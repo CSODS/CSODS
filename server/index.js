@@ -1,6 +1,6 @@
 import cors from 'cors';
 import express from 'express';
-import { router as projectsRouter } from "./routes/projectsRoute.js";
+import router from './routes/projectsRoute.js';
 import { turso } from './db/csods.js';
 import { ROUTES } from './constants/constants.js';
 
@@ -15,6 +15,7 @@ app.use(express.json());
 app.use(cors());
 
 //  for routes
+const projectsRouter = router;
 app.use(ROUTES.PROJECTS, projectsRouter);
 
 app.listen(3001, () => {
