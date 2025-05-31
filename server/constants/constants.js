@@ -1,3 +1,5 @@
+export const BASE = "http://localhost:3001";
+
 export const ROUTES = {
     PROJECTS: '/projects'
 };
