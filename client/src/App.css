@@ -1,38 +1,188 @@
 .App {
   text-align: center;
 }
-/* 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+
+/* body */
+body {
+  background-color: #2a1f2d;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  /* background-image: url("tech_particles_mesh.png");
+  background-repeat: no-repeat;
+  background-position: center bottom;
+  background-attachment: fixed;
+  background-size: cover; */
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+/* main */
+main {
+  padding-top: 50px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+.bg-green {
+  background-color:#5b6c5d;
+}
+
+/* text */
+
+.bolder {
+  font-weight: 800;
+}
+
+/* colors */
+.color-celeste {
+  color: #C5FFFD !important;
+}
+
+.color-non-photo-blue {
+  color: #88D9E6 !important;
+}
+
+.color-raisin-black {
+  color: #3b2c35 !important;
+}
+
+.color-dark-purple {
+  color: #2A1F2D !important;
+}
+
+/* header styles */
+.header-container {
+  height: 100px;
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+.brand-container {
+  display:flex;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  padding-left: 30px;
+}
+
+.header-logo {
+  width: 55px;
+  height: 55px;
+  margin-left: 15px;
+  margin-right: 15px;
+  object-fit: cover;
+}
+
+.header-brand {
+  color: #2A1F2D;
+  font-weight: 800;
+  font-size: 36px;
+  transition-duration: 0.4s;
+}
+
+.header-brand:hover {
+  color: #2A1F2D;
+}
+
+.header-nav-element {
+  color: #2A1F2D;
+  font-weight: 600;
+  margin-left: 15px;
+  margin-right: 15px;
+  transition-duration: 0.4s;
+}
+
+.header-nav-element:hover {
+  transform: translateY(-2px);
+  color: #2A1F2D;
+  /* color:#3b2c35; */
+  /* text-shadow: 2px 2px 5px #2A1F2D; */
+}
+
+/* spacing */
+.end-5 {
+  right: 5%;
+}
+
+.end-10 {
+  right: 1%;
+}
+
+/* margins */
+.no-margin {
+  margin: 0%;
+}
+
+.no-padding {
+  padding: 0%;
+}
+
+/* sizing */
+.w-60 {
+  width: 60%;
+}
+/*  button  */
+.btn-url-1 {
+  border-radius: 50px;
+  background-color: #2A1F2D;
+  color: #C5FFFD !important;
+  padding: 15px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  transition-duration: 0.4s;
+}
+
+.btn-url-1.btn-thick {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.btn-url-1:hover {
+  background-color: #C5FFFD;
+  color:#2A1F2D;
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+.btn-element {
+  margin-left: 10px;
+  margin-right: 3px;
+}
+
+/* home page */
+.home {
+  background-image: url("tech_particles_mesh.png");
+  background-repeat: no-repeat;
+  background-position: left bottom;
+  background-attachment: fixed;
+}
+
+/* home card */
+.home-card {
+  border-radius: 25px;
+  background-color:#5b6c5d;
+  opacity: 0.75;
+}
+
+.home-subcard {
+  background-color: transparent;
+  border-color: transparent;
+}
+
+.home-card-element {
+  margin-top: 1%;
+  margin-bottom: 3%;
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.home-card-element.txt-sm {
+  font-size: 78%;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-} */
+.home-card-element.bolder {
+  color:#C5FFFD;
+  font-size: 180%;
+}
+
+.text-emphasize {
+  font-weight: 800;
+  color: #88D9E6;
+}
+
+.home-page-img {
+  object-fit: cover;
+  height: 500px;
+  width: 800px;
+}

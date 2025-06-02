@@ -1,28 +1,25 @@
-// import logo from './logo.svg';
 import './App.css';
-import axios from 'axios';
-//  run a function immediately when page renders
-import { useEffect, useState } from 'react';
-
-import { BASE, ENDPOINTS } from './constants/constants.js';
+import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
+import MainLayout from './components/layouts/MainLayout';
+import LandingPage from './components/pages/LandingPage';
+import Home from "./components/pages/Home";
+import StudentProjects from './components/pages/StudentProjects';
+import SubmitProject from './components/pages/SubmitProject';
 
 function App() {
-  const [projectList, setProjectList] = useState([]);
-  useEffect(() => {
-    axios.get(`${BASE+ENDPOINTS.PROJECTS}`).then((response) => {
-      // do something
-      setProjectList(response.data);
-    })
-  }, [])
-
   return (
     <div className="App">
-      {
-        projectList.map((value, key) =>  {
-          //  display data
-          return <div> {value.ProjectName} {value.ProjectOwner} </div>
-        })
-      }
+      <Router>
+        <Routes>
+          <Route path="/" element={<MainLayout />}>
+            <Route index element={<LandingPage />} />
+            <Route path="/landing_page" element={<LandingPage />} />
+            <Route path="/home" element={<Home />} />
+            <Route path="/student_projects" element={<StudentProjects />} />
+          </Route>
+          <Route path="/submit_project" element={<SubmitProject />}/>
+        </Routes>
+      </Router>
     </div>
   );
 }
