@@ -51,7 +51,7 @@ function Home() {
           </div>
         </div>
         <div className='card col home-subcard d-flex flex-column justify-content-center align-items-start'>
-          <img src={homepage_img} alt='...' className='home-page-img'></img>
+          <img src={homepage_img} alt='...' className='card-img'></img>
         </div>
       </div>
 
