@@ -1,5 +1,5 @@
 import React from 'react';
-import MainLayout from '../layouts/MainLayout'
+import PrimaryLayout from '../layouts/MainLayout'
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { BASE, ENDPOINTS } from '../../constants/constants.js';
