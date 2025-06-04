@@ -3,61 +3,44 @@ import React from 'react';
 
 function Home() {
   return (
-    <div className='pt-4'>
-      {/* <div className="card h-75 w-75 ps-3 position-absolute start-50 translate-middle-x home-card">
-        <div className="card-body">
-          <div className='row row-cols-2 h-100'>
-            <div className='col position-relative'>
-              <div className='ps-3 pt-4 position-absolute top-50 translate-middle-y text-start'>
-                <div className='mt-4 col-lg-3 custom-card-element txt-sm btn-url-1 text-center'>#DevelopersSpace</div>
-                <h3 class="card-title w-75 custom-card-element bolder">Your Space to Learn, Build, and Grow.</h3>
-                <p class="card-text w-75 custom-card-element">
+    <div className='pt-4 d-flex justify-content-center'>
+      <div className='container-md mx-3 py-3 d-flex flex-row justify-content-center bg-feldgrau translucent rounded-5' style={{maxWidth:1100}}>
+        <div className='pb-4 m-4 card border border-0 bg-transparent'>
+          <div className='row g-0'>
+            <div className='col-md-6 d-flex d-md-none'>
+              <img src={homepage_img} alt='...' className='card-img'></img>
+            </div>
+            <div className='ps-md-3 col-md-6 d-flex align-items-end'>
+              <div className='card-body mx-0 ps-0 pb-0 align-self-end d-flex flex-column justify-content-end'>
+                <div className='mt-4 mb-1 p-0 d-flex'>
+                  <div className='p-3 py-0 fs-6 btn-custom-1 rounded-pill text-center'>
+                    #DevelopersSpace
+                  </div>
+                </div>
+                <h5 class="card-title col-md-9 mt-1 mb-3 text-start fs-3 color-celeste bolder">Your Space to Learn, Build, and Grow.</h5>
+                <p class="card-text col-md-9 mt-1 mb-3 text-light text-start">
                   <span className='text-emphasize'>Computer Science Organization: Developers’ Space </span>
                   is a digital hub for students of the Computer Science Department where we foster innovation, 
                   collaboration, and academic excellence in the field of computing.
                 </p>
-                <p class="card-text w-75 custom-card-element color-non-photo-blue">
+                <p class="card-text col-md-9 mt-1 mb-4 text-start color-non-photo-blue">
                   Explore. Learn. Contribute.
                 </p>
-                <a href="/student_projects" className="nav-link col-lg-4 d-lg-flex custom-card-element btn-url-1 btn-thick">
-                  <a href="/student_projects" className="nav-link btn-element">View Projects</a>
-                  <i className="bi bi-arrow-right-circle btn-element"></i>
-                </a>
+                <div className='d-flex'>
+                  <a href="/student_projects" className="nav-link d-flex flex-row align-items-center justify-content-center btn-custom-1 rounded-pill py-2">
+                    <a href="/student_projects" className="nav-link ms-3 me-1 fs-6">View Projects</a>
+                    <i className="bi bi-arrow-right-circle ms-3 me-1"></i>
+                  </a>
+                </div>
               </div>
             </div>
-            <div className='col-lg-6'>
-              <img src={homepage_img} alt='...' className='home-page-img'></img>
+            <div className='col-md-6 d-none d-md-flex'>
+              <img src={homepage_img} alt='...' className='card-img'></img>
             </div>
           </div>
         </div>
-      </div> */}
-      <div className='w-75 ps-3 py-3 position-absolute start-50 translate-middle-x bg-feldgrau translucent rounded-5 row row-cols-2'>
-        <div className='card col pb-4 custom-subcard d-flex flex-row justify-content-center'>
-          <div className='card-body pb-0 align-self-end d-flex flex-column justify-content-end'>
-            <div className='mt-4 p-1 col-lg-3 custom-card-element txt-sm btn-custom-1 rounded-pill text-center'>#DevelopersSpace</div>
-            <h3 class="card-title w-75 custom-card-element text-start fs-2 bolder">Your Space to Learn, Build, and Grow.</h3>
-            <p class="card-text w-75 custom-card-element text-start">
-              <span className='text-emphasize'>Computer Science Organization: Developers’ Space </span>
-              is a digital hub for students of the Computer Science Department where we foster innovation, 
-              collaboration, and academic excellence in the field of computing.
-            </p>
-            <p class="card-text w-60 custom-card-element text-start color-non-photo-blue">
-              Explore. Learn. Contribute.
-            </p>
-            <a href="/student_projects" className="nav-link col-lg-4 d-lg-flex custom-card-element btn-custom-1 rounded-pill py-2">
-              <a href="/student_projects" className="nav-link btn-element">View Projects</a>
-              <i className="bi bi-arrow-right-circle btn-element"></i>
-            </a>
-          </div>
-        </div>
-        <div className='card col custom-subcard d-flex flex-column justify-content-center align-items-start'>
-          <img src={homepage_img} alt='...' className='card-img'></img>
-        </div>
       </div>
-
-    </div>
-    
-          
+    </div> 
   );
 }
 

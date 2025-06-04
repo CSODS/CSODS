@@ -12,8 +12,8 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<PrimaryLayout />}>
-            <Route index element={<LandingPage />} />
-            <Route path="/landing_page" element={<LandingPage />} />
+            <Route index element={<Home />} />
+            {/* <Route path="/landing_page" element={<LandingPage />} /> */}
             <Route path="/home" element={<Home />} />
             <Route path="/student_projects" element={<StudentProjects />}/>
             <Route path='/student_projects/:id' element={<ProjectDetails />}/>

@@ -5,7 +5,6 @@
 /* body */
 body {
   padding: 0%;
-  padding-bottom: 10%;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   /* background-image: url("tech_particles_mesh-3.png");
   background-repeat: no-repeat;
@@ -104,29 +103,10 @@ input[type="text"] {
   padding-right: 40px;
 }
 
-.brand-container {
-  display:flex;
-  align-items: center;
-  padding-left: 30px;
-}
-
 .header-logo {
   width: 55px;
   height: 55px;
-  margin-left: 15px;
-  margin-right: 15px;
   object-fit: cover;
-}
-
-.header-brand {
-  color: #2A1F2D;
-  font-weight: 800;
-  font-size: 36px;
-  transition-duration: 0.4s;
-}
-
-.header-brand:hover {
-  color: #2A1F2D;
 }
 
 .header-nav-element {
@@ -149,24 +129,6 @@ input[type="text"] {
   aspect-ratio: 1 / 1 !important;
 }
 
-/* spacing */
-.end-5 {
-  right: 5%;
-}
-
-.end-10 {
-  right: 1%;
-}
-
-/* margins */
-.no-margin {
-  margin: 0%;
-}
-
-.no-padding {
-  padding: 0%;
-}
-
 /* sizing */
 .w-60 {
   width: 60%;
@@ -181,29 +143,11 @@ input[type="text"] {
   transition-duration: 0.4s;
 }
 
-.btn-custom-1.btn-thick {
-  padding-top: 10px;
-  padding-bottom: 10px;
-}
-
 .btn-custom-1:hover {
   background-color: #C5FFFD !important;
   color:#2A1F2D !important;
   box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
   transform: translateY(-4px);
-}
-
-.btn-element {
-  margin-left: 10px;
-  margin-right: 3px;
-}
-
-/* home page */
-.home {
-  background-image: url("tech_particles_mesh.png");
-  background-repeat: no-repeat;
-  background-position: left bottom;
-  background-attachment: fixed;
 }
 
 /*card */
@@ -222,26 +166,6 @@ input[type="text"] {
 
 .project-card.bg-celeste:hover {
   background-color: #d0fffd !important;
-}
-
-.custom-subcard {
-  background-color: transparent;
-  border-color: transparent;
-}
-
-.custom-card-element {
-  margin-top: 1%;
-  margin-bottom: 3%;
-  color: white;
-}
-
-.custom-card-element.txt-sm {
-  font-size: 78%;
-}
-
-.custom-card-element.bolder {
-  color:#C5FFFD;
-  font-size: 180%;
 }
 
 .home-page-img {
