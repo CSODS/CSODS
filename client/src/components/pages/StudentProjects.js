@@ -21,12 +21,20 @@ export function StudentProjects() {
   return (
     <div>
       {/* header */}
-      <div className='p-0 mb-5 d-flex flex-column justify-content-center'>
-        <div className='d-flex flex-row align-items-center justify-content-center'>
+      <div className='p-0 mt-3 mb-5 d-flex flex-column align-items-center justify-content-center'>
+        {/* <div className='d-flex align-items-center justify-content-center'>
           <img src={github_logo} alt='...' className='header-logo shadow-lg'></img>
           <h1 className='fs-h1 bolder color-celeste text-shadow-m'>GitHub Projects</h1>
+        </div> */}
+        <div className='row g-0 d-flex justify-content-center align-items-center' style={{maxWidth:700}}>
+            <div className='col-md-auto p-0 m-0 d-flex justify-content-center align-items-center'>
+              <img src={github_logo} alt='...' className='header-logo shadow-lg'></img>
+            </div>
+            <div className='col-md p-0 ps-md-3 m-0 d-flex justify-content-center align-items-center'>
+              <h1 className='fs-h1 bolder color-celeste text-shadow-m'>GitHub Projects</h1>
+            </div>
         </div>
-        <div className='fs-5 color-non-photo-blue'>
+        <div className='px-3 fs-5 color-non-photo-blue'>
           Discover open source projects uploaded by our very own students.
         </div>
       </div>
@@ -38,15 +46,15 @@ export function StudentProjects() {
         </div>
       </div>
       <div className='mt-4'>
-        <button type='button' className='btn-custom-1 rounded-pill mx-2 px-4 border-celeste'>All</button>
-        <button type='button' className='btn-custom-1 rounded-pill mx-2 px-4 border-celeste'>JavaScript</button>
-        <button type='button' className='btn-custom-1 rounded-pill mx-2 px-4 border-celeste'>Python</button>
-        <button type='button' className='btn-custom-1 rounded-pill mx-2 px-4 border-celeste'>C#</button>
-        <button type='button' className='btn-custom-1 rounded-pill mx-2 px-4 border-celeste'>C</button>
+        <button type='button' className='btn-custom-1 rounded-pill my-1 mx-2 px-4 border-celeste'>All</button>
+        <button type='button' className='btn-custom-1 rounded-pill my-1 mx-2 px-4 border-celeste'>JavaScript</button>
+        <button type='button' className='btn-custom-1 rounded-pill my-1 mx-2 px-4 border-celeste'>Python</button>
+        <button type='button' className='btn-custom-1 rounded-pill my-1 mx-2 px-4 border-celeste'>C#</button>
+        <button type='button' className='btn-custom-1 rounded-pill my-1 mx-2 px-4 border-celeste'>C</button>
       </div>
       {/* project cards */}
-      <div className='mx-5 mt-5 px-5 row row-cols-1 row-cols-md-2 g-4 d-flex justify-content-center'>
-        <div className='col'>
+      <div className='mx-0 px-3 mt-5 row row-cols-1 row-cols-md-2 gap-4 d-flex justify-content-center'>
+        <div className='col' style={{maxWidth:700}}>
           {/* project card */}
           <div className='card project-card border-celeste rounded-4 bg-dark-purple translucent'>
             <div className='card-body pt-4 ps-4 d-flex flex-row align-items-start text-light'>
@@ -79,7 +87,7 @@ export function StudentProjects() {
             </div>
           </div>
         </div>
-        <div className='col'>
+        <div className='col' style={{maxWidth:700}}>
           <div className='card project-card border-celeste rounded-4 bg-dark-purple translucent'>
             <div className='card-body pt-4 ps-4 d-flex flex-row align-items-start text-light'>
               <i className="bi bi-filetype-py fs-3"></i>
@@ -122,10 +130,10 @@ export function ProjectDetails() {
         {/* header container */}
         <div className='p-0 mb-5 d-flex flex-column align-items-center justify-content-center'>
           <h1 className='fs-h1 bolder color-celeste text-shadow-m'>Project Title</h1>
-          <div className='fs-5 fw-bold   color-non-photo-blue'>
+          <div className='fs-5 fw-bold color-non-photo-blue'>
             Project Owner
           </div>
-          <div className='mt-3 w-50 px-5 py-4 rounded-4 bg-dark-purple border border-celeste text-light text-start'>
+          <div className='col-md-9 mt-3 mx-2 px-3 py-4 rounded-4 bg-dark-purple border border-celeste text-light text-start'>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
             Cras a nisl eros. Nullam elit augue, vulputate at auctor id, interdum in nisi. 
             Vestibulum et purus pellentesque, efficitur sapien in, mattis sapien. 
@@ -138,7 +146,7 @@ export function ProjectDetails() {
           </div>
         </div>
         {/* metrics */}
-        <div className='w-50 align-self-center row row-cols-1 row-cols-md-4 g-4 d-flex align-items-center justify-content-center'>
+        <div className='col-6 align-self-center row row-cols-1 row-cols-md-4 g-4 d-flex align-items-center justify-content-center'>
           {/* stars */}
           <div className='col'>
             <div className='bg-dark-purple card project-card w-100 square rounded-5 pb-1 border-celeste'>
