@@ -125,7 +125,7 @@ export function ProjectDetails() {
           <div className='fs-5 fw-bold   color-non-photo-blue'>
             Project Owner
           </div>
-          <div className='mt-3 w-50 text-light text-start'>
+          <div className='mt-3 w-50 px-5 py-4 rounded-4 bg-dark-purple border border-celeste text-light text-start'>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
             Cras a nisl eros. Nullam elit augue, vulputate at auctor id, interdum in nisi. 
             Vestibulum et purus pellentesque, efficitur sapien in, mattis sapien. 
@@ -138,43 +138,55 @@ export function ProjectDetails() {
           </div>
         </div>
         {/* metrics */}
-        <div className='w-50 px-5 align-self-center d-flex flex-row align-items-center justify-content-center'>
+        <div className='w-50 align-self-center row row-cols-1 row-cols-md-4 g-4 d-flex align-items-center justify-content-center'>
           {/* stars */}
-          <div className='mx-3 bg-dark-purple card project-card col-lg-3 square rounded-5 pb-1 border-celeste'>
-            <div className='card-body pb-0 flex-column align-items-center'>
-              <i className="bi bi-stars color-celeste fs-h1"></i>
-              <p className='mt-1 mb-1 fw-bolder fs-5 color-non-photo-blue'>
-                1024
-              </p>
+          <div className='col'>
+            <div className='bg-dark-purple card project-card w-100 square rounded-5 pb-1 border-celeste'>
+              <div className='card-body pb-0 flex-column align-items-center'>
+                <i className="bi bi-stars color-celeste fs-h1"></i>
+                <p className='mt-1 mb-1 fw-bolder fs-5 color-non-photo-blue'>
+                  1024
+                </p>
+              </div>
             </div>
           </div>
+          
           {/* forks */}
-          <div className='mx-3 bg-dark-purple card project-card col-lg-3 square rounded-5 pb-1 border-celeste'>
-            <div className='card-body pb-0 flex-column align-items-center'>
-              <i className="bi bi-plugin color-celeste fs-h1"></i>
-              <p className='mt-1 mb-1 fw-bolder fs-5 color-non-photo-blue'>
-                512
-              </p>
+          <div className='col'>
+            <div className='bg-dark-purple card project-card w-100 square rounded-5 pb-1 border-celeste'>
+              <div className='card-body pb-0 flex-column align-items-center'>
+                <i className="bi bi-plugin color-celeste fs-h1"></i>
+                <p className='mt-1 mb-1 fw-bolder fs-5 color-non-photo-blue'>
+                  512
+                </p>
+              </div>
             </div>
           </div>
+          
           {/* issues */}
-          <div className='mx-3 bg-dark-purple card project-card col-lg-3 square rounded-5 pb-1 border-celeste'>
-            <div className='card-body pb-0 flex-column align-items-center'>
-              <i className="bi bi-exclamation-octagon color-celeste fs-h1"></i>
-              <p className='mt-1 mb-1 fw-bolder fs-5 color-non-photo-blue'>
-                256
-              </p>
+          <div className='col'>
+            <div className='bg-dark-purple card project-card w-100 square rounded-5 pb-1 border-celeste'>
+              <div className='card-body pb-0 flex-column align-items-center'>
+                <i className="bi bi-exclamation-octagon color-celeste fs-h1"></i>
+                <p className='mt-1 mb-1 fw-bolder fs-5 color-non-photo-blue'>
+                  256
+                </p>
+              </div>
             </div>
           </div>
-           {/* contributors */}
-          <div className='mx-3 bg-dark-purple card project-card col-lg-3 square rounded-5 pb-1 border-celeste'>
-            <div className='card-body pb-0 flex-column align-items-center'>
-              <i className="bi bi-person-workspace color-celeste fs-h1"></i>
-              <p className='mt-1 mb-1 fw-bolder fs-5 color-non-photo-blue'>
-                3
-              </p>
+          
+          {/* contributors */}
+          <div className='col'>
+            <div className='bg-dark-purple card project-card w-100 square rounded-5 pb-1 border-celeste'>
+              <div className='card-body pb-0 flex-column align-items-center'>
+                <i className="bi bi-person-workspace color-celeste fs-h1"></i>
+                <p className='mt-1 mb-1 fw-bolder fs-5 color-non-photo-blue'>
+                  3
+                </p>
+              </div>
             </div>
           </div>
+          
         </div>
         {/* Tags */}
         <div className='mt-5 d-flex flex-column align-items-center'>
@@ -183,6 +195,41 @@ export function ProjectDetails() {
             <button type='button' className='project-card bg-dark-purple rounded-pill mx-2 px-4 py-1 border-celeste color-celeste'>JavaScript</button>
             <button type='button' className='project-card bg-dark-purple rounded-pill mx-2 px-4 py-1 border-celeste color-celeste'>FastAPI</button>
           </div>
+        </div>
+        {/* Core Contributors */}
+        <div className='mt-5 d-flex flex-column align-items-center'>
+          <h1 className='fs-h1 bolder color-non-photo-blue text-shadow-m'>Core Contributors</h1>
+          <div className='mt-4 w-100 d-flex flex-row justify-content-center'>
+            <div className='project-card px-5 bg-celeste rounded-5 mx-2 px-4 py-1 border border-dark-purple'>
+              <p className='mt-1 mb-0 fs-6 color-dark-purple'>
+                Owner
+              </p>
+              <i className="mt-0 bi bi-person-workspace color-dark-purple fs-h1"></i>
+              <p className='mt-1 fw-bolder fs-5 color-dark-purple'>
+                Name
+              </p>
+              <p className='mt-1 mb-1 fs-6 color-raisin-black'>
+                Role
+              </p>
+            </div>
+            <div className='project-card px-5 bg-dark-purple rounded-5 mx-2 px-4 py-1 border border-celeste'>
+              <p className='mt-1 mb-0 fs-6 color-celeste'>
+                Contributor
+              </p>
+              <i className="mt-0 bi bi-person-workspace color-celeste fs-h1"></i>
+              <p className='mt-1 fw-bolder fs-5 color-celeste'>
+                Name
+              </p>
+              <p className='mt-1 mb-1 fs-6 color-non-photo-blue'>
+                Role
+              </p>
+            </div>
+          </div>
+        </div>
+        {/* Navigation Buttons */}
+        <div className='mt-5 d-flex flex-row justify-content-center'>
+            <button type='button' className='px-4 py-3 mx-2 bg-dark-pruple btn-custom-1 rounded-pill border-celeste'>Back to Projects</button>
+            <button type='button' className='px-4 py-3 mx-2 bg-dark-pruple btn-custom-1 rounded-pill border-celeste'>View On GitHub</button>
         </div>
       </div>
     );

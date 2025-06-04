@@ -31,8 +31,8 @@ function Home() {
           </div>
         </div>
       </div> */}
-      <div className='h-75 w-75 ps-3 position-absolute start-50 translate-middle-x bg-feldgrau translucent rounded-5 row row-cols-2'>
-        <div className='card col pb-4 custom-subcard d-flex'>
+      <div className='w-75 ps-3 py-3 position-absolute start-50 translate-middle-x bg-feldgrau translucent rounded-5 row row-cols-2'>
+        <div className='card col pb-4 custom-subcard d-flex flex-row justify-content-center'>
           <div className='card-body pb-0 align-self-end d-flex flex-column justify-content-end'>
             <div className='mt-4 p-1 col-lg-3 custom-card-element txt-sm btn-custom-1 rounded-pill text-center'>#DevelopersSpace</div>
             <h3 class="card-title w-75 custom-card-element text-start fs-2 bolder">Your Space to Learn, Build, and Grow.</h3>
