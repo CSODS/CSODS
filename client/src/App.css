@@ -25,6 +25,14 @@ input[type="text"] {
   outline: none;
 }
 
+.bg-celeste {
+  background-color: #C5FFFD !important;
+}
+
+.bg-non-photo-blue {
+  background-color: #88D9E6 !important;
+}
+
 .bg-feldgrau {
   background-color:#5b6c5d !important;
 }
@@ -205,10 +213,15 @@ input[type="text"] {
 
 .project-card:hover {
   transform: translateY(-4px);
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 }
 
 .project-card.bg-dark-purple:hover {
   background-color: #332737 !important;
+}
+
+.project-card.bg-celeste:hover {
+  background-color: #d0fffd !important;
 }
 
 .custom-subcard {
@@ -240,4 +253,9 @@ input[type="text"] {
 /* border */
 .border-celeste {
   border-color: #C5FFFD !important;
+}
+
+.border-dark-purple {
+  border-color: #2A1F2D !important;
+  border-width: thick;
 }
