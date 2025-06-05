@@ -24,7 +24,7 @@ export function PrimaryLayout() {
                             <a href="/student_projects" className="nav-link header-nav-element">Projects</a>
                             <a href="/submit_project" className="nav-link header-nav-element">About</a>
                         </div>
-                        <a href="/submit_project" className="ms-auto me-2 nav-link d-none d-lg-flex btn-custom-1 rounded-pill">
+                        <a href="/submit_project" className="ms-auto me-2 px-3 py-2 nav-link d-none d-lg-flex btn-custom-1 rounded-pill">
                             <a href="/submit_project" className="nav-link ms-2 me-1">Submit a Project</a>
                             <i className="bi bi-arrow-right-circle ms-2 me-1"></i>
                         </a>
