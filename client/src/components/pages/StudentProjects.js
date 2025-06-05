@@ -1,9 +1,11 @@
 import github_logo from '../../github_logo.png';
+import { COLORS, DEVELOPMENT_TYPES, ICONS } from '../../constants/constants.js';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { BASE, ENDPOINTS, ADDRESSES } from '../../constants/constants.js';
 
+//#region Student Projects
 export function StudentProjects() {
 //   const [projectList, setProjectList] = useState([]);
 //   useEffect(() => {
@@ -12,6 +14,33 @@ export function StudentProjects() {
 //       setProjectList(response.data);
 //     })
 //   }, []);
+
+  const [projectList, setProjectList] = useState([
+    {
+      ProjectId: 1,
+      ProjectNumber: 2310227,
+      ProjectName: "Nexus Banking",
+      ProjectDevType: DEVELOPMENT_TYPES.WEB_DEV,
+      ProjectOwner: "Julius Trinidad",
+      ProjectDescription: "A Banking App in C#",
+      ProjectUrl: "https://github.com/zeraus00/E_Banking_System.git"
+    },
+    {
+      ProjectId: 2,
+      ProjectNumber: 2310228,
+      ProjectName: "Mon App",
+      ProjectDevType: DEVELOPMENT_TYPES.SOFTWARE_DEV,
+      ProjectOwner: "Bogart Dela Mon",
+      ProjectDescription: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+        Curabitur vel condimentum quam. Phasellus non augue cursus, porta turpis sed, 
+        pellentesque dui. Donec dolor ante, euismod in laoreet nec, feugiat eget ipsum. 
+        Donec feugiat tempor urna non scelerisque. Donec venenatis at magna id tincidunt. 
+        Cras facilisis non lectus non interdum. Aliquam ut urna et nulla posuere interdum 
+        sit amet sit amet justo.`,
+      ProjectUrl: "https://github.com/zeraus00/E_Banking_System.git"
+    }
+  ]);
+
   const navigate = useNavigate();
 
   const handleClick = (projectId) => {
@@ -21,6 +50,9 @@ export function StudentProjects() {
   return (
     <div>
       {/* header */}
+      <div data-bs-spy='scroll' data-bs-target='#nav-scroll' data-bs-offset='-100'>
+        <div id='heading'></div>
+      </div> 
       <div className='p-0 mt-3 mb-5 d-flex flex-column align-items-center justify-content-center'>
         <div className='row g-0 d-flex justify-content-center align-items-center' style={{maxWidth:700}}>
             <div className='col-md-auto p-0 m-0 d-flex justify-content-center align-items-center'>
@@ -50,75 +82,66 @@ export function StudentProjects() {
       </div>
       {/* project cards */}
       <div className='mx-0 px-3 mt-5 row row-cols-1 row-cols-md-2 row-gap-4 d-flex justify-content-center'>
-        <div className='col' style={{maxWidth:700}}>
-          {/* project card */}
-          <div className='card project-card border-celeste rounded-4 bg-dark-purple translucent'>
-            <div className='card-body pt-4 ps-4 d-flex flex-row align-items-start text-light'>
-              <i className="bi bi-filetype-js fs-3"></i>
-              <div className='mx-3'>
-                {/* project title  */}
-                <h5 className='card-title col-lg-6 text-start fs-3 color-celeste bolder'>Project 1</h5>
-                {/* project description */}
-                <p className='card-text my-1 text-start'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eu mollis leo, 
-                  at commodo turpis. Quisque venenatis iaculis facilisis. Donec tempor eu sem ut tincidunt.
-                </p>
-                {/* project tags */}
-                <div className='my-1 d-flex flex-row align-items-start'>
-                  <div className='py-1 px-3 ms-0 me-2 bg-raisin-black btn-custom-1 rounded-pill border border-celeste fs-xs'>
-                    JavaScript
+        {
+          projectList.map((value, key) => {
+            return (
+              <div className='col' style={{maxWidth:700}}>
+                {/* project card */}
+                <div className='ps-md-2 card project-card border-celeste rounded-4 bg-dark-purple translucent'>
+                  <div className='row g-0'>
+                    <div className='pt-3 col-md-1'>
+                      <i className={`${ICONS[value.ProjectDevType]} color-celeste fs-4`}></i>
+                    </div>
+                    <div className='col-md-11'>
+                      <div className='px-3 pb-3 ps-md-0 card-body d-flex flex-column align-items-start text-light' style={{minHeight:290}}>
+                        {/* project title  */}
+                          <h5 className='card-title text-start fs-3 color-celeste bolder'>{value.ProjectName}</h5>
+                          {/* project description */}
+                          <p className='card-text my-1 text-start'>{
+                            value.ProjectDescription.length > 190
+                            ? value.ProjectDescription.slice(0, 190) + "..." 
+                            : value.ProjectDescription
+                          }
+                          </p>
+                          <div className='mt-auto mx-0 row col-12'>
+                            {/* project tags */}
+                            <div className='ps-0 d-flex flex-row align-items-start'>
+                              <div className='py-1 px-3 ms-0 me-2 bg-raisin-black btn-custom-1 rounded-pill border border-celeste fs-xs'>
+                                JavaScript
+                              </div>
+                              <div className='py-1 px-3 ms-0 me-2 bg-raisin-black btn-custom-1 rounded-pill border border-celeste fs-xs'>
+                                FastAPI
+                              </div>
+                            </div>
+                            {/* github link and view link */}
+                            <div className='mt-3 mb-0 ps-0 pe-0 d-flex flex-row align-items-center'>
+                              <button type='button' className='px-4 py-2 bg-raisin-black d-flex flex-row align-items-center justify-content-center btn-custom-1 rounded-4 border-celeste'>
+                                {/* <img src={github_logo} alt='...' className='img-fluid'/> */}
+                                GitHub
+                              </button>
+                              <button type='button' className='ms-auto px-4 py-2 bg-raisin-black btn-custom-1 rounded-4 border-celeste' onClick={() => handleClick(1)}>View</button>
+                            </div>
+                          </div>
+                      </div>
+                    </div>
                   </div>
-                  <div className='py-1 px-3 ms-0 me-2 bg-raisin-black btn-custom-1 rounded-pill border border-celeste fs-xs'>
-                    FastAPI
-                  </div>
-                </div>
-                {/* github link and view link */}
-                <div className='mt-3 mb-0 d-flex flex-row align-items-center'>
-                  <button type='button' className='px-4 py-2 bg-raisin-black d-flex flex-row align-items-center justify-content-center btn-custom-1 rounded-4 border-celeste'>
-                    {/* <img src={github_logo} alt='...' className='img-fluid'/> */}
-                    GitHub
-                  </button>
-                  <button type='button' className='ms-auto px-4 py-2 bg-raisin-black btn-custom-1 rounded-4 border-celeste' onClick={() => handleClick(1)}>View</button>
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
-        <div className='col' style={{maxWidth:700}}>
-          <div className='card project-card border-celeste rounded-4 bg-dark-purple translucent'>
-            <div className='card-body pt-4 ps-4 d-flex flex-row align-items-start text-light'>
-              <i className="bi bi-filetype-py fs-3"></i>
-              <div className='mx-3'>  
-                <h5 className='card-title col-lg-6 text-start fs-3 color-celeste bolder'>Project 2</h5>
-                <p className='card-text my-1 text-start'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eu mollis leo, 
-                  at commodo turpis. Quisque venenatis iaculis facilisis. Donec tempor eu sem ut tincidunt.
-                </p>
-                <div className='my-1 d-flex flex-row align-items-start'>
-                  <div className='py-1 px-3 ms-0 me-2 bg-raisin-black btn-custom-1 rounded-pill border border-celeste fs-xs'>
-                    Python
-                  </div>
-                  <div className='py-1 px-3 ms-0 me-2 bg-raisin-black btn-custom-1 rounded-pill border border-celeste fs-xs'>
-                    MongoDB
-                  </div>
-                </div>
-                <div className='mt-3 mb-0 d-flex flex-row align-items-center'>
-                  <button type='button' className='px-4 py-2 bg-raisin-black btn-custom-1 rounded-4 border-celeste'>GitHub</button>
-                  <button type='button' className='ms-auto px-4 py-2 bg-raisin-black btn-custom-1 rounded-4 border-celeste' onClick={() => handleClick(2)}>View</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+            );
+          })
+        }
       </div>
-        
-      {
-        // projectList.map((value, key) =>  {
-        //   //  display data
-        //   return <div> {value.ProjectName} {value.ProjectOwner} </div>
-        // })
-      }
+      
+      {/* Up Button */}
+      <div className='mt-3 d-flex d-lg-none sticky-bottom justify-content-center'>
+        <a href='#heading' className='px-2 bg-dark-purple project-card rounded-pill d-flex justify-content-center align-content-center'>
+          <i className="bi bi-arrow-bar-up fs-6 color-celeste"></i>
+        </a>
+      </div>
     </div>  
   );
 }
+//#endregion
 
 export function ProjectDetails() {
   const [sampleProject] = useState({
