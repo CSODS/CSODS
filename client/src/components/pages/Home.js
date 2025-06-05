@@ -27,7 +27,7 @@ function Home() {
                   Explore. Learn. Contribute.
                 </p>
                 <div className='d-flex'>
-                  <a href="/student_projects" className="nav-link d-flex flex-row align-items-center justify-content-center btn-custom-1 rounded-pill py-2">
+                  <a href="/student_projects" className="px-3 py-2 nav-link d-flex flex-row align-items-center justify-content-center btn-custom-1 rounded-pill py-2">
                     <a href="/student_projects" className="nav-link ms-3 me-1 fs-6">View Projects</a>
                     <i className="bi bi-arrow-right-circle ms-3 me-1"></i>
                   </a>

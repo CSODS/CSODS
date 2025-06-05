@@ -137,9 +137,6 @@ input[type="text"] {
 .btn-custom-1 {
   background-color: #2A1F2D;
   color: #C5FFFD !important;
-  padding: 15px;
-  padding-top: 5px;
-  padding-bottom: 5px;
   transition-duration: 0.4s;
 }
 
@@ -147,7 +144,6 @@ input[type="text"] {
   background-color: #C5FFFD !important;
   color:#2A1F2D !important;
   box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
-  transform: translateY(-4px);
 }
 
 /*card */
