@@ -121,207 +121,158 @@ export function StudentProjects() {
 }
 
 export function ProjectDetails() {
-    return (
-      <div className='d-flex flex-column'>
-        {/* header container */}
-        <div className='p-0 mb-5 d-flex flex-column align-items-center justify-content-center'>
-          <h1 className='fs-1 bolder color-celeste text-shadow-m'>Project Title</h1>
-          <div className='fs-5 fw-bold color-non-photo-blue'>
-            Project Owner
-          </div>
-          <div className='col-md-11 mt-3 mx-2 px-3 py-4 rounded-4 bg-dark-purple border border-celeste text-light text-start' style={{maxWidth:1400}}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-            Cras a nisl eros. Nullam elit augue, vulputate at auctor id, interdum in nisi. 
-            Vestibulum et purus pellentesque, efficitur sapien in, mattis sapien. 
-            Proin blandit mattis mi nec lacinia. Nulla commodo, purus eu fringilla blandit, 
-            eros ipsum laoreet risus, imperdiet sagittis ligula libero non lorem. 
-            Donec volutpat, metus tincidunt laoreet volutpat, arcu nulla mollis magna, 
-            ut tristique risus nibh id sem. Etiam porta interdum vehicula. 
-            Morbi non arcu accumsan, auctor mi in, ornare sapien. Suspendisse ex nulla, 
-            ultricies a auctor quis, interdum eget purus.
-          </div>
+  const [sampleProject] = useState({
+    ProjectId: 1,
+    ProjectNumber: 2310227,
+    ProjectName: "Nexus Banking",
+    ProjectOwner: "Julius Trinidad",
+    ProjectDescription: "A Banking App in C#",
+    ProjectUrl: "https://github.com/zeraus00/E_Banking_System.git"
+  });
+
+  const [projectDetails] = useState({
+    Contributors: [
+      {Username: "steins0668", Role: "Contributor", Subrole: "Backend Dev"},
+      {Username: "eounaria", Role: "Contributor", Subrole: "Frontend Dev"},
+      {Username: "zeraus00", Role: "Owner", Subrole: "Fullstack Dev"}
+    ],
+    Tags: ["C#", "Blazor Web App", "Web Application", "Web Dev", "SQL"]
+  });
+
+  return (
+    <div className='d-flex flex-column'>
+      {/* header container */}
+      <div className='p-0 mb-5 d-flex flex-column align-items-center justify-content-center'>
+        <h1 className='fs-1 bolder color-celeste text-shadow-m'>{sampleProject.ProjectName}</h1>
+        <div className='fs-5 fw-bold color-non-photo-blue'>
+          {sampleProject.ProjectOwner}
         </div>
-        {/* metrics */}
-        <div className='col-6 align-self-center row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 d-flex align-items-center justify-content-center' style={{maxWidth:700}}>
-          {/* stars */}
-          <div className='col' style={{maxWidth:150}}>
-            <div className='bg-dark-purple card project-card rounded-5 pb-1 border-celeste'>
-              <div className='card-body pb-0 flex-column align-items-center'>
-                <i className="bi bi-stars color-celeste fs-1"></i>
-                <p className='mt-1 mb-1 fw-bolder fs-5 color-non-photo-blue'>
-                  1024
-                </p>
-              </div>
-            </div>
-          </div>
-          
-          {/* forks */}
-          <div className='col' style={{maxWidth:150}}>
-            <div className='bg-dark-purple card project-card rounded-5 pb-1 border-celeste'>
-              <div className='card-body pb-0 flex-column align-items-center'>
-                <i className="bi bi-plugin color-celeste fs-1"></i>
-                <p className='mt-1 mb-1 fw-bolder fs-5 color-non-photo-blue'>
-                  512
-                </p>
-              </div>
-            </div>
-          </div>
-          
-          {/* issues */}
-          <div className='col' style={{maxWidth:150}}>
-            <div className='bg-dark-purple card project-card rounded-5 pb-1 border-celeste'>
-              <div className='card-body pb-0 flex-column align-items-center'>
-                <i className="bi bi-exclamation-octagon color-celeste fs-1"></i>
-                <p className='mt-1 mb-1 fw-bolder fs-5 color-non-photo-blue'>
-                  256
-                </p>
-              </div>
-            </div>
-          </div>
-          
-          {/* contributors */}
-          <div className='col' style={{maxWidth:150}}>
-            <div className='bg-dark-purple card project-card rounded-5 pb-1 border-celeste'>
-              <div className='card-body pb-0 flex-column align-items-center'>
-                <i className="bi bi-person-workspace color-celeste fs-1"></i>
-                <p className='mt-1 mb-1 fw-bolder fs-5 color-non-photo-blue'>
-                  3
-                </p>
-              </div>
-            </div>
-          </div>
+        <div className='col-md-11 mt-3 mx-2 px-3 py-4 rounded-4 bg-dark-purple border border-celeste text-light text-start' style={{maxWidth:1400}}>
+          {sampleProject.ProjectDescription}
+          {/* Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+          Cras a nisl eros. Nullam elit augue, vulputate at auctor id, interdum in nisi. 
+          Vestibulum et purus pellentesque, efficitur sapien in, mattis sapien. 
+          Proin blandit mattis mi nec lacinia. Nulla commodo, purus eu fringilla blandit, 
+          eros ipsum laoreet risus, imperdiet sagittis ligula libero non lorem. 
+          Donec volutpat, metus tincidunt laoreet volutpat, arcu nulla mollis magna, 
+          ut tristique risus nibh id sem. Etiam porta interdum vehicula. 
+          Morbi non arcu accumsan, auctor mi in, ornare sapien. Suspendisse ex nulla, 
+          ultricies a auctor quis, interdum eget purus. */}
         </div>
-        {/* Navigation Buttons */}
-        <div className='mt-5 d-flex flex-row justify-content-center'>
-            <button type='button' className='px-3 py-1 py-md-3 mx-2 bg-dark-pruple btn-custom-1 rounded-pill border-celeste'>Back to Projects</button>
-            <button type='button' className='px-3 py-1 py-md-3 mx-2 bg-dark-pruple btn-custom-1 rounded-pill border-celeste'>View On GitHub</button>
-        </div>
-        {/* Tags */}
-        <div className='mt-5 d-flex flex-column align-items-center'>
-          <h1 className='fs-1 bolder color-non-photo-blue text-shadow-m'>Tags</h1>
-          <div className='mt-4'>
-            <button type='button' className='project-card bg-dark-purple rounded-pill mx-2 px-4 py-1 border-celeste color-celeste'>JavaScript</button>
-            <button type='button' className='project-card bg-dark-purple rounded-pill mx-2 px-4 py-1 border-celeste color-celeste'>FastAPI</button>
-          </div>
-        </div>
-        {/* Core Contributors */}
-        <div className='mt-5 d-flex flex-column align-items-center'>
-          <h1 className='fs-1 bolder color-non-photo-blue text-shadow-m'>Core Contributors</h1>
-          {/* <div className='mt-4 d-flex flex-column flex-md-row row-gap-3 justify-content-center'>
-            <div className='project-card px-5 bg-celeste rounded-5 mx-2 px-4 py-1 border border-dark-purple'>
-              <p className='mt-1 mb-0 fs-6 color-dark-purple'>
-                Owner
-              </p>
-              <i className="mt-0 bi bi-person-workspace color-dark-purple fs-h1"></i>
-              <p className='mt-1 fw-bolder fs-5 color-dark-purple'>
-                Username
-              </p>
-              <p className='mt-1 mb-1 fs-6 color-raisin-black'>
-                Role
+      </div>
+      {/* metrics */}
+      <div className='col-6 align-self-center row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 d-flex align-items-center justify-content-center' style={{maxWidth:700}}>
+        {/* stars */}
+        <div className='col' style={{maxWidth:150}}>
+          <div className='bg-dark-purple card project-card rounded-5 pb-1 border-celeste'>
+            <div className='card-body pb-0 flex-column align-items-center'>
+              <i className="bi bi-stars color-celeste fs-1"></i>
+              <p className='mt-1 mb-1 fw-bolder fs-5 color-non-photo-blue'>
+                1024
               </p>
             </div>
-            <div className='d-flex flex-column'>
-              <div className='project-card px-5 bg-dark-purple rounded-5 mx-2 px-4 py-1 border border-celeste'>
-                <p className='mt-1 mb-0 fs-6 color-celeste'>
-                  Contributor
-                </p>
-                <i className="mt-0 bi bi-person-workspace color-celeste fs-h1"></i>
-                <p className='mt-1 fw-bolder fs-5 color-celeste'>
-                  Username
-                </p>
-                <p className='mt-1 mb-1 fs-6 color-non-photo-blue'>
-                  Role
-                </p>
-              </div>
+          </div>
+        </div>
+        
+        {/* forks */}
+        <div className='col' style={{maxWidth:150}}>
+          <div className='bg-dark-purple card project-card rounded-5 pb-1 border-celeste'>
+            <div className='card-body pb-0 flex-column align-items-center'>
+              <i className="bi bi-plugin color-celeste fs-1"></i>
+              <p className='mt-1 mb-1 fw-bolder fs-5 color-non-photo-blue'>
+                512
+              </p>
             </div>
-          </div> */}
-          <div className='mt-4 w-100 row row-cols-1 row-cols-md-3 row-cols-lg-4 row-gap-3 justify-content-center'>
-            <div className='col' style={{maxWidth:300}}>
-              <div className='project-card px-5 bg-celeste rounded-5 mx-2 px-4 py-1 border border-dark-purple'>
-                <p className='mt-1 mb-0 fs-6 color-dark-purple'>
-                  Owner
-                </p>
-                <i className="mt-0 bi bi-person-workspace color-dark-purple fs-h1"></i>
-                <p className='mt-1 fw-bolder fs-5 color-dark-purple'>
-                  Username
-                </p>
-                <p className='mt-1 mb-1 fs-6 color-raisin-black'>
-                  Role
-                </p>
-              </div>
+          </div>
+        </div>
+        
+        {/* issues */}
+        <div className='col' style={{maxWidth:150}}>
+          <div className='bg-dark-purple card project-card rounded-5 pb-1 border-celeste'>
+            <div className='card-body pb-0 flex-column align-items-center'>
+              <i className="bi bi-exclamation-octagon color-celeste fs-1"></i>
+              <p className='mt-1 mb-1 fw-bolder fs-5 color-non-photo-blue'>
+                256
+              </p>
             </div>
-            <div className='col' style={{maxWidth:300}}>
-              <div className='project-card px-5 bg-dark-purple rounded-5 mx-2 px-4 py-1 border border-celeste'>
-                <p className='mt-1 mb-0 fs-6 color-celeste'>
-                  Contributor
-                </p>
-                <i className="mt-0 bi bi-person-workspace color-celeste fs-h1"></i>
-                <p className='mt-1 fw-bolder fs-5 color-celeste'>
-                  Username
-                </p>
-                <p className='mt-1 mb-1 fs-6 color-non-photo-blue'>
-                  Role
-                </p>
-              </div>
-            </div>
-            <div className='col' style={{maxWidth:300}}>
-              <div className='project-card px-5 bg-dark-purple rounded-5 mx-2 px-4 py-1 border border-celeste'>
-                <p className='mt-1 mb-0 fs-6 color-celeste'>
-                  Contributor
-                </p>
-                <i className="mt-0 bi bi-person-workspace color-celeste fs-h1"></i>
-                <p className='mt-1 fw-bolder fs-5 color-celeste'>
-                  Username
-                </p>
-                <p className='mt-1 mb-1 fs-6 color-non-photo-blue'>
-                  Role
-                </p>
-              </div>
-            </div>
-            <div className='col' style={{maxWidth:300}}>
-              <div className='project-card px-5 bg-dark-purple rounded-5 mx-2 px-4 py-1 border border-celeste'>
-                <p className='mt-1 mb-0 fs-6 color-celeste'>
-                  Contributor
-                </p>
-                <i className="mt-0 bi bi-person-workspace color-celeste fs-h1"></i>
-                <p className='mt-1 fw-bolder fs-5 color-celeste'>
-                  Username
-                </p>
-                <p className='mt-1 mb-1 fs-6 color-non-photo-blue'>
-                  Role
-                </p>
-              </div>
-            </div>
-            <div className='col' style={{maxWidth:300}}>
-              <div className='project-card px-5 bg-dark-purple rounded-5 mx-2 px-4 py-1 border border-celeste'>
-                <p className='mt-1 mb-0 fs-6 color-celeste'>
-                  Contributor
-                </p>
-                <i className="mt-0 bi bi-person-workspace color-celeste fs-h1"></i>
-                <p className='mt-1 fw-bolder fs-5 color-celeste'>
-                  Username
-                </p>
-                <p className='mt-1 mb-1 fs-6 color-non-photo-blue'>
-                  Role
-                </p>
-              </div>
-            </div>
-            <div className='col' style={{maxWidth:300}}>
-              <div className='project-card px-5 bg-dark-purple rounded-5 mx-2 px-4 py-1 border border-celeste'>
-                <p className='mt-1 mb-0 fs-6 color-celeste'>
-                  Contributor
-                </p>
-                <i className="mt-0 bi bi-person-workspace color-celeste fs-h1"></i>
-                <p className='mt-1 fw-bolder fs-5 color-celeste'>
-                  Username
-                </p>
-                <p className='mt-1 mb-1 fs-6 color-non-photo-blue'>
-                  Role
-                </p>
-              </div>
+          </div>
+        </div>
+        
+        {/* contributors */}
+        <div className='col' style={{maxWidth:150}}>
+          <div className='bg-dark-purple card project-card rounded-5 pb-1 border-celeste'>
+            <div className='card-body pb-0 flex-column align-items-center'>
+              <i className="bi bi-person-workspace color-celeste fs-1"></i>
+              <p className='mt-1 mb-1 fw-bolder fs-5 color-non-photo-blue'>
+                3
+              </p>
             </div>
           </div>
         </div>
       </div>
-    );
+      {/* Navigation Buttons */}
+      <div className='mt-5 d-flex flex-row justify-content-center'>
+          <button type='button' className='px-3 py-1 py-md-3 mx-2 bg-dark-pruple btn-custom-1 rounded-pill border-celeste'>Back to Projects</button>
+          <button type='button' className='px-3 py-1 py-md-3 mx-2 bg-dark-pruple btn-custom-1 rounded-pill border-celeste'>View On GitHub</button>
+      </div>
+      {/* Tags */}
+      <div className='mt-5 d-flex flex-column  align-items-center'>
+        <h1 className='fs-1 bolder color-non-photo-blue text-shadow-m'>Tags</h1>
+        <div className='mt-4'>
+          {
+            // projectList.map((value, key) =>  {
+            //   //  display data
+            //   return <div> {value.ProjectName} {value.ProjectOwner} </div>
+            // })
+            projectDetails.Tags.map((value, key) => {
+              return <button type='button' className='project-card bg-dark-purple rounded-pill mx-2 mb-2 px-4 py-1 border-celeste color-celeste'>{value}</button>
+            })
+          }
+          {/* <button type='button' className='project-card bg-dark-purple rounded-pill mx-2 px-4 py-1 border-celeste color-celeste'>JavaScript</button>
+          <button type='button' className='project-card bg-dark-purple rounded-pill mx-2 px-4 py-1 border-celeste color-celeste'>FastAPI</button> */}
+        </div>
+      </div>
+      {/* Core Contributors */}
+      <div className='mt-5 d-flex flex-column align-items-center'>
+        <h1 className='fs-1 bolder color-non-photo-blue text-shadow-m'>Core Contributors</h1>
+        <div className='mt-4 w-100 row row-cols-1 row-cols-md-3 row-cols-lg-4 row-gap-3 justify-content-center'>
+          {
+            projectDetails.Contributors.map((value, key) => {
+              let styles = {bgColor: "", color: ""}
+              switch (value.Role) {
+                case "Owner":
+                  styles.bgColor = 'bg-celeste';
+                  styles.color = 'color-dark-purple';
+                  styles.colorSecondary = 'color-raisin-black';
+                  break;
+                case "Contributor":
+                  styles.bgColor = 'bg-dark-purple';
+                  styles.color = 'color-celeste';
+                  styles.colorSecondary = 'color-non-photo-blue';
+                  break;
+                default:
+                  break;
+              }
+              return (
+                <div className='col' style={{maxWidth:300}}>
+                  <div className={`${styles.bgColor} project-card px-5 rounded-5 mx-2 px-4 py-1 border border-dark-purple`}>
+                    <p className={`mt-1 mb-0 fs-6 ${styles.color}`}>
+                      {value.Role}
+                    </p>
+                    <i className={`mt-0 bi bi-person-workspace ${styles.color} fs-h1`}></i>
+                    <p className={`mt-1 fw-bolder fs-5 ${styles.color}`}>
+                      {value.Username}
+                    </p>
+                    <p className={`mt-1 mb-1 fs-6 ${styles.colorSecondary}`}>
+                      {value.Subrole}
+                    </p>
+                  </div>
+                </div>
+              );
+            })
+          }
+        </div>
+      </div>
+    </div>
+  );
 }
