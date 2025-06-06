@@ -73,17 +73,17 @@ export function StudentProjects() {
       </div>
       {/* search bar */}
       <div className='mt-5 d-flex justify-content-center align-items-center'>
-        <div className='py-3 px-4 col-md-6 d-flex align-items-center justify-content-start border border-celeste rounded-pill bg-dark-2'>
+        <div className='py-3 px-4 col-md-6 d-flex align-items-center justify-content-start border border-light-1 rounded-pill bg-dark-1 translucent'>
           <i className="bi bi-search color-light-2 me-3"></i>
           <input type='text' className='m-0 fs-6 w-100 color-light-2' placeholder='Search projects...'/>
         </div>
       </div>
       <div className='mt-4'>
-        <button type='button' className='btn-custom-1 rounded-pill my-1 mx-2 px-4 border-celeste'>All</button>
-        <button type='button' className='btn-custom-1 rounded-pill my-1 mx-2 px-4 border-celeste'>JavaScript</button>
-        <button type='button' className='btn-custom-1 rounded-pill my-1 mx-2 px-4 border-celeste'>Python</button>
-        <button type='button' className='btn-custom-1 rounded-pill my-1 mx-2 px-4 border-celeste'>C#</button>
-        <button type='button' className='btn-custom-1 rounded-pill my-1 mx-2 px-4 border-celeste'>C</button>
+        <button type='button' className='btn-dark-1 rounded-pill my-1 mx-2 px-4 border border-1 border-light-1'>All</button>
+        <button type='button' className='btn-dark-1 rounded-pill my-1 mx-2 px-4 border border-1 border-light-1'>JavaScript</button>
+        <button type='button' className='btn-dark-1 rounded-pill my-1 mx-2 px-4 border border-1 border-light-1'>Python</button>
+        <button type='button' className='btn-dark-1 rounded-pill my-1 mx-2 px-4 border border-1 border-light-1'>C#</button>
+        <button type='button' className='btn-dark-1 rounded-pill my-1 mx-2 px-4 border border-1 border-light-1'>C</button>
       </div>
       {/* project cards */}
       <div className='mx-0 px-3 mt-5 row row-cols-1 row-cols-md-2 row-gap-4 d-flex justify-content-center'>
@@ -92,13 +92,13 @@ export function StudentProjects() {
             return (
               <div className='col' style={{maxWidth:700}}>
                 {/* project card */}
-                <div className='ps-md-2 card project-card border-celeste rounded-4 bg-dark-2 translucent'>
+                <div className='ps-lg-2 card project-card border-light-1 rounded-4 bg-dark-1 translucent'>
                   <div className='row g-0'>
-                    <div className='pt-3 col-md-1'>
+                    <div className='pt-3 col-lg-1'>
                       <i className={`${ICONS[value.ProjectDevType]} color-light-2 fs-4`}></i>
                     </div>
-                    <div className='col-md-11'>
-                      <div className='px-3 pb-3 ps-md-0 card-body d-flex flex-column align-items-start text-light' style={{minHeight:290}}>
+                    <div className='col-lg-11'>
+                      <div className='px-3 pb-3 ps-lg-0 card-body d-flex flex-column align-items-start text-light' style={{minHeight:290}}>
                         {/* project title  */}
                           <h5 className='card-title text-start fs-3 color-light-2 bolder'>{value.ProjectName}</h5>
                           {/* project description */}
@@ -111,20 +111,20 @@ export function StudentProjects() {
                           <div className='mt-auto mx-0 row col-12'>
                             {/* project tags */}
                             <div className='ps-0 d-flex flex-row align-items-start'>
-                              <div className='py-1 px-3 ms-0 me-2 bg-dark-1 btn-custom-1 rounded-pill border border-celeste fs-xs'>
+                              <div className='py-1 px-3 ms-0 me-2 bg-dark-1 btn-dark-1 rounded-pill border border-light-1 fs-xs'>
                                 JavaScript
                               </div>
-                              <div className='py-1 px-3 ms-0 me-2 bg-dark-1 btn-custom-1 rounded-pill border border-celeste fs-xs'>
+                              <div className='py-1 px-3 ms-0 me-2 bg-dark-1 btn-dark-1 rounded-pill border border-light-1 fs-xs'>
                                 FastAPI
                               </div>
                             </div>
                             {/* github link and view link */}
                             <div className='mt-3 mb-0 ps-0 pe-0 d-flex flex-row align-items-center'>
-                              <button type='button' className='px-4 py-2 bg-dark-1 d-flex flex-row align-items-center justify-content-center btn-custom-1 rounded-4 border-celeste' onClick={() => redirectToUrl(value.ProjectUrl)}>
+                              <button type='button' className='col-lg-3 px-4 py-2 ms-0 me-3 btn-light-1 rounded-4 border border-0' onClick={() => redirectToUrl(value.ProjectUrl)}>
                                 {/* <img src={github_logo} alt='...' className='img-fluid'/> */}
                                 GitHub
                               </button>
-                              <button type='button' className='ms-auto px-4 py-2 bg-dark-1 btn-custom-1 rounded-4 border-celeste' onClick={() => handleClick(1)}>View</button>
+                              <button type='button' className='col-lg-3 px-4 py-2 ms-0 me-3 btn-light-1 rounded-4 border border-0' onClick={() => handleClick(1)}>View</button>
                             </div>
                           </div>
                       </div>
@@ -170,12 +170,12 @@ export function ProjectDetails() {
   return (
     <div className='d-flex flex-column'>
       {/* header container */}
-      <div className='p-0 mb-5 d-flex flex-column align-items-center justify-content-center'>
+      <div className='p-0 mt-2 mb-5 d-flex flex-column align-items-center justify-content-center'>
         <h1 className='fs-1 bolder color-light-2 text-shadow-m'>{sampleProject.ProjectName}</h1>
         <div className='fs-5 fw-bold color-light-2'>
           {sampleProject.ProjectOwner}
         </div>
-        <div className='col-md-11 mt-3 mx-2 px-3 py-4 rounded-4 bg-dark-2 border border-celeste text-light text-start' style={{maxWidth:1400}}>
+        <div className='col-md-11 mt-3 mx-2 px-3 py-4 rounded-4 bg-dark-1 border border-light-1 text-light text-start' style={{maxWidth:1400}}>
           {sampleProject.ProjectDescription}
           {/* Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
           Cras a nisl eros. Nullam elit augue, vulputate at auctor id, interdum in nisi. 
@@ -192,7 +192,7 @@ export function ProjectDetails() {
       <div className='col-6 align-self-center row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 d-flex align-items-center justify-content-center' style={{maxWidth:700}}>
         {/* stars */}
         <div className='col' style={{maxWidth:150}}>
-          <div className='bg-dark-2 card project-card rounded-5 pb-1 border-celeste'>
+          <div className='bg-dark-1 card project-card rounded-5 pb-1 border-light-1'>
             <div className='card-body pb-0 flex-column align-items-center'>
               <i className="bi bi-stars color-light-2 fs-1"></i>
               <p className='mt-1 mb-1 fw-bolder fs-5 color-light-2'>
@@ -204,7 +204,7 @@ export function ProjectDetails() {
         
         {/* forks */}
         <div className='col' style={{maxWidth:150}}>
-          <div className='bg-dark-2 card project-card rounded-5 pb-1 border-celeste'>
+          <div className='bg-dark-1 card project-card rounded-5 pb-1 border-light-1'>
             <div className='card-body pb-0 flex-column align-items-center'>
               <i className="bi bi-plugin color-light-2 fs-1"></i>
               <p className='mt-1 mb-1 fw-bolder fs-5 color-light-2'>
@@ -216,7 +216,7 @@ export function ProjectDetails() {
         
         {/* issues */}
         <div className='col' style={{maxWidth:150}}>
-          <div className='bg-dark-2 card project-card rounded-5 pb-1 border-celeste'>
+          <div className='bg-dark-1 card project-card rounded-5 pb-1 border-light-1'>
             <div className='card-body pb-0 flex-column align-items-center'>
               <i className="bi bi-exclamation-octagon color-light-2 fs-1"></i>
               <p className='mt-1 mb-1 fw-bolder fs-5 color-light-2'>
@@ -228,7 +228,7 @@ export function ProjectDetails() {
         
         {/* contributors */}
         <div className='col' style={{maxWidth:150}}>
-          <div className='bg-dark-2 card project-card rounded-5 pb-1 border-celeste'>
+          <div className='bg-dark-1 card project-card rounded-5 pb-1 border-light-1'>
             <div className='card-body pb-0 flex-column align-items-center'>
               <i className="bi bi-person-workspace color-light-2 fs-1"></i>
               <p className='mt-1 mb-1 fw-bolder fs-5 color-light-2'>
@@ -240,8 +240,8 @@ export function ProjectDetails() {
       </div>
       {/* Navigation Buttons */}
       <div className='mt-5 d-flex flex-row justify-content-center'>
-          <button type='button' className='px-3 py-1 py-md-3 mx-2 bg-dark-pruple btn-custom-1 rounded-pill border-celeste'>Back to Projects</button>
-          <button type='button' className='px-3 py-1 py-md-3 mx-2 bg-dark-pruple btn-custom-1 rounded-pill border-celeste'>View On GitHub</button>
+          <button type='button' className='px-3 py-1 py-md-3 mx-2 bg-dark-pruple btn-dark-1 rounded-pill border border-1 border-light-1'>Back to Projects</button>
+          <button type='button' className='px-3 py-1 py-md-3 mx-2 bg-dark-pruple btn-dark-1 rounded-pill border border-1 border-light-1'>View On GitHub</button>
       </div>
       {/* Tags */}
       <div className='mt-5 d-flex flex-column  align-items-center'>
@@ -253,11 +253,11 @@ export function ProjectDetails() {
             //   return <div> {value.ProjectName} {value.ProjectOwner} </div>
             // })
             projectDetails.Tags.map((value, key) => {
-              return <button type='button' className='project-card bg-dark-2 rounded-pill mx-2 mb-2 px-4 py-1 border-celeste color-light-2'>{value}</button>
+              return <button type='button' className='project-card bg-dark-1 rounded-pill mx-2 mb-2 px-4 py-1 border border-1 border-light-1 color-light-2'>{value}</button>
             })
           }
-          {/* <button type='button' className='project-card bg-dark-2 rounded-pill mx-2 px-4 py-1 border-celeste color-light-2'>JavaScript</button>
-          <button type='button' className='project-card bg-dark-2 rounded-pill mx-2 px-4 py-1 border-celeste color-light-2'>FastAPI</button> */}
+          {/* <button type='button' className='project-card bg-dark-2 rounded-pill mx-2 px-4 py-1 border-light-1 color-light-2'>JavaScript</button>
+          <button type='button' className='project-card bg-dark-2 rounded-pill mx-2 px-4 py-1 border-light-1 color-light-2'>FastAPI</button> */}
         </div>
       </div>
       {/* Core Contributors */}
@@ -274,8 +274,8 @@ export function ProjectDetails() {
                   styles.colorSecondary = 'color-dark-1';
                   break;
                 case "Contributor":
-                  styles.bgColor = 'bg-dark-2';
-                  styles.color = 'color-light-2';
+                  styles.bgColor = 'bg-dark-1';
+                  styles.color = 'color-light-1';
                   styles.colorSecondary = 'color-light-2';
                   break;
                 default:
@@ -283,7 +283,7 @@ export function ProjectDetails() {
               }
               return (
                 <div className='col' style={{maxWidth:300}}>
-                  <div className={`${styles.bgColor} project-card px-5 rounded-5 mx-2 px-4 py-1 border border-dark-purple`}>
+                  <div className={`${styles.bgColor} project-card px-5 rounded-5 mx-2 px-4 py-1 border border-2 border-dark-2`}>
                     <p className={`mt-1 mb-0 fs-6 ${styles.color}`}>
                       {value.Role}
                     </p>
