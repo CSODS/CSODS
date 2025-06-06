@@ -10,8 +10,8 @@ export function PrimaryLayout() {
     return(
         <div>
             <div className="p-0 navbar navbar-expand-lg sticky-top bg-body-tertiary">    
-                <div className="container-fluid bg-feldgrau header-container">
-                    <a className="navbar-brand color-dark-purple fs-3 bolder" href={ADDRESSES.LANDING_PAGE}>
+                <div className="container-fluid bg-neutral header-container">
+                    <a className="navbar-brand color-dark-2 fs-3 bolder" href={ADDRESSES.LANDING_PAGE}>
                         <img src={logo} alt="CSO_LOGO" className='header-logo'/>
                         CSO:DS  
                     </a>
@@ -29,11 +29,11 @@ export function PrimaryLayout() {
                             <i className="bi bi-arrow-right-circle ms-2 me-1"></i>
                         </a>
                         
-                        <div className="bg-dark-purple navbar-nav d-flex d-lg-none flex-column border border-celeste rounded-2">
-                            <a href={ADDRESSES.HOME} className="nav-link color-celeste">Home</a>
-                            <a href={ADDRESSES.STUDENT_PROJECTS} className="nav-link color-celeste">Projects</a>
-                            <a href={ADDRESSES.ABOUT} className="nav-link color-celeste">About</a>
-                            <a href={ADDRESSES.SUBMIT_PROJECT} className="nav-link color-celeste">Submit a Project</a>
+                        <div className="bg-dark-2 navbar-nav d-flex d-lg-none flex-column border border-celeste rounded-2">
+                            <a href={ADDRESSES.HOME} className="nav-link color-light-2">Home</a>
+                            <a href={ADDRESSES.STUDENT_PROJECTS} className="nav-link color-light-2">Projects</a>
+                            <a href={ADDRESSES.ABOUT} className="nav-link color-light-2">About</a>
+                            <a href={ADDRESSES.SUBMIT_PROJECT} className="nav-link color-light-2">Submit a Project</a>
                         </div>
                     </div>
                 </div>

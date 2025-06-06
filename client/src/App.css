@@ -24,31 +24,31 @@ input[type="text"] {
   outline: none;
 }
 
-.bg-celeste {
+.bg-light-1 {
   background-color: #C5FFFD !important;
 }
 
-.bg-non-photo-blue {
+.bg-light-2 {
   background-color: #88D9E6 !important;
 }
 
-.bg-feldgrau {
+.bg-neutral {
   background-color:#5b6c5d !important;
 }
 
-.bg-raisin-black {
+.bg-dark-1 {
   background-color: #3b2c35 !important;
 }
 
-.bg-dark-purple {
+.bg-dark-2{
   background-color: #2a1f2d !important;
 }
 
-.bg-feldgrau.translucent {
+.bg-neutral.translucent {
   background-color: #5b6c5dbf !important;
 }
 
-.bg-dark-purple.translucent {
+.bg-dark-2.translucent {
   background-color: #2a1f2dbf !important;
 }
 
@@ -76,23 +76,23 @@ input[type="text"] {
 }
 
 /* colors */
-.color-celeste {
+.color-light-1 {
   color: #C5FFFD !important;
 }
 
-.color-non-photo-blue {
+.color-light-2 {
   color: #88D9E6 !important;
 }
 
-.color-feldgrau {
+.color-neutral {
   color: #5b6c5d !important;
 }
 
-.color-raisin-black {
+.color-dark-1 {
   color: #3b2c35 !important;
 }
 
-.color-dark-purple {
+.color-dark-2 {
   color: #2A1F2D !important;
 }
 
@@ -156,11 +156,11 @@ input[type="text"] {
   box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 }
 
-.project-card.bg-dark-purple:hover {
+.project-card.bg-dark-2:hover {
   background-color: #332737 !important;
 }
 
-.project-card.bg-celeste:hover {
+.project-card.bg-light-1:hover {
   background-color: #d0fffd !important;
 }
 
