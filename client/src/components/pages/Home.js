@@ -4,7 +4,7 @@ import React from 'react';
 function Home() {
   return (
     <div className='pt-4 d-flex justify-content-center'>
-      <div className='container-md mx-3 py-3 d-flex flex-row justify-content-center bg-feldgrau translucent rounded-5' style={{maxWidth:1100}}>
+      <div className='container-md mx-3 py-3 d-flex flex-row justify-content-center bg-neutral translucent rounded-5' style={{maxWidth:1100}}>
         <div className='pb-4 m-4 card border border-0 bg-transparent'>
           <div className='row g-0'>
             <div className='col-md-6 d-flex d-md-none'>
@@ -17,13 +17,13 @@ function Home() {
                     #DevelopersSpace
                   </div>
                 </div>
-                <h5 class="card-title col-md-9 mt-1 mb-3 text-start fs-3 color-celeste bolder">Your Space to Learn, Build, and Grow.</h5>
+                <h5 class="card-title col-md-9 mt-1 mb-3 text-start fs-3 color-light-2 bolder">Your Space to Learn, Build, and Grow.</h5>
                 <p class="card-text col-md-9 mt-1 mb-3 text-light text-start">
                   <span className='text-emphasize'>Computer Science Organization: Developers’ Space </span>
                   is a digital hub for students of the Computer Science Department where we foster innovation, 
                   collaboration, and academic excellence in the field of computing.
                 </p>
-                <p class="card-text col-md-9 mt-1 mb-4 text-start color-non-photo-blue">
+                <p class="card-text col-md-9 mt-1 mb-4 text-start color-light-2">
                   Explore. Learn. Contribute.
                 </p>
                 <div className='d-flex'>
