@@ -8,6 +8,8 @@ const turso = createClient({
     authToken: process.env.TURSO_AUTH_TOKEN,
 });
 
+turso.execute('PRAGMA foreign_keys=ON;');
+
 const csodsContext = drizzle(turso);
 
 export {turso, csodsContext}
