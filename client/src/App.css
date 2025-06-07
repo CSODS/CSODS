@@ -89,6 +89,10 @@ input[type="text"] {
   text-shadow: 2px 2px 30px #2A1F2D;
 }
 
+.color-transparent {
+  color: transparent !important;
+}
+
 /* colors */
 .color-light-1 {
   /*color: #C5FFFD !important; */
@@ -117,8 +121,6 @@ input[type="text"] {
 /* header styles */
 .header-container {
   height: 80px;
-  padding-left: 40px;
-  padding-right: 40px;
 }
 
 .header-logo {
