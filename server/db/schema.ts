@@ -1,10 +1,7 @@
-import { integer, text, sqliteTable } from "drizzle-orm/sqlite-core";
-
-export const Projects = sqliteTable("Projects", {
-  ProjectId: integer("ProjectId").primaryKey({autoIncrement: true}),
-  ProjectNumber: text("ProjectNumber").notNull(),
-  ProjectName: text("ProjectName").notNull(),
-  ProjectOwner: text("ProjectOwner").notNull(),
-  ProjectDescription: text("ProjectDescription").notNull(),
-  ProjectUrl: text("ProjectUrl").notNull()
-});
+export { Roles } from "./models/roles";
+export { Users } from "./models/users"; 
+export { Projects } from "./models/Projects";
+export { ProjectImages } from "./models/project_images";
+export { DevTypes } from "./models/DevTypes";
+export { Tags } from "./models/Tags";
+export { ProjectTags } from "./models/ProjectTags";

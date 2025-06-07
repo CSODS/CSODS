@@ -19,10 +19,11 @@
     "dotenv": "^16.5.0",
     "drizzle-orm": "^0.44.1",
     "express": "^5.1.0",
-    "nodemon": "^3.1.10",
-    "typescript": "^5.8.3"
+    "gel": "^2.1.0",
+    "nodemon": "^3.1.10"
   },
   "devDependencies": {
-    "drizzle-kit": "^0.31.1"
+    "drizzle-kit": "^0.31.1",
+    "typescript": "^5.8.3"
   }
 }
