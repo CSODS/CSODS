@@ -10,12 +10,12 @@ export function PrimaryLayout() {
     return(
         <div>
             <div className="p-0 navbar navbar-expand-lg sticky-top bg-body-tertiary">    
-                <div className="container-fluid bg-dark-1 header-container">
+                <div className="px-lg-5 container-fluid bg-dark-1 header-container">
                     <a className="navbar-brand color-light-1 fs-4 bolder" href={ADDRESSES.LANDING_PAGE}>
                         <img src={logo} alt="CSO_LOGO" className='header-logo'/>
                         CSO:DS  
                     </a>
-                    <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+                    <button className="navbar-toggler bg-light-2 color-transparent" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
                     </button>
                     <div className="collapse navbar-collapse" id="navbar">
