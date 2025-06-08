@@ -1,0 +1,450 @@
+{
+  "version": "6",
+  "dialect": "sqlite",
+  "id": "225ebfdc-76fe-4b0a-9cfc-10c7dcbeafdc",
+  "prevId": "b40d5578-e491-4936-b7b4-b58ba2756fe1",
+  "tables": {
+    "DevTypes": {
+      "name": "DevTypes",
+      "columns": {
+        "DevTypeId": {
+          "name": "DevTypeId",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "DevTypeName": {
+          "name": "DevTypeName",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "DevTypes_DevTypeId_unique": {
+          "name": "DevTypes_DevTypeId_unique",
+          "columns": [
+            "DevTypeId"
+          ],
+          "isUnique": true
+        },
+        "DevTypes_DevTypeName_unique": {
+          "name": "DevTypes_DevTypeName_unique",
+          "columns": [
+            "DevTypeName"
+          ],
+          "isUnique": true
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "ProjectImages": {
+      "name": "ProjectImages",
+      "columns": {
+        "ImageId": {
+          "name": "ImageId",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "ProjectId": {
+          "name": "ProjectId",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "ImageUrl": {
+          "name": "ImageUrl",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "ProjectImages_ImageId_unique": {
+          "name": "ProjectImages_ImageId_unique",
+          "columns": [
+            "ImageId"
+          ],
+          "isUnique": true
+        }
+      },
+      "foreignKeys": {
+        "ProjectImages_ProjectId_Projects_ProjectId_fk": {
+          "name": "ProjectImages_ProjectId_Projects_ProjectId_fk",
+          "tableFrom": "ProjectImages",
+          "tableTo": "Projects",
+          "columnsFrom": [
+            "ProjectId"
+          ],
+          "columnsTo": [
+            "ProjectId"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "ProjectTags": {
+      "name": "ProjectTags",
+      "columns": {
+        "ProjectId": {
+          "name": "ProjectId",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "TagId": {
+          "name": "TagId",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "ProjectTags_ProjectId_Projects_ProjectId_fk": {
+          "name": "ProjectTags_ProjectId_Projects_ProjectId_fk",
+          "tableFrom": "ProjectTags",
+          "tableTo": "Projects",
+          "columnsFrom": [
+            "ProjectId"
+          ],
+          "columnsTo": [
+            "ProjectId"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "ProjectTags_TagId_Tags_TagId_fk": {
+          "name": "ProjectTags_TagId_Tags_TagId_fk",
+          "tableFrom": "ProjectTags",
+          "tableTo": "Tags",
+          "columnsFrom": [
+            "TagId"
+          ],
+          "columnsTo": [
+            "TagId"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "ProjectTags_ProjectId_TagId_pk": {
+          "columns": [
+            "ProjectId",
+            "TagId"
+          ],
+          "name": "ProjectTags_ProjectId_TagId_pk"
+        }
+      },
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "Projects": {
+      "name": "Projects",
+      "columns": {
+        "ProjectId": {
+          "name": "ProjectId",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "ProjectNumber": {
+          "name": "ProjectNumber",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "UserId": {
+          "name": "UserId",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "ProjectTitle": {
+          "name": "ProjectTitle",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "DevTypeId": {
+          "name": "DevTypeId",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "GitHubUrl": {
+          "name": "GitHubUrl",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "Projects_ProjectId_unique": {
+          "name": "Projects_ProjectId_unique",
+          "columns": [
+            "ProjectId"
+          ],
+          "isUnique": true
+        },
+        "Projects_ProjectNumber_unique": {
+          "name": "Projects_ProjectNumber_unique",
+          "columns": [
+            "ProjectNumber"
+          ],
+          "isUnique": true
+        }
+      },
+      "foreignKeys": {
+        "Projects_UserId_Users_UserId_fk": {
+          "name": "Projects_UserId_Users_UserId_fk",
+          "tableFrom": "Projects",
+          "tableTo": "Users",
+          "columnsFrom": [
+            "UserId"
+          ],
+          "columnsTo": [
+            "UserId"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "Projects_DevTypeId_DevTypes_DevTypeId_fk": {
+          "name": "Projects_DevTypeId_DevTypes_DevTypeId_fk",
+          "tableFrom": "Projects",
+          "tableTo": "DevTypes",
+          "columnsFrom": [
+            "DevTypeId"
+          ],
+          "columnsTo": [
+            "DevTypeId"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "Roles": {
+      "name": "Roles",
+      "columns": {
+        "RoleId": {
+          "name": "RoleId",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "RoleName": {
+          "name": "RoleName",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "Roles_RoleId_unique": {
+          "name": "Roles_RoleId_unique",
+          "columns": [
+            "RoleId"
+          ],
+          "isUnique": true
+        },
+        "Roles_RoleName_unique": {
+          "name": "Roles_RoleName_unique",
+          "columns": [
+            "RoleName"
+          ],
+          "isUnique": true
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "Tags": {
+      "name": "Tags",
+      "columns": {
+        "TagId": {
+          "name": "TagId",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "TagName": {
+          "name": "TagName",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "Tags_TagId_unique": {
+          "name": "Tags_TagId_unique",
+          "columns": [
+            "TagId"
+          ],
+          "isUnique": true
+        },
+        "Tags_TagName_unique": {
+          "name": "Tags_TagName_unique",
+          "columns": [
+            "TagName"
+          ],
+          "isUnique": true
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "Users": {
+      "name": "Users",
+      "columns": {
+        "UserId": {
+          "name": "UserId",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "Email": {
+          "name": "Email",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "Username": {
+          "name": "Username",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "Name": {
+          "name": "Name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "Password": {
+          "name": "Password",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "RoleId": {
+          "name": "RoleId",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "StudentNumber": {
+          "name": "StudentNumber",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "UserIconImg": {
+          "name": "UserIconImg",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "Users_UserId_unique": {
+          "name": "Users_UserId_unique",
+          "columns": [
+            "UserId"
+          ],
+          "isUnique": true
+        },
+        "Users_Email_unique": {
+          "name": "Users_Email_unique",
+          "columns": [
+            "Email"
+          ],
+          "isUnique": true
+        },
+        "Users_Username_unique": {
+          "name": "Users_Username_unique",
+          "columns": [
+            "Username"
+          ],
+          "isUnique": true
+        },
+        "Users_StudentNumber_unique": {
+          "name": "Users_StudentNumber_unique",
+          "columns": [
+            "StudentNumber"
+          ],
+          "isUnique": true
+        }
+      },
+      "foreignKeys": {
+        "Users_RoleId_Roles_RoleId_fk": {
+          "name": "Users_RoleId_Roles_RoleId_fk",
+          "tableFrom": "Users",
+          "tableTo": "Roles",
+          "columnsFrom": [
+            "RoleId"
+          ],
+          "columnsTo": [
+            "RoleId"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    }
+  },
+  "views": {},
+  "enums": {},
+  "_meta": {
+    "schemas": {},
+    "tables": {},
+    "columns": {}
+  },
+  "internal": {
+    "indexes": {}
+  }
+}

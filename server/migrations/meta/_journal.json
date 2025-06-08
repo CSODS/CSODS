@@ -8,6 +8,13 @@
       "when": 1749303373533,
       "tag": "0000_ordinary_frightful_four",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1749399524954,
+      "tag": "0001_high_madripoor",
+      "breakpoints": true
     }
   ]
 }
