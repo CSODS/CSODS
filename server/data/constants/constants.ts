@@ -12,5 +12,13 @@ export const PROJECT_ROUTES = {
 export const CACHE = {
     BASE_NAME: 'cachedProjects',
     HARD_BACKUP: 'cachedProjectsHardBackup',
-    AS_JSON: '.json'
+    AS_JSON: '.json',
+    PAGE_SIZE: 8
+} as const;
+
+export const DEVELOPMENT_TYPES = {
+    GAME_DEV: "Game Development",
+    WEB_DEV: "Web Development",
+    SOFTWARE_DEV: "Software Development",
+    API_DEV: "API Development"  
 } as const;
