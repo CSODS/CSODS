@@ -1,5 +1,6 @@
 import { drizzle } from "drizzle-orm/libsql";
 import { createClient } from "@libsql/client";
+import * as schema from './schema.js';
 import dotenv from "dotenv"
 dotenv.config()
 
@@ -10,6 +11,6 @@ const turso = createClient({
 
 turso.execute('PRAGMA foreign_keys=ON;');
 
-const csodsContext = drizzle(turso);
+const csodsContext = drizzle({client: turso, schema});
 
 export {turso, csodsContext}
