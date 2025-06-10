@@ -6,7 +6,8 @@ export const ROUTES = {
 
 export const PROJECT_ROUTES = {
     ROOT: '/',
-    BY_ID: '/:projectId'
+    BY_PAGE: '/:pageNumber',
+    BY_ID: '/:pageNumber/:projectId'
 } as const;
 
 export const CACHE = {

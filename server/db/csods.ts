@@ -4,13 +4,34 @@ import * as schema from './schema.js';
 import dotenv from "dotenv"
 dotenv.config()
 
-const turso = createClient({
-    url: process.env.TURSO_DATABASE_URL!,
-    authToken: process.env.TURSO_AUTH_TOKEN,
-});
+let tursoClient: ReturnType<typeof createClient> | null = null;
 
-turso.execute('PRAGMA foreign_keys=ON;');
+function createTursoClient() {
+    if (!tursoClient) {
+        tursoClient = createClient({
+            url: process.env.TURSO_DATABASE_URL!,
+            authToken: process.env.TURSO_AUTH_TOKEN,
+        });
+    }
+    return tursoClient;
+}
 
-const csodsContext = drizzle({client: turso, schema});
+export async function createContext() {
+    const turso = createTursoClient();
+    await turso.execute('PRAGMA foreign_keys=ON;');
 
-export {turso, csodsContext}
+    const csodsContext = drizzle({client: turso, schema});
+
+    return csodsContext;
+}
+
+// const turso = createClient({
+//     url: process.env.TURSO_DATABASE_URL!,
+//     authToken: process.env.TURSO_AUTH_TOKEN,
+// });
+
+// turso.execute('PRAGMA foreign_keys=ON;');
+
+// const csodsContext = drizzle({client: turso, schema});
+
+// export {turso, csodsContext}

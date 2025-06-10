@@ -1,10 +1,8 @@
 import cors from 'cors';
 import express from 'express';
 import router from './routes/projectsRoute.js';
-import { turso } from './db/csods.js';
-import { ROUTES } from './constants/constants.js';
-
-await turso.execute('PRAGMA foreign_keys = ON');
+import { ROUTES } from './data/constants/constants.js';
+import { attachProjectCacheHandler } from './middleware/attacheMiddleware.js';
 
 
 const app = express()
@@ -13,6 +11,7 @@ const app = express()
 app.use(express.json());
 //  whitelist api so connection works and you can make requests.
 app.use(cors());
+app.use(attachProjectCacheHandler);
 
 //  for routes
 const projectsRouter = router;
