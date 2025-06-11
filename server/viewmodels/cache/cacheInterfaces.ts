@@ -44,5 +44,5 @@ export interface IUserCache {
     Users: Record<string, User>
 }
 
-export type ProjectCachePages = Record<number, IProjectCachePage>;
+export type CachePageRecord = Record<number, IProjectCachePage>;
 
