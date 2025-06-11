@@ -242,6 +242,12 @@ export class ProjectCacheHandler {
             //  Attempt to retrieve page from cache.
             let cachePages: ProjectCachePages = this._jsonCache!.CachePages;
 
+            //  Return null if the user tries to access a page that doesn't exist.
+            if (pageNumber > this._jsonCache!.TotalPages) {
+                console.log('Page is out of bounds.')
+                return null;
+            }
+
             //  If page is not in cache, fetch page from database and add to cache.
             if (!this.isPageInJsonCache(cachePages, pageNumber)) {
                 console.log('Page not in cache. Attempting to add new page...');
@@ -270,7 +276,7 @@ export class ProjectCacheHandler {
      * @returns {Promise<void>} A Promise that resolves when the project cache has been successfully loaded into memory, or if all attempts to load/create it fail.
      * This method does not return a value but sets the `_jsonCache` property of the class.
      */
-    public async setProjectsCache() : Promise<void> {
+    public async setProjectsCache() : Promise<IProjectCache | null> {
         //  Get current date.
         const cDate: Date = new Date();
         //  Set file name.
@@ -293,6 +299,7 @@ export class ProjectCacheHandler {
         }
         //  Sets the loaded cache into _jsonCache.
         this._jsonCache = cachedProjects;
+        return this._jsonCache;
     }
     
     //#region In-memory Cache Handler
@@ -422,6 +429,10 @@ export class ProjectCacheHandler {
                 }
             }
         }
+        //  Return cache if successfully parsed.
+        else {
+            return cachedProjects;
+        }
 
         //  Return null if cache creation failed.
         console.log('Cache creation attempts failed. Returning null...');
@@ -530,6 +541,10 @@ export class ProjectCacheHandler {
 
             //  Attempt to write to json file.
             const projectsJson = JSON.stringify(projectCache, null, 2);
+            // Ensure the directory exists. Create it recursively if it doesn't.
+            console.log(`Ensuring directory exists: ${process.env.PROJECT_CACHE_PATH!}`);
+            await fs.mkdir(process.env.PROJECT_CACHE_PATH!, { recursive: true });
+            console.log('Directory ensured.');
             console.log('Attempting to write cache...');
             await fs.writeFile(filePath, projectsJson);
             console.log('Json cache written.');
@@ -582,7 +597,8 @@ export class ProjectCacheHandler {
     private generateJsonPath(basePath: string, baseName: string, date: Date | null = null): string {
         let fileName: string = baseName;
         if (date != null) {
-            const dateString: string = date.toLocaleDateString('en-US', {timeZone: 'Asia/Singapore'});
+            // const dateString: string = date.toLocaleDateString('en-US', {timeZone: 'Asia/Singapore'});
+            const dateString: string = date.toDateString();
             fileName += `-${dateString}`;
         }
         fileName += CACHE.AS_JSON;
@@ -609,15 +625,17 @@ export class ProjectCacheHandler {
         //  store all pages in a ProjectCachePages object.
         for (let pageNumber = pageStart; pageNumber <= pageEnd; pageNumber++ ) {
             console.log(`Fetching page ${pageNumber} from database...`);
+            const projectList: Project[] = (
+                await this._projectRepository.GetRows(
+                    Projects.ProjectId, 
+                    CACHE.PAGE_SIZE,
+                    pageNumber
+                )
+            )
+            if (projectList.length == 0 ) break;
             cachePages[pageNumber] = {
                 VisitCount: 0,
-                ProjectList: (
-                    await this._projectRepository.GetRows(
-                        Projects.ProjectId, 
-                        CACHE.PAGE_SIZE,
-                        pageNumber
-                    )
-                )
+                ProjectList: projectList
             };
         }
         console.log(`Pages ${pageStart} to ${pageEnd} fetched from database.`);
