@@ -1,7 +1,7 @@
-export { Roles } from "./models/roles";
-export { Users } from "./models/users"; 
-export { Projects } from "./models/Projects";
-export { ProjectImages } from "./models/project_images";
-export { DevTypes } from "./models/DevTypes";
-export { Tags } from "./models/Tags";
-export { ProjectTags } from "./models/ProjectTags";
+export { Roles } from "./models/roles.js";
+export { Users } from "./models/users.js"; 
+export { Projects } from "./models/Projects.js";
+export { ProjectImages } from "./models/project_images.js";
+export { DevTypes } from "./models/DevTypes.js";
+export { Tags } from "./models/Tags.js";
+export { ProjectTags } from "./models/ProjectTags.js";

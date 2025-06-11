@@ -5,8 +5,14 @@ import express from 'express';
 
 const router = express.Router();
 
+router.get(PROJECT_ROUTES.LOAD_PROJECTS, async (req, res) => {
+    res.json(await req.projectCacheHandler.setProjectsCache());
+})
+
 router.get(PROJECT_ROUTES.BY_PAGE, async (req, res) => {
-    res.json(await req.projectCacheHandler.getJsonCachePage(Number(req.params.pageNumber)));
+    const projectCacheHandler = req.projectCacheHandler;
+    await projectCacheHandler.setProjectsCache();
+    res.json(await projectCacheHandler.getJsonCachePage(Number(req.params.pageNumber)));
 });
 
 router.get(PROJECT_ROUTES.BY_ID, async (req, res) => {
