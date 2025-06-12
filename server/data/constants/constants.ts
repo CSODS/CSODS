@@ -1,7 +1,8 @@
 export const BASE = "http://localhost:3001";
 
 export const ROUTES = {
-    PROJECTS: '/projects'
+    PROJECTS: '/projects',
+    PROJECT_TAGS: '/project_tags'
 } as const;
 
 export const PROJECT_ROUTES = {
@@ -10,6 +11,11 @@ export const PROJECT_ROUTES = {
     BY_ID: '/:pageNumber/:projectId',
     LOAD_PROJECTS: '/load_projects'
 } as const;
+
+export const PROJECT_TAG_ROUTES = {
+    ROOT: '/',
+    ALL_DATA: '/all_data'
+}
 
 export const CACHE = {
     BASE_NAME: 'cachedProjects',
