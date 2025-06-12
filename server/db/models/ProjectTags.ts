@@ -4,11 +4,11 @@ import { Tags } from "./Tags.js";
 export const ProjectTags  = sqliteTable("ProjectTags", {
     ProjectId : integer('ProjectId')
         .notNull()
-        .references(() => Projects.ProjectId , { onDelete :"cascade"}
+        .references(() => Projects.ProjectId , { onDelete :"restrict"}
     ),
     TagId : integer('TagId')
         .notNull()
-        .references( () => Tags.TagId, { onDelete: 'cascade'}
+        .references( () => Tags.TagId, { onDelete: 'restrict'}
     ),
 }, (table) => ({
     pk: primaryKey({ columns: [table.ProjectId, table.TagId] })

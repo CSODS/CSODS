@@ -6,10 +6,10 @@ export const Projects  = sqliteTable("Projects", {
     ProjectId : integer('ProjectId').primaryKey({autoIncrement: true}).unique(),
     ProjectNumber : text('ProjectNumber').unique(),
     UserId : integer('UserId').references(() => Users.UserId, 
-    {onDelete: 'cascade'}).notNull(),
+    {onDelete: 'restrict'}).notNull(),
     ProjectTitle : text('ProjectTitle'),
     DevTypeId : integer('DevTypeId').references(() => DevTypes.DevTypeId, 
-    {onDelete: 'cascade'}),
+    {onDelete: 'restrict'}),
     GitHubUrl : text('GitHubUrl')
     
 })

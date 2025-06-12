@@ -1,7 +1,7 @@
 {
   "version": "6",
   "dialect": "sqlite",
-  "id": "b40d5578-e491-4936-b7b4-b58ba2756fe1",
+  "id": "9209c1f4-8231-4fc1-8b4f-5001a32f5800",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
     "DevTypes": {
@@ -16,7 +16,7 @@
         },
         "DevTypeName": {
           "name": "DevTypeName",
-          "type": "integer",
+          "type": "text",
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false
@@ -103,26 +103,18 @@
           "name": "ProjectId",
           "type": "integer",
           "primaryKey": false,
-          "notNull": false,
+          "notNull": true,
           "autoincrement": false
         },
         "TagId": {
           "name": "TagId",
           "type": "integer",
           "primaryKey": false,
-          "notNull": false,
+          "notNull": true,
           "autoincrement": false
         }
       },
-      "indexes": {
-        "ProjectTags_TagId_unique": {
-          "name": "ProjectTags_TagId_unique",
-          "columns": [
-            "TagId"
-          ],
-          "isUnique": true
-        }
-      },
+      "indexes": {},
       "foreignKeys": {
         "ProjectTags_ProjectId_Projects_ProjectId_fk": {
           "name": "ProjectTags_ProjectId_Projects_ProjectId_fk",
@@ -134,7 +126,7 @@
           "columnsTo": [
             "ProjectId"
           ],
-          "onDelete": "cascade",
+          "onDelete": "restrict",
           "onUpdate": "no action"
         },
         "ProjectTags_TagId_Tags_TagId_fk": {
@@ -147,11 +139,19 @@
           "columnsTo": [
             "TagId"
           ],
-          "onDelete": "cascade",
+          "onDelete": "restrict",
           "onUpdate": "no action"
         }
       },
-      "compositePrimaryKeys": {},
+      "compositePrimaryKeys": {
+        "ProjectTags_ProjectId_TagId_pk": {
+          "columns": [
+            "ProjectId",
+            "TagId"
+          ],
+          "name": "ProjectTags_ProjectId_TagId_pk"
+        }
+      },
       "uniqueConstraints": {},
       "checkConstraints": {}
     },
@@ -228,7 +228,7 @@
           "columnsTo": [
             "UserId"
           ],
-          "onDelete": "cascade",
+          "onDelete": "restrict",
           "onUpdate": "no action"
         },
         "Projects_DevTypeId_DevTypes_DevTypeId_fk": {
@@ -241,7 +241,7 @@
           "columnsTo": [
             "DevTypeId"
           ],
-          "onDelete": "cascade",
+          "onDelete": "restrict",
           "onUpdate": "no action"
         }
       },
@@ -367,7 +367,7 @@
         },
         "RoleId": {
           "name": "RoleId",
-          "type": "text",
+          "type": "integer",
           "primaryKey": false,
           "notNull": true,
           "autoincrement": false
@@ -428,7 +428,7 @@
           "columnsTo": [
             "RoleId"
           ],
-          "onDelete": "cascade",
+          "onDelete": "restrict",
           "onUpdate": "no action"
         }
       },
