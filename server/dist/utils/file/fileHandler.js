@@ -114,8 +114,10 @@ export class JsonFileHandler {
                 yield fs.mkdir(filePath, { recursive: true });
                 console.log('Directory ensured.');
                 const fullPath = path.join(filePath, fileName);
-                release = yield lockfile.lock(fullPath, { retries: this._retryOptions });
-                console.log('Lock acqquired.');
+                if (existsSync(fullPath)) {
+                    release = yield lockfile.lock(fullPath, { retries: this._retryOptions });
+                    console.log('Lock acqquired.');
+                }
                 //  attempt to write to file.
                 console.log('Attempting to write json file...');
                 yield fs.writeFile(fullPath, dataJson);

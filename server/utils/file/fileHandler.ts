@@ -122,8 +122,11 @@ export class JsonFileHandler<TModel> {
             
             const fullPath = path.join(filePath, fileName);
 
-            release = await lockfile.lock(fullPath, {retries: this._retryOptions});
-            console.log('Lock acqquired.');
+            if (existsSync(fullPath)) {
+                release = await lockfile.lock(fullPath, {retries: this._retryOptions});
+                console.log('Lock acqquired.');                
+            }
+
 
             //  attempt to write to file.
             console.log('Attempting to write json file...');
