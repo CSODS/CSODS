@@ -8,6 +8,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 import { existsSync, promises as fs } from 'fs';
+import * as lockfile from 'proper-lockfile';
 import path from 'path';
 export function createJsonFileHandler(modelName) {
     return new JsonFileHandler(modelName);
@@ -28,6 +29,12 @@ export class JsonFileHandler {
      * @param {string} modelName A string identifier representing the name of the model, used in logging and error messages.
      */
     constructor(modelName) {
+        this._retryOptions = {
+            retries: 3,
+            factor: 1.5,
+            minTimeout: 1 * 1000,
+            maxTimeout: 60 * 1000
+        };
         this._modelName = modelName;
     }
     //#region .json CRUD
@@ -44,20 +51,24 @@ export class JsonFileHandler {
      */
     parseJsonFile(filePath_1, fileName_1) {
         return __awaiter(this, arguments, void 0, function* (filePath, fileName, reviver = null) {
+            const fullPath = path.join(filePath, fileName);
+            console.log(`Attempting to access .json file from ${fullPath}...`);
+            //  Return null if the file does not exist.
+            if (!existsSync(fullPath)) {
+                console.log(`${fullPath} does not exist. Returning null...`);
+                return null;
+            }
+            let release = null;
             //  Read from json file
             try {
-                const fullPath = path.join(filePath, fileName);
-                console.log(`Attempting to access .json file from ${fullPath}...`);
-                //  Return null if the file does not exist.
-                if (!existsSync(fullPath)) {
-                    console.log(`${fullPath} does not exist. Returning null...`);
-                    return null;
-                }
                 //  Attempt to read file.
                 console.log(`.json file found. Attempting to parse...`);
-                const jsonString = yield fs.readFile(fullPath, 'utf-8');
+                //  Lock file.
+                release = yield lockfile.lock(fullPath, { retries: this._retryOptions });
+                console.log('File lock acquired');
                 //  Parse Json as a TModel object and return.
                 //  Additionally apply a reviver function if provided.
+                const jsonString = yield fs.readFile(fullPath, 'utf-8');
                 const data = (reviver
                     ? JSON.parse(jsonString, reviver)
                     : JSON.parse(jsonString));
@@ -69,6 +80,13 @@ export class JsonFileHandler {
                 //  log error and return null.
                 console.error('Error parsing cache: ', err);
                 return null;
+            }
+            finally {
+                if (release) {
+                    //  release lock.
+                    yield release();
+                    console.log('File lock released');
+                }
             }
         });
     }
@@ -85,6 +103,7 @@ export class JsonFileHandler {
      */
     writeToJsonFile(filePath, fileName, data) {
         return __awaiter(this, void 0, void 0, function* () {
+            let release = null;
             try {
                 //  throw exception if data is null.
                 this.assertDataNotNull(data);
@@ -94,8 +113,11 @@ export class JsonFileHandler {
                 console.log(`Ensuring directory exists: ${filePath}`);
                 yield fs.mkdir(filePath, { recursive: true });
                 console.log('Directory ensured.');
-                console.log('Attempting to write json file...');
                 const fullPath = path.join(filePath, fileName);
+                release = yield lockfile.lock(fullPath, { retries: this._retryOptions });
+                console.log('Lock acqquired.');
+                //  attempt to write to file.
+                console.log('Attempting to write json file...');
                 yield fs.writeFile(fullPath, dataJson);
                 console.log('Json file written.');
                 return data;
@@ -103,6 +125,12 @@ export class JsonFileHandler {
             catch (err) {
                 console.error('Error writing cache: ', err);
                 throw err;
+            }
+            finally {
+                if (release) {
+                    yield release();
+                    console.log('File lock released.');
+                }
             }
         });
     }
