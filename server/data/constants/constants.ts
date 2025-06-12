@@ -15,7 +15,8 @@ export const CACHE = {
     BASE_NAME: 'cachedProjects',
     HARD_BACKUP: 'cachedProjectsHardBackup',
     AS_JSON: '.json',
-    PAGE_SIZE: 8
+    PAGE_SIZE: 8,
+    TAGS_CACHE: 'cachedTags'
 } as const;
 
 export const DEVELOPMENT_TYPES = {

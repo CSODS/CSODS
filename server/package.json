@@ -7,6 +7,7 @@
     "test": "vitest",
     "start": "nodemon dist/index.js",
     "seed": "node dist/scripts/seeder.js",
+    "loadCache:tags": "node dist/scripts/cacheLoader.js",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
     "db:studio": "drizzle-kit studio"

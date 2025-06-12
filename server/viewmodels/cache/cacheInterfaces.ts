@@ -43,9 +43,9 @@ export interface IUserCache {
 export type CachePageRecord = Record<number, IProjectCachePage>;
 
 export interface IProjectTags {
-    DevTypes: Record<number, tableTypes.DevType>;
-    ProgrammingLanguages: Record<number, tableTypes.ProgrammingLanguage>;
-    Frameworks: Record<number, tableTypes.ProgrammingLanguage>;
-    DatabaseTechnologies: Record<number, tableTypes.DatabaseTechnology>;
-    ApplicationIndustries: Record<number, tableTypes.ApplicationIndustry>;
+    DevTypes: tableTypes.DevType[];
+    ProgrammingLanguages: tableTypes.ProgrammingLanguage[];
+    Frameworks: tableTypes.Framework[];
+    DatabaseTechnologies: tableTypes.DatabaseTechnology[];
+    ApplicationIndustries: tableTypes.ApplicationIndustry[];
 }
