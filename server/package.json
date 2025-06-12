@@ -4,7 +4,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "vitest",
     "start": "nodemon dist/index.js",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
@@ -29,10 +29,13 @@
   "devDependencies": {
     "@types/better-sqlite3": "^7.6.13",
     "@types/express": "^5.0.3",
+    "@types/mock-fs": "^4.13.4",
     "@types/proper-lockfile": "^4.1.4",
     "@types/redis": "^4.0.10",
     "@types/retry": "^0.12.5",
     "drizzle-kit": "^0.31.1",
-    "typescript": "^5.8.3"
+    "mock-fs": "^5.5.0",
+    "typescript": "^5.8.3",
+    "vitest": "^3.2.3"
   }
 }
