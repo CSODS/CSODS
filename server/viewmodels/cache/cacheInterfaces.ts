@@ -1,8 +1,4 @@
-import { InferSelectModel } from 'drizzle-orm';
-import { Projects, Users } from '../../db/schema.js';
-
-type Project = InferSelectModel<typeof Projects>;
-type User = InferSelectModel<typeof Users>;
+import * as tableTypes from "../dbModels.js";
 
 /**
  * A View Model for the Project Cache.
@@ -29,7 +25,7 @@ export interface IProjectCache {
  */
 export interface IProjectCachePage {
     VisitCount: number;
-    ProjectList: Project[];
+    ProjectList: tableTypes.Project[];
 }
 
 /**
@@ -41,8 +37,15 @@ export interface IProjectCachePage {
  * Each key is a username, and the corresponding value is the user object.
  */
 export interface IUserCache {
-    Users: Record<string, User>
+    Users: Record<string, tableTypes.User>
 }
 
 export type CachePageRecord = Record<number, IProjectCachePage>;
 
+export interface IProjectTags {
+    DevTypes: Record<number, tableTypes.DevType>;
+    ProgrammingLanguages: Record<number, tableTypes.ProgrammingLanguage>;
+    Frameworks: Record<number, tableTypes.ProgrammingLanguage>;
+    DatabaseTechnologies: Record<number, tableTypes.DatabaseTechnology>;
+    ApplicationIndustries: Record<number, tableTypes.ApplicationIndustry>;
+}

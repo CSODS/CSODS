@@ -6,6 +6,7 @@
   "scripts": {
     "test": "vitest",
     "start": "nodemon dist/index.js",
+    "seed": "node dist/scripts/seeder.js",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
     "db:studio": "drizzle-kit studio"
@@ -20,6 +21,7 @@
     "cors": "^2.8.5",
     "dotenv": "^16.5.0",
     "drizzle-orm": "^0.44.2",
+    "drizzle-seed": "^0.3.1",
     "express": "^5.1.0",
     "gel": "^2.1.0",
     "node-redis": "^0.1.7",

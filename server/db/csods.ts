@@ -1,4 +1,4 @@
-import { drizzle as drizzleTurso } from "drizzle-orm/libsql/";
+import { drizzle as drizzleTurso } from "drizzle-orm/libsql";
 import { drizzle as drizzleLocal } from "drizzle-orm/better-sqlite3";
 import Database from "better-sqlite3";
 import { createClient } from "@libsql/client";
