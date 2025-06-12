@@ -6,7 +6,7 @@ export const Users = sqliteTable("Users", {
     Username: text("Username").unique().notNull(),
     Name: text("Name").notNull(),
     Password: text("Password").notNull(),
-    RoleId: text("RoleId").references(() => Roles.RoleId, { onDelete: 'cascade' }).notNull(),
+    RoleId: integer("RoleId").references(() => Roles.RoleId, { onDelete: 'restrict' }).notNull(),
     StudentNumber: text("StudentNumber").unique().notNull(),
     UserIconUrl: text('UserIconImg').notNull()
 });

@@ -1,6 +1,7 @@
+PRAGMA foreign_keys=ON; --> statement-breakpoint
 CREATE TABLE `DevTypes` (
 	`DevTypeId` integer PRIMARY KEY AUTOINCREMENT NOT NULL,
-	`DevTypeName` integer
+	`DevTypeName` text
 );
 --> statement-breakpoint
 CREATE UNIQUE INDEX `DevTypes_DevTypeId_unique` ON `DevTypes` (`DevTypeId`);--> statement-breakpoint
@@ -14,13 +15,13 @@ CREATE TABLE `ProjectImages` (
 --> statement-breakpoint
 CREATE UNIQUE INDEX `ProjectImages_ImageId_unique` ON `ProjectImages` (`ImageId`);--> statement-breakpoint
 CREATE TABLE `ProjectTags` (
-	`ProjectId` integer,
-	`TagId` integer,
-	FOREIGN KEY (`ProjectId`) REFERENCES `Projects`(`ProjectId`) ON UPDATE no action ON DELETE cascade,
-	FOREIGN KEY (`TagId`) REFERENCES `Tags`(`TagId`) ON UPDATE no action ON DELETE cascade
+	`ProjectId` integer NOT NULL,
+	`TagId` integer NOT NULL,
+	PRIMARY KEY(`ProjectId`, `TagId`),
+	FOREIGN KEY (`ProjectId`) REFERENCES `Projects`(`ProjectId`) ON UPDATE no action ON DELETE restrict,
+	FOREIGN KEY (`TagId`) REFERENCES `Tags`(`TagId`) ON UPDATE no action ON DELETE restrict
 );
 --> statement-breakpoint
-CREATE UNIQUE INDEX `ProjectTags_TagId_unique` ON `ProjectTags` (`TagId`);--> statement-breakpoint
 CREATE TABLE `Projects` (
 	`ProjectId` integer PRIMARY KEY AUTOINCREMENT NOT NULL,
 	`ProjectNumber` text,
@@ -28,8 +29,8 @@ CREATE TABLE `Projects` (
 	`ProjectTitle` text,
 	`DevTypeId` integer,
 	`GitHubUrl` text,
-	FOREIGN KEY (`UserId`) REFERENCES `Users`(`UserId`) ON UPDATE no action ON DELETE cascade,
-	FOREIGN KEY (`DevTypeId`) REFERENCES `DevTypes`(`DevTypeId`) ON UPDATE no action ON DELETE cascade
+	FOREIGN KEY (`UserId`) REFERENCES `Users`(`UserId`) ON UPDATE no action ON DELETE restrict,
+	FOREIGN KEY (`DevTypeId`) REFERENCES `DevTypes`(`DevTypeId`) ON UPDATE no action ON DELETE restrict
 );
 --> statement-breakpoint
 CREATE UNIQUE INDEX `Projects_ProjectId_unique` ON `Projects` (`ProjectId`);--> statement-breakpoint
@@ -54,10 +55,10 @@ CREATE TABLE `Users` (
 	`Username` text NOT NULL,
 	`Name` text NOT NULL,
 	`Password` text NOT NULL,
-	`RoleId` text NOT NULL,
+	`RoleId` integer NOT NULL,
 	`StudentNumber` text NOT NULL,
 	`UserIconImg` text NOT NULL,
-	FOREIGN KEY (`RoleId`) REFERENCES `Roles`(`RoleId`) ON UPDATE no action ON DELETE cascade
+	FOREIGN KEY (`RoleId`) REFERENCES `Roles`(`RoleId`) ON UPDATE no action ON DELETE restrict
 );
 --> statement-breakpoint
 CREATE UNIQUE INDEX `Users_UserId_unique` ON `Users` (`UserId`);--> statement-breakpoint
