@@ -1,7 +1,10 @@
+export { ApplicationIndustry } from "./models/ApplicationIndustry.js";
+export { DatabaseTechnologies } from "./models/DatabaseTechnologies.js";
+export { ProgrammingLanguages } from "./models/ProgrammingLanguages.js";
 export { Roles } from "./models/roles.js";
 export { Users } from "./models/users.js"; 
 export { Projects } from "./models/Projects.js";
 export { ProjectImages } from "./models/project_images.js";
 export { DevTypes } from "./models/DevTypes.js";
-export { Tags } from "./models/Tags.js";
-export { ProjectTags } from "./models/ProjectTags.js";
+export { Frameworks } from "./models/Frameworks.js";
+export { ProjectFrameworks } from "./models/ProjectFrameworks.js";

@@ -24,3 +24,13 @@ export const DEVELOPMENT_TYPES = {
     SOFTWARE_DEV: "Software Development",
     API_DEV: "API Development"  
 } as const;
+
+export const PROGRAMMING_LANGUAGES = {
+    C_SHARP: 'C#',
+    C: 'C',
+    CPP: 'C++',
+    JAVA: 'Java',
+    JAVASCRIPT: 'Javascript',
+    PYTHON: 'Python',
+    RUBY: 'Ruby'
+} as const;
