@@ -9,16 +9,16 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 import { PROJECT_ROUTES } from '../data/constants/constants.js';
 import express from 'express';
-const router = express.Router();
-router.get(PROJECT_ROUTES.LOAD_PROJECTS, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const projectsRouter = express.Router();
+projectsRouter.get(PROJECT_ROUTES.LOAD_PROJECTS, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     res.json(yield req.projectCacheHandler.setProjectsCache());
 }));
-router.get(PROJECT_ROUTES.BY_PAGE, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+projectsRouter.get(PROJECT_ROUTES.BY_PAGE, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const projectCacheHandler = req.projectCacheHandler;
     yield projectCacheHandler.setProjectsCache();
     res.json(yield projectCacheHandler.getJsonCachePage(Number(req.params.pageNumber)));
 }));
-router.get(PROJECT_ROUTES.BY_ID, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+projectsRouter.get(PROJECT_ROUTES.BY_ID, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const page = Number(req.params.pageNumber);
     const id = Number(req.params.projectId);
     const project = yield req.projectCacheHandler.getProject(page, id);
@@ -27,4 +27,4 @@ router.get(PROJECT_ROUTES.BY_ID, (req, res) => __awaiter(void 0, void 0, void 0,
         : res.status(404).json({ error: "Project Not Found." });
 }));
 // router.post();
-export default router;
+export default projectsRouter;

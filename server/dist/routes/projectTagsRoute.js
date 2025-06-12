@@ -7,16 +7,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import { createProjectCacheHandler } from "../utils/cache/projectCacheHandler.js";
-import { createTagsCacheHandler } from "../utils/cache/tagsCacheHandler.js";
-export function attachProjectCacheHandler(req, res, next) {
-    return __awaiter(this, void 0, void 0, function* () {
-        req.projectCacheHandler = yield createProjectCacheHandler();
-        next();
-    });
-}
-;
-export function attachTagsCacheHandler(req, res, next) {
-    req.tagsCacheHandler = createTagsCacheHandler();
-    next();
-}
+import { PROJECT_TAG_ROUTES } from '../data/constants/constants.js';
+import express from 'express';
+const projectTagsRouter = express.Router();
+projectTagsRouter.get(PROJECT_TAG_ROUTES.ALL_DATA, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    res.json(yield req.tagsCacheHandler.getTagsCache());
+}));
+export default projectTagsRouter;

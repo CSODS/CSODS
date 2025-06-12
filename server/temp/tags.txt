@@ -1,0 +1,8 @@
+C#, C, C++, Java, JavaScript, Python, Ruby, 
+React, Angular, Vue.js, Svelte, Next.js, Nuxt.js, Express.js, Django, Flask, Ruby on Rails, ASP.NET Core, Laravel, Spring Boot, Symfony,
+React Native, Flutter, Xamarin, Ionic,
+Unity, Unreal Engine, Godot,
+FastAPI, Express.js, Spring Boot, Gin, Koa,
+Electron, Qt, WPF,
+MySQL, PostgreSQL, Microsoft SQL Server, Oracle Database, SQLite, MariaDB, MongoDB, Cassandra, Redis, Firebase, DynamoDB,
+Medical, Finance, Education, Retail, Manufacturing, Telecommunications, Government, Non-profit, Sports
