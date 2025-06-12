@@ -30,7 +30,7 @@ export class JsonFileHandler {
      */
     constructor(modelName) {
         this._retryOptions = {
-            retries: 3,
+            retries: 10,
             factor: 1.5,
             minTimeout: 1 * 1000,
             maxTimeout: 60 * 1000

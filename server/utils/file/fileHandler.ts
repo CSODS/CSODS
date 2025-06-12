@@ -19,7 +19,7 @@ export function createJsonFileHandler<TModel>(modelName: string) {
 export class JsonFileHandler<TModel> {
     private readonly _modelName: string;
     private readonly _retryOptions:  OperationOptions = {
-        retries: 3,
+        retries: 10,
         factor: 1.5,
         minTimeout: 1 * 1000,
         maxTimeout: 60 * 1000
