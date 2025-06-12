@@ -1,5 +1,6 @@
 server/.env
+server/sqlite.db
 server/node_modules/
+server/data/project_cache/
 client/.env
 client/node_modules/
-server/data/project_cache/

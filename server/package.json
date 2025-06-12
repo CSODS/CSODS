@@ -16,15 +16,18 @@
   "dependencies": {
     "@libsql/client": "^0.15.8",
     "@types/cors": "^2.8.19",
+    "better-sqlite3": "^11.10.0",
     "cors": "^2.8.5",
     "dotenv": "^16.5.0",
-    "drizzle-orm": "^0.44.1",
+    "drizzle-orm": "^0.44.2",
     "express": "^5.1.0",
     "gel": "^2.1.0",
     "node-redis": "^0.1.7",
-    "nodemon": "^3.1.10"
+    "nodemon": "^3.1.10",
+    "proper-lockfile": "^4.1.2"
   },
   "devDependencies": {
+    "@types/better-sqlite3": "^7.6.13",
     "@types/express": "^5.0.3",
     "@types/redis": "^4.0.10",
     "drizzle-kit": "^0.31.1",
