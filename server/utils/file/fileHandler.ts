@@ -1,5 +1,7 @@
 import { existsSync, promises as fs} from 'fs';
+import * as lockfile from 'proper-lockfile';
 import path from 'path';
+import { OperationOptions } from 'retry';
 
 export function createJsonFileHandler<TModel>(modelName: string) {
     return new JsonFileHandler<TModel>(modelName);
@@ -16,7 +18,12 @@ export function createJsonFileHandler<TModel>(modelName: string) {
  */
 export class JsonFileHandler<TModel> {
     private readonly _modelName: string;
-
+    private readonly _retryOptions:  OperationOptions = {
+        retries: 10,
+        factor: 1.5,
+        minTimeout: 1 * 1000,
+        maxTimeout: 60 * 1000
+    };
     /**
      * Constructs a new instance of `JsonFileHandler`.
      * 
@@ -44,21 +51,29 @@ export class JsonFileHandler<TModel> {
         reviver: Parameters<typeof JSON.parse>[1] | null = null
     ): Promise<TModel | null> 
     {
+        const fullPath = path.join(filePath, fileName);
+        console.log(`Attempting to access .json file from ${fullPath}...`);
+        
+        //  Return null if the file does not exist.
+        if (!existsSync(fullPath)) {
+            console.log(`${fullPath} does not exist. Returning null...`);
+            return null;
+        }
+
+        let release: (() => Promise<void>) | null = null;
+
         //  Read from json file
         try {
-            const fullPath = path.join(filePath, fileName);
-            console.log(`Attempting to access .json file from ${fullPath}...`);
-            //  Return null if the file does not exist.
-            if (!existsSync(fullPath)) {
-                console.log(`${fullPath} does not exist. Returning null...`);
-                return null;
-            }
             //  Attempt to read file.
             console.log(`.json file found. Attempting to parse...`);
-            const jsonString = await fs.readFile(fullPath, 'utf-8');
+            
+            //  Lock file.
+            release = await lockfile.lock(fullPath, {retries: this._retryOptions});
+            console.log('File lock acquired');
 
             //  Parse Json as a TModel object and return.
             //  Additionally apply a reviver function if provided.
+            const jsonString = await fs.readFile(fullPath, 'utf-8');
             const data: TModel = (
                 reviver
                     ? JSON.parse(jsonString, reviver)
@@ -72,6 +87,12 @@ export class JsonFileHandler<TModel> {
             //  log error and return null.
             console.error('Error parsing cache: ', err);
             return null;
+        } finally {
+            if (release) {
+                //  release lock.
+                await release();
+                console.log('File lock released');
+            }
         }
     }
     /**
@@ -86,6 +107,8 @@ export class JsonFileHandler<TModel> {
      * @throws {Error} If the data is `null` or the write operation fails.
      */
     public async writeToJsonFile(filePath: string, fileName: string, data: TModel | null): Promise<TModel> {
+        let release: (() => Promise<void>) | null = null;
+        
         try {
             //  throw exception if data is null.
             this.assertDataNotNull(data);
@@ -96,14 +119,29 @@ export class JsonFileHandler<TModel> {
             console.log(`Ensuring directory exists: ${filePath}`);
             await fs.mkdir(filePath, { recursive: true });
             console.log('Directory ensured.');
-            console.log('Attempting to write json file...');
+            
             const fullPath = path.join(filePath, fileName);
+
+            if (existsSync(fullPath)) {
+                release = await lockfile.lock(fullPath, {retries: this._retryOptions});
+                console.log('Lock acqquired.');                
+            }
+
+
+            //  attempt to write to file.
+            console.log('Attempting to write json file...');
             await fs.writeFile(fullPath, dataJson);
             console.log('Json file written.');
+            
             return data!;
         } catch (err) {
             console.error('Error writing cache: ', err);
             throw err;
+        } finally {
+            if (release) {
+                await release();
+                console.log('File lock released.');
+            }
         }
     }
     //#endregion
