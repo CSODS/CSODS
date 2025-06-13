@@ -1,11 +1,11 @@
-import './App.css';
+import '../App.css';
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
-import { ADDRESSES } from './constants/constants';
-import { PrimaryLayout } from './components/layouts/MainLayout';
-import LandingPage from './components/pages/LandingPage';
-import Home from "./components/pages/Home";
-import { StudentProjects, ProjectDetails } from './components/pages/StudentProjects';
-import SubmitProject from './components/pages/SubmitProject';
+import { ADDRESSES } from './constants/constants.js';
+import { PrimaryLayout } from './components/layouts/MainLayout.js';
+import LandingPage from './components/pages/LandingPage.js';
+import Home from "./components/pages/Home.js";
+import { StudentProjects, ProjectDetails } from './components/pages/StudentProjects.js';
+import SubmitProject from './components/pages/SubmitProject.js';
 
 function App() {
   return (

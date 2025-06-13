@@ -13,7 +13,7 @@ body {
     url('web_bg.jpg');  */
   background: 
     linear-gradient(rgba(42, 31, 45, 0.75), rgba(42, 31, 45, 0.5)), 
-    url('web_bg.jpg');
+    url('../public/web_bg.jpg');
   background-repeat: no-repeat;
   /* background-position: center bottom; */
   background-attachment: fixed;

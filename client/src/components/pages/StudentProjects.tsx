@@ -1,11 +1,10 @@
-import github_logo from '../../github_logo.png';
-import { COLORS, DEVELOPMENT_TYPES, ICONS } from '../../constants/constants.js';
+import { DEVELOPMENT_TYPES, ICONS } from '../../constants/constants.js';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { BASE, ENDPOINTS, ADDRESSES } from '../../constants/constants.js';
+import { CSODS_BASE, API_PATHS, ADDRESSES } from '../../constants/constants.js';
 
-function redirectToUrl(url) {
+function redirectToUrl(url: string) {
   window.open(url);
   return;
 }
@@ -48,7 +47,7 @@ export function StudentProjects() {
 
   const navigate = useNavigate();
 
-  const handleClick = (projectId) => {
+  const handleClick = (projectId: number) => {
     navigate(`${ADDRESSES.STUDENT_PROJECTS}/${projectId}`);
   }
 
@@ -61,7 +60,7 @@ export function StudentProjects() {
       <div className='p-0 mt-3 mb-5 d-flex flex-column align-items-center justify-content-center'>
         <div className='row g-0 d-flex justify-content-center align-items-center' style={{maxWidth:700}}>
             <div className='col-md-auto p-0 m-0 d-flex justify-content-center align-items-center'>
-              <img src={github_logo} alt='...' className='header-logo shadow-lg'></img>
+              <img src='/github_logo.png' alt='...' className='header-logo shadow-lg'></img>
             </div>
             <div className='col-md p-0 ps-md-3 m-0 d-flex justify-content-center align-items-center'>
               <h1 className='fs-h1 bolder color-light-2 text-shadow-m'>GitHub Projects</h1>
@@ -266,7 +265,7 @@ export function ProjectDetails() {
         <div className='mt-4 w-100 row row-cols-1 row-cols-md-3 row-cols-lg-4 row-gap-3 justify-content-center'>
           {
             projectDetails.Contributors.map((value, key) => {
-              let styles = {bgColor: "", color: ""}
+              let styles = {bgColor: "", color: "", colorSecondary: ""};
               switch (value.Role) {
                 case "Owner":
                   styles.bgColor = 'bg-light-1';
@@ -280,7 +279,7 @@ export function ProjectDetails() {
                   break;
                 default:
                   break;
-              }
+              };
               return (
                 <div className='col' style={{maxWidth:300}}>
                   <div className={`${styles.bgColor} project-card px-5 rounded-5 mx-2 px-4 py-1 border border-2 border-dark-2`}>
