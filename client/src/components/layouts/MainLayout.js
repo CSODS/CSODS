@@ -31,7 +31,7 @@ export function PrimaryLayout() {
                         
                         <div className="bg-dark-2 navbar-nav d-flex d-lg-none flex-column border border-light-1 rounded-2">
                             <a href={ADDRESSES.HOME} className="nav-link color-light-2">Home</a>
-                            <a href={ADDRESSES.STUDENT_PROJECTS} className="nav-link color-light-2">Projects</a>
+                            <a href={`${ADDRESSES.STUDENT_PROJECTS_ROOT}/1`} className="nav-link color-light-2">Projects</a>
                             <a href={ADDRESSES.ABOUT} className="nav-link color-light-2">About</a>
                             <a href={ADDRESSES.SUBMIT_PROJECT} className="nav-link color-light-2">Submit a Project</a>
                         </div>
