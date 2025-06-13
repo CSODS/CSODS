@@ -21,18 +21,3 @@ export class ProjectCache implements IProjectCache {
         return this;
     }
 }
-
-export class ProjectCachePage implements IProjectCachePage {
-    VisitCount: number = 0;
-    ProjectList: Project[] = [];
-
-    public withVisitCount(visitCount: number): this {
-        this.VisitCount = visitCount;
-        return this;
-    }
-
-    public withProjectList(projectList: Project[]): this {
-        this.ProjectList = projectList;
-        return this;
-    }
-}

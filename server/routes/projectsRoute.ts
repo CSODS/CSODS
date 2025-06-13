@@ -1,5 +1,5 @@
 import { PROJECT_ROUTES } from '../data/constants/constants.js';
-import { Project } from '../viewmodels/dbModels.js';
+import { IProjectDetails } from '../viewmodels/cache/cacheInterfaces.js';
 import express from 'express';
 
 const projectsRouter = express.Router();
@@ -17,7 +17,7 @@ projectsRouter.get(PROJECT_ROUTES.BY_PAGE, async (req, res) => {
 projectsRouter.get(PROJECT_ROUTES.BY_ID, async (req, res) => {
     const page: number = Number(req.params.pageNumber);
     const id: number = Number(req.params.projectId);
-    const project: Project | null = await req.projectCacheHandler.getProject(page, id);
+    const project: IProjectDetails | null = await req.projectCacheHandler.getProject(page, id);
     project
         ? res.json(project)
         : res.status(404).json({error : "Project Not Found."});

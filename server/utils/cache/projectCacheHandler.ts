@@ -1,6 +1,5 @@
 import { CACHE } from '../../data/constants/constants.js';
-import { Project } from '../../viewmodels/dbModels.js';
-import { IProjectCachePage, IProjectCache, CachePageRecord } from '../../viewmodels/cache/cacheInterfaces.js';
+import { IProjectCachePage, IProjectCache, CachePageRecord, IProjectDetails } from '../../viewmodels/cache/cacheInterfaces.js';
 import { createJsonFileHandler, JsonFileHandler } from '../file/fileHandler.js';
 import { createProjectDataService, ProjectDataService } from '../data/projectDataService.js';
 import { startRedis } from '../../redis/redisClient.js';
@@ -22,6 +21,7 @@ export class ProjectCacheHandler {
     private readonly _projectDataService: ProjectDataService;
     private readonly _jsonFileHandler: JsonFileHandler<IProjectCache>
     private _jsonCache: IProjectCache | null = null;
+    private _cDate: Date;
 
     public constructor(
         projectDataService: ProjectDataService,
@@ -30,6 +30,7 @@ export class ProjectCacheHandler {
     {
         this._projectDataService = projectDataService;
         this._jsonFileHandler = jsonFileHandler;
+        this._cDate = new Date();
     }
     
     /**
@@ -63,10 +64,10 @@ export class ProjectCacheHandler {
      * @param {number} projectId The ID of the project to retrieve.
      * @returns {Promise<Project | null>} The found project or `null` if not found.
      */
-    public async getProject(pageNumber: number, projectId: number) : Promise<Project | null> {
+    public async getProject(pageNumber: number, projectId: number) : Promise<IProjectDetails | null> {
         const cachePage: IProjectCachePage | null = await this.getJsonCachePage(pageNumber);
         if (cachePage != null) {
-            return cachePage.ProjectList.find(p => p.ProjectId == projectId) ?? null;
+            return cachePage.Projects.find(p => p.Project.ProjectId == projectId) ?? null;
         }
         return null;
     }
@@ -108,6 +109,7 @@ export class ProjectCacheHandler {
             }
 
             //  Return the cache page if found in the cache.
+            await this.updatePageViewCount(pageNumber);
             console.log('Page found in cache. Returning cache page...');
             return cachePages[pageNumber];
         }
@@ -131,9 +133,9 @@ export class ProjectCacheHandler {
      */
     public async setProjectsCache() : Promise<IProjectCache | null> {
         //  Get current date.
-        const cDate: Date = new Date();
+        this._cDate = new Date();
         //  Set file name.
-        const filename = this.generateFileName(CACHE.BASE_NAME, cDate);
+        const filename = this.generateFileName(CACHE.BASE_NAME, this._cDate);
         
         //  Initialize the object wherein the loaded cache will be stored..
         let cachedProjects: IProjectCache | null = null;
@@ -148,7 +150,7 @@ export class ProjectCacheHandler {
         if (cachedProjects == null || Object.entries(cachePages).length == 0) {
             console.log('Failed to retrieve data from json file. Attempting to read back-ups.');
 
-            cachedProjects = await this.parseBackupJsonCache(cDate);
+            cachedProjects = await this.parseBackupJsonCache(this._cDate);
         }
         //  Sets the loaded cache into _jsonCache.
         this._jsonCache = cachedProjects;
@@ -176,16 +178,20 @@ export class ProjectCacheHandler {
             console.log('Attempting to fetch data for new page from database...');
             const cachePage: IProjectCachePage = {
                 VisitCount: 1,
-                ProjectList: (
-                    await this._projectDataService.fetchPage(pageNumber, CACHE.PAGE_SIZE)
-                )
+                Projects: (
+                    await this._projectDataService
+                    .fetchProjectsPages(
+                        pageNumber, 
+                        CACHE.PAGE_SIZE
+                    )
+                )[pageNumber]
             };
             console.log('New page fetched from database.');
             this._jsonCache!.CachePages[pageNumber] = cachePage;
 
             //  attempt to update the cache
             console.log('Updating cache...');
-            const fileName: string = this.generateFileName(CACHE.BASE_NAME, new Date());
+            const fileName: string = this.generateFileName(CACHE.BASE_NAME, this._cDate);
             //  throws an exception if update fails.
             await this._jsonFileHandler.writeToJsonFile(process.env.PROJECT_CACHE_PATH!, fileName, this._jsonCache);
             console.log('Updated cache successfully. Returning cache page...');
@@ -201,6 +207,35 @@ export class ProjectCacheHandler {
             if (this._jsonCache != null && this.isPageInJsonCache(this._jsonCache.CachePages, pageNumber)) {
                 delete this._jsonCache.CachePages[pageNumber];
             }
+            throw err;
+        }
+    }
+    /**
+     * Increments the visit count for a specific page number within the in-memory cache and persists the updated cache to a JSON file.
+     *
+     * This method first ensures that the JSON cache (`_jsonCache`) is not null. It then attempts to:
+     * 1. Increment the `VisitCount` property of the specified `pageNumber` within the `CachePages` object in the in-memory cache.
+     * 2. Generate a unique filename for the cache file using a base name and the current date.
+     * 3. Asynchronously write the entire updated cache object to the designated JSON file path.
+     *
+     * If any error occurs during the cache update or file writing process, the original exception is caught
+     * and re-thrown as a new `Error` to propagate the failure.
+     *
+     * @param {number} pageNumber - The page number whose visit count needs to be incremented.
+     * @returns {Promise<void>} A Promise that resolves when the page view count has been successfully updated and persisted,
+     * or rejects if an error occurs during the process.
+     */
+    private async updatePageViewCount(pageNumber: number): Promise<void> {
+        this._jsonFileHandler.assertDataNotNull(this._jsonCache);
+        try {
+
+            this._jsonCache!.CachePages[pageNumber].VisitCount += 1;
+
+            //  throws an exception if update fails.
+            const fileName: string = this.generateFileName(CACHE.BASE_NAME, this._cDate);
+            await this._jsonFileHandler.writeToJsonFile(process.env.PROJECT_CACHE_PATH!, fileName, this._jsonCache);
+        }
+        catch (err) {
             throw err;
         }
     }
@@ -350,18 +385,17 @@ export class ProjectCacheHandler {
      */
     private async generateProjectCache(): Promise<IProjectCache> {
         //  fetch pages 1 to 3 from database.
-        const projects = await this._projectDataService.fetchPages(1, CACHE.PAGE_SIZE, 3);
-        
+        const projectDetails = await this._projectDataService.fetchProjectsPages(1, CACHE.PAGE_SIZE, 3);
         //  store in pages in cache pages.
         const cachePages: CachePageRecord = {};
 
-        for (const key in Object.keys(projects)) {
+        for (const key in Object.keys(projectDetails)) {
             const numericKey = Number(key) + 1;
             console.log(`Adding page ${numericKey}`);
             cachePages[numericKey] = {
                 VisitCount: 0,
-                ProjectList: projects[numericKey]
-            };
+                Projects: projectDetails[numericKey]
+            }
         }
 
         //  fetch total project count from database.

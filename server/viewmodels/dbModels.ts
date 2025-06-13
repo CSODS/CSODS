@@ -10,3 +10,4 @@ export type ProgrammingLanguage = InferSelectModel<typeof schema.ProgrammingLang
 export type DatabaseTechnology = InferSelectModel<typeof schema.DatabaseTechnologies>;
 export type Framework = InferSelectModel<typeof schema.Frameworks>;
 export type ApplicationIndustry = InferSelectModel<typeof schema.ApplicationIndustry>;
+export type ProjectFramework = InferSelectModel<typeof schema.ProjectFrameworks>;
