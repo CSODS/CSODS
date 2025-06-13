@@ -17,17 +17,3 @@ export class ProjectCache {
         return this;
     }
 }
-export class ProjectCachePage {
-    constructor() {
-        this.VisitCount = 0;
-        this.ProjectList = [];
-    }
-    withVisitCount(visitCount) {
-        this.VisitCount = visitCount;
-        return this;
-    }
-    withProjectList(projectList) {
-        this.ProjectList = projectList;
-        return this;
-    }
-}

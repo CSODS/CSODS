@@ -14,8 +14,10 @@ import * as tableTypes from "../dbModels.js";
 export interface IProjectCache {
     TotalPages: number;
     LoadTime: Date;
-    CachePages: Record<number, IProjectCachePage>;
+    CachePages: CachePageRecord;
 }
+
+export type CachePageRecord = Record<number, IProjectCachePage>;
 
 /**
  * Represents a cached page of projects within the ProjectCache.
@@ -25,7 +27,20 @@ export interface IProjectCache {
  */
 export interface IProjectCachePage {
     VisitCount: number;
-    ProjectList: tableTypes.Project[];
+    Projects: IProjectDetails[];
+}
+
+export interface IProjectDetails {
+    Project: tableTypes.Project;
+    ProjectFrameworks: tableTypes.ProjectFramework[];
+}
+
+export interface IProjectTags {
+    DevTypes: tableTypes.DevType[];
+    ProgrammingLanguages: tableTypes.ProgrammingLanguage[];
+    Frameworks: tableTypes.Framework[];
+    DatabaseTechnologies: tableTypes.DatabaseTechnology[];
+    ApplicationIndustries: tableTypes.ApplicationIndustry[];
 }
 
 /**
@@ -38,14 +53,4 @@ export interface IProjectCachePage {
  */
 export interface IUserCache {
     Users: Record<string, tableTypes.User>
-}
-
-export type CachePageRecord = Record<number, IProjectCachePage>;
-
-export interface IProjectTags {
-    DevTypes: tableTypes.DevType[];
-    ProgrammingLanguages: tableTypes.ProgrammingLanguage[];
-    Frameworks: tableTypes.Framework[];
-    DatabaseTechnologies: tableTypes.DatabaseTechnology[];
-    ApplicationIndustries: tableTypes.ApplicationIndustry[];
 }
