@@ -1,11 +1,11 @@
-import * as CONSTANTS from '../../constants/constants.js';
-import * as DEFAULTS from '../../constants/defaults.js';
+import * as CONSTANTS from '../../constants/constants';
+import * as DEFAULTS from '../../constants/defaults';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { IProjectDetails, IAllProjectTags } from '../../viewModels/csods/csodsApiInterfaces.js';
-import { ProjectDataService } from '../../utils/data/ProjectDataService.js';
-import ApiHandler from '../../utils/api/ApiHandler.js';
-import ProjectCard from './StudentProjectsComponents/ProjectCards.js';
+import { IProjectDetails, IAllProjectTags } from '../../viewModels/csods/csodsApiInterfaces';
+import { ProjectDataService } from '../../utils/data/ProjectDataService';
+import ApiHandler from '../../utils/api/ApiHandler';
+import ProjectCard from './StudentProjectsComponents/ProjectCards';
 
 //#region Student Projects
 export default function StudentProjects() {

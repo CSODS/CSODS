@@ -1,4 +1,4 @@
-import * as CONSTANTS from '../../../constants/constants.js';
+import * as CONSTANTS from '../../../constants/constants';
 import { useNavigate } from "react-router-dom";
 import { IProjectDetails, IProjectTags } from "../../../viewModels/csods/csodsApiInterfaces";
 
