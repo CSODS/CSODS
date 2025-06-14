@@ -4,10 +4,6 @@ import express from 'express';
 
 const projectsRouter = express.Router();
 
-projectsRouter.get(PROJECT_ROUTES.LOAD_PROJECTS, async (req, res) => {
-    res.json(await req.projectCacheHandler.setProjectsCache());
-})
-
 projectsRouter.get(PROJECT_ROUTES.BY_PAGE, async (req, res) => {
     const projectCacheHandler = req.projectCacheHandler;
     await projectCacheHandler.setProjectsCache();
@@ -17,10 +13,14 @@ projectsRouter.get(PROJECT_ROUTES.BY_PAGE, async (req, res) => {
 projectsRouter.get(PROJECT_ROUTES.BY_ID, async (req, res) => {
     const page: number = Number(req.params.pageNumber);
     const id: number = Number(req.params.projectId);
-    const project: IProjectDetails | null = await req.projectCacheHandler.getProject(page, id);
+    const project: IProjectDetails | null = await req.projectCacheHandler.getProjectByPageAndId(page, id);
     project
         ? res.json(project)
         : res.status(404).json({error : "Project Not Found."});
+})
+
+projectsRouter.get(PROJECT_ROUTES.TITLE_SEARCH, async(req, res) => {
+    res.json('hello');
 })
 
 // router.post();
