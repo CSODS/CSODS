@@ -64,7 +64,7 @@ export class ProjectCacheHandler {
      * @param {number} projectId The ID of the project to retrieve.
      * @returns {Promise<Project | null>} The found project or `null` if not found.
      */
-    public async getProject(pageNumber: number, projectId: number) : Promise<IProjectDetails | null> {
+    public async getProjectByPageAndId(pageNumber: number, projectId: number) : Promise<IProjectDetails | null> {
         const cachePage: IProjectCachePage | null = await this.getJsonCachePage(pageNumber);
         if (cachePage != null) {
             return cachePage.Projects.find(p => p.Project.ProjectId == projectId) ?? null;
