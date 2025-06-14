@@ -1,19 +1,33 @@
-export const BASE = "http://localhost:3001";
+import dotenv from 'dotenv';
+dotenv.config();
 
-export const ENDPOINTS = {
-    PROJECTS: '/projects'
+export const CSODS_BASE = process.env.REACT_ENV === 'testing'
+    ? process.env.CSODS_LOCAL_API_BASE_URL
+    : process.env.CSODS_API_BASE_URL;
+
+export const API_PATHS = {
+    PROJECTS: '/projects',
+    PROJECT_TAGS: '/project_tags'
 };
 
-export const PROJECT_ENDPOINTS = {
+export const PROJECT_PATHS = {
     ROOT: '/',
-    BY_ID: '/:projectId'
+    BY_PAGE: '/:pageNumber',
+    BY_ID: '/:pageNumber/:projectId',
+    LOAD_PROJECTS: '/load_projects'
 };
+
+export const PROJECT_TAG_PATHS = {
+    ROOT: '/',
+    ALL_DATA: '/all_data'
+}
 
 export const ADDRESSES = {
     LANDING_PAGE: "/",
     HOME: "/home",
-    STUDENT_PROJECTS: '/student_projects',
-    PROJECT_DETAILS: '/student_projects/:id',
+    STUDENT_PROJECTS: '/student_projects/:pageNumber',
+    STUDENT_PROJECTS_ROOT: '/student_projects',
+    PROJECT_DETAILS: '/student_projects/:pageNumber/:id',
     SUBMIT_PROJECT: "/submit_project",
     ABOUT: "/about"
 };

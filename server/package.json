@@ -4,8 +4,10 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon index.js",
+    "test": "vitest",
+    "start": "nodemon dist/index.js",
+    "seed": "node dist/scripts/seeder.js",
+    "loadCache:tags": "node dist/scripts/cacheLoader.js",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
     "db:studio": "drizzle-kit studio"
@@ -15,15 +17,28 @@
   "description": "",
   "dependencies": {
     "@libsql/client": "^0.15.8",
+    "@types/cors": "^2.8.19",
+    "better-sqlite3": "^11.10.0",
     "cors": "^2.8.5",
     "dotenv": "^16.5.0",
-    "drizzle-orm": "^0.44.1",
+    "drizzle-orm": "^0.44.2",
+    "drizzle-seed": "^0.3.1",
     "express": "^5.1.0",
     "gel": "^2.1.0",
-    "nodemon": "^3.1.10"
+    "node-redis": "^0.1.7",
+    "nodemon": "^3.1.10",
+    "proper-lockfile": "^4.1.2"
   },
   "devDependencies": {
+    "@types/better-sqlite3": "^7.6.13",
+    "@types/express": "^5.0.3",
+    "@types/mock-fs": "^4.13.4",
+    "@types/proper-lockfile": "^4.1.4",
+    "@types/redis": "^4.0.10",
+    "@types/retry": "^0.12.5",
     "drizzle-kit": "^0.31.1",
-    "typescript": "^5.8.3"
+    "mock-fs": "^5.5.0",
+    "typescript": "^5.8.3",
+    "vitest": "^3.2.3"
   }
 }

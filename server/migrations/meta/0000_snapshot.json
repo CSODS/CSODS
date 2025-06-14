@@ -1,9 +1,87 @@
 {
   "version": "6",
   "dialect": "sqlite",
-  "id": "b40d5578-e491-4936-b7b4-b58ba2756fe1",
+  "id": "d5d2a272-af16-4bfd-8ec7-89d45e59630f",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
+    "ApplicationIndustry": {
+      "name": "ApplicationIndustry",
+      "columns": {
+        "IndustryId": {
+          "name": "IndustryId",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "Industry": {
+          "name": "Industry",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "ApplicationIndustry_IndustryId_unique": {
+          "name": "ApplicationIndustry_IndustryId_unique",
+          "columns": [
+            "IndustryId"
+          ],
+          "isUnique": true
+        },
+        "ApplicationIndustry_Industry_unique": {
+          "name": "ApplicationIndustry_Industry_unique",
+          "columns": [
+            "Industry"
+          ],
+          "isUnique": true
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "DatabaseTechnologies": {
+      "name": "DatabaseTechnologies",
+      "columns": {
+        "DatabaseId": {
+          "name": "DatabaseId",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "Database": {
+          "name": "Database",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "DatabaseTechnologies_DatabaseId_unique": {
+          "name": "DatabaseTechnologies_DatabaseId_unique",
+          "columns": [
+            "DatabaseId"
+          ],
+          "isUnique": true
+        },
+        "DatabaseTechnologies_Database_unique": {
+          "name": "DatabaseTechnologies_Database_unique",
+          "columns": [
+            "Database"
+          ],
+          "isUnique": true
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
     "DevTypes": {
       "name": "DevTypes",
       "columns": {
@@ -16,7 +94,7 @@
         },
         "DevTypeName": {
           "name": "DevTypeName",
-          "type": "integer",
+          "type": "text",
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false
@@ -40,6 +118,164 @@
       },
       "foreignKeys": {},
       "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "Frameworks": {
+      "name": "Frameworks",
+      "columns": {
+        "FrameworkId": {
+          "name": "FrameworkId",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "FrameworkName": {
+          "name": "FrameworkName",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "DevTypeId": {
+          "name": "DevTypeId",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "Frameworks_FrameworkId_unique": {
+          "name": "Frameworks_FrameworkId_unique",
+          "columns": [
+            "FrameworkId"
+          ],
+          "isUnique": true
+        },
+        "Frameworks_FrameworkName_unique": {
+          "name": "Frameworks_FrameworkName_unique",
+          "columns": [
+            "FrameworkName"
+          ],
+          "isUnique": true
+        }
+      },
+      "foreignKeys": {
+        "Frameworks_DevTypeId_DevTypes_DevTypeId_fk": {
+          "name": "Frameworks_DevTypeId_DevTypes_DevTypeId_fk",
+          "tableFrom": "Frameworks",
+          "tableTo": "DevTypes",
+          "columnsFrom": [
+            "DevTypeId"
+          ],
+          "columnsTo": [
+            "DevTypeId"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "ProgrammingLanguages": {
+      "name": "ProgrammingLanguages",
+      "columns": {
+        "LanguageId": {
+          "name": "LanguageId",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "LanguageName": {
+          "name": "LanguageName",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "ProgrammingLanguages_LanguageId_unique": {
+          "name": "ProgrammingLanguages_LanguageId_unique",
+          "columns": [
+            "LanguageId"
+          ],
+          "isUnique": true
+        },
+        "ProgrammingLanguages_LanguageName_unique": {
+          "name": "ProgrammingLanguages_LanguageName_unique",
+          "columns": [
+            "LanguageName"
+          ],
+          "isUnique": true
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "ProjectFrameworks": {
+      "name": "ProjectFrameworks",
+      "columns": {
+        "ProjectId": {
+          "name": "ProjectId",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "FrameworkId": {
+          "name": "FrameworkId",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "ProjectFrameworks_ProjectId_Projects_ProjectId_fk": {
+          "name": "ProjectFrameworks_ProjectId_Projects_ProjectId_fk",
+          "tableFrom": "ProjectFrameworks",
+          "tableTo": "Projects",
+          "columnsFrom": [
+            "ProjectId"
+          ],
+          "columnsTo": [
+            "ProjectId"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "no action"
+        },
+        "ProjectFrameworks_FrameworkId_Frameworks_FrameworkId_fk": {
+          "name": "ProjectFrameworks_FrameworkId_Frameworks_FrameworkId_fk",
+          "tableFrom": "ProjectFrameworks",
+          "tableTo": "Frameworks",
+          "columnsFrom": [
+            "FrameworkId"
+          ],
+          "columnsTo": [
+            "FrameworkId"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "ProjectFrameworks_ProjectId_FrameworkId_pk": {
+          "columns": [
+            "ProjectId",
+            "FrameworkId"
+          ],
+          "name": "ProjectFrameworks_ProjectId_FrameworkId_pk"
+        }
+      },
       "uniqueConstraints": {},
       "checkConstraints": {}
     },
@@ -96,65 +332,6 @@
       "uniqueConstraints": {},
       "checkConstraints": {}
     },
-    "ProjectTags": {
-      "name": "ProjectTags",
-      "columns": {
-        "ProjectId": {
-          "name": "ProjectId",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
-        },
-        "TagId": {
-          "name": "TagId",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
-        }
-      },
-      "indexes": {
-        "ProjectTags_TagId_unique": {
-          "name": "ProjectTags_TagId_unique",
-          "columns": [
-            "TagId"
-          ],
-          "isUnique": true
-        }
-      },
-      "foreignKeys": {
-        "ProjectTags_ProjectId_Projects_ProjectId_fk": {
-          "name": "ProjectTags_ProjectId_Projects_ProjectId_fk",
-          "tableFrom": "ProjectTags",
-          "tableTo": "Projects",
-          "columnsFrom": [
-            "ProjectId"
-          ],
-          "columnsTo": [
-            "ProjectId"
-          ],
-          "onDelete": "cascade",
-          "onUpdate": "no action"
-        },
-        "ProjectTags_TagId_Tags_TagId_fk": {
-          "name": "ProjectTags_TagId_Tags_TagId_fk",
-          "tableFrom": "ProjectTags",
-          "tableTo": "Tags",
-          "columnsFrom": [
-            "TagId"
-          ],
-          "columnsTo": [
-            "TagId"
-          ],
-          "onDelete": "cascade",
-          "onUpdate": "no action"
-        }
-      },
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {},
-      "checkConstraints": {}
-    },
     "Projects": {
       "name": "Projects",
       "columns": {
@@ -188,6 +365,34 @@
         },
         "DevTypeId": {
           "name": "DevTypeId",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "PrimaryLanguageId": {
+          "name": "PrimaryLanguageId",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "SecondaryLanguageId": {
+          "name": "SecondaryLanguageId",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "DatabaseTechnologyId": {
+          "name": "DatabaseTechnologyId",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "ApplicationIndustryId": {
+          "name": "ApplicationIndustryId",
           "type": "integer",
           "primaryKey": false,
           "notNull": false,
@@ -228,7 +433,7 @@
           "columnsTo": [
             "UserId"
           ],
-          "onDelete": "cascade",
+          "onDelete": "restrict",
           "onUpdate": "no action"
         },
         "Projects_DevTypeId_DevTypes_DevTypeId_fk": {
@@ -241,7 +446,59 @@
           "columnsTo": [
             "DevTypeId"
           ],
-          "onDelete": "cascade",
+          "onDelete": "restrict",
+          "onUpdate": "no action"
+        },
+        "Projects_PrimaryLanguageId_ProgrammingLanguages_LanguageId_fk": {
+          "name": "Projects_PrimaryLanguageId_ProgrammingLanguages_LanguageId_fk",
+          "tableFrom": "Projects",
+          "tableTo": "ProgrammingLanguages",
+          "columnsFrom": [
+            "PrimaryLanguageId"
+          ],
+          "columnsTo": [
+            "LanguageId"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "no action"
+        },
+        "Projects_SecondaryLanguageId_ProgrammingLanguages_LanguageId_fk": {
+          "name": "Projects_SecondaryLanguageId_ProgrammingLanguages_LanguageId_fk",
+          "tableFrom": "Projects",
+          "tableTo": "ProgrammingLanguages",
+          "columnsFrom": [
+            "SecondaryLanguageId"
+          ],
+          "columnsTo": [
+            "LanguageId"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "no action"
+        },
+        "Projects_DatabaseTechnologyId_DatabaseTechnologies_DatabaseId_fk": {
+          "name": "Projects_DatabaseTechnologyId_DatabaseTechnologies_DatabaseId_fk",
+          "tableFrom": "Projects",
+          "tableTo": "DatabaseTechnologies",
+          "columnsFrom": [
+            "DatabaseTechnologyId"
+          ],
+          "columnsTo": [
+            "DatabaseId"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "no action"
+        },
+        "Projects_ApplicationIndustryId_ApplicationIndustry_IndustryId_fk": {
+          "name": "Projects_ApplicationIndustryId_ApplicationIndustry_IndustryId_fk",
+          "tableFrom": "Projects",
+          "tableTo": "ApplicationIndustry",
+          "columnsFrom": [
+            "ApplicationIndustryId"
+          ],
+          "columnsTo": [
+            "IndustryId"
+          ],
+          "onDelete": "restrict",
           "onUpdate": "no action"
         }
       },
@@ -279,45 +536,6 @@
           "name": "Roles_RoleName_unique",
           "columns": [
             "RoleName"
-          ],
-          "isUnique": true
-        }
-      },
-      "foreignKeys": {},
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {},
-      "checkConstraints": {}
-    },
-    "Tags": {
-      "name": "Tags",
-      "columns": {
-        "TagId": {
-          "name": "TagId",
-          "type": "integer",
-          "primaryKey": true,
-          "notNull": true,
-          "autoincrement": true
-        },
-        "TagName": {
-          "name": "TagName",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
-        }
-      },
-      "indexes": {
-        "Tags_TagId_unique": {
-          "name": "Tags_TagId_unique",
-          "columns": [
-            "TagId"
-          ],
-          "isUnique": true
-        },
-        "Tags_TagName_unique": {
-          "name": "Tags_TagName_unique",
-          "columns": [
-            "TagName"
           ],
           "isUnique": true
         }
@@ -367,7 +585,7 @@
         },
         "RoleId": {
           "name": "RoleId",
-          "type": "text",
+          "type": "integer",
           "primaryKey": false,
           "notNull": true,
           "autoincrement": false
@@ -428,7 +646,7 @@
           "columnsTo": [
             "RoleId"
           ],
-          "onDelete": "cascade",
+          "onDelete": "restrict",
           "onUpdate": "no action"
         }
       },
