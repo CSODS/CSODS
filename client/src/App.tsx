@@ -4,7 +4,8 @@ import { ADDRESSES } from './constants/constants.js';
 import { PrimaryLayout } from './components/layouts/MainLayout.js';
 import LandingPage from './components/pages/LandingPage.js';
 import Home from "./components/pages/Home.js";
-import { StudentProjects, ProjectDetails } from './components/pages/StudentProjects.js';
+import StudentProjects from './components/pages/StudentProjects.js';
+import ProjectDetails from './components/pages/ProjectDetails';
 import SubmitProject from './components/pages/SubmitProject.js';
 
 function App() {

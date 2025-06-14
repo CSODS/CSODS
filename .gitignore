@@ -4,5 +4,6 @@ server/node_modules/
 server/data/project_cache/
 server/data/tags_cache/
 server/temp/
+client/.env
 client/src/.env
 client/node_modules/

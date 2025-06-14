@@ -1,5 +1,6 @@
 import { Outlet } from 'react-router-dom';
 import { ADDRESSES } from '../../constants/constants';
+import { Link } from 'react-router-dom';
 
 export function PrimaryLayout() {
     // useEffect(() => {
@@ -18,20 +19,20 @@ export function PrimaryLayout() {
                     </button>
                     <div className="collapse navbar-collapse" id="navbar">
                         <div className="navbar-nav d-none d-lg-flex gap-2 position-absolute top-50 start-50 translate-middle">
-                            <a href={ADDRESSES.HOME} className="nav-link header-nav-element">Home</a>
-                            <a href={ADDRESSES.STUDENT_PROJECTS} className="nav-link header-nav-element">Projects</a>
-                            <a href={ADDRESSES.ABOUT} className="nav-link header-nav-element">About</a>
+                            <Link to={ADDRESSES.HOME} className="nav-link header-nav-element">Home</Link>
+                            <Link to={`${ADDRESSES.STUDENT_PROJECTS_ROOT}/1`} className="nav-link header-nav-element">Projects</Link>
+                            <Link to={ADDRESSES.ABOUT} className="nav-link header-nav-element">About</Link>
                         </div>
-                        <a href={ADDRESSES.SUBMIT_PROJECT} className="ms-auto me-2 px-2 py-1 nav-link d-none d-lg-flex btn-light-1 rounded-pill">
-                            <a href={ADDRESSES.SUBMIT_PROJECT} className="nav-link ms-2 me-1">Submit a Project</a>
+                        <Link to={ADDRESSES.SUBMIT_PROJECT} className="ms-auto me-2 px-2 py-1 nav-link d-none d-lg-flex btn-light-1 rounded-pill">
+                            <div className="nav-link ms-2 me-1">Submit a Project</div>
                             <i className="bi bi-arrow-right-circle ms-2 me-1"></i>
-                        </a>
+                        </Link>
                         
                         <div className="bg-dark-2 navbar-nav d-flex d-lg-none flex-column border border-light-1 rounded-2">
-                            <a href={ADDRESSES.HOME} className="nav-link color-light-2">Home</a>
-                            <a href={`${ADDRESSES.STUDENT_PROJECTS_ROOT}/1`} className="nav-link color-light-2">Projects</a>
-                            <a href={ADDRESSES.ABOUT} className="nav-link color-light-2">About</a>
-                            <a href={ADDRESSES.SUBMIT_PROJECT} className="nav-link color-light-2">Submit a Project</a>
+                            <Link to={ADDRESSES.HOME} className="nav-link color-light-2">Home</Link>
+                            <Link to={`${ADDRESSES.STUDENT_PROJECTS_ROOT}/1`} className="nav-link color-light-2">Projects</Link>
+                            <Link to={ADDRESSES.ABOUT} className="nav-link color-light-2">About</Link>
+                            <Link to={ADDRESSES.SUBMIT_PROJECT} className="nav-link color-light-2">Submit a Project</Link>
                         </div>
                     </div>
                 </div>

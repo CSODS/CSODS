@@ -8,7 +8,7 @@ export interface IProjectDetails {
     ProjectFrameworks: IProjectFramework[]
 };
 
-export interface IProjectTags {
+export interface IAllProjectTags {
     DevTypes: IDevType[],
     ProgrammingLanguages: IProgrammingLanguage[],
     Frameworks: IFramework[],
@@ -23,10 +23,19 @@ export interface IProject {
     ProjectTitle: string,
     DevTypeId: number,
     PrimaryLanguageId: number,
-    SecondaryLanguageId: number,
-    DatabaseTechnologyId: number,
-    ApplicationIndustryId: number,
+    SecondaryLanguageId: number | null,
+    DatabaseTechnologyId: number | null,
+    ApplicationIndustryId: number | null,
     GitHubUrl: string
+};
+
+export interface IProjectTags {
+    DevType: string,
+    PrimaryLanguage: string,
+    SecondaryLanguage: string | null,
+    DatabaseTechnology: string | null,
+    ApplicationIndustry: string | null,
+    Frameworks: (string | null)[]
 };
 
 export interface IDevType {
