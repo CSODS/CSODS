@@ -3,7 +3,7 @@ import React from 'react';
 
 function Home() {
   return (
-    <div className='pt-4 d-flex justify-content-center'>
+    <main className='pt-4 d-flex justify-content-center'>
       <div className='container-md mx-3 py-3 d-flex flex-row justify-content-center bg-light-2 translucent rounded-5' style={{maxWidth:1100}}>
         <div className='pb-4 m-4 card border border-0 bg-transparent'>
           <div className='row g-0'>
@@ -40,7 +40,7 @@ function Home() {
           </div>
         </div>
       </div>
-    </div> 
+    </main> 
   );
 }
 
