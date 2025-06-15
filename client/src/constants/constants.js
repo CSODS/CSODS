@@ -1,9 +1,6 @@
-import dotenv from 'dotenv';
-dotenv.config();
-
-export const CSODS_BASE = process.env.REACT_ENV === 'testing'
-    ? process.env.CSODS_LOCAL_API_BASE_URL
-    : process.env.CSODS_API_BASE_URL;
+export const CSODS_BASE = process.env.REACT_APP_ENV === 'testing'
+    ? process.env.REACT_APP_CSODS_LOCAL_API_BASE_URL
+    : process.env.REACT_APP_CSODS_API_BASE_URL;
 
 export const API_PATHS = {
     PROJECTS: '/projects',
