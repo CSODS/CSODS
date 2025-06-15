@@ -11,20 +11,25 @@ import { PROJECT_ROUTES } from '../data/constants/constants.js';
 import express from 'express';
 const projectsRouter = express.Router();
 projectsRouter.get(PROJECT_ROUTES.LOAD_PROJECTS, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    res.json(yield req.projectCacheHandler.setProjectsCache());
+    const projectCacheHandler = req.projectCacheHandler;
+    yield projectCacheHandler.setProjectsCache();
+    res.json(yield projectCacheHandler.getCachePages());
 }));
 projectsRouter.get(PROJECT_ROUTES.BY_PAGE, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const projectCacheHandler = req.projectCacheHandler;
     yield projectCacheHandler.setProjectsCache();
-    res.json(yield projectCacheHandler.getJsonCachePage(Number(req.params.pageNumber)));
+    res.json(yield projectCacheHandler.getOrCreatePage(Number(req.params.pageNumber)));
 }));
 projectsRouter.get(PROJECT_ROUTES.BY_ID, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const page = Number(req.params.pageNumber);
     const id = Number(req.params.projectId);
-    const project = yield req.projectCacheHandler.getProject(page, id);
+    const project = yield req.projectCacheHandler.getProjectByPageAndId(page, id);
     project
         ? res.json(project)
         : res.status(404).json({ error: "Project Not Found." });
+}));
+projectsRouter.get(PROJECT_ROUTES.TITLE_SEARCH, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    res.json('hello');
 }));
 // router.post();
 export default projectsRouter;

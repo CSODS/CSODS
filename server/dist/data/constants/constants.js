@@ -7,6 +7,7 @@ export const PROJECT_ROUTES = {
     ROOT: '/',
     BY_PAGE: '/:pageNumber',
     BY_ID: '/:pageNumber/:projectId',
+    TITLE_SEARCH: '/:title_search',
     LOAD_PROJECTS: '/load_projects'
 };
 export const PROJECT_TAG_ROUTES = {

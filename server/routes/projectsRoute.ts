@@ -4,10 +4,18 @@ import express from 'express';
 
 const projectsRouter = express.Router();
 
+//  for testing
+projectsRouter.get(PROJECT_ROUTES.LOAD_PROJECTS, async (req, res) => {
+    const projectCacheHandler = req.projectCacheHandler;
+    await projectCacheHandler.setProjectsCache();
+    res.json(projectCacheHandler.getCachePages());
+});
+
 projectsRouter.get(PROJECT_ROUTES.BY_PAGE, async (req, res) => {
     const projectCacheHandler = req.projectCacheHandler;
     await projectCacheHandler.setProjectsCache();
-    res.json(await projectCacheHandler.getJsonCachePage(Number(req.params.pageNumber)));
+    
+    res.json(await projectCacheHandler.getOrCreatePage(Number(req.params.pageNumber)));
 });
 
 projectsRouter.get(PROJECT_ROUTES.BY_ID, async (req, res) => {

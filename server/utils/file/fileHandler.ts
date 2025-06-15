@@ -2,6 +2,7 @@ import { existsSync, promises as fs} from 'fs';
 import * as lockfile from 'proper-lockfile';
 import path from 'path';
 import { OperationOptions } from 'retry';
+import { boolean } from 'drizzle-orm/gel-core';
 
 export function createJsonFileHandler<TModel>(modelName: string) {
     return new JsonFileHandler<TModel>(modelName);
@@ -162,5 +163,19 @@ export class JsonFileHandler<TModel> {
         
     }
 
+    /**
+     * Generates a file name using a given file extension and an arbitrary number of name elements.
+     * The name elements will be joined by hyphens.
+     *
+     * @param fileExtension The extension of the file.
+     * @param nameElements An arbitrary number of string elements that will form the base name of the file.
+     * @returns A string representing the complete file name.
+     */
+    public generateFileName(fileExtension: string, ...nameElements: string[]): string {
+        //  Removes falsy values including '', null, and undefined.
+        nameElements = nameElements.filter(Boolean);
+        const fileName: string = nameElements.join('-');
+        return `${fileName}.${fileExtension}`;
+    }
     //#endregion
 }
