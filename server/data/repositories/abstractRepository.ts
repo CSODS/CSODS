@@ -1,8 +1,6 @@
-import { drizzle } from "drizzle-orm/libsql";
-import { asc, InferSelectModel } from "drizzle-orm";
-import { AnySQLiteColumn, SQLiteSelect, SQLiteTable } from "drizzle-orm/sqlite-core";
+import { asc, InferSelectModel, SQL } from "drizzle-orm";
+import { AnySQLiteColumn, SQLiteTable } from "drizzle-orm/sqlite-core";
 import { createContext } from "../../db/csods";
-import { Project } from "../../viewmodels/dbModels";
 
 type DbContext = Awaited<ReturnType<typeof createContext>>;
 
@@ -17,24 +15,53 @@ export abstract class Repository<
         this._dbContext = context;
         this._table = table;
     }
-
-    public async GetRows(
+    /**
+     * Retrieves a paginated list of rows from the database table, optionally applying a WHERE clause.
+     *
+     * Results are ordered in ascending order by the specified column and limited to the given page size.
+     * Supports offset-based pagination using the provided page number.
+     *
+     * @param column The column to use for sorting the result set in ascending order.
+     * @param pageSize The number of rows to fetch per page.
+     * @param pageNumber The page number to retrieve (1-based index).
+     * @param whereClause Optional SQL condition to filter the rows.
+     *
+     * @returns A promise that resolves to an array of typed rows (`TResult[]`).
+     *
+     * @example
+     * const rows = await GetRows(Projects.ProjectId, 10, 2, eq(Projects.LanguageId, 1));
+     * // Retrieves page 2 (items 11–20) of projects using LanguageId = 1
+     */
+    protected async GetRows(
         column: AnySQLiteColumn, 
         pageSize: number, 
-        pageNumber: number
+        pageNumber: number,
+        whereClause?: SQL
     ): Promise<TResult[]> {
+
         const rows = await this._dbContext
             .select()
             .from(this._table)
+            .where(whereClause)
             .orderBy(asc(column))
             .limit(pageSize)
             .offset(pageSize * (pageNumber - 1));
         
         return rows as TResult[];
     }
-
-    public async GetCount() : Promise<number> {
-        return await this._dbContext.$count(this._table);
+    /**
+     * Counts the number of rows in the current table, optionally using a WHERE clause.
+     *
+     * @param whereClause Optional SQL condition to restrict which rows are counted.
+     *
+     * @returns A promise resolving to the total count of matching rows.
+     *
+     * @example
+     * const total = await GetCount(eq(Projects.DevTypeId, 2));
+     * // Returns the number of projects with DevTypeId = 2
+     */
+    protected async GetCount(whereClause?: SQL) : Promise<number> {
+        return await this._dbContext.$count(this._table, whereClause);
     }
 }
 

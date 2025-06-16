@@ -1,8 +1,7 @@
 import { createContext } from '../../db/csods.js'; 
-import { Projects, ProjectFrameworks } from '../../db/schema.js';
-import { Project, ProjectFramework } from '../../viewmodels/dbModels.js';
+import { Project } from '../../viewmodels/dbModels.js';
 import { IProjectDetails } from '../../viewmodels/cache/cacheInterfaces.js';
-import ProjectRepository from '../../data/repositories/projectRepository.js';
+import ProjectRepository, { IProjectFilter } from '../../data/repositories/projectRepository.js';
 import ProjectFrameworkRepository from '../../data/repositories/projectFrameworkRepository.js';
 
 export async function createProjectDataService() {
@@ -36,22 +35,54 @@ export class ProjectDataService {
     }
 
     /**
-     * Fetches a range of project pages from the database and organizes them into a page-number-keyed record.
+     * Fetches one or more pages of project data from the database and organizes the results into a page-number-keyed object.
      *
-     * Each entry in the returned record corresponds to a page number and contains an array of `IProjectDetails` objects.
-     * `IProjectDetails` encapsulates both the primary project information (`Project`) and its associated frameworks (`ProjectFrameworks`).
-     * Pages are fetched sequentially based on the `pageSize` parameter.
-     * If an empty page (meaning no projects are returned for that page number) is encountered during the iteration,
-     * the fetching process is stopped early, assuming no further projects exist beyond that point.
+     * Each page consists of a list of `IProjectDetails` entries, combining the core project data (`Project`)
+     * with its associated frameworks (`ProjectFrameworks`). Pages are retrieved in ascending order starting from `pageStart`.
      *
-     * @param {number} pageStart - The starting page number for the fetch operation (inclusive, 1-indexed).
-     * @param {number} pageSize - The maximum number of projects to include on each page.
-     * @param {number} [pageEnd=pageStart] - The ending page number for the fetch operation (inclusive). Defaults to `pageStart` if not provided,
-     * meaning only a single page will be fetched.
-     * @returns {Promise<Record<number, IProjectDetails[]>>} A promise that resolves to a record where keys are page numbers
-     * and values are arrays of `IProjectDetails` objects.
+     * The operation stops early if an empty page is returned — this is treated as an indicator that there are no more
+     * projects beyond that point in the database.
+     *
+     * ### Behavior:
+     * - Pages are 1-indexed.
+     * - If `pageEnd` is not provided, only the `pageStart` page is fetched.
+     * - If filters are provided, the results will be limited accordingly.
+     *
+     * @param options An object containing:
+     * - `pageStart` (number): The first page to fetch (inclusive, 1-indexed).
+     * - `pageSize` (number): The number of projects per page.
+     * - `pageEnd` (number, optional): The last page to fetch (inclusive). Defaults to `pageStart`.
+     * - `filter` (IProjectFilter, optional): A filter to apply to the query (e.g., by language, type, etc.).
+     *
+     * @returns A promise resolving to a `Record<number, IProjectDetails[]>`, where each key is a page number
+     * and each value is an array of fully-hydrated `IProjectDetails` entries (project + frameworks).
+     *
+     * @example
+     * const result = await fetchProjectsPages({
+     *   pageStart: 1,
+     *   pageSize: 10,
+     *   pageEnd: 3,
+     *   filter: { LanguageId: 2 }
+     * });
+     *
+     * // result might look like:
+     * // {
+     * //   1: [{ Project: ..., ProjectFrameworks: [...] }, ...],
+     * //   2: [...],
+     * //   3: [...]
+     * // }
      */
-    public async fetchProjectsPages(pageStart: number, pageSize: number, pageEnd: number = pageStart): Promise<Record<number, IProjectDetails[]>> {
+    public async fetchProjectsPages( options: {
+        pageStart: number, 
+        pageSize: number, 
+        pageEnd?: number, 
+        filter?: IProjectFilter
+    }): Promise<Record<number, IProjectDetails[]>> {
+        const pageStart = options.pageStart;
+        const pageSize = options.pageSize;
+        const pageEnd = options.pageEnd ?? options.pageStart;
+        const filter = options.filter;
+
         // Calculate the logical start and end row numbers for logging purposes, based on the page range and page size.
         const startRow = (pageStart - 1) * pageSize;
         const endRow = pageEnd * pageSize;
@@ -59,49 +90,57 @@ export class ProjectDataService {
             `- Fetching rows ${startRow} to ${endRow}...
             - Paginated with page size: ${pageSize} from database...`
         );
-
-        // Initialize an empty record to store the fetched project details, keyed by page number.
         let projectDetails: Record<number, IProjectDetails[]> = {};
 
-        // Iterate through the requested page range to fetch projects for each page.
         for (let pageNumber = pageStart; pageNumber <= pageEnd; pageNumber++ ) {
             console.log(`Fetching page ${pageNumber} from database...`);
 
-            // Retrieve a batch of projects for the current page number using the project repository.
-            const projectArr: Project[] = (
-                await this._projectRepo.GetRows(
-                    Projects.ProjectId,
-                    pageSize,
-                    pageNumber
-                )
-            );
+            const projectArr: Project[] = await this._projectRepo.getProjects(pageSize, pageNumber, filter);
 
-            // If no projects are returned for the current page, it signifies the end of available data,
-            // so stop fetching further pages.
+            //  If no projects are returned for the current page, it signifies the end of available data,
+            //  so stop fetching further pages.
             if (projectArr.length == 0 ) break;
             
-            // For each fetched project, asynchronously retrieve its associated frameworks
-            // and construct an `IProjectDetails` object.
-            // `Promise.all` ensures all framework fetches for the current page complete concurrently.
-            projectDetails[pageNumber] = await Promise.all(
-                projectArr.map(async (project) => ({
-                    Project: project, // The core project data.
-                    ProjectFrameworks: await this._projectFrameworkRepo.FindManyByProjectId(project.ProjectId) // Associated frameworks.
-                }))
-            );
+            //  Build project details for this page.
+            projectDetails[pageNumber] = await this.constructProjectDetails(projectArr);
 
             console.log(`Page ${pageNumber} fetched.`);
         }
         console.log(`Rows fetched from database.`);
         return projectDetails;
     }
+    /**
+     * Constructs an array of `IProjectDetails` objects from the given list of `Project` entities.
+     *
+     * For each project, this method fetches its associated frameworks asynchronously and
+     * combines them into a single `IProjectDetails` object.
+     *
+     * @param projectArr An array of `Project` entities for which to fetch associated frameworks.
+     * @returns A promise resolving to an array of fully-hydrated `IProjectDetails` objects,
+     * where each entry contains the project and its associated frameworks.
+     *
+     * @example
+     * const details = await constructProjectDetails(projects);
+     * // details: [{ Project: ..., ProjectFrameworks: [...] }, ...]
+     */
+    private async constructProjectDetails(projectArr: Project[]) : Promise<IProjectDetails[]> {
+        return await Promise.all(
+            projectArr.map(async (project) => ({
+                Project: project, // The core project data.
+                ProjectFrameworks: await this._projectFrameworkRepo.FindManyByProjectId(project.ProjectId) // Associated frameworks.
+            }))
+        );
+    }
 
     /**
-     * Retrieves the total count of projects available in the database.
+     * Retrieves the total number of project records available in the database.
      *
-     * @returns {Promise<number>} A promise resolving to the total number of project records.
+     * If a filter is provided, the count will reflect only the projects that match the specified criteria.
+     *
+     * @param filter - Optional filter to apply (e.g., by language, dev type, etc.).
+     * @returns A promise that resolves to the count of matching project records.
      */
-    public async countProjects() {
-        return await this._projectRepo.GetCount();
+    public async fetchProjectsCount(filter?: IProjectFilter): Promise<number> {
+        return await this._projectRepo.countProjects(filter);
     }
 }
