@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "test": "vitest",
+    "compilets": "npx tsc --incremental",
     "start": "nodemon dist/index.js",
     "seed": "node dist/scripts/seeder.js",
     "loadCache:tags": "node dist/scripts/cacheLoader.js",

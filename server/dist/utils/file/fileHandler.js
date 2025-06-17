@@ -150,4 +150,18 @@ export class JsonFileHandler {
         if (data == null)
             throw new TypeError(`Expected type ${this._modelName}, but received null.`);
     }
+    /**
+     * Generates a file name using a given file extension and an arbitrary number of name elements.
+     * The name elements will be joined by hyphens.
+     *
+     * @param fileExtension The extension of the file.
+     * @param nameElements An arbitrary number of string elements that will form the base name of the file.
+     * @returns A string representing the complete file name.
+     */
+    generateFileName(fileExtension, ...nameElements) {
+        //  Removes falsy values including '', null, and undefined.
+        nameElements = nameElements.filter(Boolean);
+        const fileName = nameElements.join('-');
+        return `${fileName}.${fileExtension}`;
+    }
 }
