@@ -51,6 +51,7 @@ export class ProjectDataService {
      * - `pageStart` (number): The first page to fetch (inclusive, 1-indexed).
      * - `pageSize` (number): The number of projects per page.
      * - `pageEnd` (number, optional): The last page to fetch (inclusive). Defaults to `pageStart`.
+     * - `isAscending (boolean, optional): Specifies the sorting order of the data before fetching.
      * - `filter` (IProjectFilter, optional): A filter to apply to the query (e.g., by language, type, etc.).
      *
      * @returns A promise resolving to a `Record<number, IProjectDetails[]>`, where each key is a page number
@@ -73,10 +74,11 @@ export class ProjectDataService {
      */
     fetchProjectsPages(options) {
         return __awaiter(this, void 0, void 0, function* () {
-            var _a;
+            var _a, _b;
             const pageStart = options.pageStart;
             const pageSize = options.pageSize;
             const pageEnd = (_a = options.pageEnd) !== null && _a !== void 0 ? _a : options.pageStart;
+            const isAscending = (_b = options.isAscending) !== null && _b !== void 0 ? _b : true;
             const filter = options.filter;
             // Calculate the logical start and end row numbers for logging purposes, based on the page range and page size.
             const startRow = (pageStart - 1) * pageSize;
@@ -86,7 +88,12 @@ export class ProjectDataService {
             let projectDetails = {};
             for (let pageNumber = pageStart; pageNumber <= pageEnd; pageNumber++) {
                 console.log(`Fetching page ${pageNumber} from database...`);
-                const projectArr = yield this._projectRepo.getProjects(pageSize, pageNumber, filter);
+                const projectArr = yield this._projectRepo.getProjects({
+                    isAscending: isAscending,
+                    filter: filter,
+                    pageSize: pageSize,
+                    pageNumber: pageNumber
+                });
                 //  If no projects are returned for the current page, it signifies the end of available data,
                 //  so stop fetching further pages.
                 if (projectArr.length == 0)

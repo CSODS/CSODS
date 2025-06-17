@@ -52,6 +52,7 @@ export class ProjectDataService {
      * - `pageStart` (number): The first page to fetch (inclusive, 1-indexed).
      * - `pageSize` (number): The number of projects per page.
      * - `pageEnd` (number, optional): The last page to fetch (inclusive). Defaults to `pageStart`.
+     * - `isAscending (boolean, optional): Specifies the sorting order of the data before fetching.
      * - `filter` (IProjectFilter, optional): A filter to apply to the query (e.g., by language, type, etc.).
      *
      * @returns A promise resolving to a `Record<number, IProjectDetails[]>`, where each key is a page number
@@ -75,12 +76,14 @@ export class ProjectDataService {
     public async fetchProjectsPages( options: {
         pageStart: number, 
         pageSize: number, 
-        pageEnd?: number, 
+        pageEnd?: number,
+        isAscending?: boolean, 
         filter?: IProjectFilter
     }): Promise<Record<number, IProjectDetails[]>> {
         const pageStart = options.pageStart;
         const pageSize = options.pageSize;
         const pageEnd = options.pageEnd ?? options.pageStart;
+        const isAscending = options.isAscending ?? true;
         const filter = options.filter;
 
         // Calculate the logical start and end row numbers for logging purposes, based on the page range and page size.
@@ -95,7 +98,12 @@ export class ProjectDataService {
         for (let pageNumber = pageStart; pageNumber <= pageEnd; pageNumber++ ) {
             console.log(`Fetching page ${pageNumber} from database...`);
 
-            const projectArr: Project[] = await this._projectRepo.getProjects(pageSize, pageNumber, filter);
+            const projectArr: Project[] = await this._projectRepo.getProjects({
+                isAscending: isAscending,
+                filter: filter,
+                pageSize: pageSize,
+                pageNumber: pageNumber
+            });
 
             //  If no projects are returned for the current page, it signifies the end of available data,
             //  so stop fetching further pages.

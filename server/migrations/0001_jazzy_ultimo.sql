@@ -1,0 +1,1 @@
+ALTER TABLE `Projects` ADD `ProjectTitleLower` text;

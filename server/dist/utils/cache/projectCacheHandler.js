@@ -141,6 +141,7 @@ export class ProjectCacheHandler {
                 const projects = (yield this._projectDataService.fetchProjectsPages({
                     pageStart: pageNumber,
                     pageSize: CACHE.PAGE_SIZE,
+                    isAscending: false,
                     filter: this._filter
                 }))[pageNumber];
                 //  Assemble cache page.
@@ -449,6 +450,7 @@ export class ProjectCacheHandler {
                 pageStart: 1,
                 pageSize: CACHE.PAGE_SIZE,
                 pageEnd: 3,
+                isAscending: false,
                 filter: this._filter
             });
             //  Assemble cache.

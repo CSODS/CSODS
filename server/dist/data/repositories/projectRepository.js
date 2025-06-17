@@ -30,12 +30,23 @@ export default class ProjectRepository extends Repository {
      * const projects = await getProjects(10, 2, { LanguageId: 3 });
      * // Fetches the second page of projects filtered by LanguageId = 3
      */
-    getProjects(pageSize, pageNumber, filter) {
+    getProjects(options) {
         return __awaiter(this, void 0, void 0, function* () {
+            var _a, _b, _c;
+            const isAscending = (_a = options === null || options === void 0 ? void 0 : options.isAscending) !== null && _a !== void 0 ? _a : true;
+            const filter = options === null || options === void 0 ? void 0 : options.filter;
+            const pageSize = (_b = options === null || options === void 0 ? void 0 : options.pageSize) !== null && _b !== void 0 ? _b : 100;
+            const pageNumber = (_c = options === null || options === void 0 ? void 0 : options.pageNumber) !== null && _c !== void 0 ? _c : 1;
             //  apply filters as specified.
             const whereClause = this.buildWhereClause(filter);
             //  get rows and return.
-            return yield this.GetRows(Projects.ProjectId, pageSize, pageNumber, whereClause);
+            return yield this.GetRows({
+                column: Projects.ProjectId,
+                isAscending: isAscending,
+                whereClause: whereClause,
+                pageSize: pageSize,
+                pageNumber: pageNumber
+            });
         });
     }
     /**
@@ -64,7 +75,7 @@ export default class ProjectRepository extends Repository {
      * If no filters are provided or all are `undefined`, the resulting clause will be `undefined`.
      *
      * ### Filters:
-     * - `ProjectTitle`: Matches the project's ProjectTitle starting with the search key.
+     * - `ProjectTitle`: Matches the project's ProjectTitle in lowercase starting with the search key.
      * - `DevTypeId`: Matches the project's development type.
      * - `LanguageId`: Matches either the primary or secondary language of the project.
      * - `DatabaseId`: Matches the project's database technology.
@@ -81,7 +92,7 @@ export default class ProjectRepository extends Repository {
         const conditions = [];
         if (filter) {
             if (filter.ProjectTitle !== undefined)
-                conditions.push(like(Projects.ProjectTitle, `${filter.ProjectTitle}%`));
+                conditions.push(like(Projects.ProjectTitleLower, `${filter.ProjectTitle}%`));
             if (filter.DevTypeId !== undefined)
                 conditions.push(eq(Projects.DevTypeId, filter.DevTypeId));
             if (filter.LanguageId !== undefined)

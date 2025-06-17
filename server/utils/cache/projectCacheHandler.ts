@@ -148,7 +148,8 @@ export class ProjectCacheHandler {
             const projects = (
                 await this._projectDataService.fetchProjectsPages({
                     pageStart: pageNumber, 
-                    pageSize: CACHE.PAGE_SIZE, 
+                    pageSize: CACHE.PAGE_SIZE,
+                    isAscending: false, 
                     filter: this._filter
                 })
             )[pageNumber]; 
@@ -479,6 +480,7 @@ export class ProjectCacheHandler {
                 pageStart: 1, 
                 pageSize: CACHE.PAGE_SIZE, 
                 pageEnd: 3, 
+                isAscending: false,
                 filter: this._filter
             }
         );
