@@ -227,7 +227,7 @@ export class ProjectCacheHandler {
             this.updateDate(); //  Refresh internal date used for filename generation.
             const filter = new ProjectFilter(filterOptions);
             this._filter = filter.isEmpty() ? undefined : filter;
-            console.log(`Project Filters: ${this._filter}`);
+            console.log(this._filter);
             const filename = this.getFilename({ isToday: true, isFiltered: true });
             console.log('Attempting to parse Json cache and store in memory...');
             let cachedProjects = yield this.tryParseOrCreateJsonCache(filename);

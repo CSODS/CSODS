@@ -124,7 +124,7 @@ export class ProjectCacheHandler {
         }
         catch (err)
         {
-            //  Return null on error.
+            //  Return null on error. 
             console.error('Failed retrieving cache page: ', err);
             return null;
         }
@@ -239,7 +239,7 @@ export class ProjectCacheHandler {
         this.updateDate();  //  Refresh internal date used for filename generation.
         const filter = new ProjectFilter(filterOptions);
         this._filter = filter.isEmpty() ? undefined : filter;
-        console.log(`Project Filters: ${this._filter}`);
+        console.log(this._filter);
         
         const filename = this.getFilename({isToday: true, isFiltered: true});
         
