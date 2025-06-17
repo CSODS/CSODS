@@ -48,6 +48,7 @@ projectsRouter.get(PROJECT_ROUTES.BY_PAGE, async (req, res) => {
  * the results.
  * 
  * ### Query Parameters (all optional):
+ * - `projectTitle`: string - Filter by project title. All values are considered prefixes.
  * - `devTypeId`: number – Filter by development type ID.
  * - `languageId`: number – Filter by programming language ID.
  * - `databaseId`: number – Filter by database technology ID.
@@ -90,9 +91,10 @@ export default projectsRouter;
  * @see parseNumberParam - Utility function used to safely parse numeric query parameters.
  */
 function assembleFilter(request: Request): IProjectFilter {
-    const { devTypeId, languageId, databaseId, industryId } = request.query;
+    const { projectTitle, devTypeId, languageId, databaseId, industryId } = request.query;
 
     const filter: IProjectFilter = {
+        ProjectTitle: parseStringParam(projectTitle),
         DevTypeId: parseNumberParam(devTypeId),
         LanguageId: parseNumberParam(languageId),
         DatabaseId: parseNumberParam(databaseId),
@@ -100,14 +102,30 @@ function assembleFilter(request: Request): IProjectFilter {
     };
     return filter;
 }
-
 /**
+ * A helper function for the @see assembleFilter function.
+ * Safely parses a value into a string.
+ * 
+ * If the input is a string, remove leading and trailing whitespaces, replace underscores
+ * '_' with spaces ' ', and convert to lowercase. Otherwise, returns 'undefined'.
+ * 
+ * @param value - The value to parse, a query string parameter.
+ * @returns The parsed string, or `undefined` if the input is invalid.
+ */
+function parseStringParam(value: any): string | undefined {
+    const str = typeof value === 'string' 
+        ? value.trim().replace('_', ' ').toLowerCase() 
+        : undefined;
+    return str;
+}
+/**
+ * A helper function for the @see assembleFilter function.
  * Safely parses a value into a number.
  *
  * If the input is a string that can be converted to a number, returns the parsed number.
  * Otherwise, returns `undefined`.
  *
- * @param value - The value to parse, typically a query string parameter.
+ * @param value - The value to parse, a query string parameter.
  * @returns The parsed number, or `undefined` if the input is invalid.
  */
 function parseNumberParam(value: any): number | undefined {

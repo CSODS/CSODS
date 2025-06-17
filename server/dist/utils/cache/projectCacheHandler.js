@@ -12,6 +12,7 @@ import { ProjectFilter } from '../../data/repositories/projectRepository.js';
 import { createJsonFileHandler } from '../file/fileHandler.js';
 import { createProjectDataService } from '../data/projectDataService.js';
 import dotenv from 'dotenv';
+import { HashService } from '../hash/hashService.js';
 dotenv.config();
 export function createProjectCacheHandler() {
     return __awaiter(this, void 0, void 0, function* () {
@@ -225,6 +226,7 @@ export class ProjectCacheHandler {
             this.updateDate(); //  Refresh internal date used for filename generation.
             const filter = new ProjectFilter(filterOptions);
             this._filter = filter.isEmpty() ? undefined : filter;
+            console.log(`Project Filters: ${this._filter}`);
             const filename = this.getFilename({ isToday: true, isFiltered: true });
             console.log('Attempting to parse Json cache and store in memory...');
             let cachedProjects = yield this.tryParseOrCreateJsonCache(filename);
@@ -373,7 +375,7 @@ export class ProjectCacheHandler {
      * @returns The constructed filename for the cache file.
      */
     getFilename(options) {
-        var _a, _b, _c, _d, _e, _f;
+        var _a, _b, _c, _d, _e, _f, _g;
         //  Resolve options.
         const isHardBackup = (_a = options === null || options === void 0 ? void 0 : options.isHardBackup) !== null && _a !== void 0 ? _a : false;
         const isToday = (_b = options === null || options === void 0 ? void 0 : options.isToday) !== null && _b !== void 0 ? _b : false;
@@ -383,6 +385,10 @@ export class ProjectCacheHandler {
         const baseName = isHardBackup ? CACHE.HARD_BACKUP : CACHE.BASE_NAME;
         const dateString = (_d = date === null || date === void 0 ? void 0 : date.toISOString().split('T')[0]) !== null && _d !== void 0 ? _d : '';
         const filterList = (_f = (_e = this._filter) === null || _e === void 0 ? void 0 : _e.getFilterList()) !== null && _f !== void 0 ? _f : ['nofilter'];
+        const hasSearchKey = this._filter !== undefined && ((_g = this._filter) === null || _g === void 0 ? void 0 : _g.hasProjectSearchKey());
+        filterList[0] = hasSearchKey
+            ? HashService.simpleHash(filterList[0]) //  hashed searchkey
+            : filterList[0];
         const filterString = isFiltered ? filterList.join('_') : 'nofilter';
         return this._jsonFileHandler.generateFileName(CACHE.AS_JSON, baseName, filterString, dateString);
     }

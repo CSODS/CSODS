@@ -1,7 +1,7 @@
 import { Projects } from '../../db/schema.js';
 import { Repository } from './abstractRepository.js';
 import { DbContext, Project } from '../../viewmodels/dbModels.js';
-import { eq, and, or } from 'drizzle-orm';
+import { eq, and, or, like } from 'drizzle-orm';
 
 export default class ProjectRepository extends Repository<typeof Projects>{
 
@@ -56,6 +56,7 @@ export default class ProjectRepository extends Repository<typeof Projects>{
      * If no filters are provided or all are `undefined`, the resulting clause will be `undefined`.
      *
      * ### Filters:
+     * - `ProjectTitle`: Matches the project's ProjectTitle starting with the search key.
      * - `DevTypeId`: Matches the project's development type.
      * - `LanguageId`: Matches either the primary or secondary language of the project.
      * - `DatabaseId`: Matches the project's database technology.
@@ -71,23 +72,25 @@ export default class ProjectRepository extends Repository<typeof Projects>{
     public buildWhereClause(filter?: IProjectFilter) {
         const conditions = [];
         if (filter) {
-            if (filter.DevTypeId !== undefined) {
-            conditions.push(eq(Projects.DevTypeId, filter.DevTypeId));
-            }
-            if (filter.LanguageId !== undefined) {
+            if (filter.ProjectTitle !== undefined) 
+                conditions.push(like(Projects.ProjectTitle, `${filter.ProjectTitle}%`));
+
+            if (filter.DevTypeId !== undefined) 
+                conditions.push(eq(Projects.DevTypeId, filter.DevTypeId));
+
+            if (filter.LanguageId !== undefined) 
                 conditions.push(
                     or (
                         eq(Projects.PrimaryLanguageId, filter.LanguageId),
                         eq(Projects.SecondaryLanguageId, filter.LanguageId)
                     )
                 );
-            }
-            if (filter.DatabaseId !== undefined) {
+
+            if (filter.DatabaseId !== undefined) 
                 conditions.push(eq(Projects.DatabaseTechnologyId, filter.DatabaseId));
-            }
-            if (filter.IndustryId !== undefined) {
+
+            if (filter.IndustryId !== undefined) 
                 conditions.push(eq(Projects.ApplicationIndustryId, filter.IndustryId));
-            }
         }
 
         //  build where clause.
@@ -96,7 +99,7 @@ export default class ProjectRepository extends Repository<typeof Projects>{
     }
 }
 
-//#endregion ProjectFilter
+//#region ProjectFilter
 
 /**
  * A utility class that encapsulates and manages project filter criteria.
@@ -104,6 +107,7 @@ export default class ProjectRepository extends Repository<typeof Projects>{
  * for evaluating and representing filters in list form.
  */
 export class ProjectFilter implements IProjectFilter {
+    ProjectTitle: string | undefined;
     DevTypeId: number | undefined;
     LanguageId: number | undefined;
     DatabaseId: number | undefined;
@@ -115,6 +119,9 @@ export class ProjectFilter implements IProjectFilter {
      * @param filter Optional object containing filter criteria.
      */
     constructor(filter?: IProjectFilter) {
+        const title = filter?.ProjectTitle;
+        //  Normalize empty titles into undefined data type.
+        this.ProjectTitle = title && title.length > 0 ? title : undefined;
         this.DevTypeId = filter?.DevTypeId;
         this.LanguageId = filter?.LanguageId;
         this.DatabaseId = filter?.DatabaseId;
@@ -133,9 +140,12 @@ export class ProjectFilter implements IProjectFilter {
             return value !== undefined
                 ? value.toString()
                 : 'NA';
-        })
-
+        });
         return filterList;
+    }
+
+    public hasProjectSearchKey(): boolean {
+        return this.ProjectTitle !== undefined;
     }
 
     /**
@@ -144,7 +154,7 @@ export class ProjectFilter implements IProjectFilter {
      * @returns `true` if no filters are set; `false` otherwise.
      */
     public isEmpty(): boolean {
-        return !this.hasFilter;
+        return !this.hasFilter();
     }
 
     /**
@@ -164,6 +174,10 @@ export class ProjectFilter implements IProjectFilter {
  * or caching project data.
  */
 export interface IProjectFilter {
+    /**
+     * A search key on project titles. All search keys are considered prefixes.
+     */
+    ProjectTitle?: string | undefined;
     /**
      * ID of the development type (e.g., web, mobile, desktop).
      */

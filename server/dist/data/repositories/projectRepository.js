@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 import { Projects } from '../../db/schema.js';
 import { Repository } from './abstractRepository.js';
-import { eq, and, or } from 'drizzle-orm';
+import { eq, and, or, like } from 'drizzle-orm';
 export default class ProjectRepository extends Repository {
     constructor(context) {
         super(context, Projects);
@@ -64,6 +64,7 @@ export default class ProjectRepository extends Repository {
      * If no filters are provided or all are `undefined`, the resulting clause will be `undefined`.
      *
      * ### Filters:
+     * - `ProjectTitle`: Matches the project's ProjectTitle starting with the search key.
      * - `DevTypeId`: Matches the project's development type.
      * - `LanguageId`: Matches either the primary or secondary language of the project.
      * - `DatabaseId`: Matches the project's database technology.
@@ -79,25 +80,23 @@ export default class ProjectRepository extends Repository {
     buildWhereClause(filter) {
         const conditions = [];
         if (filter) {
-            if (filter.DevTypeId !== undefined) {
+            if (filter.ProjectTitle !== undefined)
+                conditions.push(like(Projects.ProjectTitle, `${filter.ProjectTitle}%`));
+            if (filter.DevTypeId !== undefined)
                 conditions.push(eq(Projects.DevTypeId, filter.DevTypeId));
-            }
-            if (filter.LanguageId !== undefined) {
+            if (filter.LanguageId !== undefined)
                 conditions.push(or(eq(Projects.PrimaryLanguageId, filter.LanguageId), eq(Projects.SecondaryLanguageId, filter.LanguageId)));
-            }
-            if (filter.DatabaseId !== undefined) {
+            if (filter.DatabaseId !== undefined)
                 conditions.push(eq(Projects.DatabaseTechnologyId, filter.DatabaseId));
-            }
-            if (filter.IndustryId !== undefined) {
+            if (filter.IndustryId !== undefined)
                 conditions.push(eq(Projects.ApplicationIndustryId, filter.IndustryId));
-            }
         }
         //  build where clause.
         const whereClause = conditions.length > 0 ? and(...conditions) : undefined;
         return whereClause;
     }
 }
-//#endregion ProjectFilter
+//#region ProjectFilter
 /**
  * A utility class that encapsulates and manages project filter criteria.
  * Implements the `IProjectFilter` interface and provides helper methods
@@ -110,6 +109,9 @@ export class ProjectFilter {
      * @param filter Optional object containing filter criteria.
      */
     constructor(filter) {
+        const title = filter === null || filter === void 0 ? void 0 : filter.ProjectTitle;
+        //  Normalize empty titles into undefined data type.
+        this.ProjectTitle = title && title.length > 0 ? title : undefined;
         this.DevTypeId = filter === null || filter === void 0 ? void 0 : filter.DevTypeId;
         this.LanguageId = filter === null || filter === void 0 ? void 0 : filter.LanguageId;
         this.DatabaseId = filter === null || filter === void 0 ? void 0 : filter.DatabaseId;
@@ -130,13 +132,16 @@ export class ProjectFilter {
         });
         return filterList;
     }
+    hasProjectSearchKey() {
+        return this.ProjectTitle !== undefined;
+    }
     /**
      * Checks if all filters are unset (i.e., no filter criteria applied).
      *
      * @returns `true` if no filters are set; `false` otherwise.
      */
     isEmpty() {
-        return !this.hasFilter;
+        return !this.hasFilter();
     }
     /**
      * Internal helper to check if at least one filter is defined.

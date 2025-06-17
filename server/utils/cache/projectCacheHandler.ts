@@ -5,6 +5,7 @@ import { createJsonFileHandler, JsonFileHandler } from '../file/fileHandler.js';
 import { createProjectDataService, ProjectDataService } from '../data/projectDataService.js';
 import { startRedis } from '../../redis/redisClient.js';
 import dotenv from 'dotenv';
+import { HashService } from '../hash/hashService.js';
 dotenv.config();
 
 export async function createProjectCacheHandler() {
@@ -237,6 +238,7 @@ export class ProjectCacheHandler {
         this.updateDate();  //  Refresh internal date used for filename generation.
         const filter = new ProjectFilter(filterOptions);
         this._filter = filter.isEmpty() ? undefined : filter;
+        console.log(`Project Filters: ${this._filter}`);
         
         const filename = this.getFilename({isToday: true, isFiltered: true});
         
@@ -406,6 +408,13 @@ export class ProjectCacheHandler {
         const baseName = isHardBackup ? CACHE.HARD_BACKUP : CACHE.BASE_NAME;
         const dateString = date?.toISOString().split('T')[0] ?? '';
         const filterList = this._filter?.getFilterList() ?? ['nofilter'];
+
+        const hasSearchKey = this._filter !== undefined && this._filter?.hasProjectSearchKey();
+
+        filterList[0] = hasSearchKey 
+            ? HashService.simpleHash(filterList[0]) //  hashed searchkey
+            : filterList[0];  
+
         const filterString = isFiltered ? filterList.join('_') : 'nofilter';
         
         return this._jsonFileHandler.generateFileName(CACHE.AS_JSON, baseName, filterString, dateString);
