@@ -21,7 +21,8 @@ export async function createProjectCacheHandler() {
  */
 export class ProjectCacheHandler {
     private readonly _projectDataService: ProjectDataService;
-    private readonly _jsonFileHandler: JsonFileHandler<IProjectCache>
+    private readonly _jsonFileHandler: JsonFileHandler<IProjectCache>;
+    private _filename: string = '';
     private _jsonCache: IProjectCache | null = null;
     private _filter?: ProjectFilter;
     private _cDate: Date;
@@ -49,7 +50,7 @@ export class ProjectCacheHandler {
      */
     public getCacheLoadTime(): Date {
         this._jsonFileHandler.assertDataNotNull(this._jsonCache);
-        return this._jsonCache!.LoadTime;
+        return this._jsonCache!.AccessTimestamp;
     }
     /**
      * @returns A `ProjectCachePages` object containing the cached pages.
@@ -109,13 +110,21 @@ export class ProjectCacheHandler {
             //  Attempt to retrieve page from cache.
             const cachePages: CachePageRecord = this._jsonCache.CachePages;
 
-            //  If page is not in cache, fetch page from database and add to cache.
             if (this.isPageMissingFromCache(cachePages, pageNumber)) {
-                console.log('Page not in cache. Attempting to add new page...');
+                console.log('Page not in cache.');
+
+                if (this._jsonCache.IsBackup) {
+                    console.log('Cache is a backup and cannot be updated.');
+                    return null;
+                }
+
+                console.log('Attempting to add new page...');
                 //  Returns new page if successful.
                 //  Throws an exception if updating or parsing the cache fails.
                 return await this.setNewJsonCachePage(pageNumber);  
             }
+
+            this._jsonCache.AccessTimestamp = this._cDate;
 
             //  Return the cache page if found in the cache.
             await this.updatePageViewCount(pageNumber);
@@ -162,8 +171,7 @@ export class ProjectCacheHandler {
 
             this._jsonCache.CachePages[pageNumber] = cachePage;
 
-            const fileName: string = this.getFilename({isToday: true, isFiltered: true});
-            await this._jsonFileHandler.writeToJsonFile(process.env.PROJECT_CACHE_PATH!, fileName, this._jsonCache);
+            await this._jsonFileHandler.writeToJsonFile(process.env.PROJECT_CACHE_PATH!, this._filename, this._jsonCache);
             
             console.log('Updated cache successfully. Returning cache page...');
             return cachePage;
@@ -210,9 +218,10 @@ export class ProjectCacheHandler {
         this._jsonFileHandler.assertDataNotNull(this._jsonCache);
         this._jsonCache.CachePages[pageNumber].VisitCount += 1;
 
+        const isFiltered = this._filter ? true : false;
+
         //  throws an exception if update fails.
-        const fileName: string = this.getFilename({isToday: true, isFiltered: true});
-        await this._jsonFileHandler.writeToJsonFile(process.env.PROJECT_CACHE_PATH!, fileName, this._jsonCache);
+        await this._jsonFileHandler.writeToJsonFile(process.env.PROJECT_CACHE_PATH!, this._filename, this._jsonCache);
     }
     //#endregion Cache Page Retrieval
     
@@ -240,11 +249,13 @@ export class ProjectCacheHandler {
         const filter = new ProjectFilter(filterOptions);
         this._filter = filter.isEmpty() ? undefined : filter;
         console.log(this._filter);
+
+        const isFiltered = filter ? true : false;
         
-        const filename = this.getFilename({isToday: true, isFiltered: true});
+        this._filename = this.getFilename({isToday: true, isFiltered: isFiltered});
         
         console.log('Attempting to parse Json cache and store in memory...');
-        let cachedProjects: IProjectCache | null = await this.tryParseOrCreateJsonCache(filename);
+        let cachedProjects: IProjectCache | null = await this.tryParseOrCreateJsonCache();
 
         //  Fallback logic for invalid cache.
         if (!this.cacheHasPages(cachedProjects)) {
@@ -265,11 +276,10 @@ export class ProjectCacheHandler {
      * Tries to read a project cache from a file, and if that fails, attempts to create a new one.
      * Retries creation up to three times if needed.
      *
-     * @param filename - The name of the JSON cache file.
      * @returns The parsed or newly created project cache, or `null` on failure.
      */
-    private async tryParseOrCreateJsonCache(filename: string): Promise<IProjectCache | null> {
-        let cachedProjects: IProjectCache | null = await this.parseJsonCache(filename);
+    private async tryParseOrCreateJsonCache(): Promise<IProjectCache | null> {
+        let cachedProjects: IProjectCache | null = await this.parseJsonCache();
 
         if (this.cacheHasPages(cachedProjects)) {
             return cachedProjects;
@@ -283,7 +293,7 @@ export class ProjectCacheHandler {
             for (let i = 0; i < 3; i++) {
                 console.log(`Attempt no. ${i + 1}`);
 
-                const newCache = await this.tryCreateCache(filename);
+                const newCache = await this.tryCreateCache();
                 
                 if (this.cacheHasPages(newCache)) {
                     console.log('Cache created.');
@@ -300,13 +310,12 @@ export class ProjectCacheHandler {
      * Attempts to create a new project cache with the given filename.
      * If the creation fails, it logs the error and returns `null`.
      *
-     * @param filename The name of the file for the new cache.
      * @returns A Promise that resolves to the created `IProjectCache` object if successful, or `null` if creation fails.
      */
-    private async tryCreateCache(filename: string): Promise<IProjectCache | null> {
+    private async tryCreateCache(): Promise<IProjectCache | null> {
         try {
             //  throws an exception if json creation fails.
-            return await this.createNewJsonCache(filename);
+            return await this.createNewJsonCache();
         }
         catch (err) {
             console.error(`Cache creation failed: ${err}`);
@@ -327,12 +336,13 @@ export class ProjectCacheHandler {
             console.log(`Attempt ${i}...`);
 
             backupDate.setDate(backupDate.getDate() - 1);
-            const backupFileName: string = this.getFilename({date: backupDate});
+            this._filename = this.getFilename({date: backupDate});
 
-            const cachedProjects: IProjectCache | null = await this.parseJsonCache(backupFileName);
+            const cachedProjects: IProjectCache | null = await this.parseJsonCache();
             
             if (this.cacheHasPages(cachedProjects)) {
-                console.log(`Backup loaded. Loading data from ${backupFileName}...`);
+                console.log(`Backup loaded. Loading data from ${this._filename}...`);
+                cachedProjects!.IsBackup = true;
                 return cachedProjects;
             }
             
@@ -340,8 +350,8 @@ export class ProjectCacheHandler {
         }
 
         console.log('Loading cache from recent backups failed. Attempting to parse from weekly backup...');
-        const hardBackupFileName: string = this.getFilename({isHardBackup: true});
-        const hardBackupCache: IProjectCache | null = await this.parseJsonCache(hardBackupFileName, true);
+        this._filename = this.getFilename({isHardBackup: true});
+        const hardBackupCache: IProjectCache | null = await this.parseJsonCache(true);
         if (this.cacheHasPages(hardBackupCache))
             console.log('Weekly backup parsed.');
         else
@@ -351,18 +361,17 @@ export class ProjectCacheHandler {
     /**
      * Asynchronously parses a JSON cache file.
      *
-     * @param fileName The name of the JSON file to parse.
      * @param isHardBackup Optional. If `true`, the file will be looked for in the `DEFAULT_CACHE_PATH`; 
      * otherwise, it will use `PROJECT_CACHE_PATH`. Defaults to `false`.
      * @returns A Promise that resolves to the parsed `IProjectCache` object, or `null` 
      * if the parsing fails or the file is not found.
      */
-    private async parseJsonCache(fileName: string, isHardBackup: boolean = false): Promise<IProjectCache | null> {
+    private async parseJsonCache(isHardBackup: boolean = false): Promise<IProjectCache | null> {
         // Determine the base file path based on whether it's a hard backup.
         const filePath = isHardBackup ? process.env.DEFAULT_CACHE_PATH! : process.env.PROJECT_CACHE_PATH!;
         return await this._jsonFileHandler.parseJsonFile(
                 filePath, 
-                fileName,
+                this._filename,
                 this.reviver
             );
     }
@@ -424,12 +433,11 @@ export class ProjectCacheHandler {
      * @private
      * Attempts to create a new project cache by fetching data from the database and writing it to a file.
      *
-     * @param fileName - The name of the file to write the new cache to.
      * @returns The created project cache.
      * @throws {Error} If cache generation fails or contains no pages.
      */
-    private async createNewJsonCache(fileName: string): Promise<IProjectCache> {
-        console.log(`Attempting to create new cache at ${fileName}`);
+    private async createNewJsonCache(): Promise<IProjectCache> {
+        console.log(`Attempting to create new cache at ${this._filename}`);
         //  Generate a new project cache containing the first 3 pages.
         const projectCache: IProjectCache = await this.generateProjectCache();
 
@@ -441,7 +449,7 @@ export class ProjectCacheHandler {
         //  Throws an error if the writing operation fails.
         return await this._jsonFileHandler.writeToJsonFile(
             process.env.PROJECT_CACHE_PATH!,
-            fileName, 
+            this._filename, 
             projectCache);
     }
     /**
@@ -467,10 +475,11 @@ export class ProjectCacheHandler {
             });
             return cachePages;
         }
-        function createCache(projectsCount: number, cachePages: CachePageRecord): IProjectCache {
+        function createCache(projectsCount: number, date: Date, cachePages: CachePageRecord): IProjectCache {
             return {
                 TotalPages: Math.ceil(projectsCount / CACHE.PAGE_SIZE ),
-                LoadTime: new Date(),
+                AccessTimestamp: date,
+                IsBackup: false,
                 CachePages: cachePages
             };
         }
@@ -488,7 +497,7 @@ export class ProjectCacheHandler {
         //  Assemble cache.
         const projectsCount: number = await this._projectDataService.fetchProjectsCount(this._filter);
         const cachePages: CachePageRecord = createCachePages(pageRecord);
-        const projectCache: IProjectCache = createCache(projectsCount, cachePages);
+        const projectCache: IProjectCache = createCache(projectsCount, this._cDate, cachePages);
         return projectCache;
     }
     /**

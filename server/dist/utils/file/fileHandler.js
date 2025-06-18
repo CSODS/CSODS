@@ -136,6 +136,37 @@ export class JsonFileHandler {
             }
         });
     }
+    deleteJsonFile(filePath, fileName) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let release = null;
+            try {
+                //  Ensure the directory exists. Create it recursively if it doesn't.
+                console.log(`Ensuring directory exists: ${filePath}`);
+                yield fs.mkdir(filePath, { recursive: true });
+                console.log('Directory ensured.');
+                const fullPath = path.join(filePath, fileName);
+                if (existsSync(fullPath)) {
+                    release = yield lockfile.lock(fullPath, { retries: this._retryOptions });
+                    console.log('Lock acqquired.');
+                }
+                //  attempt to write to file.
+                console.log('Attempting to deleted json file...');
+                yield fs.unlink(fullPath);
+                console.log('Json file deleted.');
+                return true;
+            }
+            catch (err) {
+                console.log('Json file failed deleting: ', err);
+                return false;
+            }
+            finally {
+                if (release) {
+                    yield release();
+                    console.log('File lock released.');
+                }
+            }
+        });
+    }
     //#endregion
     //#region .json Utility Methods 
     /**

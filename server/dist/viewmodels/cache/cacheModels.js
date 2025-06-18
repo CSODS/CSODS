@@ -1,19 +1,18 @@
-export class ProjectCache {
-    constructor() {
-        this.TotalPages = 0;
-        this.LoadTime = new Date();
-        this.CachePages = {};
-    }
-    withTotalPages(totalPages) {
-        this.TotalPages = totalPages;
-        return this;
-    }
-    withLoadTime(loadTime) {
-        this.LoadTime = loadTime;
-        return this;
-    }
-    withCachePages(cachePages) {
-        this.CachePages = cachePages;
-        return this;
-    }
-}
+export {};
+// export class ProjectCache implements IProjectCache {
+//     TotalPages: number = 0;
+//     AccessTimestamp: Date = new Date();
+//     CachePages: Record<number, IProjectCachePage> = {}
+//     public withTotalPages(totalPages: number): this {
+//         this.TotalPages = totalPages;
+//         return this;
+//     }
+//     public withLoadTime(loadTime: Date): this {
+//         this.AccessTimestamp = loadTime;
+//         return this;
+//     }
+//     public withCachePages(cachePages: Record<number, IProjectCachePage>) {
+//         this.CachePages = cachePages;
+//         return this;
+//     }
+// }
