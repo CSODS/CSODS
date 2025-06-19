@@ -136,21 +136,28 @@ export class JsonFileHandler {
             }
         });
     }
+    /**
+     * Deletes a JSON file.
+     *
+     * If the file exists, lock the file first.
+     *
+     * Returns true if the file is deleted and false otherwise.
+     *
+     * @param filePath - The directory path where the JSON file is stored.
+     * @param fileName - THe name of the JSON file to delete.
+     * @returns - True if the file is deleted, false otherwise.
+     */
     deleteJsonFile(filePath, fileName) {
         return __awaiter(this, void 0, void 0, function* () {
             let release = null;
+            const fullPath = path.join(filePath, fileName);
             try {
-                //  Ensure the directory exists. Create it recursively if it doesn't.
-                console.log(`Ensuring directory exists: ${filePath}`);
-                yield fs.mkdir(filePath, { recursive: true });
-                console.log('Directory ensured.');
-                const fullPath = path.join(filePath, fileName);
                 if (existsSync(fullPath)) {
                     release = yield lockfile.lock(fullPath, { retries: this._retryOptions });
                     console.log('Lock acqquired.');
                 }
                 //  attempt to write to file.
-                console.log('Attempting to deleted json file...');
+                console.log('Attempting to delete json file...');
                 yield fs.unlink(fullPath);
                 console.log('Json file deleted.');
                 return true;

@@ -15,7 +15,8 @@ export async function createProjectCacheHandler() {
 }
 
 /**
- * Manages the caching of project data, including reading from and writing to JSON files,
+ * @class ProjectCacheHandler
+ * @description Manages the caching of project data, including reading from and writing to JSON files,
  * handling cache pages, and managing backup strategies. This class ensures efficient
  * retrieval of project data by utilizing an in-memory cache and persistent JSON storage.
  */
@@ -45,14 +46,16 @@ export class ProjectCacheHandler {
         return this._jsonCache!.TotalPages;
     }
     /**
+     * @public
      * @returns A `Date` object representing the cache's load time.
      * @throws {Error} If the JSON cache is not loaded.
      */
     public getCacheLoadTime(): Date {
         this._jsonFileHandler.assertDataNotNull(this._jsonCache);
-        return this._jsonCache!.AccessTimestamp;
+        return this._jsonCache!.LastAccessed;
     }
     /**
+     * @public
      * @returns A `ProjectCachePages` object containing the cached pages.
      * @throws {Error} If the JSON cache is not loaded.
      */
@@ -61,13 +64,15 @@ export class ProjectCacheHandler {
         return this._jsonCache!.CachePages;
     }
     /**
-     * Updates the internal current date (`_cDate`) to the current system date and time.
+     * @public
+     * @description Updates the internal current date (`_cDate`) to the current system date and time.
      */
     public updateDate(): void {
         this._cDate = new Date();
     }
     /**
-     * Retrieves a project by page number and project ID.
+     * @public
+     * @description Retrieves a project by page number and project ID.
      *
      * @param pageNumber The page number to search.
      * @param projectId The ID of the project to retrieve.
@@ -79,7 +84,8 @@ export class ProjectCacheHandler {
     }
     //#region Cache Page Retrieval
     /**
-     * Retrieves a specific page of project data from the cache.
+     * @public
+     * @description Retrieves a specific page of project data from the cache.
      *
      * If the requested page exists in the in-memory cache, it returns it directly.
      * If the page is not present, it fetches the page from the database via the `ProjectRepository`,
@@ -124,7 +130,7 @@ export class ProjectCacheHandler {
                 return await this.setNewJsonCachePage(pageNumber);  
             }
 
-            this._jsonCache.AccessTimestamp = this._cDate;
+            this._jsonCache.LastAccessed = this._cDate;
 
             //  Return the cache page if found in the cache.
             await this.updatePageViewCount(pageNumber);
@@ -140,7 +146,8 @@ export class ProjectCacheHandler {
     }
     /**
      * @private
-     * Fetches a page from the database, adds it to the cache, and writes the updated cache to disk.
+     * @description Fetches a page from the database, adds it to the cache, and writes the updated 
+     * cache to disk.
      *
      * @param pageNumber - The page number to fetch and add.
      * @returns The newly cached page.
@@ -189,7 +196,7 @@ export class ProjectCacheHandler {
     }
     /**
      * @private
-     * Checks whether a given page number exists in the cache.
+     * @description Checks whether a given page number exists in the cache.
      *
      * @param cachePages - The current cache pages.
      * @param pageNumber - The page number to verify.
@@ -199,10 +206,13 @@ export class ProjectCacheHandler {
         return !Object.keys(cachePages).includes(pageNumber.toString());
     }
     /**
-     * Increments the visit count for a specific page number within the in-memory cache and persists the updated cache to a JSON file.
+     * @private
+     * @description Increments the visit count for a specific page number within the in-memory cache 
+     * and persists the updated cache to a JSON file.
      *
      * This method first ensures that the JSON cache (`_jsonCache`) is not null. It then attempts to:
-     * 1. Increment the `VisitCount` property of the specified `pageNumber` within the `CachePages` object in the in-memory cache.
+     * 1. Increment the `VisitCount` property of the specified `pageNumber` within the `CachePages` object in the 
+     * in-memory cache.
      * 2. Generate a unique filename for the cache file using a base name and the current date.
      * 3. Asynchronously write the entire updated cache object to the designated JSON file path.
      *
@@ -227,7 +237,8 @@ export class ProjectCacheHandler {
     
     //#region Cache Retrieval
     /**
-     * Loads the project cache based on the current date and optional filter criteria.
+     * @public
+     * @description Loads the project cache based on the current date and optional filter criteria.
      * 
      * This method first updates the internal date state (`_cDate`) and initializes the filter 
      * (if provided) as a `ProjectFilter` instance. It then attempts to load the cache from a 
@@ -273,7 +284,7 @@ export class ProjectCacheHandler {
     }
     /**
      * @private
-     * Tries to read a project cache from a file, and if that fails, attempts to create a new one.
+     * @description Tries to read a project cache from a file, and if that fails, attempts to create a new one.
      * Retries creation up to three times if needed.
      *
      * @returns The parsed or newly created project cache, or `null` on failure.
@@ -307,7 +318,8 @@ export class ProjectCacheHandler {
         return null;
     }
     /**
-     * Attempts to create a new project cache with the given filename.
+     * @private
+     * @description Attempts to create a new project cache with the given filename.
      * If the creation fails, it logs the error and returns `null`.
      *
      * @returns A Promise that resolves to the created `IProjectCache` object if successful, or `null` if creation fails.
@@ -324,7 +336,7 @@ export class ProjectCacheHandler {
     }    
     /**
      * @private
-     * Reads a backup JSON cache from the last 3 days or a fallback weekly backup if available.
+     * @description Reads a backup JSON cache from the last 3 days or a fallback weekly backup if available.
      *
      * @param cDate - The current date used to determine backup file names.
      * @returns A valid cache from backups or `null` if all attempts fail.
@@ -359,7 +371,8 @@ export class ProjectCacheHandler {
         return hardBackupCache;
     }
     /**
-     * Asynchronously parses a JSON cache file.
+     * @private
+     * @description Asynchronously parses a JSON cache file.
      *
      * @param isHardBackup Optional. If `true`, the file will be looked for in the `DEFAULT_CACHE_PATH`; 
      * otherwise, it will use `PROJECT_CACHE_PATH`. Defaults to `false`.
@@ -377,20 +390,22 @@ export class ProjectCacheHandler {
     }
     /**
      * @private
-     * Revives certain fields (e.g., converts 'LoadTime' string back into a Date).
+     * @description Revives certain fields (e.g., converts 'CreatedOn' string back into a Date).
      *
      * @param key - The property name.
      * @param value - The property value.
      * @returns The transformed value.
      */
     private reviver(key: string, value: any) {
-        if (key === 'LoadTime' && typeof value === 'string') {
+        const isDateKey = key === 'CreatedOn' || key === 'LastAccessed';
+        if (isDateKey && typeof value === 'string') {
             return new Date(value);
         }
         return value;
     }
     /**
-     * Generates a JSON cache filename based on backup type, date, and optional filters.
+     * @private
+     * @description Generates a JSON cache filename based on backup type, date, and optional filters.
      *
      * The filename format typically includes:
      * - A base name (`CACHE.BASE_NAME` or `CACHE.HARD_BACKUP`)
@@ -431,7 +446,7 @@ export class ProjectCacheHandler {
     }
     /**
      * @private
-     * Attempts to create a new project cache by fetching data from the database and writing it to a file.
+     * @description Attempts to create a new project cache by fetching data from the database and writing it to a file.
      *
      * @returns The created project cache.
      * @throws {Error} If cache generation fails or contains no pages.
@@ -454,7 +469,7 @@ export class ProjectCacheHandler {
     }
     /**
      * @private
-     * Fetches and assembles an initial in-memory project cache with the first three pages and total count.
+     * @description Fetches and assembles an initial in-memory project cache with the first three pages and total count.
      *
      * @returns The generated in-memory project cache.
      */
@@ -478,7 +493,8 @@ export class ProjectCacheHandler {
         function createCache(projectsCount: number, date: Date, cachePages: CachePageRecord): IProjectCache {
             return {
                 TotalPages: Math.ceil(projectsCount / CACHE.PAGE_SIZE ),
-                AccessTimestamp: date,
+                CreatedOn: date,
+                LastAccessed: date,
                 IsBackup: false,
                 CachePages: cachePages
             };
@@ -502,7 +518,7 @@ export class ProjectCacheHandler {
     }
     /**
      * @private
-     * Checks if the cache object is not null and contains at least one page.
+     * @description Checks if the cache object is not null and contains at least one page.
      *
      * @param cache - The project cache to check.
      * @returns `true` if the cache is not null and has pages, otherwise `false`.

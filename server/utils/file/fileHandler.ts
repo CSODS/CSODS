@@ -145,6 +145,42 @@ export class JsonFileHandler<TModel> {
             }
         }
     }
+    /**
+     * Deletes a JSON file.
+     * 
+     * If the file exists, lock the file first. 
+     * 
+     * Returns true if the file is deleted and false otherwise.
+     * 
+     * @param filePath - The directory path where the JSON file is stored.
+     * @param fileName - THe name of the JSON file to delete.
+     * @returns - True if the file is deleted, false otherwise.
+     */
+    public async deleteJsonFile(filePath: string, fileName: string): Promise<boolean> {
+        let release: (() => Promise<void>) | null = null;
+        const fullPath = path.join(filePath, fileName);
+        
+        try {            
+            if (existsSync(fullPath)) {
+                release = await lockfile.lock(fullPath, {retries: this._retryOptions});
+                console.log('Lock acqquired.');                
+            }
+
+            //  attempt to write to file.
+            console.log('Attempting to delete json file...');
+            await fs.unlink(fullPath);
+            console.log('Json file deleted.');
+            return true;
+        } catch (err) {
+            console.log('Json file failed deleting: ', err);
+            return false;
+        } finally {
+            if (release) {
+                await release();
+                console.log('File lock released.');
+            }
+        }
+    }
     //#endregion
     
     //#region .json Utility Methods 
@@ -178,4 +214,18 @@ export class JsonFileHandler<TModel> {
         return `${fileName}.${fileExtension}`;
     }
     //#endregion
+}
+
+/**
+ * Represents a file with its path and name.
+ */
+export interface IFile {
+    /**
+     * The file path leading to the file's directory.
+     */
+    Filepath: string,
+    /**
+     * The file name including it's extension (e.g. .json, .txt)
+     */
+    Filename: string
 }

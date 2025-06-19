@@ -15,18 +15,21 @@ describe('fileHandler', () => __awaiter(void 0, void 0, void 0, function* () {
     const _date = new Date();
     const _dataRead = {
         TotalPages: 0,
-        AccessTimestamp: _date,
+        CreatedOn: _date,
+        LastAccessed: _date,
         IsBackup: true,
         CachePages: {}
     };
     const _dataWrite = {
         TotalPages: 5,
-        AccessTimestamp: _date,
+        LastAccessed: _date,
+        CreatedOn: _date,
         IsBackup: true,
         CachePages: {}
     };
     const _mockData = (i) => ({
-        AccessTimestamp: new Date(),
+        LastAccessed: new Date(),
+        CreatedOn: _date,
         TotalPages: i,
         IsBackup: true,
         CachePages: {},
