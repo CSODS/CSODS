@@ -1,10 +1,10 @@
-import { ICache } from "../../viewmodels/cache/cacheInterfaces";
-import { JsonFileHandler, IFile } from "../file/fileHandler";
+import { ICache } from "../../viewmodels/cache/cacheInterfaces.js";
+import { JsonFileHandler, IFile } from "../file/fileHandler.js";
 
 
-export class CacheEvictionHandler<TCache extends ICache> {
-    private _jsonFileHandler: JsonFileHandler<TCache>;
-    private _defaultEvictionOptions: IEvictionOptions;
+export class BaseCacheEvictor<TCache extends ICache> {
+    protected readonly _jsonFileHandler: JsonFileHandler<TCache>;
+    protected _defaultEvictionOptions: IEvictionOptions;
 
     public constructor(
         jsonFileHandler: JsonFileHandler<TCache>, 
@@ -14,7 +14,6 @@ export class CacheEvictionHandler<TCache extends ICache> {
         this._jsonFileHandler = jsonFileHandler;
         this._defaultEvictionOptions = this.normalizeEvictionOptions(defaultEvictionOptions);
     }
-    
     /**
      * @public
      * @description Forcefully evicts a cache from memory.
@@ -27,6 +26,7 @@ export class CacheEvictionHandler<TCache extends ICache> {
     public async forceEvict(file: IFile): Promise<boolean> {
         return await this.deleteFile(file);
     }
+    //#region tryEvict logic
     /**
      * @public
      * @description Attempts to read then evict a cache with an optional evictionOptions parameter.
@@ -37,7 +37,7 @@ export class CacheEvictionHandler<TCache extends ICache> {
      * @param {IEvictionOptions} evictionOptions - see IEvictionOptions for details.
      * @returns {boolean} True if the file is sucessfully evicted, false if not or if the data is null.
      */
-    public async tryEvictCache(file: IFile, evictionOptions?: IEvictionOptions): Promise<boolean> {
+    public async tryEvict(file: IFile, evictionOptions?: IEvictionOptions): Promise<boolean> {
         const data = await this.readFile(file);
 
         if(data && await this.isEvict(data, evictionOptions)) {
@@ -46,7 +46,7 @@ export class CacheEvictionHandler<TCache extends ICache> {
         return false;
     }
     /**
-     * @private
+     * @protected
      * @description Helper function for reading a file with a provided filepath and filename throug
      * JsonFileHandler.
      * 
@@ -54,7 +54,7 @@ export class CacheEvictionHandler<TCache extends ICache> {
      * @returns {Promise<TCache | null>} - A promise that resolves to the data inside the file if
      * successfully read, null otherwise.
      */
-    private async readFile(file: IFile): Promise<TCache | null> {
+    protected async readFile(file: IFile): Promise<TCache | null> {
         const filepath = file.Filepath;
         const filename = file.Filename;
 
@@ -67,6 +67,23 @@ export class CacheEvictionHandler<TCache extends ICache> {
 
         return data;
     }
+    /**
+     * @protected
+     * @description Revives certain fields (e.g., converts 'CreatedOn' string back into a Date).
+     *
+     * @param {string} key - The property name.
+     * @param {any} value - The property value.
+     * @returns {any} The transformed value.
+     */
+    protected reviver(key: string, value: any) {
+        const isDateKey = key === 'CreatedOn' || key === 'LastAccessed';
+        if (isDateKey && typeof value === 'string') {
+            return new Date(value);
+        }
+        return value;
+    }
+
+    //#region eviction verification
     /**
      * @public
      * @description Verifies if the data is up for eviction with an optional evictionOptions parameter.
@@ -95,19 +112,19 @@ export class CacheEvictionHandler<TCache extends ICache> {
                 console.log('Verifying if cache is up for eviction by lfu strategy.');
                 return this.verifyEvictByLfu(data, evictionOptions);
             default:
-                console.log(`Unknown eviction strategy: ${evictionOptions.Strategy}`);
+                console.warn(`Unknown eviction strategy: ${evictionOptions.Strategy}`);
                 return false;
         }
     }
     /**
-     * @private
+     * @protected
      * @description Normalizes the provided eviction options, applying default values where unassigned.
      * 
      * @param {IEvictionOptions} [evictionOptions] - The eviction options to normalize. If not provided,
      * the method uses `this._defaultEvictionOptions` as the base.
      * @returns {IEvictionOptions} The normalized eviction options.
      */
-    private normalizeEvictionOptions(evictionOptions?: IEvictionOptions): IEvictionOptions {
+    protected normalizeEvictionOptions(evictionOptions?: IEvictionOptions): IEvictionOptions {
         const base = evictionOptions ?? this._defaultEvictionOptions;
         return {
             Strategy: base.Strategy,
@@ -117,20 +134,20 @@ export class CacheEvictionHandler<TCache extends ICache> {
         }
     }
     /**
-     * @private
+     * @protected
      * @description Verifies if a cache entry should be evicted based on the Time-to-Live (TTL) strategy.
      * 
      * @param {TCache} data - The cache entry to check. It is assumed that `data` has a `LastAccessed` property which is a Date object.
      * @param {IEvictionOptions} evictionOptions - The eviction options, specifically expecting `Duration` to be defined for this strategy.
      * @returns {boolean} `true` if the cache entry has expired based on its last access time and the configured duration, `false` otherwise.
      */
-    private verifyEvictByTtl(data: TCache, evictionOptions: IEvictionOptions): boolean {
+    protected verifyEvictByTtl(data: TCache, evictionOptions: IEvictionOptions): boolean {
         const now = new Date().valueOf();
         const isExpired = (now - data.LastAccessed.valueOf()) > evictionOptions.Duration!
         return isExpired;
     }
     /**
-     * @private
+     * @protected
      * @description Verifies if a cache entry should be evicted based on the Least Frequently Used (LFU) strategy.
      * 
      * @param {TCache} data - The cache entry to check.
@@ -138,47 +155,33 @@ export class CacheEvictionHandler<TCache extends ICache> {
      * @returns {boolean} `true` if the cache entry should be evicted based on LFU criteria, `false` otherwise.
      * @todo Implement the LFU eviction logic based on `data`'s view count and `evictionOptions.ViewThreshold`.
      */
-    private verifyEvictByLfu(data: TCache, evictionOptions: IEvictionOptions): boolean {
+    protected verifyEvictByLfu(data: TCache, evictionOptions: IEvictionOptions): boolean {
         //  to follow.
         return false;
     }
+    //#endregion eviction verification
+
+    //#endregion tryEvict Logic
 
     /**
-     * @private
-     * @description Revives certain fields (e.g., converts 'CreatedOn' string back into a Date).
-     *
-     * @param {string} key - The property name.
-     * @param {any} value - The property value.
-     * @returns {any} The transformed value.
-     */
-    private reviver(key: string, value: any) {
-        const isDateKey = key === 'CreatedOn' || key === 'LastAccessed';
-        if (isDateKey && typeof value === 'string') {
-            return new Date(value);
-        }
-        return value;
-    }
-
-    /**
-     * @private
+     * @protected
      * @description Helper function for deleting a file and improved readabiltiy.
      * 
      * @param {IFile} file - The file's path and name used for identifying the file to be deleted.
      * @returns {boolean} True if the file is successfully deleted, false if not.
      */
-    private async deleteFile(file: IFile) : Promise<boolean>
+    protected async deleteFile(file: IFile) : Promise<boolean>
     {
         const filepath = file.Filepath;
         const filename = file.Filename;
         return await this._jsonFileHandler.deleteJsonFile(filepath, filename);
     }
 }
-
 /**
  * @interface IEvictionOptions
  * @description Defines options for cache eviction strategies.
  */
-interface IEvictionOptions {
+export interface IEvictionOptions {
     /**
      * The eviction strategy.
      * 

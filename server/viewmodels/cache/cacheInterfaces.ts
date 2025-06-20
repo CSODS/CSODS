@@ -30,11 +30,7 @@ export type CachePageRecord = Record<number, IProjectCachePage>;
 /**
  * Represents a cached page of projects within the ProjectCache.
  */
-export interface IProjectCachePage {
-    /**
-     * The number of times that the page has been visited.
-     */
-    VisitCount: number;
+export interface IProjectCachePage extends ICache{
     /**
      * The project list associated with this page.
      */
@@ -140,6 +136,10 @@ export interface ICache {
      * The timestamp when this cache was last loaded or refreshed.
      */
     LastAccessed: Date;
+    /**
+     * 
+     */
+    ViewCount: number;
 }
 
 //#endregion

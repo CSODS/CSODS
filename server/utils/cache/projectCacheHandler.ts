@@ -130,8 +130,6 @@ export class ProjectCacheHandler {
                 return await this.setNewJsonCachePage(pageNumber);  
             }
 
-            this._jsonCache.LastAccessed = this._cDate;
-
             //  Return the cache page if found in the cache.
             await this.updatePageViewCount(pageNumber);
             console.log('Page found in cache. Returning cache page...');
@@ -147,7 +145,7 @@ export class ProjectCacheHandler {
     /**
      * @private
      * @description Fetches a page from the database, adds it to the cache, and writes the updated 
-     * cache to disk.
+     * cache to disk. Also updates the 'LastAccessed' and 'VisitCount' property of the ProjectsCache.
      *
      * @param pageNumber - The page number to fetch and add.
      * @returns The newly cached page.
@@ -172,10 +170,14 @@ export class ProjectCacheHandler {
             
             //  Assemble cache page.
             const cachePage: IProjectCachePage = {
-                VisitCount: 1,
+                CreatedOn: this._cDate,
+                LastAccessed: this._cDate,
+                ViewCount: 1,
                 Projects: projects
             };
 
+            this._jsonCache.LastAccessed = this._cDate;
+            this._jsonCache.ViewCount += 1;
             this._jsonCache.CachePages[pageNumber] = cachePage;
 
             await this._jsonFileHandler.writeToJsonFile(process.env.PROJECT_CACHE_PATH!, this._filename, this._jsonCache);
@@ -211,10 +213,9 @@ export class ProjectCacheHandler {
      * and persists the updated cache to a JSON file.
      *
      * This method first ensures that the JSON cache (`_jsonCache`) is not null. It then attempts to:
-     * 1. Increment the `VisitCount` property of the specified `pageNumber` within the `CachePages` object in the 
-     * in-memory cache.
-     * 2. Generate a unique filename for the cache file using a base name and the current date.
-     * 3. Asynchronously write the entire updated cache object to the designated JSON file path.
+     * 1. Increment the `VisitCount` and `LastAccessed` property of the _jsonCache and the specified 
+     * `pageNumber` within the `CachePages` object in the in-memory cache.
+     * 2. Asynchronously write the entire updated cache object to the designated JSON file path.
      *
      * If any error occurs during the cache update or file writing process, the original exception is caught
      * and re-thrown as a new `Error` to propagate the failure.
@@ -226,8 +227,10 @@ export class ProjectCacheHandler {
     private async updatePageViewCount(pageNumber: number): Promise<void> {
         //  Throws TypeError if data is null.
         this._jsonFileHandler.assertDataNotNull(this._jsonCache);
-        this._jsonCache.CachePages[pageNumber].VisitCount += 1;
-
+        this._jsonCache.LastAccessed = this._cDate;
+        this._jsonCache.ViewCount += 1;
+        this._jsonCache.CachePages[pageNumber].LastAccessed = this._cDate;
+        this._jsonCache.CachePages[pageNumber].ViewCount += 1;
         const isFiltered = this._filter ? true : false;
 
         //  throws an exception if update fails.
@@ -475,18 +478,20 @@ export class ProjectCacheHandler {
      */
     private async generateProjectCache(): Promise<IProjectCache> {
         //  Define page and cache creation utils.
-        function createCachePage(projects: IProjectDetails[]): IProjectCachePage {
+        function createCachePage(date: Date, projects: IProjectDetails[]): IProjectCachePage {
             return {
-                VisitCount: 0,
+                CreatedOn: date,
+                LastAccessed: date,
+                ViewCount: 0,
                 Projects: projects
             };
         }
-        function createCachePages(pageRecord: Record<number, IProjectDetails[]>): CachePageRecord {
+        function createCachePages(date: Date, pageRecord: Record<number, IProjectDetails[]>): CachePageRecord {
             let cachePages: CachePageRecord = {};
             const recordEntries = Object.entries(pageRecord);
             recordEntries.map((keyPagePair) => {
                 const numericKey = Number(keyPagePair[0]);
-                cachePages[numericKey] = createCachePage(keyPagePair[1])
+                cachePages[numericKey] = createCachePage(date, keyPagePair[1])
             });
             return cachePages;
         }
@@ -495,6 +500,7 @@ export class ProjectCacheHandler {
                 TotalPages: Math.ceil(projectsCount / CACHE.PAGE_SIZE ),
                 CreatedOn: date,
                 LastAccessed: date,
+                ViewCount: 0,
                 IsBackup: false,
                 CachePages: cachePages
             };
@@ -512,7 +518,7 @@ export class ProjectCacheHandler {
 
         //  Assemble cache.
         const projectsCount: number = await this._projectDataService.fetchProjectsCount(this._filter);
-        const cachePages: CachePageRecord = createCachePages(pageRecord);
+        const cachePages: CachePageRecord = createCachePages(this._cDate, pageRecord);
         const projectCache: IProjectCache = createCache(projectsCount, this._cDate, cachePages);
         return projectCache;
     }

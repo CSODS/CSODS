@@ -36,6 +36,31 @@ export class JsonFileHandler<TModel> {
     //#region .json CRUD
 
     /**
+     * @public
+     * @description
+     * Retrieves a list of filenames of all files existing in a directory.
+     * @param directory 
+     * @returns 
+     */
+    public async getDirectoryFilenames(directory: string): Promise<string[]> {
+        console.log(`Attempting to access directory ${directory}`);
+
+        if (!existsSync(directory)) {
+            console.warn('Directory does not exist');
+            return [];
+        }
+
+        try {
+            const filenames = await fs.readdir(directory);
+            return filenames;
+        }
+        catch (err) {
+            console.error('Error retrieving directory filenames: ', err);
+            return [];
+            }
+    }
+
+    /**
      * Reads and parses a JSON file from the specified path into an object of type `TModel`.
      *
      * If the file does not exist or cannot be parsed due to an error, the method returns `null`.
@@ -167,7 +192,7 @@ export class JsonFileHandler<TModel> {
             }
 
             //  attempt to write to file.
-            console.log('Attempting to delete json file...');
+            console.log(`Attempting to delete ${fileName}...`);
             await fs.unlink(fullPath);
             console.log('Json file deleted.');
             return true;
