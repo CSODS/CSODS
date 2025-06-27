@@ -15,17 +15,26 @@ describe('fileHandler', () => __awaiter(void 0, void 0, void 0, function* () {
     const _date = new Date();
     const _dataRead = {
         TotalPages: 0,
-        LoadTime: _date,
+        CreatedOn: _date,
+        LastAccessed: _date,
+        ViewCount: 0,
+        IsBackup: true,
         CachePages: {}
     };
     const _dataWrite = {
         TotalPages: 5,
-        LoadTime: _date,
+        CreatedOn: _date,
+        LastAccessed: _date,
+        ViewCount: 0,
+        IsBackup: true,
         CachePages: {}
     };
     const _mockData = (i) => ({
-        LoadTime: new Date(),
         TotalPages: i,
+        CreatedOn: _date,
+        LastAccessed: new Date(),
+        ViewCount: 0,
+        IsBackup: true,
         CachePages: {},
     });
     const reviver = (key, value) => {

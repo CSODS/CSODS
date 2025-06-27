@@ -8,15 +8,15 @@ import * as tableTypes from "../dbModels.js";
  * This interface represents the structure used to cache paginated project data,
  * enabling efficient retrieval and display in a paginated view.
  */
-export interface IProjectCache {
+export interface IProjectCache extends ICache {
     /**
      * The total number of available pages of projects.
      */
     TotalPages: number;
     /**
-     * The timestamp when this cache was last loaded or refreshed.
+     * Flags if the cache is a backup cache.
      */
-    LoadTime: Date;
+    IsBackup: boolean,
     /**
      * A mapping of page numbers to CachePage objects.
      * Each key is a page number, and the corresponding value is a CachePage instance 
@@ -30,11 +30,7 @@ export type CachePageRecord = Record<number, IProjectCachePage>;
 /**
  * Represents a cached page of projects within the ProjectCache.
  */
-export interface IProjectCachePage {
-    /**
-     * The number of times that the page has been visited.
-     */
-    VisitCount: number;
+export interface IProjectCachePage extends ICache{
     /**
      * The project list associated with this page.
      */
@@ -93,6 +89,22 @@ export interface IProjectTags {
 
 //#endregion ProjectsCache
 
+//#region SearchCache
+
+export interface ISearchMap {
+    Projects: ProjectSearchRecord
+}
+
+export type ProjectSearchRecord = Record<string, IProjectSearchCache>;
+
+export interface IProjectSearchCache {
+    SearchHash: string;
+    SearchCount: number;
+    SearchDate: Date;
+}
+
+//#endregion SearchCache
+
 //#region UserCache
 
 /**
@@ -108,3 +120,26 @@ export interface IUserCache {
 }
 
 //#endregion UserCache
+
+//#region ICache
+
+/**
+ * @interface ICache
+ * @description Represents the basic structure for a cache entry, including metadata about its creation and last access time.
+ */
+export interface ICache {
+    /**
+     * The timestamp when the cache was created.
+     */
+    CreatedOn: Date;
+    /**
+     * The timestamp when this cache was last loaded or refreshed.
+     */
+    LastAccessed: Date;
+    /**
+     * 
+     */
+    ViewCount: number;
+}
+
+//#endregion

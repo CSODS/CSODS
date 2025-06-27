@@ -39,6 +39,30 @@ export class JsonFileHandler {
     }
     //#region .json CRUD
     /**
+     * @public
+     * @description
+     * Retrieves a list of filenames of all files existing in a directory.
+     * @param directory
+     * @returns
+     */
+    getDirectoryFilenames(directory) {
+        return __awaiter(this, void 0, void 0, function* () {
+            console.log(`Attempting to access directory ${directory}`);
+            if (!existsSync(directory)) {
+                console.warn('Directory does not exist');
+                return [];
+            }
+            try {
+                const filenames = yield fs.readdir(directory);
+                return filenames;
+            }
+            catch (err) {
+                console.error('Error retrieving directory filenames: ', err);
+                return [];
+            }
+        });
+    }
+    /**
      * Reads and parses a JSON file from the specified path into an object of type `TModel`.
      *
      * If the file does not exist or cannot be parsed due to an error, the method returns `null`.
@@ -127,6 +151,44 @@ export class JsonFileHandler {
             catch (err) {
                 console.error('Error writing cache: ', err);
                 throw err;
+            }
+            finally {
+                if (release) {
+                    yield release();
+                    console.log('File lock released.');
+                }
+            }
+        });
+    }
+    /**
+     * Deletes a JSON file.
+     *
+     * If the file exists, lock the file first.
+     *
+     * Returns true if the file is deleted and false otherwise.
+     *
+     * @param filePath - The directory path where the JSON file is stored.
+     * @param fileName - THe name of the JSON file to delete.
+     * @returns - True if the file is deleted, false otherwise.
+     */
+    deleteJsonFile(filePath, fileName) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let release = null;
+            const fullPath = path.join(filePath, fileName);
+            try {
+                if (existsSync(fullPath)) {
+                    release = yield lockfile.lock(fullPath, { retries: this._retryOptions });
+                    console.log('Lock acqquired.');
+                }
+                //  attempt to write to file.
+                console.log(`Attempting to delete ${fileName}...`);
+                yield fs.unlink(fullPath);
+                console.log('Json file deleted.');
+                return true;
+            }
+            catch (err) {
+                console.log('Json file failed deleting: ', err);
+                return false;
             }
             finally {
                 if (release) {

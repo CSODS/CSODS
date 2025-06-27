@@ -15,7 +15,7 @@ projectsRouter.get(PROJECT_ROUTES.LOAD_PROJECTS, (req, res) => __awaiter(void 0,
     const projectCacheHandler = req.projectCacheHandler;
     const filter = assembleFilter(req);
     yield projectCacheHandler.setProjectsCache(filter);
-    res.json(projectCacheHandler.getCachePages());
+    res.json(projectCacheHandler.getJsonCache());
 }));
 /**
  * GET @see PROJECT_ROUTES.BY_PAGE for the route's address.
