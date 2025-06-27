@@ -92,11 +92,6 @@ export class BaseCacheEvictor<TCache extends ICache> {
      * @param {TCache} data - The data subject to eviction.
      * @param {IEvictionOptions} evictionOptions - The eviction options to be used for determining if data is up for eviction.
      * 
-     * Contains the following fields:
-     * - `Strategy` - The eviction strategy.
-     * - `Duration` - Specifies the duration in milliseconds before the next eviction.
-     * - `Granularity` - Specifies how often the program checks if the data is up for eviction.
-     * - `Threshold` - Specifies the minimum views that the data must have in order to avoid eviction.
      * @returns - True if data is up for eviction, false if not or if an unknown eviction strategy is
      * used in the evictionOptions.
      */
@@ -111,6 +106,12 @@ export class BaseCacheEvictor<TCache extends ICache> {
             case 'lfu':
                 console.log('Verifying if cache is up for eviction by lfu strategy.');
                 return this.verifyEvictByLfu(data, evictionOptions);
+            case 'ttl+lfu':
+                console.log('Verifying if cache is up for eviction by ttl+lfu strategy.');
+                const isEvictByTtl = this.verifyEvictByTtl(data, evictionOptions);
+                const isEvictByLfu = this.verifyEvictByLfu(data, evictionOptions);
+                const isEvictFinal = isEvictByTtl && isEvictByLfu;
+                return isEvictFinal;
             default:
                 console.warn(`Unknown eviction strategy: ${evictionOptions.Strategy}`);
                 return false;
@@ -135,29 +136,54 @@ export class BaseCacheEvictor<TCache extends ICache> {
     }
     /**
      * @protected
-     * @description Verifies if a cache entry should be evicted based on the Time-to-Live (TTL) strategy.
+     * @description 
+     * Determines whether a cache entry should be evicted based on the Time-to-Live (TTL) strategy.
+     * 
+     * This method checks if the time elapsed since the entry's `LastAccessed` timestamp exceeds
+     * the specified TTL duration. If either the timestamp is invalid or the eviction options
+     * are malformed, the method defaults to evicting the entry as a fail-safe.
      * 
      * @param {TCache} data - The cache entry to check. It is assumed that `data` has a `LastAccessed` property which is a Date object.
      * @param {IEvictionOptions} evictionOptions - The eviction options, specifically expecting `Duration` to be defined for this strategy.
      * @returns {boolean} `true` if the cache entry has expired based on its last access time and the configured duration, `false` otherwise.
      */
     protected verifyEvictByTtl(data: TCache, evictionOptions: IEvictionOptions): boolean {
+        const { LastAccessed } = data;
+        const { Duration } = evictionOptions;
+
+        if (!LastAccessed || !(LastAccessed instanceof Date) || typeof Duration !== 'number') {
+            //  Fail-safe for invalid date in the cache or malformed eviction options.
+            return true;
+        }
+
         const now = new Date().valueOf();
-        const isExpired = (now - data.LastAccessed.valueOf()) > evictionOptions.Duration!
+        const isExpired = (now - LastAccessed.valueOf()) > Duration;
         return isExpired;
     }
     /**
      * @protected
-     * @description Verifies if a cache entry should be evicted based on the Least Frequently Used (LFU) strategy.
+     * @description
+     * Determines whether a cache entry should be evicted based on the Least Frequently Used (LFU) strategy.
      * 
-     * @param {TCache} data - The cache entry to check.
-     * @param {IEvictionOptions} evictionOptions - The eviction options.
-     * @returns {boolean} `true` if the cache entry should be evicted based on LFU criteria, `false` otherwise.
-     * @todo Implement the LFU eviction logic based on `data`'s view count and `evictionOptions.ViewThreshold`.
+     * This method checks if the entry's view count is less than or equal to the configured `ViewThreshold`.
+     * If the view count is missing or the eviction options are malformed, the entry will be evicted by default
+     * as a safety measure.
+     * 
+     * @param {TCache} data - The cache entry to evaluate. Must include a numeric `ViewCount` property.
+     * @param {IEvictionOptions} evictionOptions - The LFU eviction options. Must include a numeric `ViewThreshold`.
+     * 
+     * @returns {boolean} `true` if the entry should be evicted based on view count or due to invalid inputs, `false` otherwise.
      */
     protected verifyEvictByLfu(data: TCache, evictionOptions: IEvictionOptions): boolean {
-        //  to follow.
-        return false;
+        const { ViewCount } = data;
+        const { ViewThreshold } = evictionOptions;
+
+        if (typeof ViewCount !== 'number' || typeof ViewThreshold !== 'number') {
+            //  Fail-safe for invalid view count in the cache or malformed eviction options.
+            return true;
+        }
+        const isLfu = ViewCount <= ViewThreshold;
+        return isLfu;
     }
     //#endregion eviction verification
 
@@ -180,6 +206,21 @@ export class BaseCacheEvictor<TCache extends ICache> {
 /**
  * @interface IEvictionOptions
  * @description Defines options for cache eviction strategies.
+ * 
+ * Fields:
+ * - `Strategy` (required): Determines the eviction strategy to use.
+ *    - `'ttl'` (Time-To-Live): Evicts items older than a specified duration.
+ *    - `'lfu'` (Least Frequently Used): Evicts items with low usage frequency.
+ *    - `ttl+lfu` (Time-To-Live + Least Frequently Used) - Combination of ttl and lfu.
+ * 
+ * - `Duration` (optional): Used in both `ttl` and `lfu`. Specifies the duration (in milliseconds)
+ *   before an item becomes eligible for eviction.
+ * 
+ * - `Granularity` (optional): Used in both `ttl` and `lfu`. Specifies how often (in milliseconds)
+ *   eviction checks are performed.
+ * 
+ * - `ViewThreshold` (optional): Used only in `lfu`. Sets the minimum view count threshold—items
+ *   below this value may be evicted.
  */
 export interface IEvictionOptions {
     /**
@@ -188,8 +229,9 @@ export interface IEvictionOptions {
      * Possible values include
      * - `ttl` - Time to live.
      * - `lfu` - Least frequently used.
+     * - `ttl+lfu` - Combination of ttl and lfu.
      */
-    Strategy: 'ttl' | 'lfu',
+    Strategy: 'ttl' | 'lfu' | 'ttl+lfu',
     /**
      * Used for both ttl and lfu.
      * Specifies the duration in milliseconds before the next eviction.

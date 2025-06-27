@@ -7,59 +7,81 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+import { createJsonFileHandler } from "../../file/fileHandler.js";
 import { BaseCacheEvictor } from "../baseCacheEvictor.js";
 import dotenv from 'dotenv';
+import { createProjectPageEvictor } from "./projectPageEvictor.js";
 dotenv.config();
+export function createProjectCacheEvictor(cacheEvictionOptions, pageEvictionOptions) {
+    const jsonFileHandler = createJsonFileHandler('IProjectCache');
+    const pageEvictorInstance = createProjectPageEvictor(pageEvictionOptions);
+    const cacheEvictorInstance = new ProjectCacheEvictor(jsonFileHandler, cacheEvictionOptions, pageEvictorInstance);
+    return cacheEvictorInstance;
+}
 export class ProjectCacheEvictor extends BaseCacheEvictor {
     constructor(jsonFileHandler, evictionOptions, projectPageEvictor) {
         super(jsonFileHandler, evictionOptions);
+        this._cacheDirectory = process.env.PROJECT_CACHE_PATH;
         this._projectPageEvictor = projectPageEvictor;
     }
     /**
      * @public
      *
      * @description
-     * Retrieves a list of filenames from the project cache directory then iterates through each.
-     * Each file will then be tried for eviction.
+     * Scans the project cache directory and attempts to evict cache files
+     * that meet the given eviction criteria.
      *
-     * @param {IEvictionOptions} evictionOptions - Specifies the eviction options.
+     * @param {IEvictionOptions} [evictionOptions] - Optional eviction strategy options.
      *
-     * @returns {Promise<number>} - A promise that resolves to how many cache files were evicted.
+     * @returns {Promise<number>} - A promise that resolves to the number of cache files evicted.
      */
     evictStaleCache(evictionOptions) {
         return __awaiter(this, void 0, void 0, function* () {
             let evictionCount = 0;
-            const filepath = process.env.PROJECT_CACHE_PATH;
-            //  Get filenames from dir
-            const filenames = yield this._jsonFileHandler.getDirectoryFilenames(filepath);
-            if (filenames.length === 0) {
-                console.log('There are no cache files in the directory.');
-                return 0;
-            }
-            //  Try each file for eviction.
-            for (const filename of filenames) {
-                const file = {
-                    Filepath: filepath,
-                    Filename: filename
-                };
+            yield this.processCacheFiles(this._cacheDirectory, (file) => __awaiter(this, void 0, void 0, function* () {
                 const isEvicted = yield this.tryEvict(file, evictionOptions);
                 if (isEvicted) {
                     evictionCount++;
-                    console.log(`Evicted file no. ${evictionCount}: ${filename}`);
+                    console.log(`Evicted file no. ${evictionCount}: ${file.Filename}`);
                 }
-            }
-            console.log(`${evictionCount} cache files evicted.`);
+            }));
             return evictionCount;
         });
     }
     /**
      * @public
+     *
+     * @description
+     * Scans the project cache directory and evicts individual stale cache pages
+     * within each cache file based on the given eviction options.
+     *
+     * @param {IEvictionOptions} [evictionOptions] - Optional eviction strategy options.
+     *
+     * @returns {Promise<number>} - A promise that resolves to the total number of cache pages evicted.
+     */
+    evictPagesFromCaches(evictionOptions) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let totalEvictedPages = 0;
+            yield this.processCacheFiles(this._cacheDirectory, (file) => __awaiter(this, void 0, void 0, function* () {
+                const evictedPages = yield this.evictStaleCachePages(file, evictionOptions);
+                totalEvictedPages += evictedPages;
+            }));
+            return totalEvictedPages;
+        });
+    }
+    /**
+     * @private
+     *
      * @description
      * Evicts stale pages from the projects cache.
      *
-     * @param {IEvictionOptions} options - Specifies the eviction options.
+     * Parses an `IProjectsCache` file first. If it has pages, iterates through all pages and
+     * tries each for eviction.
      *
-     * @returns {Promise<number>} - A promise that resolves to how many cache pages were evicted.
+     * @param {IFile} file - The file to parse and evict pages from.
+     * @param {IEvictionOptions} [evictionOptions] - Optional eviction strategy options (e.g., TTL, LFU).
+     *
+     * @returns {Promise<number>} - A promise that resolves to the number of cache pages evicted from the file.
      */
     evictStaleCachePages(file, evictionOptions) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -78,19 +100,46 @@ export class ProjectCacheEvictor extends BaseCacheEvictor {
                 const page = pageEntry[1];
                 const isEvictPage = yield this._projectPageEvictor.isEvict(page, evictionOptions);
                 if (isEvictPage) {
-                    console.log(`Evicting page ${pageNumber} from ${file.Filename}`);
                     delete cachePageRecord[pageNumber];
                     evictedPages++;
                 }
             }
             try {
-                this._jsonFileHandler.writeToJsonFile(file.Filepath, file.Filename, data);
+                yield this._jsonFileHandler.writeToJsonFile(file.Filepath, file.Filename, data);
                 console.log(`Successfully evicted ${evictedPages} pages from ${file.Filename}`);
                 return evictedPages;
             }
             catch (err) {
                 console.error('Error evicting cache pages: ', err);
                 return 0;
+            }
+        });
+    }
+    /**
+     * @private
+     *
+     * @description
+     * Retrieves a list of JSON cache files from the specified directory and applies
+     * a given asynchronous function to each file.
+     *
+     * @param {string} directory - The path to the cache directory.
+     * @param {(file: IFile) => Promise<void>} func - An async function to apply to each cache file.
+     *
+     * @returns {Promise<void>} - A promise that resolves once all files have been processed.
+     */
+    processCacheFiles(directory, func) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const filenames = yield this._jsonFileHandler.getDirectoryFilenames(directory);
+            if (filenames.length === 0) {
+                console.log('There are no cache files in the directory.');
+                return;
+            }
+            for (const filename of filenames) {
+                const file = {
+                    Filepath: this._cacheDirectory,
+                    Filename: filename
+                };
+                yield func(file);
             }
         });
     }

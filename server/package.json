@@ -6,7 +6,7 @@
   "scripts": {
     "test": "vitest",
     "compilets": "npx tsc --incremental",
-    "start": "nodemon dist/index.js",
+    "start": "nodemon dist/index.js --ignore 'data/project_cache/*' --ignore 'data/tags_cache/*'",
     "seed": "node dist/scripts/seeder.js",
     "loadCache:tags": "node dist/scripts/cacheLoader.js",
     "db:generate": "drizzle-kit generate",
