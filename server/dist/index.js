@@ -29,4 +29,6 @@ evictionJob.scheduleProjectCacheEviction();
 evictionJob.scheduleCachePageEviction();
 app.listen(3001, () => __awaiter(void 0, void 0, void 0, function* () {
     console.log("Server running on port 3001");
+    yield evictionJob.evictProjectCache();
+    yield evictionJob.evictCachePages();
 }));
