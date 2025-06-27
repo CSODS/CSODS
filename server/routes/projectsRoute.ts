@@ -12,7 +12,7 @@ projectsRouter.get(PROJECT_ROUTES.LOAD_PROJECTS, async (req, res) => {
     const filter = assembleFilter(req);
 
     await projectCacheHandler.setProjectsCache(filter);
-    res.json(projectCacheHandler.getCachePages());
+    res.json(projectCacheHandler.getJsonCache());
 });
 
 /**

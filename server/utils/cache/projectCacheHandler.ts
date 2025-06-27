@@ -38,6 +38,15 @@ export class ProjectCacheHandler {
         this._cDate = new Date();
     }
     /**
+     * @public
+     * @description
+     * Accessor for the _jsonCache field.
+     * @returns The json cache data or null.
+     */
+    public getJsonCache(): IProjectCache | null {
+        return this._jsonCache;
+    }
+    /**
      * @returns The total number of pages.
      * @throws {Error} If the JSON cache is not loaded.
      */
@@ -500,7 +509,7 @@ export class ProjectCacheHandler {
                 TotalPages: Math.ceil(projectsCount / CACHE.PAGE_SIZE ),
                 CreatedOn: date,
                 LastAccessed: date,
-                ViewCount: 0,
+                ViewCount: 1,
                 IsBackup: false,
                 CachePages: cachePages
             };
