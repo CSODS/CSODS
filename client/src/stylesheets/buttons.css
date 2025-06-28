@@ -1,0 +1,113 @@
+.btn-light-1 {
+  transition-duration: 0.2s;
+  background-color: rgb(255, 255, 255) !important;
+  color: rgb(19, 7, 46);
+}
+.btn-light-1:hover {
+  background-color: rgb(0, 0, 0) !important;
+  color: rgb(255, 255, 255);
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
+.btn-light-1.translucent {
+  background-color: rgba(255, 255, 255, 0.4) !important;
+}
+
+.btn-light-2 {
+  transition-duration: 0.2s;
+  background-color: rgb(222, 222, 222) !important;
+  color: rgb(19, 7, 46);
+}
+.btn-light-2:hover {
+  background-color: rgb(0, 0, 0) !important;
+  color: rgb(255, 255, 255);
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
+.btn-light-2.translucent {
+  background-color: rgba(222, 222, 222, 0.4) !important;
+}
+
+.btn-light-3 {
+  transition-duration: 0.2s;
+  background-color: rgb(222, 222, 222) !important;
+  color: rgb(19, 7, 46);
+}
+.btn-light-3:hover {
+  background-color: rgb(0, 0, 0) !important;
+  color: rgb(255, 255, 255);
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
+.btn-light-3.translucent {
+  background-color: rgba(222, 222, 222, 0.4) !important;
+}
+
+.btn-neutral-1 {
+  transition-duration: 0.2s;
+  background-color: rgb(0, 191, 99) !important;
+  color: rgb(255, 255, 255);
+}
+.btn-neutral-1:hover {
+  background-color: rgb(255, 255, 255) !important;
+  color: rgb(0, 0, 0);
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
+.btn-neutral-1.translucent {
+  background-color: rgba(0, 191, 99, 0.4) !important;
+}
+
+.btn-neutral-2 {
+  transition-duration: 0.2s;
+  background-color: rgb(68, 67, 109) !important;
+  color: rgb(255, 255, 255);
+}
+.btn-neutral-2:hover {
+  background-color: rgb(255, 255, 255) !important;
+  color: rgb(0, 0, 0);
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
+.btn-neutral-2.translucent {
+  background-color: rgba(68, 67, 109, 0.4) !important;
+}
+
+.btn-dark-1 {
+  transition-duration: 0.2s;
+  background-color: rgb(43, 45, 66) !important;
+  color: rgb(255, 255, 255);
+}
+.btn-dark-1:hover {
+  background-color: rgb(255, 255, 255) !important;
+  color: rgb(0, 0, 0);
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
+.btn-dark-1.translucent {
+  background-color: rgba(43, 45, 66, 0.4) !important;
+}
+
+.btn-dark-2 {
+  transition-duration: 0.2s;
+  background-color: rgb(19, 7, 46) !important;
+  color: rgb(255, 255, 255);
+}
+.btn-dark-2:hover {
+  background-color: rgb(255, 255, 255) !important;
+  color: rgb(0, 0, 0);
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
+.btn-dark-2.translucent {
+  background-color: rgba(19, 7, 46, 0.4) !important;
+}
+
+.btn-dark-3 {
+  transition-duration: 0.2s;
+  background-color: rgb(0, 0, 0) !important;
+  color: rgb(255, 255, 255);
+}
+.btn-dark-3:hover {
+  background-color: rgb(255, 255, 255) !important;
+  color: rgb(0, 0, 0);
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
+.btn-dark-3.translucent {
+  background-color: rgba(0, 0, 0, 0.4) !important;
+}
+
+/*# sourceMappingURL=buttons.css.map */
