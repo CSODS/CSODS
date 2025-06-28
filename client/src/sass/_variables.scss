@@ -1,3 +1,6 @@
+@use "sass:map";
+@use "sass:list";
+
 // color scheme
 $white:rgb(255, 255, 255);
 $light-grey:rgb(222, 222, 222);
@@ -8,24 +11,48 @@ $dark-grey-blue:rgb(43, 45, 66);
 $dark-purple:rgb(19, 7, 46);
 $black:rgb(0, 0, 0);
 
-$colors : (
-    "white":rgb(255, 255, 255),
-    "light-grey":rgb(222, 222, 222),
-    "grey":rgb(222, 222, 222),
-    "green":rgb(0, 191, 99),
-    "grey-blue":rgb(68, 67, 109),
-    "dark-grey-blue":rgb(43, 45, 66),
-    "dark-purple":rgb(19, 7, 46),
-    "black":rgb(0, 0, 0)
-);
+$light-colors: $white, $light-grey, $grey;
 
-$color-scheme: (
-    "light-1": $white,
-    "light-2": $light-grey,
-    "light-3": $grey,
-    "neutral": $green,
-    "dark-4": $grey-blue,
-    "dark-3": $dark-grey-blue,
-    "dark-2": $dark-purple,
-    "dark-1": $black
-);
+$neutral-colors: $green, $grey-blue;
+
+$dark-colors: $dark-grey-blue, $dark-purple, $black;
+
+@function build-color-scheme() {
+    $map: ();
+    $count: 1;
+    @each $color in $light-colors {
+        $map: map.set($map, "light-#{$count}", $color);
+        $count: $count + 1;
+    }
+    $count: 1;
+    @each $color in $neutral-colors {
+        $map: map.set($map, "neutral-#{$count}", $color);
+        $count: $count + 1;
+    }
+    $count: 1;
+    @each $color in $dark-colors {
+        $map: map.set($map, "dark-#{$count}", $color);
+        $count: $count + 1;
+    }
+    @return $map;
+}
+
+$color-scheme: build-color-scheme();
+
+@function is-color-light($color) {
+    $color-index: list.index($light-colors, $color);
+    $is-light: $color-index != null;
+    @return $is-light;
+}
+
+@function is-color-neutral($color) {
+    $color-index: list.index($neutral-colors, $color);
+    $is-neutral: $color-index != null;
+    @return $is-neutral;
+}
+
+@function is-color-dark($color) {
+    $color-index: list.index($dark-colors, $color);
+    $is-dark: $color-index != null;
+    @return $is-dark;
+}

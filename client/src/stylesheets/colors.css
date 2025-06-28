@@ -43,48 +43,48 @@
   border-color: rgb(222, 222, 222) !important;
 }
 
-.bg-neutral {
+.bg-neutral-1 {
   background-color: rgb(0, 191, 99) !important;
 }
-.bg-neutral.translucent {
+.bg-neutral-1.translucent {
   background-color: rgba(0, 191, 99, 0.7) !important;
 }
 
-.color-neutral {
+.color-neutral-1 {
   color: rgb(0, 191, 99) !important;
 }
 
-.border-neutral {
+.border-neutral-1 {
   border-color: rgb(0, 191, 99) !important;
 }
 
-.bg-dark-4 {
+.bg-neutral-2 {
   background-color: rgb(68, 67, 109) !important;
 }
-.bg-dark-4.translucent {
+.bg-neutral-2.translucent {
   background-color: rgba(68, 67, 109, 0.7) !important;
 }
 
-.color-dark-4 {
+.color-neutral-2 {
   color: rgb(68, 67, 109) !important;
 }
 
-.border-dark-4 {
+.border-neutral-2 {
   border-color: rgb(68, 67, 109) !important;
 }
 
-.bg-dark-3 {
+.bg-dark-1 {
   background-color: rgb(43, 45, 66) !important;
 }
-.bg-dark-3.translucent {
+.bg-dark-1.translucent {
   background-color: rgba(43, 45, 66, 0.7) !important;
 }
 
-.color-dark-3 {
+.color-dark-1 {
   color: rgb(43, 45, 66) !important;
 }
 
-.border-dark-3 {
+.border-dark-1 {
   border-color: rgb(43, 45, 66) !important;
 }
 
@@ -103,18 +103,18 @@
   border-color: rgb(19, 7, 46) !important;
 }
 
-.bg-dark-1 {
+.bg-dark-3 {
   background-color: rgb(0, 0, 0) !important;
 }
-.bg-dark-1.translucent {
+.bg-dark-3.translucent {
   background-color: rgba(0, 0, 0, 0.7) !important;
 }
 
-.color-dark-1 {
+.color-dark-3 {
   color: rgb(0, 0, 0) !important;
 }
 
-.border-dark-1 {
+.border-dark-3 {
   border-color: rgb(0, 0, 0) !important;
 }
 
