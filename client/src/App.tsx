@@ -1,4 +1,6 @@
 import './stylesheets/App.css';
+import './stylesheets/cards.css';
+import './stylesheets/colors.css';
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import { ADDRESSES } from './constants/constants';
 import { PrimaryLayout } from './components/layouts/MainLayout';

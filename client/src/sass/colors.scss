@@ -1,0 +1,19 @@
+@use 'variables.scss' as v;
+@use 'sass:color';
+
+@each $name, $value in v.$color-scheme {
+    .bg-#{$name} {
+        background-color: $value !important;
+        &.translucent {
+            background-color: color.change($color: $value, $alpha: 0.7) !important;
+        }
+    }
+
+    .color-#{$name} {
+        color: $value !important;
+    }
+
+    .border-#{$name} {
+        border-color: $value !important;
+    }
+}
