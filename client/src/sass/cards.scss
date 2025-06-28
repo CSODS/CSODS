@@ -2,7 +2,7 @@
 @use "sass:color";
 
 @each $name, $value in v.$color-scheme {
-    .project-card {
+    .project-card-#{$name} {
         transition-duration: 0.4s;
         background-color: $value !important;
         &:hover {

@@ -1,78 +1,78 @@
-.project-card {
+.project-card-light-1 {
   transition-duration: 0.4s;
   background-color: rgb(255, 255, 255) !important;
 }
-.project-card:hover {
+.project-card-light-1:hover {
   transform: translateY(-4px);
   background-color: rgb(178.5, 178.5, 178.5);
   box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
 }
 
-.project-card {
+.project-card-light-2 {
   transition-duration: 0.4s;
   background-color: rgb(222, 222, 222) !important;
 }
-.project-card:hover {
+.project-card-light-2:hover {
   transform: translateY(-4px);
   background-color: rgb(155.4, 155.4, 155.4);
   box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
 }
 
-.project-card {
+.project-card-light-3 {
   transition-duration: 0.4s;
   background-color: rgb(222, 222, 222) !important;
 }
-.project-card:hover {
+.project-card-light-3:hover {
   transform: translateY(-4px);
   background-color: rgb(155.4, 155.4, 155.4);
   box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
 }
 
-.project-card {
+.project-card-neutral {
   transition-duration: 0.4s;
   background-color: rgb(0, 191, 99) !important;
 }
-.project-card:hover {
+.project-card-neutral:hover {
   transform: translateY(-4px);
   background-color: rgb(0, 133.7, 69.3);
   box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
 }
 
-.project-card {
+.project-card-dark-4 {
   transition-duration: 0.4s;
   background-color: rgb(68, 67, 109) !important;
 }
-.project-card:hover {
+.project-card-dark-4:hover {
   transform: translateY(-4px);
   background-color: rgb(47.6, 46.9, 76.3);
   box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
 }
 
-.project-card {
+.project-card-dark-3 {
   transition-duration: 0.4s;
   background-color: rgb(43, 45, 66) !important;
 }
-.project-card:hover {
+.project-card-dark-3:hover {
   transform: translateY(-4px);
   background-color: rgb(30.1, 31.5, 46.2);
   box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
 }
 
-.project-card {
+.project-card-dark-2 {
   transition-duration: 0.4s;
   background-color: rgb(19, 7, 46) !important;
 }
-.project-card:hover {
+.project-card-dark-2:hover {
   transform: translateY(-4px);
   background-color: rgb(13.3, 4.9, 32.2);
   box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
 }
 
-.project-card {
+.project-card-dark-1 {
   transition-duration: 0.4s;
   background-color: rgb(0, 0, 0) !important;
 }
-.project-card:hover {
+.project-card-dark-1:hover {
   transform: translateY(-4px);
   background-color: black;
   box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
