@@ -4,7 +4,7 @@ import projectsRouter from './routes/projectsRoute.js';
 import projectTagsRouter from './routes/projectTagsRoute.js';
 import { ROUTES } from './data/constants/constants.js';
 import { attachProjectCacheHandler, attachTagsCacheHandler } from './middleware/attacheMiddleware.js';
-
+import { createEvictionJobService } from './utils/jobs/evictionJob.js';
 
 const app = express()
 
@@ -19,7 +19,13 @@ app.use(attachTagsCacheHandler);
 app.use(ROUTES.PROJECTS, projectsRouter);
 app.use(ROUTES.PROJECT_TAGS, projectTagsRouter);
 
-app.listen(3001, () => {
-    console.log("Server running on port 3001")
+const evictionJob = createEvictionJobService();
+evictionJob.scheduleProjectCacheEviction();
+evictionJob.scheduleCachePageEviction();
+
+app.listen(3001, async () => {
+    console.log("Server running on port 3001");
+    await evictionJob.evictProjectCache();
+    await evictionJob.evictCachePages();
 });
 

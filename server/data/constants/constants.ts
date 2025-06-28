@@ -9,6 +9,7 @@ export const PROJECT_ROUTES = {
     ROOT: '/',
     BY_PAGE: '/:pageNumber',
     BY_ID: '/:pageNumber/:projectId',
+    TITLE_SEARCH: '/:title_search',
     LOAD_PROJECTS: '/load_projects'
 } as const;
 
@@ -18,11 +19,11 @@ export const PROJECT_TAG_ROUTES = {
 }
 
 export const CACHE = {
-    BASE_NAME: 'cachedProjects',
-    HARD_BACKUP: 'cachedProjectsHardBackup',
+    BASE_NAME: 'PROJECT_CACHE',
+    HARD_BACKUP: 'PROJECT_CACHE_HARD_BACKUP',
     AS_JSON: '.json',
     PAGE_SIZE: 8,
-    TAGS_CACHE: 'cachedTags'
+    TAGS_CACHE: 'TAG_CACHE'
 } as const;
 
 export const DEVELOPMENT_TYPES = {

@@ -1,0 +1,675 @@
+{
+  "version": "6",
+  "dialect": "sqlite",
+  "id": "7e56edf7-425e-4cd1-b623-9f4d19afc551",
+  "prevId": "d5d2a272-af16-4bfd-8ec7-89d45e59630f",
+  "tables": {
+    "ApplicationIndustry": {
+      "name": "ApplicationIndustry",
+      "columns": {
+        "IndustryId": {
+          "name": "IndustryId",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "Industry": {
+          "name": "Industry",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "ApplicationIndustry_IndustryId_unique": {
+          "name": "ApplicationIndustry_IndustryId_unique",
+          "columns": [
+            "IndustryId"
+          ],
+          "isUnique": true
+        },
+        "ApplicationIndustry_Industry_unique": {
+          "name": "ApplicationIndustry_Industry_unique",
+          "columns": [
+            "Industry"
+          ],
+          "isUnique": true
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "DatabaseTechnologies": {
+      "name": "DatabaseTechnologies",
+      "columns": {
+        "DatabaseId": {
+          "name": "DatabaseId",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "Database": {
+          "name": "Database",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "DatabaseTechnologies_DatabaseId_unique": {
+          "name": "DatabaseTechnologies_DatabaseId_unique",
+          "columns": [
+            "DatabaseId"
+          ],
+          "isUnique": true
+        },
+        "DatabaseTechnologies_Database_unique": {
+          "name": "DatabaseTechnologies_Database_unique",
+          "columns": [
+            "Database"
+          ],
+          "isUnique": true
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "DevTypes": {
+      "name": "DevTypes",
+      "columns": {
+        "DevTypeId": {
+          "name": "DevTypeId",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "DevTypeName": {
+          "name": "DevTypeName",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "DevTypes_DevTypeId_unique": {
+          "name": "DevTypes_DevTypeId_unique",
+          "columns": [
+            "DevTypeId"
+          ],
+          "isUnique": true
+        },
+        "DevTypes_DevTypeName_unique": {
+          "name": "DevTypes_DevTypeName_unique",
+          "columns": [
+            "DevTypeName"
+          ],
+          "isUnique": true
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "Frameworks": {
+      "name": "Frameworks",
+      "columns": {
+        "FrameworkId": {
+          "name": "FrameworkId",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "FrameworkName": {
+          "name": "FrameworkName",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "DevTypeId": {
+          "name": "DevTypeId",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "Frameworks_FrameworkId_unique": {
+          "name": "Frameworks_FrameworkId_unique",
+          "columns": [
+            "FrameworkId"
+          ],
+          "isUnique": true
+        },
+        "Frameworks_FrameworkName_unique": {
+          "name": "Frameworks_FrameworkName_unique",
+          "columns": [
+            "FrameworkName"
+          ],
+          "isUnique": true
+        }
+      },
+      "foreignKeys": {
+        "Frameworks_DevTypeId_DevTypes_DevTypeId_fk": {
+          "name": "Frameworks_DevTypeId_DevTypes_DevTypeId_fk",
+          "tableFrom": "Frameworks",
+          "tableTo": "DevTypes",
+          "columnsFrom": [
+            "DevTypeId"
+          ],
+          "columnsTo": [
+            "DevTypeId"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "ProgrammingLanguages": {
+      "name": "ProgrammingLanguages",
+      "columns": {
+        "LanguageId": {
+          "name": "LanguageId",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "LanguageName": {
+          "name": "LanguageName",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "ProgrammingLanguages_LanguageId_unique": {
+          "name": "ProgrammingLanguages_LanguageId_unique",
+          "columns": [
+            "LanguageId"
+          ],
+          "isUnique": true
+        },
+        "ProgrammingLanguages_LanguageName_unique": {
+          "name": "ProgrammingLanguages_LanguageName_unique",
+          "columns": [
+            "LanguageName"
+          ],
+          "isUnique": true
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "ProjectFrameworks": {
+      "name": "ProjectFrameworks",
+      "columns": {
+        "ProjectId": {
+          "name": "ProjectId",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "FrameworkId": {
+          "name": "FrameworkId",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "ProjectFrameworks_ProjectId_Projects_ProjectId_fk": {
+          "name": "ProjectFrameworks_ProjectId_Projects_ProjectId_fk",
+          "tableFrom": "ProjectFrameworks",
+          "tableTo": "Projects",
+          "columnsFrom": [
+            "ProjectId"
+          ],
+          "columnsTo": [
+            "ProjectId"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "no action"
+        },
+        "ProjectFrameworks_FrameworkId_Frameworks_FrameworkId_fk": {
+          "name": "ProjectFrameworks_FrameworkId_Frameworks_FrameworkId_fk",
+          "tableFrom": "ProjectFrameworks",
+          "tableTo": "Frameworks",
+          "columnsFrom": [
+            "FrameworkId"
+          ],
+          "columnsTo": [
+            "FrameworkId"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "ProjectFrameworks_ProjectId_FrameworkId_pk": {
+          "columns": [
+            "ProjectId",
+            "FrameworkId"
+          ],
+          "name": "ProjectFrameworks_ProjectId_FrameworkId_pk"
+        }
+      },
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "ProjectImages": {
+      "name": "ProjectImages",
+      "columns": {
+        "ImageId": {
+          "name": "ImageId",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "ProjectId": {
+          "name": "ProjectId",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "ImageUrl": {
+          "name": "ImageUrl",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "ProjectImages_ImageId_unique": {
+          "name": "ProjectImages_ImageId_unique",
+          "columns": [
+            "ImageId"
+          ],
+          "isUnique": true
+        }
+      },
+      "foreignKeys": {
+        "ProjectImages_ProjectId_Projects_ProjectId_fk": {
+          "name": "ProjectImages_ProjectId_Projects_ProjectId_fk",
+          "tableFrom": "ProjectImages",
+          "tableTo": "Projects",
+          "columnsFrom": [
+            "ProjectId"
+          ],
+          "columnsTo": [
+            "ProjectId"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "Projects": {
+      "name": "Projects",
+      "columns": {
+        "ProjectId": {
+          "name": "ProjectId",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "ProjectNumber": {
+          "name": "ProjectNumber",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "UserId": {
+          "name": "UserId",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "ProjectTitle": {
+          "name": "ProjectTitle",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "ProjectTitleLower": {
+          "name": "ProjectTitleLower",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "DevTypeId": {
+          "name": "DevTypeId",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "PrimaryLanguageId": {
+          "name": "PrimaryLanguageId",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "SecondaryLanguageId": {
+          "name": "SecondaryLanguageId",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "DatabaseTechnologyId": {
+          "name": "DatabaseTechnologyId",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "ApplicationIndustryId": {
+          "name": "ApplicationIndustryId",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "GitHubUrl": {
+          "name": "GitHubUrl",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "Projects_ProjectId_unique": {
+          "name": "Projects_ProjectId_unique",
+          "columns": [
+            "ProjectId"
+          ],
+          "isUnique": true
+        },
+        "Projects_ProjectNumber_unique": {
+          "name": "Projects_ProjectNumber_unique",
+          "columns": [
+            "ProjectNumber"
+          ],
+          "isUnique": true
+        }
+      },
+      "foreignKeys": {
+        "Projects_UserId_Users_UserId_fk": {
+          "name": "Projects_UserId_Users_UserId_fk",
+          "tableFrom": "Projects",
+          "tableTo": "Users",
+          "columnsFrom": [
+            "UserId"
+          ],
+          "columnsTo": [
+            "UserId"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "no action"
+        },
+        "Projects_DevTypeId_DevTypes_DevTypeId_fk": {
+          "name": "Projects_DevTypeId_DevTypes_DevTypeId_fk",
+          "tableFrom": "Projects",
+          "tableTo": "DevTypes",
+          "columnsFrom": [
+            "DevTypeId"
+          ],
+          "columnsTo": [
+            "DevTypeId"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "no action"
+        },
+        "Projects_PrimaryLanguageId_ProgrammingLanguages_LanguageId_fk": {
+          "name": "Projects_PrimaryLanguageId_ProgrammingLanguages_LanguageId_fk",
+          "tableFrom": "Projects",
+          "tableTo": "ProgrammingLanguages",
+          "columnsFrom": [
+            "PrimaryLanguageId"
+          ],
+          "columnsTo": [
+            "LanguageId"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "no action"
+        },
+        "Projects_SecondaryLanguageId_ProgrammingLanguages_LanguageId_fk": {
+          "name": "Projects_SecondaryLanguageId_ProgrammingLanguages_LanguageId_fk",
+          "tableFrom": "Projects",
+          "tableTo": "ProgrammingLanguages",
+          "columnsFrom": [
+            "SecondaryLanguageId"
+          ],
+          "columnsTo": [
+            "LanguageId"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "no action"
+        },
+        "Projects_DatabaseTechnologyId_DatabaseTechnologies_DatabaseId_fk": {
+          "name": "Projects_DatabaseTechnologyId_DatabaseTechnologies_DatabaseId_fk",
+          "tableFrom": "Projects",
+          "tableTo": "DatabaseTechnologies",
+          "columnsFrom": [
+            "DatabaseTechnologyId"
+          ],
+          "columnsTo": [
+            "DatabaseId"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "no action"
+        },
+        "Projects_ApplicationIndustryId_ApplicationIndustry_IndustryId_fk": {
+          "name": "Projects_ApplicationIndustryId_ApplicationIndustry_IndustryId_fk",
+          "tableFrom": "Projects",
+          "tableTo": "ApplicationIndustry",
+          "columnsFrom": [
+            "ApplicationIndustryId"
+          ],
+          "columnsTo": [
+            "IndustryId"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "Roles": {
+      "name": "Roles",
+      "columns": {
+        "RoleId": {
+          "name": "RoleId",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "RoleName": {
+          "name": "RoleName",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "Roles_RoleId_unique": {
+          "name": "Roles_RoleId_unique",
+          "columns": [
+            "RoleId"
+          ],
+          "isUnique": true
+        },
+        "Roles_RoleName_unique": {
+          "name": "Roles_RoleName_unique",
+          "columns": [
+            "RoleName"
+          ],
+          "isUnique": true
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "Users": {
+      "name": "Users",
+      "columns": {
+        "UserId": {
+          "name": "UserId",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "Email": {
+          "name": "Email",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "Username": {
+          "name": "Username",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "Name": {
+          "name": "Name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "Password": {
+          "name": "Password",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "RoleId": {
+          "name": "RoleId",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "StudentNumber": {
+          "name": "StudentNumber",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "UserIconImg": {
+          "name": "UserIconImg",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "Users_UserId_unique": {
+          "name": "Users_UserId_unique",
+          "columns": [
+            "UserId"
+          ],
+          "isUnique": true
+        },
+        "Users_Email_unique": {
+          "name": "Users_Email_unique",
+          "columns": [
+            "Email"
+          ],
+          "isUnique": true
+        },
+        "Users_Username_unique": {
+          "name": "Users_Username_unique",
+          "columns": [
+            "Username"
+          ],
+          "isUnique": true
+        },
+        "Users_StudentNumber_unique": {
+          "name": "Users_StudentNumber_unique",
+          "columns": [
+            "StudentNumber"
+          ],
+          "isUnique": true
+        }
+      },
+      "foreignKeys": {
+        "Users_RoleId_Roles_RoleId_fk": {
+          "name": "Users_RoleId_Roles_RoleId_fk",
+          "tableFrom": "Users",
+          "tableTo": "Roles",
+          "columnsFrom": [
+            "RoleId"
+          ],
+          "columnsTo": [
+            "RoleId"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    }
+  },
+  "views": {},
+  "enums": {},
+  "_meta": {
+    "schemas": {},
+    "tables": {},
+    "columns": {}
+  },
+  "internal": {
+    "indexes": {}
+  }
+}

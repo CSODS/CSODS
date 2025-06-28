@@ -13,6 +13,7 @@ export const Projects  = sqliteTable("Projects", {
         .references(() => Users.UserId, {onDelete: 'restrict'}
     ),
     ProjectTitle : text('ProjectTitle'),
+    ProjectTitleLower : text('ProjectTitleLower'),
     DevTypeId : integer('DevTypeId')
         .notNull()
         .references(() => DevTypes.DevTypeId, {onDelete: 'restrict'}

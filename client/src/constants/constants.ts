@@ -25,6 +25,9 @@ export const ADDRESSES = {
     STUDENT_PROJECTS: '/student_projects/:pageNumber',
     STUDENT_PROJECTS_ROOT: '/student_projects',
     PROJECT_DETAILS: '/student_projects/:pageNumber/:id',
+    STUDENT_PROJECTS: '/student_projects/:pageNumber',
+    STUDENT_PROJECTS_ROOT: '/student_projects',
+    PROJECT_DETAILS: '/student_projects/:pageNumber/:id',
     SUBMIT_PROJECT: "/submit_project",
     ABOUT: "/about"
 } as const;

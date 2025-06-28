@@ -2,6 +2,7 @@ import { existsSync, promises as fs} from 'fs';
 import * as lockfile from 'proper-lockfile';
 import path from 'path';
 import { OperationOptions } from 'retry';
+import { boolean } from 'drizzle-orm/gel-core';
 
 export function createJsonFileHandler<TModel>(modelName: string) {
     return new JsonFileHandler<TModel>(modelName);
@@ -33,6 +34,31 @@ export class JsonFileHandler<TModel> {
         this._modelName = modelName;
     }
     //#region .json CRUD
+
+    /**
+     * @public
+     * @description
+     * Retrieves a list of filenames of all files existing in a directory.
+     * @param directory 
+     * @returns 
+     */
+    public async getDirectoryFilenames(directory: string): Promise<string[]> {
+        console.log(`Attempting to access directory ${directory}`);
+
+        if (!existsSync(directory)) {
+            console.warn('Directory does not exist');
+            return [];
+        }
+
+        try {
+            const filenames = await fs.readdir(directory);
+            return filenames;
+        }
+        catch (err) {
+            console.error('Error retrieving directory filenames: ', err);
+            return [];
+            }
+    }
 
     /**
      * Reads and parses a JSON file from the specified path into an object of type `TModel`.
@@ -144,6 +170,42 @@ export class JsonFileHandler<TModel> {
             }
         }
     }
+    /**
+     * Deletes a JSON file.
+     * 
+     * If the file exists, lock the file first. 
+     * 
+     * Returns true if the file is deleted and false otherwise.
+     * 
+     * @param filePath - The directory path where the JSON file is stored.
+     * @param fileName - THe name of the JSON file to delete.
+     * @returns - True if the file is deleted, false otherwise.
+     */
+    public async deleteJsonFile(filePath: string, fileName: string): Promise<boolean> {
+        let release: (() => Promise<void>) | null = null;
+        const fullPath = path.join(filePath, fileName);
+        
+        try {            
+            if (existsSync(fullPath)) {
+                release = await lockfile.lock(fullPath, {retries: this._retryOptions});
+                console.log('Lock acqquired.');                
+            }
+
+            //  attempt to write to file.
+            console.log(`Attempting to delete ${fileName}...`);
+            await fs.unlink(fullPath);
+            console.log('Json file deleted.');
+            return true;
+        } catch (err) {
+            console.log('Json file failed deleting: ', err);
+            return false;
+        } finally {
+            if (release) {
+                await release();
+                console.log('File lock released.');
+            }
+        }
+    }
     //#endregion
     
     //#region .json Utility Methods 
@@ -162,5 +224,33 @@ export class JsonFileHandler<TModel> {
         
     }
 
+    /**
+     * Generates a file name using a given file extension and an arbitrary number of name elements.
+     * The name elements will be joined by hyphens.
+     *
+     * @param fileExtension The extension of the file.
+     * @param nameElements An arbitrary number of string elements that will form the base name of the file.
+     * @returns A string representing the complete file name.
+     */
+    public generateFileName(fileExtension: string, ...nameElements: string[]): string {
+        //  Removes falsy values including '', null, and undefined.
+        nameElements = nameElements.filter(Boolean);
+        const fileName: string = nameElements.join('-');
+        return `${fileName}.${fileExtension}`;
+    }
     //#endregion
+}
+
+/**
+ * Represents a file with its path and name.
+ */
+export interface IFile {
+    /**
+     * The file path leading to the file's directory.
+     */
+    Filepath: string,
+    /**
+     * The file name including it's extension (e.g. .json, .txt)
+     */
+    Filename: string
 }
