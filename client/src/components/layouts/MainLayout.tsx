@@ -14,7 +14,7 @@ export function PrimaryLayout() {
     return(
         <div>
             <div className="p-0 navbar navbar-expand-lg sticky-top">    
-                <div className="container-fluid bg-grey-blue translucent header-container">
+                <div className="container-fluid bg-dark-grey-blue translucent header-container">
                     <a className="navbar-brand color-light-1 fs-4 bolder" href={ADDRESSES.LANDING_PAGE}>
                         <img src='/lucso-logo-no-bg.png' alt="CSO_LOGO" className='header-logo'/>
                         CSO:DS  
