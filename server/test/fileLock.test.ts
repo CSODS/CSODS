@@ -12,19 +12,28 @@ describe('fileHandler', async () => {
 
     const _dataRead: IProjectCache = {
         TotalPages: 0,
-        LoadTime: _date,
+        CreatedOn: _date,
+        LastAccessed: _date,
+        ViewCount: 0,
+        IsBackup: true,
         CachePages: {}
     }
 
     const _dataWrite: IProjectCache = {
         TotalPages: 5,
-        LoadTime: _date,
+        CreatedOn: _date,
+        LastAccessed: _date,
+        ViewCount: 0,
+        IsBackup: true,
         CachePages: {}
     }
 
     const _mockData = (i: number): IProjectCache => ({
-        LoadTime: new Date(),
         TotalPages: i,
+        CreatedOn: _date,
+        LastAccessed: new Date(),
+        ViewCount: 0,
+        IsBackup: true,
         CachePages: {},
     });
 
