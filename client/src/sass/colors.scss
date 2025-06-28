@@ -5,7 +5,7 @@
     .bg-#{$name} {
         background-color: $value !important;
         &.translucent {
-            background-color: color.change($color: $value, $alpha: 0.7) !important;
+            background-color: color.change($color: $value, $alpha: 0.23) !important;
         }
     }
 

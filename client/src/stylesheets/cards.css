@@ -28,16 +28,16 @@
 
 .project-card-light-3 {
   transition-duration: 0.4s;
-  background-color: rgb(222, 222, 222) !important;
+  background-color: rgb(140, 127, 132) !important;
   color: rgb(0, 0, 0);
 }
 .project-card-light-3:hover {
   transform: translateY(-4px);
-  background-color: rgb(155.4, 155.4, 155.4);
+  background-color: rgb(98.449382716, 88.450617284, 92.2962962963);
   box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
 }
 .project-card-light-3.translucent {
-  background-color: rgba(222, 222, 222, 0.4) !important;
+  background-color: rgba(140, 127, 132, 0.4) !important;
 }
 
 .project-card-neutral-1 {

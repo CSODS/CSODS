@@ -2,7 +2,7 @@
   background-color: rgb(255, 255, 255) !important;
 }
 .bg-light-1.translucent {
-  background-color: rgba(255, 255, 255, 0.7) !important;
+  background-color: rgba(255, 255, 255, 0.23) !important;
 }
 
 .color-light-1 {
@@ -17,7 +17,7 @@
   background-color: rgb(222, 222, 222) !important;
 }
 .bg-light-2.translucent {
-  background-color: rgba(222, 222, 222, 0.7) !important;
+  background-color: rgba(222, 222, 222, 0.23) !important;
 }
 
 .color-light-2 {
@@ -29,25 +29,25 @@
 }
 
 .bg-light-3 {
-  background-color: rgb(222, 222, 222) !important;
+  background-color: rgb(140, 127, 132) !important;
 }
 .bg-light-3.translucent {
-  background-color: rgba(222, 222, 222, 0.7) !important;
+  background-color: rgba(140, 127, 132, 0.23) !important;
 }
 
 .color-light-3 {
-  color: rgb(222, 222, 222) !important;
+  color: rgb(140, 127, 132) !important;
 }
 
 .border-light-3 {
-  border-color: rgb(222, 222, 222) !important;
+  border-color: rgb(140, 127, 132) !important;
 }
 
 .bg-neutral-1 {
   background-color: rgb(0, 191, 99) !important;
 }
 .bg-neutral-1.translucent {
-  background-color: rgba(0, 191, 99, 0.7) !important;
+  background-color: rgba(0, 191, 99, 0.23) !important;
 }
 
 .color-neutral-1 {
@@ -62,7 +62,7 @@
   background-color: rgb(68, 67, 109) !important;
 }
 .bg-neutral-2.translucent {
-  background-color: rgba(68, 67, 109, 0.7) !important;
+  background-color: rgba(68, 67, 109, 0.23) !important;
 }
 
 .color-neutral-2 {
@@ -77,7 +77,7 @@
   background-color: rgb(43, 45, 66) !important;
 }
 .bg-dark-1.translucent {
-  background-color: rgba(43, 45, 66, 0.7) !important;
+  background-color: rgba(43, 45, 66, 0.23) !important;
 }
 
 .color-dark-1 {
@@ -92,7 +92,7 @@
   background-color: rgb(19, 7, 46) !important;
 }
 .bg-dark-2.translucent {
-  background-color: rgba(19, 7, 46, 0.7) !important;
+  background-color: rgba(19, 7, 46, 0.23) !important;
 }
 
 .color-dark-2 {
@@ -107,7 +107,7 @@
   background-color: rgb(0, 0, 0) !important;
 }
 .bg-dark-3.translucent {
-  background-color: rgba(0, 0, 0, 0.7) !important;
+  background-color: rgba(0, 0, 0, 0.23) !important;
 }
 
 .color-dark-3 {
