@@ -1,15 +1,20 @@
 import { Outlet } from 'react-router-dom';
 import { ADDRESSES } from '../../constants/constants';
 import { Link } from 'react-router-dom';
+import { bgConstants } from '../../constants/bg-constants';
 
 export function PrimaryLayout() {
     // useEffect(() => {
     //     document.body.style.backgroundColor = COLORS.RAISIN_BLACK;
     // });
+    function randomX() {
+        return `${Math.floor(Math.random() * 90)}%`
+    }
+
     return(
         <div>
-            <div className="p-0 navbar navbar-expand-lg sticky-top bg-body-tertiary">    
-                <div className="px-lg-5 container-fluid bg-dark-1 header-container">
+            <div className="p-0 navbar navbar-expand-lg sticky-top">    
+                <div className="container-fluid bg-dark-1 header-container">
                     <a className="navbar-brand color-light-1 fs-4 bolder" href={ADDRESSES.LANDING_PAGE}>
                         <img src='/lucso-logo-no-bg.png' alt="CSO_LOGO" className='header-logo'/>
                         CSO:DS  
@@ -36,6 +41,26 @@ export function PrimaryLayout() {
                         </div>
                     </div>
                 </div>
+            </div>
+            <div className="bg-container">
+                <div className="grid-overlay"></div>
+                <div className="gradient-orb orb1"></div>
+                <div className="gradient-orb orb2"></div>
+                <div className="gradient-orb orb3"></div>
+
+                {
+                    bgConstants.map((x, index) => (
+                    <div
+                        key = {index}
+                        className = {`bg-code ${x.label}`}
+                        style = {{
+                            left: randomX(),
+                            animationDelay: `${index * 2}s`,
+                        }}
+                    >
+                        {x.content}
+                        </div>
+                ))}
             </div>
             <main className='pb-3'>
                 <Outlet />
