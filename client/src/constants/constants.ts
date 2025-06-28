@@ -5,19 +5,19 @@ export const CSODS_BASE = process.env.REACT_APP_ENV === 'testing'
 export const API_PATHS = {
     PROJECTS: '/projects',
     PROJECT_TAGS: '/project_tags'
-};
+} as const;
 
 export const PROJECT_PATHS = {
     ROOT: '/',
     BY_PAGE: '/:pageNumber',
     BY_ID: '/:pageNumber/:projectId',
     LOAD_PROJECTS: '/load_projects'
-};
+} as const;
 
 export const PROJECT_TAG_PATHS = {
     ROOT: '/',
     ALL_DATA: '/all_data'
-}
+} as const;
 
 export const ADDRESSES = {
     LANDING_PAGE: "/",
@@ -27,7 +27,7 @@ export const ADDRESSES = {
     PROJECT_DETAILS: '/student_projects/:pageNumber/:id',
     SUBMIT_PROJECT: "/submit_project",
     ABOUT: "/about"
-};
+} as const;
 
 export const COLORS = {
     CELESTE: "#C5FFFD",
@@ -35,24 +35,18 @@ export const COLORS = {
     FELDGRAU: "#5b6c5d",
     RAISIN_BLACK: "#3b2c35",
     DARK_PURPLE: "#2A1F2D"
-};
+} as const;
 
 export const DEVELOPMENT_TYPES = {
     GAME_DEV: "Game Development",
     WEB_DEV: "Web Development",
     SOFTWARE_DEV: "Software Development",
     API_DEV: "API Development"
-};
+} as const;
 
 export const ICONS = {
     [DEVELOPMENT_TYPES.GAME_DEV]: "bi bi-controller",
     [DEVELOPMENT_TYPES.WEB_DEV]: "bi bi-browser-chrome",
     [DEVELOPMENT_TYPES.SOFTWARE_DEV]: "bi bi-code-square",
     [DEVELOPMENT_TYPES.API_DEV]: "bi bi-gear-wide-connected"
-};
-
-/* <Route path="/home" element={<Home />} />
-            <Route path="/student_projects" element={<StudentProjects />}/>
-            <Route path='/student_projects/:id' element={<ProjectDetails />}/>
-          </Route>
-          <Route path="/submit_project" element={<SubmitProject />}/> */
+} as const;

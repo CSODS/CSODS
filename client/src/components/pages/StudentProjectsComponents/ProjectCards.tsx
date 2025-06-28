@@ -1,0 +1,91 @@
+import * as CONSTANTS from '../../../constants/constants';
+import { useNavigate } from "react-router-dom";
+import { IProjectDetails, IProjectTags } from "../../../viewModels/csods/csodsApiInterfaces";
+
+interface ProjectCardProps {
+    iconClass: string, 
+    projectDetails: IProjectDetails,
+    projectTags: IProjectTags, 
+    projectDescription: string
+};
+
+export default function ProjectCard({
+    iconClass,
+    projectDetails,
+    projectTags, 
+    projectDescription
+}: ProjectCardProps) {
+    const redirectToUrl = (url: string) => {
+        window.open(url);
+        return;
+    }
+    
+    const navigate = useNavigate();
+    const handleClick = (projectId: number) => {
+        navigate(`${CONSTANTS.ADDRESSES.STUDENT_PROJECTS_ROOT}/${projectId}`);
+    }
+
+    return (
+        <div key={projectDetails.Project.ProjectId} className='col' style={{maxWidth:700}}>
+            {/* project card */}
+            <div className='ps-lg-2 card project-card border-light-1 rounded-4 bg-dark-1 translucent'>
+            <div className='row g-0'>
+                <div className='pt-3 col-lg-1'>
+                <i className={`${iconClass} color-light-2 fs-4`}></i>
+                </div>
+                <div className='col-lg-11'>
+                <div className='px-3 pb-3 ps-lg-0 card-body d-flex flex-column align-items-start text-light' style={{minHeight:290}}>
+                    {/* project title  */}
+                    <h5 className='card-title text-start fs-3 color-light-2 bolder'>{projectDetails.Project.ProjectTitle}</h5>
+                    {/* project description */}
+                    <p className='card-text my-1 text-start'>{projectDescription}
+                    </p>
+                    <div className='mt-auto mx-0 row col-12'>
+                        {/* project tags */}
+                        <div className='ps-0 d-flex flex-wrap align-items-start'>
+                            {Tags(projectTags)}
+                        </div>
+                        {/* github link and view link */}
+                        <div className='mt-3 mb-0 ps-0 pe-0 d-flex flex-row align-items-center'>
+                        <button type='button' className='col-lg-3 px-4 py-2 ms-0 me-3 btn-light-1 rounded-4 border border-0' onClick={() => redirectToUrl(projectDetails.Project.GitHubUrl)}>
+                            {/* <img src={github_logo} alt='...' className='img-fluid'/> */}
+                            GitHub
+                        </button>
+                        <button type='button' className='col-lg-3 px-4 py-2 ms-0 me-3 btn-light-1 rounded-4 border border-0' onClick={() => handleClick(1)}>View</button>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    );
+}
+
+function Tags(projectTags: IProjectTags) {
+  const tagValues = Object.values(projectTags);
+  return(
+    tagValues.map((tag, index) => {
+      if (typeof tag === 'string') {
+        return (
+          <div key={`tag-${index}`} className='mt-1 py-1 px-3 ms-0 me-2 bg-dark-1 btn-dark-1 rounded-pill border border-light-1 fs-xs'>
+            {tag}
+          </div>
+        )
+      }
+      else if (Array.isArray(tag)) {
+        return (
+          tag.map((subTag, subIndex) => 
+            subTag ? (
+                <div key={`tag-${subIndex}`} className='mt-1 py-1 px-3 ms-0 me-2 bg-dark-1 btn-dark-1 rounded-pill border border-light-1 fs-xs'>
+                  {subTag}  
+                </div>
+            ) : null
+        ))
+      }
+      else {
+        return [];
+      }
+    })
+  )
+}

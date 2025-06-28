@@ -1,9 +1,8 @@
-import React from 'react';
 import { useEffect} from 'react';
 
-function SubmitProject() {
+export default function SubmitProject() {
     useEffect(() => {
-        async function RedirectToGForms(){
+        async function redirectToGForms(){
             await new Promise(resolve => setTimeout(resolve, 2000));
             window.open(
                 "https://docs.google.com/forms/d/e/1FAIpQLSfJ-Zycx9VlgpoaGjjQlcmwLZzSjzDhXMyXGzcTjeK-ILZ6GA/viewform?usp=header",
@@ -11,8 +10,8 @@ function SubmitProject() {
             );
             return;
         }
-        RedirectToGForms();
-    });
+        redirectToGForms();
+    }, []);
     return (
         <div>
             <p>Redirecting to Google Forms...</p>
@@ -22,5 +21,3 @@ function SubmitProject() {
         </div>
     );
 }
-
-export default SubmitProject;

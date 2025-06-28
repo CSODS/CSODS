@@ -20,7 +20,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "compilets": "npx tsc --incremental"
   },
   "eslintConfig": {
     "extends": [
@@ -41,6 +42,8 @@
     ]
   },
   "devDependencies": {
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6",
     "typescript": "^4.9.5"
   }
 }

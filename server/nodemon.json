@@ -1,0 +1,9 @@
+{
+  "watch": ["dist"],
+  "ignore": [
+    "data/project_cache/**",
+    "data/tags_cache/**"
+  ],
+  "ext": "js,json",
+  "exec": "node dist/index.js"
+}

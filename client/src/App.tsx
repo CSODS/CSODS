@@ -4,7 +4,8 @@ import { ADDRESSES } from './constants/constants';
 import { PrimaryLayout } from './components/layouts/MainLayout';
 import LandingPage from './components/pages/LandingPage';
 import Home from "./components/pages/Home";
-import { StudentProjects, ProjectDetails } from './components/pages/StudentProjects';
+import StudentProjects from './components/pages/StudentProjects';
+import ProjectDetails from './components/pages/ProjectDetails';
 import SubmitProject from './components/pages/SubmitProject';
 
 function App() {

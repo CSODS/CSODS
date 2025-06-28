@@ -1,4 +1,3 @@
-import homepage_img from '../../homepage_img.png';
 import React from 'react';
 
 function Home() {
@@ -8,7 +7,7 @@ function Home() {
         <div className='pb-4 m-4 card border border-0 bg-transparent'>
           <div className='row g-0'>
             <div className='col-md-6 d-flex d-md-none'>
-              <img src={homepage_img} alt='...' className='card-img'></img>
+              <img src='/homepage_img.png' alt='...' className='card-img'></img>
             </div>
             <div className='ps-md-3 col-md-6 d-flex align-items-end'>
               <div className='card-body mx-0 ps-0 pb-0 align-self-end d-flex flex-column justify-content-end'>
@@ -17,13 +16,13 @@ function Home() {
                     #DevelopersSpace
                   </div>
                 </div>
-                <h5 class="card-title col-md-9 mt-1 mb-3 text-start fs-3 color-dark-2 bolder">Your Space to Learn, Build, and Grow.</h5>
-                <p class="card-text col-md-9 mt-1 mb-3 color-dark-1 text-start">
+                <h5 className="card-title col-md-9 mt-1 mb-3 text-start fs-3 color-dark-2 bolder">Your Space to Learn, Build, and Grow.</h5>
+                <p className="card-text col-md-9 mt-1 mb-3 color-dark-1 text-start">
                   <span className='text-emphasize'>Computer Science Organization: Developers’ Space </span>
                   is a digital hub for students of the Computer Science Department where we foster innovation, 
                   collaboration, and academic excellence in the field of computing.
                 </p>
-                <p class="card-text col-md-9 mt-1 mb-4 text-start color-light-2 fst-italic">
+                <p className="card-text col-md-9 mt-1 mb-4 text-start color-light-2 fst-italic">
                   Explore. Learn. Contribute.
                 </p>
                 <div className='d-flex'>
@@ -35,7 +34,7 @@ function Home() {
               </div>
             </div>
             <div className='col-md-6 d-none d-md-flex'>
-              <img src={homepage_img} alt='...' className='card-img'></img>
+              <img src='/homepage_img.png' alt='...' className='card-img'></img>
             </div>
           </div>
         </div>
