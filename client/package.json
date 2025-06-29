@@ -19,7 +19,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "sass_app": "sass ./src/App.scss ./src/App.css",
+    "sass": "sass ./src/sass:./src/stylesheets",
+    "sass watch": "sass --watch ./src/sass:./src/stylesheets",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "compilets": "npx tsc --incremental"

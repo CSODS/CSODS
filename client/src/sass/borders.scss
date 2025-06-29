@@ -1,0 +1,7 @@
+@use 'variables.scss' as v;
+
+@each $name, $value in v.$color-scheme {
+    .border-#{$name} {
+        border-color: $value;
+    }
+}

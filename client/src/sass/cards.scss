@@ -1,0 +1,43 @@
+@use "variables.scss" as v;
+@use "sass:color";
+
+@each $name, $value in v.$color-scheme {
+    $is-light-bg: v.is-color-light($value);
+    $is-neutral-bg: v.is-color-neutral($value);
+    $is-dark-bg: v.is-color-dark($value);
+    
+    .project-card-#{$name} {
+        transition-duration: 0.4s;
+        background-color: $value !important;
+
+        @if ($is-light-bg) {
+            color: v.$black;
+        }
+        @else {
+            color: v.$white;
+        }
+
+        &:hover {
+            transform: translateY(-4px);
+            background-color: color.scale($value, $lightness: -70%);
+            box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+        }
+        
+        @each $opacity in v.$opacities {
+            &.translucent-#{$opacity * 100} {
+                background-color: color.change($color: $value, $alpha: $opacity) !important;
+
+                &:hover { 
+                    $hover-opacity: $opacity;
+                    @if ($hover-opacity <= 0.7) {
+                        $hover-opacity: $hover-opacity + 0.2;
+                    }
+                    @else {
+                        $hover-opacity: 1.0;
+                    }
+                    background-color: color.change($color: $value, $alpha: $hover-opacity) !important;
+                }
+            }
+        }
+    }
+}
