@@ -11,26 +11,39 @@
         background-color: $value !important;
 
         @if ($is-light-bg) {
-            color: v.$dark-purple
+            color: v.$dark-purple;
+
+            &:hover {
+                background-color: v.$black !important;
+                color: v.$white !important;
+                box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 
+                            0 17px 50px 0 rgba(0,0,0,0.19);
+            }
         }
         @else {
             color: v.$white;
-        }
 
-        &:hover {
-            @if ($is-light-bg) {
-                background-color: v.$black !important;
-                color: v.$white;
-            }
-            @else {
+            &:hover {
                 background-color: v.$white !important;
-                color: v.$black;
+                color: v.$black !important;
+                box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 
+                            0 17px 50px 0 rgba(0,0,0,0.19);
             }
-            box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
         }
         
-        &.translucent {
-            background-color: color.change($color: $value, $alpha: 0.4) !important;
+        @each $opacity in v.$opacities {
+            &.translucent-#{$opacity * 100} {
+                background-color: color.change($color: $value, $alpha: $opacity) !important;
+
+                &:hover {
+                    @if ($is-light-bg) {
+                        background-color: color.change($color: v.$black, $alpha: $opacity) !important;
+                    }
+                    @else {
+                        background-color: color.change($color: v.$white, $alpha: $opacity) !important;
+                    }
+                }
+            }
         }
     }
 }
