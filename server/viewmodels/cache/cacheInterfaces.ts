@@ -32,6 +32,10 @@ export type CachePageRecord = Record<number, IProjectCachePage>;
  */
 export interface IProjectCachePage extends ICache{
     /**
+     * The total number of available pages of projects.
+     */
+    TotalPages: number;
+    /**
      * The project list associated with this page.
      */
     Projects: IProjectDetails[];

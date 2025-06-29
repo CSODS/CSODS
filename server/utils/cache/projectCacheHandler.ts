@@ -182,6 +182,7 @@ export class ProjectCacheHandler {
                 CreatedOn: this._cDate,
                 LastAccessed: this._cDate,
                 ViewCount: 1,
+                TotalPages: this._jsonCache.TotalPages,
                 Projects: projects
             };
 
@@ -487,20 +488,22 @@ export class ProjectCacheHandler {
      */
     private async generateProjectCache(): Promise<IProjectCache> {
         //  Define page and cache creation utils.
-        function createCachePage(date: Date, projects: IProjectDetails[]): IProjectCachePage {
+        function createCachePage(date: Date, totalPages: number, projects: IProjectDetails[]): IProjectCachePage {
             return {
                 CreatedOn: date,
                 LastAccessed: date,
                 ViewCount: 0,
+                TotalPages: totalPages,
                 Projects: projects
             };
         }
         function createCachePages(date: Date, pageRecord: Record<number, IProjectDetails[]>): CachePageRecord {
             let cachePages: CachePageRecord = {};
             const recordEntries = Object.entries(pageRecord);
+            const totalEntries = recordEntries.length;
             recordEntries.map((keyPagePair) => {
                 const numericKey = Number(keyPagePair[0]);
-                cachePages[numericKey] = createCachePage(date, keyPagePair[1])
+                cachePages[numericKey] = createCachePage(date, totalEntries, keyPagePair[1])
             });
             return cachePages;
         }
