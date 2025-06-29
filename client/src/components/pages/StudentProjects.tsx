@@ -6,6 +6,7 @@ import { IProjectDetails, IAllProjectTags } from '../../viewModels/csods/csodsAp
 import { ProjectDataService } from '../../utils/data/ProjectDataService';
 import ApiHandler from '../../utils/api/ApiHandler';
 import ProjectCard from './StudentProjectsComponents/ProjectCards';
+import Paginator from './StudentProjectsComponents/Paginator';
 
 //#region Student Projects
 export default function StudentProjects() {
@@ -76,6 +77,8 @@ export default function StudentProjects() {
       </div>
       {/* Up Button */}
       <UpButton/>
+      {/* Paginator */}
+      <Paginator totalPages={totalPages} currentPage={Number(pageNumber)}/>
     </div>  
   );
 }
