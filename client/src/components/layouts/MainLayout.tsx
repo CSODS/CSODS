@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom';
 import { ADDRESSES } from '../../constants/constants';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { bgConstants } from '../../constants/bg-constants';
 
 export function PrimaryLayout() {
@@ -14,7 +14,7 @@ export function PrimaryLayout() {
     return(
         <div>
             <div className="p-0 navbar navbar-expand-lg sticky-top">    
-                <div className="py-1 container-fluid bg-dark-grey-blue translucent header-container">
+                <div className="py-1 container-fluid bg-dark-2 translucent-20 header-container">
                     <a className="navbar-brand color-light-1 fs-4 bolder" href={ADDRESSES.LANDING_PAGE}>
                         <img src='/lucso-logo-no-bg.png' alt="CSO_LOGO" className='header-logo'/>
                         CSO:DS  
@@ -24,20 +24,20 @@ export function PrimaryLayout() {
                     </button>
                     <div className="collapse navbar-collapse" id="navbar">
                         <div className="navbar-nav d-none d-lg-flex gap-2 position-absolute top-50 start-50 translate-middle">
-                            <Link to={ADDRESSES.HOME} className="nav-link header-nav-element">Home</Link>
-                            <Link to={`${ADDRESSES.STUDENT_PROJECTS_ROOT}/1`} className="nav-link header-nav-element">Projects</Link>
-                            <Link to={ADDRESSES.ABOUT} className="nav-link header-nav-element">About</Link>
+                            <NavLink to={ADDRESSES.HOME} className="mx-2 header-nav-element">Home</NavLink>
+                            <NavLink to={`${ADDRESSES.STUDENT_PROJECTS_ROOT}/1`} className="mx-2 header-nav-element">Projects</NavLink>
+                            <NavLink to={ADDRESSES.ABOUT} className="mx-2 header-nav-element">About</NavLink>
                         </div>
-                        <Link to={ADDRESSES.SUBMIT_PROJECT} className="ms-auto me-2 px-2 py-1 nav-link d-none d-lg-flex btn-light-1 rounded-pill">
+                        <NavLink to={ADDRESSES.SUBMIT_PROJECT} className="ms-auto me-2 px-2 py-1 nav-link d-none d-lg-flex btn-neutral-1 rounded-pill">
                             <div className="nav-link ms-2 me-1">Submit a Project</div>
                             <i className="bi bi-arrow-right-circle ms-2 me-1"></i>
-                        </Link>
+                        </NavLink>
                         
                         <div className="bg-dark-2 navbar-nav d-flex d-lg-none flex-column border border-light-1 rounded-2">
-                            <Link to={ADDRESSES.HOME} className="nav-link color-light-2">Home</Link>
-                            <Link to={`${ADDRESSES.STUDENT_PROJECTS_ROOT}/1`} className="nav-link color-light-2">Projects</Link>
-                            <Link to={ADDRESSES.ABOUT} className="nav-link color-light-2">About</Link>
-                            <Link to={ADDRESSES.SUBMIT_PROJECT} className="nav-link color-light-2">Submit a Project</Link>
+                            <NavLink to={ADDRESSES.HOME} className="nav-link color-light-2">Home</NavLink>
+                            <NavLink to={`${ADDRESSES.STUDENT_PROJECTS_ROOT}/1`} className="nav-link color-light-2">Projects</NavLink>
+                            <NavLink to={ADDRESSES.ABOUT} className="nav-link color-light-2">About</NavLink>
+                            <NavLink to={ADDRESSES.SUBMIT_PROJECT} className="nav-link color-light-2">Submit a Project</NavLink>
                         </div>
                     </div>
                 </div>
