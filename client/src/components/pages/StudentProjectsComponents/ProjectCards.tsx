@@ -47,11 +47,11 @@ export default function ProjectCard({
                         </div>
                         {/* github link and view link */}
                         <div className='mt-3 mb-0 ps-0 pe-0 d-flex flex-row align-items-center'>
-                        <button type='button' className='col-lg-3 px-4 py-2 ms-0 me-3 btn-light-1 rounded-4 border border-1 border-dark-3' onClick={() => redirectToUrl(projectDetails.Project.GitHubUrl)}>
+                        <button type='button' className='col-lg-3 px-4 py-2 ms-0 me-3 btn btn-light-1 rounded-4 border border-1 border-dark-3' onClick={() => redirectToUrl(projectDetails.Project.GitHubUrl)}>
                             {/* <img src={github_logo} alt='...' className='img-fluid'/> */}
                             GitHub
                         </button>
-                        <button type='button' className='col-lg-3 px-4 py-2 ms-0 me-3 btn-dark-3 rounded-4 border border-1 border-light-1' onClick={() => handleClick(1)}>View</button>
+                        <button type='button' className='col-lg-3 px-4 py-2 ms-0 me-3 btn btn-dark-3 rounded-4 border border-1 border-light-1' onClick={() => handleClick(1)}>View</button>
                         </div>
                     </div>
                 </div>
