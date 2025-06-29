@@ -1,8 +1,35 @@
 .bg-light-1 {
   background-color: rgb(255, 255, 255) !important;
 }
-.bg-light-1.translucent {
-  background-color: rgba(255, 255, 255, 0.23) !important;
+.bg-light-1.translucent-10 {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
+.bg-light-1.translucent-20 {
+  background-color: rgba(255, 255, 255, 0.2) !important;
+}
+.bg-light-1.translucent-30 {
+  background-color: rgba(255, 255, 255, 0.3) !important;
+}
+.bg-light-1.translucent-40 {
+  background-color: rgba(255, 255, 255, 0.4) !important;
+}
+.bg-light-1.translucent-50 {
+  background-color: rgba(255, 255, 255, 0.5) !important;
+}
+.bg-light-1.translucent-60 {
+  background-color: rgba(255, 255, 255, 0.6) !important;
+}
+.bg-light-1.translucent-70 {
+  background-color: rgba(255, 255, 255, 0.7) !important;
+}
+.bg-light-1.translucent-80 {
+  background-color: rgba(255, 255, 255, 0.8) !important;
+}
+.bg-light-1.translucent-90 {
+  background-color: rgba(255, 255, 255, 0.9) !important;
+}
+.bg-light-1.translucent-100 {
+  background-color: white !important;
 }
 
 .color-light-1 {
@@ -16,8 +43,35 @@
 .bg-light-2 {
   background-color: rgb(222, 222, 222) !important;
 }
-.bg-light-2.translucent {
-  background-color: rgba(222, 222, 222, 0.23) !important;
+.bg-light-2.translucent-10 {
+  background-color: rgba(222, 222, 222, 0.1) !important;
+}
+.bg-light-2.translucent-20 {
+  background-color: rgba(222, 222, 222, 0.2) !important;
+}
+.bg-light-2.translucent-30 {
+  background-color: rgba(222, 222, 222, 0.3) !important;
+}
+.bg-light-2.translucent-40 {
+  background-color: rgba(222, 222, 222, 0.4) !important;
+}
+.bg-light-2.translucent-50 {
+  background-color: rgba(222, 222, 222, 0.5) !important;
+}
+.bg-light-2.translucent-60 {
+  background-color: rgba(222, 222, 222, 0.6) !important;
+}
+.bg-light-2.translucent-70 {
+  background-color: rgba(222, 222, 222, 0.7) !important;
+}
+.bg-light-2.translucent-80 {
+  background-color: rgba(222, 222, 222, 0.8) !important;
+}
+.bg-light-2.translucent-90 {
+  background-color: rgba(222, 222, 222, 0.9) !important;
+}
+.bg-light-2.translucent-100 {
+  background-color: #dedede !important;
 }
 
 .color-light-2 {
@@ -31,8 +85,35 @@
 .bg-light-3 {
   background-color: rgb(140, 127, 132) !important;
 }
-.bg-light-3.translucent {
-  background-color: rgba(140, 127, 132, 0.23) !important;
+.bg-light-3.translucent-10 {
+  background-color: rgba(140, 127, 132, 0.1) !important;
+}
+.bg-light-3.translucent-20 {
+  background-color: rgba(140, 127, 132, 0.2) !important;
+}
+.bg-light-3.translucent-30 {
+  background-color: rgba(140, 127, 132, 0.3) !important;
+}
+.bg-light-3.translucent-40 {
+  background-color: rgba(140, 127, 132, 0.4) !important;
+}
+.bg-light-3.translucent-50 {
+  background-color: rgba(140, 127, 132, 0.5) !important;
+}
+.bg-light-3.translucent-60 {
+  background-color: rgba(140, 127, 132, 0.6) !important;
+}
+.bg-light-3.translucent-70 {
+  background-color: rgba(140, 127, 132, 0.7) !important;
+}
+.bg-light-3.translucent-80 {
+  background-color: rgba(140, 127, 132, 0.8) !important;
+}
+.bg-light-3.translucent-90 {
+  background-color: rgba(140, 127, 132, 0.9) !important;
+}
+.bg-light-3.translucent-100 {
+  background-color: #8c7f84 !important;
 }
 
 .color-light-3 {
@@ -46,8 +127,35 @@
 .bg-neutral-1 {
   background-color: rgb(0, 191, 99) !important;
 }
-.bg-neutral-1.translucent {
-  background-color: rgba(0, 191, 99, 0.23) !important;
+.bg-neutral-1.translucent-10 {
+  background-color: rgba(0, 191, 99, 0.1) !important;
+}
+.bg-neutral-1.translucent-20 {
+  background-color: rgba(0, 191, 99, 0.2) !important;
+}
+.bg-neutral-1.translucent-30 {
+  background-color: rgba(0, 191, 99, 0.3) !important;
+}
+.bg-neutral-1.translucent-40 {
+  background-color: rgba(0, 191, 99, 0.4) !important;
+}
+.bg-neutral-1.translucent-50 {
+  background-color: rgba(0, 191, 99, 0.5) !important;
+}
+.bg-neutral-1.translucent-60 {
+  background-color: rgba(0, 191, 99, 0.6) !important;
+}
+.bg-neutral-1.translucent-70 {
+  background-color: rgba(0, 191, 99, 0.7) !important;
+}
+.bg-neutral-1.translucent-80 {
+  background-color: rgba(0, 191, 99, 0.8) !important;
+}
+.bg-neutral-1.translucent-90 {
+  background-color: rgba(0, 191, 99, 0.9) !important;
+}
+.bg-neutral-1.translucent-100 {
+  background-color: #00bf63 !important;
 }
 
 .color-neutral-1 {
@@ -61,8 +169,35 @@
 .bg-neutral-2 {
   background-color: rgb(68, 67, 109) !important;
 }
-.bg-neutral-2.translucent {
-  background-color: rgba(68, 67, 109, 0.23) !important;
+.bg-neutral-2.translucent-10 {
+  background-color: rgba(68, 67, 109, 0.1) !important;
+}
+.bg-neutral-2.translucent-20 {
+  background-color: rgba(68, 67, 109, 0.2) !important;
+}
+.bg-neutral-2.translucent-30 {
+  background-color: rgba(68, 67, 109, 0.3) !important;
+}
+.bg-neutral-2.translucent-40 {
+  background-color: rgba(68, 67, 109, 0.4) !important;
+}
+.bg-neutral-2.translucent-50 {
+  background-color: rgba(68, 67, 109, 0.5) !important;
+}
+.bg-neutral-2.translucent-60 {
+  background-color: rgba(68, 67, 109, 0.6) !important;
+}
+.bg-neutral-2.translucent-70 {
+  background-color: rgba(68, 67, 109, 0.7) !important;
+}
+.bg-neutral-2.translucent-80 {
+  background-color: rgba(68, 67, 109, 0.8) !important;
+}
+.bg-neutral-2.translucent-90 {
+  background-color: rgba(68, 67, 109, 0.9) !important;
+}
+.bg-neutral-2.translucent-100 {
+  background-color: #44436d !important;
 }
 
 .color-neutral-2 {
@@ -76,8 +211,35 @@
 .bg-dark-1 {
   background-color: rgb(43, 45, 66) !important;
 }
-.bg-dark-1.translucent {
-  background-color: rgba(43, 45, 66, 0.23) !important;
+.bg-dark-1.translucent-10 {
+  background-color: rgba(43, 45, 66, 0.1) !important;
+}
+.bg-dark-1.translucent-20 {
+  background-color: rgba(43, 45, 66, 0.2) !important;
+}
+.bg-dark-1.translucent-30 {
+  background-color: rgba(43, 45, 66, 0.3) !important;
+}
+.bg-dark-1.translucent-40 {
+  background-color: rgba(43, 45, 66, 0.4) !important;
+}
+.bg-dark-1.translucent-50 {
+  background-color: rgba(43, 45, 66, 0.5) !important;
+}
+.bg-dark-1.translucent-60 {
+  background-color: rgba(43, 45, 66, 0.6) !important;
+}
+.bg-dark-1.translucent-70 {
+  background-color: rgba(43, 45, 66, 0.7) !important;
+}
+.bg-dark-1.translucent-80 {
+  background-color: rgba(43, 45, 66, 0.8) !important;
+}
+.bg-dark-1.translucent-90 {
+  background-color: rgba(43, 45, 66, 0.9) !important;
+}
+.bg-dark-1.translucent-100 {
+  background-color: #2b2d42 !important;
 }
 
 .color-dark-1 {
@@ -91,8 +253,35 @@
 .bg-dark-2 {
   background-color: rgb(19, 7, 46) !important;
 }
-.bg-dark-2.translucent {
-  background-color: rgba(19, 7, 46, 0.23) !important;
+.bg-dark-2.translucent-10 {
+  background-color: rgba(19, 7, 46, 0.1) !important;
+}
+.bg-dark-2.translucent-20 {
+  background-color: rgba(19, 7, 46, 0.2) !important;
+}
+.bg-dark-2.translucent-30 {
+  background-color: rgba(19, 7, 46, 0.3) !important;
+}
+.bg-dark-2.translucent-40 {
+  background-color: rgba(19, 7, 46, 0.4) !important;
+}
+.bg-dark-2.translucent-50 {
+  background-color: rgba(19, 7, 46, 0.5) !important;
+}
+.bg-dark-2.translucent-60 {
+  background-color: rgba(19, 7, 46, 0.6) !important;
+}
+.bg-dark-2.translucent-70 {
+  background-color: rgba(19, 7, 46, 0.7) !important;
+}
+.bg-dark-2.translucent-80 {
+  background-color: rgba(19, 7, 46, 0.8) !important;
+}
+.bg-dark-2.translucent-90 {
+  background-color: rgba(19, 7, 46, 0.9) !important;
+}
+.bg-dark-2.translucent-100 {
+  background-color: #13072e !important;
 }
 
 .color-dark-2 {
@@ -106,8 +295,35 @@
 .bg-dark-3 {
   background-color: rgb(0, 0, 0) !important;
 }
-.bg-dark-3.translucent {
-  background-color: rgba(0, 0, 0, 0.23) !important;
+.bg-dark-3.translucent-10 {
+  background-color: rgba(0, 0, 0, 0.1) !important;
+}
+.bg-dark-3.translucent-20 {
+  background-color: rgba(0, 0, 0, 0.2) !important;
+}
+.bg-dark-3.translucent-30 {
+  background-color: rgba(0, 0, 0, 0.3) !important;
+}
+.bg-dark-3.translucent-40 {
+  background-color: rgba(0, 0, 0, 0.4) !important;
+}
+.bg-dark-3.translucent-50 {
+  background-color: rgba(0, 0, 0, 0.5) !important;
+}
+.bg-dark-3.translucent-60 {
+  background-color: rgba(0, 0, 0, 0.6) !important;
+}
+.bg-dark-3.translucent-70 {
+  background-color: rgba(0, 0, 0, 0.7) !important;
+}
+.bg-dark-3.translucent-80 {
+  background-color: rgba(0, 0, 0, 0.8) !important;
+}
+.bg-dark-3.translucent-90 {
+  background-color: rgba(0, 0, 0, 0.9) !important;
+}
+.bg-dark-3.translucent-100 {
+  background-color: black !important;
 }
 
 .color-dark-3 {

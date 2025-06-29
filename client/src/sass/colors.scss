@@ -4,9 +4,13 @@
 @each $name, $value in v.$color-scheme {
     .bg-#{$name} {
         background-color: $value !important;
-        &.translucent {
-            background-color: color.change($color: $value, $alpha: 0.23) !important;
+
+        @each $opacity in v.$opacities {
+            &.translucent-#{$opacity * 100} {
+                background-color: color.change($color: $value, $alpha: $opacity) !important;
+            }
         }
+        
     }
 
     .color-#{$name} {
