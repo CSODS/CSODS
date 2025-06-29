@@ -1,0 +1,33 @@
+.border-light-1 {
+  border-color: rgb(255, 255, 255);
+}
+
+.border-light-2 {
+  border-color: rgb(222, 222, 222);
+}
+
+.border-light-3 {
+  border-color: rgb(140, 127, 132);
+}
+
+.border-neutral-1 {
+  border-color: rgb(0, 191, 99);
+}
+
+.border-neutral-2 {
+  border-color: rgb(68, 67, 109);
+}
+
+.border-dark-1 {
+  border-color: rgb(43, 45, 66);
+}
+
+.border-dark-2 {
+  border-color: rgb(19, 7, 46);
+}
+
+.border-dark-3 {
+  border-color: rgb(0, 0, 0);
+}
+
+/*# sourceMappingURL=borders.css.map */
