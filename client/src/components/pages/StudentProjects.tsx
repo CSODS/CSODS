@@ -11,6 +11,7 @@ import ProjectCard from './StudentProjectsComponents/ProjectCards';
 export default function StudentProjects() {
 
   const [projectList, setProjectList] = useState<IProjectDetails[]>(DEFAULTS.PROJECT_LIST);
+  const [totalPages, setTotalPages] = useState<number>(1);
   const [projectTags, setProjectTags] = useState<IAllProjectTags>(DEFAULTS.TAGS);
 
   const [projectDataService, setProjectDataService] = useState<ProjectDataService>(
@@ -23,9 +24,10 @@ export default function StudentProjects() {
     const apiHandler = new ApiHandler();
     const loadProjectList = async() => {
       if (pageNumber){
-        const projectList = await apiHandler.GetProjectList(pageNumber);
-        if (projectList) {
-          setProjectList(projectList);
+        const projectsPage = await apiHandler.GetProjectsPage(pageNumber);
+        if (projectsPage && projectsPage.Projects) {
+          setTotalPages(projectsPage.TotalPages);
+          setProjectList(projectsPage.Projects);
         }
       }
     }

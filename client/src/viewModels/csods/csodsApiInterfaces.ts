@@ -1,5 +1,5 @@
 export interface IProjectsPage {
-    VisitCount: number,
+    TotalPages: number,
     Projects: IProjectDetails[]
 };
 
