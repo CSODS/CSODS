@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { IProjectDetails, IProjectTags } from "../../../viewModels/csods/csodsApiInterfaces";
 
 interface ProjectCardProps {
+    pageNumber: number,
     iconClass: string, 
     projectDetails: IProjectDetails,
     projectTags: IProjectTags, 
@@ -10,6 +11,7 @@ interface ProjectCardProps {
 };
 
 export default function ProjectCard({
+    pageNumber,
     iconClass,
     projectDetails,
     projectTags, 
@@ -21,9 +23,11 @@ export default function ProjectCard({
     }
     
     const navigate = useNavigate();
-    const handleClick = (projectId: number) => {
-        navigate(`${CONSTANTS.ADDRESSES.STUDENT_PROJECTS_ROOT}/${projectId}`);
+    const viewProject = (pageNumber: number, projectId: number) => {
+        navigate(`${CONSTANTS.ADDRESSES.STUDENT_PROJECTS_ROOT}/${pageNumber}/${projectId}`);
     }
+
+    const projectId: number = projectDetails.Project.ProjectId;
 
     return (
         <div key={projectDetails.Project.ProjectId} className='col' style={{maxWidth:700}}>
@@ -47,11 +51,11 @@ export default function ProjectCard({
                         </div>
                         {/* github link and view link */}
                         <div className='mt-3 mb-0 ps-0 pe-0 d-flex flex-row align-items-center'>
-                        <button type='button' className='col-lg-3 px-4 py-2 ms-0 me-3 btn-light-1 rounded-4 border border-1 border-dark-3' onClick={() => redirectToUrl(projectDetails.Project.GitHubUrl)}>
+                        <button type='button' className='col-lg-3 px-4 py-2 ms-0 me-3 btn btn-light-1 rounded-4 border border-1 border-dark-3' onClick={() => redirectToUrl(projectDetails.Project.GitHubUrl)}>
                             {/* <img src={github_logo} alt='...' className='img-fluid'/> */}
                             GitHub
                         </button>
-                        <button type='button' className='col-lg-3 px-4 py-2 ms-0 me-3 btn-dark-3 rounded-4 border border-1 border-light-1' onClick={() => handleClick(1)}>View</button>
+                        <button type='button' className='col-lg-3 px-4 py-2 ms-0 me-3 btn btn-dark-3 rounded-4 border border-1 border-light-1' onClick={() => viewProject(pageNumber, projectId)}>View</button>
                         </div>
                     </div>
                 </div>
@@ -68,7 +72,7 @@ function Tags(projectTags: IProjectTags) {
     tagValues.map((tag, index) => {
       if (typeof tag === 'string') {
         return (
-          <div key={`tag-${index}`} className='mt-1 py-1 px-3 ms-0 me-2 bg-dark-1 btn-dark-1 rounded-pill border border-light-1 fs-xs'>
+          <div key={`tag-${index}`} className='mt-1 py-1 px-3 ms-0 me-2 bg-dark-1 btn btn-dark-1 rounded-pill border border-light-1 fs-xs'>
             {tag}
           </div>
         )
@@ -77,7 +81,7 @@ function Tags(projectTags: IProjectTags) {
         return (
           tag.map((subTag, subIndex) => 
             subTag ? (
-                <div key={`tag-${subIndex}`} className='mt-1 py-1 px-3 ms-0 me-2 bg-dark-1 btn-dark-1 rounded-pill border border-light-1 fs-xs'>
+                <div key={`tag-${subIndex}`} className='mt-1 py-1 px-3 ms-0 me-2 bg-dark-1 btn btn-dark-1 rounded-pill border border-light-1 fs-xs'>
                   {subTag}  
                 </div>
             ) : null

@@ -6,11 +6,13 @@ import { IProjectDetails, IAllProjectTags } from '../../viewModels/csods/csodsAp
 import { ProjectDataService } from '../../utils/data/ProjectDataService';
 import ApiHandler from '../../utils/api/ApiHandler';
 import ProjectCard from './StudentProjectsComponents/ProjectCards';
+import Paginator from './StudentProjectsComponents/Paginator';
 
 //#region Student Projects
 export default function StudentProjects() {
 
   const [projectList, setProjectList] = useState<IProjectDetails[]>(DEFAULTS.PROJECT_LIST);
+  const [totalPages, setTotalPages] = useState<number>(1);
   const [projectTags, setProjectTags] = useState<IAllProjectTags>(DEFAULTS.TAGS);
 
   const [projectDataService, setProjectDataService] = useState<ProjectDataService>(
@@ -23,9 +25,10 @@ export default function StudentProjects() {
     const apiHandler = new ApiHandler();
     const loadProjectList = async() => {
       if (pageNumber){
-        const projectList = await apiHandler.GetProjectList(pageNumber);
-        if (projectList) {
-          setProjectList(projectList);
+        const projectsPage = await apiHandler.GetProjectsPage(pageNumber);
+        if (projectsPage && projectsPage.Projects) {
+          setTotalPages(projectsPage.TotalPages);
+          setProjectList(projectsPage.Projects);
         }
       }
     }
@@ -63,6 +66,7 @@ export default function StudentProjects() {
             return (
               <ProjectCard
                 key={value.Project.ProjectId}
+                pageNumber={Number(pageNumber)}
                 iconClass={iconClass}
                 projectDetails={value}
                 projectTags={projectTags}
@@ -74,6 +78,8 @@ export default function StudentProjects() {
       </div>
       {/* Up Button */}
       <UpButton/>
+      {/* Paginator */}
+      <Paginator totalPages={totalPages} currentPage={Number(pageNumber)}/>
     </div>  
   );
 }
@@ -111,11 +117,11 @@ function SearchBar() {
         </div>
       </div>
       <div className='mt-4'>
-        <button type='button' className='btn-dark-3 translucent-60 rounded-pill my-1 mx-2 px-4 border border-1 border-light-1'>All</button>
-        <button type='button' className='btn-dark-3 translucent-60 rounded-pill my-1 mx-2 px-4 border border-1 border-light-1'>JavaScript</button>
-        <button type='button' className='btn-dark-3 translucent-60 rounded-pill my-1 mx-2 px-4 border border-1 border-light-1'>Python</button>
-        <button type='button' className='btn-dark-3 translucent-60 rounded-pill my-1 mx-2 px-4 border border-1 border-light-1'>C#</button>
-        <button type='button' className='btn-dark-3 translucent-60 rounded-pill my-1 mx-2 px-4 border border-1 border-light-1'>C</button>
+        <button type='button' className='btn btn-dark-3 translucent-60 rounded-pill my-1 mx-2 px-4 border border-1 border-light-1'>All</button>
+        <button type='button' className='btn btn-dark-3 translucent-60 rounded-pill my-1 mx-2 px-4 border border-1 border-light-1'>JavaScript</button>
+        <button type='button' className='btn btn-dark-3 translucent-60 rounded-pill my-1 mx-2 px-4 border border-1 border-light-1'>Python</button>
+        <button type='button' className='btn btn-dark-3 translucent-60 rounded-pill my-1 mx-2 px-4 border border-1 border-light-1'>C#</button>
+        <button type='button' className='btn btn-dark-3 translucent-60 rounded-pill my-1 mx-2 px-4 border border-1 border-light-1'>C</button>
       </div>
     </div>
   );
