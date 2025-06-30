@@ -66,6 +66,7 @@ export default function StudentProjects() {
             return (
               <ProjectCard
                 key={value.Project.ProjectId}
+                pageNumber={Number(pageNumber)}
                 iconClass={iconClass}
                 projectDetails={value}
                 projectTags={projectTags}

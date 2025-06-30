@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { IProjectDetails, IProjectTags } from "../../../viewModels/csods/csodsApiInterfaces";
 
 interface ProjectCardProps {
+    pageNumber: number,
     iconClass: string, 
     projectDetails: IProjectDetails,
     projectTags: IProjectTags, 
@@ -10,6 +11,7 @@ interface ProjectCardProps {
 };
 
 export default function ProjectCard({
+    pageNumber,
     iconClass,
     projectDetails,
     projectTags, 
@@ -21,9 +23,11 @@ export default function ProjectCard({
     }
     
     const navigate = useNavigate();
-    const handleClick = (projectId: number) => {
-        navigate(`${CONSTANTS.ADDRESSES.STUDENT_PROJECTS_ROOT}/${projectId}`);
+    const viewProject = (pageNumber: number, projectId: number) => {
+        navigate(`${CONSTANTS.ADDRESSES.STUDENT_PROJECTS_ROOT}/${pageNumber}/${projectId}`);
     }
+
+    const projectId: number = projectDetails.Project.ProjectId;
 
     return (
         <div key={projectDetails.Project.ProjectId} className='col' style={{maxWidth:700}}>
@@ -51,7 +55,7 @@ export default function ProjectCard({
                             {/* <img src={github_logo} alt='...' className='img-fluid'/> */}
                             GitHub
                         </button>
-                        <button type='button' className='col-lg-3 px-4 py-2 ms-0 me-3 btn btn-dark-3 rounded-4 border border-1 border-light-1' onClick={() => handleClick(1)}>View</button>
+                        <button type='button' className='col-lg-3 px-4 py-2 ms-0 me-3 btn btn-dark-3 rounded-4 border border-1 border-light-1' onClick={() => viewProject(pageNumber, projectId)}>View</button>
                         </div>
                     </div>
                 </div>
