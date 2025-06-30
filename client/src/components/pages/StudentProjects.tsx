@@ -116,11 +116,11 @@ function SearchBar() {
         </div>
       </div>
       <div className='mt-4'>
-        <button type='button' className='btn-dark-3 translucent-60 rounded-pill my-1 mx-2 px-4 border border-1 border-light-1'>All</button>
-        <button type='button' className='btn-dark-3 translucent-60 rounded-pill my-1 mx-2 px-4 border border-1 border-light-1'>JavaScript</button>
-        <button type='button' className='btn-dark-3 translucent-60 rounded-pill my-1 mx-2 px-4 border border-1 border-light-1'>Python</button>
-        <button type='button' className='btn-dark-3 translucent-60 rounded-pill my-1 mx-2 px-4 border border-1 border-light-1'>C#</button>
-        <button type='button' className='btn-dark-3 translucent-60 rounded-pill my-1 mx-2 px-4 border border-1 border-light-1'>C</button>
+        <button type='button' className='btn btn-dark-3 translucent-60 rounded-pill my-1 mx-2 px-4 border border-1 border-light-1'>All</button>
+        <button type='button' className='btn btn-dark-3 translucent-60 rounded-pill my-1 mx-2 px-4 border border-1 border-light-1'>JavaScript</button>
+        <button type='button' className='btn btn-dark-3 translucent-60 rounded-pill my-1 mx-2 px-4 border border-1 border-light-1'>Python</button>
+        <button type='button' className='btn btn-dark-3 translucent-60 rounded-pill my-1 mx-2 px-4 border border-1 border-light-1'>C#</button>
+        <button type='button' className='btn btn-dark-3 translucent-60 rounded-pill my-1 mx-2 px-4 border border-1 border-light-1'>C</button>
       </div>
     </div>
   );

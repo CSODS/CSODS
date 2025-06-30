@@ -77,7 +77,7 @@ function Tags(projectTags: IProjectTags) {
         return (
           tag.map((subTag, subIndex) => 
             subTag ? (
-                <div key={`tag-${subIndex}`} className='mt-1 py-1 px-3 ms-0 me-2 bg-dark-1 btn-dark-1 rounded-pill border border-light-1 fs-xs'>
+                <div key={`tag-${subIndex}`} className='mt-1 py-1 px-3 ms-0 me-2 bg-dark-1 btn btn-dark-1 rounded-pill border border-light-1 fs-xs'>
                   {subTag}  
                 </div>
             ) : null
