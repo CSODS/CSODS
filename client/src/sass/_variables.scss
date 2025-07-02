@@ -12,6 +12,16 @@ $dark-purple:rgb(19, 7, 46);
 $black:rgb(0, 0, 0);
 $mulled-wine: rgb(68, 67, 109);
 
+$chrome-yellow: rgb(255 165 0);
+$cookie-brown: rgb(199 155 26);
+
+//  utility colors
+$util-error: rgb(255, 255, 255);
+$util-alert: $chrome-yellow;
+$util-alert-subtle: $cookie-brown;
+$util-notify: rgb(255, 255, 255);
+$util-success: $green;
+
 //  opacity values
 $opacities: 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0;
 
@@ -168,3 +178,10 @@ $color-scheme: build-color-scheme();
     $is-dark: $color-index != null;
     @return $is-dark;
 }
+
+$utility-colors: (
+    "util-error": $util-error,
+    "util-alert": $util-alert,
+    "util-notify": $util-notify,
+    "util-success": $util-success
+);

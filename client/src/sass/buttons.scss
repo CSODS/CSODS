@@ -125,3 +125,15 @@
         }
     }
 }
+
+@each $name, $value in v.$utility-colors {
+    .btn.btn-#{$name} {
+        background-color: $value !important;
+
+        @each $opacity in v.$opacities {
+            &.translucent-#{$opacity * 100} {
+                background-color: color.change($color: $value, $alpha: $opacity) !important; 
+            }
+         }
+    }
+}
