@@ -15,7 +15,7 @@ function Home() {
             <div className='ps-md-3 col-md-6 d-flex align-items-end'>
               <div className='card-body mx-0 ps-0 pb-0 align-self-end d-flex flex-column justify-content-end'>
                 <div className='mt-4 mb-1 p-0 d-flex'>
-                  <div className='p-3 py-0 fs-6 btn-light-1 rounded-pill text-center'>
+                  <div className='p-3 py-0 fs-6 btn btn-light-1 rounded-pill text-center'>
                     #DevelopersSpace
                   </div>
                 </div>
