@@ -114,8 +114,8 @@ export const DEFAULT_PROJECT = {
 }
 
 export const DEFAULT_USER = {
-    Name: 'User',
-    Email: 'user@gmail.com'
+    Name: 'Project Owner',
+    Email: 'projectowner@gmail.com'
 }
 
 export const TAGS = {
