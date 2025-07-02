@@ -1,4 +1,4 @@
-import * as CONSTANTS from '../../constants/constants';
+import { DEVELOPMENT_TYPES, ICONS } from '../../constants/project_data/tags';
 import * as DEFAULTS from '../../constants/defaults';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
@@ -59,9 +59,9 @@ export default function StudentProjects() {
           projectList.map((value) => {
             const projectTags = projectDataService.getProjectTagValues(value);
 
-            type DevType = keyof typeof CONSTANTS.ICONS
+            type DevType = keyof typeof ICONS;
             const iconKey = projectTags.DevType as DevType;
-            const iconClass: string = CONSTANTS.ICONS[iconKey];
+            const iconClass: string = ICONS[iconKey];
             const projectDescription: string = projectDataService.omitProjectDescription(DEFAULTS.PROJECT_DESCRIPTION);
             return (
               <ProjectCard

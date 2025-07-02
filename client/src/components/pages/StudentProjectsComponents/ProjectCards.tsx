@@ -1,4 +1,4 @@
-import * as CONSTANTS from '../../../constants/constants';
+import ADDRESSES from "../../../constants/addresses/addresses";
 import { useNavigate } from "react-router-dom";
 import { IProjectDetails, IProjectTags } from "../../../viewModels/csods/csodsApiInterfaces";
 
@@ -24,7 +24,9 @@ export default function ProjectCard({
     
     const navigate = useNavigate();
     const viewProject = (pageNumber: number, projectId: number) => {
-        navigate(`${CONSTANTS.ADDRESSES.STUDENT_PROJECTS_ROOT}/${pageNumber}/${projectId}`);
+      const pageLink = `${ADDRESSES.STUDENT_PROJECTS.ROOT}/${pageNumber}`;
+      const detailsLink = `${ADDRESSES.PROJECT_DETAILS.ROOT}/${projectId}`;
+      navigate(`${pageLink}${detailsLink}`);
     }
 
     const projectId: number = projectDetails.Project.ProjectId;

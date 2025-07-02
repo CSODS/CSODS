@@ -1,10 +1,13 @@
 import axios from "axios";
-import * as CONSTANTS from "../../constants/constants";
+import CSODS_API_PATHS from "../../constants/api/api";
 import { IAllProjectTags, IProjectsPage } from "../../viewModels/csods/csodsApiInterfaces";
 
 export default class ApiHandler {
+    private readonly _apiBase = CSODS_API_PATHS.BASE;
+
     public async GetProjectsPage(pageNumber: string): Promise<IProjectsPage | null> {
-        const projectPageLink = `${CONSTANTS.CSODS_BASE}${CONSTANTS.API_PATHS.PROJECTS}/${pageNumber}`;
+        const projectsPage = `${CSODS_API_PATHS.PROJECTS.PATH}/${pageNumber}`;
+        const projectPageLink = `${this._apiBase}${projectsPage}`;
         
         try {
             const response = await axios.get(projectPageLink);
@@ -23,7 +26,9 @@ export default class ApiHandler {
     }
 
     public async GetAllTags(): Promise<IAllProjectTags | null> {
-        const projectTagsLink = `${CONSTANTS.CSODS_BASE}${CONSTANTS.API_PATHS.PROJECT_TAGS}${CONSTANTS.PROJECT_TAG_PATHS.ALL_DATA}`;
+        const projectTagsPath = CSODS_API_PATHS.PROJECT_TAGS.PATH;
+        const all_data = CSODS_API_PATHS.PROJECT_TAGS.ALL_DATA;
+        const projectTagsLink = `${this._apiBase}${projectTagsPath}${all_data}`;
 
         try {
             const response = await axios.get(projectTagsLink);

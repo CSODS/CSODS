@@ -1,4 +1,4 @@
-import * as CONSTANTS from "../../../constants/constants";
+import ADDRESSES from "../../../constants/addresses/addresses";
 import { Link } from "react-router-dom";
 
 export interface IPaginationProps {
@@ -11,7 +11,7 @@ export default function Paginator({
   currentPage
 }: IPaginationProps) {
   const getPageLink = (pageNumber: number) => {
-    const root = CONSTANTS.ADDRESSES.STUDENT_PROJECTS_ROOT;
+    const root = ADDRESSES.STUDENT_PROJECTS.ROOT;
     const link = `${root}/${pageNumber}`;
     return link;
   };
