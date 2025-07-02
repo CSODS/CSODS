@@ -90,7 +90,7 @@ export const PROJECT_LIST = (
             ]
         }
     ]
-) as const;
+)
 
 export const DEFAULT_PROJECT = {
     Project: {
@@ -111,12 +111,12 @@ export const DEFAULT_PROJECT = {
         FrameworkId: 1
         }
     ]
-} as const;
+}
 
 export const DEFAULT_USER = {
     Name: 'User',
     Email: 'user@gmail.com'
-} as const;
+}
 
 export const TAGS = {
     DevTypes: [],
@@ -124,4 +124,4 @@ export const TAGS = {
     Frameworks: [],
     DatabaseTechnologies: [],
     ApplicationIndustries: []
-} as const;
+}
