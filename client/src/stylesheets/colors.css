@@ -334,4 +334,46 @@
   border-color: rgb(0, 0, 0) !important;
 }
 
+.bg-dark-4 {
+  background-color: rgb(68, 67, 109) !important;
+}
+.bg-dark-4.translucent-10 {
+  background-color: rgba(68, 67, 109, 0.1) !important;
+}
+.bg-dark-4.translucent-20 {
+  background-color: rgba(68, 67, 109, 0.2) !important;
+}
+.bg-dark-4.translucent-30 {
+  background-color: rgba(68, 67, 109, 0.3) !important;
+}
+.bg-dark-4.translucent-40 {
+  background-color: rgba(68, 67, 109, 0.4) !important;
+}
+.bg-dark-4.translucent-50 {
+  background-color: rgba(68, 67, 109, 0.5) !important;
+}
+.bg-dark-4.translucent-60 {
+  background-color: rgba(68, 67, 109, 0.6) !important;
+}
+.bg-dark-4.translucent-70 {
+  background-color: rgba(68, 67, 109, 0.7) !important;
+}
+.bg-dark-4.translucent-80 {
+  background-color: rgba(68, 67, 109, 0.8) !important;
+}
+.bg-dark-4.translucent-90 {
+  background-color: rgba(68, 67, 109, 0.9) !important;
+}
+.bg-dark-4.translucent-100 {
+  background-color: #44436d !important;
+}
+
+.color-dark-4 {
+  color: rgb(68, 67, 109) !important;
+}
+
+.border-dark-4 {
+  border-color: rgb(68, 67, 109) !important;
+}
+
 /*# sourceMappingURL=colors.css.map */
