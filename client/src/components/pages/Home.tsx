@@ -1,7 +1,9 @@
 import React from 'react';
-import { ADDRESSES } from '../../constants/constants';
+import ADDRESSES from '../../constants/addresses/addresses';
 
 function Home() {
+  const projectsFirstPage = `${ADDRESSES.STUDENT_PROJECTS.ROOT}/1`;
+
   return (
     <div className='pt-4 d-flex justify-content-center'>
       <div className='container-md mx-3 py-3 d-flex flex-row justify-content-center bg-light-1 translucent-50 rounded-5' style={{maxWidth:1100}}>
@@ -27,8 +29,8 @@ function Home() {
                   Explore. Learn. Contribute.
                 </p>
                 <div className='d-flex'>
-                  <a href={`${ADDRESSES.STUDENT_PROJECTS_ROOT}/1`} className="px-3 py-2 nav-link d-flex flex-row align-items-center justify-content-center btn btn-dark-1 rounded-pill py-2">
-                    <a href="/student_projects" className="nav-link ms-3 me-1 fs-6">View Projects</a>
+                  <a href={projectsFirstPage} className="px-3 py-2 nav-link d-flex flex-row align-items-center justify-content-center btn btn-dark-1 rounded-pill py-2">
+                    <a href={projectsFirstPage} className="nav-link ms-3 me-1 fs-6">View Projects</a>
                     <i className="bi bi-arrow-right-circle ms-3 me-1"></i>
                   </a>
                 </div>

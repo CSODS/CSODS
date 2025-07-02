@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router-dom';
-import { ADDRESSES } from '../../constants/constants';
+import ADDRESSES from '../../constants/addresses/addresses';
 import { NavLink } from 'react-router-dom';
 import { bgConstants } from '../../constants/bg-constants';
 
@@ -10,6 +10,8 @@ export function PrimaryLayout() {
     function randomX() {
         return `${Math.floor(Math.random() * 90)}%`
     }
+
+    const projectsFirstPage = `${ADDRESSES.STUDENT_PROJECTS.ROOT}/1`;
 
     return(
         <div>
@@ -25,7 +27,7 @@ export function PrimaryLayout() {
                     <div className="collapse navbar-collapse" id="navbar">
                         <div className="navbar-nav d-none d-lg-flex gap-2 position-absolute top-50 start-50 translate-middle">
                             <NavLink to={ADDRESSES.HOME} className="mx-2 header-nav-element">Home</NavLink>
-                            <NavLink to={`${ADDRESSES.STUDENT_PROJECTS_ROOT}/1`} className="mx-2 header-nav-element">Projects</NavLink>
+                            <NavLink to={projectsFirstPage} className="mx-2 header-nav-element">Projects</NavLink>
                             <NavLink to={ADDRESSES.ABOUT} className="mx-2 header-nav-element">About</NavLink>
                         </div>
                         <NavLink to={ADDRESSES.SUBMIT_PROJECT} className="ms-auto me-2 px-2 py-1 nav-link d-none d-lg-flex btn btn-neutral-1 rounded-pill">
@@ -35,7 +37,7 @@ export function PrimaryLayout() {
                         
                         <div className="bg-dark-2 navbar-nav d-flex d-lg-none flex-column border border-light-1 rounded-2">
                             <NavLink to={ADDRESSES.HOME} className="nav-link color-light-2">Home</NavLink>
-                            <NavLink to={`${ADDRESSES.STUDENT_PROJECTS_ROOT}/1`} className="nav-link color-light-2">Projects</NavLink>
+                            <NavLink to={projectsFirstPage} className="nav-link color-light-2">Projects</NavLink>
                             <NavLink to={ADDRESSES.ABOUT} className="nav-link color-light-2">About</NavLink>
                             <NavLink to={ADDRESSES.SUBMIT_PROJECT} className="nav-link color-light-2">Submit a Project</NavLink>
                         </div>
