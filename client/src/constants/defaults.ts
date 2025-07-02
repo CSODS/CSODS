@@ -92,6 +92,27 @@ export const PROJECT_LIST = (
     ]
 )
 
+export const DEFAULT_PROJECT = {
+    Project: {
+        ProjectId: 1,
+        ProjectNumber: '0235',
+        UserId: 1,
+        ProjectTitle: 'Nexus Banking',
+        DevTypeId: 1,
+        PrimaryLanguageId: 1,
+        SecondaryLanguageId: null,
+        DatabaseTechnologyId: 2,
+        ApplicationIndustryId: 3,
+        GitHubUrl: 'https://github.com/CSODS/CSODS.git'
+    },
+    ProjectFrameworks: [
+        {
+        ProjectId: 1,
+        FrameworkId: 1
+        }
+    ]
+}
+
 export const TAGS = {
     DevTypes: [],
     ProgrammingLanguages: [],
