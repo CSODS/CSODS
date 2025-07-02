@@ -6,7 +6,7 @@ function Home() {
 
   return (
     <div className='pt-4 d-flex justify-content-center'>
-      <div className='container-md mx-3 py-3 d-flex flex-row justify-content-center bg-light-1 translucent-50 rounded-5' style={{maxWidth:1100}}>
+      <div className='container-md mx-3 py-3 d-flex flex-row justify-content-center bg-light-1 translucent-70 rounded-5' style={{maxWidth:1100}}>
         <div className='pb-4 m-4 card border border-0 bg-transparent'>
           <div className='row g-0'>
             <div className='col-md-6 d-flex d-md-none'>
@@ -15,7 +15,7 @@ function Home() {
             <div className='ps-md-3 col-md-6 d-flex align-items-end'>
               <div className='card-body mx-0 ps-0 pb-0 align-self-end d-flex flex-column justify-content-end'>
                 <div className='mt-4 mb-1 p-0 d-flex'>
-                  <div className='p-3 py-0 fs-6 btn btn-light-1 rounded-pill text-center'>
+                  <div className='p-3 py-0 fs-6 fs-light btn btn-light-1 rounded-pill text-center'>
                     #DevelopersSpace
                   </div>
                 </div>
@@ -25,7 +25,7 @@ function Home() {
                   is a digital hub for students of the Computer Science Department where we foster innovation, 
                   collaboration, and academic excellence in the field of computing.
                 </p>
-                <p className="card-text col-md-9 mt-1 mb-4 text-start color-light-2 fst-italic">
+                <p className="card-text col-md-9 mt-1 mb-4 text-start color-dark-3 fst-italic">
                   Explore. Learn. Contribute.
                 </p>
                 <div className='d-flex'>
