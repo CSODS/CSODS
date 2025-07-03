@@ -88,8 +88,8 @@ function ProjectStatus({
 }: ProjectStatusProps) {
     return (
         <div className="d-flex flex-row justify-content-center align-items-center">
-            <div className="btn bg-dark-2 translucent-30 color-util-alert border-light-1 rounded-pill">
-                <div className="p-0 d-flex flex-row justify-content-center align-items-center">
+            <div className="px-3 py-1 bg-dark-2 translucent-30 color-util-alert border border-light-1 rounded-pill">
+                <div className="m-0 p-0 d-flex flex-row justify-content-center align-items-center">
                     <i className="col m-0 bi bi-dash-circle-fill"></i>
                     <p className="col ms-4 my-0">{Status}</p>
                 </div>
