@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import ProjectInformationCard from "./projectDetailsComponents/ProjectInformation";
 import { IAllProjectTags, IProjectDetails, IUser } from "../../viewModels/csods/csodsApiInterfaces";
 import ApiHandler from "../../utils/api/ApiHandler";
+import CoreContributors from "./projectDetailsComponents/CoreContributors";
 
 export const AllTagsContext = createContext<IAllProjectTags>(TAGS);
 export const ProjectContext = createContext<IProjectDetails>(DEFAULT_PROJECT);
@@ -48,7 +49,7 @@ export default function ProjectDetails() {
             <div className="px-lg-5 d-flex flex-column justify-content-center align-items-center">
               <div className="mt-3 row row-cols-lg-2 w-100">
                 <div className="col-lg-4">
-                  Core Contributors
+                  <CoreContributors/>
                 </div>
                 <UserContext.Provider value={user}>
                   <div className="col-lg-8">
