@@ -4,6 +4,8 @@ import { AllTagsContext, ProjectContext, UserContext } from "../ProjectDetails";
 import { ICONS } from "../../../constants/project_data/tags";
 import { ProjectDataService } from "../../../utils/data/ProjectDataService";
 import { PROJECT_DESCRIPTION } from "../../../constants/defaults";
+import TagRow from "../../TagRow";
+import { Color, Opacity } from "@/types";
 
 const DevIconContext = createContext<string>('');
 const ProjectTagsContext = createContext<IProjectTags | undefined>(undefined);
@@ -19,6 +21,14 @@ export default function ProjectInformationCard() {
     const projectTags = useMemo(() => {
         return projectDataService.getProjectTagValues(project)
     }, [project, projectDataService]);
+
+    const projectTagList = useMemo(() => {
+        return projectDataService.getProjectTagList(projectTags);
+    }, [projectTags, projectDataService]);
+
+    const bgColor: Color = "dark-3";
+    const textColor: Color = "light-1";
+    const opacity: Opacity = 100;
 
     const [devTypeIcon, setDevTypeIcon] = useState<string>('');
 
@@ -40,7 +50,7 @@ export default function ProjectInformationCard() {
                 <SubHeader/>
                 <Description/>
                 <ProjectTagsContext.Provider value={projectTags}>
-                    <Tags/>
+                    <TagRow TagList={projectTagList} BackgroundColor={bgColor} TextColor={textColor} Opacity={opacity}/>
                 </ProjectTagsContext.Provider>
                 <GitHubStatistics/>
             </div>
@@ -136,45 +146,6 @@ function Description() {
             </p>
         </div>
     );
-}
-
-function Tags() {
-    const projectTags = useContext(ProjectTagsContext);
-
-    if (!projectTags)
-        return <div></div>;
-
-    const tagValues = Object.values(projectTags);
-    return(
-        <div className="px-2 mt-2 row w-100">
-            <div className="col d-flex flex-wrap align-items-start">
-                {
-                    tagValues.map((tag, index) => {
-                        if (typeof tag === 'string') {
-                            return (
-                            <div key={`tag-${index}`} className='mt-1 py-1 px-3 ms-0 me-2 bg-dark-1 btn btn-dark-3 rounded-pill fs-xs'>
-                                {tag}
-                            </div>
-                            )
-                        }
-                        else if (Array.isArray(tag)) {
-                            return (
-                            tag.map((subTag, subIndex) => {
-                                return subTag ? (
-                                    <div key={`tag-${subIndex}`} className='mt-1 py-1 px-3 ms-0 me-2 bg-dark-1 btn btn-dark-3 rounded-pill fs-xs'>
-                                    {subTag}  
-                                    </div>
-                                ) : <div/>
-                            }))
-                        }
-                        else {
-                            return <div></div>;
-                        }
-                    })
-                }
-            </div>
-        </div>
-    )
 }
 
 //#region GitHub Statistics
