@@ -1,11 +1,11 @@
-import { DEFAULT_PROJECT, TAGS, DEFAULT_USER } from "../../constants/defaults";
-import { useState, useEffect, createContext } from "react";
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import ProjectInformationCard from "./projectDetailsComponents/ProjectInformation";
+import { DEFAULT_USER } from "../../constants/defaults";
 import { IAllProjectTags, IProjectDetails, IUser } from "../../viewModels/csods/csodsApiInterfaces";
 import ApiHandler from "../../utils/api/ApiHandler";
 import CoreContributors from "./projectDetailsComponents/CoreContributors";
 import ProjectDetailsProvider from "./projectDetailsComponents/ProjectDetailsProvider";
+import ProjectInformationCard from "./projectDetailsComponents/ProjectInformation";
 
 export default function ProjectDetails() {
   const { pageNumber, projectId} = useParams();
