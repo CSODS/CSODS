@@ -5,10 +5,7 @@ import ProjectInformationCard from "./projectDetailsComponents/ProjectInformatio
 import { IAllProjectTags, IProjectDetails, IUser } from "../../viewModels/csods/csodsApiInterfaces";
 import ApiHandler from "../../utils/api/ApiHandler";
 import CoreContributors from "./projectDetailsComponents/CoreContributors";
-
-export const AllTagsContext = createContext<IAllProjectTags>(TAGS);
-export const ProjectContext = createContext<IProjectDetails>(DEFAULT_PROJECT);
-export const UserContext = createContext<IUser>(DEFAULT_USER);
+import ProjectDetailsProvider from "./projectDetailsComponents/ProjectDetailsProvider";
 
 export default function ProjectDetails() {
   const { pageNumber, projectId} = useParams();
@@ -44,22 +41,18 @@ export default function ProjectDetails() {
 
   if (allTags && project) { 
     return (
-      <AllTagsContext.Provider value={allTags}>
-        <ProjectContext.Provider value={project}>
-            <div className="px-lg-5 d-flex flex-column justify-content-center align-items-center">
-              <div className="mt-3 row row-cols-lg-2 w-100">
-                <div className="col-lg-4">
-                  <CoreContributors/>
-                </div>
-                <UserContext.Provider value={user}>
-                  <div className="col-lg-8">
-                    <ProjectInformationCard/>
-                  </div>
-                </UserContext.Provider>
-              </div>
+      <div className="px-lg-5 d-flex flex-column justify-content-center align-items-center">
+        <ProjectDetailsProvider allTags={allTags} project={project} user={user}>
+          <div className="mt-3 row row-cols-lg-2 w-100">
+            <div className="col-lg-4">
+              <CoreContributors/>
             </div>
-        </ProjectContext.Provider>
-      </AllTagsContext.Provider>
+            <div className="col-lg-8">
+              <ProjectInformationCard/>
+            </div>
+          </div>
+        </ProjectDetailsProvider>
+      </div>
     )
   }
   else {

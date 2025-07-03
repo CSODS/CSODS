@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { ProjectContext } from "../ProjectDetails";
+import { ProjectContext } from "../projectDetailsComponents/ProjectDetailsProvider";
 
 export default function CoreContributors() {
     const project = useContext(ProjectContext);
