@@ -24,8 +24,8 @@ export default function CoreContributors() {
     ];
 
     return (
-        <div className="p-4 d-flex flex-column">
-            <p className="ms-1 ps-3 my-1 row fs-5 text-start text-decoration-underline">
+        <div className="p-4 pt-0 d-flex flex-column position-sticky" style={{top: '90px'}}>
+            <p className="ms-1 ps-3 mt-0 mb-1 row fs-5 text-start text-decoration-underline">
                 Core Contributors
             </p>
             <div className="row">

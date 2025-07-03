@@ -6,10 +6,11 @@ import ApiHandler from "../../utils/api/ApiHandler";
 import CoreContributors from "./projectDetailsComponents/CoreContributors";
 import ProjectDetailsProvider from "./projectDetailsComponents/ProjectDetailsProvider";
 import ProjectInformationCard from "./projectDetailsComponents/ProjectInformation";
+import ProjectImages from "./projectDetailsComponents/ProjectImages";
 
 export default function ProjectDetails() {
   const { pageNumber, projectId} = useParams();
-
+  
   const [allTags, setAllTags] = useState<IAllProjectTags>();
   const [project, setProject] = useState<IProjectDetails>();
   const [user] = useState<IUser>(DEFAULT_USER);
@@ -49,6 +50,7 @@ export default function ProjectDetails() {
             </div>
             <div className="col-lg-8">
               <ProjectInformationCard/>
+              <ProjectImages/>
             </div>
           </div>
         </ProjectDetailsProvider>
