@@ -20,7 +20,7 @@ export default function ProjectImages() {
                         <ImageCarousel imageLinks={imageLinks}/>
                     </div>
                 </div>
-                <div className="ms-5 col-lg-3">
+                <div className="ms-5 col-lg-2">
                     <ImageSet imageLinks={imageLinks}/>
                 </div>
             </div>
@@ -124,7 +124,7 @@ function ImageSet({
     imageLinks
 }: ImageSetProps) {
     return(
-        <div className="pt-2 row w-75 row-cols-1 row-gap-4">
+        <div className="pt-2 row w-100 row-cols-1 row-gap-4">
             {
                 imageLinks.map((value, index) => {
                     const cardId = `img-${index + 1}`;
