@@ -1,11 +1,11 @@
-import { IProjectTags } from "../../../viewModels/csods/csodsApiInterfaces";
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
-import { AllTagsContext, ProjectContext, UserContext } from "../ProjectDetails";
-import { ICONS } from "../../../constants/project_data/tags";
-import { ProjectDataService } from "../../../utils/data/ProjectDataService";
-import { PROJECT_DESCRIPTION } from "../../../constants/defaults";
-import TagRow from "../../TagRow";
 import { Color, Opacity } from "@/types";
+import { ICONS } from "../../../constants/project_data/tags";
+import { PROJECT_DESCRIPTION } from "../../../constants/defaults";
+import { IProjectTags } from "../../../viewModels/csods/csodsApiInterfaces";
+import { AllTagsContext, ProjectContext, UserContext } from "../ProjectDetails";
+import { ProjectDataService } from "../../../utils/data/ProjectDataService";
+import TagRow from "../../TagRow";
 
 const DevIconContext = createContext<string>('');
 const ProjectTagsContext = createContext<IProjectTags | undefined>(undefined);
