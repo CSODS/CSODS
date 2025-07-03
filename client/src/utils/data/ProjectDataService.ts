@@ -68,4 +68,22 @@ export class ProjectDataService {
             Frameworks: frameworks.map((value) => this.getFramework(value.FrameworkId))
         }
     }
+
+    public getProjectTagList(tags: IProjectTags): string[] {
+        const tagValues = Object.values(tags);
+
+        const tagList: string[] = (
+            tagValues.flatMap((tag) => {
+                if (typeof tag === 'string') {
+                    return tag;
+                }
+                if (Array.isArray(tag)) {
+                    return tag.filter((subTag): subTag is string => typeof subTag === 'string');
+                }
+                return [];
+            })
+        );
+
+        return tagList;
+    }
 }
