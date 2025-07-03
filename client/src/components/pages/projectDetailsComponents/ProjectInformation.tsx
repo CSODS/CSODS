@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
-import { Color, Opacity } from "@/types/index";
+import { Color, Opacity } from "../../../types";
 import { ICONS } from "../../../constants/project_data/tags";
 import { PROJECT_DESCRIPTION } from "../../../constants/defaults";
 import { IProjectTags } from "../../../viewModels/csods/csodsApiInterfaces";

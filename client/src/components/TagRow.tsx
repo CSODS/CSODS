@@ -1,4 +1,4 @@
-import { Color, Opacity } from '@/types/index';
+import { Color, Opacity } from '../types';
 
 export interface ITagProps {
     TagList: string[];
