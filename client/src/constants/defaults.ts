@@ -113,6 +113,12 @@ export const DEFAULT_PROJECT = {
     ]
 }
 
+export const DEFAULT_PROJECT_IMAGES = [
+    "https://placehold.co/600x400/44436D/white?text=img-1",
+    "https://placehold.co/600x400/44436D/white?text=img-2",
+    "https://placehold.co/600x400/44436D/white?text=img-3"
+];
+
 export const DEFAULT_USER = {
     Name: 'Project Owner',
     Email: 'projectowner@gmail.com'
