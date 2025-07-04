@@ -1,7 +1,8 @@
 import { Color, Opacity, OnHover } from "@/types";
+import { ReactNode } from "react";
 
 export interface ButtonProps {
-    buttonText: string;
+    children: ReactNode;
     bgColor: Color;
     txtColor: Color;
     opacity: Opacity;
@@ -11,7 +12,7 @@ export interface ButtonProps {
 }
 
 export default function Button({
-    buttonText,
+    children,
     bgColor,
     txtColor,
     opacity,
@@ -35,7 +36,7 @@ export default function Button({
 
     return (
         <button key={key} id={btnId} className={selectors}>
-            
+            {children}
         </button>
     );
 }
