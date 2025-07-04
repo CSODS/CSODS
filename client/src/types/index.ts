@@ -6,5 +6,10 @@ export type {
     Opacity, 
     Color, 
     OnHover, 
-    BorderSelectors, 
-    CssSelector } from './themes/styles';
+    TranslucentSelectors,
+    BtnSelectors,
+    ColorSelectors,
+    ProjectCardSelectors, 
+    BorderSelectors,
+    CssSelector 
+} from './themes/styles';
