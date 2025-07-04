@@ -1,7 +1,6 @@
 import { Outlet } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
-import ADDRESSES from '@constants/addresses/addresses';
-import bgConstants from '@constants/bg-constants';
+import { ADDRESSES, bgConstants } from '@/constants';
 
 export function PrimaryLayout() {
     // useEffect(() => {

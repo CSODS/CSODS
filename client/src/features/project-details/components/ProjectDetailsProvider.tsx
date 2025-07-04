@@ -1,7 +1,10 @@
 import { ReactNode, createContext } from "react";
 import { IAllProjectTags, IProjectDetails, IUser } from "@/types";
-import { DEFAULT_PROJECT, TAGS, DEFAULT_USER } from "@constants/defaults";
+import { DEFAULTS } from "@constants/index";
 
+const TAGS = DEFAULTS.TAGS;
+const DEFAULT_PROJECT = DEFAULTS.DEFAULT_PROJECT;
+const DEFAULT_USER = DEFAULTS.DEFAULT_USER;
 
 export const AllTagsContext = createContext<IAllProjectTags>(TAGS);
 export const ProjectContext = createContext<IProjectDetails>(DEFAULT_PROJECT);

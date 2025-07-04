@@ -8,7 +8,7 @@ const PROJECT_DETAILS = {
     ROOT: '/project_details'
 } as const;
 
-const ADDRESSES = {
+export const ADDRESSES = {
     LANDING_PAGE: "/",
     HOME: "/home",
     STUDENT_PROJECTS: STUDENT_PROJECTS,
@@ -16,5 +16,3 @@ const ADDRESSES = {
     SUBMIT_PROJECT: "/submit_project",
     ABOUT: "/about"
 } as const;
-
-export default ADDRESSES;

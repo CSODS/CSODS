@@ -1,4 +1,4 @@
-import ADDRESSES from "@constants/addresses/addresses";
+import { ADDRESSES } from "@constants/index";
 
 function Home() {
   const projectsFirstPage = `${ADDRESSES.STUDENT_PROJECTS.ROOT}/1`;
