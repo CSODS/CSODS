@@ -172,7 +172,7 @@ function TagRow({ tagList }: TagRowProps) {
         opacitySelector
     ];
 
-    const colSelectors = ["col d-flex flex-wrap align-items-start"];
+    const colSelectors = ["ps-3 col d-flex flex-wrap align-items-start"];
 
     return <BtnGroup TagList={tagList} btnSelectors={btnSelectors} colSelectors={colSelectors}/>
 }
