@@ -29,7 +29,7 @@ export type BorderSelectors = (
     BorderAdditive | BorderSubtractive | BorderWidth | BorderRadius | BorderSize
 );
 
-export type Selectors = (
+export type CssSelector = (
     Opacity | LightColor | NeutralColor | DarkColor | Color | BorderSelectors | BtnSelectors | 
     ColorSelectors | ProjectCardSelectors | OnHover
 );
