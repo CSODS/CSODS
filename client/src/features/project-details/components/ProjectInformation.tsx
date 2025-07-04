@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
-import { Color, HoverSelector, Opacity } from "@/types";
-import TagRow from "@components/shared/TagRow";
+import { BtnSelector, Color, ColorSelector, CssSelector, HoverSelector, Opacity, TranslucentSelector } from "@/types";
+import BtnGroup from "@/components/shared/ButtonGroup";
 import { ICONS, DEFAULTS } from "@/constants";
 import { IProjectTags, ProjectDataService } from "@utils/data/ProjectDataService";
 import { AllTagsContext, ProjectContext, UserContext } from "@components/shared/Providers";
@@ -51,7 +51,7 @@ export default function ProjectInformationCard() {
                 <SubHeader/>
                 <Description/>
                 <ProjectTagsContext.Provider value={projectTags}>
-                    <TagRow TagList={projectTagList} BackgroundColor={bgColor} TextColor={textColor} Opacity={opacity} OnHover={onHover} />
+                    <TagRow tagList={projectTagList}/>
                 </ProjectTagsContext.Provider>
                 <GitHubStatistics/>
             </div>
@@ -152,6 +152,29 @@ function Description() {
             </p>
         </div>
     );
+}
+
+interface TagRowProps {
+    tagList: string[];
+}
+
+function TagRow({ tagList }: TagRowProps) {
+    const btnSelector: BtnSelector = 'btn-dark-3';
+    const hoverSelector: HoverSelector = 'hover-lighten';
+    const colorSelector: ColorSelector = 'color-light-1';
+    const opacitySelector: TranslucentSelector = 'translucent-100';
+
+    const btnSelectors: (CssSelector | string)[] = [
+        'mt-1 py-1 px-3 ms-0 me-2 btn rounded-pill fs-xs',
+        btnSelector,
+        hoverSelector,
+        colorSelector,
+        opacitySelector
+    ];
+
+    const colSelectors = ["col d-flex flex-wrap align-items-start"];
+
+    return <BtnGroup TagList={tagList} btnSelectors={btnSelectors} colSelectors={colSelectors}/>
 }
 
 //#region GitHub Statistics
