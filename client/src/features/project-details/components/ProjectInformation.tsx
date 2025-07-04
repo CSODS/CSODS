@@ -3,9 +3,9 @@ import { Color, OnHover, Opacity } from "../../../types";
 import { ICONS } from "../../../constants/project_data/tags";
 import { PROJECT_DESCRIPTION } from "../../../constants/defaults";
 import { IProjectTags } from "../../../viewModels/csods/csodsApiInterfaces";
-import { AllTagsContext, ProjectContext, UserContext } from "../projectDetailsComponents/ProjectDetailsProvider";
+import { AllTagsContext, ProjectContext, UserContext } from "./ProjectDetailsProvider";
 import { ProjectDataService } from "../../../utils/data/ProjectDataService";
-import TagRow from "../../TagRow";
+import TagRow from "../../../components/shared/TagRow";
 
 const DevIconContext = createContext<string>('');
 const ProjectTagsContext = createContext<IProjectTags | undefined>(undefined);

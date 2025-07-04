@@ -5,12 +5,11 @@ import { useParams } from 'react-router-dom';
 import { IProjectDetails, IAllProjectTags } from '../../viewModels/csods/csodsApiInterfaces';
 import { ProjectDataService } from '../../utils/data/ProjectDataService';
 import ApiHandler from '../../utils/api/ApiHandler';
-import ProjectCard from './StudentProjectsComponents/ProjectCards';
-import Paginator from './StudentProjectsComponents/Paginator';
+import ProjectCard from './components/ProjectCards';
+import Paginator from './components/Paginator';
 
 //#region Student Projects
 export default function StudentProjects() {
-
   const [projectList, setProjectList] = useState<IProjectDetails[]>(DEFAULTS.PROJECT_LIST);
   const [totalPages, setTotalPages] = useState<number>(1);
   const [projectTags, setProjectTags] = useState<IAllProjectTags>(DEFAULTS.TAGS);

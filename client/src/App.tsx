@@ -6,11 +6,11 @@ import './stylesheets/borders.css';
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import ADDRESSES from './constants/addresses/addresses';
 import { PrimaryLayout } from './components/layouts/MainLayout';
-import LandingPage from './components/pages/LandingPage';
-import Home from "./components/pages/Home";
-import StudentProjects from './components/pages/StudentProjects';
-import ProjectDetails from './components/pages/ProjectDetails';
-import SubmitProject from './components/pages/SubmitProject';
+import LandingPage from './features/landing/LandingPage';
+import Home from "./features/home/Home";
+import StudentProjects from './features/project-list/StudentProjects';
+import ProjectDetails from './features/project-details/ProjectDetails';
+import SubmitProject from './features/submit-project/SubmitProject';
 
 function App() {
   return (
