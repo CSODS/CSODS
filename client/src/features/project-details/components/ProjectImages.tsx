@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { ProjectContext } from "./ProjectDetailsProvider";
-import { DEFAULT_PROJECT_IMAGES } from "../../../constants/defaults";
+import { DEFAULT_PROJECT_IMAGES } from "@constants/defaults";
 
 export default function ProjectImages() {
     const project = useContext(ProjectContext);

@@ -1,11 +1,10 @@
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
-import { Color, OnHover, Opacity } from "../../../types";
-import { ICONS } from "../../../constants/project_data/tags";
-import { PROJECT_DESCRIPTION } from "../../../constants/defaults";
-import { IProjectTags } from "../../../utils/data/ProjectDataService";
+import { Color, OnHover, Opacity } from "@/types";
+import TagRow from "@components/shared/TagRow";
+import { ICONS } from "@constants/project_data/tags";
+import { PROJECT_DESCRIPTION } from "@constants/defaults";
+import { IProjectTags, ProjectDataService } from "@utils/data/ProjectDataService";
 import { AllTagsContext, ProjectContext, UserContext } from "./ProjectDetailsProvider";
-import { ProjectDataService } from "../../../utils/data/ProjectDataService";
-import TagRow from "../../../components/shared/TagRow";
 
 const DevIconContext = createContext<string>('');
 const ProjectTagsContext = createContext<IProjectTags | undefined>(undefined);

@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { DEFAULT_USER } from "../../constants/defaults";
 import { IUser, IProjectDetails, IAllProjectTags } from "@/types";
-import ApiHandler from "../../utils/api/ApiHandler";
+import { DEFAULT_USER } from "@constants/defaults";
+import ApiHandler from "@utils/api/ApiHandler";
 import CoreContributors from "./components/CoreContributors";
 import ProjectDetailsProvider from "./components/ProjectDetailsProvider";
 import ProjectInformationCard from "./components/ProjectInformation";

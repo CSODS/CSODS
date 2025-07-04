@@ -1,7 +1,7 @@
-import ADDRESSES from "../../../constants/addresses/addresses";
 import { useNavigate } from "react-router-dom";
 import { IProjectDetails } from "@/types";
-import { IProjectTags } from "@/utils/data/ProjectDataService";
+import ADDRESSES from "@constants/addresses/addresses";
+import { IProjectTags } from "@utils/data/ProjectDataService";
 
 interface ProjectCardProps {
   pageNumber: number,

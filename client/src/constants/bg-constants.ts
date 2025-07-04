@@ -1,4 +1,4 @@
-export const bgConstants = [
+const bgConstants = [
     {label: 'bg-code javascript', content: 'console.log();'},
     {label: 'bg-code python', content: 'print("Hello")'},
     {label: 'bg-code css', content: 'display: flex;'},
@@ -21,3 +21,5 @@ export const bgConstants = [
     {label: 'bg-code java', content: 'System.out.println()'},
     {label: 'bg-code cpp', content: 'std::cout <<'},
 ];
+
+export default bgConstants;
