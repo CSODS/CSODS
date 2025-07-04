@@ -42,9 +42,9 @@ export default function ProjectDetails() {
 
   if (allTags && project) { 
     return (
-      <div className="px-lg-5 d-flex flex-column justify-content-center align-items-center">
+      <div className="px-lg-5 px-0 d-flex flex-column justify-content-center align-items-center">
         <ProjectDetailsProvider allTags={allTags} project={project} user={user}>
-          <div className="mt-3 row row-cols-lg-2 w-100">
+          <div className="mt-3 m-0 row row-cols-lg-2 w-100">
             <div className="col-lg-4">
               <CoreContributors/>
             </div>
