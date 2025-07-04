@@ -1,4 +1,13 @@
-import { IProject, IProjectDetails, IProjectFramework, IAllProjectTags, IProjectTags } from "@/types";
+import { IProject, IProjectDetails, IProjectFramework, IAllProjectTags } from "@/types";
+
+export interface IProjectTags {
+    DevType: string,
+    PrimaryLanguage: string,
+    SecondaryLanguage: string | null,
+    DatabaseTechnology: string | null,
+    ApplicationIndustry: string | null,
+    Frameworks: (string | null)[]
+};
 
 export class ProjectDataService {
     private _allProjectTags: IAllProjectTags;

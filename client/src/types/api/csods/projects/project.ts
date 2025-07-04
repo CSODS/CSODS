@@ -17,12 +17,3 @@ export interface IProject {
     ApplicationIndustryId: number | null,
     GitHubUrl: string
 };
-
-export interface IProjectTags {
-    DevType: string,
-    PrimaryLanguage: string,
-    SecondaryLanguage: string | null,
-    DatabaseTechnology: string | null,
-    ApplicationIndustry: string | null,
-    Frameworks: (string | null)[]
-};
