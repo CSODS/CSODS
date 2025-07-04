@@ -50,5 +50,5 @@
     "craco-alias": "^3.0.1",
     "typescript": "^4.9.5"
   },
-  "cracoConfig": "./craco.config.ts"
+  "cracoConfig": "./craco.config.js"
 }
