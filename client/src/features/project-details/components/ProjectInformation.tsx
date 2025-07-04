@@ -3,7 +3,7 @@ import { Color, OnHover, Opacity } from "@/types";
 import TagRow from "@components/shared/TagRow";
 import { ICONS, DEFAULTS } from "@/constants";
 import { IProjectTags, ProjectDataService } from "@utils/data/ProjectDataService";
-import { AllTagsContext, ProjectContext, UserContext } from "./ProjectDetailsProvider";
+import { AllTagsContext, ProjectContext, UserContext } from "@components/shared/Providers";
 
 const PROJECT_DESCRIPTION = DEFAULTS.PROJECT_DESCRIPTION;
 

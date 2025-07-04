@@ -1,16 +1,8 @@
-import { ReactNode, createContext } from "react";
+import { ReactNode } from "react";
 import { IAllProjectTags, IProjectDetails, IUser } from "@/types";
-import { DEFAULTS } from "@constants/index";
+import { ProjectContextProvider, TagsContextProvider, UserContextProvider } from "@/components/shared/Providers";
 
-const TAGS = DEFAULTS.TAGS;
-const DEFAULT_PROJECT = DEFAULTS.DEFAULT_PROJECT;
-const DEFAULT_USER = DEFAULTS.DEFAULT_USER;
-
-export const AllTagsContext = createContext<IAllProjectTags>(TAGS);
-export const ProjectContext = createContext<IProjectDetails>(DEFAULT_PROJECT);
-export const UserContext = createContext<IUser>(DEFAULT_USER);
-
-export interface ProjectDetailsProvidersProps {
+interface ProjectDetailsProvidersProps {
     children: ReactNode;
     allTags: IAllProjectTags;
     project: IProjectDetails;
@@ -24,12 +16,14 @@ export default function ProjectDetailsProvider({
     user
 }: ProjectDetailsProvidersProps) {
     return (
-        <ProjectContext.Provider value={project}>
-            <AllTagsContext.Provider value={allTags}>
-                <UserContext.Provider value={user}>
-                    {children}
-                </UserContext.Provider>
-            </AllTagsContext.Provider>
-        </ProjectContext.Provider>
+        <div>
+            <ProjectContextProvider projectDetails={project}>
+                <TagsContextProvider allTags={allTags}>
+                    <UserContextProvider user={user}>
+                        {children}
+                    </UserContextProvider>
+                </TagsContextProvider>
+            </ProjectContextProvider>
+        </div>
     );
 }

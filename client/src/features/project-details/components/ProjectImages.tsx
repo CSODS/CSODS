@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { ProjectContext } from "./ProjectDetailsProvider";
+import { ProjectContext } from "@components/shared/Providers";
 import { DEFAULTS } from "@/constants";
 
 const DEFAULT_PROJECT_IMAGES = DEFAULTS.DEFAULT_PROJECT_IMAGES;
