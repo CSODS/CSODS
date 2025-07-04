@@ -26,11 +26,6 @@ export default function ProjectInformationCard() {
         return projectDataService.getProjectTagList(projectTags);
     }, [projectTags, projectDataService]);
 
-    const bgColor: Color = "dark-3";
-    const textColor: Color = "light-1";
-    const opacity: Opacity = 100;
-    const onHover: HoverSelector = 'hover-lighten';
-
     const [devTypeIcon, setDevTypeIcon] = useState<string>('');
 
     useEffect(() => {
