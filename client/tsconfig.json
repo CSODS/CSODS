@@ -31,11 +31,11 @@
     "baseUrl": "src",                                  /* Specify the base directory to resolve non-relative module names. */
     "paths": {
       "@/*": ["*"],
-      "@/utils": ["utils"],
-      "@/types": ["types"],
-      "@/constants": ["constants"],
-      "@/components": ["components"],
-      "@/assets": ["assets"]
+      "@utils/*": ["utils/*"],
+      "@types/*": ["types/*"],
+      "@constants/*": ["constants/*"],
+      "@components/*": ["components/*"],
+      "@assets/*": ["assets/*"]
     },                                      /* Specify a set of entries that re-map imports to additional lookup locations. */
     // "rootDirs": [],                                   /* Allow multiple folders to be treated as one when resolving modules. */
     // "typeRoots": [],                                  /* Specify multiple folders that act like './node_modules/@types'. */
