@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
-import { Color, Opacity } from "../../../types";
+import { Color, OnHover, Opacity } from "../../../types";
 import { ICONS } from "../../../constants/project_data/tags";
 import { PROJECT_DESCRIPTION } from "../../../constants/defaults";
 import { IProjectTags } from "../../../viewModels/csods/csodsApiInterfaces";
@@ -29,6 +29,7 @@ export default function ProjectInformationCard() {
     const bgColor: Color = "dark-3";
     const textColor: Color = "light-1";
     const opacity: Opacity = 100;
+    const onHover: OnHover = 'lighten';
 
     const [devTypeIcon, setDevTypeIcon] = useState<string>('');
 
@@ -50,7 +51,7 @@ export default function ProjectInformationCard() {
                 <SubHeader/>
                 <Description/>
                 <ProjectTagsContext.Provider value={projectTags}>
-                    <TagRow TagList={projectTagList} BackgroundColor={bgColor} TextColor={textColor} Opacity={opacity}/>
+                    <TagRow TagList={projectTagList} BackgroundColor={bgColor} TextColor={textColor} Opacity={opacity} OnHover={onHover} />
                 </ProjectTagsContext.Provider>
                 <GitHubStatistics/>
             </div>

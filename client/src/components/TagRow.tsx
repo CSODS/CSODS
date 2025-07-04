@@ -1,24 +1,28 @@
-import { Color, Opacity } from '../types';
+import { Color, Opacity, OnHover } from '../types';
 
 export interface ITagProps {
     TagList: string[];
     BackgroundColor: Color;
     TextColor: Color;
     Opacity: Opacity;
+    OnHover: OnHover
 }
 
 export default function TagRow({
     TagList,
     BackgroundColor,
     TextColor,
-    Opacity
+    Opacity,
+    OnHover
 }: ITagProps) {
     const btnSelector = `btn-${BackgroundColor}`;
+    const hoverSelector = `hover-${OnHover}`;
     const colorSelector = `color-${TextColor}`;
     const opacitySelector = `translucent-${Opacity}`;
     
     const selectorList = [
         btnSelector,
+        hoverSelector,
         colorSelector,
         opacitySelector
     ];
