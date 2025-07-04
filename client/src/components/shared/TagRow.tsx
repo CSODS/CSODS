@@ -1,4 +1,5 @@
-import { Color, Opacity, OnHover } from '@/types';
+
+import { BtnSelector, Color, ColorSelector, CssSelector, HoverSelector, Opacity, TranslucentSelector } from '@/types';
 import Button from './Button';
 
 export interface ITagProps {
@@ -6,7 +7,7 @@ export interface ITagProps {
     BackgroundColor: Color;
     TextColor: Color;
     Opacity: Opacity;
-    OnHover: OnHover
+    OnHover: HoverSelector;
 }
 
 export default function TagRow({
@@ -16,12 +17,12 @@ export default function TagRow({
     Opacity,
     OnHover
 }: ITagProps) {
-    const btnSelector = `btn-${BackgroundColor}`;
-    const hoverSelector = `hover-${OnHover}`;
-    const colorSelector = `color-${TextColor}`;
-    const opacitySelector = `translucent-${Opacity}`;
+    const btnSelector: BtnSelector = `btn-${BackgroundColor}`;
+    const hoverSelector: HoverSelector = OnHover;
+    const colorSelector: ColorSelector = `color-${TextColor}`;
+    const opacitySelector: TranslucentSelector = `translucent-${Opacity}`;
     
-    const selectorList = [
+    const selectorList: CssSelector[] = [
         btnSelector,
         hoverSelector,
         colorSelector,
@@ -35,10 +36,13 @@ export default function TagRow({
             <div className="col d-flex flex-wrap align-items-start">
                 {
                     TagList.map((tag, index) => {
+                        const key = `tag-${index}`
                         return (
-                            <div key={`tag-${index}`} className={`mt-1 py-1 px-3 ms-0 me-2 btn rounded-pill fs-xs ${selectors}`}>
-                                {tag}
-                            </div>
+                            <Button selectorList={selectorList} componentKey={key}>
+                                <p className='p-0 m-0 text-start'>
+                                    {tag}
+                                </p>
+                            </Button>
                         )
                     })
                 }

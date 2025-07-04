@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
-import { Color, OnHover, Opacity } from "@/types";
+import { Color, HoverSelector, Opacity } from "@/types";
 import TagRow from "@components/shared/TagRow";
 import { ICONS, DEFAULTS } from "@/constants";
 import { IProjectTags, ProjectDataService } from "@utils/data/ProjectDataService";
@@ -29,7 +29,7 @@ export default function ProjectInformationCard() {
     const bgColor: Color = "dark-3";
     const textColor: Color = "light-1";
     const opacity: Opacity = 100;
-    const onHover: OnHover = 'lighten';
+    const onHover: HoverSelector = 'hover-lighten';
 
     const [devTypeIcon, setDevTypeIcon] = useState<string>('');
 
