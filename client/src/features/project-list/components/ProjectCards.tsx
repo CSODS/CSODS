@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { IProjectDetails } from "@/types";
-import ADDRESSES from "@constants/addresses/addresses";
+import { ADDRESSES } from "@/constants";
 import { IProjectTags } from "@utils/data/ProjectDataService";
 
 interface ProjectCardProps {

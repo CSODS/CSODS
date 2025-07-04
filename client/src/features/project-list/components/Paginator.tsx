@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import ADDRESSES from "@constants/addresses/addresses";
+import { ADDRESSES } from "@/constants";
 export interface IPaginationProps {
   totalPages: number,
   currentPage: number

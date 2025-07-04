@@ -1,5 +1,5 @@
 import axios from "axios";
-import CSODS_API_PATHS from "../../constants/api/api";
+import { CSODS_API_PATHS }from "@/constants";
 import { IAllProjectTags, IProjectDetails, IProjectsPage } from "@/types";
 
 export default class ApiHandler {
