@@ -1,8 +1,8 @@
-import './stylesheets/App.css';
-import './stylesheets/cards.css';
-import './stylesheets/colors.css';
-import './stylesheets/buttons.css';
-import './stylesheets/borders.css';
+import './assets/stylesheets/App.css';
+import './assets/stylesheets/cards.css';
+import './assets/stylesheets/colors.css';
+import './assets/stylesheets/buttons.css';
+import './assets/stylesheets/borders.css';
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import ADDRESSES from './constants/addresses/addresses';
 import { PrimaryLayout } from './components/layouts/MainLayout';
