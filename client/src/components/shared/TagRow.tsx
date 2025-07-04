@@ -1,4 +1,5 @@
 import { Color, Opacity, OnHover } from '@/types';
+import Button from './Button';
 
 export interface ITagProps {
     TagList: string[];
