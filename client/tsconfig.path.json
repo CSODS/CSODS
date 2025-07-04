@@ -7,7 +7,7 @@
     "moduleResolution": "node",
     "baseUrl": "src",
     "paths": {
-      "@/*": ["*"],
+      "@/*": ["./*"],
       "@utils/*": ["utils/*"],
       "@types/*": ["types/*"],
       "@constants/*": ["constants/*"],
