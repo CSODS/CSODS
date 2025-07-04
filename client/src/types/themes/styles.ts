@@ -1,5 +1,5 @@
 export type Opacity = 0 | 10 | 20 | 30 | 40 | 50 | 60 | 70 | 80 | 90 | 100;
-export type TranslucentSelectors = `translucent-${Opacity}`;
+export type TranslucentSelector = `translucent-${Opacity}`;
 
 export type LightColor = 'light-1' | 'light-2' | 'light-3';
 export type NeutralColor = 'neutral-1' | 'neutral-2';
@@ -7,11 +7,11 @@ export type DarkColor = 'dark-1' | 'dark-2' | 'dark-3' | 'dark-4';
 
 export type Color =  LightColor | NeutralColor | DarkColor;
 
-export type BtnSelectors = `btn-${Color}`;
-export type ColorSelectors = `color-${Color}`;
-export type ProjectCardSelectors = `project-card-${Color}`;
+export type BtnSelector = `btn-${Color}`;
+export type ColorSelector = `color-${Color}`;
+export type ProjectCardSelector = `project-card-${Color}`;
 
-export type OnHover = 'invert' | 'lighten' | 'darken';
+export type HoverSelector = 'hover-invert' | 'hover-lighten' | 'hover-darken';
 
 type BorderAdditive = 'border-top' | 'border-start' | 'border-bottom' | 'border-end';
 type BorderSubtractive = (
@@ -26,15 +26,15 @@ type BorderSize = (
     'rounded-circle' | 'rounded-pill'
 );
 
-export type BorderSelectors = (
+export type BorderSelector = (
     BorderAdditive | BorderSubtractive | BorderWidth | BorderRadius | BorderSize
 );
 
 export type CssSelector = (
-    TranslucentSelectors |
-    BtnSelectors | 
-    ColorSelectors | 
-    ProjectCardSelectors | 
-    BorderSelectors | 
-    OnHover
+    TranslucentSelector |
+    BtnSelector | 
+    ColorSelector | 
+    ProjectCardSelector | 
+    BorderSelector | 
+    HoverSelector
 );

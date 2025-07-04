@@ -5,11 +5,11 @@ export type { IProjectsPage } from './api/csods/projects/projectsPage';
 export type { 
     Opacity, 
     Color, 
-    OnHover, 
-    TranslucentSelectors,
-    BtnSelectors,
-    ColorSelectors,
-    ProjectCardSelectors, 
-    BorderSelectors,
+    HoverSelector, 
+    TranslucentSelector,
+    BtnSelector,
+    ColorSelector,
+    ProjectCardSelector, 
+    BorderSelector,
     CssSelector 
 } from './themes/styles';
