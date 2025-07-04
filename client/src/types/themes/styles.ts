@@ -25,9 +25,15 @@ type BorderSize = (
     'rounded-0' | 'rounded-1' | 'rounded-2' | 'rounded-3' | 'rounded-4' | 'rounded-5' | 
     'rounded-circle' | 'rounded-pill'
 );
+type BorderColor = `border-${Color}`;
 
 export type BorderSelector = (
-    BorderAdditive | BorderSubtractive | BorderWidth | BorderRadius | BorderSize
+    BorderAdditive | 
+    BorderSubtractive | 
+    BorderWidth | 
+    BorderRadius | 
+    BorderSize |
+    BorderColor 
 );
 
 export type CssSelector = (
