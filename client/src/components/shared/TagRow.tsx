@@ -22,7 +22,8 @@ export default function TagRow({
     const colorSelector: ColorSelector = `color-${TextColor}`;
     const opacitySelector: TranslucentSelector = `translucent-${Opacity}`;
     
-    const selectorList: CssSelector[] = [
+    const selectorList: (CssSelector | string)[] = [
+        'mt-1 py-1 px-3 ms-0 me-2 btn rounded-pill fs-xs',
         btnSelector,
         hoverSelector,
         colorSelector,

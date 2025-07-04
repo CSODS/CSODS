@@ -3,7 +3,7 @@ import { ReactNode } from "react";
 
 export interface ButtonProps {
     children: ReactNode;
-    selectorList: CssSelector[];
+    selectorList: (CssSelector | string)[];
     componentKey?: string,
     componentId?: string,
 }
@@ -17,7 +17,7 @@ export default function Button({
     const selectors = selectorList.join(' ');
 
     return (
-        <button key={componentKey} id={componentId} className={`mt-1 py-1 px-3 ms-0 me-2 btn rounded-pill fs-xs ${selectors}`}>
+        <button key={componentKey} id={componentId} className={`${selectors}`}>
             {children}
         </button>
     );
