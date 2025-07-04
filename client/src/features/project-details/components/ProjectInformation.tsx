@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
-import { BtnSelector, Color, ColorSelector, CssSelector, HoverSelector, Opacity, TranslucentSelector } from "@/types";
+import { BtnSelector, ColorSelector, CssSelector, HoverSelector, TranslucentSelector } from "@/types";
 import BtnGroup from "@/components/shared/ButtonGroup";
 import { ICONS, DEFAULTS } from "@/constants";
 import { IProjectTags, ProjectDataService } from "@utils/data/ProjectDataService";
