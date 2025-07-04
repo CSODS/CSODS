@@ -57,6 +57,7 @@ export default function StudentProjects() {
         {
           projectList.map((value) => {
             const projectTags = projectDataService.getProjectTagValues(value);
+            const tagList = projectDataService.getProjectTagList(projectTags);
 
             type DevType = keyof typeof ICONS;
             const iconKey = projectTags.DevType as DevType;
@@ -66,6 +67,7 @@ export default function StudentProjects() {
               <ProjectCard
                 key={value.Project.ProjectId}
                 pageNumber={Number(pageNumber)}
+                tagList={tagList}
                 iconClass={iconClass}
                 projectDetails={value}
                 projectTags={projectTags}

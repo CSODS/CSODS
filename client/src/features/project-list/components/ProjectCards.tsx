@@ -1,13 +1,16 @@
 import { useNavigate } from "react-router-dom";
-import { IProjectDetails } from "@/types";
+import { BorderSelector, BtnSelector, ColorSelector, CssSelector, HoverSelector, IProjectDetails, TranslucentSelector } from "@/types";
 import { ADDRESSES } from "@constants/index";
-import { IProjectTags } from "@utils/data/ProjectDataService";
+import { IProjectTags, ProjectDataService } from "@utils/data/ProjectDataService";
+import BtnGroup from "@/components/shared/ButtonGroup";
+import { useEffect, useState } from "react";
 
 interface ProjectCardProps {
   pageNumber: number,
   iconClass: string, 
   projectDetails: IProjectDetails,
-  projectTags: IProjectTags, 
+  projectTags: IProjectTags,
+  tagList: string[], 
   projectDescription: string
 };
 
@@ -15,7 +18,8 @@ export default function ProjectCard({
   pageNumber,
   iconClass,
   projectDetails,
-  projectTags, 
+  projectTags,
+  tagList, 
   projectDescription
 }: ProjectCardProps) {
   const redirectToUrl = (url: string) => {
@@ -48,9 +52,7 @@ export default function ProjectCard({
               <p className='card-text my-1 text-start'>{projectDescription}</p>
               <div className='mt-auto mx-0 row col-12'>
                 {/* project tags */}
-                <div className='ps-0 d-flex flex-wrap align-items-start'>
-                    {Tags(projectTags)}
-                </div>
+                <TagRow tagList={tagList}/>
                 {/* github link and view link */}
                 <div className='mt-3 mb-0 ps-0 pe-0 d-flex flex-row align-items-center'>
                   <button type='button' className='col-lg-3 px-4 py-2 ms-0 me-3 btn btn-light-1 rounded-4 border border-1 border-dark-3' onClick={() => redirectToUrl(projectDetails.Project.GitHubUrl)}>
@@ -68,30 +70,27 @@ export default function ProjectCard({
   );
 }
 
-function Tags(projectTags: IProjectTags) {
-  const tagValues = Object.values(projectTags);
-  return(
-    tagValues.map((tag, index) => {
-      if (typeof tag === 'string') {
-        return (
-          <div key={`tag-${index}`} className='mt-1 py-1 px-3 ms-0 me-2 bg-dark-1 btn btn-dark-1 rounded-pill border border-light-1 fs-xs'>
-            {tag}
-          </div>
-        )
-      }
-      else if (Array.isArray(tag)) {
-        return (
-          tag.map((subTag, subIndex) => 
-            subTag ? (
-                <div key={`tag-${subIndex}`} className='mt-1 py-1 px-3 ms-0 me-2 bg-dark-1 btn btn-dark-1 rounded-pill border border-light-1 fs-xs'>
-                  {subTag}  
-                </div>
-            ) : null
-        ))
-      }
-      else {
-        return [];
-      }
-    })
-  )
+interface TagRowProps {
+    tagList: string[];
+}
+
+function TagRow({ tagList }: TagRowProps) {
+    const btnSelector: BtnSelector = 'btn-dark-1';
+    const borderSelector: BorderSelector = 'border-light-1';
+    const hoverSelector: HoverSelector = 'hover-invert';
+    const colorSelector: ColorSelector = 'color-light-1';
+    const opacitySelector: TranslucentSelector = 'translucent-100';
+
+    const btnSelectors: (CssSelector | string)[] = [
+        'mt-1 py-1 px-3 ms-0 me-2 btn rounded-pill fs-xs',
+        btnSelector,
+        borderSelector,
+        hoverSelector,
+        colorSelector,
+        opacitySelector
+    ];
+
+    const colSelectors = ["p-0 col d-flex flex-wrap align-items-start"];
+
+    return <BtnGroup TagList={tagList} btnSelectors={btnSelectors} colSelectors={colSelectors}/>
 }
