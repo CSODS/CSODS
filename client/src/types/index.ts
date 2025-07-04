@@ -1,1 +1,1 @@
-export type { Opacity, Color } from './themes/styles';
+export type { Opacity, Color, OnHover } from './themes/styles';
