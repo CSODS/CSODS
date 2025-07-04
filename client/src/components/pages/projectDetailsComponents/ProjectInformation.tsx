@@ -45,7 +45,7 @@ export default function ProjectInformationCard() {
 
     return (
         <DevIconContext.Provider value={devTypeIcon}>
-            <div className="p-3 py-4 card project-card-dark-4 translucent-70 border-light-1 rounded-3 align-items-center justify-content-center">
+            <div className="px-md-3 px-1 py-md-4 py-3 card project-card-dark-4 translucent-70 border-light-1 rounded-3 align-items-center justify-content-center">
                 <Header/>
                 <SubHeader/>
                 <Description/>
@@ -62,11 +62,11 @@ export default function ProjectInformationCard() {
 
 function Header() {
     return (
-        <div className="px-2 w-100 row row-cols-2">
-            <div className="col-9">
+        <div className="px-md-2 px-1 w-100 row row-cols-1 row-cols-md-2">
+            <div className="col-md-9">
                 <ProjectTitle/>
             </div>
-            <div className="col-3 d-flex align-items-center justify-content-end">
+            <div className="col-md-3 m-0 d-flex">
                 <ProjectStatus Status="Ongoing"/>
             </div>
         </div>
@@ -97,7 +97,7 @@ function ProjectStatus({
     Status
 }: ProjectStatusProps) {
     return (
-        <div className="d-flex flex-row justify-content-center align-items-center">
+        <div className="d-flex flex-row flex-fill justify-content-md-end align-items-center">
             <div className="px-3 py-1 bg-dark-2 translucent-30 color-util-alert border border-light-1 rounded-pill">
                 <div className="m-0 p-0 d-flex flex-row justify-content-center align-items-center">
                     <i className="col m-0 bi bi-dash-circle-fill"></i>
@@ -116,17 +116,22 @@ function SubHeader() {
     return (
         <div className="px-2 mt-1 mb-0 row w-100">
             <div className="col-12">
+                <div className="row py-0 d-md-none d-flex">
+                    <div className="col my-0">
+                        <p className="my-0 fs-6 text-start">Uploaded: January 1, 1001</p>
+                    </div>
+                </div>
                 <div className="row py-0 d-flex align-items-start justify-content-start">
-                    <p className="col my-0">
-                        <p className="my-0 fs-5 text-start">{user.Name}</p>
-                    </p>
-                    <p className="col my-0">
-                        <p className="my-0 fs-5 text-end">Uploaded: January 1, 1001</p>
-                    </p>
+                    <div className="col my-0">
+                        <p className="my-0 fs-6 text-start">{user.Name}</p>
+                    </div>
+                    <div className="col my-0 d-none d-md-block">
+                        <p className="my-0 fs-6 text-end">Uploaded: January 1, 1001</p>
+                    </div>
                 </div>
                 <div className="row py-0 d-flex align-items-start justify-content-start">
                     <div className="my-0">
-                        <p className="my-0 pb-2 fs-5 border-2 border-bottom text-start color-light-3">
+                        <p className="my-0 pb-2 fs-6 border-2 border-bottom text-start color-light-3">
                             {user.Email}
                         </p>
                     </div>
@@ -175,7 +180,7 @@ function StatisticsTable({
     Statistics
 }: StatisticTableProps) {
     return (
-        <div className="row row-cols-4 row-gap-4 px-4 py-3">
+        <div className="px-4 py-3 row row-cols-md-4 row-cols-2 row-gap-md-4 row-gap-1">
             {
                 Object.entries(Statistics).map((value) => {
                     return <StatisticColumn Name={value[0]} Value={value[1]}/>;
@@ -196,11 +201,11 @@ function StatisticColumn({
 }: StatisticProps) {
     return(
         <div className="col mb-2">
-            <div className="row ps-4 fw-bold">
-                <p className="mt-0 mb-3 fw-bolder text-start p-0">{Name}</p>
+            <div className="row ps-md-4 p-0 fw-bold">
+                <p className="m-0 mb-3 p-0 text-start">{Name}</p>
             </div>
-            <div className="row ps-4 fw-medium">
-                <p className="my-0 text-start p-0 color-light-3">{Value}</p>
+            <div className="row ps-md-4 ps-0 fw-medium">
+                <p className="m-0 p-0 text-start color-light-3">{Value}</p>
             </div>
         </div>
     );
