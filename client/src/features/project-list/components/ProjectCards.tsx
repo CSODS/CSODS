@@ -1,9 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { BorderSelector, BtnSelector, ColorSelector, CssSelector, HoverSelector, IProjectDetails, TranslucentSelector } from "@/types";
 import { ADDRESSES } from "@constants/index";
-import { IProjectTags, ProjectDataService } from "@utils/data/ProjectDataService";
+import { IProjectTags } from "@utils/data/ProjectDataService";
 import BtnGroup from "@/components/shared/ButtonGroup";
-import { useEffect, useState } from "react";
 
 interface ProjectCardProps {
   pageNumber: number,
