@@ -6,3 +6,24 @@ export type DarkColor = 'dark-1' | 'dark-2' | 'dark-3' | 'dark-4';
 export type Color =  LightColor | NeutralColor | DarkColor;
 
 export type OnHover = 'invert' | 'lighten' | 'darken';
+
+type BorderAdditive = 'border-top' | 'border-start' | 'border-bottom' | 'border-end';
+type BorderSubtractive = (
+    'border-top-0' | 'border-start-0' | 'border-bottom-0' | 'border-end-0'
+);
+type BorderWidth = 'border-1' | 'border-2' | 'border-3' | 'border-4' | 'border-5';
+type BorderRadius = (
+    'rounded' | 'rounded-top' | 'rounded-start' | 'rounded-bottom' | 'rounded-end'
+);
+type BorderSize = (
+    'rounded-0' | 'rounded-1' | 'rounded-2' | 'rounded-3' | 'rounded-4' | 'rounded-5' | 
+    'rounded-circle' | 'rounded-pill'
+);
+
+export type BorderSelectors = (
+    BorderAdditive | BorderSubtractive | BorderWidth | BorderRadius | BorderSize
+);
+
+export type Selectors = (
+    BorderSelectors | Opacity | Color | OnHover
+);
