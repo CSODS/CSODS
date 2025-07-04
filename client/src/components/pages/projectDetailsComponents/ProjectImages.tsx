@@ -8,22 +8,21 @@ export default function ProjectImages() {
     const [imageLinks] = useState<string[]>(DEFAULT_PROJECT_IMAGES);
 
     return(
-        <div className="mt-4 col">
-            {/* <div className="mb-4 row">
-                <div className="fs-1 fw-bold text-start">
+        <div className="mt-4 p-0 col border border-light-1 rounded-3 ratio ratio-16x9">
+            <ImageCarousel imageLinks={imageLinks}/>
+            {/* <div className="m-0 p-0 mb-2 row fw-bold">
+                <div className="fs-1 fw-bolder text-start">
                     Project Images
                 </div>
-            </div> */}
-            <div className="row">
+            </div>
+            <div className="m-0 p-0 row">
                 <div className="col-lg-8">
-                    <div className="p-4 card project-card-dark-4 translucent-70 border-light-1 rounded-3">
-                        <ImageCarousel imageLinks={imageLinks}/>
-                    </div>
+                    <ImageCarousel imageLinks={imageLinks}/>
                 </div>
                 <div className="ms-5 col-lg-2">
                     <ImageSet imageLinks={imageLinks}/>
                 </div>
-            </div>
+            </div> */}
         </div>
 
     );
@@ -35,7 +34,7 @@ interface ImageCarouselProps {
     imageLinks: string[];
 };
 
-function ImageCarousel({
+export function ImageCarousel({
     imageLinks
 }: ImageCarouselProps) {
     const imgCount = imageLinks.length;
@@ -145,7 +144,7 @@ function ImageCard({
     cardId
 }: ImageCardProps) {
     return (
-        <div id={cardId} className="p-0 col card project-card-dark-4 translucent-70 border-light-1 rounded-3 overflow-hidden">
+        <div id={cardId} className="p-0 col card project-card-dark-4 translucent-70 rounded-3 overflow-hidden">
             <img src={imageLink} className="d-block w-100" alt={cardId}/>
         </div>
     );
