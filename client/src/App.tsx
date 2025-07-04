@@ -1,16 +1,16 @@
-import './stylesheets/App.css';
-import './stylesheets/cards.css';
-import './stylesheets/colors.css';
-import './stylesheets/buttons.css';
-import './stylesheets/borders.css';
+import './assets/stylesheets/App.css';
+import './assets/stylesheets/cards.css';
+import './assets/stylesheets/colors.css';
+import './assets/stylesheets/buttons.css';
+import './assets/stylesheets/borders.css';
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
-import ADDRESSES from './constants/addresses/addresses';
-import { PrimaryLayout } from './components/layouts/MainLayout';
-import LandingPage from './components/pages/LandingPage';
-import Home from "./components/pages/Home";
-import StudentProjects from './components/pages/StudentProjects';
-import ProjectDetails from './components/pages/ProjectDetails';
-import SubmitProject from './components/pages/SubmitProject';
+import { ADDRESSES } from '@/constants';
+import { PrimaryLayout } from '@/components/layouts/MainLayout';
+import LandingPage from './features/landing/LandingPage';
+import Home from "./features/home/Home";
+import StudentProjects from './features/project-list/StudentProjects';
+import ProjectDetails from './features/project-details/ProjectDetails';
+import SubmitProject from './features/submit-project/SubmitProject';
 
 function App() {
   return (

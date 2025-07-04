@@ -17,10 +17,8 @@ const PROJECT_TAG_PATHS = {
     ALL_DATA: '/all_data'
 } as const;
 
-const CSODS_API_PATHS = {
+export const CSODS_API_PATHS = {
     BASE: CSODS_API_BASE,
     PROJECTS: PROJECT_PATHS,
     PROJECT_TAGS: PROJECT_TAG_PATHS
 } as const;
-
-export default CSODS_API_PATHS;

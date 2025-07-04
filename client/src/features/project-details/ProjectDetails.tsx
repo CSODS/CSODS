@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { DEFAULT_USER } from "../../constants/defaults";
-import { IAllProjectTags, IProjectDetails, IUser } from "../../viewModels/csods/csodsApiInterfaces";
-import ApiHandler from "../../utils/api/ApiHandler";
-import CoreContributors from "./projectDetailsComponents/CoreContributors";
-import ProjectDetailsProvider from "./projectDetailsComponents/ProjectDetailsProvider";
-import ProjectInformationCard from "./projectDetailsComponents/ProjectInformation";
-import ProjectImages from "./projectDetailsComponents/ProjectImages";
+import { IUser, IProjectDetails, IAllProjectTags } from "@/types";
+import { DEFAULT_USER } from "@constants/defaults";
+import ApiHandler from "@utils/api/ApiHandler";
+import CoreContributors from "./components/CoreContributors";
+import ProjectDetailsProvider from "./components/ProjectDetailsProvider";
+import ProjectInformationCard from "./components/ProjectInformation";
+import ProjectImages from "./components/ProjectImages";
 
 export default function ProjectDetails() {
   const { pageNumber, projectId} = useParams();
