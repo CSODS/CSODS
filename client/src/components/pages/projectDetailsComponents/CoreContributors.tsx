@@ -7,18 +7,18 @@ export default function CoreContributors() {
 
     const contributors = [
         {
-            Name: "Name",
-            Email: "contributor@gmail.com",
+            Name: "Contributor1",
+            Email: "contributor1@gmail.com",
             Roles: ["Fullstack Developer", "Project Manager"]
         },
         {
-            Name: "Name",
-            Email: "contributor@gmail.com",
+            Name: "Contributor2",
+            Email: "contributor2@gmail.com",
             Roles: ["Backend Developer"]
         },
         {
-            Name: "Name",
-            Email: "contributor@gmail.com",
+            Name: "Contributor3",
+            Email: "contributor3@gmail.com",
             Roles: ["Frontend Developer"]
         },
     ];
@@ -61,40 +61,67 @@ function ContributorCard({
             <div className="col-2 p-0">
                 <i className="m-0 bi bi-person-circle fs-1 color-light-1"></i>
             </div>
-            <div className="col-10">
+            <div className="col-10 ps-lg-2 ps-xl-0">
                 <p className="row m-0 mt-2 p-0 fs-6 text-start fw-bold">
                     {Name}
                 </p>
                 <p className="row m-0 p-0 fs-6 text-start color-light-3">
                     {Email}
                 </p>
-                <RoleView Roles={Roles}/>
+                <RoleView Name={Name} Roles={Roles}/>
             </div>
         </div>
     );
 }
 
 interface RoleViewProps {
+    Name: string,
     Roles: string[];
 };
 
-function RoleView({ Roles }: RoleViewProps) {
+function RoleView({ Name, Roles }: RoleViewProps) {
+    const collapseId=`${Name}-roles`;
+
     return (
         <div className="row ps-2">
-            <div className="col-1">
-                <i className="bi bi-arrow-return-right"></i>
-            </div>
-            <div className="col-11">
-                {
-                    Roles.map((role) => {
-                        return (
-                            <p className="row m-0 fs-6 text-start">
-                                {role}
-                            </p>
-                        )
-                    })
-                }
+            <button className="row bg-transparent border-0 color-light-1" type='button' data-bs-toggle="collapse" data-bs-target={`#${collapseId}`} aria-expanded="false" aria-controls={collapseId}>
+                <div className="col-2">
+                    <i className="bi bi-arrow-return-right"></i>
+                </div>
+                <div className="col-10 p-0">
+                    <p className="row m-0 fs-6 text-start">
+                        Roles
+                    </p>
+                </div>
+            </button>
+            <div className="row collapse" id={collapseId}>
+                <div className="col-2"></div>
+                <div className="col-10 p-0">
+                    {
+                        Roles.map((role) => {
+                            return (
+                                <p className="row m-0 fs-6 fst-italic text-start">
+                                    {role}
+                                </p>
+                            )
+                        })
+                    }
+                </div>
             </div>
         </div>
     );
+}
+
+interface RowsProps {
+    rowContent: string[];
+}
+
+function UnorderedList({
+    rowContent
+}: RowsProps) {
+    return (
+        <div className="">
+
+        </div>
+    )
 }
