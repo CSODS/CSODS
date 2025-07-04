@@ -10,6 +10,17 @@ $grey-blue:rgb(68, 67, 109);
 $dark-grey-blue:rgb(43, 45, 66);
 $dark-purple:rgb(19, 7, 46);
 $black:rgb(0, 0, 0);
+$mulled-wine: rgb(68, 67, 109);
+
+$chrome-yellow: rgb(255 165 0);
+$cookie-brown: rgb(199 155 26);
+
+//  utility colors
+$util-error: rgb(255, 255, 255);
+$util-alert: $chrome-yellow;
+$util-alert-subtle: $cookie-brown;
+$util-notify: rgb(255, 255, 255);
+$util-success: $green;
 
 //  opacity values
 $opacities: 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0;
@@ -110,12 +121,23 @@ $black-80: rgba(0, 0, 0, 0.8);
 $black-90: rgba(0, 0, 0, 0.9);
 $black-100: rgba(0, 0, 0, 1);
 
+//  mulled-wines
+$mulled-wine-10: rgba(68, 67, 109, 0.1);
+$mulled-wine-20: rgba(68, 67, 109, 0.2);
+$mulled-wine-30: rgba(68, 67, 109, 0.3);
+$mulled-wine-40: rgba(68, 67, 109, 0.4);
+$mulled-wine-50: rgba(68, 67, 109, 0.5);
+$mulled-wine-60: rgba(68, 67, 109, 0.6);
+$mulled-wine-70: rgba(68, 67, 109, 0.7);
+$mulled-wine-80: rgba(68, 67, 109, 0.8);
+$mulled-wine-90: rgba(68, 67, 109, 0.9);
+$mulled-wine-100: rgba(68, 67, 109, 1);
 
 $light-colors: $white, $light-grey, $grey;
 
 $neutral-colors: $green, $grey-blue;
 
-$dark-colors: $dark-grey-blue, $dark-purple, $black;
+$dark-colors: $dark-grey-blue, $dark-purple, $black, $mulled-wine;
 
 @function build-color-scheme() {
     $map: ();
@@ -156,3 +178,10 @@ $color-scheme: build-color-scheme();
     $is-dark: $color-index != null;
     @return $is-dark;
 }
+
+$utility-colors: (
+    "util-error": $util-error,
+    "util-alert": $util-alert,
+    "util-notify": $util-notify,
+    "util-success": $util-success
+);

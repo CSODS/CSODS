@@ -1,6 +1,6 @@
 import axios from "axios";
 import CSODS_API_PATHS from "../../constants/api/api";
-import { IAllProjectTags, IProjectsPage } from "../../viewModels/csods/csodsApiInterfaces";
+import { IAllProjectTags, IProjectDetails, IProjectsPage } from "../../viewModels/csods/csodsApiInterfaces";
 
 export default class ApiHandler {
     private readonly _apiBase = CSODS_API_PATHS.BASE;
@@ -20,7 +20,21 @@ export default class ApiHandler {
             return projectsPage;
         }
         catch (err) {
-            console.error(`Failed to fetch project list: ${err}`);
+            console.error('Failed to fetch project list: ', err);
+            return null;
+        }
+    }
+
+    public async GetProject(pageNumber: string, projectId: string): Promise<IProjectDetails | null> {
+        const endpoint = `${this._apiBase}${CSODS_API_PATHS.PROJECTS.PATH}/${pageNumber}/${projectId}`;
+        
+        try {
+            const response = await axios.get(endpoint);
+            const project = response.data;
+            return project;
+        }
+        catch (err) {
+            console.error('Failed to fetch project: ', err);
             return null;
         }
     }

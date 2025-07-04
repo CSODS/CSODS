@@ -334,4 +334,214 @@
   border-color: rgb(0, 0, 0) !important;
 }
 
+.bg-dark-4 {
+  background-color: rgb(68, 67, 109) !important;
+}
+.bg-dark-4.translucent-10 {
+  background-color: rgba(68, 67, 109, 0.1) !important;
+}
+.bg-dark-4.translucent-20 {
+  background-color: rgba(68, 67, 109, 0.2) !important;
+}
+.bg-dark-4.translucent-30 {
+  background-color: rgba(68, 67, 109, 0.3) !important;
+}
+.bg-dark-4.translucent-40 {
+  background-color: rgba(68, 67, 109, 0.4) !important;
+}
+.bg-dark-4.translucent-50 {
+  background-color: rgba(68, 67, 109, 0.5) !important;
+}
+.bg-dark-4.translucent-60 {
+  background-color: rgba(68, 67, 109, 0.6) !important;
+}
+.bg-dark-4.translucent-70 {
+  background-color: rgba(68, 67, 109, 0.7) !important;
+}
+.bg-dark-4.translucent-80 {
+  background-color: rgba(68, 67, 109, 0.8) !important;
+}
+.bg-dark-4.translucent-90 {
+  background-color: rgba(68, 67, 109, 0.9) !important;
+}
+.bg-dark-4.translucent-100 {
+  background-color: #44436d !important;
+}
+
+.color-dark-4 {
+  color: rgb(68, 67, 109) !important;
+}
+
+.border-dark-4 {
+  border-color: rgb(68, 67, 109) !important;
+}
+
+.bg-util-error {
+  background-color: rgb(255, 255, 255) !important;
+}
+.bg-util-error.translucent-10 {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+.bg-util-error.translucent-20 {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+.bg-util-error.translucent-30 {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+.bg-util-error.translucent-40 {
+  background-color: rgba(255, 255, 255, 0.4);
+}
+.bg-util-error.translucent-50 {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+.bg-util-error.translucent-60 {
+  background-color: rgba(255, 255, 255, 0.6);
+}
+.bg-util-error.translucent-70 {
+  background-color: rgba(255, 255, 255, 0.7);
+}
+.bg-util-error.translucent-80 {
+  background-color: rgba(255, 255, 255, 0.8);
+}
+.bg-util-error.translucent-90 {
+  background-color: rgba(255, 255, 255, 0.9);
+}
+.bg-util-error.translucent-100 {
+  background-color: white;
+}
+
+.color-util-error {
+  color: rgb(255, 255, 255) !important;
+}
+
+.border-util-error {
+  border-color: rgb(255, 255, 255) !important;
+}
+
+.bg-util-alert {
+  background-color: rgb(255, 165, 0) !important;
+}
+.bg-util-alert.translucent-10 {
+  background-color: rgba(255, 165, 0, 0.1);
+}
+.bg-util-alert.translucent-20 {
+  background-color: rgba(255, 165, 0, 0.2);
+}
+.bg-util-alert.translucent-30 {
+  background-color: rgba(255, 165, 0, 0.3);
+}
+.bg-util-alert.translucent-40 {
+  background-color: rgba(255, 165, 0, 0.4);
+}
+.bg-util-alert.translucent-50 {
+  background-color: rgba(255, 165, 0, 0.5);
+}
+.bg-util-alert.translucent-60 {
+  background-color: rgba(255, 165, 0, 0.6);
+}
+.bg-util-alert.translucent-70 {
+  background-color: rgba(255, 165, 0, 0.7);
+}
+.bg-util-alert.translucent-80 {
+  background-color: rgba(255, 165, 0, 0.8);
+}
+.bg-util-alert.translucent-90 {
+  background-color: rgba(255, 165, 0, 0.9);
+}
+.bg-util-alert.translucent-100 {
+  background-color: orange;
+}
+
+.color-util-alert {
+  color: rgb(255, 165, 0) !important;
+}
+
+.border-util-alert {
+  border-color: rgb(255, 165, 0) !important;
+}
+
+.bg-util-notify {
+  background-color: rgb(255, 255, 255) !important;
+}
+.bg-util-notify.translucent-10 {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+.bg-util-notify.translucent-20 {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+.bg-util-notify.translucent-30 {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+.bg-util-notify.translucent-40 {
+  background-color: rgba(255, 255, 255, 0.4);
+}
+.bg-util-notify.translucent-50 {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+.bg-util-notify.translucent-60 {
+  background-color: rgba(255, 255, 255, 0.6);
+}
+.bg-util-notify.translucent-70 {
+  background-color: rgba(255, 255, 255, 0.7);
+}
+.bg-util-notify.translucent-80 {
+  background-color: rgba(255, 255, 255, 0.8);
+}
+.bg-util-notify.translucent-90 {
+  background-color: rgba(255, 255, 255, 0.9);
+}
+.bg-util-notify.translucent-100 {
+  background-color: white;
+}
+
+.color-util-notify {
+  color: rgb(255, 255, 255) !important;
+}
+
+.border-util-notify {
+  border-color: rgb(255, 255, 255) !important;
+}
+
+.bg-util-success {
+  background-color: rgb(0, 191, 99) !important;
+}
+.bg-util-success.translucent-10 {
+  background-color: rgba(0, 191, 99, 0.1);
+}
+.bg-util-success.translucent-20 {
+  background-color: rgba(0, 191, 99, 0.2);
+}
+.bg-util-success.translucent-30 {
+  background-color: rgba(0, 191, 99, 0.3);
+}
+.bg-util-success.translucent-40 {
+  background-color: rgba(0, 191, 99, 0.4);
+}
+.bg-util-success.translucent-50 {
+  background-color: rgba(0, 191, 99, 0.5);
+}
+.bg-util-success.translucent-60 {
+  background-color: rgba(0, 191, 99, 0.6);
+}
+.bg-util-success.translucent-70 {
+  background-color: rgba(0, 191, 99, 0.7);
+}
+.bg-util-success.translucent-80 {
+  background-color: rgba(0, 191, 99, 0.8);
+}
+.bg-util-success.translucent-90 {
+  background-color: rgba(0, 191, 99, 0.9);
+}
+.bg-util-success.translucent-100 {
+  background-color: #00bf63;
+}
+
+.color-util-success {
+  color: rgb(0, 191, 99) !important;
+}
+
+.border-util-success {
+  border-color: rgb(0, 191, 99) !important;
+}
+
 /*# sourceMappingURL=colors.css.map */

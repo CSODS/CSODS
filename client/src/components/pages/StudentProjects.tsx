@@ -1,4 +1,4 @@
-import { DEVELOPMENT_TYPES, ICONS } from '../../constants/project_data/tags';
+import { ICONS } from '../../constants/project_data/tags';
 import * as DEFAULTS from '../../constants/defaults';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';

@@ -1,0 +1,1 @@
+export type { Opacity, Color, OnHover } from './themes/styles';

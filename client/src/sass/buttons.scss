@@ -10,37 +10,116 @@
         transition-duration: 0.2s;
         background-color: $value !important;
 
+        &:hover {
+            box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 
+                        0 17px 50px 0 rgba(0,0,0,0.19);
+        }
+
         @if ($is-light-bg) {
-            color: v.$dark-purple;
+            color: v.$dark-purple !important;
 
             &:hover {
                 background-color: v.$black !important;
                 color: v.$white !important;
-                box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 
-                            0 17px 50px 0 rgba(0,0,0,0.19);
+            }
+
+            &.hover-invert {
+                &:hover {
+                    background-color: v.$black !important;
+                    color: v.$white !important;
+                }
+            }
+
+            &.hover-lighten {
+                &:hover {
+                    color: v.$dark-purple !important;
+                }
+            }
+
+            &.hover-darken {
+                &:hover {
+                    color: v.$dark-purple !important;
+                }
             }
         }
         @else {
-            color: v.$white;
+            color: v.$white !important;
 
             &:hover {
                 background-color: v.$white !important;
                 color: v.$black !important;
-                box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 
-                            0 17px 50px 0 rgba(0,0,0,0.19);
+            }
+
+            &.hover-invert {
+                &:hover {
+                    background-color: v.$white !important;
+                    color: v.$black !important;
+                }
+            }
+
+            &.hover-lighten {
+                &:hover {
+                    color: v.$white !important;
+                }
+            }
+
+            &.hover-darken {
+                &:hover {
+                    color: v.$white !important;
+                }
             }
         }
         
+        &.hover-lighten {
+            &:hover {
+                background-color: color.scale($color: $value, $lightness: 10%, $space:lab) !important;
+            }
+        }
+
+        &.hover-darken {
+            &:hover {
+                background-color: color.scale($color: $value, $lightness: -10%, $space:lab) !important;
+            }
+        }
+
         @each $opacity in v.$opacities {
             &.translucent-#{$opacity * 100} {
-                background-color: color.change($color: $value, $alpha: $opacity) !important;
+                $translucent-bg: color.change($color: $value, $alpha: $opacity);
 
-                &:hover {
-                    @if ($is-light-bg) {
+                background-color: $translucent-bg !important;
+
+                @if ($is-light-bg) {
+                    &:hover {
                         background-color: color.change($color: v.$black, $alpha: $opacity) !important;
                     }
-                    @else {
+
+                    &.hover-invert {
+                        &:hover {
+                            background-color: color.change($color: v.$black, $alpha: $opacity) !important;
+                        }
+                    }
+                }
+                @else {
+                    &:hover {
                         background-color: color.change($color: v.$white, $alpha: $opacity) !important;
+                    }
+                    
+                    &.hover-invert {
+                        &:hover {
+                            background-color: color.change($color: v.$white, $alpha: $opacity) !important;
+                        }
+                    }
+                }
+
+                &.hover-lighten {
+                    &:hover {
+                        background-color: color.scale($color: $translucent-bg, $lightness: 10%, $space:lab) !important;
+                    }
+                }
+
+                &.hover-darken {
+                    &:hover {
+                        background-color: color.scale($color: $translucent-bg, $lightness: -10%, $space:lab) !important;
                     }
                 }
             }
@@ -123,5 +202,17 @@
                 }
             }
         }
+    }
+}
+
+@each $name, $value in v.$utility-colors {
+    .btn.btn-#{$name} {
+        background-color: $value !important;
+
+        @each $opacity in v.$opacities {
+            &.translucent-#{$opacity * 100} {
+                background-color: color.change($color: $value, $alpha: $opacity) !important; 
+            }
+         }
     }
 }
