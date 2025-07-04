@@ -16,7 +16,7 @@ export default function BtnGroup({
     const colSelectorsStr = colSelectors.join(' ');
 
     return(
-        <div className="px-2 mt-2 row w-100">
+        <div className="mt-2 row w-100">
             <div className={colSelectorsStr}>
                 {
                     TagList.map((tag, index) => {
