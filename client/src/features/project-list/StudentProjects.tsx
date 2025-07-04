@@ -2,7 +2,7 @@ import { ICONS } from '../../constants/project_data/tags';
 import * as DEFAULTS from '../../constants/defaults';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { IProjectDetails, IAllProjectTags } from '../../viewModels/csods/csodsApiInterfaces';
+import { IProjectDetails, IAllProjectTags } from '@/types';
 import { ProjectDataService } from '../../utils/data/ProjectDataService';
 import ApiHandler from '../../utils/api/ApiHandler';
 import ProjectCard from './components/ProjectCards';

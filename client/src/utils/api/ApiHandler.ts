@@ -1,6 +1,6 @@
 import axios from "axios";
 import CSODS_API_PATHS from "../../constants/api/api";
-import { IAllProjectTags, IProjectDetails, IProjectsPage } from "../../viewModels/csods/csodsApiInterfaces";
+import { IAllProjectTags, IProjectDetails, IProjectsPage } from "@/types";
 
 export default class ApiHandler {
     private readonly _apiBase = CSODS_API_PATHS.BASE;

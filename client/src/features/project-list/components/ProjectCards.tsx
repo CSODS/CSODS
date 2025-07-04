@@ -1,6 +1,6 @@
 import ADDRESSES from "../../../constants/addresses/addresses";
 import { useNavigate } from "react-router-dom";
-import { IProjectDetails, IProjectTags } from "../../../viewModels/csods/csodsApiInterfaces";
+import { IProjectDetails, IProjectTags } from "@/types";
 
 interface ProjectCardProps {
   pageNumber: number,

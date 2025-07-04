@@ -1,5 +1,5 @@
 import { ReactNode, createContext } from "react";
-import { IAllProjectTags, IProjectDetails, IUser } from "../../../viewModels/csods/csodsApiInterfaces";
+import { IAllProjectTags, IProjectDetails, IUser } from "@/types";
 import { DEFAULT_PROJECT, TAGS, DEFAULT_USER } from "../../../constants/defaults";
 
 

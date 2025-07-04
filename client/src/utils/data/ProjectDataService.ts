@@ -1,4 +1,4 @@
-import { IProject, IProjectDetails, IProjectFramework, IAllProjectTags, IProjectTags } from "../../viewModels/csods/csodsApiInterfaces";
+import { IProject, IProjectDetails, IProjectFramework, IAllProjectTags, IProjectTags } from "@/types";
 
 export class ProjectDataService {
     private _allProjectTags: IAllProjectTags;
