@@ -19,7 +19,7 @@ export default function Paginator({
     if (pageNumber === currentPage) {
       return (
         <li className='mx-1'>
-          <span className='page-link btn page-light-1 translucent-40 active border rounded-pill border-1 border-light-1'>
+          <span className='page-link btn btn-light-1 translucent-40 initial-transparent active border rounded-pill border-1 border-light-1'>
             {pageNumber}
           </span>
         </li>
@@ -28,7 +28,7 @@ export default function Paginator({
     else {
       return (
         <li className="mx-1">
-          <Link className="page-link btn page-light-1 translucent-40 border rounded-pill border-1 border-light-1" to={link}>
+          <Link className="page-link btn btn-light-1 translucent-40 initial-transparent border rounded-pill border-1 border-light-1" to={link}>
             {pageNumber}
           </Link>
         </li>
@@ -42,7 +42,7 @@ export default function Paginator({
     if (currentPage !== 1) {
       return (
         <li className="mx-1">
-          <Link className="page-link btn page-light-1 translucent-40 border rounded-pill border-1 border-light-1" to={link}>
+          <Link className="page-link btn btn-light-1 translucent-40 initial-transparent border rounded-pill border-1 border-light-1" to={link}>
             Previous
           </Link>
         </li>
@@ -56,7 +56,7 @@ export default function Paginator({
     if (currentPage !== totalPages) {
       return (
         <li className="mx-1">
-          <Link className="page-link btn page-light-1 translucent-40 border rounded-pill border-1 border-light-1" to={link}>
+          <Link className="page-link btn btn-light-1 translucent-40 initial-transparent border rounded-pill border-1 border-light-1" to={link}>
             Next
           </Link>
         </li> 
