@@ -3,8 +3,8 @@ import { BtnSelector, ColorSelector, CssSelector, HoverSelector, TranslucentSele
 import BtnGroup from "@/components/shared/ButtonGroup";
 import { ICONS, DEFAULTS } from "@/constants";
 import { IProjectTags, ProjectDataService } from "@utils/data/ProjectDataService";
-import { AllTagsContext, UserContext } from "@components/shared/Providers";
-import { useProjectDetails } from "@/hooks";
+import { AllTagsContext } from "@components/shared/Providers";
+import { useProjectDetails, useUser } from "@/hooks";
 
 const PROJECT_DESCRIPTION = DEFAULTS.PROJECT_DESCRIPTION;
 
@@ -108,7 +108,7 @@ function ProjectStatus({
 //#endregion Header
 
 function SubHeader() {
-    const user = useContext(UserContext);
+    const user = useUser();
 
     return (
         <div className="px-2 mt-1 mb-0 row w-100">
