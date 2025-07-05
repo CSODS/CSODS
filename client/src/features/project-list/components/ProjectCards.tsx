@@ -6,7 +6,7 @@ import { useProjectDataService, useProjectDetails, useProjectIcon } from "@/hook
 import { redirectToUrl } from "@/utils/navigation/navigation";
 import { getProjectLink } from "../utils";
 
-export function ProjectCard () {
+export default function ProjectCard () {
   const navigate = useNavigate();
   const viewProject = () => { navigate(getProjectLink(Number(pageNumber), projectId)) }
 

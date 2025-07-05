@@ -1,9 +1,9 @@
 import { useFetchProjectsPage, useFetchTagData } from "@/hooks";
 import { ProjectDetailsProvider, ProjectDataServiceProvider } from "@/components";
-import { ProjectCard } from "./ProjectCards";
+import ProjectCard from "./ProjectCards";
 import Paginator from "./Paginator";
 
-export function ProjectList () {
+export default function ProjectList () {
     const projectsPage = useFetchProjectsPage();
     const allTags = useFetchTagData();
 
