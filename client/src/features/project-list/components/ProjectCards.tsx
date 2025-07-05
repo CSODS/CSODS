@@ -3,7 +3,7 @@ import { BorderSelector, BtnSelector, ColorSelector, CssSelector, HoverSelector,
 import { DEFAULTS, ICONS } from "@constants/index";
 import { BtnGroup } from "@/components";
 import { useProjectDataService, useProjectDetails, useProjectIcon } from "@/hooks";
-import { redirectToUrl } from "@/utils/navigation/navigation";
+import { redirectToUrl } from "@/utils";
 import { getProjectLink } from "../utils";
 
 export default function ProjectCard () {
