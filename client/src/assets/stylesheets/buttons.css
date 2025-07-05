@@ -6,19 +6,9 @@
 .btn.btn-light-1:hover {
   box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
 }
-.btn.btn-light-1:hover {
-  background-color: rgb(0, 0, 0);
-  color: rgb(255, 255, 255);
-}
 .btn.btn-light-1.hover-invert:hover {
   background-color: rgb(0, 0, 0);
   color: rgb(255, 255, 255);
-}
-.btn.btn-light-1.hover-lighten:hover {
-  color: rgb(19, 7, 46);
-}
-.btn.btn-light-1.hover-darken:hover {
-  color: rgb(19, 7, 46);
 }
 .btn.btn-light-1.hover-lighten:hover {
   background-color: white;
@@ -185,19 +175,9 @@
 .btn.btn-light-2:hover {
   box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
 }
-.btn.btn-light-2:hover {
-  background-color: rgb(0, 0, 0);
-  color: rgb(255, 255, 255);
-}
 .btn.btn-light-2.hover-invert:hover {
   background-color: rgb(0, 0, 0);
   color: rgb(255, 255, 255);
-}
-.btn.btn-light-2.hover-lighten:hover {
-  color: rgb(19, 7, 46);
-}
-.btn.btn-light-2.hover-darken:hover {
-  color: rgb(19, 7, 46);
 }
 .btn.btn-light-2.hover-lighten:hover {
   background-color: rgb(225.2607390435, 225.2607390435, 225.2607390435);
@@ -364,19 +344,9 @@
 .btn.btn-light-3:hover {
   box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
 }
-.btn.btn-light-3:hover {
-  background-color: rgb(0, 0, 0);
-  color: rgb(255, 255, 255);
-}
 .btn.btn-light-3.hover-invert:hover {
   background-color: rgb(0, 0, 0);
   color: rgb(255, 255, 255);
-}
-.btn.btn-light-3.hover-lighten:hover {
-  color: rgb(19, 7, 46);
-}
-.btn.btn-light-3.hover-darken:hover {
-  color: rgb(19, 7, 46);
 }
 .btn.btn-light-3.hover-lighten:hover {
   background-color: rgb(151.9060658581, 138.6937582284, 143.7651075574);
@@ -543,19 +513,9 @@
 .btn.btn-neutral-1:hover {
   box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
 }
-.btn.btn-neutral-1:hover {
-  background-color: rgb(255, 255, 255);
-  color: rgb(0, 0, 0);
-}
 .btn.btn-neutral-1.hover-invert:hover {
   background-color: rgb(255, 255, 255);
   color: rgb(0, 0, 0);
-}
-.btn.btn-neutral-1.hover-lighten:hover {
-  color: rgb(255, 255, 255);
-}
-.btn.btn-neutral-1.hover-darken:hover {
-  color: rgb(255, 255, 255);
 }
 .btn.btn-neutral-1.hover-lighten:hover {
   background-color: rgb(30.518652113, 200.0258547643, 107.1423388617);
@@ -722,19 +682,9 @@
 .btn.btn-neutral-2:hover {
   box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
 }
-.btn.btn-neutral-2:hover {
-  background-color: rgb(255, 255, 255);
-  color: rgb(0, 0, 0);
-}
 .btn.btn-neutral-2.hover-invert:hover {
   background-color: rgb(255, 255, 255);
   color: rgb(0, 0, 0);
-}
-.btn.btn-neutral-2.hover-lighten:hover {
-  color: rgb(255, 255, 255);
-}
-.btn.btn-neutral-2.hover-darken:hover {
-  color: rgb(255, 255, 255);
 }
 .btn.btn-neutral-2.hover-lighten:hover {
   background-color: rgb(84.9067128413, 83.2653420144, 126.7319465742);
@@ -901,19 +851,9 @@
 .btn.btn-dark-1:hover {
   box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
 }
-.btn.btn-dark-1:hover {
-  background-color: rgb(255, 255, 255);
-  color: rgb(0, 0, 0);
-}
 .btn.btn-dark-1.hover-invert:hover {
   background-color: rgb(255, 255, 255);
   color: rgb(0, 0, 0);
-}
-.btn.btn-dark-1.hover-lighten:hover {
-  color: rgb(255, 255, 255);
-}
-.btn.btn-dark-1.hover-darken:hover {
-  color: rgb(255, 255, 255);
 }
 .btn.btn-dark-1.hover-lighten:hover {
   background-color: rgb(61.0779242649, 62.804561636, 84.9195381589);
@@ -1080,19 +1020,9 @@
 .btn.btn-dark-2:hover {
   box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
 }
-.btn.btn-dark-2:hover {
-  background-color: rgb(255, 255, 255);
-  color: rgb(0, 0, 0);
-}
 .btn.btn-dark-2.hover-invert:hover {
   background-color: rgb(255, 255, 255);
   color: rgb(0, 0, 0);
-}
-.btn.btn-dark-2.hover-lighten:hover {
-  color: rgb(255, 255, 255);
-}
-.btn.btn-dark-2.hover-darken:hover {
-  color: rgb(255, 255, 255);
 }
 .btn.btn-dark-2.hover-lighten:hover {
   background-color: rgb(38.1459666251, 29.5838531762, 67.4813283023);
@@ -1259,19 +1189,9 @@
 .btn.btn-dark-3:hover {
   box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
 }
-.btn.btn-dark-3:hover {
-  background-color: rgb(255, 255, 255);
-  color: rgb(0, 0, 0);
-}
 .btn.btn-dark-3.hover-invert:hover {
   background-color: rgb(255, 255, 255);
   color: rgb(0, 0, 0);
-}
-.btn.btn-dark-3.hover-lighten:hover {
-  color: rgb(255, 255, 255);
-}
-.btn.btn-dark-3.hover-darken:hover {
-  color: rgb(255, 255, 255);
 }
 .btn.btn-dark-3.hover-lighten:hover {
   background-color: rgb(27.4643698292, 27.4643698292, 27.4643698292);
@@ -1438,19 +1358,9 @@
 .btn.btn-dark-4:hover {
   box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
 }
-.btn.btn-dark-4:hover {
-  background-color: rgb(255, 255, 255);
-  color: rgb(0, 0, 0);
-}
 .btn.btn-dark-4.hover-invert:hover {
   background-color: rgb(255, 255, 255);
   color: rgb(0, 0, 0);
-}
-.btn.btn-dark-4.hover-lighten:hover {
-  color: rgb(255, 255, 255);
-}
-.btn.btn-dark-4.hover-darken:hover {
-  color: rgb(255, 255, 255);
 }
 .btn.btn-dark-4.hover-lighten:hover {
   background-color: rgb(84.9067128413, 83.2653420144, 126.7319465742);

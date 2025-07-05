@@ -18,54 +18,20 @@
         @if ($is-light-bg) {
             color: v.$dark-purple ;
 
-            &:hover {
-                background-color: v.$black ;
-                color: v.$white ;
-            }
-
             &.hover-invert {
                 &:hover {
                     background-color: v.$black ;
                     color: v.$white ;
                 }
             }
-
-            &.hover-lighten {
-                &:hover {
-                    color: v.$dark-purple ;
-                }
-            }
-
-            &.hover-darken {
-                &:hover {
-                    color: v.$dark-purple ;
-                }
-            }
         }
         @else {
             color: v.$white ;
-
-            &:hover {
-                background-color: v.$white ;
-                color: v.$black ;
-            }
 
             &.hover-invert {
                 &:hover {
                     background-color: v.$white ;
                     color: v.$black ;
-                }
-            }
-
-            &.hover-lighten {
-                &:hover {
-                    color: v.$white ;
-                }
-            }
-
-            &.hover-darken {
-                &:hover {
-                    color: v.$white ;
                 }
             }
         }
