@@ -1,13 +1,25 @@
 import { createContext, ReactNode } from "react";
 import { IAllProjectTags, IProjectDetails, IUser } from "@/types";
-import { TAGS, DEFAULT_PROJECT, DEFAULT_USER } from "@/constants/defaults";
+import { TAGS, DEFAULT_PROJECT, DEFAULT_USER, PROJECT_LIST } from "@/constants/defaults";
 
-export const ProjectContext = createContext<IProjectDetails>(DEFAULT_PROJECT);
+
+interface ProjectListProviderProps {
+    children: ReactNode;
+    projectList: IProjectDetails[];
+}
+
+export const ProjectListContext = createContext<IProjectDetails[]>(PROJECT_LIST);
+
+export function ProjectListProvider ({ children, projectList }: ProjectListProviderProps) {
+    return <ProjectListContext.Provider value={projectList}> {children} </ProjectListContext.Provider>
+}
 
 interface ProjectProviderProps {
     children: ReactNode;
     projectDetails: IProjectDetails;
 }
+
+export const ProjectContext = createContext<IProjectDetails>(DEFAULT_PROJECT);
 
 export function ProjectContextProvider ({ children, projectDetails }: ProjectProviderProps) {
     return (
