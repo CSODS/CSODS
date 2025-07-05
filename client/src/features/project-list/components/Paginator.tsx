@@ -1,85 +1,59 @@
-import { Link, useParams } from "react-router-dom";
-import { ADDRESSES } from "@constants/index";
-export interface IPaginationProps {
-  totalPages: number
-};
+import { Link } from "react-router-dom";
+import { useTotalPages } from "../hooks/context";
+import { PaginationButtonProps, usePaginationBtnState } from "../hooks/pagination";
 
-export default function Paginator({
-  totalPages
-}: IPaginationProps) {
-  const getPageLink = (pageNumber: number) => {
-    const root = ADDRESSES.STUDENT_PROJECTS.ROOT;
-    const link = `${root}/${pageNumber}`;
-    return link;
-  };
-
-  const assemblePageBtn = (pageNumber: number, totalPages: number, currentPage: number) => {
-    const link = getPageLink(pageNumber);
-
-    if (pageNumber === currentPage) {
-      return (
-        <li className='mx-1'>
-          <span className='page-link btn btn-light-1 translucent-40 initial-transparent active border rounded-pill border-1 border-light-1'>
-            {pageNumber}
-          </span>
-        </li>
-      )
-    }
-    else {
-      return (
-        <li className="mx-1">
-          <Link className="page-link btn btn-light-1 translucent-40 initial-transparent border rounded-pill border-1 border-light-1" to={link}>
-            {pageNumber}
-          </Link>
-        </li>
-      )
-    }
-  };
-
-  const assemblePreviousBtn = (currentPage: number) => {
-    const link = getPageLink(currentPage - 1);
-
-    if (currentPage !== 1) {
-      return (
-        <li className="mx-1">
-          <Link className="page-link btn btn-light-1 translucent-40 initial-transparent border rounded-pill border-1 border-light-1" to={link}>
-            Previous
-          </Link>
-        </li>
-      )
-    }
-  }
-
-  const assembleNextBtn = (totalPages: number, currentPage: number) => {
-    const link = getPageLink(currentPage + 1);
-
-    if (currentPage !== totalPages) {
-      return (
-        <li className="mx-1">
-          <Link className="page-link btn btn-light-1 translucent-40 initial-transparent border rounded-pill border-1 border-light-1" to={link}>
-            Next
-          </Link>
-        </li> 
-      )
-    }
-  }
-
-  const { pageNumber } = useParams();
-  const currentPage = Number(pageNumber);
+export default function Paginator() {
+  const totalPages = useTotalPages();
 
   return (
     <div className="d-flex flex-column align-items-center justify-content-center">
       <nav aria-label="projects navigation v2" className='m-0 mt-3 d-flex flex-row justify-content-center'>
         <ul className="pagination">
-          {assemblePreviousBtn(currentPage)}
+          <PaginationButton isPrevious/>
           {
-            [...Array(totalPages)].map((_, i) => (
-              assemblePageBtn(i + 1, totalPages, currentPage)
-            ))
-          } 
-          {assembleNextBtn(totalPages, currentPage)}
+            [...Array(totalPages)].map((_, i) => {
+              return <PaginationButton page={i + 1}/>
+            })
+          }
+          <PaginationButton isNext/>
         </ul>
       </nav>
     </div>
   );
+}
+
+function PaginationButton(props: PaginationButtonProps) {
+  const { btnText, isActiveBtn, isPreviousActive, isNextActive, link } = usePaginationBtnState(props);
+  const isActive = isActiveBtn || isPreviousActive || isNextActive;
+  const activeSelector = isActive ? 'active' : '';
+  
+  const selectorList = [
+    'page-link btn btn-light-1 translucent-40 initial-transparent border rounded-pill border-1 border-light-1',
+    activeSelector
+  ];
+
+  const selectors = selectorList.join(' ');
+
+  if (isActiveBtn) {
+    return (
+      <li className="mx-1">
+        <span className={selectors}>
+          {btnText}
+        </span>
+      </li>
+    )
+  } 
+  else if (isPreviousActive || isNextActive) {
+    return <div></div>
+  } 
+  else {
+    return (
+      <li className="mx-1">
+        <Link className={selectors} to={link}>
+          {btnText}
+        </Link>
+      </li>
+    );
+  }
+
 }
