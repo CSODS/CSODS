@@ -1,4 +1,4 @@
-import { ProjectContextProvider, ProjectDataServiceProvider } from "@/components/shared/Providers";
+import { ProjectDetailsProvider, ProjectDataServiceProvider } from "@/components/shared/Providers";
 import { DEFAULTS } from "@/constants";
 import { IAllProjectTags, IProjectDetails } from "@/types";
 import ApiHandler from "@/utils/api/ApiHandler";
@@ -49,9 +49,9 @@ export function ProjectList () {
                                 const contextKey = `project-context-${index}`;
                                 const cardKey = `project-card-${index}`;
                                 return (
-                                    <ProjectContextProvider key={contextKey} projectDetails={project}>
+                                    <ProjectDetailsProvider key={contextKey} projectDetails={project}>
                                         <ProjectCard key={cardKey}/>
-                                    </ProjectContextProvider>
+                                    </ProjectDetailsProvider>
                                 )
                             })
                         }

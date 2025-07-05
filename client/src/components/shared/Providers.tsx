@@ -15,16 +15,16 @@ export function ProjectListProvider ({ children, projectList }: ProjectListProvi
     return <ProjectListContext.Provider value={projectList}> {children} </ProjectListContext.Provider>
 }
 
-interface ProjectProviderProps {
+interface ProjectDetailsProviderProps {
     children: ReactNode;
     projectDetails: IProjectDetails;
 }
 
-export const ProjectContext = createContext<IProjectDetails>(DEFAULT_PROJECT);
+export const ProjectDetailsContext = createContext<IProjectDetails>(DEFAULT_PROJECT);
 
-export function ProjectContextProvider ({ children, projectDetails }: ProjectProviderProps) {
+export function ProjectDetailsProvider ({ children, projectDetails }: ProjectDetailsProviderProps) {
     return (
-        <ProjectContext.Provider value={projectDetails}> {children} </ProjectContext.Provider>
+        <ProjectDetailsContext.Provider value={projectDetails}> {children} </ProjectDetailsContext.Provider>
     );
 }
 

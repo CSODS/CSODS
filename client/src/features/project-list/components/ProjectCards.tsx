@@ -4,7 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { BorderSelector, BtnSelector, ColorSelector, CssSelector, HoverSelector, TranslucentSelector } from "@/types";
 import { ADDRESSES, DEFAULTS, ICONS } from "@constants/index";
 import BtnGroup from "@/components/shared/ButtonGroup";
-import { ProjectContext, ProjectDataServiceContext } from "@/components/shared/Providers";
+import { ProjectDetailsContext, ProjectDataServiceContext } from "@/components/shared/Providers";
 
 export function ProjectCard () {
   const redirectToUrl = (url: string) => {
@@ -19,7 +19,7 @@ export function ProjectCard () {
   }
 
   const { pageNumber } = useParams();
-  const projectDetails = useContext(ProjectContext);
+  const projectDetails = useContext(ProjectDetailsContext);
   const projectDataService = useContext(ProjectDataServiceContext)!;
 
   const projectTags = projectDataService.getProjectTagValues(projectDetails);
