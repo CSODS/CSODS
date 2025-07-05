@@ -6,7 +6,7 @@
     $is-neutral-bg: v.is-color-neutral($value);
     $is-dark-bg: v.is-color-dark($value);
     
-    .btn.btn-#{$name} {
+    .btn-#{$name} {
         transition-duration: 0.2s;
         background-color: $value ;
 
@@ -92,72 +92,51 @@
     $is-neutral-bg: v.is-color-neutral($value);
     $is-dark-bg: v.is-color-dark($value);
 
-    .btn.page-#{$name} {
-        transition-duration: 0.2s;
-        background-color: transparent ;
-        color: v.$white ;
+    .btn-#{$name} {
+        &.initial-transparent {
+            background-color: transparent;
 
-        @if ($is-light-bg) {
             &:hover {
-                background-color: $value ;
-                box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 
-                            0 17px 50px 0 rgba(0,0,0,0.19);
+                background-color: $value;
             }
 
-            &.active {
-                background-color: v.$white ;
-                color: v.$black ;
-                box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 
-                            0 17px 50px 0 rgba(0,0,0,0.19);
-            }
             &.disabled {
-                background-color: $value ;
-                box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 
-                            0 17px 50px 0 rgba(0,0,0,0.19);
+                background-color: $value;
+            }
+
+            @if ($is-light-bg) {
+                color: v.$white;
+
+                &.active {
+                    background-color: v.$white !important;
+                    color: v.$black;
+                }
+            }
+            @else {
+                color: v.$black;
+
+                &.active {
+                    background-color: v.$black !important;
+                    color: v.$white;
+                }
             }
         }
-        @else {
-            &:hover {
-                background-color: $value ;
-                box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 
-                            0 17px 50px 0 rgba(0,0,0,0.19);
-            }
-            &.active {
-                background-color: v.$black ;
-                box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 
-                            0 17px 50px 0 rgba(0,0,0,0.19);
-            }
-            &.disabled {
-                background-color: $value ;
-                box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 
-                            0 17px 50px 0 rgba(0,0,0,0.19);
-            }
-        }
-        
+
         @each $opacity in v.$opacities {
             &.translucent-#{$opacity * 100} {
-                background-color: transparent ;
+                $translucent-bg: color.change($color: $value, $alpha: $opacity);
 
-                @if ($is-light-bg) {
+                background-color: $translucent-bg ;
+
+                &.initial-transparent {
+                    background-color: transparent;
+
                     &:hover {
-                        background-color: color.change($color: v.$white, $alpha: $opacity) ;
+                        background-color: $translucent-bg;
                     }
-                    &.active {
-                        background-color: color.change($color: v.$white, $alpha: 1) ;
-                    }
+
                     &.disabled {
-                        background-color: color.change($color: v.$white, $alpha: $opacity) ;
-                    }
-                }
-                @else {
-                    &:hover {
-                        background-color: color.change($color: v.$black, $alpha: $opacity) ;
-                    }
-                    &.active {
-                        background-color: color.change($color: v.$black, $alpha: 1) ;
-                    }
-                    &.disabled {
-                        background-color: color.change($color: v.$black, $alpha: $opacity) ;   
+                        background-color: $translucent-bg;
                     }
                 }
             }
