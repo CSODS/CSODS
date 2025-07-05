@@ -40,11 +40,11 @@ export default function ProjectCard () {
                 <TagRow tagList={tagList}/>
                 {/* github link and view link */}
                 <div className='mt-3 mb-0 ps-0 pe-0 d-flex flex-row align-items-center'>
-                  <button type='button' className='col-lg-3 px-4 py-2 ms-0 me-3 btn btn-light-1 rounded-4 border border-1 border-dark-3' onClick={() => redirectToUrl(projectDetails.Project.GitHubUrl)}>
+                  <button type='button' className='col-lg-3 px-4 py-2 ms-0 me-3 btn btn-light-1 hover-invert rounded-4 border border-1 border-dark-3' onClick={() => redirectToUrl(projectDetails.Project.GitHubUrl)}>
                       {/* <img src={github_logo} alt='...' className='img-fluid'/> */}
                       GitHub
                   </button>
-                  <button type='button' className='col-lg-3 px-4 py-2 ms-0 me-3 btn btn-dark-3 rounded-4 border border-1 border-light-1' onClick={() => viewProject()}>View</button>
+                  <button type='button' className='col-lg-3 px-4 py-2 ms-0 me-3 btn btn-dark-3 hover-invert rounded-4 border border-1 border-light-1' onClick={() => viewProject()}>View</button>
                 </div>
               </div>
             </div>
@@ -62,14 +62,13 @@ interface TagRowProps {
 function TagRow({ tagList }: TagRowProps) {
     const btnSelector: BtnSelector = 'btn-dark-1';
     const borderSelector: BorderSelector = 'border-light-1';
-    const hoverSelector: HoverSelector = 'hover-invert';
+    const hoverSelector: HoverSelector = 'hover-darken';
     const colorSelector: ColorSelector = 'color-light-1';
     const opacitySelector: TranslucentSelector = 'translucent-100';
 
     const btnSelectors: (CssSelector | string)[] = [
         'mt-1 py-1 px-3 ms-0 me-2 btn rounded-pill fs-xs',
         btnSelector,
-        borderSelector,
         hoverSelector,
         colorSelector,
         opacitySelector
