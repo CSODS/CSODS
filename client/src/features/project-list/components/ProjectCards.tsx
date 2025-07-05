@@ -1,31 +1,16 @@
-import { useNavigate } from "react-router-dom";
-import { BorderSelector, BtnSelector, ColorSelector, CssSelector, HoverSelector, IProjectDetails, TranslucentSelector } from "@/types";
-import { ADDRESSES } from "@constants/index";
-import { IProjectTags } from "@utils/data/ProjectDataService";
+
+import { useContext, useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { BorderSelector, BtnSelector, ColorSelector, CssSelector, HoverSelector, TranslucentSelector } from "@/types";
+import { ADDRESSES, DEFAULTS, ICONS } from "@constants/index";
 import BtnGroup from "@/components/shared/ButtonGroup";
+import { ProjectContext, ProjectDataServiceContext } from "@/components/shared/Providers";
 
-interface ProjectCardProps {
-  pageNumber: number,
-  iconClass: string, 
-  projectDetails: IProjectDetails,
-  projectTags: IProjectTags,
-  tagList: string[], 
-  projectDescription: string
-};
-
-export default function ProjectCard({
-  pageNumber,
-  iconClass,
-  projectDetails,
-  projectTags,
-  tagList, 
-  projectDescription
-}: ProjectCardProps) {
+export function ProjectCard () {
   const redirectToUrl = (url: string) => {
     window.open(url);
     return;
   }
-  
   const navigate = useNavigate();
   const viewProject = (pageNumber: number, projectId: number) => {
     const pageLink = `${ADDRESSES.STUDENT_PROJECTS.ROOT}/${pageNumber}`;
@@ -33,10 +18,30 @@ export default function ProjectCard({
     navigate(`${pageLink}${detailsLink}`);
   }
 
+  const { pageNumber } = useParams();
+  const projectDetails = useContext(ProjectContext);
+  const projectDataService = useContext(ProjectDataServiceContext)!;
+
+  const projectTags = projectDataService.getProjectTagValues(projectDetails);
+  const tagList = projectDataService.getProjectTagList(projectTags);
+  const projectDescription = projectDataService.omitProjectDescription(DEFAULTS.LOREM_IPSUM);
+
+  const [ iconClass, setIconClass ] = useState<string>('');
+
+  useEffect(() => {
+    type DevType = keyof typeof ICONS;
+    const getIconClass = (devType: DevType) => {
+      const iconClass = ICONS[devType];
+      return iconClass;
+    }
+    const iconClass = getIconClass(projectTags.DevType as DevType);
+    setIconClass(iconClass);
+  }, [projectTags.DevType]);
+
   const projectId: number = projectDetails.Project.ProjectId;
 
   return (
-    <div key={projectDetails.Project.ProjectId} className='col' style={{maxWidth:700}}>
+    <div key={`projectId-${projectId}`} className="col" style={{ maxWidth:700 }}>
       {/* project card */}
       <div className='ps-lg-2 card project-card-dark-3 translucent-40 border-light-1 rounded-4'>
         <div className='row g-0'>
@@ -58,7 +63,7 @@ export default function ProjectCard({
                       {/* <img src={github_logo} alt='...' className='img-fluid'/> */}
                       GitHub
                   </button>
-                  <button type='button' className='col-lg-3 px-4 py-2 ms-0 me-3 btn btn-dark-3 rounded-4 border border-1 border-light-1' onClick={() => viewProject(pageNumber, projectId)}>View</button>
+                  <button type='button' className='col-lg-3 px-4 py-2 ms-0 me-3 btn btn-dark-3 rounded-4 border border-1 border-light-1' onClick={() => viewProject(Number(pageNumber), projectId)}>View</button>
                 </div>
               </div>
             </div>
@@ -66,7 +71,7 @@ export default function ProjectCard({
         </div>
       </div>
     </div>
-  );
+  )
 }
 
 interface TagRowProps {

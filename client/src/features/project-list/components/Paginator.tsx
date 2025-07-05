@@ -1,13 +1,11 @@
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { ADDRESSES } from "@constants/index";
 export interface IPaginationProps {
-  totalPages: number,
-  currentPage: number
+  totalPages: number
 };
 
 export default function Paginator({
-  totalPages,
-  currentPage
+  totalPages
 }: IPaginationProps) {
   const getPageLink = (pageNumber: number) => {
     const root = ADDRESSES.STUDENT_PROJECTS.ROOT;
@@ -15,9 +13,8 @@ export default function Paginator({
     return link;
   };
 
-  const assemblePageBtn = (pageNumber: number, props: IPaginationProps) => {
+  const assemblePageBtn = (pageNumber: number, totalPages: number, currentPage: number) => {
     const link = getPageLink(pageNumber);
-    const currentPage = props.currentPage;
 
     if (pageNumber === currentPage) {
       return (
@@ -39,19 +36,9 @@ export default function Paginator({
     }
   };
 
-  const assemblePreviousBtn = (props: IPaginationProps) => {
-    const currentPage = props.currentPage;
+  const assemblePreviousBtn = (currentPage: number) => {
     const link = getPageLink(currentPage - 1);
 
-    // if (currentPage === 1) {
-    //   return (
-    //     <li className='mx-1'>
-    //       <span className='page-link btn page-light-1 translucent-40 disabled border rounded-pill border-1 border-light-1'>
-    //         Previous
-    //       </span>
-    //     </li>
-    //   )
-    // }
     if (currentPage !== 1) {
       return (
         <li className="mx-1">
@@ -63,20 +50,9 @@ export default function Paginator({
     }
   }
 
-  const assembleNextBtn = (props: IPaginationProps) => {
-    const currentPage = props.currentPage;
-    const totalPages = props.totalPages;
+  const assembleNextBtn = (totalPages: number, currentPage: number) => {
     const link = getPageLink(currentPage + 1);
 
-    // if (currentPage === totalPages) {
-    //   return (
-    //     <li className='mx-1'>
-    //       <span className='page-link  btn page-light-1 translucent-40 disabled border rounded-pill border-1 border-light-1'>
-    //         Next
-    //       </span>
-    //     </li>
-    //   )
-    // }
     if (currentPage !== totalPages) {
       return (
         <li className="mx-1">
@@ -88,17 +64,20 @@ export default function Paginator({
     }
   }
 
+  const { pageNumber } = useParams();
+  const currentPage = Number(pageNumber);
+
   return (
     <div className="d-flex flex-column align-items-center justify-content-center">
       <nav aria-label="projects navigation v2" className='m-0 mt-3 d-flex flex-row justify-content-center'>
         <ul className="pagination">
-          {assemblePreviousBtn({totalPages, currentPage})}
+          {assemblePreviousBtn(currentPage)}
           {
             [...Array(totalPages)].map((_, i) => (
-              assemblePageBtn(i + 1, {totalPages, currentPage})
+              assemblePageBtn(i + 1, totalPages, currentPage)
             ))
           } 
-          {assembleNextBtn({totalPages, currentPage})}
+          {assembleNextBtn(totalPages, currentPage)}
         </ul>
       </nav>
     </div>
