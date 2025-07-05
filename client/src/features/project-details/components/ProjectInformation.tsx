@@ -1,31 +1,19 @@
-import { createContext, useContext, useEffect, useMemo, useState } from "react";
+import { createContext, useContext } from "react";
 import { BtnSelector, ColorSelector, CssSelector, HoverSelector, TranslucentSelector } from "@/types";
-import BtnGroup from "@/components/shared/ButtonGroup";
+import { useProjectDataService, useProjectDetails, useProjectIcon, useUser } from "@/hooks";
 import { ICONS, DEFAULTS } from "@/constants";
-import { IProjectTags, ProjectDataService } from "@utils/data/ProjectDataService";
-import { AllTagsContext } from "@components/shared/Providers";
-import { useProjectDetails, useProjectIcon, useUser } from "@/hooks";
+import BtnGroup from "@/components/shared/ButtonGroup";
 
 const PROJECT_DESCRIPTION = DEFAULTS.PROJECT_DESCRIPTION;
 
 const DevIconContext = createContext<string>('');
-const ProjectTagsContext = createContext<IProjectTags | undefined>(undefined);
 
 export default function ProjectInformationCard() {
     const project = useProjectDetails();
-    const allTags = useContext(AllTagsContext);
+    const projectDataService = useProjectDataService();
 
-    const projectDataService = useMemo(() => {
-        return new ProjectDataService(allTags)
-    }, [allTags]);
-
-    const projectTags = useMemo(() => {
-        return projectDataService.getProjectTagValues(project)
-    }, [project, projectDataService]);
-
-    const projectTagList = useMemo(() => {
-        return projectDataService.getProjectTagList(projectTags);
-    }, [projectTags, projectDataService]);
+    const projectTags = projectDataService.getProjectTagValues(project);
+    const projectTagList = projectDataService.getProjectTagList(projectTags);
 
     const devTypeIcon = useProjectIcon(projectTags.DevType as keyof typeof ICONS);
 
@@ -35,9 +23,7 @@ export default function ProjectInformationCard() {
                 <Header/>
                 <SubHeader/>
                 <Description/>
-                <ProjectTagsContext.Provider value={projectTags}>
-                    <TagRow tagList={projectTagList}/>
-                </ProjectTagsContext.Provider>
+                <TagRow tagList={projectTagList}/>
                 <GitHubStatistics/>
             </div>
         </DevIconContext.Provider>
