@@ -19,11 +19,9 @@
 .btn.btn-light-1.translucent-10 {
   background-color: rgba(255, 255, 255, 0.1);
 }
-.btn.btn-light-1.translucent-10:hover {
-  background-color: rgba(0, 0, 0, 0.1);
-}
 .btn.btn-light-1.translucent-10.hover-invert:hover {
   background-color: rgba(0, 0, 0, 0.1);
+  color: rgb(255, 255, 255);
 }
 .btn.btn-light-1.translucent-10.hover-lighten:hover {
   background-color: rgba(255, 255, 255, 0.1);
@@ -34,11 +32,9 @@
 .btn.btn-light-1.translucent-20 {
   background-color: rgba(255, 255, 255, 0.2);
 }
-.btn.btn-light-1.translucent-20:hover {
-  background-color: rgba(0, 0, 0, 0.2);
-}
 .btn.btn-light-1.translucent-20.hover-invert:hover {
   background-color: rgba(0, 0, 0, 0.2);
+  color: rgb(255, 255, 255);
 }
 .btn.btn-light-1.translucent-20.hover-lighten:hover {
   background-color: rgba(255, 255, 255, 0.2);
@@ -49,11 +45,9 @@
 .btn.btn-light-1.translucent-30 {
   background-color: rgba(255, 255, 255, 0.3);
 }
-.btn.btn-light-1.translucent-30:hover {
-  background-color: rgba(0, 0, 0, 0.3);
-}
 .btn.btn-light-1.translucent-30.hover-invert:hover {
   background-color: rgba(0, 0, 0, 0.3);
+  color: rgb(255, 255, 255);
 }
 .btn.btn-light-1.translucent-30.hover-lighten:hover {
   background-color: rgba(255, 255, 255, 0.3);
@@ -64,11 +58,9 @@
 .btn.btn-light-1.translucent-40 {
   background-color: rgba(255, 255, 255, 0.4);
 }
-.btn.btn-light-1.translucent-40:hover {
-  background-color: rgba(0, 0, 0, 0.4);
-}
 .btn.btn-light-1.translucent-40.hover-invert:hover {
   background-color: rgba(0, 0, 0, 0.4);
+  color: rgb(255, 255, 255);
 }
 .btn.btn-light-1.translucent-40.hover-lighten:hover {
   background-color: rgba(255, 255, 255, 0.4);
@@ -79,11 +71,9 @@
 .btn.btn-light-1.translucent-50 {
   background-color: rgba(255, 255, 255, 0.5);
 }
-.btn.btn-light-1.translucent-50:hover {
-  background-color: rgba(0, 0, 0, 0.5);
-}
 .btn.btn-light-1.translucent-50.hover-invert:hover {
   background-color: rgba(0, 0, 0, 0.5);
+  color: rgb(255, 255, 255);
 }
 .btn.btn-light-1.translucent-50.hover-lighten:hover {
   background-color: rgba(255, 255, 255, 0.5);
@@ -94,11 +84,9 @@
 .btn.btn-light-1.translucent-60 {
   background-color: rgba(255, 255, 255, 0.6);
 }
-.btn.btn-light-1.translucent-60:hover {
-  background-color: rgba(0, 0, 0, 0.6);
-}
 .btn.btn-light-1.translucent-60.hover-invert:hover {
   background-color: rgba(0, 0, 0, 0.6);
+  color: rgb(255, 255, 255);
 }
 .btn.btn-light-1.translucent-60.hover-lighten:hover {
   background-color: rgba(255, 255, 255, 0.6);
@@ -109,11 +97,9 @@
 .btn.btn-light-1.translucent-70 {
   background-color: rgba(255, 255, 255, 0.7);
 }
-.btn.btn-light-1.translucent-70:hover {
-  background-color: rgba(0, 0, 0, 0.7);
-}
 .btn.btn-light-1.translucent-70.hover-invert:hover {
   background-color: rgba(0, 0, 0, 0.7);
+  color: rgb(255, 255, 255);
 }
 .btn.btn-light-1.translucent-70.hover-lighten:hover {
   background-color: rgba(255, 255, 255, 0.7);
@@ -124,11 +110,9 @@
 .btn.btn-light-1.translucent-80 {
   background-color: rgba(255, 255, 255, 0.8);
 }
-.btn.btn-light-1.translucent-80:hover {
-  background-color: rgba(0, 0, 0, 0.8);
-}
 .btn.btn-light-1.translucent-80.hover-invert:hover {
   background-color: rgba(0, 0, 0, 0.8);
+  color: rgb(255, 255, 255);
 }
 .btn.btn-light-1.translucent-80.hover-lighten:hover {
   background-color: rgba(255, 255, 255, 0.8);
@@ -139,11 +123,9 @@
 .btn.btn-light-1.translucent-90 {
   background-color: rgba(255, 255, 255, 0.9);
 }
-.btn.btn-light-1.translucent-90:hover {
-  background-color: rgba(0, 0, 0, 0.9);
-}
 .btn.btn-light-1.translucent-90.hover-invert:hover {
   background-color: rgba(0, 0, 0, 0.9);
+  color: rgb(255, 255, 255);
 }
 .btn.btn-light-1.translucent-90.hover-lighten:hover {
   background-color: rgba(255, 255, 255, 0.9);
@@ -154,11 +136,9 @@
 .btn.btn-light-1.translucent-100 {
   background-color: white;
 }
-.btn.btn-light-1.translucent-100:hover {
-  background-color: black;
-}
 .btn.btn-light-1.translucent-100.hover-invert:hover {
   background-color: black;
+  color: rgb(255, 255, 255);
 }
 .btn.btn-light-1.translucent-100.hover-lighten:hover {
   background-color: white;
@@ -188,11 +168,9 @@
 .btn.btn-light-2.translucent-10 {
   background-color: rgba(222, 222, 222, 0.1);
 }
-.btn.btn-light-2.translucent-10:hover {
-  background-color: rgba(0, 0, 0, 0.1);
-}
 .btn.btn-light-2.translucent-10.hover-invert:hover {
   background-color: rgba(0, 0, 0, 0.1);
+  color: rgb(255, 255, 255);
 }
 .btn.btn-light-2.translucent-10.hover-lighten:hover {
   background-color: rgba(225.2607390435, 225.2607390435, 225.2607390435, 0.1);
@@ -203,11 +181,9 @@
 .btn.btn-light-2.translucent-20 {
   background-color: rgba(222, 222, 222, 0.2);
 }
-.btn.btn-light-2.translucent-20:hover {
-  background-color: rgba(0, 0, 0, 0.2);
-}
 .btn.btn-light-2.translucent-20.hover-invert:hover {
   background-color: rgba(0, 0, 0, 0.2);
+  color: rgb(255, 255, 255);
 }
 .btn.btn-light-2.translucent-20.hover-lighten:hover {
   background-color: rgba(225.2607390435, 225.2607390435, 225.2607390435, 0.2);
@@ -218,11 +194,9 @@
 .btn.btn-light-2.translucent-30 {
   background-color: rgba(222, 222, 222, 0.3);
 }
-.btn.btn-light-2.translucent-30:hover {
-  background-color: rgba(0, 0, 0, 0.3);
-}
 .btn.btn-light-2.translucent-30.hover-invert:hover {
   background-color: rgba(0, 0, 0, 0.3);
+  color: rgb(255, 255, 255);
 }
 .btn.btn-light-2.translucent-30.hover-lighten:hover {
   background-color: rgba(225.2607390435, 225.2607390435, 225.2607390435, 0.3);
@@ -233,11 +207,9 @@
 .btn.btn-light-2.translucent-40 {
   background-color: rgba(222, 222, 222, 0.4);
 }
-.btn.btn-light-2.translucent-40:hover {
-  background-color: rgba(0, 0, 0, 0.4);
-}
 .btn.btn-light-2.translucent-40.hover-invert:hover {
   background-color: rgba(0, 0, 0, 0.4);
+  color: rgb(255, 255, 255);
 }
 .btn.btn-light-2.translucent-40.hover-lighten:hover {
   background-color: rgba(225.2607390435, 225.2607390435, 225.2607390435, 0.4);
@@ -248,11 +220,9 @@
 .btn.btn-light-2.translucent-50 {
   background-color: rgba(222, 222, 222, 0.5);
 }
-.btn.btn-light-2.translucent-50:hover {
-  background-color: rgba(0, 0, 0, 0.5);
-}
 .btn.btn-light-2.translucent-50.hover-invert:hover {
   background-color: rgba(0, 0, 0, 0.5);
+  color: rgb(255, 255, 255);
 }
 .btn.btn-light-2.translucent-50.hover-lighten:hover {
   background-color: rgba(225.2607390435, 225.2607390435, 225.2607390435, 0.5);
@@ -263,11 +233,9 @@
 .btn.btn-light-2.translucent-60 {
   background-color: rgba(222, 222, 222, 0.6);
 }
-.btn.btn-light-2.translucent-60:hover {
-  background-color: rgba(0, 0, 0, 0.6);
-}
 .btn.btn-light-2.translucent-60.hover-invert:hover {
   background-color: rgba(0, 0, 0, 0.6);
+  color: rgb(255, 255, 255);
 }
 .btn.btn-light-2.translucent-60.hover-lighten:hover {
   background-color: rgba(225.2607390435, 225.2607390435, 225.2607390435, 0.6);
@@ -278,11 +246,9 @@
 .btn.btn-light-2.translucent-70 {
   background-color: rgba(222, 222, 222, 0.7);
 }
-.btn.btn-light-2.translucent-70:hover {
-  background-color: rgba(0, 0, 0, 0.7);
-}
 .btn.btn-light-2.translucent-70.hover-invert:hover {
   background-color: rgba(0, 0, 0, 0.7);
+  color: rgb(255, 255, 255);
 }
 .btn.btn-light-2.translucent-70.hover-lighten:hover {
   background-color: rgba(225.2607390435, 225.2607390435, 225.2607390435, 0.7);
@@ -293,11 +259,9 @@
 .btn.btn-light-2.translucent-80 {
   background-color: rgba(222, 222, 222, 0.8);
 }
-.btn.btn-light-2.translucent-80:hover {
-  background-color: rgba(0, 0, 0, 0.8);
-}
 .btn.btn-light-2.translucent-80.hover-invert:hover {
   background-color: rgba(0, 0, 0, 0.8);
+  color: rgb(255, 255, 255);
 }
 .btn.btn-light-2.translucent-80.hover-lighten:hover {
   background-color: rgba(225.2607390435, 225.2607390435, 225.2607390435, 0.8);
@@ -308,11 +272,9 @@
 .btn.btn-light-2.translucent-90 {
   background-color: rgba(222, 222, 222, 0.9);
 }
-.btn.btn-light-2.translucent-90:hover {
-  background-color: rgba(0, 0, 0, 0.9);
-}
 .btn.btn-light-2.translucent-90.hover-invert:hover {
   background-color: rgba(0, 0, 0, 0.9);
+  color: rgb(255, 255, 255);
 }
 .btn.btn-light-2.translucent-90.hover-lighten:hover {
   background-color: rgba(225.2607390435, 225.2607390435, 225.2607390435, 0.9);
@@ -323,11 +285,9 @@
 .btn.btn-light-2.translucent-100 {
   background-color: #dedede;
 }
-.btn.btn-light-2.translucent-100:hover {
-  background-color: black;
-}
 .btn.btn-light-2.translucent-100.hover-invert:hover {
   background-color: black;
+  color: rgb(255, 255, 255);
 }
 .btn.btn-light-2.translucent-100.hover-lighten:hover {
   background-color: rgb(225.2607390435, 225.2607390435, 225.2607390435);
@@ -357,11 +317,9 @@
 .btn.btn-light-3.translucent-10 {
   background-color: rgba(140, 127, 132, 0.1);
 }
-.btn.btn-light-3.translucent-10:hover {
-  background-color: rgba(0, 0, 0, 0.1);
-}
 .btn.btn-light-3.translucent-10.hover-invert:hover {
   background-color: rgba(0, 0, 0, 0.1);
+  color: rgb(255, 255, 255);
 }
 .btn.btn-light-3.translucent-10.hover-lighten:hover {
   background-color: rgba(151.9060658581, 138.6937582284, 143.7651075574, 0.1);
@@ -372,11 +330,9 @@
 .btn.btn-light-3.translucent-20 {
   background-color: rgba(140, 127, 132, 0.2);
 }
-.btn.btn-light-3.translucent-20:hover {
-  background-color: rgba(0, 0, 0, 0.2);
-}
 .btn.btn-light-3.translucent-20.hover-invert:hover {
   background-color: rgba(0, 0, 0, 0.2);
+  color: rgb(255, 255, 255);
 }
 .btn.btn-light-3.translucent-20.hover-lighten:hover {
   background-color: rgba(151.9060658581, 138.6937582284, 143.7651075574, 0.2);
@@ -387,11 +343,9 @@
 .btn.btn-light-3.translucent-30 {
   background-color: rgba(140, 127, 132, 0.3);
 }
-.btn.btn-light-3.translucent-30:hover {
-  background-color: rgba(0, 0, 0, 0.3);
-}
 .btn.btn-light-3.translucent-30.hover-invert:hover {
   background-color: rgba(0, 0, 0, 0.3);
+  color: rgb(255, 255, 255);
 }
 .btn.btn-light-3.translucent-30.hover-lighten:hover {
   background-color: rgba(151.9060658581, 138.6937582284, 143.7651075574, 0.3);
@@ -402,11 +356,9 @@
 .btn.btn-light-3.translucent-40 {
   background-color: rgba(140, 127, 132, 0.4);
 }
-.btn.btn-light-3.translucent-40:hover {
-  background-color: rgba(0, 0, 0, 0.4);
-}
 .btn.btn-light-3.translucent-40.hover-invert:hover {
   background-color: rgba(0, 0, 0, 0.4);
+  color: rgb(255, 255, 255);
 }
 .btn.btn-light-3.translucent-40.hover-lighten:hover {
   background-color: rgba(151.9060658581, 138.6937582284, 143.7651075574, 0.4);
@@ -417,11 +369,9 @@
 .btn.btn-light-3.translucent-50 {
   background-color: rgba(140, 127, 132, 0.5);
 }
-.btn.btn-light-3.translucent-50:hover {
-  background-color: rgba(0, 0, 0, 0.5);
-}
 .btn.btn-light-3.translucent-50.hover-invert:hover {
   background-color: rgba(0, 0, 0, 0.5);
+  color: rgb(255, 255, 255);
 }
 .btn.btn-light-3.translucent-50.hover-lighten:hover {
   background-color: rgba(151.9060658581, 138.6937582284, 143.7651075574, 0.5);
@@ -432,11 +382,9 @@
 .btn.btn-light-3.translucent-60 {
   background-color: rgba(140, 127, 132, 0.6);
 }
-.btn.btn-light-3.translucent-60:hover {
-  background-color: rgba(0, 0, 0, 0.6);
-}
 .btn.btn-light-3.translucent-60.hover-invert:hover {
   background-color: rgba(0, 0, 0, 0.6);
+  color: rgb(255, 255, 255);
 }
 .btn.btn-light-3.translucent-60.hover-lighten:hover {
   background-color: rgba(151.9060658581, 138.6937582284, 143.7651075574, 0.6);
@@ -447,11 +395,9 @@
 .btn.btn-light-3.translucent-70 {
   background-color: rgba(140, 127, 132, 0.7);
 }
-.btn.btn-light-3.translucent-70:hover {
-  background-color: rgba(0, 0, 0, 0.7);
-}
 .btn.btn-light-3.translucent-70.hover-invert:hover {
   background-color: rgba(0, 0, 0, 0.7);
+  color: rgb(255, 255, 255);
 }
 .btn.btn-light-3.translucent-70.hover-lighten:hover {
   background-color: rgba(151.9060658581, 138.6937582284, 143.7651075574, 0.7);
@@ -462,11 +408,9 @@
 .btn.btn-light-3.translucent-80 {
   background-color: rgba(140, 127, 132, 0.8);
 }
-.btn.btn-light-3.translucent-80:hover {
-  background-color: rgba(0, 0, 0, 0.8);
-}
 .btn.btn-light-3.translucent-80.hover-invert:hover {
   background-color: rgba(0, 0, 0, 0.8);
+  color: rgb(255, 255, 255);
 }
 .btn.btn-light-3.translucent-80.hover-lighten:hover {
   background-color: rgba(151.9060658581, 138.6937582284, 143.7651075574, 0.8);
@@ -477,11 +421,9 @@
 .btn.btn-light-3.translucent-90 {
   background-color: rgba(140, 127, 132, 0.9);
 }
-.btn.btn-light-3.translucent-90:hover {
-  background-color: rgba(0, 0, 0, 0.9);
-}
 .btn.btn-light-3.translucent-90.hover-invert:hover {
   background-color: rgba(0, 0, 0, 0.9);
+  color: rgb(255, 255, 255);
 }
 .btn.btn-light-3.translucent-90.hover-lighten:hover {
   background-color: rgba(151.9060658581, 138.6937582284, 143.7651075574, 0.9);
@@ -492,11 +434,9 @@
 .btn.btn-light-3.translucent-100 {
   background-color: #8c7f84;
 }
-.btn.btn-light-3.translucent-100:hover {
-  background-color: black;
-}
 .btn.btn-light-3.translucent-100.hover-invert:hover {
   background-color: black;
+  color: rgb(255, 255, 255);
 }
 .btn.btn-light-3.translucent-100.hover-lighten:hover {
   background-color: rgb(151.9060658581, 138.6937582284, 143.7651075574);
@@ -526,11 +466,9 @@
 .btn.btn-neutral-1.translucent-10 {
   background-color: rgba(0, 191, 99, 0.1);
 }
-.btn.btn-neutral-1.translucent-10:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-}
 .btn.btn-neutral-1.translucent-10.hover-invert:hover {
   background-color: rgba(255, 255, 255, 0.1);
+  color: rgb(0, 0, 0);
 }
 .btn.btn-neutral-1.translucent-10.hover-lighten:hover {
   background-color: rgba(30.518652113, 200.0258547643, 107.1423388617, 0.1);
@@ -541,11 +479,9 @@
 .btn.btn-neutral-1.translucent-20 {
   background-color: rgba(0, 191, 99, 0.2);
 }
-.btn.btn-neutral-1.translucent-20:hover {
-  background-color: rgba(255, 255, 255, 0.2);
-}
 .btn.btn-neutral-1.translucent-20.hover-invert:hover {
   background-color: rgba(255, 255, 255, 0.2);
+  color: rgb(0, 0, 0);
 }
 .btn.btn-neutral-1.translucent-20.hover-lighten:hover {
   background-color: rgba(30.518652113, 200.0258547643, 107.1423388617, 0.2);
@@ -556,11 +492,9 @@
 .btn.btn-neutral-1.translucent-30 {
   background-color: rgba(0, 191, 99, 0.3);
 }
-.btn.btn-neutral-1.translucent-30:hover {
-  background-color: rgba(255, 255, 255, 0.3);
-}
 .btn.btn-neutral-1.translucent-30.hover-invert:hover {
   background-color: rgba(255, 255, 255, 0.3);
+  color: rgb(0, 0, 0);
 }
 .btn.btn-neutral-1.translucent-30.hover-lighten:hover {
   background-color: rgba(30.518652113, 200.0258547643, 107.1423388617, 0.3);
@@ -571,11 +505,9 @@
 .btn.btn-neutral-1.translucent-40 {
   background-color: rgba(0, 191, 99, 0.4);
 }
-.btn.btn-neutral-1.translucent-40:hover {
-  background-color: rgba(255, 255, 255, 0.4);
-}
 .btn.btn-neutral-1.translucent-40.hover-invert:hover {
   background-color: rgba(255, 255, 255, 0.4);
+  color: rgb(0, 0, 0);
 }
 .btn.btn-neutral-1.translucent-40.hover-lighten:hover {
   background-color: rgba(30.518652113, 200.0258547643, 107.1423388617, 0.4);
@@ -586,11 +518,9 @@
 .btn.btn-neutral-1.translucent-50 {
   background-color: rgba(0, 191, 99, 0.5);
 }
-.btn.btn-neutral-1.translucent-50:hover {
-  background-color: rgba(255, 255, 255, 0.5);
-}
 .btn.btn-neutral-1.translucent-50.hover-invert:hover {
   background-color: rgba(255, 255, 255, 0.5);
+  color: rgb(0, 0, 0);
 }
 .btn.btn-neutral-1.translucent-50.hover-lighten:hover {
   background-color: rgba(30.518652113, 200.0258547643, 107.1423388617, 0.5);
@@ -601,11 +531,9 @@
 .btn.btn-neutral-1.translucent-60 {
   background-color: rgba(0, 191, 99, 0.6);
 }
-.btn.btn-neutral-1.translucent-60:hover {
-  background-color: rgba(255, 255, 255, 0.6);
-}
 .btn.btn-neutral-1.translucent-60.hover-invert:hover {
   background-color: rgba(255, 255, 255, 0.6);
+  color: rgb(0, 0, 0);
 }
 .btn.btn-neutral-1.translucent-60.hover-lighten:hover {
   background-color: rgba(30.518652113, 200.0258547643, 107.1423388617, 0.6);
@@ -616,11 +544,9 @@
 .btn.btn-neutral-1.translucent-70 {
   background-color: rgba(0, 191, 99, 0.7);
 }
-.btn.btn-neutral-1.translucent-70:hover {
-  background-color: rgba(255, 255, 255, 0.7);
-}
 .btn.btn-neutral-1.translucent-70.hover-invert:hover {
   background-color: rgba(255, 255, 255, 0.7);
+  color: rgb(0, 0, 0);
 }
 .btn.btn-neutral-1.translucent-70.hover-lighten:hover {
   background-color: rgba(30.518652113, 200.0258547643, 107.1423388617, 0.7);
@@ -631,11 +557,9 @@
 .btn.btn-neutral-1.translucent-80 {
   background-color: rgba(0, 191, 99, 0.8);
 }
-.btn.btn-neutral-1.translucent-80:hover {
-  background-color: rgba(255, 255, 255, 0.8);
-}
 .btn.btn-neutral-1.translucent-80.hover-invert:hover {
   background-color: rgba(255, 255, 255, 0.8);
+  color: rgb(0, 0, 0);
 }
 .btn.btn-neutral-1.translucent-80.hover-lighten:hover {
   background-color: rgba(30.518652113, 200.0258547643, 107.1423388617, 0.8);
@@ -646,11 +570,9 @@
 .btn.btn-neutral-1.translucent-90 {
   background-color: rgba(0, 191, 99, 0.9);
 }
-.btn.btn-neutral-1.translucent-90:hover {
-  background-color: rgba(255, 255, 255, 0.9);
-}
 .btn.btn-neutral-1.translucent-90.hover-invert:hover {
   background-color: rgba(255, 255, 255, 0.9);
+  color: rgb(0, 0, 0);
 }
 .btn.btn-neutral-1.translucent-90.hover-lighten:hover {
   background-color: rgba(30.518652113, 200.0258547643, 107.1423388617, 0.9);
@@ -661,11 +583,9 @@
 .btn.btn-neutral-1.translucent-100 {
   background-color: #00bf63;
 }
-.btn.btn-neutral-1.translucent-100:hover {
-  background-color: white;
-}
 .btn.btn-neutral-1.translucent-100.hover-invert:hover {
   background-color: white;
+  color: rgb(0, 0, 0);
 }
 .btn.btn-neutral-1.translucent-100.hover-lighten:hover {
   background-color: rgb(30.518652113, 200.0258547643, 107.1423388617);
@@ -695,11 +615,9 @@
 .btn.btn-neutral-2.translucent-10 {
   background-color: rgba(68, 67, 109, 0.1);
 }
-.btn.btn-neutral-2.translucent-10:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-}
 .btn.btn-neutral-2.translucent-10.hover-invert:hover {
   background-color: rgba(255, 255, 255, 0.1);
+  color: rgb(0, 0, 0);
 }
 .btn.btn-neutral-2.translucent-10.hover-lighten:hover {
   background-color: rgba(84.9067128413, 83.2653420144, 126.7319465742, 0.1);
@@ -710,11 +628,9 @@
 .btn.btn-neutral-2.translucent-20 {
   background-color: rgba(68, 67, 109, 0.2);
 }
-.btn.btn-neutral-2.translucent-20:hover {
-  background-color: rgba(255, 255, 255, 0.2);
-}
 .btn.btn-neutral-2.translucent-20.hover-invert:hover {
   background-color: rgba(255, 255, 255, 0.2);
+  color: rgb(0, 0, 0);
 }
 .btn.btn-neutral-2.translucent-20.hover-lighten:hover {
   background-color: rgba(84.9067128413, 83.2653420144, 126.7319465742, 0.2);
@@ -725,11 +641,9 @@
 .btn.btn-neutral-2.translucent-30 {
   background-color: rgba(68, 67, 109, 0.3);
 }
-.btn.btn-neutral-2.translucent-30:hover {
-  background-color: rgba(255, 255, 255, 0.3);
-}
 .btn.btn-neutral-2.translucent-30.hover-invert:hover {
   background-color: rgba(255, 255, 255, 0.3);
+  color: rgb(0, 0, 0);
 }
 .btn.btn-neutral-2.translucent-30.hover-lighten:hover {
   background-color: rgba(84.9067128413, 83.2653420144, 126.7319465742, 0.3);
@@ -740,11 +654,9 @@
 .btn.btn-neutral-2.translucent-40 {
   background-color: rgba(68, 67, 109, 0.4);
 }
-.btn.btn-neutral-2.translucent-40:hover {
-  background-color: rgba(255, 255, 255, 0.4);
-}
 .btn.btn-neutral-2.translucent-40.hover-invert:hover {
   background-color: rgba(255, 255, 255, 0.4);
+  color: rgb(0, 0, 0);
 }
 .btn.btn-neutral-2.translucent-40.hover-lighten:hover {
   background-color: rgba(84.9067128413, 83.2653420144, 126.7319465742, 0.4);
@@ -755,11 +667,9 @@
 .btn.btn-neutral-2.translucent-50 {
   background-color: rgba(68, 67, 109, 0.5);
 }
-.btn.btn-neutral-2.translucent-50:hover {
-  background-color: rgba(255, 255, 255, 0.5);
-}
 .btn.btn-neutral-2.translucent-50.hover-invert:hover {
   background-color: rgba(255, 255, 255, 0.5);
+  color: rgb(0, 0, 0);
 }
 .btn.btn-neutral-2.translucent-50.hover-lighten:hover {
   background-color: rgba(84.9067128413, 83.2653420144, 126.7319465742, 0.5);
@@ -770,11 +680,9 @@
 .btn.btn-neutral-2.translucent-60 {
   background-color: rgba(68, 67, 109, 0.6);
 }
-.btn.btn-neutral-2.translucent-60:hover {
-  background-color: rgba(255, 255, 255, 0.6);
-}
 .btn.btn-neutral-2.translucent-60.hover-invert:hover {
   background-color: rgba(255, 255, 255, 0.6);
+  color: rgb(0, 0, 0);
 }
 .btn.btn-neutral-2.translucent-60.hover-lighten:hover {
   background-color: rgba(84.9067128413, 83.2653420144, 126.7319465742, 0.6);
@@ -785,11 +693,9 @@
 .btn.btn-neutral-2.translucent-70 {
   background-color: rgba(68, 67, 109, 0.7);
 }
-.btn.btn-neutral-2.translucent-70:hover {
-  background-color: rgba(255, 255, 255, 0.7);
-}
 .btn.btn-neutral-2.translucent-70.hover-invert:hover {
   background-color: rgba(255, 255, 255, 0.7);
+  color: rgb(0, 0, 0);
 }
 .btn.btn-neutral-2.translucent-70.hover-lighten:hover {
   background-color: rgba(84.9067128413, 83.2653420144, 126.7319465742, 0.7);
@@ -800,11 +706,9 @@
 .btn.btn-neutral-2.translucent-80 {
   background-color: rgba(68, 67, 109, 0.8);
 }
-.btn.btn-neutral-2.translucent-80:hover {
-  background-color: rgba(255, 255, 255, 0.8);
-}
 .btn.btn-neutral-2.translucent-80.hover-invert:hover {
   background-color: rgba(255, 255, 255, 0.8);
+  color: rgb(0, 0, 0);
 }
 .btn.btn-neutral-2.translucent-80.hover-lighten:hover {
   background-color: rgba(84.9067128413, 83.2653420144, 126.7319465742, 0.8);
@@ -815,11 +719,9 @@
 .btn.btn-neutral-2.translucent-90 {
   background-color: rgba(68, 67, 109, 0.9);
 }
-.btn.btn-neutral-2.translucent-90:hover {
-  background-color: rgba(255, 255, 255, 0.9);
-}
 .btn.btn-neutral-2.translucent-90.hover-invert:hover {
   background-color: rgba(255, 255, 255, 0.9);
+  color: rgb(0, 0, 0);
 }
 .btn.btn-neutral-2.translucent-90.hover-lighten:hover {
   background-color: rgba(84.9067128413, 83.2653420144, 126.7319465742, 0.9);
@@ -830,11 +732,9 @@
 .btn.btn-neutral-2.translucent-100 {
   background-color: #44436d;
 }
-.btn.btn-neutral-2.translucent-100:hover {
-  background-color: white;
-}
 .btn.btn-neutral-2.translucent-100.hover-invert:hover {
   background-color: white;
+  color: rgb(0, 0, 0);
 }
 .btn.btn-neutral-2.translucent-100.hover-lighten:hover {
   background-color: rgb(84.9067128413, 83.2653420144, 126.7319465742);
@@ -864,11 +764,9 @@
 .btn.btn-dark-1.translucent-10 {
   background-color: rgba(43, 45, 66, 0.1);
 }
-.btn.btn-dark-1.translucent-10:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-}
 .btn.btn-dark-1.translucent-10.hover-invert:hover {
   background-color: rgba(255, 255, 255, 0.1);
+  color: rgb(0, 0, 0);
 }
 .btn.btn-dark-1.translucent-10.hover-lighten:hover {
   background-color: rgba(61.0779242649, 62.804561636, 84.9195381589, 0.1);
@@ -879,11 +777,9 @@
 .btn.btn-dark-1.translucent-20 {
   background-color: rgba(43, 45, 66, 0.2);
 }
-.btn.btn-dark-1.translucent-20:hover {
-  background-color: rgba(255, 255, 255, 0.2);
-}
 .btn.btn-dark-1.translucent-20.hover-invert:hover {
   background-color: rgba(255, 255, 255, 0.2);
+  color: rgb(0, 0, 0);
 }
 .btn.btn-dark-1.translucent-20.hover-lighten:hover {
   background-color: rgba(61.0779242649, 62.804561636, 84.9195381589, 0.2);
@@ -894,11 +790,9 @@
 .btn.btn-dark-1.translucent-30 {
   background-color: rgba(43, 45, 66, 0.3);
 }
-.btn.btn-dark-1.translucent-30:hover {
-  background-color: rgba(255, 255, 255, 0.3);
-}
 .btn.btn-dark-1.translucent-30.hover-invert:hover {
   background-color: rgba(255, 255, 255, 0.3);
+  color: rgb(0, 0, 0);
 }
 .btn.btn-dark-1.translucent-30.hover-lighten:hover {
   background-color: rgba(61.0779242649, 62.804561636, 84.9195381589, 0.3);
@@ -909,11 +803,9 @@
 .btn.btn-dark-1.translucent-40 {
   background-color: rgba(43, 45, 66, 0.4);
 }
-.btn.btn-dark-1.translucent-40:hover {
-  background-color: rgba(255, 255, 255, 0.4);
-}
 .btn.btn-dark-1.translucent-40.hover-invert:hover {
   background-color: rgba(255, 255, 255, 0.4);
+  color: rgb(0, 0, 0);
 }
 .btn.btn-dark-1.translucent-40.hover-lighten:hover {
   background-color: rgba(61.0779242649, 62.804561636, 84.9195381589, 0.4);
@@ -924,11 +816,9 @@
 .btn.btn-dark-1.translucent-50 {
   background-color: rgba(43, 45, 66, 0.5);
 }
-.btn.btn-dark-1.translucent-50:hover {
-  background-color: rgba(255, 255, 255, 0.5);
-}
 .btn.btn-dark-1.translucent-50.hover-invert:hover {
   background-color: rgba(255, 255, 255, 0.5);
+  color: rgb(0, 0, 0);
 }
 .btn.btn-dark-1.translucent-50.hover-lighten:hover {
   background-color: rgba(61.0779242649, 62.804561636, 84.9195381589, 0.5);
@@ -939,11 +829,9 @@
 .btn.btn-dark-1.translucent-60 {
   background-color: rgba(43, 45, 66, 0.6);
 }
-.btn.btn-dark-1.translucent-60:hover {
-  background-color: rgba(255, 255, 255, 0.6);
-}
 .btn.btn-dark-1.translucent-60.hover-invert:hover {
   background-color: rgba(255, 255, 255, 0.6);
+  color: rgb(0, 0, 0);
 }
 .btn.btn-dark-1.translucent-60.hover-lighten:hover {
   background-color: rgba(61.0779242649, 62.804561636, 84.9195381589, 0.6);
@@ -954,11 +842,9 @@
 .btn.btn-dark-1.translucent-70 {
   background-color: rgba(43, 45, 66, 0.7);
 }
-.btn.btn-dark-1.translucent-70:hover {
-  background-color: rgba(255, 255, 255, 0.7);
-}
 .btn.btn-dark-1.translucent-70.hover-invert:hover {
   background-color: rgba(255, 255, 255, 0.7);
+  color: rgb(0, 0, 0);
 }
 .btn.btn-dark-1.translucent-70.hover-lighten:hover {
   background-color: rgba(61.0779242649, 62.804561636, 84.9195381589, 0.7);
@@ -969,11 +855,9 @@
 .btn.btn-dark-1.translucent-80 {
   background-color: rgba(43, 45, 66, 0.8);
 }
-.btn.btn-dark-1.translucent-80:hover {
-  background-color: rgba(255, 255, 255, 0.8);
-}
 .btn.btn-dark-1.translucent-80.hover-invert:hover {
   background-color: rgba(255, 255, 255, 0.8);
+  color: rgb(0, 0, 0);
 }
 .btn.btn-dark-1.translucent-80.hover-lighten:hover {
   background-color: rgba(61.0779242649, 62.804561636, 84.9195381589, 0.8);
@@ -984,11 +868,9 @@
 .btn.btn-dark-1.translucent-90 {
   background-color: rgba(43, 45, 66, 0.9);
 }
-.btn.btn-dark-1.translucent-90:hover {
-  background-color: rgba(255, 255, 255, 0.9);
-}
 .btn.btn-dark-1.translucent-90.hover-invert:hover {
   background-color: rgba(255, 255, 255, 0.9);
+  color: rgb(0, 0, 0);
 }
 .btn.btn-dark-1.translucent-90.hover-lighten:hover {
   background-color: rgba(61.0779242649, 62.804561636, 84.9195381589, 0.9);
@@ -999,11 +881,9 @@
 .btn.btn-dark-1.translucent-100 {
   background-color: #2b2d42;
 }
-.btn.btn-dark-1.translucent-100:hover {
-  background-color: white;
-}
 .btn.btn-dark-1.translucent-100.hover-invert:hover {
   background-color: white;
+  color: rgb(0, 0, 0);
 }
 .btn.btn-dark-1.translucent-100.hover-lighten:hover {
   background-color: rgb(61.0779242649, 62.804561636, 84.9195381589);
@@ -1033,11 +913,9 @@
 .btn.btn-dark-2.translucent-10 {
   background-color: rgba(19, 7, 46, 0.1);
 }
-.btn.btn-dark-2.translucent-10:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-}
 .btn.btn-dark-2.translucent-10.hover-invert:hover {
   background-color: rgba(255, 255, 255, 0.1);
+  color: rgb(0, 0, 0);
 }
 .btn.btn-dark-2.translucent-10.hover-lighten:hover {
   background-color: rgba(38.1459666251, 29.5838531762, 67.4813283023, 0.1);
@@ -1048,11 +926,9 @@
 .btn.btn-dark-2.translucent-20 {
   background-color: rgba(19, 7, 46, 0.2);
 }
-.btn.btn-dark-2.translucent-20:hover {
-  background-color: rgba(255, 255, 255, 0.2);
-}
 .btn.btn-dark-2.translucent-20.hover-invert:hover {
   background-color: rgba(255, 255, 255, 0.2);
+  color: rgb(0, 0, 0);
 }
 .btn.btn-dark-2.translucent-20.hover-lighten:hover {
   background-color: rgba(38.1459666251, 29.5838531762, 67.4813283023, 0.2);
@@ -1063,11 +939,9 @@
 .btn.btn-dark-2.translucent-30 {
   background-color: rgba(19, 7, 46, 0.3);
 }
-.btn.btn-dark-2.translucent-30:hover {
-  background-color: rgba(255, 255, 255, 0.3);
-}
 .btn.btn-dark-2.translucent-30.hover-invert:hover {
   background-color: rgba(255, 255, 255, 0.3);
+  color: rgb(0, 0, 0);
 }
 .btn.btn-dark-2.translucent-30.hover-lighten:hover {
   background-color: rgba(38.1459666251, 29.5838531762, 67.4813283023, 0.3);
@@ -1078,11 +952,9 @@
 .btn.btn-dark-2.translucent-40 {
   background-color: rgba(19, 7, 46, 0.4);
 }
-.btn.btn-dark-2.translucent-40:hover {
-  background-color: rgba(255, 255, 255, 0.4);
-}
 .btn.btn-dark-2.translucent-40.hover-invert:hover {
   background-color: rgba(255, 255, 255, 0.4);
+  color: rgb(0, 0, 0);
 }
 .btn.btn-dark-2.translucent-40.hover-lighten:hover {
   background-color: rgba(38.1459666251, 29.5838531762, 67.4813283023, 0.4);
@@ -1093,11 +965,9 @@
 .btn.btn-dark-2.translucent-50 {
   background-color: rgba(19, 7, 46, 0.5);
 }
-.btn.btn-dark-2.translucent-50:hover {
-  background-color: rgba(255, 255, 255, 0.5);
-}
 .btn.btn-dark-2.translucent-50.hover-invert:hover {
   background-color: rgba(255, 255, 255, 0.5);
+  color: rgb(0, 0, 0);
 }
 .btn.btn-dark-2.translucent-50.hover-lighten:hover {
   background-color: rgba(38.1459666251, 29.5838531762, 67.4813283023, 0.5);
@@ -1108,11 +978,9 @@
 .btn.btn-dark-2.translucent-60 {
   background-color: rgba(19, 7, 46, 0.6);
 }
-.btn.btn-dark-2.translucent-60:hover {
-  background-color: rgba(255, 255, 255, 0.6);
-}
 .btn.btn-dark-2.translucent-60.hover-invert:hover {
   background-color: rgba(255, 255, 255, 0.6);
+  color: rgb(0, 0, 0);
 }
 .btn.btn-dark-2.translucent-60.hover-lighten:hover {
   background-color: rgba(38.1459666251, 29.5838531762, 67.4813283023, 0.6);
@@ -1123,11 +991,9 @@
 .btn.btn-dark-2.translucent-70 {
   background-color: rgba(19, 7, 46, 0.7);
 }
-.btn.btn-dark-2.translucent-70:hover {
-  background-color: rgba(255, 255, 255, 0.7);
-}
 .btn.btn-dark-2.translucent-70.hover-invert:hover {
   background-color: rgba(255, 255, 255, 0.7);
+  color: rgb(0, 0, 0);
 }
 .btn.btn-dark-2.translucent-70.hover-lighten:hover {
   background-color: rgba(38.1459666251, 29.5838531762, 67.4813283023, 0.7);
@@ -1138,11 +1004,9 @@
 .btn.btn-dark-2.translucent-80 {
   background-color: rgba(19, 7, 46, 0.8);
 }
-.btn.btn-dark-2.translucent-80:hover {
-  background-color: rgba(255, 255, 255, 0.8);
-}
 .btn.btn-dark-2.translucent-80.hover-invert:hover {
   background-color: rgba(255, 255, 255, 0.8);
+  color: rgb(0, 0, 0);
 }
 .btn.btn-dark-2.translucent-80.hover-lighten:hover {
   background-color: rgba(38.1459666251, 29.5838531762, 67.4813283023, 0.8);
@@ -1153,11 +1017,9 @@
 .btn.btn-dark-2.translucent-90 {
   background-color: rgba(19, 7, 46, 0.9);
 }
-.btn.btn-dark-2.translucent-90:hover {
-  background-color: rgba(255, 255, 255, 0.9);
-}
 .btn.btn-dark-2.translucent-90.hover-invert:hover {
   background-color: rgba(255, 255, 255, 0.9);
+  color: rgb(0, 0, 0);
 }
 .btn.btn-dark-2.translucent-90.hover-lighten:hover {
   background-color: rgba(38.1459666251, 29.5838531762, 67.4813283023, 0.9);
@@ -1168,11 +1030,9 @@
 .btn.btn-dark-2.translucent-100 {
   background-color: #13072e;
 }
-.btn.btn-dark-2.translucent-100:hover {
-  background-color: white;
-}
 .btn.btn-dark-2.translucent-100.hover-invert:hover {
   background-color: white;
+  color: rgb(0, 0, 0);
 }
 .btn.btn-dark-2.translucent-100.hover-lighten:hover {
   background-color: rgb(38.1459666251, 29.5838531762, 67.4813283023);
@@ -1202,11 +1062,9 @@
 .btn.btn-dark-3.translucent-10 {
   background-color: rgba(0, 0, 0, 0.1);
 }
-.btn.btn-dark-3.translucent-10:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-}
 .btn.btn-dark-3.translucent-10.hover-invert:hover {
   background-color: rgba(255, 255, 255, 0.1);
+  color: rgb(0, 0, 0);
 }
 .btn.btn-dark-3.translucent-10.hover-lighten:hover {
   background-color: rgba(27.4643698292, 27.4643698292, 27.4643698292, 0.1);
@@ -1217,11 +1075,9 @@
 .btn.btn-dark-3.translucent-20 {
   background-color: rgba(0, 0, 0, 0.2);
 }
-.btn.btn-dark-3.translucent-20:hover {
-  background-color: rgba(255, 255, 255, 0.2);
-}
 .btn.btn-dark-3.translucent-20.hover-invert:hover {
   background-color: rgba(255, 255, 255, 0.2);
+  color: rgb(0, 0, 0);
 }
 .btn.btn-dark-3.translucent-20.hover-lighten:hover {
   background-color: rgba(27.4643698292, 27.4643698292, 27.4643698292, 0.2);
@@ -1232,11 +1088,9 @@
 .btn.btn-dark-3.translucent-30 {
   background-color: rgba(0, 0, 0, 0.3);
 }
-.btn.btn-dark-3.translucent-30:hover {
-  background-color: rgba(255, 255, 255, 0.3);
-}
 .btn.btn-dark-3.translucent-30.hover-invert:hover {
   background-color: rgba(255, 255, 255, 0.3);
+  color: rgb(0, 0, 0);
 }
 .btn.btn-dark-3.translucent-30.hover-lighten:hover {
   background-color: rgba(27.4643698292, 27.4643698292, 27.4643698292, 0.3);
@@ -1247,11 +1101,9 @@
 .btn.btn-dark-3.translucent-40 {
   background-color: rgba(0, 0, 0, 0.4);
 }
-.btn.btn-dark-3.translucent-40:hover {
-  background-color: rgba(255, 255, 255, 0.4);
-}
 .btn.btn-dark-3.translucent-40.hover-invert:hover {
   background-color: rgba(255, 255, 255, 0.4);
+  color: rgb(0, 0, 0);
 }
 .btn.btn-dark-3.translucent-40.hover-lighten:hover {
   background-color: rgba(27.4643698292, 27.4643698292, 27.4643698292, 0.4);
@@ -1262,11 +1114,9 @@
 .btn.btn-dark-3.translucent-50 {
   background-color: rgba(0, 0, 0, 0.5);
 }
-.btn.btn-dark-3.translucent-50:hover {
-  background-color: rgba(255, 255, 255, 0.5);
-}
 .btn.btn-dark-3.translucent-50.hover-invert:hover {
   background-color: rgba(255, 255, 255, 0.5);
+  color: rgb(0, 0, 0);
 }
 .btn.btn-dark-3.translucent-50.hover-lighten:hover {
   background-color: rgba(27.4643698292, 27.4643698292, 27.4643698292, 0.5);
@@ -1277,11 +1127,9 @@
 .btn.btn-dark-3.translucent-60 {
   background-color: rgba(0, 0, 0, 0.6);
 }
-.btn.btn-dark-3.translucent-60:hover {
-  background-color: rgba(255, 255, 255, 0.6);
-}
 .btn.btn-dark-3.translucent-60.hover-invert:hover {
   background-color: rgba(255, 255, 255, 0.6);
+  color: rgb(0, 0, 0);
 }
 .btn.btn-dark-3.translucent-60.hover-lighten:hover {
   background-color: rgba(27.4643698292, 27.4643698292, 27.4643698292, 0.6);
@@ -1292,11 +1140,9 @@
 .btn.btn-dark-3.translucent-70 {
   background-color: rgba(0, 0, 0, 0.7);
 }
-.btn.btn-dark-3.translucent-70:hover {
-  background-color: rgba(255, 255, 255, 0.7);
-}
 .btn.btn-dark-3.translucent-70.hover-invert:hover {
   background-color: rgba(255, 255, 255, 0.7);
+  color: rgb(0, 0, 0);
 }
 .btn.btn-dark-3.translucent-70.hover-lighten:hover {
   background-color: rgba(27.4643698292, 27.4643698292, 27.4643698292, 0.7);
@@ -1307,11 +1153,9 @@
 .btn.btn-dark-3.translucent-80 {
   background-color: rgba(0, 0, 0, 0.8);
 }
-.btn.btn-dark-3.translucent-80:hover {
-  background-color: rgba(255, 255, 255, 0.8);
-}
 .btn.btn-dark-3.translucent-80.hover-invert:hover {
   background-color: rgba(255, 255, 255, 0.8);
+  color: rgb(0, 0, 0);
 }
 .btn.btn-dark-3.translucent-80.hover-lighten:hover {
   background-color: rgba(27.4643698292, 27.4643698292, 27.4643698292, 0.8);
@@ -1322,11 +1166,9 @@
 .btn.btn-dark-3.translucent-90 {
   background-color: rgba(0, 0, 0, 0.9);
 }
-.btn.btn-dark-3.translucent-90:hover {
-  background-color: rgba(255, 255, 255, 0.9);
-}
 .btn.btn-dark-3.translucent-90.hover-invert:hover {
   background-color: rgba(255, 255, 255, 0.9);
+  color: rgb(0, 0, 0);
 }
 .btn.btn-dark-3.translucent-90.hover-lighten:hover {
   background-color: rgba(27.4643698292, 27.4643698292, 27.4643698292, 0.9);
@@ -1337,11 +1179,9 @@
 .btn.btn-dark-3.translucent-100 {
   background-color: black;
 }
-.btn.btn-dark-3.translucent-100:hover {
-  background-color: white;
-}
 .btn.btn-dark-3.translucent-100.hover-invert:hover {
   background-color: white;
+  color: rgb(0, 0, 0);
 }
 .btn.btn-dark-3.translucent-100.hover-lighten:hover {
   background-color: rgb(27.4643698292, 27.4643698292, 27.4643698292);
@@ -1371,11 +1211,9 @@
 .btn.btn-dark-4.translucent-10 {
   background-color: rgba(68, 67, 109, 0.1);
 }
-.btn.btn-dark-4.translucent-10:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-}
 .btn.btn-dark-4.translucent-10.hover-invert:hover {
   background-color: rgba(255, 255, 255, 0.1);
+  color: rgb(0, 0, 0);
 }
 .btn.btn-dark-4.translucent-10.hover-lighten:hover {
   background-color: rgba(84.9067128413, 83.2653420144, 126.7319465742, 0.1);
@@ -1386,11 +1224,9 @@
 .btn.btn-dark-4.translucent-20 {
   background-color: rgba(68, 67, 109, 0.2);
 }
-.btn.btn-dark-4.translucent-20:hover {
-  background-color: rgba(255, 255, 255, 0.2);
-}
 .btn.btn-dark-4.translucent-20.hover-invert:hover {
   background-color: rgba(255, 255, 255, 0.2);
+  color: rgb(0, 0, 0);
 }
 .btn.btn-dark-4.translucent-20.hover-lighten:hover {
   background-color: rgba(84.9067128413, 83.2653420144, 126.7319465742, 0.2);
@@ -1401,11 +1237,9 @@
 .btn.btn-dark-4.translucent-30 {
   background-color: rgba(68, 67, 109, 0.3);
 }
-.btn.btn-dark-4.translucent-30:hover {
-  background-color: rgba(255, 255, 255, 0.3);
-}
 .btn.btn-dark-4.translucent-30.hover-invert:hover {
   background-color: rgba(255, 255, 255, 0.3);
+  color: rgb(0, 0, 0);
 }
 .btn.btn-dark-4.translucent-30.hover-lighten:hover {
   background-color: rgba(84.9067128413, 83.2653420144, 126.7319465742, 0.3);
@@ -1416,11 +1250,9 @@
 .btn.btn-dark-4.translucent-40 {
   background-color: rgba(68, 67, 109, 0.4);
 }
-.btn.btn-dark-4.translucent-40:hover {
-  background-color: rgba(255, 255, 255, 0.4);
-}
 .btn.btn-dark-4.translucent-40.hover-invert:hover {
   background-color: rgba(255, 255, 255, 0.4);
+  color: rgb(0, 0, 0);
 }
 .btn.btn-dark-4.translucent-40.hover-lighten:hover {
   background-color: rgba(84.9067128413, 83.2653420144, 126.7319465742, 0.4);
@@ -1431,11 +1263,9 @@
 .btn.btn-dark-4.translucent-50 {
   background-color: rgba(68, 67, 109, 0.5);
 }
-.btn.btn-dark-4.translucent-50:hover {
-  background-color: rgba(255, 255, 255, 0.5);
-}
 .btn.btn-dark-4.translucent-50.hover-invert:hover {
   background-color: rgba(255, 255, 255, 0.5);
+  color: rgb(0, 0, 0);
 }
 .btn.btn-dark-4.translucent-50.hover-lighten:hover {
   background-color: rgba(84.9067128413, 83.2653420144, 126.7319465742, 0.5);
@@ -1446,11 +1276,9 @@
 .btn.btn-dark-4.translucent-60 {
   background-color: rgba(68, 67, 109, 0.6);
 }
-.btn.btn-dark-4.translucent-60:hover {
-  background-color: rgba(255, 255, 255, 0.6);
-}
 .btn.btn-dark-4.translucent-60.hover-invert:hover {
   background-color: rgba(255, 255, 255, 0.6);
+  color: rgb(0, 0, 0);
 }
 .btn.btn-dark-4.translucent-60.hover-lighten:hover {
   background-color: rgba(84.9067128413, 83.2653420144, 126.7319465742, 0.6);
@@ -1461,11 +1289,9 @@
 .btn.btn-dark-4.translucent-70 {
   background-color: rgba(68, 67, 109, 0.7);
 }
-.btn.btn-dark-4.translucent-70:hover {
-  background-color: rgba(255, 255, 255, 0.7);
-}
 .btn.btn-dark-4.translucent-70.hover-invert:hover {
   background-color: rgba(255, 255, 255, 0.7);
+  color: rgb(0, 0, 0);
 }
 .btn.btn-dark-4.translucent-70.hover-lighten:hover {
   background-color: rgba(84.9067128413, 83.2653420144, 126.7319465742, 0.7);
@@ -1476,11 +1302,9 @@
 .btn.btn-dark-4.translucent-80 {
   background-color: rgba(68, 67, 109, 0.8);
 }
-.btn.btn-dark-4.translucent-80:hover {
-  background-color: rgba(255, 255, 255, 0.8);
-}
 .btn.btn-dark-4.translucent-80.hover-invert:hover {
   background-color: rgba(255, 255, 255, 0.8);
+  color: rgb(0, 0, 0);
 }
 .btn.btn-dark-4.translucent-80.hover-lighten:hover {
   background-color: rgba(84.9067128413, 83.2653420144, 126.7319465742, 0.8);
@@ -1491,11 +1315,9 @@
 .btn.btn-dark-4.translucent-90 {
   background-color: rgba(68, 67, 109, 0.9);
 }
-.btn.btn-dark-4.translucent-90:hover {
-  background-color: rgba(255, 255, 255, 0.9);
-}
 .btn.btn-dark-4.translucent-90.hover-invert:hover {
   background-color: rgba(255, 255, 255, 0.9);
+  color: rgb(0, 0, 0);
 }
 .btn.btn-dark-4.translucent-90.hover-lighten:hover {
   background-color: rgba(84.9067128413, 83.2653420144, 126.7319465742, 0.9);
@@ -1506,11 +1328,9 @@
 .btn.btn-dark-4.translucent-100 {
   background-color: #44436d;
 }
-.btn.btn-dark-4.translucent-100:hover {
-  background-color: white;
-}
 .btn.btn-dark-4.translucent-100.hover-invert:hover {
   background-color: white;
+  color: rgb(0, 0, 0);
 }
 .btn.btn-dark-4.translucent-100.hover-lighten:hover {
   background-color: rgb(84.9067128413, 83.2653420144, 126.7319465742);

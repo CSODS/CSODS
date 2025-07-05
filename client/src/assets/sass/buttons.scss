@@ -55,24 +55,18 @@
                 background-color: $translucent-bg ;
 
                 @if ($is-light-bg) {
-                    &:hover {
-                        background-color: color.change($color: v.$black, $alpha: $opacity) ;
-                    }
-
                     &.hover-invert {
                         &:hover {
                             background-color: color.change($color: v.$black, $alpha: $opacity) ;
+                            color: v.$white;
                         }
                     }
                 }
                 @else {
-                    &:hover {
-                        background-color: color.change($color: v.$white, $alpha: $opacity) ;
-                    }
-                    
                     &.hover-invert {
                         &:hover {
                             background-color: color.change($color: v.$white, $alpha: $opacity) ;
+                            color: v.$black;
                         }
                     }
                 }
