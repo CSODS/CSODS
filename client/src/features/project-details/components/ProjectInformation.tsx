@@ -1,48 +1,21 @@
-import { createContext, useContext, useEffect, useMemo, useState } from "react";
-import { Color, OnHover, Opacity } from "@/types";
-import TagRow from "@components/shared/TagRow";
+import { createContext, useContext } from "react";
+import { BtnSelector, ColorSelector, CssSelector, HoverSelector, TranslucentSelector } from "@/types";
+import { useProjectDataService, useProjectDetails, useProjectIcon, useUser } from "@/hooks";
 import { ICONS, DEFAULTS } from "@/constants";
-import { IProjectTags, ProjectDataService } from "@utils/data/ProjectDataService";
-import { AllTagsContext, ProjectContext, UserContext } from "./ProjectDetailsProvider";
+import { BtnGroup } from "@/components";
 
 const PROJECT_DESCRIPTION = DEFAULTS.PROJECT_DESCRIPTION;
 
 const DevIconContext = createContext<string>('');
-const ProjectTagsContext = createContext<IProjectTags | undefined>(undefined);
 
 export default function ProjectInformationCard() {
-    const project = useContext(ProjectContext);
-    const allTags = useContext(AllTagsContext);
+    const project = useProjectDetails();
+    const projectDataService = useProjectDataService();
 
-    const projectDataService = useMemo(() => {
-        return new ProjectDataService(allTags)
-    }, [allTags]);
+    const projectTags = projectDataService.getProjectTagValues(project);
+    const projectTagList = projectDataService.getProjectTagList(projectTags);
 
-    const projectTags = useMemo(() => {
-        return projectDataService.getProjectTagValues(project)
-    }, [project, projectDataService]);
-
-    const projectTagList = useMemo(() => {
-        return projectDataService.getProjectTagList(projectTags);
-    }, [projectTags, projectDataService]);
-
-    const bgColor: Color = "dark-3";
-    const textColor: Color = "light-1";
-    const opacity: Opacity = 100;
-    const onHover: OnHover = 'lighten';
-
-    const [devTypeIcon, setDevTypeIcon] = useState<string>('');
-
-    useEffect(() => {
-        const loadIcon = () => {
-            if (projectTags) {  
-                type DevType = keyof typeof ICONS;
-                const iconKey = projectTags.DevType as DevType;
-                setDevTypeIcon(ICONS[iconKey]);
-            }
-        }
-        loadIcon();
-    }, [projectTags]);
+    const devTypeIcon = useProjectIcon(projectTags.DevType as keyof typeof ICONS);
 
     return (
         <DevIconContext.Provider value={devTypeIcon}>
@@ -50,9 +23,7 @@ export default function ProjectInformationCard() {
                 <Header/>
                 <SubHeader/>
                 <Description/>
-                <ProjectTagsContext.Provider value={projectTags}>
-                    <TagRow TagList={projectTagList} BackgroundColor={bgColor} TextColor={textColor} Opacity={opacity} OnHover={onHover} />
-                </ProjectTagsContext.Provider>
+                <TagRow tagList={projectTagList}/>
                 <GitHubStatistics/>
             </div>
         </DevIconContext.Provider>
@@ -75,7 +46,7 @@ function Header() {
 }
 
 function ProjectTitle() {
-    const project = useContext(ProjectContext);
+    const project = useProjectDetails();
     const icon = useContext(DevIconContext);
 
     return (
@@ -112,7 +83,7 @@ function ProjectStatus({
 //#endregion Header
 
 function SubHeader() {
-    const user = useContext(UserContext);
+    const user = useUser();
 
     return (
         <div className="px-2 mt-1 mb-0 row w-100">
@@ -143,7 +114,7 @@ function SubHeader() {
 }
 
 function Description() {
-    const project = useContext(ProjectContext);
+    const project = useProjectDetails();
 
     return(
         <div className="px-2 mt-2 mb-0 row w-100">
@@ -152,6 +123,29 @@ function Description() {
             </p>
         </div>
     );
+}
+
+interface TagRowProps {
+    tagList: string[];
+}
+
+function TagRow({ tagList }: TagRowProps) {
+    const btnSelector: BtnSelector = 'btn-dark-3';
+    const hoverSelector: HoverSelector = 'hover-lighten';
+    const colorSelector: ColorSelector = 'color-light-1';
+    const opacitySelector: TranslucentSelector = 'translucent-100';
+
+    const btnSelectors: (CssSelector | string)[] = [
+        'mt-1 py-1 px-3 ms-0 me-2 btn rounded-pill fs-xs',
+        btnSelector,
+        hoverSelector,
+        colorSelector,
+        opacitySelector
+    ];
+
+    const colSelectors = ["ps-3 col d-flex flex-wrap align-items-start"];
+
+    return <BtnGroup TagList={tagList} btnSelectors={btnSelectors} colSelectors={colSelectors}/>
 }
 
 //#region GitHub Statistics

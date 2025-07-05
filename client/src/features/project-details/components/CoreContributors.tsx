@@ -1,8 +1,7 @@
-import { useContext } from "react";
-import { ProjectContext } from "./ProjectDetailsProvider";
+import { useProjectDetails } from "@/hooks";
 
 export default function CoreContributors() {
-    const project = useContext(ProjectContext);
+    const project = useProjectDetails();
     const githubLink = project.Project.GitHubUrl;
 
     const contributors = [

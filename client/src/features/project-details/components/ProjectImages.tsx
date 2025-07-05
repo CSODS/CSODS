@@ -1,11 +1,11 @@
-import { useContext, useState } from "react";
-import { ProjectContext } from "./ProjectDetailsProvider";
+import { useState } from "react";
 import { DEFAULTS } from "@/constants";
+import { useProjectDetails } from "@/hooks";
 
 const DEFAULT_PROJECT_IMAGES = DEFAULTS.DEFAULT_PROJECT_IMAGES;
 
 export default function ProjectImages() {
-    const project = useContext(ProjectContext);
+    const project = useProjectDetails();
 
     const [imageLinks] = useState<string[]>(DEFAULT_PROJECT_IMAGES);
 

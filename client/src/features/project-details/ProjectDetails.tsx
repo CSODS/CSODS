@@ -1,50 +1,19 @@
-import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import { IUser, IProjectDetails, IAllProjectTags } from "@/types";
+import { useState } from "react";
 import { DEFAULT_USER } from "@constants/defaults";
-import ApiHandler from "@utils/api/ApiHandler";
-import CoreContributors from "./components/CoreContributors";
-import ProjectDetailsProvider from "./components/ProjectDetailsProvider";
-import ProjectInformationCard from "./components/ProjectInformation";
-import ProjectImages from "./components/ProjectImages";
+import { useFetchProject, useFetchTagData } from "@/hooks";
+import { IUser } from "@/types";
+import { CoreContributors, ProjectImages, ProjectInformationCard, ProjectInformationProvider } from "./components";
 
 export default function ProjectDetails() {
-  const { pageNumber, projectId} = useParams();
-  
-  const [allTags, setAllTags] = useState<IAllProjectTags>();
-  const [project, setProject] = useState<IProjectDetails>();
+  const allTags = useFetchTagData();
+  const project = useFetchProject();
   const [user] = useState<IUser>(DEFAULT_USER);
-
-  useEffect(() => {
-    const apiHandler = new ApiHandler();
-    const loadTagData = async() => {
-      const tagData = await await apiHandler.GetAllTags();
-      if (tagData) {
-        setAllTags(tagData);
-      }
-    }
-    loadTagData();
-  }, []);
-  
-  useEffect(() => {
-    const apiHandler = new ApiHandler();
-    const loadProject = async() => {
-      if (pageNumber && projectId) {
-        const projectData = await apiHandler.GetProject(pageNumber, projectId);
-        if (projectData)
-        {
-          setProject(projectData);
-        }
-      }
-    }
-    loadProject();
-  }, [pageNumber, projectId]);
 
   if (allTags && project) { 
     return (
-      <div className="px-lg-5 d-flex flex-column justify-content-center align-items-center">
-        <ProjectDetailsProvider allTags={allTags} project={project} user={user}>
-          <div className="mt-3 row row-cols-lg-2 w-100">
+      <div className="px-lg-5 px-0 d-flex flex-column justify-content-center align-items-center">
+        <ProjectInformationProvider allTags={allTags} project={project} user={user}>
+          <div className="mt-3 m-0 row row-cols-lg-2 w-100">
             <div className="col-lg-4">
               <CoreContributors/>
             </div>
@@ -53,7 +22,7 @@ export default function ProjectDetails() {
               <ProjectImages/>
             </div>
           </div>
-        </ProjectDetailsProvider>
+        </ProjectInformationProvider>
       </div>
     )
   }
