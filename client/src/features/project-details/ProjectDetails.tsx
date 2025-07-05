@@ -4,7 +4,7 @@ import { IUser, IProjectDetails, IAllProjectTags } from "@/types";
 import { DEFAULT_USER } from "@constants/defaults";
 import ApiHandler from "@utils/api/ApiHandler";
 import CoreContributors from "./components/CoreContributors";
-import ProjectDetailsProvider from "./components/ProjectDetailsProvider";
+import ProjectInformationProvider from "./components/ProjectDetailsProvider";
 import ProjectInformationCard from "./components/ProjectInformation";
 import ProjectImages from "./components/ProjectImages";
 
@@ -43,7 +43,7 @@ export default function ProjectDetails() {
   if (allTags && project) { 
     return (
       <div className="px-lg-5 px-0 d-flex flex-column justify-content-center align-items-center">
-        <ProjectDetailsProvider allTags={allTags} project={project} user={user}>
+        <ProjectInformationProvider allTags={allTags} project={project} user={user}>
           <div className="mt-3 m-0 row row-cols-lg-2 w-100">
             <div className="col-lg-4">
               <CoreContributors/>
@@ -53,7 +53,7 @@ export default function ProjectDetails() {
               <ProjectImages/>
             </div>
           </div>
-        </ProjectDetailsProvider>
+        </ProjectInformationProvider>
       </div>
     )
   }

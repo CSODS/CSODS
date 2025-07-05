@@ -2,19 +2,19 @@ import { ReactNode } from "react";
 import { IAllProjectTags, IProjectDetails, IUser } from "@/types";
 import { ProjectDetailsProvider, TagsContextProvider, UserContextProvider } from "@/components/shared/Providers";
 
-interface ProjectDetailsProvidersProps {
+interface ProjectInformationProviderProps {
     children: ReactNode;
     allTags: IAllProjectTags;
     project: IProjectDetails;
     user: IUser;
 };
 
-export default function ProjectDetailsProvider({
+export default function ProjectInformationProvider({
     children,
     allTags,
     project,
     user
-}: ProjectDetailsProvidersProps) {
+}: ProjectInformationProviderProps) {
     return (
         <div>
             <ProjectDetailsProvider projectDetails={project}>
