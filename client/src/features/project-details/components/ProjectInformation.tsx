@@ -3,7 +3,8 @@ import { BtnSelector, ColorSelector, CssSelector, HoverSelector, TranslucentSele
 import BtnGroup from "@/components/shared/ButtonGroup";
 import { ICONS, DEFAULTS } from "@/constants";
 import { IProjectTags, ProjectDataService } from "@utils/data/ProjectDataService";
-import { AllTagsContext, ProjectDetailsContext, UserContext } from "@components/shared/Providers";
+import { AllTagsContext, UserContext } from "@components/shared/Providers";
+import { useProjectDetails } from "@/hooks";
 
 const PROJECT_DESCRIPTION = DEFAULTS.PROJECT_DESCRIPTION;
 
@@ -11,7 +12,7 @@ const DevIconContext = createContext<string>('');
 const ProjectTagsContext = createContext<IProjectTags | undefined>(undefined);
 
 export default function ProjectInformationCard() {
-    const project = useContext(ProjectDetailsContext);
+    const project = useProjectDetails();
     const allTags = useContext(AllTagsContext);
 
     const projectDataService = useMemo(() => {
@@ -70,7 +71,7 @@ function Header() {
 }
 
 function ProjectTitle() {
-    const project = useContext(ProjectDetailsContext);
+    const project = useProjectDetails();
     const icon = useContext(DevIconContext);
 
     return (
@@ -138,7 +139,7 @@ function SubHeader() {
 }
 
 function Description() {
-    const project = useContext(ProjectDetailsContext);
+    const project = useProjectDetails();
 
     return(
         <div className="px-2 mt-2 mb-0 row w-100">
