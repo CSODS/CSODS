@@ -1,20 +1,14 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { BorderSelector, BtnSelector, ColorSelector, CssSelector, HoverSelector, TranslucentSelector } from "@/types";
-import { ADDRESSES, DEFAULTS, ICONS } from "@constants/index";
+import { DEFAULTS, ICONS } from "@constants/index";
 import BtnGroup from "@/components/shared/ButtonGroup";
 import { useProjectDataService, useProjectDetails, useProjectIcon } from "@/hooks";
+import { redirectToUrl } from "@/utils/navigation/navigation";
+import { getProjectLink } from "../utils";
 
 export function ProjectCard () {
-  const redirectToUrl = (url: string) => {
-    window.open(url);
-    return;
-  }
   const navigate = useNavigate();
-  const viewProject = (pageNumber: number, projectId: number) => {
-    const pageLink = `${ADDRESSES.STUDENT_PROJECTS.ROOT}/${pageNumber}`;
-    const detailsLink = `${ADDRESSES.PROJECT_DETAILS.ROOT}/${projectId}`;
-    navigate(`${pageLink}${detailsLink}`);
-  }
+  const viewProject = () => { navigate(getProjectLink(Number(pageNumber), projectId)) }
 
   const { pageNumber } = useParams();
   const projectDetails = useProjectDetails();
@@ -50,7 +44,7 @@ export function ProjectCard () {
                       {/* <img src={github_logo} alt='...' className='img-fluid'/> */}
                       GitHub
                   </button>
-                  <button type='button' className='col-lg-3 px-4 py-2 ms-0 me-3 btn btn-dark-3 rounded-4 border border-1 border-light-1' onClick={() => viewProject(Number(pageNumber), projectId)}>View</button>
+                  <button type='button' className='col-lg-3 px-4 py-2 ms-0 me-3 btn btn-dark-3 rounded-4 border border-1 border-light-1' onClick={() => viewProject()}>View</button>
                 </div>
               </div>
             </div>
