@@ -1,4 +1,4 @@
-import Button from "./Button";
+import Button, { LinkButton } from "./Button";
 import BtnGroup from "./ButtonGroup";
 
 export {
@@ -14,4 +14,4 @@ export {
     UserContextProvider
 } from "./Providers";
 
-export { Button, BtnGroup };
+export { Button, LinkButton, BtnGroup };
