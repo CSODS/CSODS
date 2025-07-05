@@ -1,2 +1,2 @@
-export { useFetchProjectsPage, useFetchTagData } from "./api/useFetch";
+export { useFetchProjectsPage, useFetchTagData, useFetchProject } from "./api/useFetch";
 export { useProjectIcon } from "./utils/useProjectIcon";

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { usePageNumber } from "@/hooks/params/useProjectParams";
-import { IAllProjectTags, IProjectsPage } from "@/types";
+import { usePageNumber, useProjectId } from "@/hooks";
+import { IAllProjectTags, IProjectDetails, IProjectsPage } from "@/types";
 import ApiHandler from "@/utils/api/ApiHandler";
 
 export function useFetchProjectsPage() {
@@ -19,6 +19,26 @@ export function useFetchProjectsPage() {
     }, [pageNumber]);
 
     return projectsPage;
+}
+
+export function useFetchProject() {
+    const pageNumber = usePageNumber();
+    const projectId = useProjectId();
+    const [project, setProject] = useState<IProjectDetails>();
+
+    useEffect(() => {
+        const loadProject = async() => {
+            const apiHandler = new ApiHandler();
+            const loadedProject = await apiHandler.GetProject(pageNumber, projectId);
+
+            if (loadedProject) {
+                setProject(loadedProject);
+            }
+        }
+        loadProject();
+    }, [pageNumber, projectId]);
+
+    return project;
 }
 
 export function useFetchTagData() {    
