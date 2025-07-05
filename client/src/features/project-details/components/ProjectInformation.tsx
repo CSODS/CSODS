@@ -4,7 +4,7 @@ import BtnGroup from "@/components/shared/ButtonGroup";
 import { ICONS, DEFAULTS } from "@/constants";
 import { IProjectTags, ProjectDataService } from "@utils/data/ProjectDataService";
 import { AllTagsContext } from "@components/shared/Providers";
-import { useProjectDetails, useUser } from "@/hooks";
+import { useProjectDetails, useProjectIcon, useUser } from "@/hooks";
 
 const PROJECT_DESCRIPTION = DEFAULTS.PROJECT_DESCRIPTION;
 
@@ -27,18 +27,7 @@ export default function ProjectInformationCard() {
         return projectDataService.getProjectTagList(projectTags);
     }, [projectTags, projectDataService]);
 
-    const [devTypeIcon, setDevTypeIcon] = useState<string>('');
-
-    useEffect(() => {
-        const loadIcon = () => {
-            if (projectTags) {  
-                type DevType = keyof typeof ICONS;
-                const iconKey = projectTags.DevType as DevType;
-                setDevTypeIcon(ICONS[iconKey]);
-            }
-        }
-        loadIcon();
-    }, [projectTags]);
+    const devTypeIcon = useProjectIcon(projectTags.DevType as keyof typeof ICONS);
 
     return (
         <DevIconContext.Provider value={devTypeIcon}>

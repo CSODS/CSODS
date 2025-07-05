@@ -1,10 +1,8 @@
-
-import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { BorderSelector, BtnSelector, ColorSelector, CssSelector, HoverSelector, TranslucentSelector } from "@/types";
 import { ADDRESSES, DEFAULTS, ICONS } from "@constants/index";
 import BtnGroup from "@/components/shared/ButtonGroup";
-import { useProjectDataService, useProjectDetails } from "@/hooks";
+import { useProjectDataService, useProjectDetails, useProjectIcon } from "@/hooks";
 
 export function ProjectCard () {
   const redirectToUrl = (url: string) => {
@@ -25,18 +23,7 @@ export function ProjectCard () {
   const projectTags = projectDataService.getProjectTagValues(projectDetails);
   const tagList = projectDataService.getProjectTagList(projectTags);
   const projectDescription = projectDataService.omitProjectDescription(DEFAULTS.LOREM_IPSUM);
-
-  const [ iconClass, setIconClass ] = useState<string>('');
-
-  useEffect(() => {
-    type DevType = keyof typeof ICONS;
-    const getIconClass = (devType: DevType) => {
-      const iconClass = ICONS[devType];
-      return iconClass;
-    }
-    const iconClass = getIconClass(projectTags.DevType as DevType);
-    setIconClass(iconClass);
-  }, [projectTags.DevType]);
+  const iconClass = useProjectIcon(projectTags.DevType as keyof typeof ICONS);
 
   const projectId: number = projectDetails.Project.ProjectId;
 
