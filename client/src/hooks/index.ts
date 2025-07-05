@@ -1,3 +1,4 @@
+export { useFetchProjectsPage, useFetchTagData } from "./project/api/useFetch";
 export { useProjectList, useProjectDetails} from "./context/project";
 export { useProjectDataService } from './context/service';
 export { useUser } from './context/user';
