@@ -1,11 +1,8 @@
 import { useState } from "react";
-import { IUser } from "@/types";
-import { useFetchProject, useFetchTagData } from "@/hooks";
 import { DEFAULT_USER } from "@constants/defaults";
-import CoreContributors from "./components/CoreContributors";
-import ProjectInformationProvider from "./components/ProjectDetailsProvider";
-import ProjectInformationCard from "./components/ProjectInformation";
-import ProjectImages from "./components/ProjectImages";
+import { useFetchProject, useFetchTagData } from "@/hooks";
+import { IUser } from "@/types";
+import { CoreContributors, ProjectImages, ProjectInformationCard, ProjectInformationProvider } from "./components";
 
 export default function ProjectDetails() {
   const allTags = useFetchTagData();
