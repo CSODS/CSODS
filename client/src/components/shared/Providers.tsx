@@ -1,7 +1,7 @@
 import { createContext, ReactNode, useMemo } from "react";
 import { IAllProjectTags, IProjectDetails, IUser } from "@/types";
 import { TAGS, DEFAULT_PROJECT, DEFAULT_USER, PROJECT_LIST } from "@/constants/defaults";
-import { ProjectDataService } from "@/utils/data/ProjectDataService";
+import { ProjectDataService } from "@/utils";
 
 
 interface ProjectListProviderProps {
