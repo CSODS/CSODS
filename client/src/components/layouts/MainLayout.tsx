@@ -29,7 +29,7 @@ export function PrimaryLayout() {
                             <NavLink to={projectsFirstPage} className="mx-2 header-nav-element">Projects</NavLink>
                             <NavLink to={ADDRESSES.ABOUT} className="mx-2 header-nav-element">About</NavLink>
                         </div>
-                        <NavLink to={ADDRESSES.SUBMIT_PROJECT} className="ms-auto me-2 px-2 py-1 nav-link d-none d-lg-flex btn btn-neutral-1 rounded-pill">
+                        <NavLink to={ADDRESSES.SUBMIT_PROJECT} className="ms-auto me-2 px-2 py-1 nav-link d-none d-lg-flex btn btn-neutral-1 hover-lighten rounded-pill">
                             <div className="nav-link ms-2 me-1">Submit a Project</div>
                             <i className="bi bi-arrow-right-circle ms-2 me-1"></i>
                         </NavLink>
