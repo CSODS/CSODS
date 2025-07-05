@@ -2,6 +2,7 @@ import { useFetchProjectsPage, useFetchTagData } from "@/hooks";
 import { ProjectDetailsProvider, ProjectDataServiceProvider } from "@/components";
 import ProjectCard from "./ProjectCards";
 import Paginator from "./Paginator";
+import { TotalPagesProvider } from "./Provider";
 
 export default function ProjectList () {
     const projectsPage = useFetchProjectsPage();
@@ -29,7 +30,9 @@ export default function ProjectList () {
                     </ProjectDataServiceProvider>
                 </div>
                 <div className="row">
-                    <Paginator totalPages={totalPages}/>
+                    <TotalPagesProvider totalPages={totalPages}>
+                        <Paginator/>
+                    </TotalPagesProvider>
                 </div>
             </div>
         );
