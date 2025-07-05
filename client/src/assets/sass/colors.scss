@@ -3,28 +3,28 @@
 
 @each $name, $value in v.$color-scheme {
     .bg-#{$name} {
-        background-color: $value !important;
+        background-color: $value ;
 
         @each $opacity in v.$opacities {
             &.translucent-#{$opacity * 100} {
-                background-color: color.change($color: $value, $alpha: $opacity) !important;
+                background-color: color.change($color: $value, $alpha: $opacity) ;
             }
         }
         
     }
 
     .color-#{$name} {
-        color: $value !important;
+        color: $value ;
     }
 
     .border-#{$name} {
-        border-color: $value !important;
+        border-color: $value ;
     }
 }
 
 @each $name, $value in v.$utility-colors {
     .bg-#{$name} {
-        background-color: $value !important;
+        background-color: $value ;
 
         @each $opacity in v.$opacities {
             &.translucent-#{$opacity * 100} {
@@ -34,10 +34,10 @@
     }
 
     .color-#{$name} {
-        color: $value !important;
+        color: $value ;
     }
 
     .border-#{$name} {
-        border-color: $value !important;
+        border-color: $value ;
     }
 }

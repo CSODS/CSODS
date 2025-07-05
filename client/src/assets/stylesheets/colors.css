@@ -1,383 +1,383 @@
 .bg-light-1 {
-  background-color: rgb(255, 255, 255) !important;
+  background-color: rgb(255, 255, 255);
 }
 .bg-light-1.translucent-10 {
-  background-color: rgba(255, 255, 255, 0.1) !important;
+  background-color: rgba(255, 255, 255, 0.1);
 }
 .bg-light-1.translucent-20 {
-  background-color: rgba(255, 255, 255, 0.2) !important;
+  background-color: rgba(255, 255, 255, 0.2);
 }
 .bg-light-1.translucent-30 {
-  background-color: rgba(255, 255, 255, 0.3) !important;
+  background-color: rgba(255, 255, 255, 0.3);
 }
 .bg-light-1.translucent-40 {
-  background-color: rgba(255, 255, 255, 0.4) !important;
+  background-color: rgba(255, 255, 255, 0.4);
 }
 .bg-light-1.translucent-50 {
-  background-color: rgba(255, 255, 255, 0.5) !important;
+  background-color: rgba(255, 255, 255, 0.5);
 }
 .bg-light-1.translucent-60 {
-  background-color: rgba(255, 255, 255, 0.6) !important;
+  background-color: rgba(255, 255, 255, 0.6);
 }
 .bg-light-1.translucent-70 {
-  background-color: rgba(255, 255, 255, 0.7) !important;
+  background-color: rgba(255, 255, 255, 0.7);
 }
 .bg-light-1.translucent-80 {
-  background-color: rgba(255, 255, 255, 0.8) !important;
+  background-color: rgba(255, 255, 255, 0.8);
 }
 .bg-light-1.translucent-90 {
-  background-color: rgba(255, 255, 255, 0.9) !important;
+  background-color: rgba(255, 255, 255, 0.9);
 }
 .bg-light-1.translucent-100 {
-  background-color: white !important;
+  background-color: white;
 }
 
 .color-light-1 {
-  color: rgb(255, 255, 255) !important;
+  color: rgb(255, 255, 255);
 }
 
 .border-light-1 {
-  border-color: rgb(255, 255, 255) !important;
+  border-color: rgb(255, 255, 255);
 }
 
 .bg-light-2 {
-  background-color: rgb(222, 222, 222) !important;
+  background-color: rgb(222, 222, 222);
 }
 .bg-light-2.translucent-10 {
-  background-color: rgba(222, 222, 222, 0.1) !important;
+  background-color: rgba(222, 222, 222, 0.1);
 }
 .bg-light-2.translucent-20 {
-  background-color: rgba(222, 222, 222, 0.2) !important;
+  background-color: rgba(222, 222, 222, 0.2);
 }
 .bg-light-2.translucent-30 {
-  background-color: rgba(222, 222, 222, 0.3) !important;
+  background-color: rgba(222, 222, 222, 0.3);
 }
 .bg-light-2.translucent-40 {
-  background-color: rgba(222, 222, 222, 0.4) !important;
+  background-color: rgba(222, 222, 222, 0.4);
 }
 .bg-light-2.translucent-50 {
-  background-color: rgba(222, 222, 222, 0.5) !important;
+  background-color: rgba(222, 222, 222, 0.5);
 }
 .bg-light-2.translucent-60 {
-  background-color: rgba(222, 222, 222, 0.6) !important;
+  background-color: rgba(222, 222, 222, 0.6);
 }
 .bg-light-2.translucent-70 {
-  background-color: rgba(222, 222, 222, 0.7) !important;
+  background-color: rgba(222, 222, 222, 0.7);
 }
 .bg-light-2.translucent-80 {
-  background-color: rgba(222, 222, 222, 0.8) !important;
+  background-color: rgba(222, 222, 222, 0.8);
 }
 .bg-light-2.translucent-90 {
-  background-color: rgba(222, 222, 222, 0.9) !important;
+  background-color: rgba(222, 222, 222, 0.9);
 }
 .bg-light-2.translucent-100 {
-  background-color: #dedede !important;
+  background-color: #dedede;
 }
 
 .color-light-2 {
-  color: rgb(222, 222, 222) !important;
+  color: rgb(222, 222, 222);
 }
 
 .border-light-2 {
-  border-color: rgb(222, 222, 222) !important;
+  border-color: rgb(222, 222, 222);
 }
 
 .bg-light-3 {
-  background-color: rgb(140, 127, 132) !important;
+  background-color: rgb(140, 127, 132);
 }
 .bg-light-3.translucent-10 {
-  background-color: rgba(140, 127, 132, 0.1) !important;
+  background-color: rgba(140, 127, 132, 0.1);
 }
 .bg-light-3.translucent-20 {
-  background-color: rgba(140, 127, 132, 0.2) !important;
+  background-color: rgba(140, 127, 132, 0.2);
 }
 .bg-light-3.translucent-30 {
-  background-color: rgba(140, 127, 132, 0.3) !important;
+  background-color: rgba(140, 127, 132, 0.3);
 }
 .bg-light-3.translucent-40 {
-  background-color: rgba(140, 127, 132, 0.4) !important;
+  background-color: rgba(140, 127, 132, 0.4);
 }
 .bg-light-3.translucent-50 {
-  background-color: rgba(140, 127, 132, 0.5) !important;
+  background-color: rgba(140, 127, 132, 0.5);
 }
 .bg-light-3.translucent-60 {
-  background-color: rgba(140, 127, 132, 0.6) !important;
+  background-color: rgba(140, 127, 132, 0.6);
 }
 .bg-light-3.translucent-70 {
-  background-color: rgba(140, 127, 132, 0.7) !important;
+  background-color: rgba(140, 127, 132, 0.7);
 }
 .bg-light-3.translucent-80 {
-  background-color: rgba(140, 127, 132, 0.8) !important;
+  background-color: rgba(140, 127, 132, 0.8);
 }
 .bg-light-3.translucent-90 {
-  background-color: rgba(140, 127, 132, 0.9) !important;
+  background-color: rgba(140, 127, 132, 0.9);
 }
 .bg-light-3.translucent-100 {
-  background-color: #8c7f84 !important;
+  background-color: #8c7f84;
 }
 
 .color-light-3 {
-  color: rgb(140, 127, 132) !important;
+  color: rgb(140, 127, 132);
 }
 
 .border-light-3 {
-  border-color: rgb(140, 127, 132) !important;
+  border-color: rgb(140, 127, 132);
 }
 
 .bg-neutral-1 {
-  background-color: rgb(0, 191, 99) !important;
+  background-color: rgb(0, 191, 99);
 }
 .bg-neutral-1.translucent-10 {
-  background-color: rgba(0, 191, 99, 0.1) !important;
+  background-color: rgba(0, 191, 99, 0.1);
 }
 .bg-neutral-1.translucent-20 {
-  background-color: rgba(0, 191, 99, 0.2) !important;
+  background-color: rgba(0, 191, 99, 0.2);
 }
 .bg-neutral-1.translucent-30 {
-  background-color: rgba(0, 191, 99, 0.3) !important;
+  background-color: rgba(0, 191, 99, 0.3);
 }
 .bg-neutral-1.translucent-40 {
-  background-color: rgba(0, 191, 99, 0.4) !important;
+  background-color: rgba(0, 191, 99, 0.4);
 }
 .bg-neutral-1.translucent-50 {
-  background-color: rgba(0, 191, 99, 0.5) !important;
+  background-color: rgba(0, 191, 99, 0.5);
 }
 .bg-neutral-1.translucent-60 {
-  background-color: rgba(0, 191, 99, 0.6) !important;
+  background-color: rgba(0, 191, 99, 0.6);
 }
 .bg-neutral-1.translucent-70 {
-  background-color: rgba(0, 191, 99, 0.7) !important;
+  background-color: rgba(0, 191, 99, 0.7);
 }
 .bg-neutral-1.translucent-80 {
-  background-color: rgba(0, 191, 99, 0.8) !important;
+  background-color: rgba(0, 191, 99, 0.8);
 }
 .bg-neutral-1.translucent-90 {
-  background-color: rgba(0, 191, 99, 0.9) !important;
+  background-color: rgba(0, 191, 99, 0.9);
 }
 .bg-neutral-1.translucent-100 {
-  background-color: #00bf63 !important;
+  background-color: #00bf63;
 }
 
 .color-neutral-1 {
-  color: rgb(0, 191, 99) !important;
+  color: rgb(0, 191, 99);
 }
 
 .border-neutral-1 {
-  border-color: rgb(0, 191, 99) !important;
+  border-color: rgb(0, 191, 99);
 }
 
 .bg-neutral-2 {
-  background-color: rgb(68, 67, 109) !important;
+  background-color: rgb(68, 67, 109);
 }
 .bg-neutral-2.translucent-10 {
-  background-color: rgba(68, 67, 109, 0.1) !important;
+  background-color: rgba(68, 67, 109, 0.1);
 }
 .bg-neutral-2.translucent-20 {
-  background-color: rgba(68, 67, 109, 0.2) !important;
+  background-color: rgba(68, 67, 109, 0.2);
 }
 .bg-neutral-2.translucent-30 {
-  background-color: rgba(68, 67, 109, 0.3) !important;
+  background-color: rgba(68, 67, 109, 0.3);
 }
 .bg-neutral-2.translucent-40 {
-  background-color: rgba(68, 67, 109, 0.4) !important;
+  background-color: rgba(68, 67, 109, 0.4);
 }
 .bg-neutral-2.translucent-50 {
-  background-color: rgba(68, 67, 109, 0.5) !important;
+  background-color: rgba(68, 67, 109, 0.5);
 }
 .bg-neutral-2.translucent-60 {
-  background-color: rgba(68, 67, 109, 0.6) !important;
+  background-color: rgba(68, 67, 109, 0.6);
 }
 .bg-neutral-2.translucent-70 {
-  background-color: rgba(68, 67, 109, 0.7) !important;
+  background-color: rgba(68, 67, 109, 0.7);
 }
 .bg-neutral-2.translucent-80 {
-  background-color: rgba(68, 67, 109, 0.8) !important;
+  background-color: rgba(68, 67, 109, 0.8);
 }
 .bg-neutral-2.translucent-90 {
-  background-color: rgba(68, 67, 109, 0.9) !important;
+  background-color: rgba(68, 67, 109, 0.9);
 }
 .bg-neutral-2.translucent-100 {
-  background-color: #44436d !important;
+  background-color: #44436d;
 }
 
 .color-neutral-2 {
-  color: rgb(68, 67, 109) !important;
+  color: rgb(68, 67, 109);
 }
 
 .border-neutral-2 {
-  border-color: rgb(68, 67, 109) !important;
+  border-color: rgb(68, 67, 109);
 }
 
 .bg-dark-1 {
-  background-color: rgb(43, 45, 66) !important;
+  background-color: rgb(43, 45, 66);
 }
 .bg-dark-1.translucent-10 {
-  background-color: rgba(43, 45, 66, 0.1) !important;
+  background-color: rgba(43, 45, 66, 0.1);
 }
 .bg-dark-1.translucent-20 {
-  background-color: rgba(43, 45, 66, 0.2) !important;
+  background-color: rgba(43, 45, 66, 0.2);
 }
 .bg-dark-1.translucent-30 {
-  background-color: rgba(43, 45, 66, 0.3) !important;
+  background-color: rgba(43, 45, 66, 0.3);
 }
 .bg-dark-1.translucent-40 {
-  background-color: rgba(43, 45, 66, 0.4) !important;
+  background-color: rgba(43, 45, 66, 0.4);
 }
 .bg-dark-1.translucent-50 {
-  background-color: rgba(43, 45, 66, 0.5) !important;
+  background-color: rgba(43, 45, 66, 0.5);
 }
 .bg-dark-1.translucent-60 {
-  background-color: rgba(43, 45, 66, 0.6) !important;
+  background-color: rgba(43, 45, 66, 0.6);
 }
 .bg-dark-1.translucent-70 {
-  background-color: rgba(43, 45, 66, 0.7) !important;
+  background-color: rgba(43, 45, 66, 0.7);
 }
 .bg-dark-1.translucent-80 {
-  background-color: rgba(43, 45, 66, 0.8) !important;
+  background-color: rgba(43, 45, 66, 0.8);
 }
 .bg-dark-1.translucent-90 {
-  background-color: rgba(43, 45, 66, 0.9) !important;
+  background-color: rgba(43, 45, 66, 0.9);
 }
 .bg-dark-1.translucent-100 {
-  background-color: #2b2d42 !important;
+  background-color: #2b2d42;
 }
 
 .color-dark-1 {
-  color: rgb(43, 45, 66) !important;
+  color: rgb(43, 45, 66);
 }
 
 .border-dark-1 {
-  border-color: rgb(43, 45, 66) !important;
+  border-color: rgb(43, 45, 66);
 }
 
 .bg-dark-2 {
-  background-color: rgb(19, 7, 46) !important;
+  background-color: rgb(19, 7, 46);
 }
 .bg-dark-2.translucent-10 {
-  background-color: rgba(19, 7, 46, 0.1) !important;
+  background-color: rgba(19, 7, 46, 0.1);
 }
 .bg-dark-2.translucent-20 {
-  background-color: rgba(19, 7, 46, 0.2) !important;
+  background-color: rgba(19, 7, 46, 0.2);
 }
 .bg-dark-2.translucent-30 {
-  background-color: rgba(19, 7, 46, 0.3) !important;
+  background-color: rgba(19, 7, 46, 0.3);
 }
 .bg-dark-2.translucent-40 {
-  background-color: rgba(19, 7, 46, 0.4) !important;
+  background-color: rgba(19, 7, 46, 0.4);
 }
 .bg-dark-2.translucent-50 {
-  background-color: rgba(19, 7, 46, 0.5) !important;
+  background-color: rgba(19, 7, 46, 0.5);
 }
 .bg-dark-2.translucent-60 {
-  background-color: rgba(19, 7, 46, 0.6) !important;
+  background-color: rgba(19, 7, 46, 0.6);
 }
 .bg-dark-2.translucent-70 {
-  background-color: rgba(19, 7, 46, 0.7) !important;
+  background-color: rgba(19, 7, 46, 0.7);
 }
 .bg-dark-2.translucent-80 {
-  background-color: rgba(19, 7, 46, 0.8) !important;
+  background-color: rgba(19, 7, 46, 0.8);
 }
 .bg-dark-2.translucent-90 {
-  background-color: rgba(19, 7, 46, 0.9) !important;
+  background-color: rgba(19, 7, 46, 0.9);
 }
 .bg-dark-2.translucent-100 {
-  background-color: #13072e !important;
+  background-color: #13072e;
 }
 
 .color-dark-2 {
-  color: rgb(19, 7, 46) !important;
+  color: rgb(19, 7, 46);
 }
 
 .border-dark-2 {
-  border-color: rgb(19, 7, 46) !important;
+  border-color: rgb(19, 7, 46);
 }
 
 .bg-dark-3 {
-  background-color: rgb(0, 0, 0) !important;
+  background-color: rgb(0, 0, 0);
 }
 .bg-dark-3.translucent-10 {
-  background-color: rgba(0, 0, 0, 0.1) !important;
+  background-color: rgba(0, 0, 0, 0.1);
 }
 .bg-dark-3.translucent-20 {
-  background-color: rgba(0, 0, 0, 0.2) !important;
+  background-color: rgba(0, 0, 0, 0.2);
 }
 .bg-dark-3.translucent-30 {
-  background-color: rgba(0, 0, 0, 0.3) !important;
+  background-color: rgba(0, 0, 0, 0.3);
 }
 .bg-dark-3.translucent-40 {
-  background-color: rgba(0, 0, 0, 0.4) !important;
+  background-color: rgba(0, 0, 0, 0.4);
 }
 .bg-dark-3.translucent-50 {
-  background-color: rgba(0, 0, 0, 0.5) !important;
+  background-color: rgba(0, 0, 0, 0.5);
 }
 .bg-dark-3.translucent-60 {
-  background-color: rgba(0, 0, 0, 0.6) !important;
+  background-color: rgba(0, 0, 0, 0.6);
 }
 .bg-dark-3.translucent-70 {
-  background-color: rgba(0, 0, 0, 0.7) !important;
+  background-color: rgba(0, 0, 0, 0.7);
 }
 .bg-dark-3.translucent-80 {
-  background-color: rgba(0, 0, 0, 0.8) !important;
+  background-color: rgba(0, 0, 0, 0.8);
 }
 .bg-dark-3.translucent-90 {
-  background-color: rgba(0, 0, 0, 0.9) !important;
+  background-color: rgba(0, 0, 0, 0.9);
 }
 .bg-dark-3.translucent-100 {
-  background-color: black !important;
+  background-color: black;
 }
 
 .color-dark-3 {
-  color: rgb(0, 0, 0) !important;
+  color: rgb(0, 0, 0);
 }
 
 .border-dark-3 {
-  border-color: rgb(0, 0, 0) !important;
+  border-color: rgb(0, 0, 0);
 }
 
 .bg-dark-4 {
-  background-color: rgb(68, 67, 109) !important;
+  background-color: rgb(68, 67, 109);
 }
 .bg-dark-4.translucent-10 {
-  background-color: rgba(68, 67, 109, 0.1) !important;
+  background-color: rgba(68, 67, 109, 0.1);
 }
 .bg-dark-4.translucent-20 {
-  background-color: rgba(68, 67, 109, 0.2) !important;
+  background-color: rgba(68, 67, 109, 0.2);
 }
 .bg-dark-4.translucent-30 {
-  background-color: rgba(68, 67, 109, 0.3) !important;
+  background-color: rgba(68, 67, 109, 0.3);
 }
 .bg-dark-4.translucent-40 {
-  background-color: rgba(68, 67, 109, 0.4) !important;
+  background-color: rgba(68, 67, 109, 0.4);
 }
 .bg-dark-4.translucent-50 {
-  background-color: rgba(68, 67, 109, 0.5) !important;
+  background-color: rgba(68, 67, 109, 0.5);
 }
 .bg-dark-4.translucent-60 {
-  background-color: rgba(68, 67, 109, 0.6) !important;
+  background-color: rgba(68, 67, 109, 0.6);
 }
 .bg-dark-4.translucent-70 {
-  background-color: rgba(68, 67, 109, 0.7) !important;
+  background-color: rgba(68, 67, 109, 0.7);
 }
 .bg-dark-4.translucent-80 {
-  background-color: rgba(68, 67, 109, 0.8) !important;
+  background-color: rgba(68, 67, 109, 0.8);
 }
 .bg-dark-4.translucent-90 {
-  background-color: rgba(68, 67, 109, 0.9) !important;
+  background-color: rgba(68, 67, 109, 0.9);
 }
 .bg-dark-4.translucent-100 {
-  background-color: #44436d !important;
+  background-color: #44436d;
 }
 
 .color-dark-4 {
-  color: rgb(68, 67, 109) !important;
+  color: rgb(68, 67, 109);
 }
 
 .border-dark-4 {
-  border-color: rgb(68, 67, 109) !important;
+  border-color: rgb(68, 67, 109);
 }
 
 .bg-util-error {
-  background-color: rgb(255, 255, 255) !important;
+  background-color: rgb(255, 255, 255);
 }
 .bg-util-error.translucent-10 {
   background-color: rgba(255, 255, 255, 0.1);
@@ -411,15 +411,15 @@
 }
 
 .color-util-error {
-  color: rgb(255, 255, 255) !important;
+  color: rgb(255, 255, 255);
 }
 
 .border-util-error {
-  border-color: rgb(255, 255, 255) !important;
+  border-color: rgb(255, 255, 255);
 }
 
 .bg-util-alert {
-  background-color: rgb(255, 165, 0) !important;
+  background-color: rgb(255, 165, 0);
 }
 .bg-util-alert.translucent-10 {
   background-color: rgba(255, 165, 0, 0.1);
@@ -453,15 +453,15 @@
 }
 
 .color-util-alert {
-  color: rgb(255, 165, 0) !important;
+  color: rgb(255, 165, 0);
 }
 
 .border-util-alert {
-  border-color: rgb(255, 165, 0) !important;
+  border-color: rgb(255, 165, 0);
 }
 
 .bg-util-notify {
-  background-color: rgb(255, 255, 255) !important;
+  background-color: rgb(255, 255, 255);
 }
 .bg-util-notify.translucent-10 {
   background-color: rgba(255, 255, 255, 0.1);
@@ -495,15 +495,15 @@
 }
 
 .color-util-notify {
-  color: rgb(255, 255, 255) !important;
+  color: rgb(255, 255, 255);
 }
 
 .border-util-notify {
-  border-color: rgb(255, 255, 255) !important;
+  border-color: rgb(255, 255, 255);
 }
 
 .bg-util-success {
-  background-color: rgb(0, 191, 99) !important;
+  background-color: rgb(0, 191, 99);
 }
 .bg-util-success.translucent-10 {
   background-color: rgba(0, 191, 99, 0.1);
@@ -537,11 +537,11 @@
 }
 
 .color-util-success {
-  color: rgb(0, 191, 99) !important;
+  color: rgb(0, 191, 99);
 }
 
 .border-util-success {
-  border-color: rgb(0, 191, 99) !important;
+  border-color: rgb(0, 191, 99);
 }
 
 /*# sourceMappingURL=colors.css.map */
