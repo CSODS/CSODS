@@ -1,6 +1,7 @@
-import { createContext, ReactNode } from "react";
+import { createContext, ReactNode, useMemo } from "react";
 import { IAllProjectTags, IProjectDetails, IUser } from "@/types";
 import { TAGS, DEFAULT_PROJECT, DEFAULT_USER, PROJECT_LIST } from "@/constants/defaults";
+import { ProjectDataService } from "@/utils/data/ProjectDataService";
 
 
 interface ProjectListProviderProps {
@@ -25,6 +26,25 @@ export function ProjectContextProvider ({ children, projectDetails }: ProjectPro
     return (
         <ProjectContext.Provider value={projectDetails}> {children} </ProjectContext.Provider>
     );
+}
+
+interface ProjectDataServiceProviderProps {
+    children: ReactNode;
+    allTags: IAllProjectTags;
+}
+
+export const ProjectDataServiceContext = createContext<ProjectDataService | null>(null);
+
+export function ProjectDataServiceProvider ({
+    children, 
+    allTags 
+}: ProjectDataServiceProviderProps) {
+    const service = useMemo(
+        () => new ProjectDataService(allTags),
+        [allTags]
+    );
+
+    return <ProjectDataServiceContext.Provider value={service}> {children} </ProjectDataServiceContext.Provider>
 }
 
 interface TagProviderProps {
