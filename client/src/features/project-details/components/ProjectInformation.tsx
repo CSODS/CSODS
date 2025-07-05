@@ -2,7 +2,7 @@ import { createContext, useContext } from "react";
 import { BtnSelector, ColorSelector, CssSelector, HoverSelector, TranslucentSelector } from "@/types";
 import { useProjectDataService, useProjectDetails, useProjectIcon, useUser } from "@/hooks";
 import { ICONS, DEFAULTS } from "@/constants";
-import BtnGroup from "@/components/shared/ButtonGroup";
+import { BtnGroup } from "@/components";
 
 const PROJECT_DESCRIPTION = DEFAULTS.PROJECT_DESCRIPTION;
 

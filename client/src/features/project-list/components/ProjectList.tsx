@@ -1,5 +1,5 @@
 import { useFetchProjectsPage, useFetchTagData } from "@/hooks";
-import { ProjectDetailsProvider, ProjectDataServiceProvider } from "@/components/shared/Providers";
+import { ProjectDetailsProvider, ProjectDataServiceProvider } from "@/components";
 import { ProjectCard } from "./ProjectCards";
 import Paginator from "./Paginator";
 

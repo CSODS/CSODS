@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 import { IAllProjectTags, IProjectDetails, IUser } from "@/types";
-import { ProjectDataServiceProvider, ProjectDetailsProvider, UserContextProvider } from "@/components/shared/Providers";
+import { ProjectDataServiceProvider, ProjectDetailsProvider, UserContextProvider } from "@/components";
 
 interface ProjectInformationProviderProps {
     children: ReactNode;

@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { BorderSelector, BtnSelector, ColorSelector, CssSelector, HoverSelector, TranslucentSelector } from "@/types";
 import { DEFAULTS, ICONS } from "@constants/index";
-import BtnGroup from "@/components/shared/ButtonGroup";
+import { BtnGroup } from "@/components";
 import { useProjectDataService, useProjectDetails, useProjectIcon } from "@/hooks";
 import { redirectToUrl } from "@/utils/navigation/navigation";
 import { getProjectLink } from "../utils";
