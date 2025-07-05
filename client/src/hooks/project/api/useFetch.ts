@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { usePageNumber, useProjectId } from "@/hooks";
 import { IAllProjectTags, IProjectDetails, IProjectsPage } from "@/types";
-import ApiHandler from "@/utils/api/ApiHandler";
+import { ApiHandler } from "@/utils";
 
 export function useFetchProjectsPage() {
     const pageNumber = usePageNumber();

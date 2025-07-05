@@ -1,5 +1,5 @@
-import { ICONS } from "@/constants";
 import { useEffect, useState } from "react";
+import { ICONS } from "@/constants";
 
 export function useProjectIcon(devType: keyof typeof ICONS) {
     const [iconClass, setIconClass] = useState<string>("");

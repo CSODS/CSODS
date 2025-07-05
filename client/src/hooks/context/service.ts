@@ -1,4 +1,4 @@
-import { ProjectDataServiceContext } from "@/components/shared/Providers";
+import { ProjectDataServiceContext } from "@/components";
 import { useContext } from "react";
 
 export function useProjectDataService() {

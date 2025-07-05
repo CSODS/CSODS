@@ -1,4 +1,4 @@
-import { ProjectDetailsContext, ProjectListContext } from "@/components/shared/Providers";
+import { ProjectDetailsContext, ProjectListContext } from "@/components";
 import { useContext } from "react";
 
 export function useProjectList() {

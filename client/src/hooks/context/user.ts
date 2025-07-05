@@ -1,4 +1,4 @@
-import { UserContext } from "@/components/shared/Providers";
+import { UserContext } from "@/components";
 import { useContext } from "react";
 
 export function useUser() {
