@@ -5,7 +5,7 @@ import { IAllProjectTags, IProjectDetails, IProjectsPage } from "@/types";
 export default class ApiHandler {
     private readonly _apiBase = CSODS_API_PATHS.BASE;
 
-    public async GetProjectsPage(pageNumber: string): Promise<IProjectsPage | null> {
+    public async GetProjectsPage(pageNumber: string | number): Promise<IProjectsPage | null> {
         const projectsPage = `${CSODS_API_PATHS.PROJECTS.PATH}/${pageNumber}`;
         const projectPageLink = `${this._apiBase}${projectsPage}`;
         
@@ -25,7 +25,7 @@ export default class ApiHandler {
         }
     }
 
-    public async GetProject(pageNumber: string, projectId: string): Promise<IProjectDetails | null> {
+    public async GetProject(pageNumber: string | number, projectId: string | number): Promise<IProjectDetails | null> {
         const endpoint = `${this._apiBase}${CSODS_API_PATHS.PROJECTS.PATH}/${pageNumber}/${projectId}`;
         
         try {
