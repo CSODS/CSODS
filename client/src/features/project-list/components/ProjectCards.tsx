@@ -1,7 +1,6 @@
 import { useNavigate, useParams } from "react-router-dom";
-import { BorderSelector, BtnSelector, ColorSelector, CssSelector, HoverSelector, TranslucentSelector } from "@/types";
+import { BtnBare } from "@/components";
 import { DEFAULTS, ICONS } from "@constants/index";
-import { BtnGroup, Button } from "@/components";
 import { useProjectDataService, useProjectDetails, useProjectIcon } from "@/hooks";
 import { redirectToUrl } from "@/utils";
 import { getProjectLink } from "../utils";
@@ -60,39 +59,27 @@ interface TagRowProps {
 }
 
 function TagRow({ tagList }: TagRowProps) {
-    const btnSelector: BtnSelector = 'btn-light-1';
-    const borderSelector: BorderSelector = 'border-light-1';
-    const hoverSelector: HoverSelector = 'hover-darken';
-    const colorSelector: ColorSelector = 'color-light-1';
-    const opacitySelector: TranslucentSelector = 'translucent-50';
+  const colSelectors = ["p-0 col d-flex flex-wrap align-items-start"];
 
-    const btnSelectors: (CssSelector | string)[] = [
-        'mt-1 py-0 px-1 ms-0 me-1 bg-transparent border border-0 rounded-pill fs-xs d-flex flex-row justify-content-center align-items-center',
-        colorSelector
-    ];
-
-    const colSelectors = ["p-0 col d-flex flex-wrap align-items-start"];
-
-    return (
-      // <BtnGroup TagList={tagList} btnSelectors={btnSelectors} colSelectors={colSelectors}/>
-      <div className="mx-0 mt-2 row w-100">
-        <div className={colSelectors.join(' ')}>
-            {
-              tagList.map((tag, index) => {
-                const key = `tag-${index}`
-                return (
-                  <Button selectorList={btnSelectors} componentKey={key}>
-                    <div className="col-1 p-0 m-0 me-1 d-flex">
+  return (
+    <div className="mx-0 mt-2 row w-100">
+      <div className={colSelectors.join(' ')}>
+          {
+            tagList.map((tag, index) => {
+              const key = `tag-${index}`
+              return (
+                <BtnBare componentKey={key} flex="row" justify="center" align="center">
+                    <div className="col-1 p-0 m-0 me-1 d-flex justify-content-center align-items-center fs-xs">
                       <i className="m-0 p-0 bi bi-circle-fill fs-xxs color-light-1"></i>
                     </div>
-                    <div className='col-11 p-0 m-0 text-center text-nowrap fst-italic'>
+                    <div className='col-11 p-0 pe-2 m-0 text-center text-nowrap fs-xs fst-italic color-light-1'>
                         {tag}
                     </div>
-                  </Button>
-                )
-              })
-            }
-        </div>
-    </div>
-    )
+                </BtnBare>
+              )
+            })
+          }
+      </div>
+  </div>
+  )
 }
