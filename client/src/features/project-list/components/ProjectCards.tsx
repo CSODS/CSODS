@@ -5,6 +5,7 @@ import { useProjectDataService, useProjectDetails, useProjectIcon } from "@/hook
 import { redirectToUrl } from "@/utils";
 import { getProjectLink } from "../utils";
 import { useTagColorMap } from "../hooks/context";
+import { Color } from "@/types";
 
 export default function ProjectCard () {
   const navigate = useNavigate();
@@ -86,6 +87,7 @@ function Tag({ tag, index }: TagProps) {
   const tagColorMap = useTagColorMap();
   const iconColor = tagColorMap.get(tag);
   const iconClass = `m-0 p-0 bi bi-circle-fill fs-xxs ${iconColor}`;
+  const textOnHover = `hover-${iconColor}`;
 
   const key = `tag-${index}`;
 
@@ -94,7 +96,7 @@ function Tag({ tag, index }: TagProps) {
         <div className="col-1 p-0 m-0 me-1 d-flex justify-content-center align-items-center fs-xs">
           <i className={iconClass}></i>
         </div>
-        <div className='col-11 p-0 pe-2 m-0 text-center text-nowrap fs-xs fst-italic color-light-1'>
+        <div className={`col-11 p-0 pe-2 m-0 text-center text-nowrap fs-xs fst-italic color-light-1 ${textOnHover}`}>
             {tag}
         </div>
     </BtnBare>
