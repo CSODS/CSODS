@@ -5,7 +5,6 @@ import { useProjectDataService, useProjectDetails, useProjectIcon } from "@/hook
 import { redirectToUrl } from "@/utils";
 import { getProjectLink } from "../utils";
 import { useTagColorMap } from "../hooks/context";
-import { Color } from "@/types";
 
 export default function ProjectCard () {
   const navigate = useNavigate();
