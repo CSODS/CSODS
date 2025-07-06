@@ -15,10 +15,12 @@ export function PrimaryLayout() {
     return(
         <div>
             <div className="p-0 navbar navbar-expand-lg sticky-top">    
-                <div className="py-1 container-fluid bg-dark-2 translucent-20 header-container">
-                    <a className="navbar-brand color-light-1 fs-4 bolder" href={ADDRESSES.LANDING_PAGE}>
+                <div className="py-1 ps-3 container-fluid bg-dark-2 translucent-20">
+                    <a className="navbar-brand color-light-1 d-flex flex-row justify-content-center align-items-center" href={ADDRESSES.LANDING_PAGE}>
                         <img src='/lucso-logo-no-bg.png' alt="CSO_LOGO" className='header-logo'/>
-                        CSO:DS  
+                        <p className='m-0 p-0 ps-2 fs-4 bolder'>
+                            CSO:DS
+                        </p>  
                     </a>
                     <button className="navbar-toggler bg-light-2 color-transparent" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
