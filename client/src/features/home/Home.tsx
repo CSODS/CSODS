@@ -6,7 +6,7 @@ import { GeneralAssembly } from "./carousel/slides/GeneralAssembly";
 export default function Home() {
   return (
     <CarouselWrapper>
-      {[<GeneralAssembly />, <ViewProjects/>]}
+      {[<ViewProjects/>, <GeneralAssembly />]}
     </CarouselWrapper>
   );
 }

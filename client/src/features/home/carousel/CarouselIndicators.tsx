@@ -8,7 +8,7 @@ export function CarouselIndicators({
   carouselId: string;
 }) {
   return (
-    <div className="carousel-indicators d-none d-md-flex">
+    <div className="carousel-indicators invisible invisible-sm-visible d-md-flex">
       {Array.from({ length: count }).map((_, i) => (
         <button
           key={i}
