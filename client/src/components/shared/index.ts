@@ -10,7 +10,7 @@ export {
     ProjectListProvider,
     ProjectDetailsProvider,
     ProjectDataServiceProvider,
-    TagsContextProvider,
+    AllTagsProvider,
     UserContextProvider
 } from "./Providers";
 

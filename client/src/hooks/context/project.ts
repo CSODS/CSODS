@@ -1,4 +1,4 @@
-import { ProjectDetailsContext, ProjectListContext } from "@/components";
+import { AllTagsContext, ProjectDetailsContext, ProjectListContext } from "@/components";
 import { useContext } from "react";
 
 export function useProjectList() {
@@ -17,4 +17,8 @@ export function useProjectDetails() {
         throw new Error(errMsg);
     }
     return projectDetailsContext;
+}
+
+export function useTags() {
+    const tagsContext = useContext(AllTagsContext)
 }

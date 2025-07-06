@@ -47,14 +47,14 @@ export function ProjectDataServiceProvider ({
     return <ProjectDataServiceContext.Provider value={service}> {children} </ProjectDataServiceContext.Provider>
 }
 
-interface TagProviderProps {
+interface AllTagsProviderProps {
     children: ReactNode;
     allTags: IAllProjectTags;
 }
 
-export const AllTagsContext = createContext<IAllProjectTags>(TAGS);
+export const AllTagsContext = createContext<IAllProjectTags | null>(null);
 
-export function TagsContextProvider ({ children, allTags }: TagProviderProps) {
+export function AllTagsProvider ({ children, allTags }: AllTagsProviderProps) {
     return (
         <AllTagsContext.Provider value={allTags}> {children} </AllTagsContext.Provider>
     );
