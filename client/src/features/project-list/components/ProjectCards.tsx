@@ -90,7 +90,7 @@ function Tag({ tag, index }: TagProps) {
   const key = `tag-${index}`;
 
   return (
-    <BtnBare componentKey={key} flex="row" justify="center" align="center">
+    <BtnBare componentKey={key} flex="row" justify="center" align="center" margin={[{breakpoint: 'lg', b: 1}, { m: 0}]}>
         <div className="col-1 p-0 m-0 me-1 d-flex justify-content-center align-items-center fs-xs">
           <i className={iconClass}></i>
         </div>

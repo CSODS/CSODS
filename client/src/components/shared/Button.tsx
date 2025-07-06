@@ -1,4 +1,5 @@
-import { Color, CssSelector } from "@/types";
+import { Color, CssSelector, marginSettings, paddingSettings } from "@/types";
+import { getBootstrapSpacing } from "@/utils";
 import { ReactNode } from "react";
 import { Link } from "react-router-dom";
 
@@ -36,6 +37,8 @@ export interface BtnBareProps {
     flex?: flex;
     justify?: placement;
     align?: placement;
+    margin?: marginSettings[];
+    padding?: paddingSettings[];
 }
 
 export function BtnBare ({ 
@@ -44,17 +47,19 @@ export function BtnBare ({
     componentId, 
     flex, 
     justify, 
-    align 
+    align,
+    margin = [{ m: 0 }], 
+    padding = [{ x: 1, y: 0 }]
 }: BtnBareProps) {
-    const margin = 'm-0';
-    const padding = 'px-1 py-0';
+    const btnMargin = margin.map((margin) => getBootstrapSpacing({ marginSettings: margin }).join(' ')).join(' ');
+    const btnPadding = padding.map((padding) => getBootstrapSpacing({ paddingSettings: padding}).join(' ')).join(' ');
     const bg = 'bg-transparent';
     const border = 'border border-0 rounded-pill';
     const btnFlex = flex ? `d-flex flex-${flex}` : '';
     const justifyContent = justify ? `justify-content-${justify}` : '';
-    const alignItems = align ? `align-items -${align}` : '';
+    const alignItems = align ? `align-items-${align}` : '';
 
-    const cssClassList = [margin, padding, bg, border, btnFlex, justifyContent, alignItems];
+    const cssClassList = [btnMargin, btnPadding, bg, border, btnFlex, justifyContent, alignItems];
 
     const cssClass = cssClassList.join(' '); 
 
