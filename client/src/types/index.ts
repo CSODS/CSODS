@@ -1,3 +1,4 @@
+export type { CustomProps } from './props/props';
 export type { spacing, spacingSettings, marginSettings, paddingSettings } from './themes/spacing';
 export type { IUser } from './api/csods/user/user';
 export type { IProjectDetails, IProject } from './api/csods/projects/project';
