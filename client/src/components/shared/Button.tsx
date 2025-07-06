@@ -1,4 +1,4 @@
-import { Color, ColorSelector, CssSelector } from "@/types";
+import { Color, CssSelector } from "@/types";
 import { ReactNode } from "react";
 import { Link } from "react-router-dom";
 

@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { BtnBare } from "@/components";
-import { DEFAULTS, ICONS } from "@constants/index";
-import { useAllTags, useProjectDataService, useProjectDetails, useProjectIcon } from "@/hooks";
+import { DEFAULTS, ICONS } from "@/constants";
+import { useProjectDataService, useProjectDetails, useProjectIcon } from "@/hooks";
 import { redirectToUrl } from "@/utils";
 import { getProjectLink } from "../utils";
 import { useTagColorMap } from "../hooks/context";
@@ -86,7 +86,7 @@ function Tag({ tag, index }: TagProps) {
   const tagColorMap = useTagColorMap();
   const iconColor = tagColorMap.get(tag);
   const iconClass = `m-0 p-0 bi bi-circle-fill fs-xxs ${iconColor}`;
-  
+
   const key = `tag-${index}`;
 
   return (
