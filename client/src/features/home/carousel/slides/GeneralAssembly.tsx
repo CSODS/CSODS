@@ -1,42 +1,63 @@
 export function GeneralAssembly() {
     
   return (
-     <div className="container-fluid p-5 d-flex">
-      <div className="container-md d-flex flex-row">
-        <div className='p-5 bg-transparent'>
-            <div className='row g-4 align-items-center'>
-        
-                <div className='col-12 d-flex d-md-none d-flex justify-content-center'>
-                    <img src="/general_assembly_tarp.png" alt='...' className="img-fluid rounded-5" style={{maxHeight: "300px"}}></img>
-                </div>
+    <section className="container-fluid d-flex p-lg-5 p-3 pb-md-5">
+        <div className="container-md">
+            <div className='row g-4 align-items-center justify-content-center'>
+                
+                {/* Text Content */}
+                <div className="col-12 col-lg-6 text-center text-lg-start d-flex flex-column ">
+                    <div className='col-lg-9 card-body mx-auto'>
 
-                <div className='col-md-6'>
-                    <div className='card-body d-flex flex-column'>
-                        <div className='mt-4 mb-1 col-md-9 text-start text-muted align-self-center'>
+                        <div className='text-muted mb-2'>
                             Upcoming Event
                         </div>
 
-                        <h5 className="card-title col-md-9 mt-1 mb-3 text-start fs-3 color-dark-2 bolder align-self-center">CS GENERAL ASSEMBLY 2025</h5>
+                        {/* Text md/lg screen */}
+                        <div className='d-none d-md-block mb-3'>
+                            <h3 className="color-dark-2 bolder mb-2">
+                                CS GENERAL ASSEMBLY 2025
+                            </h3>
                         
-                        <p className="card-text col-md-9 mt-1 mb-3 color-dark-1 text-start align-self-center">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eu mollis leo, at commodo turpis. Quisque venenatis iaculis facilisis. 
+                            <small className="text-muted fst-italic d-block mb-1">
+                                August 26, 2025 | 8:00 AM - 5:00 PM
+                            </small>
+                        </div>
+
+                        {/* Mobile Image*/}
+                        <div className='d-lg-none mb-3'>
+                            <img src="/general_assembly_tarp.png" 
+                                alt='CS General Assembly' 
+                                className="img-fluid rounded-3 mx-auto" 
+                                style={{maxHeight: "200px"}}>
+                            </img>
+                        </div>
+
+                        {/* Text md/lg screen */}
+                        <p className="d-none d-md-block mb-3 color-dark-1 mb-0">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eu mollis leo, at commodo turpis. Quisque venenatis iaculis facilisis. 
                         </p>
 
-                        <div className='col-md-9 d-flex align-self-center'>
-                            <button className="px-3 py-2 btn btn-dark-1 rounded-pill py-2">
-                                <span className="ms-3 me-1 fs-6 my-auto">View Details</span>
+                        {/* View Details Button */}
+                        <div className='mt-2'>
+                            <button className="btn btn-dark-1 rounded-pill px-4">
+                                <span className="small">View Details</span>
                             </button>
                         </div>
                     </div>
-                    </div>
+                </div>
 
-                    <div className='col-md-6 d-none d-md-flex justify-content-center'>
-                    <img src='/general_assembly_tarp.png' alt='...' className="img-fluid rounded-5" style={{maxHeight: "300px"}}></img>
+                {/* Desktop Image */}
+                <div className='col-lg-6 d-none d-lg-flex justify-content-center'>
+                    <img src='/general_assembly_tarp.png' 
+                        alt='CS General Assembly' 
+                        className="img-fluid rounded-3" 
+                        style={{maxHeight: "300px"}}>
+                    </img>
                 </div>
             </div>
-            </div>
         </div>
-      </div>
+    </section>
   );
 }
 
