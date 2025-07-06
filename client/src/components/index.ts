@@ -1,4 +1,4 @@
-export { PrimaryLayout } from "./layouts/MainLayout";
+export { NavBar, InvertedNavBar, CsodsBackground } from "./layouts/MainLayout";
 
 export {
     ProjectListContext,
