@@ -1,4 +1,4 @@
-import { Color, CssSelector, marginSettings, paddingSettings } from "@/types";
+import { CssSelector, CustomProps } from "@/types";
 import { getBootstrapSpacing } from "@/utils";
 import { ReactNode } from "react";
 import { Link } from "react-router-dom";
@@ -25,22 +25,6 @@ export default function Button({
     );
 }
 
-type flex = 'row' | 'col';
-type placement = 'start' | 'center' | 'end';
-
-
-export interface BtnBareProps {
-    children: ReactNode;
-    txtColor?: Color;
-    componentKey?: string;
-    componentId?: string;
-    flex?: flex;
-    justify?: placement;
-    align?: placement;
-    margin?: marginSettings[];
-    padding?: paddingSettings[];
-}
-
 export function BtnBare ({ 
     children, 
     componentKey, 
@@ -50,7 +34,7 @@ export function BtnBare ({
     align,
     margin = [{ m: 0 }], 
     padding = [{ x: 1, y: 0 }]
-}: BtnBareProps) {
+}: CustomProps) {
     const btnMargin = margin.map((margin) => getBootstrapSpacing({ marginSettings: margin }).join(' ')).join(' ');
     const btnPadding = padding.map((padding) => getBootstrapSpacing({ paddingSettings: padding}).join(' ')).join(' ');
     const bg = 'bg-transparent';
