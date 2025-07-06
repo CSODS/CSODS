@@ -293,8 +293,16 @@ input[type=text] {
   font-size: 400%;
 }
 
+.fs-xxs {
+  font-size: 60%;
+}
+
 .fs-xs {
   font-size: 70%;
+}
+
+.fs-s {
+  font-size: 85%;
 }
 
 .text-emphasize {
