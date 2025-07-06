@@ -27,11 +27,11 @@ export function TagColorProvider({ children, allTags }: TagColorProviderProps) {
     const tagColorMap = useMemo(() => {
         const map = new Map<string, string>();
 
-        allTags.DevTypes.forEach((dt) => { map.set(dt.DevTypeName, 'color-light-1')});
+        allTags.DevTypes.forEach((dt) => { map.set(dt.DevTypeName, 'color-util-error')});
         allTags.ProgrammingLanguages.forEach((pl) => { map.set(pl.LanguageName, 'color-neutral-1')});
         allTags.Frameworks.forEach((fw) => { map.set(fw.FrameworkName, 'color-util-alert')});
-        allTags.DatabaseTechnologies.forEach((db) => { map.set(db.Database, 'color-neutral-2')});
-        allTags.ApplicationIndustries.forEach((ai) => { map.set(ai.Industry, 'color-dark-4')});
+        allTags.DatabaseTechnologies.forEach((db) => { map.set(db.Database, 'color-util-notify')});
+        allTags.ApplicationIndustries.forEach((ai) => { map.set(ai.Industry, 'color-neutral-2')});
         
         return map;
     }, [allTags])
