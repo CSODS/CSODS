@@ -2,7 +2,7 @@ import { useFetchProjectsPage, useFetchTagData } from "@/hooks";
 import { ProjectDetailsProvider, ProjectDataServiceProvider, AllTagsProvider } from "@/components";
 import ProjectCard from "./ProjectCards";
 import Paginator from "./Paginator";
-import { TotalPagesProvider } from "./Provider";
+import { TagColorProvider, TotalPagesProvider } from "./Provider";
 
 export default function ProjectList () {
     const projectsPage = useFetchProjectsPage();
@@ -15,7 +15,7 @@ export default function ProjectList () {
         return (
             <div className="row">
                 <div className='mx-0 px-3 mt-5 row row-cols-1 row-cols-md-2 row-gap-4 d-flex justify-content-center'>
-                    <AllTagsProvider allTags={allTags}>
+                    <TagColorProvider allTags={allTags}>
                         <ProjectDataServiceProvider allTags={allTags}>
                             {
                                 projectList.map((project, index) => {
@@ -29,7 +29,7 @@ export default function ProjectList () {
                                 })
                             }
                         </ProjectDataServiceProvider>
-                    </AllTagsProvider>
+                    </TagColorProvider>
                 </div>
                 <div className="row">
                     <TotalPagesProvider totalPages={totalPages}>

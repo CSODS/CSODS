@@ -4,6 +4,7 @@ import { DEFAULTS, ICONS } from "@constants/index";
 import { useAllTags, useProjectDataService, useProjectDetails, useProjectIcon } from "@/hooks";
 import { redirectToUrl } from "@/utils";
 import { getProjectLink } from "../utils";
+import { useTagColorMap } from "../hooks/context";
 
 export default function ProjectCard () {
   const navigate = useNavigate();
@@ -82,23 +83,11 @@ interface TagProps {
 }
 
 function Tag({ tag, index }: TagProps) {
-  const allTags = useAllTags();
-  const key = `tag-${index}`;
-  let iconColor = 'color-light-1';
-
-  const isDevType = allTags.DevTypes.find((dt => dt.DevTypeName === tag));
-  const isProgLang = allTags.ProgrammingLanguages.find((pl => pl.LanguageName === tag));
-  const isFramework = allTags.Frameworks.find((fw => fw.FrameworkName === tag));
-  const isDbTech = allTags.DatabaseTechnologies.find((dbt => dbt.Database === tag));
-  const isAppIndustry = allTags.ApplicationIndustries.find((ai => ai.Industry === tag));
-
-  if (isDevType) iconColor = 'color-light-1';
-  else if (isProgLang) iconColor = 'color-neutral-1';
-  else if (isFramework) iconColor = 'color-util-alert';
-  else if (isDbTech) iconColor = 'color-neutral-2';
-  else if (isAppIndustry) iconColor = 'color-dark-4';
-
+  const tagColorMap = useTagColorMap();
+  const iconColor = tagColorMap.get(tag);
   const iconClass = `m-0 p-0 bi bi-circle-fill fs-xxs ${iconColor}`;
+  
+  const key = `tag-${index}`;
 
   return (
     <BtnBare componentKey={key} flex="row" justify="center" align="center">
