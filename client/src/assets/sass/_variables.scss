@@ -6,6 +6,7 @@ $white:rgb(255, 255, 255);
 $light-grey:rgb(222, 222, 222);
 $grey:rgb(140, 127, 132);
 $green:rgb(0, 191, 99);
+$biloba-flower: rgb(187 154 247);
 $grey-blue:rgb(68, 67, 109);
 $dark-grey-blue:rgb(43, 45, 66);
 $dark-purple:rgb(19, 7, 46);
@@ -14,12 +15,14 @@ $mulled-wine: rgb(68, 67, 109);
 
 $chrome-yellow: rgb(255 165 0);
 $cookie-brown: rgb(199 155 26);
+$vivid-red: rgb(234 67 53);
+$ball-blue: rgb(54 163 217);
 
 //  utility colors
-$util-error: rgb(255, 255, 255);
+$util-error: $vivid-red;
 $util-alert: $chrome-yellow;
 $util-alert-subtle: $cookie-brown;
-$util-notify: rgb(255, 255, 255);
+$util-notify: $ball-blue;
 $util-success: $green;
 
 //  opacity values
@@ -135,7 +138,7 @@ $mulled-wine-100: rgba(68, 67, 109, 1);
 
 $light-colors: $white, $light-grey, $grey;
 
-$neutral-colors: $green, $grey-blue;
+$neutral-colors: $green, $biloba-flower, $grey-blue;
 
 $dark-colors: $dark-grey-blue, $dark-purple, $black, $mulled-wine;
 
@@ -182,6 +185,7 @@ $color-scheme: build-color-scheme();
 $utility-colors: (
     "util-error": $util-error,
     "util-alert": $util-alert,
+    "util-alert-subtle": $util-alert-subtle,
     "util-notify": $util-notify,
     "util-success": $util-success
 );

@@ -284,72 +284,143 @@
 
 .project-card-neutral-2 {
   transition-duration: 0.4s;
-  background-color: rgb(68, 67, 109);
+  background-color: rgb(187, 154, 247);
   color: rgb(255, 255, 255);
 }
 .project-card-neutral-2:hover {
   transform: translateY(-4px);
-  background-color: rgb(20.4, 20.1, 32.7);
+  background-color: rgb(45.2504587156, 8.8293577982, 111.4706422018);
   box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
 }
 .project-card-neutral-2.translucent-10 {
-  background-color: rgba(68, 67, 109, 0.1);
+  background-color: rgba(187, 154, 247, 0.1);
 }
 .project-card-neutral-2.translucent-10:hover {
-  background-color: rgba(68, 67, 109, 0.3);
+  background-color: rgba(187, 154, 247, 0.3);
 }
 .project-card-neutral-2.translucent-20 {
-  background-color: rgba(68, 67, 109, 0.2);
+  background-color: rgba(187, 154, 247, 0.2);
 }
 .project-card-neutral-2.translucent-20:hover {
-  background-color: rgba(68, 67, 109, 0.4);
+  background-color: rgba(187, 154, 247, 0.4);
 }
 .project-card-neutral-2.translucent-30 {
-  background-color: rgba(68, 67, 109, 0.3);
+  background-color: rgba(187, 154, 247, 0.3);
 }
 .project-card-neutral-2.translucent-30:hover {
-  background-color: rgba(68, 67, 109, 0.5);
+  background-color: rgba(187, 154, 247, 0.5);
 }
 .project-card-neutral-2.translucent-40 {
-  background-color: rgba(68, 67, 109, 0.4);
+  background-color: rgba(187, 154, 247, 0.4);
 }
 .project-card-neutral-2.translucent-40:hover {
-  background-color: rgba(68, 67, 109, 0.6);
+  background-color: rgba(187, 154, 247, 0.6);
 }
 .project-card-neutral-2.translucent-50 {
-  background-color: rgba(68, 67, 109, 0.5);
+  background-color: rgba(187, 154, 247, 0.5);
 }
 .project-card-neutral-2.translucent-50:hover {
-  background-color: rgba(68, 67, 109, 0.7);
+  background-color: rgba(187, 154, 247, 0.7);
 }
 .project-card-neutral-2.translucent-60 {
-  background-color: rgba(68, 67, 109, 0.6);
+  background-color: rgba(187, 154, 247, 0.6);
 }
 .project-card-neutral-2.translucent-60:hover {
-  background-color: rgba(68, 67, 109, 0.8);
+  background-color: rgba(187, 154, 247, 0.8);
 }
 .project-card-neutral-2.translucent-70 {
-  background-color: rgba(68, 67, 109, 0.7);
+  background-color: rgba(187, 154, 247, 0.7);
 }
 .project-card-neutral-2.translucent-70:hover {
-  background-color: rgba(68, 67, 109, 0.9);
+  background-color: rgba(187, 154, 247, 0.9);
 }
 .project-card-neutral-2.translucent-80 {
-  background-color: rgba(68, 67, 109, 0.8);
+  background-color: rgba(187, 154, 247, 0.8);
 }
 .project-card-neutral-2.translucent-80:hover {
-  background-color: #44436d;
+  background-color: #bb9af7;
 }
 .project-card-neutral-2.translucent-90 {
-  background-color: rgba(68, 67, 109, 0.9);
+  background-color: rgba(187, 154, 247, 0.9);
 }
 .project-card-neutral-2.translucent-90:hover {
-  background-color: #44436d;
+  background-color: #bb9af7;
 }
 .project-card-neutral-2.translucent-100 {
-  background-color: #44436d;
+  background-color: #bb9af7;
 }
 .project-card-neutral-2.translucent-100:hover {
+  background-color: #bb9af7;
+}
+
+.project-card-neutral-3 {
+  transition-duration: 0.4s;
+  background-color: rgb(68, 67, 109);
+  color: rgb(255, 255, 255);
+}
+.project-card-neutral-3:hover {
+  transform: translateY(-4px);
+  background-color: rgb(20.4, 20.1, 32.7);
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
+.project-card-neutral-3.translucent-10 {
+  background-color: rgba(68, 67, 109, 0.1);
+}
+.project-card-neutral-3.translucent-10:hover {
+  background-color: rgba(68, 67, 109, 0.3);
+}
+.project-card-neutral-3.translucent-20 {
+  background-color: rgba(68, 67, 109, 0.2);
+}
+.project-card-neutral-3.translucent-20:hover {
+  background-color: rgba(68, 67, 109, 0.4);
+}
+.project-card-neutral-3.translucent-30 {
+  background-color: rgba(68, 67, 109, 0.3);
+}
+.project-card-neutral-3.translucent-30:hover {
+  background-color: rgba(68, 67, 109, 0.5);
+}
+.project-card-neutral-3.translucent-40 {
+  background-color: rgba(68, 67, 109, 0.4);
+}
+.project-card-neutral-3.translucent-40:hover {
+  background-color: rgba(68, 67, 109, 0.6);
+}
+.project-card-neutral-3.translucent-50 {
+  background-color: rgba(68, 67, 109, 0.5);
+}
+.project-card-neutral-3.translucent-50:hover {
+  background-color: rgba(68, 67, 109, 0.7);
+}
+.project-card-neutral-3.translucent-60 {
+  background-color: rgba(68, 67, 109, 0.6);
+}
+.project-card-neutral-3.translucent-60:hover {
+  background-color: rgba(68, 67, 109, 0.8);
+}
+.project-card-neutral-3.translucent-70 {
+  background-color: rgba(68, 67, 109, 0.7);
+}
+.project-card-neutral-3.translucent-70:hover {
+  background-color: rgba(68, 67, 109, 0.9);
+}
+.project-card-neutral-3.translucent-80 {
+  background-color: rgba(68, 67, 109, 0.8);
+}
+.project-card-neutral-3.translucent-80:hover {
+  background-color: #44436d;
+}
+.project-card-neutral-3.translucent-90 {
+  background-color: rgba(68, 67, 109, 0.9);
+}
+.project-card-neutral-3.translucent-90:hover {
+  background-color: #44436d;
+}
+.project-card-neutral-3.translucent-100 {
+  background-color: #44436d;
+}
+.project-card-neutral-3.translucent-100:hover {
   background-color: #44436d;
 }
 
