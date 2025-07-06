@@ -9,7 +9,7 @@ export {
     ProjectListProvider,
     ProjectDetailsProvider,
     ProjectDataServiceProvider,
-    AllTagsProvider as TagsContextProvider,
+    AllTagsProvider,
     UserContextProvider
 } from "./shared";
 
