@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { TotalPagesContext } from "../components/Provider";
+import { TagColorContext, TotalPagesContext } from "../components/Provider";
 
 export function useTotalPages() {
     const totalPages = useContext(TotalPagesContext);
@@ -10,4 +10,15 @@ export function useTotalPages() {
     }
 
     return totalPages;
+}
+
+export function useTagColorMap() {
+    const tagColorMap = useContext(TagColorContext);
+
+    if (!tagColorMap) {
+        const errMsg = 'Function useTagColorMap must be used inside a TagColorProvider component.';
+        throw new Error(errMsg);
+    }
+    
+    return tagColorMap;
 }

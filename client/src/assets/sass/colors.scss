@@ -20,6 +20,13 @@
     .border-#{$name} {
         border-color: $value ;
     }
+
+    .hover-color-#{$name} {
+        transition-duration: 0.4s;
+        &:hover {
+            color: $value;
+        }
+    }
 }
 
 @each $name, $value in v.$utility-colors {
@@ -39,5 +46,12 @@
 
     .border-#{$name} {
         border-color: $value ;
+    }
+
+    .hover-color-#{$name} {
+        transition-duration: 0.4s;
+        &:hover {
+            color: $value;
+        }
     }
 }

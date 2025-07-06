@@ -1,4 +1,4 @@
-import { ProjectDetailsContext, ProjectListContext } from "@/components";
+import { AllTagsContext, ProjectDetailsContext, ProjectListContext } from "@/components";
 import { useContext } from "react";
 
 export function useProjectList() {
@@ -17,4 +17,13 @@ export function useProjectDetails() {
         throw new Error(errMsg);
     }
     return projectDetailsContext;
+}
+
+export function useAllTags() {
+    const tagsContext = useContext(AllTagsContext);
+    if (!tagsContext) {
+        const errMsg = 'Function useAllTags must be used inside an AllTagsProvider component.';
+        throw new Error(errMsg);
+    }
+    return tagsContext;
 }

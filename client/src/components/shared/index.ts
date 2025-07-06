@@ -1,4 +1,4 @@
-import Button, { LinkButton } from "./Button";
+import Button, { BtnBare, LinkButton } from "./Button";
 import BtnGroup from "./ButtonGroup";
 
 export {
@@ -10,8 +10,8 @@ export {
     ProjectListProvider,
     ProjectDetailsProvider,
     ProjectDataServiceProvider,
-    TagsContextProvider,
+    AllTagsProvider,
     UserContextProvider
 } from "./Providers";
 
-export { Button, LinkButton, BtnGroup };
+export { Button, BtnBare, LinkButton, BtnGroup };

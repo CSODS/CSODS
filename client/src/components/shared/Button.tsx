@@ -1,4 +1,5 @@
-import { CssSelector } from "@/types";
+import { CssSelector, CustomProps } from "@/types";
+import { getBootstrapSpacing } from "@/utils";
 import { ReactNode } from "react";
 import { Link } from "react-router-dom";
 
@@ -22,6 +23,35 @@ export default function Button({
             {children}
         </button>
     );
+}
+
+export function BtnBare ({ 
+    children, 
+    componentKey, 
+    componentId, 
+    flex, 
+    justify, 
+    align,
+    margin = [{ m: 0 }], 
+    padding = [{ x: 1, y: 0 }]
+}: CustomProps) {
+    const btnMargin = margin.map((margin) => getBootstrapSpacing({ marginSettings: margin }).join(' ')).join(' ');
+    const btnPadding = padding.map((padding) => getBootstrapSpacing({ paddingSettings: padding}).join(' ')).join(' ');
+    const bg = 'bg-transparent';
+    const border = 'border border-0 rounded-pill';
+    const btnFlex = flex ? `d-flex flex-${flex}` : '';
+    const justifyContent = justify ? `justify-content-${justify}` : '';
+    const alignItems = align ? `align-items-${align}` : '';
+
+    const cssClassList = [btnMargin, btnPadding, bg, border, btnFlex, justifyContent, alignItems];
+
+    const cssClass = cssClassList.join(' '); 
+
+    return (
+        <button key={componentKey} id={componentId} className={cssClass}>
+            {children}
+        </button>
+    )
 }
 
 export interface LinkButtonProps {
