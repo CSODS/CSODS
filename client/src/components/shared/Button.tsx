@@ -1,4 +1,4 @@
-import { CssSelector } from "@/types";
+import { Color, ColorSelector, CssSelector } from "@/types";
 import { ReactNode } from "react";
 import { Link } from "react-router-dom";
 
@@ -22,6 +22,47 @@ export default function Button({
             {children}
         </button>
     );
+}
+
+type flex = 'row' | 'col';
+type placement = 'start' | 'center' | 'end';
+
+
+export interface BtnBareProps {
+    children: ReactNode;
+    txtColor?: Color;
+    componentKey?: string;
+    componentId?: string;
+    flex?: flex;
+    justify?: placement;
+    align?: placement;
+}
+
+export function BtnBare ({ 
+    children, 
+    componentKey, 
+    componentId, 
+    flex, 
+    justify, 
+    align 
+}: BtnBareProps) {
+    const margin = 'm-0';
+    const padding = 'px-1 py-0';
+    const bg = 'bg-transparent';
+    const border = 'border border-0 rounded-pill';
+    const btnFlex = flex ? `d-flex flex-${flex}` : '';
+    const justifyContent = justify ? `justify-content-${justify}` : '';
+    const alignItems = align ? `align-items -${align}` : '';
+
+    const cssClassList = [margin, padding, bg, border, btnFlex, justifyContent, alignItems];
+
+    const cssClass = cssClassList.join(' '); 
+
+    return (
+        <button key={componentKey} id={componentId} className={cssClass}>
+            {children}
+        </button>
+    )
 }
 
 export interface LinkButtonProps {
