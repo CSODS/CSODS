@@ -40,6 +40,13 @@
   border-color: rgb(255, 255, 255);
 }
 
+.hover-color-light-1 {
+  transition-duration: 0.4s;
+}
+.hover-color-light-1:hover {
+  color: rgb(255, 255, 255);
+}
+
 .bg-light-2 {
   background-color: rgb(222, 222, 222);
 }
@@ -80,6 +87,13 @@
 
 .border-light-2 {
   border-color: rgb(222, 222, 222);
+}
+
+.hover-color-light-2 {
+  transition-duration: 0.4s;
+}
+.hover-color-light-2:hover {
+  color: rgb(222, 222, 222);
 }
 
 .bg-light-3 {
@@ -124,6 +138,13 @@
   border-color: rgb(140, 127, 132);
 }
 
+.hover-color-light-3 {
+  transition-duration: 0.4s;
+}
+.hover-color-light-3:hover {
+  color: rgb(140, 127, 132);
+}
+
 .bg-neutral-1 {
   background-color: rgb(0, 191, 99);
 }
@@ -164,6 +185,13 @@
 
 .border-neutral-1 {
   border-color: rgb(0, 191, 99);
+}
+
+.hover-color-neutral-1 {
+  transition-duration: 0.4s;
+}
+.hover-color-neutral-1:hover {
+  color: rgb(0, 191, 99);
 }
 
 .bg-neutral-2 {
@@ -208,6 +236,13 @@
   border-color: rgb(68, 67, 109);
 }
 
+.hover-color-neutral-2 {
+  transition-duration: 0.4s;
+}
+.hover-color-neutral-2:hover {
+  color: rgb(68, 67, 109);
+}
+
 .bg-dark-1 {
   background-color: rgb(43, 45, 66);
 }
@@ -248,6 +283,13 @@
 
 .border-dark-1 {
   border-color: rgb(43, 45, 66);
+}
+
+.hover-color-dark-1 {
+  transition-duration: 0.4s;
+}
+.hover-color-dark-1:hover {
+  color: rgb(43, 45, 66);
 }
 
 .bg-dark-2 {
@@ -292,6 +334,13 @@
   border-color: rgb(19, 7, 46);
 }
 
+.hover-color-dark-2 {
+  transition-duration: 0.4s;
+}
+.hover-color-dark-2:hover {
+  color: rgb(19, 7, 46);
+}
+
 .bg-dark-3 {
   background-color: rgb(0, 0, 0);
 }
@@ -332,6 +381,13 @@
 
 .border-dark-3 {
   border-color: rgb(0, 0, 0);
+}
+
+.hover-color-dark-3 {
+  transition-duration: 0.4s;
+}
+.hover-color-dark-3:hover {
+  color: rgb(0, 0, 0);
 }
 
 .bg-dark-4 {
@@ -376,6 +432,13 @@
   border-color: rgb(68, 67, 109);
 }
 
+.hover-color-dark-4 {
+  transition-duration: 0.4s;
+}
+.hover-color-dark-4:hover {
+  color: rgb(68, 67, 109);
+}
+
 .bg-util-error {
   background-color: rgb(255, 255, 255);
 }
@@ -416,6 +479,13 @@
 
 .border-util-error {
   border-color: rgb(255, 255, 255);
+}
+
+.hover-color-util-error {
+  transition-duration: 0.4s;
+}
+.hover-color-util-error:hover {
+  color: rgb(255, 255, 255);
 }
 
 .bg-util-alert {
@@ -460,6 +530,13 @@
   border-color: rgb(255, 165, 0);
 }
 
+.hover-color-util-alert {
+  transition-duration: 0.4s;
+}
+.hover-color-util-alert:hover {
+  color: rgb(255, 165, 0);
+}
+
 .bg-util-notify {
   background-color: rgb(255, 255, 255);
 }
@@ -502,6 +579,13 @@
   border-color: rgb(255, 255, 255);
 }
 
+.hover-color-util-notify {
+  transition-duration: 0.4s;
+}
+.hover-color-util-notify:hover {
+  color: rgb(255, 255, 255);
+}
+
 .bg-util-success {
   background-color: rgb(0, 191, 99);
 }
@@ -542,6 +626,13 @@
 
 .border-util-success {
   border-color: rgb(0, 191, 99);
+}
+
+.hover-color-util-success {
+  transition-duration: 0.4s;
+}
+.hover-color-util-success:hover {
+  color: rgb(0, 191, 99);
 }
 
 /*# sourceMappingURL=colors.css.map */
