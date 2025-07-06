@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { BtnBare } from "@/components";
 import { DEFAULTS, ICONS } from "@constants/index";
-import { useProjectDataService, useProjectDetails, useProjectIcon } from "@/hooks";
+import { useAllTags, useProjectDataService, useProjectDetails, useProjectIcon } from "@/hooks";
 import { redirectToUrl } from "@/utils";
 import { getProjectLink } from "../utils";
 
@@ -29,7 +29,7 @@ export default function ProjectCard () {
             <i className={`${iconClass} color-light-2 fs-4`}></i>
           </div>
           <div className='col-lg-11'>
-            <div className='px-3 pb-3 ps-lg-0 card-body d-flex flex-column align-items-start text-light' style={{minHeight:280}}>
+            <div className='px-3 pb-3 ps-lg-0 card-body d-flex flex-column align-items-start text-light' style={{minHeight:260}}>
               {/* project title  */}
               <h5 className='card-title text-start fs-3 color-light-2 bolder'>{projectDetails.Project.ProjectTitle}</h5>
               {/* project description */}
@@ -66,20 +66,48 @@ function TagRow({ tagList }: TagRowProps) {
       <div className={colSelectors.join(' ')}>
           {
             tagList.map((tag, index) => {
-              const key = `tag-${index}`
               return (
-                <BtnBare componentKey={key} flex="row" justify="center" align="center">
-                    <div className="col-1 p-0 m-0 me-1 d-flex justify-content-center align-items-center fs-xs">
-                      <i className="m-0 p-0 bi bi-circle-fill fs-xxs color-light-1"></i>
-                    </div>
-                    <div className='col-11 p-0 pe-2 m-0 text-center text-nowrap fs-xs fst-italic color-light-1'>
-                        {tag}
-                    </div>
-                </BtnBare>
+                <Tag tag={tag} index={index}/>
               )
             })
           }
       </div>
   </div>
+  )
+}
+
+interface TagProps {
+  tag: string;
+  index: number;
+}
+
+function Tag({ tag, index }: TagProps) {
+  const allTags = useAllTags();
+  const key = `tag-${index}`;
+  let iconColor = 'color-light-1';
+
+  const isDevType = allTags.DevTypes.find((dt => dt.DevTypeName === tag));
+  const isProgLang = allTags.ProgrammingLanguages.find((pl => pl.LanguageName === tag));
+  const isFramework = allTags.Frameworks.find((fw => fw.FrameworkName === tag));
+  const isDbTech = allTags.DatabaseTechnologies.find((dbt => dbt.Database === tag));
+  const isAppIndustry = allTags.ApplicationIndustries.find((ai => ai.Industry === tag));
+
+  if (isDevType) iconColor = 'color-light-1';
+  else if (isProgLang) iconColor = 'color-neutral-1';
+  else if (isFramework) iconColor = 'color-util-alert';
+  else if (isDbTech) iconColor = 'color-neutral-2';
+  else if (isAppIndustry) iconColor = 'color-dark-4';
+
+  const iconClass = `m-0 p-0 bi bi-circle-fill fs-xxs ${iconColor}`;
+
+  return (
+    <BtnBare componentKey={key} flex="row" justify="center" align="center">
+        <div className="col-1 p-0 m-0 me-1 d-flex justify-content-center align-items-center fs-xs">
+          <i className={iconClass}></i>
+        </div>
+        <div className='col-11 p-0 pe-2 m-0 text-center text-nowrap fs-xs fst-italic color-light-1'>
+            {tag}
+        </div>
+    </BtnBare>
   )
 }
