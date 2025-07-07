@@ -1,10 +1,29 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { getPageLink } from "../utils";
+
 export default function SearchBar() {
+  const [searchString, setSearchString] = useState<string>('');
+
+  const handleChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchString(evt.target.value);
+  }
+
+  const navigate = useNavigate();
+  const handleKeyDown = (evt: React.KeyboardEvent<HTMLInputElement>) => {
+    if (evt.key === 'Enter') {
+      const link = getPageLink(1, { projectTitle: searchString });
+      navigate(link);
+      return;
+    }
+  }
+
   return(
     <div>
       <div className='mt-5 d-flex justify-content-center align-items-center'>
         <div className='py-3 px-4 col-md-6 d-flex align-items-center justify-content-start border border-light-1 rounded-pill bg-light-3 translucent-20'>
           <i className="bi bi-search color-light-1 me-3"></i>
-          <input type='text' className='m-0 fs-6 w-100 color-light-1' placeholder='Search projects...'/>
+          <input type='text' className='m-0 fs-6 w-100 color-light-1' placeholder='Search projects...' value={searchString} onChange={handleChange} onKeyDown={handleKeyDown}/>
         </div>
       </div>
       <div className='mt-4'>
