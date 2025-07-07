@@ -1,4 +1,4 @@
-import { CssSelector, CustomProps } from "@/types";
+import { CssSelector, CustomBtnProps } from "@/types";
 import { getBootstrapSpacing } from "@/utils";
 import { ReactNode } from "react";
 import { Link } from "react-router-dom";
@@ -29,13 +29,14 @@ export function BtnBare ({
     children, 
     componentKey, 
     componentId,
-    componentValue, 
+    componentValue,
+    callBackFn, 
     flex, 
     justify, 
     align,
     margin = [{ m: 0 }], 
     padding = [{ x: 1, y: 0 }]
-}: CustomProps) {
+}: CustomBtnProps) {
     const btnMargin = margin.map((margin) => getBootstrapSpacing({ marginSettings: margin }).join(' ')).join(' ');
     const btnPadding = padding.map((padding) => getBootstrapSpacing({ paddingSettings: padding}).join(' ')).join(' ');
     const bg = 'bg-transparent';
@@ -49,7 +50,7 @@ export function BtnBare ({
     const cssClass = cssClassList.join(' '); 
 
     return (
-        <button key={componentKey} id={componentId} className={cssClass} value={componentValue}>
+        <button key={componentKey} id={componentId} className={cssClass} value={componentValue} onClick={callBackFn}>
             {children}
         </button>
     )
