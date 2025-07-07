@@ -2,8 +2,9 @@ import { ReactNode } from "react";
 import { Color } from "../themes/styles";
 import { marginSettings, paddingSettings } from "../themes/spacing";
 
-type flex = 'row' | 'col';
-type placement = 'start' | 'center' | 'end';
+export interface CustomBtnProps extends CustomProps {
+    callBackFn?: () => void;
+}
 
 export interface CustomProps {
     children: ReactNode;
@@ -17,3 +18,6 @@ export interface CustomProps {
     margin?: marginSettings[];
     padding?: paddingSettings[];
 }
+
+type flex = 'row' | 'col';
+type placement = 'start' | 'center' | 'end';
