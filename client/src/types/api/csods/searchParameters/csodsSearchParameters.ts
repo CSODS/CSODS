@@ -1,0 +1,9 @@
+import { PROJECT_QUERY_PARAMETERS } from "@/constants";
+
+export interface IProjectSearchParameters {
+    [PROJECT_QUERY_PARAMETERS.PROJECT_TITLE]?: string;
+    [PROJECT_QUERY_PARAMETERS.DEVELOPMENT_TYPE]?: number | string;
+    [PROJECT_QUERY_PARAMETERS.PROGRAMMING_LANGUAGE]?: number | string;
+    [PROJECT_QUERY_PARAMETERS.DATABASE_TECHNOLOGY]?: number | string;
+    [PROJECT_QUERY_PARAMETERS.APPLICATION_INDUSTRY]?: number | string;
+}
