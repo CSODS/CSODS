@@ -1,10 +1,11 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { BtnBare } from "@/components";
 import { DEFAULTS, ICONS } from "@/constants";
-import { useProjectDataService, useProjectDetails, useProjectIcon } from "@/hooks";
+import { useProjectDataService, useProjectDetails, useProjectIcon, useTagCategoryMap } from "@/hooks";
 import { redirectToUrl } from "@/utils";
-import { getProjectLink } from "../utils";
+import { getPageLink, getProjectLink } from "../utils";
 import { useTagColorMap } from "../hooks/context";
+import { IProjectSearchParameters } from "@/types";
 
 export default function ProjectCard () {
   const navigate = useNavigate();
@@ -68,7 +69,7 @@ function TagRow({ tagList }: TagRowProps) {
           {
             tagList.map((tag, index) => {
               return (
-                <Tag tag={tag} index={index}/>
+                <Tag key={`${tag}-${index}`} tag={tag}/>
               )
             })
           }
@@ -79,19 +80,31 @@ function TagRow({ tagList }: TagRowProps) {
 
 interface TagProps {
   tag: string;
-  index: number;
 }
 
-function Tag({ tag, index }: TagProps) {
+function Tag({ tag }: TagProps) {
   const tagColorMap = useTagColorMap();
   const iconColor = tagColorMap.get(tag);
   const iconClass = `m-0 p-0 bi bi-circle-fill fs-xxs ${iconColor}`;
   const textOnHover = `hover-${iconColor}`;
 
-  const key = `tag-${index}`;
+  const tagCategoryMap = useTagCategoryMap();
+  const tagDetails = tagCategoryMap.get(tag);
+
+  const navigate = useNavigate();
+  const callbackFn = () => {
+    if (tagDetails) {
+      const tagCategory = tagDetails.tagCategory;
+      const tagId = tagDetails.tagId;
+      const searchParameters = { [tagCategory]: tagId };
+      const link = getPageLink(1, searchParameters as IProjectSearchParameters);
+      console.log(link);
+      navigate(link);
+    }
+  }
 
   return (
-    <BtnBare componentKey={key} flex="row" justify="center" align="center" margin={[{breakpoint: 'lg', b: 1}, { m: 0}]}>
+    <BtnBare flex="row" justify="center" align="center" margin={[{breakpoint: 'lg', b: 1}, { m: 0}]} callBackFn={callbackFn}>
         <div className="col-1 p-0 m-0 me-1 d-flex justify-content-center align-items-center fs-xs">
           <i className={iconClass}></i>
         </div>
