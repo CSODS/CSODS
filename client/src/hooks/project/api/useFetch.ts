@@ -1,22 +1,21 @@
 import { useEffect, useState } from "react";
-import { usePageNumber, useProjectId } from "@/hooks";
+import { usePageNumber, useProjectId, useProjectSearchParams } from "@/hooks";
 import { IAllProjectTags, IProjectDetails, IProjectsPage } from "@/types";
 import { ApiHandler } from "@/utils";
 
 export function useFetchProjectsPage() {
     const pageNumber = usePageNumber();
-    const [projectsPage, setProjectsPage] = useState<IProjectsPage>();
+    const projectSearchParams = useProjectSearchParams();
+    const [projectsPage, setProjectsPage] = useState<IProjectsPage | null>();
     useEffect(() => {
         const loadProjectPage = async () => {
             const apiHandler = new ApiHandler();
-            const loadedPage = await apiHandler.GetProjectsPage(pageNumber);
+            const loadedPage = await apiHandler.GetProjectsPage(pageNumber, projectSearchParams);
             
-            if (loadedPage) {
-                setProjectsPage(loadedPage);
-            }
+            setProjectsPage(loadedPage);
         }
         loadProjectPage();
-    }, [pageNumber]);
+    }, [pageNumber, projectSearchParams]);
 
     return projectsPage;
 }
@@ -24,19 +23,18 @@ export function useFetchProjectsPage() {
 export function useFetchProject() {
     const pageNumber = usePageNumber();
     const projectId = useProjectId();
-    const [project, setProject] = useState<IProjectDetails>();
+    const projectSearchParams = useProjectSearchParams();
+    const [project, setProject] = useState<IProjectDetails | null>();
 
     useEffect(() => {
         const loadProject = async() => {
             const apiHandler = new ApiHandler();
-            const loadedProject = await apiHandler.GetProject(pageNumber, projectId);
+            const loadedProject = await apiHandler.GetProject(pageNumber, projectId, projectSearchParams);
 
-            if (loadedProject) {
-                setProject(loadedProject);
-            }
+            setProject(loadedProject);
         }
         loadProject();
-    }, [pageNumber, projectId]);
+    }, [pageNumber, projectId, projectSearchParams]);
 
     return project;
 }
