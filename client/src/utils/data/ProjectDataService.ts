@@ -71,9 +71,9 @@ export class ProjectDataService {
         return {
             DevType: this.getDevType(project.DevTypeId),
             PrimaryLanguage: this.getProgrammingLanguage(project.PrimaryLanguageId)!,
-            SecondaryLanguage: null,
+            SecondaryLanguage: this.getProgrammingLanguage(project.SecondaryLanguageId),
             DatabaseTechnology: this.getDatabaseTechnology(project.DatabaseTechnologyId),
-            ApplicationIndustry: null,
+            ApplicationIndustry: this.getApplicationIndustry(project.ApplicationIndustryId),
             Frameworks: frameworks.map((value) => this.getFramework(value.FrameworkId))
         }
     }
