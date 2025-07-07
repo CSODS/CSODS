@@ -5,11 +5,13 @@ export {
     ProjectDetailsContext,
     ProjectDataServiceContext,
     AllTagsContext,
+    TagCategoryContext,
     UserContext,
     ProjectListProvider,
     ProjectDetailsProvider,
     ProjectDataServiceProvider,
     AllTagsProvider,
+    TagCategoryProvider,
     UserContextProvider
 } from "./shared";
 
