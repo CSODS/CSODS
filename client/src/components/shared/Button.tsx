@@ -28,7 +28,8 @@ export default function Button({
 export function BtnBare ({ 
     children, 
     componentKey, 
-    componentId, 
+    componentId,
+    componentValue, 
     flex, 
     justify, 
     align,
@@ -48,7 +49,7 @@ export function BtnBare ({
     const cssClass = cssClassList.join(' '); 
 
     return (
-        <button key={componentKey} id={componentId} className={cssClass}>
+        <button key={componentKey} id={componentId} className={cssClass} value={componentValue}>
             {children}
         </button>
     )

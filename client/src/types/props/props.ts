@@ -10,6 +10,7 @@ export interface CustomProps {
     txtColor?: Color;
     componentKey?: string;
     componentId?: string;
+    componentValue?: string;
     flex?: flex;
     justify?: placement;
     align?: placement;
