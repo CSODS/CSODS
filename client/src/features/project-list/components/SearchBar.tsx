@@ -1,5 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { RadioBtnPill } from "@/components";
+import { useAllTags, useTagCategoryMap } from "@/hooks";
+import { IProjectSearchParameters } from "@/types";
 import { getPageLink } from "../utils";
 
 export default function SearchBar() {
@@ -35,4 +38,55 @@ export default function SearchBar() {
       </div>
     </div>
   );
+}
+
+interface FilterButtonsProps {
+  onRadioBtnChange: (evt: React.ChangeEvent<HTMLInputElement>) => void;
+}
+
+function FilterButtons({ onRadioBtnChange }: FilterButtonsProps) {
+  const allTags = useAllTags();
+  //  TO DO: include the filter button contents in FilterButtonProps
+  const devTypes = allTags.DevTypes;
+
+  return (
+    <div className="mt-4 d-flex flex-wrap justify-content-center">
+      <RadioBtnPill
+        key='filter-nofilter'
+        componentId='filter-nofilter-option'
+        componentName='filter-options'
+        bgColor='dark-3'
+        hoverBehavior='invert'
+        opacity={60}
+        margin={[{y: 1, x: 2}]} 
+        padding={[{x: 3, y: 1}]} 
+        border={{width: 1, color:'light-1'}} 
+        componentValue='All'
+        onRadioBtnChange={onRadioBtnChange}
+      />
+      {
+        devTypes.map((devType) => {
+          const filterId = devType.DevTypeId;
+          const filterName = devType.DevTypeName;
+          const componentKey = `filter-devType-${filterId}`;
+          const componentId = `filter-devType-option-${filterId}`;
+          return (
+            <RadioBtnPill
+              key={componentKey}
+              componentId={componentId}
+              componentName="filter-options"
+              bgColor='dark-3'
+              hoverBehavior='invert' 
+              opacity={60} 
+              margin={[{y: 1, x: 2}]} 
+              padding={[{x: 3, y: 1}]} 
+              border={{width: 1, color:'light-1'}} 
+              componentValue={filterName}
+              onRadioBtnChange={onRadioBtnChange}
+            />
+          )
+        })
+      }
+    </div>
+  )
 }
