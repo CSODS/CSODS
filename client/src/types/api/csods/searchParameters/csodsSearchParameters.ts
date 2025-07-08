@@ -1,5 +1,6 @@
 import { PROJECT_QUERY_PARAMETERS } from "@/constants";
 
+//  TODO: ADD FRAMEWORKS TO THE QUERY PARAMETERS WHEN THE BACKEND SUPPORTS IT.
 export interface IProjectSearchParameters {
     [PROJECT_QUERY_PARAMETERS.PROJECT_TITLE]?: string;
     [PROJECT_QUERY_PARAMETERS.DEVELOPMENT_TYPE]?: number | string;
