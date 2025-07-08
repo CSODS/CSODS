@@ -53,7 +53,7 @@ interface AllTagsProviderProps {
     allTags: IAllProjectTags;
 }
 
-export const AllTagsContext = createContext<IAllProjectTags | null>(null);
+export const AllTagsContext = createContext<IAllProjectTags | undefined>(undefined);
 
 export function AllTagsProvider ({ children, allTags }: AllTagsProviderProps) {
     return (
