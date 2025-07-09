@@ -80,6 +80,7 @@ function FilterButtons({ onRadioBtnChange }: FilterButtonsProps) {
         border={{width: 1, color:'light-1'}} 
         componentValue='All'
         onRadioBtnChange={onRadioBtnChange}
+        defaultChecked
       />
       {
         devTypes.map((devType) => {
