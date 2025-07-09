@@ -1488,6 +1488,1448 @@
   color: rgb(0, 0, 0);
 }
 
+.btn-check:checked + .btn-light-1 {
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+  transform: translateY(-2px);
+}
+.btn-check:checked + .btn-light-1.hover-lighten {
+  background-color: white;
+}
+.btn-check:checked + .btn-light-1.hover-darken {
+  background-color: rgb(226.3296259417, 226.3296259417, 226.3296259417);
+}
+.btn-check:checked + .btn-light-1.hover-invert {
+  background-color: rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
+}
+.btn-check:checked + .btn-light-2 {
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+  transform: translateY(-2px);
+}
+.btn-check:checked + .btn-light-2.hover-lighten {
+  background-color: rgb(225.2607390435, 225.2607390435, 225.2607390435);
+}
+.btn-check:checked + .btn-light-2.hover-darken {
+  background-color: rgb(197.2857037282, 197.2857037282, 197.2857037282);
+}
+.btn-check:checked + .btn-light-2.hover-invert {
+  background-color: rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
+}
+.btn-check:checked + .btn-light-3 {
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+  transform: translateY(-2px);
+}
+.btn-check:checked + .btn-light-3.hover-lighten {
+  background-color: rgb(151.9060658581, 138.6937582284, 143.7651075574);
+}
+.btn-check:checked + .btn-light-3.hover-darken {
+  background-color: rgb(125.9757115154, 113.244240258, 118.1546515759);
+}
+.btn-check:checked + .btn-light-3.hover-invert {
+  background-color: rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
+}
+.btn-check:checked + .btn-neutral-1 {
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+  transform: translateY(-2px);
+}
+.btn-check:checked + .btn-neutral-1.hover-lighten {
+  background-color: rgb(30.518652113, 200.0258547643, 107.1423388617);
+}
+.btn-check:checked + .btn-neutral-1.hover-darken {
+  background-color: hsl(154.5813564437, 162.0313469308%, 25.7341477138%);
+}
+.btn-check:checked + .btn-neutral-1.hover-invert {
+  background-color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
+}
+.btn-check:checked + .btn-neutral-2 {
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+  transform: translateY(-2px);
+}
+.btn-check:checked + .btn-neutral-2.hover-lighten {
+  background-color: hsl(261.4002455194, 102.0214351472%, 81.9824996853%);
+}
+.btn-check:checked + .btn-neutral-2.hover-darken {
+  background-color: rgb(167.6973406519, 135.7455385043, 226.9912304296);
+}
+.btn-check:checked + .btn-neutral-2.hover-invert {
+  background-color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
+}
+.btn-check:checked + .btn-neutral-3 {
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+  transform: translateY(-2px);
+}
+.btn-check:checked + .btn-neutral-3.hover-lighten {
+  background-color: rgb(84.9067128413, 83.2653420144, 126.7319465742);
+}
+.btn-check:checked + .btn-neutral-3.hover-darken {
+  background-color: rgb(60.8856644909, 60.2172559612, 101.5409023935);
+}
+.btn-check:checked + .btn-neutral-3.hover-invert {
+  background-color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
+}
+.btn-check:checked + .btn-dark-1 {
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+  transform: translateY(-2px);
+}
+.btn-check:checked + .btn-dark-1.hover-lighten {
+  background-color: rgb(61.0779242649, 62.804561636, 84.9195381589);
+}
+.btn-check:checked + .btn-dark-1.hover-darken {
+  background-color: rgb(38.8780688093, 40.9635092473, 61.6751513793);
+}
+.btn-check:checked + .btn-dark-1.hover-invert {
+  background-color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
+}
+.btn-check:checked + .btn-dark-2 {
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+  transform: translateY(-2px);
+}
+.btn-check:checked + .btn-dark-2.hover-lighten {
+  background-color: rgb(38.1459666251, 29.5838531762, 67.4813283023);
+}
+.btn-check:checked + .btn-dark-2.hover-darken {
+  background-color: rgb(18.3780296873, 5.4364765425, 45.1153005248);
+}
+.btn-check:checked + .btn-dark-2.hover-invert {
+  background-color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
+}
+.btn-check:checked + .btn-dark-3 {
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+  transform: translateY(-2px);
+}
+.btn-check:checked + .btn-dark-3.hover-lighten {
+  background-color: rgb(27.4643698292, 27.4643698292, 27.4643698292);
+}
+.btn-check:checked + .btn-dark-3.hover-darken {
+  background-color: black;
+}
+.btn-check:checked + .btn-dark-3.hover-invert {
+  background-color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
+}
+.btn-check:checked + .btn-dark-4 {
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+  transform: translateY(-2px);
+}
+.btn-check:checked + .btn-dark-4.hover-lighten {
+  background-color: rgb(84.9067128413, 83.2653420144, 126.7319465742);
+}
+.btn-check:checked + .btn-dark-4.hover-darken {
+  background-color: rgb(60.8856644909, 60.2172559612, 101.5409023935);
+}
+.btn-check:checked + .btn-dark-4.hover-invert {
+  background-color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
+}
+
+.btn-check:checked + .btn-light-1.translucent-10 {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+.btn-check:checked + .btn-light-1.translucent-10.hover-lighten {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+.btn-check:checked + .btn-light-1.translucent-10.hover-darken {
+  background-color: rgba(226.3296259417, 226.3296259417, 226.3296259417, 0.1);
+}
+.btn-check:checked + .btn-light-1.translucent-10.hover-invert {
+  background-color: rgba(0, 0, 0, 0.1);
+  color: rgb(255, 255, 255);
+}
+.btn-check:checked + .btn-light-1.translucent-20 {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+.btn-check:checked + .btn-light-1.translucent-20.hover-lighten {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+.btn-check:checked + .btn-light-1.translucent-20.hover-darken {
+  background-color: rgba(226.3296259417, 226.3296259417, 226.3296259417, 0.2);
+}
+.btn-check:checked + .btn-light-1.translucent-20.hover-invert {
+  background-color: rgba(0, 0, 0, 0.2);
+  color: rgb(255, 255, 255);
+}
+.btn-check:checked + .btn-light-1.translucent-30 {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+.btn-check:checked + .btn-light-1.translucent-30.hover-lighten {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+.btn-check:checked + .btn-light-1.translucent-30.hover-darken {
+  background-color: rgba(226.3296259417, 226.3296259417, 226.3296259417, 0.3);
+}
+.btn-check:checked + .btn-light-1.translucent-30.hover-invert {
+  background-color: rgba(0, 0, 0, 0.3);
+  color: rgb(255, 255, 255);
+}
+.btn-check:checked + .btn-light-1.translucent-40 {
+  background-color: rgba(255, 255, 255, 0.4);
+}
+.btn-check:checked + .btn-light-1.translucent-40.hover-lighten {
+  background-color: rgba(255, 255, 255, 0.4);
+}
+.btn-check:checked + .btn-light-1.translucent-40.hover-darken {
+  background-color: rgba(226.3296259417, 226.3296259417, 226.3296259417, 0.4);
+}
+.btn-check:checked + .btn-light-1.translucent-40.hover-invert {
+  background-color: rgba(0, 0, 0, 0.4);
+  color: rgb(255, 255, 255);
+}
+.btn-check:checked + .btn-light-1.translucent-50 {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+.btn-check:checked + .btn-light-1.translucent-50.hover-lighten {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+.btn-check:checked + .btn-light-1.translucent-50.hover-darken {
+  background-color: rgba(226.3296259417, 226.3296259417, 226.3296259417, 0.5);
+}
+.btn-check:checked + .btn-light-1.translucent-50.hover-invert {
+  background-color: rgba(0, 0, 0, 0.5);
+  color: rgb(255, 255, 255);
+}
+.btn-check:checked + .btn-light-1.translucent-60 {
+  background-color: rgba(255, 255, 255, 0.6);
+}
+.btn-check:checked + .btn-light-1.translucent-60.hover-lighten {
+  background-color: rgba(255, 255, 255, 0.6);
+}
+.btn-check:checked + .btn-light-1.translucent-60.hover-darken {
+  background-color: rgba(226.3296259417, 226.3296259417, 226.3296259417, 0.6);
+}
+.btn-check:checked + .btn-light-1.translucent-60.hover-invert {
+  background-color: rgba(0, 0, 0, 0.6);
+  color: rgb(255, 255, 255);
+}
+.btn-check:checked + .btn-light-1.translucent-70 {
+  background-color: rgba(255, 255, 255, 0.7);
+}
+.btn-check:checked + .btn-light-1.translucent-70.hover-lighten {
+  background-color: rgba(255, 255, 255, 0.7);
+}
+.btn-check:checked + .btn-light-1.translucent-70.hover-darken {
+  background-color: rgba(226.3296259417, 226.3296259417, 226.3296259417, 0.7);
+}
+.btn-check:checked + .btn-light-1.translucent-70.hover-invert {
+  background-color: rgba(0, 0, 0, 0.7);
+  color: rgb(255, 255, 255);
+}
+.btn-check:checked + .btn-light-1.translucent-80 {
+  background-color: rgba(255, 255, 255, 0.8);
+}
+.btn-check:checked + .btn-light-1.translucent-80.hover-lighten {
+  background-color: rgba(255, 255, 255, 0.8);
+}
+.btn-check:checked + .btn-light-1.translucent-80.hover-darken {
+  background-color: rgba(226.3296259417, 226.3296259417, 226.3296259417, 0.8);
+}
+.btn-check:checked + .btn-light-1.translucent-80.hover-invert {
+  background-color: rgba(0, 0, 0, 0.8);
+  color: rgb(255, 255, 255);
+}
+.btn-check:checked + .btn-light-1.translucent-90 {
+  background-color: rgba(255, 255, 255, 0.9);
+}
+.btn-check:checked + .btn-light-1.translucent-90.hover-lighten {
+  background-color: rgba(255, 255, 255, 0.9);
+}
+.btn-check:checked + .btn-light-1.translucent-90.hover-darken {
+  background-color: rgba(226.3296259417, 226.3296259417, 226.3296259417, 0.9);
+}
+.btn-check:checked + .btn-light-1.translucent-90.hover-invert {
+  background-color: rgba(0, 0, 0, 0.9);
+  color: rgb(255, 255, 255);
+}
+.btn-check:checked + .btn-light-1.translucent-100 {
+  background-color: white;
+}
+.btn-check:checked + .btn-light-1.translucent-100.hover-lighten {
+  background-color: white;
+}
+.btn-check:checked + .btn-light-1.translucent-100.hover-darken {
+  background-color: rgb(226.3296259417, 226.3296259417, 226.3296259417);
+}
+.btn-check:checked + .btn-light-1.translucent-100.hover-invert {
+  background-color: black;
+  color: rgb(255, 255, 255);
+}
+.btn-check:checked + .btn-light-2.translucent-10 {
+  background-color: rgba(222, 222, 222, 0.1);
+}
+.btn-check:checked + .btn-light-2.translucent-10.hover-lighten {
+  background-color: rgba(225.2607390435, 225.2607390435, 225.2607390435, 0.1);
+}
+.btn-check:checked + .btn-light-2.translucent-10.hover-darken {
+  background-color: rgba(197.2857037282, 197.2857037282, 197.2857037282, 0.1);
+}
+.btn-check:checked + .btn-light-2.translucent-10.hover-invert {
+  background-color: rgba(0, 0, 0, 0.1);
+  color: rgb(255, 255, 255);
+}
+.btn-check:checked + .btn-light-2.translucent-20 {
+  background-color: rgba(222, 222, 222, 0.2);
+}
+.btn-check:checked + .btn-light-2.translucent-20.hover-lighten {
+  background-color: rgba(225.2607390435, 225.2607390435, 225.2607390435, 0.2);
+}
+.btn-check:checked + .btn-light-2.translucent-20.hover-darken {
+  background-color: rgba(197.2857037282, 197.2857037282, 197.2857037282, 0.2);
+}
+.btn-check:checked + .btn-light-2.translucent-20.hover-invert {
+  background-color: rgba(0, 0, 0, 0.2);
+  color: rgb(255, 255, 255);
+}
+.btn-check:checked + .btn-light-2.translucent-30 {
+  background-color: rgba(222, 222, 222, 0.3);
+}
+.btn-check:checked + .btn-light-2.translucent-30.hover-lighten {
+  background-color: rgba(225.2607390435, 225.2607390435, 225.2607390435, 0.3);
+}
+.btn-check:checked + .btn-light-2.translucent-30.hover-darken {
+  background-color: rgba(197.2857037282, 197.2857037282, 197.2857037282, 0.3);
+}
+.btn-check:checked + .btn-light-2.translucent-30.hover-invert {
+  background-color: rgba(0, 0, 0, 0.3);
+  color: rgb(255, 255, 255);
+}
+.btn-check:checked + .btn-light-2.translucent-40 {
+  background-color: rgba(222, 222, 222, 0.4);
+}
+.btn-check:checked + .btn-light-2.translucent-40.hover-lighten {
+  background-color: rgba(225.2607390435, 225.2607390435, 225.2607390435, 0.4);
+}
+.btn-check:checked + .btn-light-2.translucent-40.hover-darken {
+  background-color: rgba(197.2857037282, 197.2857037282, 197.2857037282, 0.4);
+}
+.btn-check:checked + .btn-light-2.translucent-40.hover-invert {
+  background-color: rgba(0, 0, 0, 0.4);
+  color: rgb(255, 255, 255);
+}
+.btn-check:checked + .btn-light-2.translucent-50 {
+  background-color: rgba(222, 222, 222, 0.5);
+}
+.btn-check:checked + .btn-light-2.translucent-50.hover-lighten {
+  background-color: rgba(225.2607390435, 225.2607390435, 225.2607390435, 0.5);
+}
+.btn-check:checked + .btn-light-2.translucent-50.hover-darken {
+  background-color: rgba(197.2857037282, 197.2857037282, 197.2857037282, 0.5);
+}
+.btn-check:checked + .btn-light-2.translucent-50.hover-invert {
+  background-color: rgba(0, 0, 0, 0.5);
+  color: rgb(255, 255, 255);
+}
+.btn-check:checked + .btn-light-2.translucent-60 {
+  background-color: rgba(222, 222, 222, 0.6);
+}
+.btn-check:checked + .btn-light-2.translucent-60.hover-lighten {
+  background-color: rgba(225.2607390435, 225.2607390435, 225.2607390435, 0.6);
+}
+.btn-check:checked + .btn-light-2.translucent-60.hover-darken {
+  background-color: rgba(197.2857037282, 197.2857037282, 197.2857037282, 0.6);
+}
+.btn-check:checked + .btn-light-2.translucent-60.hover-invert {
+  background-color: rgba(0, 0, 0, 0.6);
+  color: rgb(255, 255, 255);
+}
+.btn-check:checked + .btn-light-2.translucent-70 {
+  background-color: rgba(222, 222, 222, 0.7);
+}
+.btn-check:checked + .btn-light-2.translucent-70.hover-lighten {
+  background-color: rgba(225.2607390435, 225.2607390435, 225.2607390435, 0.7);
+}
+.btn-check:checked + .btn-light-2.translucent-70.hover-darken {
+  background-color: rgba(197.2857037282, 197.2857037282, 197.2857037282, 0.7);
+}
+.btn-check:checked + .btn-light-2.translucent-70.hover-invert {
+  background-color: rgba(0, 0, 0, 0.7);
+  color: rgb(255, 255, 255);
+}
+.btn-check:checked + .btn-light-2.translucent-80 {
+  background-color: rgba(222, 222, 222, 0.8);
+}
+.btn-check:checked + .btn-light-2.translucent-80.hover-lighten {
+  background-color: rgba(225.2607390435, 225.2607390435, 225.2607390435, 0.8);
+}
+.btn-check:checked + .btn-light-2.translucent-80.hover-darken {
+  background-color: rgba(197.2857037282, 197.2857037282, 197.2857037282, 0.8);
+}
+.btn-check:checked + .btn-light-2.translucent-80.hover-invert {
+  background-color: rgba(0, 0, 0, 0.8);
+  color: rgb(255, 255, 255);
+}
+.btn-check:checked + .btn-light-2.translucent-90 {
+  background-color: rgba(222, 222, 222, 0.9);
+}
+.btn-check:checked + .btn-light-2.translucent-90.hover-lighten {
+  background-color: rgba(225.2607390435, 225.2607390435, 225.2607390435, 0.9);
+}
+.btn-check:checked + .btn-light-2.translucent-90.hover-darken {
+  background-color: rgba(197.2857037282, 197.2857037282, 197.2857037282, 0.9);
+}
+.btn-check:checked + .btn-light-2.translucent-90.hover-invert {
+  background-color: rgba(0, 0, 0, 0.9);
+  color: rgb(255, 255, 255);
+}
+.btn-check:checked + .btn-light-2.translucent-100 {
+  background-color: #dedede;
+}
+.btn-check:checked + .btn-light-2.translucent-100.hover-lighten {
+  background-color: rgb(225.2607390435, 225.2607390435, 225.2607390435);
+}
+.btn-check:checked + .btn-light-2.translucent-100.hover-darken {
+  background-color: rgb(197.2857037282, 197.2857037282, 197.2857037282);
+}
+.btn-check:checked + .btn-light-2.translucent-100.hover-invert {
+  background-color: black;
+  color: rgb(255, 255, 255);
+}
+.btn-check:checked + .btn-light-3.translucent-10 {
+  background-color: rgba(140, 127, 132, 0.1);
+}
+.btn-check:checked + .btn-light-3.translucent-10.hover-lighten {
+  background-color: rgba(151.9060658581, 138.6937582284, 143.7651075574, 0.1);
+}
+.btn-check:checked + .btn-light-3.translucent-10.hover-darken {
+  background-color: rgba(125.9757115154, 113.244240258, 118.1546515759, 0.1);
+}
+.btn-check:checked + .btn-light-3.translucent-10.hover-invert {
+  background-color: rgba(0, 0, 0, 0.1);
+  color: rgb(255, 255, 255);
+}
+.btn-check:checked + .btn-light-3.translucent-20 {
+  background-color: rgba(140, 127, 132, 0.2);
+}
+.btn-check:checked + .btn-light-3.translucent-20.hover-lighten {
+  background-color: rgba(151.9060658581, 138.6937582284, 143.7651075574, 0.2);
+}
+.btn-check:checked + .btn-light-3.translucent-20.hover-darken {
+  background-color: rgba(125.9757115154, 113.244240258, 118.1546515759, 0.2);
+}
+.btn-check:checked + .btn-light-3.translucent-20.hover-invert {
+  background-color: rgba(0, 0, 0, 0.2);
+  color: rgb(255, 255, 255);
+}
+.btn-check:checked + .btn-light-3.translucent-30 {
+  background-color: rgba(140, 127, 132, 0.3);
+}
+.btn-check:checked + .btn-light-3.translucent-30.hover-lighten {
+  background-color: rgba(151.9060658581, 138.6937582284, 143.7651075574, 0.3);
+}
+.btn-check:checked + .btn-light-3.translucent-30.hover-darken {
+  background-color: rgba(125.9757115154, 113.244240258, 118.1546515759, 0.3);
+}
+.btn-check:checked + .btn-light-3.translucent-30.hover-invert {
+  background-color: rgba(0, 0, 0, 0.3);
+  color: rgb(255, 255, 255);
+}
+.btn-check:checked + .btn-light-3.translucent-40 {
+  background-color: rgba(140, 127, 132, 0.4);
+}
+.btn-check:checked + .btn-light-3.translucent-40.hover-lighten {
+  background-color: rgba(151.9060658581, 138.6937582284, 143.7651075574, 0.4);
+}
+.btn-check:checked + .btn-light-3.translucent-40.hover-darken {
+  background-color: rgba(125.9757115154, 113.244240258, 118.1546515759, 0.4);
+}
+.btn-check:checked + .btn-light-3.translucent-40.hover-invert {
+  background-color: rgba(0, 0, 0, 0.4);
+  color: rgb(255, 255, 255);
+}
+.btn-check:checked + .btn-light-3.translucent-50 {
+  background-color: rgba(140, 127, 132, 0.5);
+}
+.btn-check:checked + .btn-light-3.translucent-50.hover-lighten {
+  background-color: rgba(151.9060658581, 138.6937582284, 143.7651075574, 0.5);
+}
+.btn-check:checked + .btn-light-3.translucent-50.hover-darken {
+  background-color: rgba(125.9757115154, 113.244240258, 118.1546515759, 0.5);
+}
+.btn-check:checked + .btn-light-3.translucent-50.hover-invert {
+  background-color: rgba(0, 0, 0, 0.5);
+  color: rgb(255, 255, 255);
+}
+.btn-check:checked + .btn-light-3.translucent-60 {
+  background-color: rgba(140, 127, 132, 0.6);
+}
+.btn-check:checked + .btn-light-3.translucent-60.hover-lighten {
+  background-color: rgba(151.9060658581, 138.6937582284, 143.7651075574, 0.6);
+}
+.btn-check:checked + .btn-light-3.translucent-60.hover-darken {
+  background-color: rgba(125.9757115154, 113.244240258, 118.1546515759, 0.6);
+}
+.btn-check:checked + .btn-light-3.translucent-60.hover-invert {
+  background-color: rgba(0, 0, 0, 0.6);
+  color: rgb(255, 255, 255);
+}
+.btn-check:checked + .btn-light-3.translucent-70 {
+  background-color: rgba(140, 127, 132, 0.7);
+}
+.btn-check:checked + .btn-light-3.translucent-70.hover-lighten {
+  background-color: rgba(151.9060658581, 138.6937582284, 143.7651075574, 0.7);
+}
+.btn-check:checked + .btn-light-3.translucent-70.hover-darken {
+  background-color: rgba(125.9757115154, 113.244240258, 118.1546515759, 0.7);
+}
+.btn-check:checked + .btn-light-3.translucent-70.hover-invert {
+  background-color: rgba(0, 0, 0, 0.7);
+  color: rgb(255, 255, 255);
+}
+.btn-check:checked + .btn-light-3.translucent-80 {
+  background-color: rgba(140, 127, 132, 0.8);
+}
+.btn-check:checked + .btn-light-3.translucent-80.hover-lighten {
+  background-color: rgba(151.9060658581, 138.6937582284, 143.7651075574, 0.8);
+}
+.btn-check:checked + .btn-light-3.translucent-80.hover-darken {
+  background-color: rgba(125.9757115154, 113.244240258, 118.1546515759, 0.8);
+}
+.btn-check:checked + .btn-light-3.translucent-80.hover-invert {
+  background-color: rgba(0, 0, 0, 0.8);
+  color: rgb(255, 255, 255);
+}
+.btn-check:checked + .btn-light-3.translucent-90 {
+  background-color: rgba(140, 127, 132, 0.9);
+}
+.btn-check:checked + .btn-light-3.translucent-90.hover-lighten {
+  background-color: rgba(151.9060658581, 138.6937582284, 143.7651075574, 0.9);
+}
+.btn-check:checked + .btn-light-3.translucent-90.hover-darken {
+  background-color: rgba(125.9757115154, 113.244240258, 118.1546515759, 0.9);
+}
+.btn-check:checked + .btn-light-3.translucent-90.hover-invert {
+  background-color: rgba(0, 0, 0, 0.9);
+  color: rgb(255, 255, 255);
+}
+.btn-check:checked + .btn-light-3.translucent-100 {
+  background-color: #8c7f84;
+}
+.btn-check:checked + .btn-light-3.translucent-100.hover-lighten {
+  background-color: rgb(151.9060658581, 138.6937582284, 143.7651075574);
+}
+.btn-check:checked + .btn-light-3.translucent-100.hover-darken {
+  background-color: rgb(125.9757115154, 113.244240258, 118.1546515759);
+}
+.btn-check:checked + .btn-light-3.translucent-100.hover-invert {
+  background-color: black;
+  color: rgb(255, 255, 255);
+}
+.btn-check:checked + .btn-neutral-1.translucent-10 {
+  background-color: rgba(0, 191, 99, 0.1);
+}
+.btn-check:checked + .btn-neutral-1.translucent-10.hover-lighten {
+  background-color: rgba(30.518652113, 200.0258547643, 107.1423388617, 0.1);
+}
+.btn-check:checked + .btn-neutral-1.translucent-10.hover-darken {
+  background-color: hsla(154.5813564437, 162.0313469308%, 25.7341477138%, 0.1);
+}
+.btn-check:checked + .btn-neutral-1.translucent-10.hover-invert {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: rgb(0, 0, 0);
+}
+.btn-check:checked + .btn-neutral-1.translucent-20 {
+  background-color: rgba(0, 191, 99, 0.2);
+}
+.btn-check:checked + .btn-neutral-1.translucent-20.hover-lighten {
+  background-color: rgba(30.518652113, 200.0258547643, 107.1423388617, 0.2);
+}
+.btn-check:checked + .btn-neutral-1.translucent-20.hover-darken {
+  background-color: hsla(154.5813564437, 162.0313469308%, 25.7341477138%, 0.2);
+}
+.btn-check:checked + .btn-neutral-1.translucent-20.hover-invert {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: rgb(0, 0, 0);
+}
+.btn-check:checked + .btn-neutral-1.translucent-30 {
+  background-color: rgba(0, 191, 99, 0.3);
+}
+.btn-check:checked + .btn-neutral-1.translucent-30.hover-lighten {
+  background-color: rgba(30.518652113, 200.0258547643, 107.1423388617, 0.3);
+}
+.btn-check:checked + .btn-neutral-1.translucent-30.hover-darken {
+  background-color: hsla(154.5813564437, 162.0313469308%, 25.7341477138%, 0.3);
+}
+.btn-check:checked + .btn-neutral-1.translucent-30.hover-invert {
+  background-color: rgba(255, 255, 255, 0.3);
+  color: rgb(0, 0, 0);
+}
+.btn-check:checked + .btn-neutral-1.translucent-40 {
+  background-color: rgba(0, 191, 99, 0.4);
+}
+.btn-check:checked + .btn-neutral-1.translucent-40.hover-lighten {
+  background-color: rgba(30.518652113, 200.0258547643, 107.1423388617, 0.4);
+}
+.btn-check:checked + .btn-neutral-1.translucent-40.hover-darken {
+  background-color: hsla(154.5813564437, 162.0313469308%, 25.7341477138%, 0.4);
+}
+.btn-check:checked + .btn-neutral-1.translucent-40.hover-invert {
+  background-color: rgba(255, 255, 255, 0.4);
+  color: rgb(0, 0, 0);
+}
+.btn-check:checked + .btn-neutral-1.translucent-50 {
+  background-color: rgba(0, 191, 99, 0.5);
+}
+.btn-check:checked + .btn-neutral-1.translucent-50.hover-lighten {
+  background-color: rgba(30.518652113, 200.0258547643, 107.1423388617, 0.5);
+}
+.btn-check:checked + .btn-neutral-1.translucent-50.hover-darken {
+  background-color: hsla(154.5813564437, 162.0313469308%, 25.7341477138%, 0.5);
+}
+.btn-check:checked + .btn-neutral-1.translucent-50.hover-invert {
+  background-color: rgba(255, 255, 255, 0.5);
+  color: rgb(0, 0, 0);
+}
+.btn-check:checked + .btn-neutral-1.translucent-60 {
+  background-color: rgba(0, 191, 99, 0.6);
+}
+.btn-check:checked + .btn-neutral-1.translucent-60.hover-lighten {
+  background-color: rgba(30.518652113, 200.0258547643, 107.1423388617, 0.6);
+}
+.btn-check:checked + .btn-neutral-1.translucent-60.hover-darken {
+  background-color: hsla(154.5813564437, 162.0313469308%, 25.7341477138%, 0.6);
+}
+.btn-check:checked + .btn-neutral-1.translucent-60.hover-invert {
+  background-color: rgba(255, 255, 255, 0.6);
+  color: rgb(0, 0, 0);
+}
+.btn-check:checked + .btn-neutral-1.translucent-70 {
+  background-color: rgba(0, 191, 99, 0.7);
+}
+.btn-check:checked + .btn-neutral-1.translucent-70.hover-lighten {
+  background-color: rgba(30.518652113, 200.0258547643, 107.1423388617, 0.7);
+}
+.btn-check:checked + .btn-neutral-1.translucent-70.hover-darken {
+  background-color: hsla(154.5813564437, 162.0313469308%, 25.7341477138%, 0.7);
+}
+.btn-check:checked + .btn-neutral-1.translucent-70.hover-invert {
+  background-color: rgba(255, 255, 255, 0.7);
+  color: rgb(0, 0, 0);
+}
+.btn-check:checked + .btn-neutral-1.translucent-80 {
+  background-color: rgba(0, 191, 99, 0.8);
+}
+.btn-check:checked + .btn-neutral-1.translucent-80.hover-lighten {
+  background-color: rgba(30.518652113, 200.0258547643, 107.1423388617, 0.8);
+}
+.btn-check:checked + .btn-neutral-1.translucent-80.hover-darken {
+  background-color: hsla(154.5813564437, 162.0313469308%, 25.7341477138%, 0.8);
+}
+.btn-check:checked + .btn-neutral-1.translucent-80.hover-invert {
+  background-color: rgba(255, 255, 255, 0.8);
+  color: rgb(0, 0, 0);
+}
+.btn-check:checked + .btn-neutral-1.translucent-90 {
+  background-color: rgba(0, 191, 99, 0.9);
+}
+.btn-check:checked + .btn-neutral-1.translucent-90.hover-lighten {
+  background-color: rgba(30.518652113, 200.0258547643, 107.1423388617, 0.9);
+}
+.btn-check:checked + .btn-neutral-1.translucent-90.hover-darken {
+  background-color: hsla(154.5813564437, 162.0313469308%, 25.7341477138%, 0.9);
+}
+.btn-check:checked + .btn-neutral-1.translucent-90.hover-invert {
+  background-color: rgba(255, 255, 255, 0.9);
+  color: rgb(0, 0, 0);
+}
+.btn-check:checked + .btn-neutral-1.translucent-100 {
+  background-color: #00bf63;
+}
+.btn-check:checked + .btn-neutral-1.translucent-100.hover-lighten {
+  background-color: rgb(30.518652113, 200.0258547643, 107.1423388617);
+}
+.btn-check:checked + .btn-neutral-1.translucent-100.hover-darken {
+  background-color: hsl(154.5813564437, 162.0313469308%, 25.7341477138%);
+}
+.btn-check:checked + .btn-neutral-1.translucent-100.hover-invert {
+  background-color: white;
+  color: rgb(0, 0, 0);
+}
+.btn-check:checked + .btn-neutral-2.translucent-10 {
+  background-color: rgba(187, 154, 247, 0.1);
+}
+.btn-check:checked + .btn-neutral-2.translucent-10.hover-lighten {
+  background-color: hsla(261.4002455194, 102.0214351472%, 81.9824996853%, 0.1);
+}
+.btn-check:checked + .btn-neutral-2.translucent-10.hover-darken {
+  background-color: rgba(167.6973406519, 135.7455385043, 226.9912304296, 0.1);
+}
+.btn-check:checked + .btn-neutral-2.translucent-10.hover-invert {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: rgb(0, 0, 0);
+}
+.btn-check:checked + .btn-neutral-2.translucent-20 {
+  background-color: rgba(187, 154, 247, 0.2);
+}
+.btn-check:checked + .btn-neutral-2.translucent-20.hover-lighten {
+  background-color: hsla(261.4002455194, 102.0214351472%, 81.9824996853%, 0.2);
+}
+.btn-check:checked + .btn-neutral-2.translucent-20.hover-darken {
+  background-color: rgba(167.6973406519, 135.7455385043, 226.9912304296, 0.2);
+}
+.btn-check:checked + .btn-neutral-2.translucent-20.hover-invert {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: rgb(0, 0, 0);
+}
+.btn-check:checked + .btn-neutral-2.translucent-30 {
+  background-color: rgba(187, 154, 247, 0.3);
+}
+.btn-check:checked + .btn-neutral-2.translucent-30.hover-lighten {
+  background-color: hsla(261.4002455194, 102.0214351472%, 81.9824996853%, 0.3);
+}
+.btn-check:checked + .btn-neutral-2.translucent-30.hover-darken {
+  background-color: rgba(167.6973406519, 135.7455385043, 226.9912304296, 0.3);
+}
+.btn-check:checked + .btn-neutral-2.translucent-30.hover-invert {
+  background-color: rgba(255, 255, 255, 0.3);
+  color: rgb(0, 0, 0);
+}
+.btn-check:checked + .btn-neutral-2.translucent-40 {
+  background-color: rgba(187, 154, 247, 0.4);
+}
+.btn-check:checked + .btn-neutral-2.translucent-40.hover-lighten {
+  background-color: hsla(261.4002455194, 102.0214351472%, 81.9824996853%, 0.4);
+}
+.btn-check:checked + .btn-neutral-2.translucent-40.hover-darken {
+  background-color: rgba(167.6973406519, 135.7455385043, 226.9912304296, 0.4);
+}
+.btn-check:checked + .btn-neutral-2.translucent-40.hover-invert {
+  background-color: rgba(255, 255, 255, 0.4);
+  color: rgb(0, 0, 0);
+}
+.btn-check:checked + .btn-neutral-2.translucent-50 {
+  background-color: rgba(187, 154, 247, 0.5);
+}
+.btn-check:checked + .btn-neutral-2.translucent-50.hover-lighten {
+  background-color: hsla(261.4002455194, 102.0214351472%, 81.9824996853%, 0.5);
+}
+.btn-check:checked + .btn-neutral-2.translucent-50.hover-darken {
+  background-color: rgba(167.6973406519, 135.7455385043, 226.9912304296, 0.5);
+}
+.btn-check:checked + .btn-neutral-2.translucent-50.hover-invert {
+  background-color: rgba(255, 255, 255, 0.5);
+  color: rgb(0, 0, 0);
+}
+.btn-check:checked + .btn-neutral-2.translucent-60 {
+  background-color: rgba(187, 154, 247, 0.6);
+}
+.btn-check:checked + .btn-neutral-2.translucent-60.hover-lighten {
+  background-color: hsla(261.4002455194, 102.0214351472%, 81.9824996853%, 0.6);
+}
+.btn-check:checked + .btn-neutral-2.translucent-60.hover-darken {
+  background-color: rgba(167.6973406519, 135.7455385043, 226.9912304296, 0.6);
+}
+.btn-check:checked + .btn-neutral-2.translucent-60.hover-invert {
+  background-color: rgba(255, 255, 255, 0.6);
+  color: rgb(0, 0, 0);
+}
+.btn-check:checked + .btn-neutral-2.translucent-70 {
+  background-color: rgba(187, 154, 247, 0.7);
+}
+.btn-check:checked + .btn-neutral-2.translucent-70.hover-lighten {
+  background-color: hsla(261.4002455194, 102.0214351472%, 81.9824996853%, 0.7);
+}
+.btn-check:checked + .btn-neutral-2.translucent-70.hover-darken {
+  background-color: rgba(167.6973406519, 135.7455385043, 226.9912304296, 0.7);
+}
+.btn-check:checked + .btn-neutral-2.translucent-70.hover-invert {
+  background-color: rgba(255, 255, 255, 0.7);
+  color: rgb(0, 0, 0);
+}
+.btn-check:checked + .btn-neutral-2.translucent-80 {
+  background-color: rgba(187, 154, 247, 0.8);
+}
+.btn-check:checked + .btn-neutral-2.translucent-80.hover-lighten {
+  background-color: hsla(261.4002455194, 102.0214351472%, 81.9824996853%, 0.8);
+}
+.btn-check:checked + .btn-neutral-2.translucent-80.hover-darken {
+  background-color: rgba(167.6973406519, 135.7455385043, 226.9912304296, 0.8);
+}
+.btn-check:checked + .btn-neutral-2.translucent-80.hover-invert {
+  background-color: rgba(255, 255, 255, 0.8);
+  color: rgb(0, 0, 0);
+}
+.btn-check:checked + .btn-neutral-2.translucent-90 {
+  background-color: rgba(187, 154, 247, 0.9);
+}
+.btn-check:checked + .btn-neutral-2.translucent-90.hover-lighten {
+  background-color: hsla(261.4002455194, 102.0214351472%, 81.9824996853%, 0.9);
+}
+.btn-check:checked + .btn-neutral-2.translucent-90.hover-darken {
+  background-color: rgba(167.6973406519, 135.7455385043, 226.9912304296, 0.9);
+}
+.btn-check:checked + .btn-neutral-2.translucent-90.hover-invert {
+  background-color: rgba(255, 255, 255, 0.9);
+  color: rgb(0, 0, 0);
+}
+.btn-check:checked + .btn-neutral-2.translucent-100 {
+  background-color: #bb9af7;
+}
+.btn-check:checked + .btn-neutral-2.translucent-100.hover-lighten {
+  background-color: hsl(261.4002455194, 102.0214351472%, 81.9824996853%);
+}
+.btn-check:checked + .btn-neutral-2.translucent-100.hover-darken {
+  background-color: rgb(167.6973406519, 135.7455385043, 226.9912304296);
+}
+.btn-check:checked + .btn-neutral-2.translucent-100.hover-invert {
+  background-color: white;
+  color: rgb(0, 0, 0);
+}
+.btn-check:checked + .btn-neutral-3.translucent-10 {
+  background-color: rgba(68, 67, 109, 0.1);
+}
+.btn-check:checked + .btn-neutral-3.translucent-10.hover-lighten {
+  background-color: rgba(84.9067128413, 83.2653420144, 126.7319465742, 0.1);
+}
+.btn-check:checked + .btn-neutral-3.translucent-10.hover-darken {
+  background-color: rgba(60.8856644909, 60.2172559612, 101.5409023935, 0.1);
+}
+.btn-check:checked + .btn-neutral-3.translucent-10.hover-invert {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: rgb(0, 0, 0);
+}
+.btn-check:checked + .btn-neutral-3.translucent-20 {
+  background-color: rgba(68, 67, 109, 0.2);
+}
+.btn-check:checked + .btn-neutral-3.translucent-20.hover-lighten {
+  background-color: rgba(84.9067128413, 83.2653420144, 126.7319465742, 0.2);
+}
+.btn-check:checked + .btn-neutral-3.translucent-20.hover-darken {
+  background-color: rgba(60.8856644909, 60.2172559612, 101.5409023935, 0.2);
+}
+.btn-check:checked + .btn-neutral-3.translucent-20.hover-invert {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: rgb(0, 0, 0);
+}
+.btn-check:checked + .btn-neutral-3.translucent-30 {
+  background-color: rgba(68, 67, 109, 0.3);
+}
+.btn-check:checked + .btn-neutral-3.translucent-30.hover-lighten {
+  background-color: rgba(84.9067128413, 83.2653420144, 126.7319465742, 0.3);
+}
+.btn-check:checked + .btn-neutral-3.translucent-30.hover-darken {
+  background-color: rgba(60.8856644909, 60.2172559612, 101.5409023935, 0.3);
+}
+.btn-check:checked + .btn-neutral-3.translucent-30.hover-invert {
+  background-color: rgba(255, 255, 255, 0.3);
+  color: rgb(0, 0, 0);
+}
+.btn-check:checked + .btn-neutral-3.translucent-40 {
+  background-color: rgba(68, 67, 109, 0.4);
+}
+.btn-check:checked + .btn-neutral-3.translucent-40.hover-lighten {
+  background-color: rgba(84.9067128413, 83.2653420144, 126.7319465742, 0.4);
+}
+.btn-check:checked + .btn-neutral-3.translucent-40.hover-darken {
+  background-color: rgba(60.8856644909, 60.2172559612, 101.5409023935, 0.4);
+}
+.btn-check:checked + .btn-neutral-3.translucent-40.hover-invert {
+  background-color: rgba(255, 255, 255, 0.4);
+  color: rgb(0, 0, 0);
+}
+.btn-check:checked + .btn-neutral-3.translucent-50 {
+  background-color: rgba(68, 67, 109, 0.5);
+}
+.btn-check:checked + .btn-neutral-3.translucent-50.hover-lighten {
+  background-color: rgba(84.9067128413, 83.2653420144, 126.7319465742, 0.5);
+}
+.btn-check:checked + .btn-neutral-3.translucent-50.hover-darken {
+  background-color: rgba(60.8856644909, 60.2172559612, 101.5409023935, 0.5);
+}
+.btn-check:checked + .btn-neutral-3.translucent-50.hover-invert {
+  background-color: rgba(255, 255, 255, 0.5);
+  color: rgb(0, 0, 0);
+}
+.btn-check:checked + .btn-neutral-3.translucent-60 {
+  background-color: rgba(68, 67, 109, 0.6);
+}
+.btn-check:checked + .btn-neutral-3.translucent-60.hover-lighten {
+  background-color: rgba(84.9067128413, 83.2653420144, 126.7319465742, 0.6);
+}
+.btn-check:checked + .btn-neutral-3.translucent-60.hover-darken {
+  background-color: rgba(60.8856644909, 60.2172559612, 101.5409023935, 0.6);
+}
+.btn-check:checked + .btn-neutral-3.translucent-60.hover-invert {
+  background-color: rgba(255, 255, 255, 0.6);
+  color: rgb(0, 0, 0);
+}
+.btn-check:checked + .btn-neutral-3.translucent-70 {
+  background-color: rgba(68, 67, 109, 0.7);
+}
+.btn-check:checked + .btn-neutral-3.translucent-70.hover-lighten {
+  background-color: rgba(84.9067128413, 83.2653420144, 126.7319465742, 0.7);
+}
+.btn-check:checked + .btn-neutral-3.translucent-70.hover-darken {
+  background-color: rgba(60.8856644909, 60.2172559612, 101.5409023935, 0.7);
+}
+.btn-check:checked + .btn-neutral-3.translucent-70.hover-invert {
+  background-color: rgba(255, 255, 255, 0.7);
+  color: rgb(0, 0, 0);
+}
+.btn-check:checked + .btn-neutral-3.translucent-80 {
+  background-color: rgba(68, 67, 109, 0.8);
+}
+.btn-check:checked + .btn-neutral-3.translucent-80.hover-lighten {
+  background-color: rgba(84.9067128413, 83.2653420144, 126.7319465742, 0.8);
+}
+.btn-check:checked + .btn-neutral-3.translucent-80.hover-darken {
+  background-color: rgba(60.8856644909, 60.2172559612, 101.5409023935, 0.8);
+}
+.btn-check:checked + .btn-neutral-3.translucent-80.hover-invert {
+  background-color: rgba(255, 255, 255, 0.8);
+  color: rgb(0, 0, 0);
+}
+.btn-check:checked + .btn-neutral-3.translucent-90 {
+  background-color: rgba(68, 67, 109, 0.9);
+}
+.btn-check:checked + .btn-neutral-3.translucent-90.hover-lighten {
+  background-color: rgba(84.9067128413, 83.2653420144, 126.7319465742, 0.9);
+}
+.btn-check:checked + .btn-neutral-3.translucent-90.hover-darken {
+  background-color: rgba(60.8856644909, 60.2172559612, 101.5409023935, 0.9);
+}
+.btn-check:checked + .btn-neutral-3.translucent-90.hover-invert {
+  background-color: rgba(255, 255, 255, 0.9);
+  color: rgb(0, 0, 0);
+}
+.btn-check:checked + .btn-neutral-3.translucent-100 {
+  background-color: #44436d;
+}
+.btn-check:checked + .btn-neutral-3.translucent-100.hover-lighten {
+  background-color: rgb(84.9067128413, 83.2653420144, 126.7319465742);
+}
+.btn-check:checked + .btn-neutral-3.translucent-100.hover-darken {
+  background-color: rgb(60.8856644909, 60.2172559612, 101.5409023935);
+}
+.btn-check:checked + .btn-neutral-3.translucent-100.hover-invert {
+  background-color: white;
+  color: rgb(0, 0, 0);
+}
+.btn-check:checked + .btn-dark-1.translucent-10 {
+  background-color: rgba(43, 45, 66, 0.1);
+}
+.btn-check:checked + .btn-dark-1.translucent-10.hover-lighten {
+  background-color: rgba(61.0779242649, 62.804561636, 84.9195381589, 0.1);
+}
+.btn-check:checked + .btn-dark-1.translucent-10.hover-darken {
+  background-color: rgba(38.8780688093, 40.9635092473, 61.6751513793, 0.1);
+}
+.btn-check:checked + .btn-dark-1.translucent-10.hover-invert {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: rgb(0, 0, 0);
+}
+.btn-check:checked + .btn-dark-1.translucent-20 {
+  background-color: rgba(43, 45, 66, 0.2);
+}
+.btn-check:checked + .btn-dark-1.translucent-20.hover-lighten {
+  background-color: rgba(61.0779242649, 62.804561636, 84.9195381589, 0.2);
+}
+.btn-check:checked + .btn-dark-1.translucent-20.hover-darken {
+  background-color: rgba(38.8780688093, 40.9635092473, 61.6751513793, 0.2);
+}
+.btn-check:checked + .btn-dark-1.translucent-20.hover-invert {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: rgb(0, 0, 0);
+}
+.btn-check:checked + .btn-dark-1.translucent-30 {
+  background-color: rgba(43, 45, 66, 0.3);
+}
+.btn-check:checked + .btn-dark-1.translucent-30.hover-lighten {
+  background-color: rgba(61.0779242649, 62.804561636, 84.9195381589, 0.3);
+}
+.btn-check:checked + .btn-dark-1.translucent-30.hover-darken {
+  background-color: rgba(38.8780688093, 40.9635092473, 61.6751513793, 0.3);
+}
+.btn-check:checked + .btn-dark-1.translucent-30.hover-invert {
+  background-color: rgba(255, 255, 255, 0.3);
+  color: rgb(0, 0, 0);
+}
+.btn-check:checked + .btn-dark-1.translucent-40 {
+  background-color: rgba(43, 45, 66, 0.4);
+}
+.btn-check:checked + .btn-dark-1.translucent-40.hover-lighten {
+  background-color: rgba(61.0779242649, 62.804561636, 84.9195381589, 0.4);
+}
+.btn-check:checked + .btn-dark-1.translucent-40.hover-darken {
+  background-color: rgba(38.8780688093, 40.9635092473, 61.6751513793, 0.4);
+}
+.btn-check:checked + .btn-dark-1.translucent-40.hover-invert {
+  background-color: rgba(255, 255, 255, 0.4);
+  color: rgb(0, 0, 0);
+}
+.btn-check:checked + .btn-dark-1.translucent-50 {
+  background-color: rgba(43, 45, 66, 0.5);
+}
+.btn-check:checked + .btn-dark-1.translucent-50.hover-lighten {
+  background-color: rgba(61.0779242649, 62.804561636, 84.9195381589, 0.5);
+}
+.btn-check:checked + .btn-dark-1.translucent-50.hover-darken {
+  background-color: rgba(38.8780688093, 40.9635092473, 61.6751513793, 0.5);
+}
+.btn-check:checked + .btn-dark-1.translucent-50.hover-invert {
+  background-color: rgba(255, 255, 255, 0.5);
+  color: rgb(0, 0, 0);
+}
+.btn-check:checked + .btn-dark-1.translucent-60 {
+  background-color: rgba(43, 45, 66, 0.6);
+}
+.btn-check:checked + .btn-dark-1.translucent-60.hover-lighten {
+  background-color: rgba(61.0779242649, 62.804561636, 84.9195381589, 0.6);
+}
+.btn-check:checked + .btn-dark-1.translucent-60.hover-darken {
+  background-color: rgba(38.8780688093, 40.9635092473, 61.6751513793, 0.6);
+}
+.btn-check:checked + .btn-dark-1.translucent-60.hover-invert {
+  background-color: rgba(255, 255, 255, 0.6);
+  color: rgb(0, 0, 0);
+}
+.btn-check:checked + .btn-dark-1.translucent-70 {
+  background-color: rgba(43, 45, 66, 0.7);
+}
+.btn-check:checked + .btn-dark-1.translucent-70.hover-lighten {
+  background-color: rgba(61.0779242649, 62.804561636, 84.9195381589, 0.7);
+}
+.btn-check:checked + .btn-dark-1.translucent-70.hover-darken {
+  background-color: rgba(38.8780688093, 40.9635092473, 61.6751513793, 0.7);
+}
+.btn-check:checked + .btn-dark-1.translucent-70.hover-invert {
+  background-color: rgba(255, 255, 255, 0.7);
+  color: rgb(0, 0, 0);
+}
+.btn-check:checked + .btn-dark-1.translucent-80 {
+  background-color: rgba(43, 45, 66, 0.8);
+}
+.btn-check:checked + .btn-dark-1.translucent-80.hover-lighten {
+  background-color: rgba(61.0779242649, 62.804561636, 84.9195381589, 0.8);
+}
+.btn-check:checked + .btn-dark-1.translucent-80.hover-darken {
+  background-color: rgba(38.8780688093, 40.9635092473, 61.6751513793, 0.8);
+}
+.btn-check:checked + .btn-dark-1.translucent-80.hover-invert {
+  background-color: rgba(255, 255, 255, 0.8);
+  color: rgb(0, 0, 0);
+}
+.btn-check:checked + .btn-dark-1.translucent-90 {
+  background-color: rgba(43, 45, 66, 0.9);
+}
+.btn-check:checked + .btn-dark-1.translucent-90.hover-lighten {
+  background-color: rgba(61.0779242649, 62.804561636, 84.9195381589, 0.9);
+}
+.btn-check:checked + .btn-dark-1.translucent-90.hover-darken {
+  background-color: rgba(38.8780688093, 40.9635092473, 61.6751513793, 0.9);
+}
+.btn-check:checked + .btn-dark-1.translucent-90.hover-invert {
+  background-color: rgba(255, 255, 255, 0.9);
+  color: rgb(0, 0, 0);
+}
+.btn-check:checked + .btn-dark-1.translucent-100 {
+  background-color: #2b2d42;
+}
+.btn-check:checked + .btn-dark-1.translucent-100.hover-lighten {
+  background-color: rgb(61.0779242649, 62.804561636, 84.9195381589);
+}
+.btn-check:checked + .btn-dark-1.translucent-100.hover-darken {
+  background-color: rgb(38.8780688093, 40.9635092473, 61.6751513793);
+}
+.btn-check:checked + .btn-dark-1.translucent-100.hover-invert {
+  background-color: white;
+  color: rgb(0, 0, 0);
+}
+.btn-check:checked + .btn-dark-2.translucent-10 {
+  background-color: rgba(19, 7, 46, 0.1);
+}
+.btn-check:checked + .btn-dark-2.translucent-10.hover-lighten {
+  background-color: rgba(38.1459666251, 29.5838531762, 67.4813283023, 0.1);
+}
+.btn-check:checked + .btn-dark-2.translucent-10.hover-darken {
+  background-color: rgba(18.3780296873, 5.4364765425, 45.1153005248, 0.1);
+}
+.btn-check:checked + .btn-dark-2.translucent-10.hover-invert {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: rgb(0, 0, 0);
+}
+.btn-check:checked + .btn-dark-2.translucent-20 {
+  background-color: rgba(19, 7, 46, 0.2);
+}
+.btn-check:checked + .btn-dark-2.translucent-20.hover-lighten {
+  background-color: rgba(38.1459666251, 29.5838531762, 67.4813283023, 0.2);
+}
+.btn-check:checked + .btn-dark-2.translucent-20.hover-darken {
+  background-color: rgba(18.3780296873, 5.4364765425, 45.1153005248, 0.2);
+}
+.btn-check:checked + .btn-dark-2.translucent-20.hover-invert {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: rgb(0, 0, 0);
+}
+.btn-check:checked + .btn-dark-2.translucent-30 {
+  background-color: rgba(19, 7, 46, 0.3);
+}
+.btn-check:checked + .btn-dark-2.translucent-30.hover-lighten {
+  background-color: rgba(38.1459666251, 29.5838531762, 67.4813283023, 0.3);
+}
+.btn-check:checked + .btn-dark-2.translucent-30.hover-darken {
+  background-color: rgba(18.3780296873, 5.4364765425, 45.1153005248, 0.3);
+}
+.btn-check:checked + .btn-dark-2.translucent-30.hover-invert {
+  background-color: rgba(255, 255, 255, 0.3);
+  color: rgb(0, 0, 0);
+}
+.btn-check:checked + .btn-dark-2.translucent-40 {
+  background-color: rgba(19, 7, 46, 0.4);
+}
+.btn-check:checked + .btn-dark-2.translucent-40.hover-lighten {
+  background-color: rgba(38.1459666251, 29.5838531762, 67.4813283023, 0.4);
+}
+.btn-check:checked + .btn-dark-2.translucent-40.hover-darken {
+  background-color: rgba(18.3780296873, 5.4364765425, 45.1153005248, 0.4);
+}
+.btn-check:checked + .btn-dark-2.translucent-40.hover-invert {
+  background-color: rgba(255, 255, 255, 0.4);
+  color: rgb(0, 0, 0);
+}
+.btn-check:checked + .btn-dark-2.translucent-50 {
+  background-color: rgba(19, 7, 46, 0.5);
+}
+.btn-check:checked + .btn-dark-2.translucent-50.hover-lighten {
+  background-color: rgba(38.1459666251, 29.5838531762, 67.4813283023, 0.5);
+}
+.btn-check:checked + .btn-dark-2.translucent-50.hover-darken {
+  background-color: rgba(18.3780296873, 5.4364765425, 45.1153005248, 0.5);
+}
+.btn-check:checked + .btn-dark-2.translucent-50.hover-invert {
+  background-color: rgba(255, 255, 255, 0.5);
+  color: rgb(0, 0, 0);
+}
+.btn-check:checked + .btn-dark-2.translucent-60 {
+  background-color: rgba(19, 7, 46, 0.6);
+}
+.btn-check:checked + .btn-dark-2.translucent-60.hover-lighten {
+  background-color: rgba(38.1459666251, 29.5838531762, 67.4813283023, 0.6);
+}
+.btn-check:checked + .btn-dark-2.translucent-60.hover-darken {
+  background-color: rgba(18.3780296873, 5.4364765425, 45.1153005248, 0.6);
+}
+.btn-check:checked + .btn-dark-2.translucent-60.hover-invert {
+  background-color: rgba(255, 255, 255, 0.6);
+  color: rgb(0, 0, 0);
+}
+.btn-check:checked + .btn-dark-2.translucent-70 {
+  background-color: rgba(19, 7, 46, 0.7);
+}
+.btn-check:checked + .btn-dark-2.translucent-70.hover-lighten {
+  background-color: rgba(38.1459666251, 29.5838531762, 67.4813283023, 0.7);
+}
+.btn-check:checked + .btn-dark-2.translucent-70.hover-darken {
+  background-color: rgba(18.3780296873, 5.4364765425, 45.1153005248, 0.7);
+}
+.btn-check:checked + .btn-dark-2.translucent-70.hover-invert {
+  background-color: rgba(255, 255, 255, 0.7);
+  color: rgb(0, 0, 0);
+}
+.btn-check:checked + .btn-dark-2.translucent-80 {
+  background-color: rgba(19, 7, 46, 0.8);
+}
+.btn-check:checked + .btn-dark-2.translucent-80.hover-lighten {
+  background-color: rgba(38.1459666251, 29.5838531762, 67.4813283023, 0.8);
+}
+.btn-check:checked + .btn-dark-2.translucent-80.hover-darken {
+  background-color: rgba(18.3780296873, 5.4364765425, 45.1153005248, 0.8);
+}
+.btn-check:checked + .btn-dark-2.translucent-80.hover-invert {
+  background-color: rgba(255, 255, 255, 0.8);
+  color: rgb(0, 0, 0);
+}
+.btn-check:checked + .btn-dark-2.translucent-90 {
+  background-color: rgba(19, 7, 46, 0.9);
+}
+.btn-check:checked + .btn-dark-2.translucent-90.hover-lighten {
+  background-color: rgba(38.1459666251, 29.5838531762, 67.4813283023, 0.9);
+}
+.btn-check:checked + .btn-dark-2.translucent-90.hover-darken {
+  background-color: rgba(18.3780296873, 5.4364765425, 45.1153005248, 0.9);
+}
+.btn-check:checked + .btn-dark-2.translucent-90.hover-invert {
+  background-color: rgba(255, 255, 255, 0.9);
+  color: rgb(0, 0, 0);
+}
+.btn-check:checked + .btn-dark-2.translucent-100 {
+  background-color: #13072e;
+}
+.btn-check:checked + .btn-dark-2.translucent-100.hover-lighten {
+  background-color: rgb(38.1459666251, 29.5838531762, 67.4813283023);
+}
+.btn-check:checked + .btn-dark-2.translucent-100.hover-darken {
+  background-color: rgb(18.3780296873, 5.4364765425, 45.1153005248);
+}
+.btn-check:checked + .btn-dark-2.translucent-100.hover-invert {
+  background-color: white;
+  color: rgb(0, 0, 0);
+}
+.btn-check:checked + .btn-dark-3.translucent-10 {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.btn-check:checked + .btn-dark-3.translucent-10.hover-lighten {
+  background-color: rgba(27.4643698292, 27.4643698292, 27.4643698292, 0.1);
+}
+.btn-check:checked + .btn-dark-3.translucent-10.hover-darken {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.btn-check:checked + .btn-dark-3.translucent-10.hover-invert {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: rgb(0, 0, 0);
+}
+.btn-check:checked + .btn-dark-3.translucent-20 {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+.btn-check:checked + .btn-dark-3.translucent-20.hover-lighten {
+  background-color: rgba(27.4643698292, 27.4643698292, 27.4643698292, 0.2);
+}
+.btn-check:checked + .btn-dark-3.translucent-20.hover-darken {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+.btn-check:checked + .btn-dark-3.translucent-20.hover-invert {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: rgb(0, 0, 0);
+}
+.btn-check:checked + .btn-dark-3.translucent-30 {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+.btn-check:checked + .btn-dark-3.translucent-30.hover-lighten {
+  background-color: rgba(27.4643698292, 27.4643698292, 27.4643698292, 0.3);
+}
+.btn-check:checked + .btn-dark-3.translucent-30.hover-darken {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+.btn-check:checked + .btn-dark-3.translucent-30.hover-invert {
+  background-color: rgba(255, 255, 255, 0.3);
+  color: rgb(0, 0, 0);
+}
+.btn-check:checked + .btn-dark-3.translucent-40 {
+  background-color: rgba(0, 0, 0, 0.4);
+}
+.btn-check:checked + .btn-dark-3.translucent-40.hover-lighten {
+  background-color: rgba(27.4643698292, 27.4643698292, 27.4643698292, 0.4);
+}
+.btn-check:checked + .btn-dark-3.translucent-40.hover-darken {
+  background-color: rgba(0, 0, 0, 0.4);
+}
+.btn-check:checked + .btn-dark-3.translucent-40.hover-invert {
+  background-color: rgba(255, 255, 255, 0.4);
+  color: rgb(0, 0, 0);
+}
+.btn-check:checked + .btn-dark-3.translucent-50 {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.btn-check:checked + .btn-dark-3.translucent-50.hover-lighten {
+  background-color: rgba(27.4643698292, 27.4643698292, 27.4643698292, 0.5);
+}
+.btn-check:checked + .btn-dark-3.translucent-50.hover-darken {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.btn-check:checked + .btn-dark-3.translucent-50.hover-invert {
+  background-color: rgba(255, 255, 255, 0.5);
+  color: rgb(0, 0, 0);
+}
+.btn-check:checked + .btn-dark-3.translucent-60 {
+  background-color: rgba(0, 0, 0, 0.6);
+}
+.btn-check:checked + .btn-dark-3.translucent-60.hover-lighten {
+  background-color: rgba(27.4643698292, 27.4643698292, 27.4643698292, 0.6);
+}
+.btn-check:checked + .btn-dark-3.translucent-60.hover-darken {
+  background-color: rgba(0, 0, 0, 0.6);
+}
+.btn-check:checked + .btn-dark-3.translucent-60.hover-invert {
+  background-color: rgba(255, 255, 255, 0.6);
+  color: rgb(0, 0, 0);
+}
+.btn-check:checked + .btn-dark-3.translucent-70 {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+.btn-check:checked + .btn-dark-3.translucent-70.hover-lighten {
+  background-color: rgba(27.4643698292, 27.4643698292, 27.4643698292, 0.7);
+}
+.btn-check:checked + .btn-dark-3.translucent-70.hover-darken {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+.btn-check:checked + .btn-dark-3.translucent-70.hover-invert {
+  background-color: rgba(255, 255, 255, 0.7);
+  color: rgb(0, 0, 0);
+}
+.btn-check:checked + .btn-dark-3.translucent-80 {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+.btn-check:checked + .btn-dark-3.translucent-80.hover-lighten {
+  background-color: rgba(27.4643698292, 27.4643698292, 27.4643698292, 0.8);
+}
+.btn-check:checked + .btn-dark-3.translucent-80.hover-darken {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+.btn-check:checked + .btn-dark-3.translucent-80.hover-invert {
+  background-color: rgba(255, 255, 255, 0.8);
+  color: rgb(0, 0, 0);
+}
+.btn-check:checked + .btn-dark-3.translucent-90 {
+  background-color: rgba(0, 0, 0, 0.9);
+}
+.btn-check:checked + .btn-dark-3.translucent-90.hover-lighten {
+  background-color: rgba(27.4643698292, 27.4643698292, 27.4643698292, 0.9);
+}
+.btn-check:checked + .btn-dark-3.translucent-90.hover-darken {
+  background-color: rgba(0, 0, 0, 0.9);
+}
+.btn-check:checked + .btn-dark-3.translucent-90.hover-invert {
+  background-color: rgba(255, 255, 255, 0.9);
+  color: rgb(0, 0, 0);
+}
+.btn-check:checked + .btn-dark-3.translucent-100 {
+  background-color: black;
+}
+.btn-check:checked + .btn-dark-3.translucent-100.hover-lighten {
+  background-color: rgb(27.4643698292, 27.4643698292, 27.4643698292);
+}
+.btn-check:checked + .btn-dark-3.translucent-100.hover-darken {
+  background-color: black;
+}
+.btn-check:checked + .btn-dark-3.translucent-100.hover-invert {
+  background-color: white;
+  color: rgb(0, 0, 0);
+}
+.btn-check:checked + .btn-dark-4.translucent-10 {
+  background-color: rgba(68, 67, 109, 0.1);
+}
+.btn-check:checked + .btn-dark-4.translucent-10.hover-lighten {
+  background-color: rgba(84.9067128413, 83.2653420144, 126.7319465742, 0.1);
+}
+.btn-check:checked + .btn-dark-4.translucent-10.hover-darken {
+  background-color: rgba(60.8856644909, 60.2172559612, 101.5409023935, 0.1);
+}
+.btn-check:checked + .btn-dark-4.translucent-10.hover-invert {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: rgb(0, 0, 0);
+}
+.btn-check:checked + .btn-dark-4.translucent-20 {
+  background-color: rgba(68, 67, 109, 0.2);
+}
+.btn-check:checked + .btn-dark-4.translucent-20.hover-lighten {
+  background-color: rgba(84.9067128413, 83.2653420144, 126.7319465742, 0.2);
+}
+.btn-check:checked + .btn-dark-4.translucent-20.hover-darken {
+  background-color: rgba(60.8856644909, 60.2172559612, 101.5409023935, 0.2);
+}
+.btn-check:checked + .btn-dark-4.translucent-20.hover-invert {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: rgb(0, 0, 0);
+}
+.btn-check:checked + .btn-dark-4.translucent-30 {
+  background-color: rgba(68, 67, 109, 0.3);
+}
+.btn-check:checked + .btn-dark-4.translucent-30.hover-lighten {
+  background-color: rgba(84.9067128413, 83.2653420144, 126.7319465742, 0.3);
+}
+.btn-check:checked + .btn-dark-4.translucent-30.hover-darken {
+  background-color: rgba(60.8856644909, 60.2172559612, 101.5409023935, 0.3);
+}
+.btn-check:checked + .btn-dark-4.translucent-30.hover-invert {
+  background-color: rgba(255, 255, 255, 0.3);
+  color: rgb(0, 0, 0);
+}
+.btn-check:checked + .btn-dark-4.translucent-40 {
+  background-color: rgba(68, 67, 109, 0.4);
+}
+.btn-check:checked + .btn-dark-4.translucent-40.hover-lighten {
+  background-color: rgba(84.9067128413, 83.2653420144, 126.7319465742, 0.4);
+}
+.btn-check:checked + .btn-dark-4.translucent-40.hover-darken {
+  background-color: rgba(60.8856644909, 60.2172559612, 101.5409023935, 0.4);
+}
+.btn-check:checked + .btn-dark-4.translucent-40.hover-invert {
+  background-color: rgba(255, 255, 255, 0.4);
+  color: rgb(0, 0, 0);
+}
+.btn-check:checked + .btn-dark-4.translucent-50 {
+  background-color: rgba(68, 67, 109, 0.5);
+}
+.btn-check:checked + .btn-dark-4.translucent-50.hover-lighten {
+  background-color: rgba(84.9067128413, 83.2653420144, 126.7319465742, 0.5);
+}
+.btn-check:checked + .btn-dark-4.translucent-50.hover-darken {
+  background-color: rgba(60.8856644909, 60.2172559612, 101.5409023935, 0.5);
+}
+.btn-check:checked + .btn-dark-4.translucent-50.hover-invert {
+  background-color: rgba(255, 255, 255, 0.5);
+  color: rgb(0, 0, 0);
+}
+.btn-check:checked + .btn-dark-4.translucent-60 {
+  background-color: rgba(68, 67, 109, 0.6);
+}
+.btn-check:checked + .btn-dark-4.translucent-60.hover-lighten {
+  background-color: rgba(84.9067128413, 83.2653420144, 126.7319465742, 0.6);
+}
+.btn-check:checked + .btn-dark-4.translucent-60.hover-darken {
+  background-color: rgba(60.8856644909, 60.2172559612, 101.5409023935, 0.6);
+}
+.btn-check:checked + .btn-dark-4.translucent-60.hover-invert {
+  background-color: rgba(255, 255, 255, 0.6);
+  color: rgb(0, 0, 0);
+}
+.btn-check:checked + .btn-dark-4.translucent-70 {
+  background-color: rgba(68, 67, 109, 0.7);
+}
+.btn-check:checked + .btn-dark-4.translucent-70.hover-lighten {
+  background-color: rgba(84.9067128413, 83.2653420144, 126.7319465742, 0.7);
+}
+.btn-check:checked + .btn-dark-4.translucent-70.hover-darken {
+  background-color: rgba(60.8856644909, 60.2172559612, 101.5409023935, 0.7);
+}
+.btn-check:checked + .btn-dark-4.translucent-70.hover-invert {
+  background-color: rgba(255, 255, 255, 0.7);
+  color: rgb(0, 0, 0);
+}
+.btn-check:checked + .btn-dark-4.translucent-80 {
+  background-color: rgba(68, 67, 109, 0.8);
+}
+.btn-check:checked + .btn-dark-4.translucent-80.hover-lighten {
+  background-color: rgba(84.9067128413, 83.2653420144, 126.7319465742, 0.8);
+}
+.btn-check:checked + .btn-dark-4.translucent-80.hover-darken {
+  background-color: rgba(60.8856644909, 60.2172559612, 101.5409023935, 0.8);
+}
+.btn-check:checked + .btn-dark-4.translucent-80.hover-invert {
+  background-color: rgba(255, 255, 255, 0.8);
+  color: rgb(0, 0, 0);
+}
+.btn-check:checked + .btn-dark-4.translucent-90 {
+  background-color: rgba(68, 67, 109, 0.9);
+}
+.btn-check:checked + .btn-dark-4.translucent-90.hover-lighten {
+  background-color: rgba(84.9067128413, 83.2653420144, 126.7319465742, 0.9);
+}
+.btn-check:checked + .btn-dark-4.translucent-90.hover-darken {
+  background-color: rgba(60.8856644909, 60.2172559612, 101.5409023935, 0.9);
+}
+.btn-check:checked + .btn-dark-4.translucent-90.hover-invert {
+  background-color: rgba(255, 255, 255, 0.9);
+  color: rgb(0, 0, 0);
+}
+.btn-check:checked + .btn-dark-4.translucent-100 {
+  background-color: #44436d;
+}
+.btn-check:checked + .btn-dark-4.translucent-100.hover-lighten {
+  background-color: rgb(84.9067128413, 83.2653420144, 126.7319465742);
+}
+.btn-check:checked + .btn-dark-4.translucent-100.hover-darken {
+  background-color: rgb(60.8856644909, 60.2172559612, 101.5409023935);
+}
+.btn-check:checked + .btn-dark-4.translucent-100.hover-invert {
+  background-color: white;
+  color: rgb(0, 0, 0);
+}
+
 .btn-light-1.initial-transparent {
   background-color: transparent;
   color: rgb(255, 255, 255);
