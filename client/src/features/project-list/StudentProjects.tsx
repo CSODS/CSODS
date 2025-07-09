@@ -1,14 +1,31 @@
+import { useFetchTagData } from "@/hooks";
+import { AllTagsProvider, TagCategoryProvider } from "@/components";
 import { Header, SearchBar, ProjectList, UpButton } from "./components";
 
-//#region Student Projects
 export default function StudentProjects() {
   return (
     <div>
       <Header/>
-      <SearchBar/>
-      <ProjectList/>
+      <ProjectsDisplay/>
       <UpButton/>
     </div>  
   );
 }
-//#endregion
+
+function ProjectsDisplay() {
+  const allTags = useFetchTagData();
+  
+  if (allTags) {
+    return (
+      <AllTagsProvider allTags={allTags}>
+        <TagCategoryProvider allTags={allTags}>
+          <SearchBar/>
+          <ProjectList/>
+        </TagCategoryProvider>
+      </AllTagsProvider>
+    )
+  }
+  else {
+    return <div></div>
+  }
+}
