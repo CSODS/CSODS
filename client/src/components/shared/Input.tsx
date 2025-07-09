@@ -4,6 +4,7 @@ import { getBootstrapSpacing } from "@/utils";
 
 interface RadioBtnProps extends CustomVoidElementProps {
     onRadioBtnChange?: (evt: React.ChangeEvent<HTMLInputElement>) => void;
+    defaultChecked?: true | undefined;
 }
 
 export function RadioBtnPill({
@@ -11,6 +12,7 @@ export function RadioBtnPill({
     componentValue,
     componentName,
     onRadioBtnChange,
+    defaultChecked,
     bgColor,
     flex,
     justify,
@@ -47,7 +49,7 @@ export function RadioBtnPill({
 
     return (
         <div className={containerStyle}>
-            <input type="radio" className='btn-check' id={componentId} value={componentValue} name={componentName} autoComplete="off" onChange={onRadioBtnChange}/>
+            <input type="radio" className='btn-check' id={componentId} value={componentValue} name={componentName} autoComplete="off" onChange={onRadioBtnChange} defaultChecked={defaultChecked}/>
             <label className={btnStyle} htmlFor={componentId}>{componentValue}</label>
         </div>
     );
