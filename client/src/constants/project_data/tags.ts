@@ -11,3 +11,12 @@ export const ICONS = {
     [DEVELOPMENT_TYPES.SOFTWARE_DEV]: "bi bi-code-square",
     [DEVELOPMENT_TYPES.API_DEV]: "bi bi-gear-wide-connected"
 } as const;
+
+//  TODO: ADD FRAMEWORKS TO THE QUERY PARAMETERS WHEN THE BACKEND SUPPORTS IT.
+export const PROJECT_QUERY_PARAMETERS = {
+    PROJECT_TITLE: 'projectTitle',
+    DEVELOPMENT_TYPE: 'devTypeId',
+    PROGRAMMING_LANGUAGE: 'languageId',
+    DATABASE_TECHNOLOGY: 'databaseId',
+    APPLICATION_INDUSTRY: 'industryId'
+} as const;

@@ -1,1 +1,1 @@
-export { getProjectLink } from "./navigation";
+export { getPageLink, getProjectLink } from "./navigation";

@@ -1,17 +1,20 @@
-import Button from "./Button";
+import Button, { BtnBare, LinkButton } from "./Button";
 import BtnGroup from "./ButtonGroup";
+import { RadioBtnPill } from "./Input";
 
 export {
     ProjectListContext,
     ProjectDetailsContext,
     ProjectDataServiceContext,
     AllTagsContext,
+    TagCategoryContext,
     UserContext,
     ProjectListProvider,
     ProjectDetailsProvider,
     ProjectDataServiceProvider,
-    TagsContextProvider,
+    AllTagsProvider,
+    TagCategoryProvider,
     UserContextProvider
 } from "./Providers";
 
-export { Button, BtnGroup };
+export { Button, RadioBtnPill, BtnBare, LinkButton, BtnGroup };

@@ -15,6 +15,10 @@
 }
 
 .border-neutral-2 {
+  border-color: rgb(187, 154, 247);
+}
+
+.border-neutral-3 {
   border-color: rgb(68, 67, 109);
 }
 

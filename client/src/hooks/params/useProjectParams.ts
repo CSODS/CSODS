@@ -1,4 +1,7 @@
-import { useParams } from "react-router-dom";
+import { PROJECT_QUERY_PARAMETERS } from "@/constants";
+import { IProjectSearchParameters } from "@/types";
+import { useEffect, useState } from "react";
+import { useParams, useSearchParams } from "react-router-dom";
 
 export function usePageNumber() {
     const { pageNumber } = useParams<{ pageNumber: string }>();
@@ -16,4 +19,22 @@ export function useProjectId() {
         throw new Error(errMsg);
     }
     return Number(projectId);
+}
+
+export function useProjectSearchParams() {
+    const [searchParameters] = useSearchParams();
+    const [projectSearchParameters, setProjectSearchParameters] = useState<IProjectSearchParameters | undefined>(undefined);
+    useEffect(() => {
+        const projectSearchParameters: IProjectSearchParameters = {};
+        Object.values(PROJECT_QUERY_PARAMETERS).forEach(
+            (paramName) => {
+                const paramValue = searchParameters.get(paramName);
+                if (paramValue) {
+                    projectSearchParameters[paramName] = paramValue;
+                }
+        });
+        setProjectSearchParameters(projectSearchParameters);
+    }, [searchParameters]);
+
+    return projectSearchParameters;
 }

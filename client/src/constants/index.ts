@@ -3,4 +3,4 @@ export { ADDRESSES } from "./addresses/addresses";
 export { bgConstants } from "./bg-constants";
 export { DEVELOPMENT_TYPE_ENUMS } from "./enums";
 export * as DEFAULTS from './defaults';
-export { DEVELOPMENT_TYPES, ICONS } from "./project_data/tags";
+export { DEVELOPMENT_TYPES, ICONS, PROJECT_QUERY_PARAMETERS } from "./project_data/tags";

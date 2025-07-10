@@ -249,8 +249,8 @@ input[type=text] {
 }
 
 .header-logo {
-  width: 55px;
-  height: 55px;
+  width: 45x;
+  height: 45px;
   object-fit: cover;
 }
 
@@ -293,8 +293,16 @@ input[type=text] {
   font-size: 400%;
 }
 
+.fs-xxs {
+  font-size: 60%;
+}
+
 .fs-xs {
   font-size: 70%;
+}
+
+.fs-s {
+  font-size: 85%;
 }
 
 .text-emphasize {

@@ -1,16 +1,17 @@
 import axios from "axios";
 import { CSODS_API_PATHS } from "@/constants";
-import { IAllProjectTags, IProjectDetails, IProjectsPage } from "@/types";
+import { IAllProjectTags, IProjectDetails, IProjectSearchParameters, IProjectsPage } from "@/types";
+import { assembleQuery } from "../navigation/navigation";
 
 export default class ApiHandler {
     private readonly _apiBase = CSODS_API_PATHS.BASE;
 
-    public async GetProjectsPage(pageNumber: string | number): Promise<IProjectsPage | null> {
-        const projectsPage = `${CSODS_API_PATHS.PROJECTS.PATH}/${pageNumber}`;
-        const projectPageLink = `${this._apiBase}${projectsPage}`;
-        
+    public async GetProjectsPage(pageNumber: string | number, searchParameters?: IProjectSearchParameters): Promise<IProjectsPage | null> {
+        const projectsPath = `${CSODS_API_PATHS.PROJECTS.PATH}/${pageNumber}`;
+        const query = assembleQuery(searchParameters);
+        const endpoint = `${this._apiBase}${projectsPath}${query}`;
         try {
-            const response = await axios.get(projectPageLink);
+            const response = await axios.get(endpoint);
             const projects = response.data.Projects;
             const totalPages = response.data.TotalPages;
             const projectsPage: IProjectsPage = {
@@ -25,8 +26,9 @@ export default class ApiHandler {
         }
     }
 
-    public async GetProject(pageNumber: string | number, projectId: string | number): Promise<IProjectDetails | null> {
-        const endpoint = `${this._apiBase}${CSODS_API_PATHS.PROJECTS.PATH}/${pageNumber}/${projectId}`;
+    public async GetProject(pageNumber: string | number, projectId: string | number, searchParameters?: IProjectSearchParameters): Promise<IProjectDetails | null> {
+        const query = assembleQuery(searchParameters);
+        const endpoint = `${this._apiBase}${CSODS_API_PATHS.PROJECTS.PATH}/${pageNumber}/${projectId}${query}`;
         
         try {
             const response = await axios.get(endpoint);
