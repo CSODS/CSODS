@@ -3,10 +3,11 @@ import { ViewProjects } from "./carousel/slides/ViewProjects";
 import { GeneralAssembly } from "./carousel/slides/GeneralAssembly";
 import { LatestNews } from "./components/LatestNews";
 import { WelcomeToCSODS } from "./components/WelcomeToCSODS";
+import { FAB } from "./components/FAB";
 
 export default function Home() {
   return (
-    <main className="fs-responsive">
+    <main className="position-relative fs-responsive">
       <CarouselWrapper>
         {[<ViewProjects />, <GeneralAssembly />]}
       </CarouselWrapper>
@@ -18,6 +19,8 @@ export default function Home() {
       <div className="d-flex justify-content-center align-items-center mt-4 px-2">
         <WelcomeToCSODS />
       </div>
+
+      <FAB />
 
     </main>
   );
