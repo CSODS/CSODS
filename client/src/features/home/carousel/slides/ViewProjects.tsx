@@ -4,37 +4,37 @@ export function ViewProjects() {
   const projectsFirstPage = `${ADDRESSES.STUDENT_PROJECTS.ROOT}/1`;
 
   return (
-    <section className="container-fluid d-flex p-lg-5 p-3 pb-md-5">
+    <section className="container-fluid d-flex p-lg-5 py-4 px-3 pb-md-5">
       <div className="container-md">
         <div className="row g-4 align-items-center justify-content-center">
           
           {/* Text Content */}
-          <div className="col-12 col-md-6 text-center text-md-start fs-responsive px-4">
+          <div className="col-12 col-md-6 text-center text-md-start px-4">
             <div className="col-md-9 card-body mx-auto px-2 px-md-0">
               
               {/* Hashtag */}
-              <div className="d-flex justify-content-center justify-content-md-start mb-2">
+              <div className="d-none d-md-flex justify-content-center justify-content-md-start mb-2">
                 <p className="btn-light-1 rounded-pill p-1 p-md-2 m-0">
                   #DevelopersSpace
                 </p>
               </div>
 
               {/* Title */}
-              <span className="color-dark-2 bolder hs-responsive">
+              <h3 className="color-dark-2 bolder hs-responsive p-1">
                 Your Space to Learn, Build, and Grow.
-              </span>
+              </h3>
 
               {/* Description */}
-              <p className="color-dark-1 my-2">
+              <p className="color-dark-1 m-2">
                 <span className="text-emphasize">
                   Computer Science Organization: Developers’ Space
                 </span>{" "}
                 is a digital hub for students of the Computer Science Department where we foster innovation, 
-                collaboration, and academic excellence in the field of computing.
+                collaboration, and academic excellence in the field of computing. 
               </p>
 
               {/* Subtext */}
-              <small className="color-dark-3 fst-italic mb-3 d-block">
+              <small className="color-dark-3 fst-italic mb-md-3 d-block">
                 Explore. Learn. Contribute.
               </small>
 

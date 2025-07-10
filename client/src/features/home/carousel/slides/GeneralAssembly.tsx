@@ -9,9 +9,9 @@ export function GeneralAssembly() {
                 <div className="col-12 col-lg-6 text-center text-lg-start d-flex flex-column ">
                     <div className='col-lg-9 card-body mx-auto'>
 
-                        <div className='text-muted mb-2'>
+                        <p className='text-muted mb-2'>
                             Upcoming Event
-                        </div>
+                        </p>
 
                         {/* Text md/lg screen */}
                         <div className='d-none d-md-block mb-3'>
@@ -25,16 +25,16 @@ export function GeneralAssembly() {
                         </div>
 
                         {/* Mobile Image*/}
-                        <div className='d-lg-none mb-3'>
+                        <div className='d-lg-none mb-2'>
                             <img src="/general_assembly_tarp.png" 
                                 alt='CS General Assembly' 
-                                className="img-fluid rounded-3 mx-auto" 
-                                style={{maxHeight: "200px"}}>
+                                className="img-fluid rounded-3" 
+                                style={{maxHeight: "150px"}}>
                             </img>
                         </div>
 
                         {/* Text md/lg screen */}
-                        <p className="d-none d-md-block mb-3 color-dark-1 mb-0">
+                        <p className="d-none d-md-block mb-3 color-dark-1 px-lg-0 px-md-5 mb-0">
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eu mollis leo, at commodo turpis. Quisque venenatis iaculis facilisis. 
                         </p>
 
