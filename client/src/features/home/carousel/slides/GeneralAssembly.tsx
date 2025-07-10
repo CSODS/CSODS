@@ -1,12 +1,12 @@
 export function GeneralAssembly() {
     
   return (
-    <section className="container-fluid d-flex p-lg-5 p-3 pb-md-5">
+    <section className="container-fluid d-flex p-lg-5 p-3 pb-md-5 h-100 justify-content-center align-items-center">
         <div className="container-md">
             <div className='row g-4 align-items-center justify-content-center'>
                 
                 {/* Text Content */}
-                <div className="col-12 col-lg-6 text-center text-lg-start d-flex flex-column ">
+                <div className="col-12 col-md-6 text-center text-lg-start d-flex flex-column ">
                     <div className='col-lg-9 card-body mx-auto'>
 
                         <p className='text-muted mb-2'>
@@ -25,7 +25,7 @@ export function GeneralAssembly() {
                         </div>
 
                         {/* Mobile Image*/}
-                        <div className='d-lg-none mb-2'>
+                        <div className='d-md-none mb-2'>
                             <img src="/general_assembly_tarp.png" 
                                 alt='CS General Assembly' 
                                 className="img-fluid rounded-3" 
@@ -48,7 +48,7 @@ export function GeneralAssembly() {
                 </div>
 
                 {/* Desktop Image */}
-                <div className='col-lg-6 d-none d-lg-flex justify-content-center'>
+                <div className='col-md-6 d-none d-md-flex justify-content-center'>
                     <img src='/general_assembly_tarp.png' 
                         alt='CS General Assembly' 
                         className="img-fluid rounded-3" 
