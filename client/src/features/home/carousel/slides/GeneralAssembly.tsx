@@ -6,8 +6,8 @@ export function GeneralAssembly() {
             <div className='row g-4 align-items-center justify-content-center'>
                 
                 {/* Text Content */}
-                <div className="col-12 col-md-6 text-center text-lg-start d-flex flex-column ">
-                    <div className='col-lg-9 card-body mx-auto'>
+                <div className="col-12 col-md-6 text-center text-md-start d-flex flex-column">
+                    <div className='col-md-9 card-body mx-auto'>
 
                         <p className='text-muted mb-2'>
                             Upcoming Event
@@ -34,7 +34,7 @@ export function GeneralAssembly() {
                         </div>
 
                         {/* Text md/lg screen */}
-                        <p className="d-none d-md-block mb-3 color-dark-1 px-lg-0 px-md-5 mb-0">
+                        <p className="d-none d-md-block mb-3 color-dark-1 mb-0">
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eu mollis leo, at commodo turpis. Quisque venenatis iaculis facilisis. 
                         </p>
 

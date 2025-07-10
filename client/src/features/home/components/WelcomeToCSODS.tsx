@@ -17,7 +17,7 @@ export function WelcomeToCSODS() {
                 className="btn btn-dark-4 px-md-5 px-3 me-2 "
                 data-bs-toggle="modal" 
                 data-bs-target="#loginModal">
-                <span className="small">Sign Up</span>
+                <span>Sign Up</span>
             </button>
     </section>
   );
