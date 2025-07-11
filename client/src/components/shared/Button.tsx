@@ -35,7 +35,7 @@ export function BtnBare ({
     justify, 
     align,
     margin = [{ m: 0 }], 
-    padding = [{ x: 1, y: 0 }]
+    padding = [{ s:0, e: 1, y: 0 }]
 }: CustomBtnProps) {
     const btnMargin = margin.map((margin) => getBootstrapSpacing({ marginSettings: margin }).join(' ')).join(' ');
     const btnPadding = padding.map((padding) => getBootstrapSpacing({ paddingSettings: padding}).join(' ')).join(' ');
