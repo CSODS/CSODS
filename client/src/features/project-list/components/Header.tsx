@@ -4,7 +4,7 @@ export default function Header() {
       <div data-bs-spy='scroll' data-bs-target='#nav-scroll' data-bs-offset='-100'>
         <div id='heading'></div>
       </div> 
-      <div className='p-0 mt-3 mb-5 d-flex flex-column align-items-center justify-content-center'>
+      <div className='p-0 mt-3 mb-1 d-md-flex d-none flex-column align-items-center justify-content-center'>
         <div className='row g-0 d-flex justify-content-center align-items-center' style={{maxWidth:700}}>
             <div className='col-md-auto p-0 m-0 d-flex justify-content-center align-items-center'>
               <img src='/github_logo.png' alt='...' className='header-logo shadow-lg'></img>
