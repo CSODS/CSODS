@@ -3,7 +3,7 @@ import './assets/stylesheets/cards.css';
 import './assets/stylesheets/colors.css';
 import './assets/stylesheets/buttons.css';
 import './assets/stylesheets/borders.css';
-import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import { ADDRESSES } from '@/constants';
 import { CsodsBackground, NavBar } from '@/components';
 import LandingPage from './features/landing/LandingPage';
@@ -11,6 +11,7 @@ import Home from "./features/home/Home";
 import StudentProjects from './features/project-list/StudentProjects';
 import ProjectDetails from './features/project-details/ProjectDetails';
 import SubmitProject from './features/submit-project/SubmitProject';
+import { ProjectListLayout } from './features/project-list/layout/ProjectListLayout';
 
 function App() {
   return (
@@ -21,8 +22,10 @@ function App() {
             <Route element={<NavBar/>}>
               <Route index element={<LandingPage />} />
               <Route path={ADDRESSES.HOME} element={<Home />} />
-              <Route path={ADDRESSES.STUDENT_PROJECTS.PATH} element={<StudentProjects />}/>
               <Route path={ADDRESSES.ABOUT} />
+            </Route>
+            <Route element={<ProjectListLayout />}>
+              <Route path={ADDRESSES.STUDENT_PROJECTS.PATH} element={<StudentProjects />}/>
               <Route path={ADDRESSES.PROJECT_DETAILS.PATH} element={<ProjectDetails />}/>
             </Route>
           </Route>
