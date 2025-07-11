@@ -38,7 +38,7 @@ export default function SearchBar() {
   }
 
   return(
-    <div className="d-md-block d-none">
+    <div className="d-lg-block d-none">
       <div className='mt-5 d-flex justify-content-center align-items-center'>
         <div className='py-3 px-4 col-md-6 d-flex align-items-center justify-content-start border border-light-1 rounded-pill bg-light-3 translucent-20'>
           <i className="bi bi-search color-light-1 me-3"></i>
