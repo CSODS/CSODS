@@ -37,12 +37,12 @@ export default function ProjectCard () {
             <i className={`${iconClass} color-light-2 fs-4`}></i>
           </div>
 
-          <div className='col-lg-11 ps-2'>
+          <div className='col-lg-11 ps-lg-3 ps-2'>
             <div className='pb-3 ps-0 card-body d-flex flex-column align-items-start text-light' style={{minHeight:260}}>
               {/* project title  */}
               <h5 className='card-title text-start fs-3 color-light-2 bolder'>{projectDetails.Project.ProjectTitle}</h5>
               {/* project description */}
-              <p className='card-text my-1 text-start'>{projectDescription}</p>
+              <p className='card-text my-1 text-start lh-sm'>{projectDescription}</p>
               <TagRow tagList={tagList}/>
               {/* card buttons desktop */}
               <div className='mt-auto mx-0 row col-12'>
@@ -123,10 +123,10 @@ function Tag({ tag }: TagProps) {
 
   return (
     <BtnBare flex="row" justify="center" align="center" margin={[{breakpoint: 'lg', b: 1}, { m: 0}]} callBackFn={callbackFn}>
-        <div className="col-1 p-0 m-0 me-1 d-flex justify-content-center align-items-center fs-xs">
+        <div className="flex-col p-0 m-0 me-1 d-flex justify-content-center align-items-center fs-xs">
           <i className={iconClass}></i>
         </div>
-        <div className={`col-11 p-0 pe-2 m-0 text-center text-nowrap fs-xs fst-italic color-light-1 ${textOnHover}`}>
+        <div className={`flex-col p-0 pe-2 m-0 text-center text-nowrap fs-xs fst-italic color-light-1 ${textOnHover}`}>
             {tag}
         </div>
     </BtnBare>
