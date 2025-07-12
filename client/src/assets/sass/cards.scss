@@ -43,11 +43,11 @@
     }
 }
 
-@mixin color-scheme-cards($scheme-name, $color-scheme) {
+@mixin color-scheme-cards($color-scheme) {
     @each $name, $value in $color-scheme {
         $is-light-bg: v.is-color-light($value);
 
-        .card-#{$scheme-name}-#{$name} {
+        .card-#{$name} {
             transition-duration: 0.4s;
             background-color: $value;
 
@@ -72,6 +72,19 @@
     }
 }
 
-@include color-scheme-cards('default', v.$color-scheme-default);
-@include color-scheme-cards('util', v.$color-scheme-utility);
-@include color-scheme-cards('frost', v.$color-scheme-frost);
+@mixin gradient-cards($scheme-name, $gradient-map) {
+    @each $name, $gradient in $gradient-map {
+        .card-#{$scheme-name}-#{$name} {
+            transition-duration: 0.4s;
+            background-image: $gradient;
+
+            @include m.hover-float(4px);
+            @include m.hover-shadow();
+        }
+    }
+}
+
+@include color-scheme-cards(v.$color-scheme-default);
+@include color-scheme-cards(v.$color-scheme-utility);
+@include color-scheme-cards(v.$color-scheme-frost);
+@include gradient-cards('frost', v.$frost-gradients);

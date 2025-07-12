@@ -1593,6 +1593,10 @@
   background-image: radial-gradient(circle at 0% 0%, rgb(74, 127, 167), rgb(26, 61, 99));
 }
 
+.bg-frost-gradient-2 {
+  background-image: radial-gradient(circle at 0% 0%, rgb(179, 207, 229), rgb(74, 127, 167));
+}
+
 .color-frost-light-azure {
   color: rgb(246, 250, 253);
 }
