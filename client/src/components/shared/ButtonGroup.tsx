@@ -23,7 +23,7 @@ export default function BtnGroup({
                         const key = `tag-${index}`
                         return (
                             <Button selectorList={btnSelectors} componentKey={key}>
-                                <p className='p-0 m-0 text-start'>
+                                <p className='p-0 m-0 text-start fs-p'>
                                     {tag}
                                 </p>
                             </Button>

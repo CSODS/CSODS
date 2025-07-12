@@ -25,6 +25,44 @@ export default function Button({
     );
 }
 
+export function Btn({
+    children,
+    callBackFn,
+    btnColor,
+    flex,
+    justify,
+    align,
+    margin,
+    padding,
+    hoverBehavior,
+    border,
+    opacity
+}: CustomBtnProps) {
+    const btnVariant = btnColor ? `btn btn-${btnColor}` : `btn`;
+    const btnMargin = margin?.map((margin) => getBootstrapSpacing({ marginSettings: margin }).join(' ')).join(' ') ?? '';
+    const btnPadding = padding?.map((padding) => getBootstrapSpacing({ paddingSettings: padding}).join(' ')).join(' ') ?? '';
+    const btnFlex = flex ? `d-flex flex-${flex}` : '';
+    const justifyContent = justify ? `justify-content-${justify}` : '';
+    const alignItems = align ? `align-items-${align}` : '';
+    const onHover = hoverBehavior ? `hover-${hoverBehavior}` : '';
+    
+    const borderWidth = `border-${border?.width ?? 0}`;
+    const borderColor = border?.color ? `border-${border.color}` : '';
+    const borderStyle = `border ${borderWidth} ${borderColor} rounded-pill`;
+
+    const btnOpacity = `translucent-${opacity ?? 100}`;
+
+    const btnStyleList = [btnVariant, btnMargin, btnPadding, btnFlex, justifyContent, alignItems, onHover, borderStyle, btnOpacity];
+
+    const btnStyle = btnStyleList.join(' ');
+
+    return (
+        <button type="button" className={btnStyle} onClick={callBackFn}>
+            {children}
+        </button>
+    )
+}
+
 export function BtnBare ({ 
     children, 
     componentKey, 

@@ -1,4 +1,4 @@
-import Button, { BtnBare, LinkButton } from "./Button";
+import Button, { Btn, BtnBare, LinkButton } from "./Button";
 import BtnGroup from "./ButtonGroup";
 import { RadioBtnPill } from "./Input";
 
@@ -17,4 +17,4 @@ export {
     UserContextProvider
 } from "./Providers";
 
-export { Button, RadioBtnPill, BtnBare, LinkButton, BtnGroup };
+export { Button, Btn, RadioBtnPill, BtnBare, LinkButton, BtnGroup };
