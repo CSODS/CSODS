@@ -50,17 +50,17 @@
 }
 
 @mixin hover-invert($current-bg, $opacity: 1.0) {
-    $is-light-bg: v.is-color-light($value);
+    $is-light-bg: v.is-color-light($current-bg);
 
     &.hover-invert {
         &:hover {
             @if ($is-light-bg) {
                 background-color: color.change($color: v.$black, $alpha: $opacity);
-                color: $white;
+                color: v.$white;
             }
             @else {
                 background-color: color.change($color: v.$white, $alpha: $opacity);
-                color: $black;
+                color: v.$black;
             }
         }
     }
