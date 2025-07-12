@@ -44,7 +44,7 @@ export function BtnPill({
     const btnFlex = flex ? `d-flex flex-${flex}` : '';
     const justifyContent = justify ? `justify-content-${justify}` : '';
     const alignItems = align ? `align-items-${align}` : '';
-    const onHover = hoverBehavior ? `hover-${hoverBehavior}` : '';
+    const onHover = hoverBehavior ? `hover-shadow hover-${hoverBehavior}` : 'hover-shadow';
     
     const borderWidth = `border-${border?.width ?? 0}`;
     const borderColor = border?.color ? `border-${border.color}` : '';
