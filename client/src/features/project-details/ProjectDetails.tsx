@@ -2,8 +2,9 @@ import { useState } from "react";
 import { DEFAULT_USER } from "@constants/defaults";
 import { useFetchProject, useFetchTagData } from "@/hooks";
 import { IUser } from "@/types";
-import { CoreContributors, ProjectImages, ProjectInformationCard, ProjectInformationProvider } from "./components";
+import { ProjectInformationProvider } from "./components";
 import HeaderCard from "./components/HeaderCard";
+import About from "./components/About";
 
 export default function ProjectDetails() {
   const allTags = useFetchTagData();
@@ -12,16 +13,14 @@ export default function ProjectDetails() {
 
   if (allTags && project) { 
     return (
-      <div className="px-0 d-flex flex-column justify-content-center align-items-center">
+      <div className="container-fluid p-0">
         <ProjectInformationProvider allTags={allTags} project={project} user={user}>
-          <HeaderCard/>
-          <div className="mt-3 m-0 row row-cols-lg-2 w-100">
-            <div className="col-lg-4">
-              <CoreContributors/>
-            </div>
-            <div className="col-lg-8">
-              <ProjectInformationCard/>
-              <ProjectImages/>
+          <div className="row m-0 p-0">
+            <HeaderCard/>
+          </div>
+          <div className="row row-cols-sm-2 row-cols-1 m-0 mt-sm-3 mt-2 px-sm-2 p-0">
+            <div className="col px-sm-3 px-2">
+              <About/>
             </div>
           </div>
         </ProjectInformationProvider>

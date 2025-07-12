@@ -1,0 +1,17 @@
+import { PROJECT_DESCRIPTION } from "@/constants/defaults";
+import { useProjectDetails } from "@/hooks";
+
+export default function About() {
+    const project = useProjectDetails();
+
+    return (
+        <div className="h-100 px-3 p-2 card card-frost-gradient-2 hover-shadow border border-0 rounded-2">
+            <h2 className="m-0 pb-1 p-0 border-bottom border-2 border-frost-midnight text-start color-frost-midnight">
+                About
+            </h2>
+            <p className="m-0 pt-2 p-0 text-start fs-p color-frost-midnight">
+                {PROJECT_DESCRIPTION}
+            </p>
+        </div>
+    )
+}
