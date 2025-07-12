@@ -1,8 +1,16 @@
+.fs-small {
+    font-size: 0.6rem;
+}
+
 .fs-p {
     font-size: 0.75rem;
 }
 
 @media (min-width: 576px) {
+    .fs-small {
+        font-size: 0.85rem;
+    }
+
     .fs-p {
         font-size: 1rem;
     }
