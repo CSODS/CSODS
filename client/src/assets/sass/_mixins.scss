@@ -1,0 +1,71 @@
+@use 'variables.scss' as v;
+@use 'sass:color';
+
+@mixin hover-shadow() {
+    &.hover-shadow {
+        &:hover {
+            box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 
+                        0 17px 50px 0 rgba(0,0,0,0.19);
+        }
+    }
+}
+
+@mixin hover-float($px: 4px) {
+    &.hover-float {
+        &:hover {
+            transform: translateY(-$px);
+        }
+    }
+}
+
+@mixin hover-solidify($current-color, $current-opacity) {
+    &.hover-solidify {
+        &:hover { 
+            $hover-opacity: $current-opacity;
+            @if ($hover-opacity <= 0.7) {
+                $hover-opacity: $hover-opacity + 0.2;
+            }
+            @else {
+                $hover-opacity: 1.0;
+            }
+            background-color: color.change($color: $current-color, $alpha: $hover-opacity) ;
+        }
+    }
+}
+
+@mixin hover-darken($current-bg, $percent: 10%) {
+    &.hover-darken {
+        &:hover {
+            background-color: color.scale($current-bg, $lightness: -$percent, $space: lab);
+        }
+    }
+}
+
+@mixin hover-lighten($current-bg, $percent: 10%) {
+    &.hover-lighten {
+        &:hover {
+            background-color: color.scale($current-bg, $lightness: $percent, $space: lab);
+        }
+    }
+}
+
+@mixin hover-invert($current-bg, $opacity: 1.0) {
+    $is-light-bg: v.is-color-light($value);
+
+    &.hover-invert {
+        &:hover {
+            @if ($is-light-bg) {
+                background-color: color.change($color: v.$black, $alpha: $opacity);
+                color: $white;
+            }
+            @else {
+                background-color: color.change($color: v.$white, $alpha: $opacity);
+                color: $black;
+            }
+        }
+    }
+}
+
+@mixin background-opacity($color, $opacity: 1.0) {
+    background-color: color.change($color, $alpha: $opacity);
+}
