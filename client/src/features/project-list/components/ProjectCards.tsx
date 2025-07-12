@@ -60,10 +60,10 @@ export default function ProjectCard () {
           {/* card buttons tablet/mobile */}
           <div className='mt-auto d-lg-none d-flex flex-row bg-dark-4 rounded-bottom'>
             <div className="w-100 my-1 ps-1 d-flex flex-col justify-content-start">
-              <button type='button' className='m-1 mx-2 px-1 btn-dark-3 translucent-20 hover-lighten rounded-2 border border-0 justify-content-center align-items-center' onClick={() => redirectToUrl(projectDetails.Project.GitHubUrl)}>
+              <button type='button' className='m-1 mx-2 px-1 btn-dark-3 translucent-50 hover-lighten rounded-2 border border-0 justify-content-center align-items-center' onClick={() => redirectToUrl(projectDetails.Project.GitHubUrl)}>
                 <i className="m-0 bi bi-github"/>
               </button>
-              <button type='button' className='m-1 px-1 btn-dark-3 translucent-20 hover-lighten rounded-2 border border-0 justify-content-center align-items-center' onClick={() => viewProject()}>
+              <button type='button' className='m-1 px-1 btn-dark-3 translucent-50 hover-lighten rounded-2 border border-0 justify-content-center align-items-center' onClick={() => viewProject()}>
                 <i className="m-0 bi bi-eye-fill"/>
               </button>
             </div>
