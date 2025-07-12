@@ -1,4 +1,5 @@
 @use 'variables.scss' as v;
+@use 'mixins.scss' as m;
 @use 'sass:color';
 
 @each $name, $value in v.$color-scheme {
@@ -226,3 +227,31 @@
          }
     }
 }
+
+@mixin btn-mixin($color-scheme) {
+    @each $name, $value in $color-scheme {
+        .btn-#{$name} {
+            transition-duration: 0.2s;
+            background-color: $value ;
+
+            @include m.hover-float(2px);
+            @include m.hover-shadow();
+            @include m.hover-darken($value, 10%);
+            @include m.hover-lighten($value, 10%);
+            @include m.hover-invert($value);
+
+            @each $opacity in v.$opacities {
+                $translucent-bg: color.change($color: $value, $alpha: $opacity);
+                background-color: $translucent-bg;
+
+                @include m.hover-darken($translucent-bg, 10%);
+                @include m.hover-lighten($translucent-bg, 10%);
+                @include m.hover-invert($value, $opacity);
+            }
+        }
+    }
+}
+
+@include btn-mixin(v.$color-scheme-default);
+@include btn-mixin(v.$color-scheme-utility);
+@include btn-mixin(v.$color-scheme-frost);

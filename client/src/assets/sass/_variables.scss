@@ -91,7 +91,6 @@ $pastel-gray-azure: rgb(179 207 229);
 $azure: rgb(74 127 167);
 $nile-blue: rgb(26 61 99);
 $midnight: rgb(10 25 49);
-$dark-purple: $dark-purple;
 
 $frost-gradient-1: radial-gradient(circle at 0% 0%, $azure, $nile-blue);
 
@@ -100,8 +99,7 @@ $color-scheme-frost: (
     'pastel-gray-azure': $pastel-gray-azure,
     'azure': $azure,
     'nile-blue': $nile-blue,
-    'midnight': $midnight,
-    'dark-purple': $dark-purple
+    'midnight': $midnight
 );
 
 $frost-gradients: (
