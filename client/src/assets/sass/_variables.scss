@@ -95,6 +95,14 @@ $color-scheme-default: (
     'mulled-wine': $mulled-wine
 );
 
+$color-scheme-utility: (
+    'error': $util-error,
+    'alert': $util-alert,
+    'alert-subtle': $util-alert-subtle,
+    'notify': $util-notify,
+    'success': $util-success
+);
+
 //  color scheme frost
 $light-azure: rgb(246 250 253);
 $pastel-gray-azure: rgb(179 207 229);
