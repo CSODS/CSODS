@@ -25,7 +25,7 @@ export default function Button({
     );
 }
 
-export function Btn({
+export function BtnPill({
     children,
     callBackFn,
     btnColor,

@@ -15,4 +15,4 @@ export {
     UserContextProvider
 } from "./shared";
 
-export { Button, Btn, RadioBtnPill, BtnBare, LinkButton, BtnGroup } from "./shared";
+export { Button, BtnPill, RadioBtnPill, BtnBare, LinkButton, BtnGroup } from "./shared";
