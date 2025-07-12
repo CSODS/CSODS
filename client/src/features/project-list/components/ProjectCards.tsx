@@ -42,7 +42,7 @@ export default function ProjectCard () {
               {/* project title  */}
               <h5 className='card-title text-start fs-3 color-light-2 bolder'>{projectDetails.Project.ProjectTitle}</h5>
               {/* project description */}
-              <p className='card-text my-1 text-start lh-sm'>{projectDescription}</p>
+              <small className='card-text my-1 text-start lh-sm'>{projectDescription}</small>
               <TagRow tagList={tagList}/>
               {/* card buttons desktop */}
               <div className='mt-auto mx-0 row col-12'>
