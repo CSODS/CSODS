@@ -3,6 +3,7 @@ import './assets/stylesheets/cards.css';
 import './assets/stylesheets/colors.css';
 import './assets/stylesheets/buttons.css';
 import './assets/stylesheets/borders.css';
+import './assets/stylesheets/font.css';
 import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import { ADDRESSES } from '@/constants';
 import { CsodsBackground, NavBar } from '@/components';
