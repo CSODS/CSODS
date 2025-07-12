@@ -57,24 +57,6 @@ $dark-colors: $dark-grey-blue, $dark-purple, $black, $mulled-wine;
 
 $color-scheme: build-color-scheme();
 
-@function is-color-light($color) {
-    $color-index: list.index($light-colors, $color);
-    $is-light: $color-index != null;
-    @return $is-light;
-}
-
-@function is-color-neutral($color) {
-    $color-index: list.index($neutral-colors, $color);
-    $is-neutral: $color-index != null;
-    @return $is-neutral;
-}
-
-@function is-color-dark($color) {
-    $color-index: list.index($dark-colors, $color);
-    $is-dark: $color-index != null;
-    @return $is-dark;
-}
-
 $utility-colors: (
     "util-error": $util-error,
     "util-alert": $util-alert,
@@ -129,3 +111,21 @@ $frost-gradients: (
 $color-light: $ball-blue, $chrome-yellow, $light-azure, $light-grey, $grey, $pastel-gray-azure, $vivid-red, $white;
 $color-neutral: $azure, $biloba-flower, $cookie-brown, $green, $grey-blue;
 $color-dark:  $black, $dark-grey-blue, $dark-purple, $midnight, $mulled-wine, $nile-blue;
+
+@function is-color-light($color) {
+    $color-index: list.index($color-light, $color);
+    $is-light: $color-index != null;
+    @return $is-light;
+}
+
+@function is-color-neutral($color) {
+    $color-index: list.index($color-neutral, $color);
+    $is-neutral: $color-index != null;
+    @return $is-neutral;
+}
+
+@function is-color-dark($color) {
+    $color-index: list.index($color-dark, $color);
+    $is-dark: $color-index != null;
+    @return $is-dark;
+}
