@@ -77,7 +77,6 @@ function FilterButtons({ onRadioBtnChange }: FilterButtonsProps) {
         opacity={60}
         margin={[{y: 1, x: 2}]} 
         padding={[{x: 3, y: 1}]} 
-        border={{width: 1, color:'light-1'}} 
         componentValue='All'
         onRadioBtnChange={onRadioBtnChange}
         defaultChecked
@@ -98,7 +97,6 @@ function FilterButtons({ onRadioBtnChange }: FilterButtonsProps) {
               opacity={60} 
               margin={[{y: 1, x: 2}]} 
               padding={[{x: 3, y: 1}]} 
-              border={{width: 1, color:'light-1'}} 
               componentValue={filterName}
               onRadioBtnChange={onRadioBtnChange}
             />
