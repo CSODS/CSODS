@@ -83,6 +83,18 @@ $utility-colors: (
     "util-success": $util-success
 );
 
+$color-scheme-default: (
+    'white': $white,
+    'light-grey': $light-grey,
+    'grey': $grey,
+    'green': $green,
+    'grey-blue': $grey-blue,
+    'dark-grey-blue': $dark-grey-blue,
+    'dark-purple': $dark-purple,
+    'black': $black,
+    'mulled-wine': $mulled-wine
+);
+
 //  color scheme frost
 $light-azure: rgb(246 250 253);
 $pastel-gray-azure: rgb(179 207 229);
