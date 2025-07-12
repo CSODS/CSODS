@@ -733,4 +733,988 @@
   color: rgb(0, 191, 99);
 }
 
+.bg-default-white {
+  background-color: rgb(255, 255, 255);
+}
+.bg-default-white.translucent-10 {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+.bg-default-white.translucent-20 {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+.bg-default-white.translucent-30 {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+.bg-default-white.translucent-40 {
+  background-color: rgba(255, 255, 255, 0.4);
+}
+.bg-default-white.translucent-50 {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+.bg-default-white.translucent-60 {
+  background-color: rgba(255, 255, 255, 0.6);
+}
+.bg-default-white.translucent-70 {
+  background-color: rgba(255, 255, 255, 0.7);
+}
+.bg-default-white.translucent-80 {
+  background-color: rgba(255, 255, 255, 0.8);
+}
+.bg-default-white.translucent-90 {
+  background-color: rgba(255, 255, 255, 0.9);
+}
+.bg-default-white.translucent-100 {
+  background-color: white;
+}
+
+.bg-default-light-grey {
+  background-color: rgb(222, 222, 222);
+}
+.bg-default-light-grey.translucent-10 {
+  background-color: rgba(222, 222, 222, 0.1);
+}
+.bg-default-light-grey.translucent-20 {
+  background-color: rgba(222, 222, 222, 0.2);
+}
+.bg-default-light-grey.translucent-30 {
+  background-color: rgba(222, 222, 222, 0.3);
+}
+.bg-default-light-grey.translucent-40 {
+  background-color: rgba(222, 222, 222, 0.4);
+}
+.bg-default-light-grey.translucent-50 {
+  background-color: rgba(222, 222, 222, 0.5);
+}
+.bg-default-light-grey.translucent-60 {
+  background-color: rgba(222, 222, 222, 0.6);
+}
+.bg-default-light-grey.translucent-70 {
+  background-color: rgba(222, 222, 222, 0.7);
+}
+.bg-default-light-grey.translucent-80 {
+  background-color: rgba(222, 222, 222, 0.8);
+}
+.bg-default-light-grey.translucent-90 {
+  background-color: rgba(222, 222, 222, 0.9);
+}
+.bg-default-light-grey.translucent-100 {
+  background-color: #dedede;
+}
+
+.bg-default-grey {
+  background-color: rgb(140, 127, 132);
+}
+.bg-default-grey.translucent-10 {
+  background-color: rgba(140, 127, 132, 0.1);
+}
+.bg-default-grey.translucent-20 {
+  background-color: rgba(140, 127, 132, 0.2);
+}
+.bg-default-grey.translucent-30 {
+  background-color: rgba(140, 127, 132, 0.3);
+}
+.bg-default-grey.translucent-40 {
+  background-color: rgba(140, 127, 132, 0.4);
+}
+.bg-default-grey.translucent-50 {
+  background-color: rgba(140, 127, 132, 0.5);
+}
+.bg-default-grey.translucent-60 {
+  background-color: rgba(140, 127, 132, 0.6);
+}
+.bg-default-grey.translucent-70 {
+  background-color: rgba(140, 127, 132, 0.7);
+}
+.bg-default-grey.translucent-80 {
+  background-color: rgba(140, 127, 132, 0.8);
+}
+.bg-default-grey.translucent-90 {
+  background-color: rgba(140, 127, 132, 0.9);
+}
+.bg-default-grey.translucent-100 {
+  background-color: #8c7f84;
+}
+
+.bg-default-green {
+  background-color: rgb(0, 191, 99);
+}
+.bg-default-green.translucent-10 {
+  background-color: rgba(0, 191, 99, 0.1);
+}
+.bg-default-green.translucent-20 {
+  background-color: rgba(0, 191, 99, 0.2);
+}
+.bg-default-green.translucent-30 {
+  background-color: rgba(0, 191, 99, 0.3);
+}
+.bg-default-green.translucent-40 {
+  background-color: rgba(0, 191, 99, 0.4);
+}
+.bg-default-green.translucent-50 {
+  background-color: rgba(0, 191, 99, 0.5);
+}
+.bg-default-green.translucent-60 {
+  background-color: rgba(0, 191, 99, 0.6);
+}
+.bg-default-green.translucent-70 {
+  background-color: rgba(0, 191, 99, 0.7);
+}
+.bg-default-green.translucent-80 {
+  background-color: rgba(0, 191, 99, 0.8);
+}
+.bg-default-green.translucent-90 {
+  background-color: rgba(0, 191, 99, 0.9);
+}
+.bg-default-green.translucent-100 {
+  background-color: #00bf63;
+}
+
+.bg-default-grey-blue {
+  background-color: rgb(68, 67, 109);
+}
+.bg-default-grey-blue.translucent-10 {
+  background-color: rgba(68, 67, 109, 0.1);
+}
+.bg-default-grey-blue.translucent-20 {
+  background-color: rgba(68, 67, 109, 0.2);
+}
+.bg-default-grey-blue.translucent-30 {
+  background-color: rgba(68, 67, 109, 0.3);
+}
+.bg-default-grey-blue.translucent-40 {
+  background-color: rgba(68, 67, 109, 0.4);
+}
+.bg-default-grey-blue.translucent-50 {
+  background-color: rgba(68, 67, 109, 0.5);
+}
+.bg-default-grey-blue.translucent-60 {
+  background-color: rgba(68, 67, 109, 0.6);
+}
+.bg-default-grey-blue.translucent-70 {
+  background-color: rgba(68, 67, 109, 0.7);
+}
+.bg-default-grey-blue.translucent-80 {
+  background-color: rgba(68, 67, 109, 0.8);
+}
+.bg-default-grey-blue.translucent-90 {
+  background-color: rgba(68, 67, 109, 0.9);
+}
+.bg-default-grey-blue.translucent-100 {
+  background-color: #44436d;
+}
+
+.bg-default-dark-grey-blue {
+  background-color: rgb(43, 45, 66);
+}
+.bg-default-dark-grey-blue.translucent-10 {
+  background-color: rgba(43, 45, 66, 0.1);
+}
+.bg-default-dark-grey-blue.translucent-20 {
+  background-color: rgba(43, 45, 66, 0.2);
+}
+.bg-default-dark-grey-blue.translucent-30 {
+  background-color: rgba(43, 45, 66, 0.3);
+}
+.bg-default-dark-grey-blue.translucent-40 {
+  background-color: rgba(43, 45, 66, 0.4);
+}
+.bg-default-dark-grey-blue.translucent-50 {
+  background-color: rgba(43, 45, 66, 0.5);
+}
+.bg-default-dark-grey-blue.translucent-60 {
+  background-color: rgba(43, 45, 66, 0.6);
+}
+.bg-default-dark-grey-blue.translucent-70 {
+  background-color: rgba(43, 45, 66, 0.7);
+}
+.bg-default-dark-grey-blue.translucent-80 {
+  background-color: rgba(43, 45, 66, 0.8);
+}
+.bg-default-dark-grey-blue.translucent-90 {
+  background-color: rgba(43, 45, 66, 0.9);
+}
+.bg-default-dark-grey-blue.translucent-100 {
+  background-color: #2b2d42;
+}
+
+.bg-default-dark-purple {
+  background-color: rgb(19, 7, 46);
+}
+.bg-default-dark-purple.translucent-10 {
+  background-color: rgba(19, 7, 46, 0.1);
+}
+.bg-default-dark-purple.translucent-20 {
+  background-color: rgba(19, 7, 46, 0.2);
+}
+.bg-default-dark-purple.translucent-30 {
+  background-color: rgba(19, 7, 46, 0.3);
+}
+.bg-default-dark-purple.translucent-40 {
+  background-color: rgba(19, 7, 46, 0.4);
+}
+.bg-default-dark-purple.translucent-50 {
+  background-color: rgba(19, 7, 46, 0.5);
+}
+.bg-default-dark-purple.translucent-60 {
+  background-color: rgba(19, 7, 46, 0.6);
+}
+.bg-default-dark-purple.translucent-70 {
+  background-color: rgba(19, 7, 46, 0.7);
+}
+.bg-default-dark-purple.translucent-80 {
+  background-color: rgba(19, 7, 46, 0.8);
+}
+.bg-default-dark-purple.translucent-90 {
+  background-color: rgba(19, 7, 46, 0.9);
+}
+.bg-default-dark-purple.translucent-100 {
+  background-color: #13072e;
+}
+
+.bg-default-black {
+  background-color: rgb(0, 0, 0);
+}
+.bg-default-black.translucent-10 {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.bg-default-black.translucent-20 {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+.bg-default-black.translucent-30 {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+.bg-default-black.translucent-40 {
+  background-color: rgba(0, 0, 0, 0.4);
+}
+.bg-default-black.translucent-50 {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.bg-default-black.translucent-60 {
+  background-color: rgba(0, 0, 0, 0.6);
+}
+.bg-default-black.translucent-70 {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+.bg-default-black.translucent-80 {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+.bg-default-black.translucent-90 {
+  background-color: rgba(0, 0, 0, 0.9);
+}
+.bg-default-black.translucent-100 {
+  background-color: black;
+}
+
+.bg-default-mulled-wine {
+  background-color: rgb(68, 67, 109);
+}
+.bg-default-mulled-wine.translucent-10 {
+  background-color: rgba(68, 67, 109, 0.1);
+}
+.bg-default-mulled-wine.translucent-20 {
+  background-color: rgba(68, 67, 109, 0.2);
+}
+.bg-default-mulled-wine.translucent-30 {
+  background-color: rgba(68, 67, 109, 0.3);
+}
+.bg-default-mulled-wine.translucent-40 {
+  background-color: rgba(68, 67, 109, 0.4);
+}
+.bg-default-mulled-wine.translucent-50 {
+  background-color: rgba(68, 67, 109, 0.5);
+}
+.bg-default-mulled-wine.translucent-60 {
+  background-color: rgba(68, 67, 109, 0.6);
+}
+.bg-default-mulled-wine.translucent-70 {
+  background-color: rgba(68, 67, 109, 0.7);
+}
+.bg-default-mulled-wine.translucent-80 {
+  background-color: rgba(68, 67, 109, 0.8);
+}
+.bg-default-mulled-wine.translucent-90 {
+  background-color: rgba(68, 67, 109, 0.9);
+}
+.bg-default-mulled-wine.translucent-100 {
+  background-color: #44436d;
+}
+
+.color-default-white {
+  color: rgb(255, 255, 255);
+}
+
+.color-default-light-grey {
+  color: rgb(222, 222, 222);
+}
+
+.color-default-grey {
+  color: rgb(140, 127, 132);
+}
+
+.color-default-green {
+  color: rgb(0, 191, 99);
+}
+
+.color-default-grey-blue {
+  color: rgb(68, 67, 109);
+}
+
+.color-default-dark-grey-blue {
+  color: rgb(43, 45, 66);
+}
+
+.color-default-dark-purple {
+  color: rgb(19, 7, 46);
+}
+
+.color-default-black {
+  color: rgb(0, 0, 0);
+}
+
+.color-default-mulled-wine {
+  color: rgb(68, 67, 109);
+}
+
+.border-default-white {
+  border-color: rgb(255, 255, 255);
+}
+
+.border-default-light-grey {
+  border-color: rgb(222, 222, 222);
+}
+
+.border-default-grey {
+  border-color: rgb(140, 127, 132);
+}
+
+.border-default-green {
+  border-color: rgb(0, 191, 99);
+}
+
+.border-default-grey-blue {
+  border-color: rgb(68, 67, 109);
+}
+
+.border-default-dark-grey-blue {
+  border-color: rgb(43, 45, 66);
+}
+
+.border-default-dark-purple {
+  border-color: rgb(19, 7, 46);
+}
+
+.border-default-black {
+  border-color: rgb(0, 0, 0);
+}
+
+.border-default-mulled-wine {
+  border-color: rgb(68, 67, 109);
+}
+
+.hover-colorize-default-white {
+  transition-duration: 0.4s;
+}
+.hover-colorize-default-white:hover {
+  color: rgb(255, 255, 255);
+}
+
+.hover-colorize-default-light-grey {
+  transition-duration: 0.4s;
+}
+.hover-colorize-default-light-grey:hover {
+  color: rgb(222, 222, 222);
+}
+
+.hover-colorize-default-grey {
+  transition-duration: 0.4s;
+}
+.hover-colorize-default-grey:hover {
+  color: rgb(140, 127, 132);
+}
+
+.hover-colorize-default-green {
+  transition-duration: 0.4s;
+}
+.hover-colorize-default-green:hover {
+  color: rgb(0, 191, 99);
+}
+
+.hover-colorize-default-grey-blue {
+  transition-duration: 0.4s;
+}
+.hover-colorize-default-grey-blue:hover {
+  color: rgb(68, 67, 109);
+}
+
+.hover-colorize-default-dark-grey-blue {
+  transition-duration: 0.4s;
+}
+.hover-colorize-default-dark-grey-blue:hover {
+  color: rgb(43, 45, 66);
+}
+
+.hover-colorize-default-dark-purple {
+  transition-duration: 0.4s;
+}
+.hover-colorize-default-dark-purple:hover {
+  color: rgb(19, 7, 46);
+}
+
+.hover-colorize-default-black {
+  transition-duration: 0.4s;
+}
+.hover-colorize-default-black:hover {
+  color: rgb(0, 0, 0);
+}
+
+.hover-colorize-default-mulled-wine {
+  transition-duration: 0.4s;
+}
+.hover-colorize-default-mulled-wine:hover {
+  color: rgb(68, 67, 109);
+}
+
+.bg-util-error {
+  background-color: rgb(234, 67, 53);
+}
+.bg-util-error.translucent-10 {
+  background-color: rgba(234, 67, 53, 0.1);
+}
+.bg-util-error.translucent-20 {
+  background-color: rgba(234, 67, 53, 0.2);
+}
+.bg-util-error.translucent-30 {
+  background-color: rgba(234, 67, 53, 0.3);
+}
+.bg-util-error.translucent-40 {
+  background-color: rgba(234, 67, 53, 0.4);
+}
+.bg-util-error.translucent-50 {
+  background-color: rgba(234, 67, 53, 0.5);
+}
+.bg-util-error.translucent-60 {
+  background-color: rgba(234, 67, 53, 0.6);
+}
+.bg-util-error.translucent-70 {
+  background-color: rgba(234, 67, 53, 0.7);
+}
+.bg-util-error.translucent-80 {
+  background-color: rgba(234, 67, 53, 0.8);
+}
+.bg-util-error.translucent-90 {
+  background-color: rgba(234, 67, 53, 0.9);
+}
+.bg-util-error.translucent-100 {
+  background-color: #ea4335;
+}
+
+.bg-util-alert {
+  background-color: rgb(255, 165, 0);
+}
+.bg-util-alert.translucent-10 {
+  background-color: rgba(255, 165, 0, 0.1);
+}
+.bg-util-alert.translucent-20 {
+  background-color: rgba(255, 165, 0, 0.2);
+}
+.bg-util-alert.translucent-30 {
+  background-color: rgba(255, 165, 0, 0.3);
+}
+.bg-util-alert.translucent-40 {
+  background-color: rgba(255, 165, 0, 0.4);
+}
+.bg-util-alert.translucent-50 {
+  background-color: rgba(255, 165, 0, 0.5);
+}
+.bg-util-alert.translucent-60 {
+  background-color: rgba(255, 165, 0, 0.6);
+}
+.bg-util-alert.translucent-70 {
+  background-color: rgba(255, 165, 0, 0.7);
+}
+.bg-util-alert.translucent-80 {
+  background-color: rgba(255, 165, 0, 0.8);
+}
+.bg-util-alert.translucent-90 {
+  background-color: rgba(255, 165, 0, 0.9);
+}
+.bg-util-alert.translucent-100 {
+  background-color: orange;
+}
+
+.bg-util-alert-subtle {
+  background-color: rgb(199, 155, 26);
+}
+.bg-util-alert-subtle.translucent-10 {
+  background-color: rgba(199, 155, 26, 0.1);
+}
+.bg-util-alert-subtle.translucent-20 {
+  background-color: rgba(199, 155, 26, 0.2);
+}
+.bg-util-alert-subtle.translucent-30 {
+  background-color: rgba(199, 155, 26, 0.3);
+}
+.bg-util-alert-subtle.translucent-40 {
+  background-color: rgba(199, 155, 26, 0.4);
+}
+.bg-util-alert-subtle.translucent-50 {
+  background-color: rgba(199, 155, 26, 0.5);
+}
+.bg-util-alert-subtle.translucent-60 {
+  background-color: rgba(199, 155, 26, 0.6);
+}
+.bg-util-alert-subtle.translucent-70 {
+  background-color: rgba(199, 155, 26, 0.7);
+}
+.bg-util-alert-subtle.translucent-80 {
+  background-color: rgba(199, 155, 26, 0.8);
+}
+.bg-util-alert-subtle.translucent-90 {
+  background-color: rgba(199, 155, 26, 0.9);
+}
+.bg-util-alert-subtle.translucent-100 {
+  background-color: #c79b1a;
+}
+
+.bg-util-notify {
+  background-color: rgb(54, 163, 217);
+}
+.bg-util-notify.translucent-10 {
+  background-color: rgba(54, 163, 217, 0.1);
+}
+.bg-util-notify.translucent-20 {
+  background-color: rgba(54, 163, 217, 0.2);
+}
+.bg-util-notify.translucent-30 {
+  background-color: rgba(54, 163, 217, 0.3);
+}
+.bg-util-notify.translucent-40 {
+  background-color: rgba(54, 163, 217, 0.4);
+}
+.bg-util-notify.translucent-50 {
+  background-color: rgba(54, 163, 217, 0.5);
+}
+.bg-util-notify.translucent-60 {
+  background-color: rgba(54, 163, 217, 0.6);
+}
+.bg-util-notify.translucent-70 {
+  background-color: rgba(54, 163, 217, 0.7);
+}
+.bg-util-notify.translucent-80 {
+  background-color: rgba(54, 163, 217, 0.8);
+}
+.bg-util-notify.translucent-90 {
+  background-color: rgba(54, 163, 217, 0.9);
+}
+.bg-util-notify.translucent-100 {
+  background-color: #36a3d9;
+}
+
+.bg-util-success {
+  background-color: rgb(0, 191, 99);
+}
+.bg-util-success.translucent-10 {
+  background-color: rgba(0, 191, 99, 0.1);
+}
+.bg-util-success.translucent-20 {
+  background-color: rgba(0, 191, 99, 0.2);
+}
+.bg-util-success.translucent-30 {
+  background-color: rgba(0, 191, 99, 0.3);
+}
+.bg-util-success.translucent-40 {
+  background-color: rgba(0, 191, 99, 0.4);
+}
+.bg-util-success.translucent-50 {
+  background-color: rgba(0, 191, 99, 0.5);
+}
+.bg-util-success.translucent-60 {
+  background-color: rgba(0, 191, 99, 0.6);
+}
+.bg-util-success.translucent-70 {
+  background-color: rgba(0, 191, 99, 0.7);
+}
+.bg-util-success.translucent-80 {
+  background-color: rgba(0, 191, 99, 0.8);
+}
+.bg-util-success.translucent-90 {
+  background-color: rgba(0, 191, 99, 0.9);
+}
+.bg-util-success.translucent-100 {
+  background-color: #00bf63;
+}
+
+.color-util-error {
+  color: rgb(234, 67, 53);
+}
+
+.color-util-alert {
+  color: rgb(255, 165, 0);
+}
+
+.color-util-alert-subtle {
+  color: rgb(199, 155, 26);
+}
+
+.color-util-notify {
+  color: rgb(54, 163, 217);
+}
+
+.color-util-success {
+  color: rgb(0, 191, 99);
+}
+
+.border-util-error {
+  border-color: rgb(234, 67, 53);
+}
+
+.border-util-alert {
+  border-color: rgb(255, 165, 0);
+}
+
+.border-util-alert-subtle {
+  border-color: rgb(199, 155, 26);
+}
+
+.border-util-notify {
+  border-color: rgb(54, 163, 217);
+}
+
+.border-util-success {
+  border-color: rgb(0, 191, 99);
+}
+
+.hover-colorize-util-error {
+  transition-duration: 0.4s;
+}
+.hover-colorize-util-error:hover {
+  color: rgb(234, 67, 53);
+}
+
+.hover-colorize-util-alert {
+  transition-duration: 0.4s;
+}
+.hover-colorize-util-alert:hover {
+  color: rgb(255, 165, 0);
+}
+
+.hover-colorize-util-alert-subtle {
+  transition-duration: 0.4s;
+}
+.hover-colorize-util-alert-subtle:hover {
+  color: rgb(199, 155, 26);
+}
+
+.hover-colorize-util-notify {
+  transition-duration: 0.4s;
+}
+.hover-colorize-util-notify:hover {
+  color: rgb(54, 163, 217);
+}
+
+.hover-colorize-util-success {
+  transition-duration: 0.4s;
+}
+.hover-colorize-util-success:hover {
+  color: rgb(0, 191, 99);
+}
+
+.bg-frost-light-azure {
+  background-color: rgb(246, 250, 253);
+}
+.bg-frost-light-azure.translucent-10 {
+  background-color: rgba(246, 250, 253, 0.1);
+}
+.bg-frost-light-azure.translucent-20 {
+  background-color: rgba(246, 250, 253, 0.2);
+}
+.bg-frost-light-azure.translucent-30 {
+  background-color: rgba(246, 250, 253, 0.3);
+}
+.bg-frost-light-azure.translucent-40 {
+  background-color: rgba(246, 250, 253, 0.4);
+}
+.bg-frost-light-azure.translucent-50 {
+  background-color: rgba(246, 250, 253, 0.5);
+}
+.bg-frost-light-azure.translucent-60 {
+  background-color: rgba(246, 250, 253, 0.6);
+}
+.bg-frost-light-azure.translucent-70 {
+  background-color: rgba(246, 250, 253, 0.7);
+}
+.bg-frost-light-azure.translucent-80 {
+  background-color: rgba(246, 250, 253, 0.8);
+}
+.bg-frost-light-azure.translucent-90 {
+  background-color: rgba(246, 250, 253, 0.9);
+}
+.bg-frost-light-azure.translucent-100 {
+  background-color: #f6fafd;
+}
+
+.bg-frost-pastel-gray-azure {
+  background-color: rgb(179, 207, 229);
+}
+.bg-frost-pastel-gray-azure.translucent-10 {
+  background-color: rgba(179, 207, 229, 0.1);
+}
+.bg-frost-pastel-gray-azure.translucent-20 {
+  background-color: rgba(179, 207, 229, 0.2);
+}
+.bg-frost-pastel-gray-azure.translucent-30 {
+  background-color: rgba(179, 207, 229, 0.3);
+}
+.bg-frost-pastel-gray-azure.translucent-40 {
+  background-color: rgba(179, 207, 229, 0.4);
+}
+.bg-frost-pastel-gray-azure.translucent-50 {
+  background-color: rgba(179, 207, 229, 0.5);
+}
+.bg-frost-pastel-gray-azure.translucent-60 {
+  background-color: rgba(179, 207, 229, 0.6);
+}
+.bg-frost-pastel-gray-azure.translucent-70 {
+  background-color: rgba(179, 207, 229, 0.7);
+}
+.bg-frost-pastel-gray-azure.translucent-80 {
+  background-color: rgba(179, 207, 229, 0.8);
+}
+.bg-frost-pastel-gray-azure.translucent-90 {
+  background-color: rgba(179, 207, 229, 0.9);
+}
+.bg-frost-pastel-gray-azure.translucent-100 {
+  background-color: #b3cfe5;
+}
+
+.bg-frost-azure {
+  background-color: rgb(74, 127, 167);
+}
+.bg-frost-azure.translucent-10 {
+  background-color: rgba(74, 127, 167, 0.1);
+}
+.bg-frost-azure.translucent-20 {
+  background-color: rgba(74, 127, 167, 0.2);
+}
+.bg-frost-azure.translucent-30 {
+  background-color: rgba(74, 127, 167, 0.3);
+}
+.bg-frost-azure.translucent-40 {
+  background-color: rgba(74, 127, 167, 0.4);
+}
+.bg-frost-azure.translucent-50 {
+  background-color: rgba(74, 127, 167, 0.5);
+}
+.bg-frost-azure.translucent-60 {
+  background-color: rgba(74, 127, 167, 0.6);
+}
+.bg-frost-azure.translucent-70 {
+  background-color: rgba(74, 127, 167, 0.7);
+}
+.bg-frost-azure.translucent-80 {
+  background-color: rgba(74, 127, 167, 0.8);
+}
+.bg-frost-azure.translucent-90 {
+  background-color: rgba(74, 127, 167, 0.9);
+}
+.bg-frost-azure.translucent-100 {
+  background-color: #4a7fa7;
+}
+
+.bg-frost-nile-blue {
+  background-color: rgb(26, 61, 99);
+}
+.bg-frost-nile-blue.translucent-10 {
+  background-color: rgba(26, 61, 99, 0.1);
+}
+.bg-frost-nile-blue.translucent-20 {
+  background-color: rgba(26, 61, 99, 0.2);
+}
+.bg-frost-nile-blue.translucent-30 {
+  background-color: rgba(26, 61, 99, 0.3);
+}
+.bg-frost-nile-blue.translucent-40 {
+  background-color: rgba(26, 61, 99, 0.4);
+}
+.bg-frost-nile-blue.translucent-50 {
+  background-color: rgba(26, 61, 99, 0.5);
+}
+.bg-frost-nile-blue.translucent-60 {
+  background-color: rgba(26, 61, 99, 0.6);
+}
+.bg-frost-nile-blue.translucent-70 {
+  background-color: rgba(26, 61, 99, 0.7);
+}
+.bg-frost-nile-blue.translucent-80 {
+  background-color: rgba(26, 61, 99, 0.8);
+}
+.bg-frost-nile-blue.translucent-90 {
+  background-color: rgba(26, 61, 99, 0.9);
+}
+.bg-frost-nile-blue.translucent-100 {
+  background-color: #1a3d63;
+}
+
+.bg-frost-midnight {
+  background-color: rgb(10, 25, 49);
+}
+.bg-frost-midnight.translucent-10 {
+  background-color: rgba(10, 25, 49, 0.1);
+}
+.bg-frost-midnight.translucent-20 {
+  background-color: rgba(10, 25, 49, 0.2);
+}
+.bg-frost-midnight.translucent-30 {
+  background-color: rgba(10, 25, 49, 0.3);
+}
+.bg-frost-midnight.translucent-40 {
+  background-color: rgba(10, 25, 49, 0.4);
+}
+.bg-frost-midnight.translucent-50 {
+  background-color: rgba(10, 25, 49, 0.5);
+}
+.bg-frost-midnight.translucent-60 {
+  background-color: rgba(10, 25, 49, 0.6);
+}
+.bg-frost-midnight.translucent-70 {
+  background-color: rgba(10, 25, 49, 0.7);
+}
+.bg-frost-midnight.translucent-80 {
+  background-color: rgba(10, 25, 49, 0.8);
+}
+.bg-frost-midnight.translucent-90 {
+  background-color: rgba(10, 25, 49, 0.9);
+}
+.bg-frost-midnight.translucent-100 {
+  background-color: #0a1931;
+}
+
+.bg-frost-dark-purple {
+  background-color: rgb(19, 7, 46);
+}
+.bg-frost-dark-purple.translucent-10 {
+  background-color: rgba(19, 7, 46, 0.1);
+}
+.bg-frost-dark-purple.translucent-20 {
+  background-color: rgba(19, 7, 46, 0.2);
+}
+.bg-frost-dark-purple.translucent-30 {
+  background-color: rgba(19, 7, 46, 0.3);
+}
+.bg-frost-dark-purple.translucent-40 {
+  background-color: rgba(19, 7, 46, 0.4);
+}
+.bg-frost-dark-purple.translucent-50 {
+  background-color: rgba(19, 7, 46, 0.5);
+}
+.bg-frost-dark-purple.translucent-60 {
+  background-color: rgba(19, 7, 46, 0.6);
+}
+.bg-frost-dark-purple.translucent-70 {
+  background-color: rgba(19, 7, 46, 0.7);
+}
+.bg-frost-dark-purple.translucent-80 {
+  background-color: rgba(19, 7, 46, 0.8);
+}
+.bg-frost-dark-purple.translucent-90 {
+  background-color: rgba(19, 7, 46, 0.9);
+}
+.bg-frost-dark-purple.translucent-100 {
+  background-color: #13072e;
+}
+
+.bg-frost-gradient-1 {
+  background-image: radial-gradient(circle at 0% 0%, rgb(74, 127, 167), rgb(26, 61, 99));
+}
+
+.color-frost-light-azure {
+  color: rgb(246, 250, 253);
+}
+
+.color-frost-pastel-gray-azure {
+  color: rgb(179, 207, 229);
+}
+
+.color-frost-azure {
+  color: rgb(74, 127, 167);
+}
+
+.color-frost-nile-blue {
+  color: rgb(26, 61, 99);
+}
+
+.color-frost-midnight {
+  color: rgb(10, 25, 49);
+}
+
+.color-frost-dark-purple {
+  color: rgb(19, 7, 46);
+}
+
+.border-frost-light-azure {
+  border-color: rgb(246, 250, 253);
+}
+
+.border-frost-pastel-gray-azure {
+  border-color: rgb(179, 207, 229);
+}
+
+.border-frost-azure {
+  border-color: rgb(74, 127, 167);
+}
+
+.border-frost-nile-blue {
+  border-color: rgb(26, 61, 99);
+}
+
+.border-frost-midnight {
+  border-color: rgb(10, 25, 49);
+}
+
+.border-frost-dark-purple {
+  border-color: rgb(19, 7, 46);
+}
+
+.hover-colorize-frost-light-azure {
+  transition-duration: 0.4s;
+}
+.hover-colorize-frost-light-azure:hover {
+  color: rgb(246, 250, 253);
+}
+
+.hover-colorize-frost-pastel-gray-azure {
+  transition-duration: 0.4s;
+}
+.hover-colorize-frost-pastel-gray-azure:hover {
+  color: rgb(179, 207, 229);
+}
+
+.hover-colorize-frost-azure {
+  transition-duration: 0.4s;
+}
+.hover-colorize-frost-azure:hover {
+  color: rgb(74, 127, 167);
+}
+
+.hover-colorize-frost-nile-blue {
+  transition-duration: 0.4s;
+}
+.hover-colorize-frost-nile-blue:hover {
+  color: rgb(26, 61, 99);
+}
+
+.hover-colorize-frost-midnight {
+  transition-duration: 0.4s;
+}
+.hover-colorize-frost-midnight:hover {
+  color: rgb(10, 25, 49);
+}
+
+.hover-colorize-frost-dark-purple {
+  transition-duration: 0.4s;
+}
+.hover-colorize-frost-dark-purple:hover {
+  color: rgb(19, 7, 46);
+}
+
 /*# sourceMappingURL=colors.css.map */
