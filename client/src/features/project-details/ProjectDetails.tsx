@@ -2,7 +2,7 @@ import { useState } from "react";
 import { DEFAULT_USER } from "@constants/defaults";
 import { useFetchProject, useFetchTagData } from "@/hooks";
 import { IUser } from "@/types";
-import { ProjectInformationProvider } from "./components";
+import { ProjectImages, ProjectInformationProvider } from "./components";
 import HeaderCard from "./components/HeaderCard";
 import About from "./components/About";
 
@@ -15,14 +15,17 @@ export default function ProjectDetails() {
     return (
       <div className="container-fluid p-0">
         <ProjectInformationProvider allTags={allTags} project={project} user={user}>
-          <div className="row m-0 p-0">
+          <section className="row m-0 p-0">
             <HeaderCard/>
-          </div>
-          <div className="row row-cols-sm-2 row-cols-1 m-0 mt-sm-3 mt-2 px-sm-2 p-0">
-            <div className="col px-sm-3 px-2">
+          </section>
+          <section className="row m-0 mt-sm-3 mt-2 px-sm-4 p-0 row-cols-sm-2 row-cols-1 row-gap-2">
+            <div className="col-sm-5 px-sm-2 px-1">
               <About/>
             </div>
-          </div>
+            <div className="col-sm-7 px-sm-2 px-1">
+              <ProjectImages/>
+            </div>
+          </section>
         </ProjectInformationProvider>
       </div>
     )
