@@ -249,9 +249,8 @@ input[type=text] {
 }
 
 .header-logo {
-  width: 40x;
-  height: 40px;
-  
+  width: 45x;
+  height: 45px;
   object-fit: cover;
 }
 

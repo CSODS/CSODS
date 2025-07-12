@@ -1,4 +1,5 @@
 @use 'variables.scss' as v;
+@use 'mixins.scss' as m;
 @use 'sass:color';
 
 @each $name, $value in v.$color-scheme {
@@ -55,3 +56,68 @@
         }
     }
 }
+
+@mixin gradient-bg($scheme-name, $gradient-map) {
+    @each $name, $value in $gradient-map {
+        .bg-#{$scheme-name}-#{$name} {
+            background-image: $value;
+        }
+    }
+}
+
+@mixin color-scheme-bg($scheme-name, $color-scheme) {
+    @each $name, $value in $color-scheme {
+        .bg-#{$scheme-name}-#{$name} {
+            background-color: $value;
+
+            @each $opacity in v.$opacities {
+                &.translucent-#{$opacity * 100} {
+                    background-color: color.change($color: $value, $alpha: $opacity);
+                }
+            }
+        }
+    }
+}
+
+@mixin color-scheme-color($scheme-name, $color-scheme) {
+    @each $name, $value in $color-scheme {
+        .color-#{$scheme-name}-#{$name} {
+            color: $value;
+        }
+    }
+}
+
+@mixin color-scheme-border($scheme-name, $color-scheme) {
+    @each $name, $value in $color-scheme {
+        .border-#{$scheme-name}-#{$name} {
+            border-color: $value;
+        }
+    }
+}
+
+@mixin color-scheme-hover-colorize($scheme-name, $color-scheme) {
+    @each $name, $value in $color-scheme {
+        .hover-colorize-#{$scheme-name}-#{$name} {
+            transition-duration: 0.4s;
+            &:hover {
+                color: $value;
+            }
+        }
+    }
+}
+
+@include color-scheme-bg('default', v.$color-scheme-default);
+@include color-scheme-color('default', v.$color-scheme-default);
+@include color-scheme-border('default', v.$color-scheme-default);
+@include color-scheme-hover-colorize('default', v.$color-scheme-default);
+
+@include color-scheme-bg('util', v.$color-scheme-utility);
+@include color-scheme-color('util', v.$color-scheme-utility);
+@include color-scheme-border('util', v.$color-scheme-utility);
+@include color-scheme-hover-colorize('util', v.$color-scheme-utility);
+
+@include color-scheme-bg('frost', v.$color-scheme-frost);
+@include gradient-bg('frost', v.$frost-gradients);
+@include color-scheme-color('frost', v.$color-scheme-frost);
+@include color-scheme-border('frost', v.$color-scheme-frost);
+@include color-scheme-hover-colorize('frost', v.$color-scheme-frost);
