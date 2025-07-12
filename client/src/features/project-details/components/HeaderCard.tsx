@@ -89,7 +89,7 @@ interface TagRowProps {
 
 function TagRow({ tagList }: TagRowProps) {
     return (
-        <section className="row w-100 my-3">
+        <section className="row w-100 my-sm-3 mt-1 mb-2">
             <div className="col m-0 p-0 d-flex flex-wrap align-items-start">
                 {
                     tagList.map((tag, index) => {
