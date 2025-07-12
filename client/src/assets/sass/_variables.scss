@@ -98,8 +98,11 @@ $color-scheme-frost: (
     'pastel-gray-azure': $pastel-gray-azure,
     'nile-blue': $nile-blue,
     'midnight': $midnight,
-    'dark-purple': $dark-purple,
-    'gradient-1': $frost-gradient-1
+    'dark-purple': $dark-purple
+);
+
+$frost-gradients: (
+    'frost-gradient-1': $frost-gradient-1
 );
 
 $color-light: $light-azure, $pastel-gray-azure;
