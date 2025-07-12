@@ -14,7 +14,6 @@
     "react-dom": "^19.1.0",
     "react-router-dom": "^7.6.1",
     "react-scripts": "5.0.1",
-    "rfs": "^10.0.0",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
