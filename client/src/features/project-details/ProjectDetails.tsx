@@ -17,9 +17,18 @@ export default function ProjectDetails() {
   const setUniformHeights = () => {
       const gallery = document.querySelector<HTMLDivElement>('.gallery-container');
       const contributors = document.querySelector<HTMLDivElement>('.contributors-container');
+      const about = document.querySelector<HTMLDivElement>('.about-container');
+      const subContainer = document.querySelector<HTMLDivElement>('.sub-container');
 
       if (gallery && contributors) {
-      contributors.style.height = `${gallery.clientHeight}px`;
+        contributors.style.height = `${gallery.clientHeight}px`;
+        console.log(`Gallery Height: ${gallery.clientHeight}px`);
+        console.log(`Reference Height: ${contributors.clientHeight}px`);
+      }
+      if (about && subContainer) {
+        about.style.maxHeight = `${subContainer.clientHeight}px`;
+        console.log(`About Height: ${about.clientHeight}px`);
+        console.log(`Reference Height: ${subContainer.clientHeight}px`);
       }
   }
 
@@ -41,12 +50,12 @@ export default function ProjectDetails() {
           </section>
 
           <section className="row m-0 mt-2 p-0 row-cols-lg-2 row-cols-1 row-gap-2">
-            <div className="col-lg-4 px-1">
+            <div className="col-lg-4 px-1 about-container">
               <About/>
             </div>
             <div className="col-lg-8 px-1">
 
-              <section className="d-grid row-gap-2">
+              <section className="d-grid row-gap-2 sub-container">
 
                 <div className="row m-0 row-gap-2 column-gap-2">
                   <div className="col-md p-0">

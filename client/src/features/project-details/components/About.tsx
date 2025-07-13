@@ -9,7 +9,7 @@ export default function About() {
             <h2 className="m-0 pb-1 p-0 border-bottom border-2 border-frost-midnight fw-bold text-start color-frost-midnight">
                 About
             </h2>
-            <p className="m-0 pt-2 p-0 lh-sm text-start fs-p color-frost-midnight">
+            <p className="m-0 pt-2 p-0 lh-sm text-start fs-p color-frost-midnight overflow-y-auto">
                 {PROJECT_DESCRIPTION}
             </p>
         </div>
