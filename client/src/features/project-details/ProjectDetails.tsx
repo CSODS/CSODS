@@ -36,11 +36,9 @@ export default function ProjectDetails() {
           </section>
 
           <section className="row m-0 mt-sm-3 mt-2 p-0 px-sm-3 px-1">
-            <div className="col-md-6 m-0 p-0">
+            {/* replace col with col-md-6 when project cards are implemented */}
+            <div className="col p-0">
               <Contributors/>
-            </div>
-            <div className="col-md-6 m-0 p-0">
-
             </div>
           </section>
         </ProjectInformationProvider>

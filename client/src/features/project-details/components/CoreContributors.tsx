@@ -24,11 +24,15 @@ export default function Contributors() {
 
     return (
         <div className="py-xl-4 px-md-2 py-lg-3 py-2 card card-frost-gradient-1 hover-shadow border-0 row-gap-3">
-            {
-                contributors.map(({Name, Email, Roles}, index) => {
-                    return <ContributorRow key={`contributor-${index}`} contributorName={Name} contributorEmail={Email} contributorRoles={Roles}/>
-                })
-            }
+            {/* remove this div when project awards are implemented so that the contributor card 
+            can scale properly with the column */}
+            <div className="col-md-6 mx-md-auto">
+                {
+                    contributors.map(({Name, Email, Roles}, index) => {
+                        return <ContributorRow key={`contributor-${index}`} contributorName={Name} contributorEmail={Email} contributorRoles={Roles}/>
+                    })
+                }
+            </div>
         </div>
     );
 }
