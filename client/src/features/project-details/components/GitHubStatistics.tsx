@@ -23,7 +23,7 @@ function StatisticsTable({
     Statistics
 }: StatisticTableProps) {
     return (
-        <div className="py-3 row d-flex justify-content-center align-items-center">
+        <div className="py-2 row d-flex justify-content-center align-items-center">
             {
                 Object.entries(Statistics).map((value, index) => {
                     const columnKey = `column-${index}`
@@ -44,7 +44,7 @@ function StatisticColumn({
     Value
 }: StatisticProps) {
     return(
-        <div className="col-auto mx-sm-5 mx-3 mb-2">
+        <div className="col-auto mx-sm-5 mx-3">
             <div className="row ps-sm-4 p-0 fw-bold">
                 <p className="m-0 mb-3 p-0 text-start color-frost-light-azure fs-p">{Name}</p>
             </div>
