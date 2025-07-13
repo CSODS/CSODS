@@ -34,12 +34,15 @@ export default function ProjectDetails() {
                   <div className="col-md p-0">
                     <ProjectImages/>
                   </div>
+                  <div className="col d-md-none d-block p-0">
+                    <GitHubStatistics/>
+                  </div>
                   <div className="col-md p-0">
                     <Contributors/>
                   </div>
                 </div>
 
-                <div className="row m-0">
+                <div className="row-md d-md-block d-none m-0">
                   <GitHubStatistics/>
                 </div>
 
