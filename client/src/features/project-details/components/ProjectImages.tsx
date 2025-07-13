@@ -89,11 +89,13 @@ function CarouselIndicators({
         <div className="carousel-indicators">
             {
                 buttons.map((_, index) => {
+                    const btnKey = `indicator-${index}`;
                     const isActive = index === 0;
 
                     return (
                         <button 
                             type="button" 
+                            key={btnKey}
                             data-bs-target={`#${carouselId}`} 
                             data-bs-slide-to={index}
                             className={isActive ? "active": ""}
