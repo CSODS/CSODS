@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { DEFAULT_USER } from "@constants/defaults";
 import { useFetchProject, useFetchTagData } from "@/hooks";
 import { IUser } from "@/types";
@@ -12,6 +12,24 @@ export default function ProjectDetails() {
   const allTags = useFetchTagData();
   const project = useFetchProject();
   const [user] = useState<IUser>(DEFAULT_USER);
+  
+  useEffect(() => {
+  const setUniformHeights = () => {
+      const gallery = document.querySelector<HTMLDivElement>('.gallery-container');
+      const contributors = document.querySelector<HTMLDivElement>('.contributors-container');
+
+      if (gallery && contributors) {
+      contributors.style.height = `${gallery.clientHeight}px`;
+      }
+  }
+
+  setUniformHeights();
+  window.addEventListener('resize', setUniformHeights);
+
+  return () => {
+      window.removeEventListener('resize', setUniformHeights);
+  }
+  }, []);
 
   if (allTags && project) { 
     return (
@@ -37,7 +55,7 @@ export default function ProjectDetails() {
                   <div className="col d-md-none d-block p-0">
                     <GitHubStatistics/>
                   </div>
-                  <div className="col-md p-0">
+                  <div className="col-md p-0 contributors-container">
                     <Contributors/>
                   </div>
                 </div>

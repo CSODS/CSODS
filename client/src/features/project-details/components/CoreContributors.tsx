@@ -20,20 +20,52 @@ export default function Contributors() {
             Email: "contributor3@gmail.com",
             Roles: ["Frontend Developer"]
         },
+        {
+            Name: "Contributor1",
+            Email: "contributor1@gmail.com",
+            Roles: ["Fullstack Developer", "Project Manager"]
+        },
+        {
+            Name: "Contributor2",
+            Email: "contributor2@gmail.com",
+            Roles: ["Backend Developer"]
+        },
+        {
+            Name: "Contributor3",
+            Email: "contributor3@gmail.com",
+            Roles: ["Frontend Developer"]
+        },
+        {
+            Name: "Contributor1",
+            Email: "contributor1@gmail.com",
+            Roles: ["Fullstack Developer", "Project Manager"]
+        },
+        {
+            Name: "Contributor2",
+            Email: "contributor2@gmail.com",
+            Roles: ["Backend Developer"]
+        },
+        {
+            Name: "Contributor3",
+            Email: "contributor3@gmail.com",
+            Roles: ["Frontend Developer"]
+        }
     ];
 
     return (
-        <div className="h-100 px-3 p-2 card card-frost-gradient-1 hover-shadow border-0 row-gap-2">
+        <div className="h-100 px-3 p-2 card card-frost-gradient-1 hover-shadow border-0">
             <div className="row m-0">
                 <h2 className="m-0 pb-1 p-0 border-bottom border-2 border-frost-midnight fw-bold text-start color-frost-midnight">
                     Contributors
                 </h2>
             </div>
-            {
-                contributors.map(({Name, Email, Roles}, index) => {
-                    return <ContributorRow key={`contributor-${index}`} contributorName={Name} contributorEmail={Email} contributorRoles={Roles}/>
-                })
-            }
+            <div className="row m-0 pt-2 row-gap-1 overflow-y-auto">
+                {
+                    contributors.map(({Name, Email, Roles}, index) => {
+                        return <ContributorRow key={`contributor-${index}`} contributorName={Name} contributorEmail={Email} contributorRoles={Roles}/>
+                    })
+                }
+            </div>
         </div>
     );
 }
