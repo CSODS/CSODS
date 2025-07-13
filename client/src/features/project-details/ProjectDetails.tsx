@@ -5,6 +5,7 @@ import { IUser } from "@/types";
 import { ProjectImages, ProjectInformationProvider } from "./components";
 import HeaderCard from "./components/HeaderCard";
 import About from "./components/About";
+import GitHubStatistics from "./components/GitHubStatistics";
 
 export default function ProjectDetails() {
   const allTags = useFetchTagData();
@@ -15,9 +16,11 @@ export default function ProjectDetails() {
     return (
       <div className="container-fluid p-0">
         <ProjectInformationProvider allTags={allTags} project={project} user={user}>
+          
           <section className="row m-0 p-0">
             <HeaderCard/>
           </section>
+
           <section className="row m-0 mt-sm-3 mt-2 px-sm-4 p-0 row-cols-sm-2 row-cols-1 row-gap-2">
             <div className="col-sm-5 px-sm-2 px-1">
               <About/>
@@ -25,6 +28,10 @@ export default function ProjectDetails() {
             <div className="col-sm-7 px-sm-2 px-1">
               <ProjectImages/>
             </div>
+          </section>
+
+          <section className="row m-0 mt-sm-3 mt-2 p-0 px-sm-3 px-1">
+            <GitHubStatistics/>
           </section>
         </ProjectInformationProvider>
       </div>
