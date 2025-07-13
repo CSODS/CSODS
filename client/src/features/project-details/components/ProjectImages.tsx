@@ -14,9 +14,9 @@ export default function ProjectImages() {
             <h2 className="m-0 pb-1 p-0 border-bottom border-2 border-frost-midnight text-start color-frost-midnight">
                 Gallery
             </h2>
-            <section className="m-0 mt-2 ratio ratio-21x9 overflow-y-scroll">
-                {/* <ImageCarousel imageLinks={imageLinks}/> */}
-                <Gallery imageLinks={imageLinks}/>
+            <section className="m-0 mt-2 ratio ratio-16x9">
+                <ImageCarousel imageLinks={imageLinks}/>
+                {/* <Gallery imageLinks={imageLinks}/> */}
             </section>
         </div>
 
