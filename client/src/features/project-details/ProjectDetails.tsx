@@ -22,11 +22,11 @@ export default function ProjectDetails() {
             <HeaderCard/>
           </section>
 
-          <section className="row m-0 mt-sm-3 mt-2 px-sm-4 p-0 row-cols-sm-2 row-cols-1 row-gap-2">
-            <div className="col-sm-5 px-sm-2 px-1">
+          <section className="row m-0 mt-sm-3 mt-2 px-sm-4 p-0 row-cols-md-2 row-cols-1 row-gap-2">
+            <div className="col-md-5 px-md-2 px-1">
               <About/>
             </div>
-            <div className="col-sm-7 px-sm-2 px-1">
+            <div className="col-md-7 px-md-2 px-1">
               <ProjectImages/>
             </div>
           </section>
