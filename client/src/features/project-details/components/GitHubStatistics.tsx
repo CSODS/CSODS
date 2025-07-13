@@ -23,13 +23,15 @@ function StatisticsTable({
     Statistics
 }: StatisticTableProps) {
     return (
-        <div className="py-2 row d-flex justify-content-center align-items-center">
-            {
-                Object.entries(Statistics).map((value, index) => {
-                    const columnKey = `column-${index}`
-                    return <StatisticColumn key={columnKey} Name={value[0]} Value={value[1]}/>;
-                })
-            }
+        <div className="mx-auto py-2 col-md-5 col-sm-7 col-8">
+            <div className="row d-flex justify-content-center align-items-center">
+                {
+                    Object.entries(Statistics).map((value, index) => {
+                        const columnKey = `column-${index}`
+                        return <StatisticColumn key={columnKey} Name={value[0]} Value={value[1]}/>;
+                    })
+                }
+            </div>
         </div>
     );
 }
@@ -44,11 +46,11 @@ function StatisticColumn({
     Value
 }: StatisticProps) {
     return(
-        <div className="col-auto mx-sm-5 mx-3">
-            <div className="row ps-sm-4 p-0 fw-bold">
+        <div className="col-3">
+            <div className="row p-0 fw-bold">
                 <p className="m-0 mb-3 p-0 text-start color-frost-light-azure fs-p">{Name}</p>
             </div>
-            <div className="row ps-sm-4 p-0 fw-medium">
+            <div className="row p-0 fw-medium">
                 <p className="m-0 p-0 text-start color-frost-pastel-gray-azure fs-p">{Value}</p>
             </div>
         </div>
