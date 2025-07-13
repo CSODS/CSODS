@@ -11,7 +11,7 @@ export default function ProjectImages() {
 
     return(
         <div className="px-3 p-2 card card-frost-gradient-2 hover-shadow border border-0 rounded-2">
-            <h2 className="m-0 pb-1 p-0 border-bottom border-2 border-frost-midnight text-start color-frost-midnight">
+            <h2 className="m-0 pb-1 p-0 border-bottom border-2 border-frost-midnight fw-bold text-start color-frost-midnight">
                 Gallery
             </h2>
             <section className="m-0 mt-2 ratio ratio-16x9">

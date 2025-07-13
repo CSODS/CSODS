@@ -22,23 +22,29 @@ export default function ProjectDetails() {
             <HeaderCard/>
           </section>
 
-          <section className="row m-0 mt-sm-3 mt-2 px-sm-4 p-0 row-cols-md-2 row-cols-1 row-gap-2">
-            <div className="col-md-5 px-md-2 px-1">
+          <section className="row m-0 mt-2 p-0 row-cols-lg-2 row-cols-1 row-gap-2">
+            <div className="col-lg-4 px-1">
               <About/>
             </div>
-            <div className="col-md-7 px-md-2 px-1">
-              <ProjectImages/>
-            </div>
-          </section>
+            <div className="col-lg-8 px-1">
 
-          <section className="row m-0 mt-sm-3 mt-2 p-0 px-sm-3 px-1">
-            <GitHubStatistics/>
-          </section>
+              <section className="d-grid row-gap-2">
 
-          <section className="row m-0 mt-sm-3 mt-2 p-0 px-sm-3 px-1">
-            {/* replace col with col-md-6 when project cards are implemented */}
-            <div className="col p-0">
-              <Contributors/>
+                <div className="row m-0 row-gap-2 column-gap-2">
+                  <div className="col-md p-0">
+                    <ProjectImages/>
+                  </div>
+                  <div className="col-md p-0">
+                    <Contributors/>
+                  </div>
+                </div>
+
+                <div className="row m-0">
+                  <GitHubStatistics/>
+                </div>
+
+              </section>
+
             </div>
           </section>
         </ProjectInformationProvider>

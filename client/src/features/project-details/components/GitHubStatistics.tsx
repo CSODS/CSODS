@@ -23,7 +23,7 @@ function StatisticsTable({
     Statistics
 }: StatisticTableProps) {
     return (
-        <div className="mx-auto py-2 col-md-5 col-sm-7 col-8">
+        <div className="mx-auto py-2 col-8">
             <div className="row d-flex justify-content-center align-items-center">
                 {
                     Object.entries(Statistics).map((value, index) => {
