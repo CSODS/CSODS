@@ -6,6 +6,10 @@
     font-size: 0.75rem;
 }
 
+.contributor-card-text {
+    font-size: 0.75rem;
+}
+
 @media (min-width: 576px) {
     .fs-small {
         font-size: 0.75rem;
@@ -16,4 +20,10 @@
     }
 }
 
+
+@media (min-width: 992px) {
+    .contributor-card-text {
+        font-size: 1rem;
+    }
+}
 
