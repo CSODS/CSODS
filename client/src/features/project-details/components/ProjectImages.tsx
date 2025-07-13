@@ -34,7 +34,7 @@ function Gallery({ imageLinks }: GalleryProps) {
                 {
                     imageLinks.map((link, index) => {
                         return (
-                            <div id={`img-${index}`} className="me-2 mb-1 bg-frost-midnight rounded-3">
+                            <div key={`img-${index}`} className="me-2 mb-1 bg-frost-midnight rounded-3">
                                 <img src={link} alt="..." style={{width: '150px', height: '150px'}}/>
                             </div>
                         )
