@@ -4,13 +4,17 @@ import { useProjectDetails } from "@/hooks";
 
 const DEFAULT_PROJECT_IMAGES = DEFAULTS.DEFAULT_PROJECT_IMAGES;
 
-export default function ProjectImages() {
+interface ProjectImagesProps {
+    galleryRef?: React.Ref<HTMLDivElement | null>;
+}
+
+export default function ProjectImages({ galleryRef }: ProjectImagesProps) {
     const project = useProjectDetails();
 
     const [imageLinks] = useState<string[]>(DEFAULT_PROJECT_IMAGES);
 
     return(
-        <div className="px-3 p-2 gallery-container card card-frost-gradient-2 hover-shadow border border-0 rounded-2">
+        <div ref={galleryRef} className="px-3 p-2 card card-frost-gradient-2 hover-shadow border border-0 rounded-2">
             <h2 className="m-0 pb-1 p-0 border-bottom border-2 border-frost-midnight fw-bold text-start color-frost-midnight">
                 Gallery
             </h2>

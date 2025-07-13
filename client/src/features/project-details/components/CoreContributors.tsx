@@ -1,6 +1,10 @@
 import { useProjectDetails } from "@/hooks";
 
-export default function Contributors() {
+interface ContributorsProps {
+    contributorsRef?: React.Ref<HTMLDivElement | null>;
+}
+
+export default function Contributors({ contributorsRef }: ContributorsProps) {
     const project = useProjectDetails();
     const githubLink = project.Project.GitHubUrl;
 
@@ -53,18 +57,20 @@ export default function Contributors() {
     ];
 
     return (
-        <div className="h-100 px-3 p-2 card card-frost-gradient-1 hover-shadow border-0">
-            <div className="row m-0">
-                <h2 className="m-0 pb-1 p-0 border-bottom border-2 border-frost-midnight fw-bold text-start color-frost-midnight">
-                    Contributors
-                </h2>
-            </div>
-            <div className="row m-0 pt-2 row-gap-1 overflow-y-auto">
-                {
-                    contributors.map(({Name, Email, Roles}, index) => {
-                        return <ContributorRow key={`contributor-${index}`} contributorName={Name} contributorEmail={Email} contributorRoles={Roles}/>
-                    })
-                }
+        <div ref={contributorsRef}>
+            <div  className="h-100 px-3 p-2 card card-frost-gradient-1 hover-shadow border-0">
+                <div className="row m-0">
+                    <h2 className="m-0 pb-1 p-0 border-bottom border-2 border-frost-midnight fw-bold text-start color-frost-midnight">
+                        Contributors
+                    </h2>
+                </div>
+                <div className="row m-0 pt-2 row-gap-1 overflow-y-auto">
+                    {
+                        contributors.map(({Name, Email, Roles}, index) => {
+                            return <ContributorRow key={`contributor-${index}`} contributorName={Name} contributorEmail={Email} contributorRoles={Roles}/>
+                        })
+                    }
+                </div>
             </div>
         </div>
     );
