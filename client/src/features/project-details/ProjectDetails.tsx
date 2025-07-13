@@ -6,6 +6,7 @@ import { ProjectImages, ProjectInformationProvider } from "./components";
 import HeaderCard from "./components/HeaderCard";
 import About from "./components/About";
 import GitHubStatistics from "./components/GitHubStatistics";
+import Contributors from "./components/CoreContributors";
 
 export default function ProjectDetails() {
   const allTags = useFetchTagData();
@@ -32,6 +33,15 @@ export default function ProjectDetails() {
 
           <section className="row m-0 mt-sm-3 mt-2 p-0 px-sm-3 px-1">
             <GitHubStatistics/>
+          </section>
+
+          <section className="row m-0 mt-sm-3 mt-2 p-0 px-sm-3 px-1">
+            <div className="col-sm-6 m-0 p-0">
+              <Contributors/>
+            </div>
+            <div className="col-sm-6 m-0 p-0">
+
+            </div>
           </section>
         </ProjectInformationProvider>
       </div>
