@@ -1,7 +1,10 @@
 import { createContext, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { BtnPill } from "@/components";
 import { ICONS } from "@/constants";
-import { useProjectDataService, useProjectDetails, useProjectIcon, useUser } from "@/hooks";
+import { useProjectDataService, useProjectDetails, useProjectIcon, useTagCategoryMap, useUser } from "@/hooks";
+import { IProjectSearchParameters } from "@/types";
+import { getPageLink } from "@/features/project-list/utils";
 
 const DevIconContext = createContext<string>('');
 
@@ -94,23 +97,45 @@ function TagRow({ tagList }: TagRowProps) {
                 {
                     tagList.map((tag, index) => {
                         const key = `tag-${index}`;
-                        return (
-                            <BtnPill 
-                                key={key}
-                                btnColor='midnight'
-                                hoverBehavior='lighten'
-                                opacity={100}
-                                margin={[{t: 1, e: 2}]}
-                                padding={[{x: 3, y: 1}]}
-                            >
-                                <p className="m-0 p-0 fs-small color-frost-light-azure">
-                                    {tag}
-                                </p>
-                            </BtnPill>
-                        )
+                        return <Tag key={key} tag={tag}/>
                     })
                 }
             </div>
         </section>
+    )
+}
+
+interface TagProps {
+    tag: string;
+}
+
+function Tag({ tag }: TagProps) {
+    const tagCategoryMap = useTagCategoryMap();
+    const tagDetails = tagCategoryMap.get(tag);
+
+    const navigate = useNavigate();
+    const callbackFn = () => {
+        if (tagDetails) {
+            const tagCategory = tagDetails.tagCategory;
+            const tagId = tagDetails.tagId;
+            const searchParameters = { [tagCategory]: tagId };
+            const link = getPageLink(1, searchParameters as IProjectSearchParameters);
+            navigate(link);
+        }
+    }
+
+    return (
+        <BtnPill 
+            btnColor='midnight'
+            callBackFn={callbackFn}
+            hoverBehavior='lighten'
+            opacity={100}
+            margin={[{t: 1, e: 2}]}
+            padding={[{x: 3, y: 1}]}
+        >
+            <p className="m-0 p-0 fs-small color-frost-light-azure">
+                {tag}
+            </p>
+        </BtnPill>
     )
 }
