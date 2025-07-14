@@ -4,30 +4,49 @@ import { useProjectDetails } from "@/hooks";
 
 const DEFAULT_PROJECT_IMAGES = DEFAULTS.DEFAULT_PROJECT_IMAGES;
 
-export default function ProjectImages() {
+interface ProjectImagesProps {
+    galleryRef?: React.Ref<HTMLDivElement | null>;
+}
+
+export default function ProjectImages({ galleryRef }: ProjectImagesProps) {
     const project = useProjectDetails();
 
     const [imageLinks] = useState<string[]>(DEFAULT_PROJECT_IMAGES);
 
     return(
-        <div className="mt-4 p-0 col border border-light-1 rounded-3 ratio ratio-16x9">
-            <ImageCarousel imageLinks={imageLinks}/>
-            {/* <div className="m-0 p-0 mb-2 row fw-bold">
-                <div className="fs-1 fw-bolder text-start">
-                    Project Images
-                </div>
-            </div>
-            <div className="m-0 p-0 row">
-                <div className="col-lg-8">
-                    <ImageCarousel imageLinks={imageLinks}/>
-                </div>
-                <div className="ms-5 col-lg-2">
-                    <ImageSet imageLinks={imageLinks}/>
-                </div>
-            </div> */}
+        <div ref={galleryRef} className="px-3 p-2 card card-frost-gradient-2 hover-shadow border border-0 rounded-2">
+            <h2 className="m-0 pb-1 p-0 border-bottom border-2 border-frost-midnight fw-bold text-start color-frost-midnight">
+                Gallery
+            </h2>
+            <section className="m-0 mt-2 ratio ratio-16x9">
+                <ImageCarousel imageLinks={imageLinks}/>
+                {/* <Gallery imageLinks={imageLinks}/> */}
+            </section>
         </div>
 
     );
+}
+
+interface GalleryProps {
+    imageLinks: string[];
+}
+
+function Gallery({ imageLinks }: GalleryProps) {
+    return (
+        <div className="row m-0 p-0 w-100">
+            <div className="col m-0 p-0 d-flex flex-wrap align-items-start">
+                {
+                    imageLinks.map((link, index) => {
+                        return (
+                            <div key={`img-${index}`} className="me-2 mb-1 bg-frost-midnight rounded-3">
+                                <img src={link} alt="..." style={{width: '150px', height: '150px'}}/>
+                            </div>
+                        )
+                    })
+                }
+            </div>
+        </div>
+    )
 }
 
 //#region Carousel
@@ -44,7 +63,7 @@ export function ImageCarousel({
     const carouselId ="projectImgCarousel";
 
     return (
-        <div id={carouselId} className="carousel slide rounded-3 overflow-hidden">
+        <div id={carouselId} className="m-0 p-0 carousel slide rounded-1 overflow-hidden">
             <CarouselIndicators btnCount={imgCount} carouselId={carouselId}/>
             <CarouselSlides imgLinks={imageLinks}/>
             <button className="carousel-control-prev" type="button" data-bs-target={`#${carouselId}`} data-bs-slide="prev">
@@ -74,11 +93,13 @@ function CarouselIndicators({
         <div className="carousel-indicators">
             {
                 buttons.map((_, index) => {
+                    const btnKey = `indicator-${index}`;
                     const isActive = index === 0;
 
                     return (
                         <button 
                             type="button" 
+                            key={btnKey}
                             data-bs-target={`#${carouselId}`} 
                             data-bs-slide-to={index}
                             className={isActive ? "active": ""}
@@ -106,7 +127,9 @@ function CarouselSlides({
                     const activeSelector = index === 0 ? 'active' : '';
                     return(
                         <div key={index} className={`carousel-item ${activeSelector}`}>
-                            <img src={link} className="d-block w-100" alt="..."/>
+                            <div className="d-flex justify-content-center align-items-center">
+                                <img src={link} className="w-100" alt="..."/>
+                            </div>
                         </div>
                     )
                 })

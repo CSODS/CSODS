@@ -1,0 +1,17 @@
+:global(.scrollbar-azure)::-webkit-scrollbar-track
+{
+	background-color: transparent;
+	border-radius: 5px;
+}
+
+:global(.scrollbar-azure)::-webkit-scrollbar
+{
+	width: 5px;
+	background-color: transparent;
+}
+
+:global(.scrollbar-azure)::-webkit-scrollbar-thumb
+{
+	border-radius: 5px;
+	background-color: rgb(74 127 167);
+}

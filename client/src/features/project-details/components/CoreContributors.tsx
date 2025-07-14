@@ -1,6 +1,11 @@
 import { useProjectDetails } from "@/hooks";
+import '../styles/scrollableStyles.module.css';
 
-export default function CoreContributors() {
+interface ContributorsProps {
+    contributorsRef?: React.Ref<HTMLDivElement | null>;
+}
+
+export default function Contributors({ contributorsRef }: ContributorsProps) {
     const project = useProjectDetails();
     const githubLink = project.Project.GitHubUrl;
 
@@ -20,89 +25,50 @@ export default function CoreContributors() {
             Email: "contributor3@gmail.com",
             Roles: ["Frontend Developer"]
         },
+        {
+            Name: "Contributor1",
+            Email: "contributor1@gmail.com",
+            Roles: ["Fullstack Developer", "Project Manager"]
+        },
+        {
+            Name: "Contributor2",
+            Email: "contributor2@gmail.com",
+            Roles: ["Backend Developer"]
+        },
+        {
+            Name: "Contributor3",
+            Email: "contributor3@gmail.com",
+            Roles: ["Frontend Developer"]
+        },
+        {
+            Name: "Contributor1",
+            Email: "contributor1@gmail.com",
+            Roles: ["Fullstack Developer", "Project Manager"]
+        },
+        {
+            Name: "Contributor2",
+            Email: "contributor2@gmail.com",
+            Roles: ["Backend Developer"]
+        },
+        {
+            Name: "Contributor3",
+            Email: "contributor3@gmail.com",
+            Roles: ["Frontend Developer"]
+        }
     ];
 
     return (
-        <div className="p-4 pt-0 d-flex flex-column position-sticky" style={{top: '90px'}}>
-            <p className="ms-1 ps-3 mt-0 mb-1 row fs-5 text-start text-decoration-underline">
-                Core Contributors
-            </p>
-            <div className="row">
-                {
-                    contributors.map((contributor, index) => {
-                        const key = index.toString();
-                        const name = contributor.Name;
-                        const email = contributor.Email;
-                        const roles = contributor.Roles;
-                        return <ContributorCard Key={key} Name={name} Email={email} Roles={roles}/>
-                    })
-                }
-            </div>
-        </div>
-    );
-}
-
-interface ContributorCardProps {
-    Key: string,
-    Name: string;
-    Email: string;
-    Roles: string[];
-}
-
-function ContributorCard({
-    Key,
-    Name,
-    Email,
-    Roles
-}: ContributorCardProps) {
-    return (
-        <div key={Key} className="p-0 d-flex flex-row justify-content-start align-items-start">
-            <div className="col-2 p-0">
-                <i className="m-0 bi bi-person-circle fs-1 color-light-1"></i>
-            </div>
-            <div className="col-10 ps-lg-2 ps-xl-0">
-                <p className="row m-0 mt-2 p-0 fs-6 text-start fw-bold">
-                    {Name}
-                </p>
-                <p className="row m-0 p-0 fs-6 text-start color-light-3">
-                    {Email}
-                </p>
-                <RoleView Name={Name} Roles={Roles}/>
-            </div>
-        </div>
-    );
-}
-
-interface RoleViewProps {
-    Name: string,
-    Roles: string[];
-};
-
-function RoleView({ Name, Roles }: RoleViewProps) {
-    const collapseId=`${Name}-roles`;
-
-    return (
-        <div className="row ps-2">
-            <button className="row bg-transparent border-0 color-light-1" type='button' data-bs-toggle="collapse" data-bs-target={`#${collapseId}`} aria-expanded="false" aria-controls={collapseId}>
-                <div className="col-2">
-                    <i className="bi bi-arrow-return-right"></i>
+        <div ref={contributorsRef}>
+            <div  className="h-100 px-3 p-2 card card-frost-gradient-1 hover-shadow border-0">
+                <div className="row m-0">
+                    <h2 className="m-0 pb-1 p-0 border-bottom border-2 border-frost-midnight fw-bold text-start color-frost-midnight">
+                        Contributors
+                    </h2>
                 </div>
-                <div className="col-10 p-0">
-                    <p className="row m-0 fs-6 text-start">
-                        Roles
-                    </p>
-                </div>
-            </button>
-            <div className="row collapse" id={collapseId}>
-                <div className="col-2"></div>
-                <div className="col-10 p-0">
+                <div className="row m-0 pt-2 row-gap-1 scrollbar-azure overflow-y-auto">
                     {
-                        Roles.map((role) => {
-                            return (
-                                <p className="row m-0 fs-6 fst-italic text-start">
-                                    {role}
-                                </p>
-                            )
+                        contributors.map(({Name, Email, Roles}, index) => {
+                            return <ContributorRow key={`contributor-${index}`} contributorName={Name} contributorEmail={Email} contributorRoles={Roles}/>
                         })
                     }
                 </div>
@@ -111,16 +77,39 @@ function RoleView({ Name, Roles }: RoleViewProps) {
     );
 }
 
-interface RowsProps {
-    rowContent: string[];
+interface ContributorRowProps {
+    contributorName: string;
+    contributorEmail: string;
+    contributorRoles: string[];
 }
 
-function UnorderedList({
-    rowContent
-}: RowsProps) {
+function ContributorRow({ contributorName, contributorEmail, contributorRoles }: ContributorRowProps) {
     return (
-        <div className="">
-
+        <div className="row m-0">
+            <div className="col-auto p-0">
+                <i className="bi bi-person-circle color-frost-midnight fs-4"/>
+            </div>
+            <div className="col-5 ms-2 me-auto p-0">
+                <p className="m-0 contributor-card-text text-start fw-bold color-frost-light-azure">
+                    {contributorName}
+                </p>
+                <p className="m-0 fs-small text-start color-frost-pastel-gray-azure">
+                    {contributorEmail}
+                </p>
+            </div>
+            <div className="col-5 p-0 pe-1">
+                {
+                    contributorRoles.map((role, index) => {
+                        return (
+                            <div key={`role-${index}`} className="row">
+                                <p className="m-0 contributor-card-text text-start color-frost-light-azure">
+                                    {role}
+                                </p>
+                            </div>
+                        )
+                    })
+                }
+            </div>
         </div>
     )
 }

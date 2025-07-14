@@ -24,6 +24,7 @@ export type {
 
 export type { 
     Opacity, 
+    ColorScheme,
     Color, 
     HoverSelector, 
     TranslucentSelector,

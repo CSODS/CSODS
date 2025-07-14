@@ -708,4 +708,1451 @@
   background-color: #44436d;
 }
 
+.card-white {
+  transition-duration: 0.4s;
+  background-color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
+}
+.card-white.hover-float:hover {
+  transform: translateY(-4px);
+}
+.card-white.hover-shadow:hover {
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
+.card-white.hover-darken:hover {
+  background-color: rgb(70.6328906142, 70.6328906142, 70.6328906142);
+}
+.card-white.translucent-10 {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+.card-white.translucent-10.hover-solidify:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+.card-white.translucent-20 {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+.card-white.translucent-20.hover-solidify:hover {
+  background-color: rgba(255, 255, 255, 0.4);
+}
+.card-white.translucent-30 {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+.card-white.translucent-30.hover-solidify:hover {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+.card-white.translucent-40 {
+  background-color: rgba(255, 255, 255, 0.4);
+}
+.card-white.translucent-40.hover-solidify:hover {
+  background-color: rgba(255, 255, 255, 0.6);
+}
+.card-white.translucent-50 {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+.card-white.translucent-50.hover-solidify:hover {
+  background-color: rgba(255, 255, 255, 0.7);
+}
+.card-white.translucent-60 {
+  background-color: rgba(255, 255, 255, 0.6);
+}
+.card-white.translucent-60.hover-solidify:hover {
+  background-color: rgba(255, 255, 255, 0.8);
+}
+.card-white.translucent-70 {
+  background-color: rgba(255, 255, 255, 0.7);
+}
+.card-white.translucent-70.hover-solidify:hover {
+  background-color: rgba(255, 255, 255, 0.9);
+}
+.card-white.translucent-80 {
+  background-color: rgba(255, 255, 255, 0.8);
+}
+.card-white.translucent-80.hover-solidify:hover {
+  background-color: white;
+}
+.card-white.translucent-90 {
+  background-color: rgba(255, 255, 255, 0.9);
+}
+.card-white.translucent-90.hover-solidify:hover {
+  background-color: white;
+}
+.card-white.translucent-100 {
+  background-color: white;
+}
+.card-white.translucent-100.hover-solidify:hover {
+  background-color: white;
+}
+
+.card-light-grey {
+  transition-duration: 0.4s;
+  background-color: rgb(222, 222, 222);
+  color: rgb(0, 0, 0);
+}
+.card-light-grey.hover-float:hover {
+  transform: translateY(-4px);
+}
+.card-light-grey.hover-shadow:hover {
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
+.card-light-grey.hover-darken:hover {
+  background-color: rgb(62.751544711, 62.751544711, 62.751544711);
+}
+.card-light-grey.translucent-10 {
+  background-color: rgba(222, 222, 222, 0.1);
+}
+.card-light-grey.translucent-10.hover-solidify:hover {
+  background-color: rgba(222, 222, 222, 0.3);
+}
+.card-light-grey.translucent-20 {
+  background-color: rgba(222, 222, 222, 0.2);
+}
+.card-light-grey.translucent-20.hover-solidify:hover {
+  background-color: rgba(222, 222, 222, 0.4);
+}
+.card-light-grey.translucent-30 {
+  background-color: rgba(222, 222, 222, 0.3);
+}
+.card-light-grey.translucent-30.hover-solidify:hover {
+  background-color: rgba(222, 222, 222, 0.5);
+}
+.card-light-grey.translucent-40 {
+  background-color: rgba(222, 222, 222, 0.4);
+}
+.card-light-grey.translucent-40.hover-solidify:hover {
+  background-color: rgba(222, 222, 222, 0.6);
+}
+.card-light-grey.translucent-50 {
+  background-color: rgba(222, 222, 222, 0.5);
+}
+.card-light-grey.translucent-50.hover-solidify:hover {
+  background-color: rgba(222, 222, 222, 0.7);
+}
+.card-light-grey.translucent-60 {
+  background-color: rgba(222, 222, 222, 0.6);
+}
+.card-light-grey.translucent-60.hover-solidify:hover {
+  background-color: rgba(222, 222, 222, 0.8);
+}
+.card-light-grey.translucent-70 {
+  background-color: rgba(222, 222, 222, 0.7);
+}
+.card-light-grey.translucent-70.hover-solidify:hover {
+  background-color: rgba(222, 222, 222, 0.9);
+}
+.card-light-grey.translucent-80 {
+  background-color: rgba(222, 222, 222, 0.8);
+}
+.card-light-grey.translucent-80.hover-solidify:hover {
+  background-color: #dedede;
+}
+.card-light-grey.translucent-90 {
+  background-color: rgba(222, 222, 222, 0.9);
+}
+.card-light-grey.translucent-90.hover-solidify:hover {
+  background-color: #dedede;
+}
+.card-light-grey.translucent-100 {
+  background-color: #dedede;
+}
+.card-light-grey.translucent-100.hover-solidify:hover {
+  background-color: #dedede;
+}
+
+.card-grey {
+  transition-duration: 0.4s;
+  background-color: rgb(140, 127, 132);
+  color: rgb(0, 0, 0);
+}
+.card-grey.hover-float:hover {
+  transform: translateY(-4px);
+}
+.card-grey.hover-shadow:hover {
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
+.card-grey.hover-darken:hover {
+  background-color: rgb(48.2353365867, 37.6274556433, 41.8654558392);
+}
+.card-grey.translucent-10 {
+  background-color: rgba(140, 127, 132, 0.1);
+}
+.card-grey.translucent-10.hover-solidify:hover {
+  background-color: rgba(140, 127, 132, 0.3);
+}
+.card-grey.translucent-20 {
+  background-color: rgba(140, 127, 132, 0.2);
+}
+.card-grey.translucent-20.hover-solidify:hover {
+  background-color: rgba(140, 127, 132, 0.4);
+}
+.card-grey.translucent-30 {
+  background-color: rgba(140, 127, 132, 0.3);
+}
+.card-grey.translucent-30.hover-solidify:hover {
+  background-color: rgba(140, 127, 132, 0.5);
+}
+.card-grey.translucent-40 {
+  background-color: rgba(140, 127, 132, 0.4);
+}
+.card-grey.translucent-40.hover-solidify:hover {
+  background-color: rgba(140, 127, 132, 0.6);
+}
+.card-grey.translucent-50 {
+  background-color: rgba(140, 127, 132, 0.5);
+}
+.card-grey.translucent-50.hover-solidify:hover {
+  background-color: rgba(140, 127, 132, 0.7);
+}
+.card-grey.translucent-60 {
+  background-color: rgba(140, 127, 132, 0.6);
+}
+.card-grey.translucent-60.hover-solidify:hover {
+  background-color: rgba(140, 127, 132, 0.8);
+}
+.card-grey.translucent-70 {
+  background-color: rgba(140, 127, 132, 0.7);
+}
+.card-grey.translucent-70.hover-solidify:hover {
+  background-color: rgba(140, 127, 132, 0.9);
+}
+.card-grey.translucent-80 {
+  background-color: rgba(140, 127, 132, 0.8);
+}
+.card-grey.translucent-80.hover-solidify:hover {
+  background-color: #8c7f84;
+}
+.card-grey.translucent-90 {
+  background-color: rgba(140, 127, 132, 0.9);
+}
+.card-grey.translucent-90.hover-solidify:hover {
+  background-color: #8c7f84;
+}
+.card-grey.translucent-100 {
+  background-color: #8c7f84;
+}
+.card-grey.translucent-100.hover-solidify:hover {
+  background-color: #8c7f84;
+}
+
+.card-green {
+  transition-duration: 0.4s;
+  background-color: rgb(0, 191, 99);
+  color: rgb(255, 255, 255);
+}
+.card-green.hover-float:hover {
+  transform: translateY(-4px);
+}
+.card-green.hover-shadow:hover {
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
+.card-green.hover-darken:hover {
+  background-color: hsl(135.1571127216, 578.2150858443%, 3.7272622787%);
+}
+.card-green.translucent-10 {
+  background-color: rgba(0, 191, 99, 0.1);
+}
+.card-green.translucent-10.hover-solidify:hover {
+  background-color: rgba(0, 191, 99, 0.3);
+}
+.card-green.translucent-20 {
+  background-color: rgba(0, 191, 99, 0.2);
+}
+.card-green.translucent-20.hover-solidify:hover {
+  background-color: rgba(0, 191, 99, 0.4);
+}
+.card-green.translucent-30 {
+  background-color: rgba(0, 191, 99, 0.3);
+}
+.card-green.translucent-30.hover-solidify:hover {
+  background-color: rgba(0, 191, 99, 0.5);
+}
+.card-green.translucent-40 {
+  background-color: rgba(0, 191, 99, 0.4);
+}
+.card-green.translucent-40.hover-solidify:hover {
+  background-color: rgba(0, 191, 99, 0.6);
+}
+.card-green.translucent-50 {
+  background-color: rgba(0, 191, 99, 0.5);
+}
+.card-green.translucent-50.hover-solidify:hover {
+  background-color: rgba(0, 191, 99, 0.7);
+}
+.card-green.translucent-60 {
+  background-color: rgba(0, 191, 99, 0.6);
+}
+.card-green.translucent-60.hover-solidify:hover {
+  background-color: rgba(0, 191, 99, 0.8);
+}
+.card-green.translucent-70 {
+  background-color: rgba(0, 191, 99, 0.7);
+}
+.card-green.translucent-70.hover-solidify:hover {
+  background-color: rgba(0, 191, 99, 0.9);
+}
+.card-green.translucent-80 {
+  background-color: rgba(0, 191, 99, 0.8);
+}
+.card-green.translucent-80.hover-solidify:hover {
+  background-color: #00bf63;
+}
+.card-green.translucent-90 {
+  background-color: rgba(0, 191, 99, 0.9);
+}
+.card-green.translucent-90.hover-solidify:hover {
+  background-color: #00bf63;
+}
+.card-green.translucent-100 {
+  background-color: #00bf63;
+}
+.card-green.translucent-100.hover-solidify:hover {
+  background-color: #00bf63;
+}
+
+.card-grey-blue {
+  transition-duration: 0.4s;
+  background-color: rgb(68, 67, 109);
+  color: rgb(255, 255, 255);
+}
+.card-grey-blue.hover-float:hover {
+  transform: translateY(-4px);
+}
+.card-grey-blue.hover-shadow:hover {
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
+.card-grey-blue.hover-darken:hover {
+  background-color: rgb(19.2746421348, 22.387868087, 58.7761501761);
+}
+.card-grey-blue.translucent-10 {
+  background-color: rgba(68, 67, 109, 0.1);
+}
+.card-grey-blue.translucent-10.hover-solidify:hover {
+  background-color: rgba(68, 67, 109, 0.3);
+}
+.card-grey-blue.translucent-20 {
+  background-color: rgba(68, 67, 109, 0.2);
+}
+.card-grey-blue.translucent-20.hover-solidify:hover {
+  background-color: rgba(68, 67, 109, 0.4);
+}
+.card-grey-blue.translucent-30 {
+  background-color: rgba(68, 67, 109, 0.3);
+}
+.card-grey-blue.translucent-30.hover-solidify:hover {
+  background-color: rgba(68, 67, 109, 0.5);
+}
+.card-grey-blue.translucent-40 {
+  background-color: rgba(68, 67, 109, 0.4);
+}
+.card-grey-blue.translucent-40.hover-solidify:hover {
+  background-color: rgba(68, 67, 109, 0.6);
+}
+.card-grey-blue.translucent-50 {
+  background-color: rgba(68, 67, 109, 0.5);
+}
+.card-grey-blue.translucent-50.hover-solidify:hover {
+  background-color: rgba(68, 67, 109, 0.7);
+}
+.card-grey-blue.translucent-60 {
+  background-color: rgba(68, 67, 109, 0.6);
+}
+.card-grey-blue.translucent-60.hover-solidify:hover {
+  background-color: rgba(68, 67, 109, 0.8);
+}
+.card-grey-blue.translucent-70 {
+  background-color: rgba(68, 67, 109, 0.7);
+}
+.card-grey-blue.translucent-70.hover-solidify:hover {
+  background-color: rgba(68, 67, 109, 0.9);
+}
+.card-grey-blue.translucent-80 {
+  background-color: rgba(68, 67, 109, 0.8);
+}
+.card-grey-blue.translucent-80.hover-solidify:hover {
+  background-color: #44436d;
+}
+.card-grey-blue.translucent-90 {
+  background-color: rgba(68, 67, 109, 0.9);
+}
+.card-grey-blue.translucent-90.hover-solidify:hover {
+  background-color: #44436d;
+}
+.card-grey-blue.translucent-100 {
+  background-color: #44436d;
+}
+.card-grey-blue.translucent-100.hover-solidify:hover {
+  background-color: #44436d;
+}
+
+.card-dark-grey-blue {
+  transition-duration: 0.4s;
+  background-color: rgb(43, 45, 66);
+  color: rgb(255, 255, 255);
+}
+.card-dark-grey-blue.hover-float:hover {
+  transform: translateY(-4px);
+}
+.card-dark-grey-blue.hover-shadow:hover {
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
+.card-dark-grey-blue.hover-darken:hover {
+  background-color: rgb(15.3300543805, 17.2895804973, 36.8218998442);
+}
+.card-dark-grey-blue.translucent-10 {
+  background-color: rgba(43, 45, 66, 0.1);
+}
+.card-dark-grey-blue.translucent-10.hover-solidify:hover {
+  background-color: rgba(43, 45, 66, 0.3);
+}
+.card-dark-grey-blue.translucent-20 {
+  background-color: rgba(43, 45, 66, 0.2);
+}
+.card-dark-grey-blue.translucent-20.hover-solidify:hover {
+  background-color: rgba(43, 45, 66, 0.4);
+}
+.card-dark-grey-blue.translucent-30 {
+  background-color: rgba(43, 45, 66, 0.3);
+}
+.card-dark-grey-blue.translucent-30.hover-solidify:hover {
+  background-color: rgba(43, 45, 66, 0.5);
+}
+.card-dark-grey-blue.translucent-40 {
+  background-color: rgba(43, 45, 66, 0.4);
+}
+.card-dark-grey-blue.translucent-40.hover-solidify:hover {
+  background-color: rgba(43, 45, 66, 0.6);
+}
+.card-dark-grey-blue.translucent-50 {
+  background-color: rgba(43, 45, 66, 0.5);
+}
+.card-dark-grey-blue.translucent-50.hover-solidify:hover {
+  background-color: rgba(43, 45, 66, 0.7);
+}
+.card-dark-grey-blue.translucent-60 {
+  background-color: rgba(43, 45, 66, 0.6);
+}
+.card-dark-grey-blue.translucent-60.hover-solidify:hover {
+  background-color: rgba(43, 45, 66, 0.8);
+}
+.card-dark-grey-blue.translucent-70 {
+  background-color: rgba(43, 45, 66, 0.7);
+}
+.card-dark-grey-blue.translucent-70.hover-solidify:hover {
+  background-color: rgba(43, 45, 66, 0.9);
+}
+.card-dark-grey-blue.translucent-80 {
+  background-color: rgba(43, 45, 66, 0.8);
+}
+.card-dark-grey-blue.translucent-80.hover-solidify:hover {
+  background-color: #2b2d42;
+}
+.card-dark-grey-blue.translucent-90 {
+  background-color: rgba(43, 45, 66, 0.9);
+}
+.card-dark-grey-blue.translucent-90.hover-solidify:hover {
+  background-color: #2b2d42;
+}
+.card-dark-grey-blue.translucent-100 {
+  background-color: #2b2d42;
+}
+.card-dark-grey-blue.translucent-100.hover-solidify:hover {
+  background-color: #2b2d42;
+}
+
+.card-dark-purple {
+  transition-duration: 0.4s;
+  background-color: rgb(19, 7, 46);
+  color: rgb(255, 255, 255);
+}
+.card-dark-purple.hover-float:hover {
+  transform: translateY(-4px);
+}
+.card-dark-purple.hover-shadow:hover {
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
+.card-dark-purple.hover-darken:hover {
+  background-color: hsl(264.1483356571, 121.6670731888%, 7.064435188%);
+}
+.card-dark-purple.translucent-10 {
+  background-color: rgba(19, 7, 46, 0.1);
+}
+.card-dark-purple.translucent-10.hover-solidify:hover {
+  background-color: rgba(19, 7, 46, 0.3);
+}
+.card-dark-purple.translucent-20 {
+  background-color: rgba(19, 7, 46, 0.2);
+}
+.card-dark-purple.translucent-20.hover-solidify:hover {
+  background-color: rgba(19, 7, 46, 0.4);
+}
+.card-dark-purple.translucent-30 {
+  background-color: rgba(19, 7, 46, 0.3);
+}
+.card-dark-purple.translucent-30.hover-solidify:hover {
+  background-color: rgba(19, 7, 46, 0.5);
+}
+.card-dark-purple.translucent-40 {
+  background-color: rgba(19, 7, 46, 0.4);
+}
+.card-dark-purple.translucent-40.hover-solidify:hover {
+  background-color: rgba(19, 7, 46, 0.6);
+}
+.card-dark-purple.translucent-50 {
+  background-color: rgba(19, 7, 46, 0.5);
+}
+.card-dark-purple.translucent-50.hover-solidify:hover {
+  background-color: rgba(19, 7, 46, 0.7);
+}
+.card-dark-purple.translucent-60 {
+  background-color: rgba(19, 7, 46, 0.6);
+}
+.card-dark-purple.translucent-60.hover-solidify:hover {
+  background-color: rgba(19, 7, 46, 0.8);
+}
+.card-dark-purple.translucent-70 {
+  background-color: rgba(19, 7, 46, 0.7);
+}
+.card-dark-purple.translucent-70.hover-solidify:hover {
+  background-color: rgba(19, 7, 46, 0.9);
+}
+.card-dark-purple.translucent-80 {
+  background-color: rgba(19, 7, 46, 0.8);
+}
+.card-dark-purple.translucent-80.hover-solidify:hover {
+  background-color: #13072e;
+}
+.card-dark-purple.translucent-90 {
+  background-color: rgba(19, 7, 46, 0.9);
+}
+.card-dark-purple.translucent-90.hover-solidify:hover {
+  background-color: #13072e;
+}
+.card-dark-purple.translucent-100 {
+  background-color: #13072e;
+}
+.card-dark-purple.translucent-100.hover-solidify:hover {
+  background-color: #13072e;
+}
+
+.card-black {
+  transition-duration: 0.4s;
+  background-color: rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
+}
+.card-black.hover-float:hover {
+  transform: translateY(-4px);
+}
+.card-black.hover-shadow:hover {
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
+.card-black.hover-darken:hover {
+  background-color: black;
+}
+.card-black.translucent-10 {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.card-black.translucent-10.hover-solidify:hover {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+.card-black.translucent-20 {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+.card-black.translucent-20.hover-solidify:hover {
+  background-color: rgba(0, 0, 0, 0.4);
+}
+.card-black.translucent-30 {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+.card-black.translucent-30.hover-solidify:hover {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.card-black.translucent-40 {
+  background-color: rgba(0, 0, 0, 0.4);
+}
+.card-black.translucent-40.hover-solidify:hover {
+  background-color: rgba(0, 0, 0, 0.6);
+}
+.card-black.translucent-50 {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.card-black.translucent-50.hover-solidify:hover {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+.card-black.translucent-60 {
+  background-color: rgba(0, 0, 0, 0.6);
+}
+.card-black.translucent-60.hover-solidify:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+.card-black.translucent-70 {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+.card-black.translucent-70.hover-solidify:hover {
+  background-color: rgba(0, 0, 0, 0.9);
+}
+.card-black.translucent-80 {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+.card-black.translucent-80.hover-solidify:hover {
+  background-color: black;
+}
+.card-black.translucent-90 {
+  background-color: rgba(0, 0, 0, 0.9);
+}
+.card-black.translucent-90.hover-solidify:hover {
+  background-color: black;
+}
+.card-black.translucent-100 {
+  background-color: black;
+}
+.card-black.translucent-100.hover-solidify:hover {
+  background-color: black;
+}
+
+.card-mulled-wine {
+  transition-duration: 0.4s;
+  background-color: rgb(68, 67, 109);
+  color: rgb(255, 255, 255);
+}
+.card-mulled-wine.hover-float:hover {
+  transform: translateY(-4px);
+}
+.card-mulled-wine.hover-shadow:hover {
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
+.card-mulled-wine.hover-darken:hover {
+  background-color: rgb(19.2746421348, 22.387868087, 58.7761501761);
+}
+.card-mulled-wine.translucent-10 {
+  background-color: rgba(68, 67, 109, 0.1);
+}
+.card-mulled-wine.translucent-10.hover-solidify:hover {
+  background-color: rgba(68, 67, 109, 0.3);
+}
+.card-mulled-wine.translucent-20 {
+  background-color: rgba(68, 67, 109, 0.2);
+}
+.card-mulled-wine.translucent-20.hover-solidify:hover {
+  background-color: rgba(68, 67, 109, 0.4);
+}
+.card-mulled-wine.translucent-30 {
+  background-color: rgba(68, 67, 109, 0.3);
+}
+.card-mulled-wine.translucent-30.hover-solidify:hover {
+  background-color: rgba(68, 67, 109, 0.5);
+}
+.card-mulled-wine.translucent-40 {
+  background-color: rgba(68, 67, 109, 0.4);
+}
+.card-mulled-wine.translucent-40.hover-solidify:hover {
+  background-color: rgba(68, 67, 109, 0.6);
+}
+.card-mulled-wine.translucent-50 {
+  background-color: rgba(68, 67, 109, 0.5);
+}
+.card-mulled-wine.translucent-50.hover-solidify:hover {
+  background-color: rgba(68, 67, 109, 0.7);
+}
+.card-mulled-wine.translucent-60 {
+  background-color: rgba(68, 67, 109, 0.6);
+}
+.card-mulled-wine.translucent-60.hover-solidify:hover {
+  background-color: rgba(68, 67, 109, 0.8);
+}
+.card-mulled-wine.translucent-70 {
+  background-color: rgba(68, 67, 109, 0.7);
+}
+.card-mulled-wine.translucent-70.hover-solidify:hover {
+  background-color: rgba(68, 67, 109, 0.9);
+}
+.card-mulled-wine.translucent-80 {
+  background-color: rgba(68, 67, 109, 0.8);
+}
+.card-mulled-wine.translucent-80.hover-solidify:hover {
+  background-color: #44436d;
+}
+.card-mulled-wine.translucent-90 {
+  background-color: rgba(68, 67, 109, 0.9);
+}
+.card-mulled-wine.translucent-90.hover-solidify:hover {
+  background-color: #44436d;
+}
+.card-mulled-wine.translucent-100 {
+  background-color: #44436d;
+}
+.card-mulled-wine.translucent-100.hover-solidify:hover {
+  background-color: #44436d;
+}
+
+.card-error {
+  transition-duration: 0.4s;
+  background-color: rgb(234, 67, 53);
+  color: rgb(0, 0, 0);
+}
+.card-error.hover-float:hover {
+  transform: translateY(-4px);
+}
+.card-error.hover-shadow:hover {
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
+.card-error.hover-darken:hover {
+  background-color: hsl(356.544107343, 210.5700982093%, 14.615000855%);
+}
+.card-error.translucent-10 {
+  background-color: rgba(234, 67, 53, 0.1);
+}
+.card-error.translucent-10.hover-solidify:hover {
+  background-color: rgba(234, 67, 53, 0.3);
+}
+.card-error.translucent-20 {
+  background-color: rgba(234, 67, 53, 0.2);
+}
+.card-error.translucent-20.hover-solidify:hover {
+  background-color: rgba(234, 67, 53, 0.4);
+}
+.card-error.translucent-30 {
+  background-color: rgba(234, 67, 53, 0.3);
+}
+.card-error.translucent-30.hover-solidify:hover {
+  background-color: rgba(234, 67, 53, 0.5);
+}
+.card-error.translucent-40 {
+  background-color: rgba(234, 67, 53, 0.4);
+}
+.card-error.translucent-40.hover-solidify:hover {
+  background-color: rgba(234, 67, 53, 0.6);
+}
+.card-error.translucent-50 {
+  background-color: rgba(234, 67, 53, 0.5);
+}
+.card-error.translucent-50.hover-solidify:hover {
+  background-color: rgba(234, 67, 53, 0.7);
+}
+.card-error.translucent-60 {
+  background-color: rgba(234, 67, 53, 0.6);
+}
+.card-error.translucent-60.hover-solidify:hover {
+  background-color: rgba(234, 67, 53, 0.8);
+}
+.card-error.translucent-70 {
+  background-color: rgba(234, 67, 53, 0.7);
+}
+.card-error.translucent-70.hover-solidify:hover {
+  background-color: rgba(234, 67, 53, 0.9);
+}
+.card-error.translucent-80 {
+  background-color: rgba(234, 67, 53, 0.8);
+}
+.card-error.translucent-80.hover-solidify:hover {
+  background-color: #ea4335;
+}
+.card-error.translucent-90 {
+  background-color: rgba(234, 67, 53, 0.9);
+}
+.card-error.translucent-90.hover-solidify:hover {
+  background-color: #ea4335;
+}
+.card-error.translucent-100 {
+  background-color: #ea4335;
+}
+.card-error.translucent-100.hover-solidify:hover {
+  background-color: #ea4335;
+}
+
+.card-alert {
+  transition-duration: 0.4s;
+  background-color: rgb(255, 165, 0);
+  color: rgb(0, 0, 0);
+}
+.card-alert.hover-float:hover {
+  transform: translateY(-4px);
+}
+.card-alert.hover-shadow:hover {
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
+.card-alert.hover-darken:hover {
+  background-color: hsl(33.4129145311, 315.5512278932%, 9.4429375846%);
+}
+.card-alert.translucent-10 {
+  background-color: rgba(255, 165, 0, 0.1);
+}
+.card-alert.translucent-10.hover-solidify:hover {
+  background-color: rgba(255, 165, 0, 0.3);
+}
+.card-alert.translucent-20 {
+  background-color: rgba(255, 165, 0, 0.2);
+}
+.card-alert.translucent-20.hover-solidify:hover {
+  background-color: rgba(255, 165, 0, 0.4);
+}
+.card-alert.translucent-30 {
+  background-color: rgba(255, 165, 0, 0.3);
+}
+.card-alert.translucent-30.hover-solidify:hover {
+  background-color: rgba(255, 165, 0, 0.5);
+}
+.card-alert.translucent-40 {
+  background-color: rgba(255, 165, 0, 0.4);
+}
+.card-alert.translucent-40.hover-solidify:hover {
+  background-color: rgba(255, 165, 0, 0.6);
+}
+.card-alert.translucent-50 {
+  background-color: rgba(255, 165, 0, 0.5);
+}
+.card-alert.translucent-50.hover-solidify:hover {
+  background-color: rgba(255, 165, 0, 0.7);
+}
+.card-alert.translucent-60 {
+  background-color: rgba(255, 165, 0, 0.6);
+}
+.card-alert.translucent-60.hover-solidify:hover {
+  background-color: rgba(255, 165, 0, 0.8);
+}
+.card-alert.translucent-70 {
+  background-color: rgba(255, 165, 0, 0.7);
+}
+.card-alert.translucent-70.hover-solidify:hover {
+  background-color: rgba(255, 165, 0, 0.9);
+}
+.card-alert.translucent-80 {
+  background-color: rgba(255, 165, 0, 0.8);
+}
+.card-alert.translucent-80.hover-solidify:hover {
+  background-color: orange;
+}
+.card-alert.translucent-90 {
+  background-color: rgba(255, 165, 0, 0.9);
+}
+.card-alert.translucent-90.hover-solidify:hover {
+  background-color: orange;
+}
+.card-alert.translucent-100 {
+  background-color: orange;
+}
+.card-alert.translucent-100.hover-solidify:hover {
+  background-color: orange;
+}
+
+.card-alert-subtle {
+  transition-duration: 0.4s;
+  background-color: rgb(199, 155, 26);
+  color: rgb(255, 255, 255);
+}
+.card-alert-subtle.hover-float:hover {
+  transform: translateY(-4px);
+}
+.card-alert-subtle.hover-shadow:hover {
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
+.card-alert-subtle.hover-darken:hover {
+  background-color: hsl(44.4884743184, 444.0591826271%, 5.2656008082%);
+}
+.card-alert-subtle.translucent-10 {
+  background-color: rgba(199, 155, 26, 0.1);
+}
+.card-alert-subtle.translucent-10.hover-solidify:hover {
+  background-color: rgba(199, 155, 26, 0.3);
+}
+.card-alert-subtle.translucent-20 {
+  background-color: rgba(199, 155, 26, 0.2);
+}
+.card-alert-subtle.translucent-20.hover-solidify:hover {
+  background-color: rgba(199, 155, 26, 0.4);
+}
+.card-alert-subtle.translucent-30 {
+  background-color: rgba(199, 155, 26, 0.3);
+}
+.card-alert-subtle.translucent-30.hover-solidify:hover {
+  background-color: rgba(199, 155, 26, 0.5);
+}
+.card-alert-subtle.translucent-40 {
+  background-color: rgba(199, 155, 26, 0.4);
+}
+.card-alert-subtle.translucent-40.hover-solidify:hover {
+  background-color: rgba(199, 155, 26, 0.6);
+}
+.card-alert-subtle.translucent-50 {
+  background-color: rgba(199, 155, 26, 0.5);
+}
+.card-alert-subtle.translucent-50.hover-solidify:hover {
+  background-color: rgba(199, 155, 26, 0.7);
+}
+.card-alert-subtle.translucent-60 {
+  background-color: rgba(199, 155, 26, 0.6);
+}
+.card-alert-subtle.translucent-60.hover-solidify:hover {
+  background-color: rgba(199, 155, 26, 0.8);
+}
+.card-alert-subtle.translucent-70 {
+  background-color: rgba(199, 155, 26, 0.7);
+}
+.card-alert-subtle.translucent-70.hover-solidify:hover {
+  background-color: rgba(199, 155, 26, 0.9);
+}
+.card-alert-subtle.translucent-80 {
+  background-color: rgba(199, 155, 26, 0.8);
+}
+.card-alert-subtle.translucent-80.hover-solidify:hover {
+  background-color: #c79b1a;
+}
+.card-alert-subtle.translucent-90 {
+  background-color: rgba(199, 155, 26, 0.9);
+}
+.card-alert-subtle.translucent-90.hover-solidify:hover {
+  background-color: #c79b1a;
+}
+.card-alert-subtle.translucent-100 {
+  background-color: #c79b1a;
+}
+.card-alert-subtle.translucent-100.hover-solidify:hover {
+  background-color: #c79b1a;
+}
+
+.card-notify {
+  transition-duration: 0.4s;
+  background-color: rgb(54, 163, 217);
+  color: rgb(0, 0, 0);
+}
+.card-notify.hover-float:hover {
+  transform: translateY(-4px);
+}
+.card-notify.hover-shadow:hover {
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
+.card-notify.hover-darken:hover {
+  background-color: hsl(197.9816144147, 314.9227963943%, 9.4501694202%);
+}
+.card-notify.translucent-10 {
+  background-color: rgba(54, 163, 217, 0.1);
+}
+.card-notify.translucent-10.hover-solidify:hover {
+  background-color: rgba(54, 163, 217, 0.3);
+}
+.card-notify.translucent-20 {
+  background-color: rgba(54, 163, 217, 0.2);
+}
+.card-notify.translucent-20.hover-solidify:hover {
+  background-color: rgba(54, 163, 217, 0.4);
+}
+.card-notify.translucent-30 {
+  background-color: rgba(54, 163, 217, 0.3);
+}
+.card-notify.translucent-30.hover-solidify:hover {
+  background-color: rgba(54, 163, 217, 0.5);
+}
+.card-notify.translucent-40 {
+  background-color: rgba(54, 163, 217, 0.4);
+}
+.card-notify.translucent-40.hover-solidify:hover {
+  background-color: rgba(54, 163, 217, 0.6);
+}
+.card-notify.translucent-50 {
+  background-color: rgba(54, 163, 217, 0.5);
+}
+.card-notify.translucent-50.hover-solidify:hover {
+  background-color: rgba(54, 163, 217, 0.7);
+}
+.card-notify.translucent-60 {
+  background-color: rgba(54, 163, 217, 0.6);
+}
+.card-notify.translucent-60.hover-solidify:hover {
+  background-color: rgba(54, 163, 217, 0.8);
+}
+.card-notify.translucent-70 {
+  background-color: rgba(54, 163, 217, 0.7);
+}
+.card-notify.translucent-70.hover-solidify:hover {
+  background-color: rgba(54, 163, 217, 0.9);
+}
+.card-notify.translucent-80 {
+  background-color: rgba(54, 163, 217, 0.8);
+}
+.card-notify.translucent-80.hover-solidify:hover {
+  background-color: #36a3d9;
+}
+.card-notify.translucent-90 {
+  background-color: rgba(54, 163, 217, 0.9);
+}
+.card-notify.translucent-90.hover-solidify:hover {
+  background-color: #36a3d9;
+}
+.card-notify.translucent-100 {
+  background-color: #36a3d9;
+}
+.card-notify.translucent-100.hover-solidify:hover {
+  background-color: #36a3d9;
+}
+
+.card-success {
+  transition-duration: 0.4s;
+  background-color: rgb(0, 191, 99);
+  color: rgb(255, 255, 255);
+}
+.card-success.hover-float:hover {
+  transform: translateY(-4px);
+}
+.card-success.hover-shadow:hover {
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
+.card-success.hover-darken:hover {
+  background-color: hsl(135.1571127216, 578.2150858443%, 3.7272622787%);
+}
+.card-success.translucent-10 {
+  background-color: rgba(0, 191, 99, 0.1);
+}
+.card-success.translucent-10.hover-solidify:hover {
+  background-color: rgba(0, 191, 99, 0.3);
+}
+.card-success.translucent-20 {
+  background-color: rgba(0, 191, 99, 0.2);
+}
+.card-success.translucent-20.hover-solidify:hover {
+  background-color: rgba(0, 191, 99, 0.4);
+}
+.card-success.translucent-30 {
+  background-color: rgba(0, 191, 99, 0.3);
+}
+.card-success.translucent-30.hover-solidify:hover {
+  background-color: rgba(0, 191, 99, 0.5);
+}
+.card-success.translucent-40 {
+  background-color: rgba(0, 191, 99, 0.4);
+}
+.card-success.translucent-40.hover-solidify:hover {
+  background-color: rgba(0, 191, 99, 0.6);
+}
+.card-success.translucent-50 {
+  background-color: rgba(0, 191, 99, 0.5);
+}
+.card-success.translucent-50.hover-solidify:hover {
+  background-color: rgba(0, 191, 99, 0.7);
+}
+.card-success.translucent-60 {
+  background-color: rgba(0, 191, 99, 0.6);
+}
+.card-success.translucent-60.hover-solidify:hover {
+  background-color: rgba(0, 191, 99, 0.8);
+}
+.card-success.translucent-70 {
+  background-color: rgba(0, 191, 99, 0.7);
+}
+.card-success.translucent-70.hover-solidify:hover {
+  background-color: rgba(0, 191, 99, 0.9);
+}
+.card-success.translucent-80 {
+  background-color: rgba(0, 191, 99, 0.8);
+}
+.card-success.translucent-80.hover-solidify:hover {
+  background-color: #00bf63;
+}
+.card-success.translucent-90 {
+  background-color: rgba(0, 191, 99, 0.9);
+}
+.card-success.translucent-90.hover-solidify:hover {
+  background-color: #00bf63;
+}
+.card-success.translucent-100 {
+  background-color: #00bf63;
+}
+.card-success.translucent-100.hover-solidify:hover {
+  background-color: #00bf63;
+}
+
+.card-light-azure {
+  transition-duration: 0.4s;
+  background-color: rgb(246, 250, 253);
+  color: rgb(0, 0, 0);
+}
+.card-light-azure.hover-float:hover {
+  transform: translateY(-4px);
+}
+.card-light-azure.hover-shadow:hover {
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
+.card-light-azure.hover-darken:hover {
+  background-color: rgb(66.605295968, 69.8285459668, 72.2143207989);
+}
+.card-light-azure.translucent-10 {
+  background-color: rgba(246, 250, 253, 0.1);
+}
+.card-light-azure.translucent-10.hover-solidify:hover {
+  background-color: rgba(246, 250, 253, 0.3);
+}
+.card-light-azure.translucent-20 {
+  background-color: rgba(246, 250, 253, 0.2);
+}
+.card-light-azure.translucent-20.hover-solidify:hover {
+  background-color: rgba(246, 250, 253, 0.4);
+}
+.card-light-azure.translucent-30 {
+  background-color: rgba(246, 250, 253, 0.3);
+}
+.card-light-azure.translucent-30.hover-solidify:hover {
+  background-color: rgba(246, 250, 253, 0.5);
+}
+.card-light-azure.translucent-40 {
+  background-color: rgba(246, 250, 253, 0.4);
+}
+.card-light-azure.translucent-40.hover-solidify:hover {
+  background-color: rgba(246, 250, 253, 0.6);
+}
+.card-light-azure.translucent-50 {
+  background-color: rgba(246, 250, 253, 0.5);
+}
+.card-light-azure.translucent-50.hover-solidify:hover {
+  background-color: rgba(246, 250, 253, 0.7);
+}
+.card-light-azure.translucent-60 {
+  background-color: rgba(246, 250, 253, 0.6);
+}
+.card-light-azure.translucent-60.hover-solidify:hover {
+  background-color: rgba(246, 250, 253, 0.8);
+}
+.card-light-azure.translucent-70 {
+  background-color: rgba(246, 250, 253, 0.7);
+}
+.card-light-azure.translucent-70.hover-solidify:hover {
+  background-color: rgba(246, 250, 253, 0.9);
+}
+.card-light-azure.translucent-80 {
+  background-color: rgba(246, 250, 253, 0.8);
+}
+.card-light-azure.translucent-80.hover-solidify:hover {
+  background-color: #f6fafd;
+}
+.card-light-azure.translucent-90 {
+  background-color: rgba(246, 250, 253, 0.9);
+}
+.card-light-azure.translucent-90.hover-solidify:hover {
+  background-color: #f6fafd;
+}
+.card-light-azure.translucent-100 {
+  background-color: #f6fafd;
+}
+.card-light-azure.translucent-100.hover-solidify:hover {
+  background-color: #f6fafd;
+}
+
+.card-pastel-gray-azure {
+  transition-duration: 0.4s;
+  background-color: rgb(179, 207, 229);
+  color: rgb(0, 0, 0);
+}
+.card-pastel-gray-azure.hover-float:hover {
+  transform: translateY(-4px);
+}
+.card-pastel-gray-azure.hover-shadow:hover {
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
+.card-pastel-gray-azure.hover-darken:hover {
+  background-color: rgb(34.675083067, 61.5172367366, 79.3185570181);
+}
+.card-pastel-gray-azure.translucent-10 {
+  background-color: rgba(179, 207, 229, 0.1);
+}
+.card-pastel-gray-azure.translucent-10.hover-solidify:hover {
+  background-color: rgba(179, 207, 229, 0.3);
+}
+.card-pastel-gray-azure.translucent-20 {
+  background-color: rgba(179, 207, 229, 0.2);
+}
+.card-pastel-gray-azure.translucent-20.hover-solidify:hover {
+  background-color: rgba(179, 207, 229, 0.4);
+}
+.card-pastel-gray-azure.translucent-30 {
+  background-color: rgba(179, 207, 229, 0.3);
+}
+.card-pastel-gray-azure.translucent-30.hover-solidify:hover {
+  background-color: rgba(179, 207, 229, 0.5);
+}
+.card-pastel-gray-azure.translucent-40 {
+  background-color: rgba(179, 207, 229, 0.4);
+}
+.card-pastel-gray-azure.translucent-40.hover-solidify:hover {
+  background-color: rgba(179, 207, 229, 0.6);
+}
+.card-pastel-gray-azure.translucent-50 {
+  background-color: rgba(179, 207, 229, 0.5);
+}
+.card-pastel-gray-azure.translucent-50.hover-solidify:hover {
+  background-color: rgba(179, 207, 229, 0.7);
+}
+.card-pastel-gray-azure.translucent-60 {
+  background-color: rgba(179, 207, 229, 0.6);
+}
+.card-pastel-gray-azure.translucent-60.hover-solidify:hover {
+  background-color: rgba(179, 207, 229, 0.8);
+}
+.card-pastel-gray-azure.translucent-70 {
+  background-color: rgba(179, 207, 229, 0.7);
+}
+.card-pastel-gray-azure.translucent-70.hover-solidify:hover {
+  background-color: rgba(179, 207, 229, 0.9);
+}
+.card-pastel-gray-azure.translucent-80 {
+  background-color: rgba(179, 207, 229, 0.8);
+}
+.card-pastel-gray-azure.translucent-80.hover-solidify:hover {
+  background-color: #b3cfe5;
+}
+.card-pastel-gray-azure.translucent-90 {
+  background-color: rgba(179, 207, 229, 0.9);
+}
+.card-pastel-gray-azure.translucent-90.hover-solidify:hover {
+  background-color: #b3cfe5;
+}
+.card-pastel-gray-azure.translucent-100 {
+  background-color: #b3cfe5;
+}
+.card-pastel-gray-azure.translucent-100.hover-solidify:hover {
+  background-color: #b3cfe5;
+}
+
+.card-azure {
+  transition-duration: 0.4s;
+  background-color: rgb(74, 127, 167);
+  color: rgb(255, 255, 255);
+}
+.card-azure.hover-float:hover {
+  transform: translateY(-4px);
+}
+.card-azure.hover-shadow:hover {
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
+.card-azure.hover-darken:hover {
+  background-color: hsl(199.4693945883, 207.1649531335%, 9.805858693%);
+}
+.card-azure.translucent-10 {
+  background-color: rgba(74, 127, 167, 0.1);
+}
+.card-azure.translucent-10.hover-solidify:hover {
+  background-color: rgba(74, 127, 167, 0.3);
+}
+.card-azure.translucent-20 {
+  background-color: rgba(74, 127, 167, 0.2);
+}
+.card-azure.translucent-20.hover-solidify:hover {
+  background-color: rgba(74, 127, 167, 0.4);
+}
+.card-azure.translucent-30 {
+  background-color: rgba(74, 127, 167, 0.3);
+}
+.card-azure.translucent-30.hover-solidify:hover {
+  background-color: rgba(74, 127, 167, 0.5);
+}
+.card-azure.translucent-40 {
+  background-color: rgba(74, 127, 167, 0.4);
+}
+.card-azure.translucent-40.hover-solidify:hover {
+  background-color: rgba(74, 127, 167, 0.6);
+}
+.card-azure.translucent-50 {
+  background-color: rgba(74, 127, 167, 0.5);
+}
+.card-azure.translucent-50.hover-solidify:hover {
+  background-color: rgba(74, 127, 167, 0.7);
+}
+.card-azure.translucent-60 {
+  background-color: rgba(74, 127, 167, 0.6);
+}
+.card-azure.translucent-60.hover-solidify:hover {
+  background-color: rgba(74, 127, 167, 0.8);
+}
+.card-azure.translucent-70 {
+  background-color: rgba(74, 127, 167, 0.7);
+}
+.card-azure.translucent-70.hover-solidify:hover {
+  background-color: rgba(74, 127, 167, 0.9);
+}
+.card-azure.translucent-80 {
+  background-color: rgba(74, 127, 167, 0.8);
+}
+.card-azure.translucent-80.hover-solidify:hover {
+  background-color: #4a7fa7;
+}
+.card-azure.translucent-90 {
+  background-color: rgba(74, 127, 167, 0.9);
+}
+.card-azure.translucent-90.hover-solidify:hover {
+  background-color: #4a7fa7;
+}
+.card-azure.translucent-100 {
+  background-color: #4a7fa7;
+}
+.card-azure.translucent-100.hover-solidify:hover {
+  background-color: #4a7fa7;
+}
+
+.card-nile-blue {
+  transition-duration: 0.4s;
+  background-color: rgb(26, 61, 99);
+  color: rgb(255, 255, 255);
+}
+.card-nile-blue.hover-float:hover {
+  transform: translateY(-4px);
+}
+.card-nile-blue.hover-shadow:hover {
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
+.card-nile-blue.hover-darken:hover {
+  background-color: hsl(206.9380576463, 177.7162428341%, 8.1875868793%);
+}
+.card-nile-blue.translucent-10 {
+  background-color: rgba(26, 61, 99, 0.1);
+}
+.card-nile-blue.translucent-10.hover-solidify:hover {
+  background-color: rgba(26, 61, 99, 0.3);
+}
+.card-nile-blue.translucent-20 {
+  background-color: rgba(26, 61, 99, 0.2);
+}
+.card-nile-blue.translucent-20.hover-solidify:hover {
+  background-color: rgba(26, 61, 99, 0.4);
+}
+.card-nile-blue.translucent-30 {
+  background-color: rgba(26, 61, 99, 0.3);
+}
+.card-nile-blue.translucent-30.hover-solidify:hover {
+  background-color: rgba(26, 61, 99, 0.5);
+}
+.card-nile-blue.translucent-40 {
+  background-color: rgba(26, 61, 99, 0.4);
+}
+.card-nile-blue.translucent-40.hover-solidify:hover {
+  background-color: rgba(26, 61, 99, 0.6);
+}
+.card-nile-blue.translucent-50 {
+  background-color: rgba(26, 61, 99, 0.5);
+}
+.card-nile-blue.translucent-50.hover-solidify:hover {
+  background-color: rgba(26, 61, 99, 0.7);
+}
+.card-nile-blue.translucent-60 {
+  background-color: rgba(26, 61, 99, 0.6);
+}
+.card-nile-blue.translucent-60.hover-solidify:hover {
+  background-color: rgba(26, 61, 99, 0.8);
+}
+.card-nile-blue.translucent-70 {
+  background-color: rgba(26, 61, 99, 0.7);
+}
+.card-nile-blue.translucent-70.hover-solidify:hover {
+  background-color: rgba(26, 61, 99, 0.9);
+}
+.card-nile-blue.translucent-80 {
+  background-color: rgba(26, 61, 99, 0.8);
+}
+.card-nile-blue.translucent-80.hover-solidify:hover {
+  background-color: #1a3d63;
+}
+.card-nile-blue.translucent-90 {
+  background-color: rgba(26, 61, 99, 0.9);
+}
+.card-nile-blue.translucent-90.hover-solidify:hover {
+  background-color: #1a3d63;
+}
+.card-nile-blue.translucent-100 {
+  background-color: #1a3d63;
+}
+.card-nile-blue.translucent-100.hover-solidify:hover {
+  background-color: #1a3d63;
+}
+
+.card-midnight {
+  transition-duration: 0.4s;
+  background-color: rgb(10, 25, 49);
+  color: rgb(255, 255, 255);
+}
+.card-midnight.hover-float:hover {
+  transform: translateY(-4px);
+}
+.card-midnight.hover-shadow:hover {
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
+.card-midnight.hover-darken:hover {
+  background-color: hsl(218.657756639, 132.384516514%, 6.1318120514%);
+}
+.card-midnight.translucent-10 {
+  background-color: rgba(10, 25, 49, 0.1);
+}
+.card-midnight.translucent-10.hover-solidify:hover {
+  background-color: rgba(10, 25, 49, 0.3);
+}
+.card-midnight.translucent-20 {
+  background-color: rgba(10, 25, 49, 0.2);
+}
+.card-midnight.translucent-20.hover-solidify:hover {
+  background-color: rgba(10, 25, 49, 0.4);
+}
+.card-midnight.translucent-30 {
+  background-color: rgba(10, 25, 49, 0.3);
+}
+.card-midnight.translucent-30.hover-solidify:hover {
+  background-color: rgba(10, 25, 49, 0.5);
+}
+.card-midnight.translucent-40 {
+  background-color: rgba(10, 25, 49, 0.4);
+}
+.card-midnight.translucent-40.hover-solidify:hover {
+  background-color: rgba(10, 25, 49, 0.6);
+}
+.card-midnight.translucent-50 {
+  background-color: rgba(10, 25, 49, 0.5);
+}
+.card-midnight.translucent-50.hover-solidify:hover {
+  background-color: rgba(10, 25, 49, 0.7);
+}
+.card-midnight.translucent-60 {
+  background-color: rgba(10, 25, 49, 0.6);
+}
+.card-midnight.translucent-60.hover-solidify:hover {
+  background-color: rgba(10, 25, 49, 0.8);
+}
+.card-midnight.translucent-70 {
+  background-color: rgba(10, 25, 49, 0.7);
+}
+.card-midnight.translucent-70.hover-solidify:hover {
+  background-color: rgba(10, 25, 49, 0.9);
+}
+.card-midnight.translucent-80 {
+  background-color: rgba(10, 25, 49, 0.8);
+}
+.card-midnight.translucent-80.hover-solidify:hover {
+  background-color: #0a1931;
+}
+.card-midnight.translucent-90 {
+  background-color: rgba(10, 25, 49, 0.9);
+}
+.card-midnight.translucent-90.hover-solidify:hover {
+  background-color: #0a1931;
+}
+.card-midnight.translucent-100 {
+  background-color: #0a1931;
+}
+.card-midnight.translucent-100.hover-solidify:hover {
+  background-color: #0a1931;
+}
+
+.card-frost-gradient-1 {
+  transition-duration: 0.4s;
+  background-image: radial-gradient(circle at 0% 0%, rgb(74, 127, 167), rgb(26, 61, 99));
+}
+.card-frost-gradient-1.hover-float:hover {
+  transform: translateY(-4px);
+}
+.card-frost-gradient-1.hover-shadow:hover {
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
+
+.card-frost-gradient-2 {
+  transition-duration: 0.4s;
+  background-image: radial-gradient(circle at 0% 0%, rgb(179, 207, 229), rgb(74, 127, 167));
+}
+.card-frost-gradient-2.hover-float:hover {
+  transform: translateY(-4px);
+}
+.card-frost-gradient-2.hover-shadow:hover {
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
+
 /*# sourceMappingURL=cards.css.map */

@@ -5,7 +5,35 @@ export type LightColor = 'light-1' | 'light-2' | 'light-3';
 export type NeutralColor = 'neutral-1' | 'neutral-2';
 export type DarkColor = 'dark-1' | 'dark-2' | 'dark-3' | 'dark-4';
 
-export type Color =  LightColor | NeutralColor | DarkColor;
+export type ColorScheme = 'default' | 'frost' | 'utility';
+
+type DefaultColor = 
+    | 'white'
+    | 'light-grey'
+    | 'grey'
+    | 'green'
+    | 'grey-blue'
+    | 'dark-grey-blue'
+    | 'dark-purple'
+    | 'black'
+    | 'mulled-wine';
+
+type FrostColor = 
+    | 'light-azure'
+    | 'pastel-gray-azure'
+    | 'azure'
+    | 'nile-blue'
+    | 'midnight'
+    | 'dark-purple';
+
+type UtilityColor =
+    | 'error'
+    | 'alert'
+    | 'alert-subtle'
+    | 'notify'
+    | 'success';
+
+export type Color =  LightColor | NeutralColor | DarkColor | DefaultColor | FrostColor | UtilityColor;
 
 export type BtnSelector = `btn-${Color}`;
 export type ColorSelector = `color-${Color}`;
