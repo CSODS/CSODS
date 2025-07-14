@@ -2,11 +2,14 @@ import { useEffect, useRef, useState } from "react";
 import { DEFAULT_USER } from "@constants/defaults";
 import { useFetchProject, useFetchTagData } from "@/hooks";
 import { IUser } from "@/types";
-import { ProjectImages, ProjectInformationProvider } from "./components";
-import HeaderCard from "./components/HeaderCard";
-import About from "./components/About";
-import GitHubStatistics from "./components/GitHubStatistics";
-import Contributors from "./components/CoreContributors";
+import {
+  About,
+  Contributors,
+  GitHubStatistics,
+  HeaderCard,
+  ProjectImages,
+  ProjectInformationProvider
+} from "./components";
 
 export default function ProjectDetails() {
   const allTags = useFetchTagData();
