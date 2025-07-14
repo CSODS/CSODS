@@ -1,13 +1,18 @@
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import { ADDRESSES } from "@/constants";
-import { ReactNode, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import { IProjectSearchParameters } from "@/types";
 import { getProjectsPageLink } from "@/utils";
+import styles from './ProjectListLayout.module.scss';
 
-export function ProjectListLayout() {
+interface ProjectListLayoutProps {
+    navBarVariant?: 1 | 2;
+}
+
+export function ProjectListLayout({ navBarVariant }: ProjectListLayoutProps) {
     return (
         <div>
-            <NavBar>
+            <NavBar navBarVariant={navBarVariant}>
                 <SearchBar/>
             </NavBar>
             <main className='pb-3'>
@@ -18,16 +23,29 @@ export function ProjectListLayout() {
 }
 
 interface NavBarProps {
+    navBarVariant?: 1 | 2;
     children?: ReactNode;
 }
 
-function NavBar({ children }: NavBarProps) {
+function NavBar({ navBarVariant = 1, children }: NavBarProps) {
     const projectsFirstPage = `${ADDRESSES.STUDENT_PROJECTS.ROOT}/1`;
+    const [navBarClass, setNavBarClass] = useState<string>('');
+    
+    useEffect(() => {
+        if (navBarVariant === 1) {
+            // setNavBarClass('bg-default-grey-blue shadow-mulled-wine translucent-100');
+            setNavBarClass(`${styles['navbar-variant-1']} translucent-100`);
+        }
+        else if (navBarVariant === 2) {
+            // setNavBarClass('bg-default-black translucent-100');
+            setNavBarClass(`${styles['navbar-variant-2']} translucent-100`);
+        }
+    }, [navBarVariant]);
 
     return (
         <div className="p-0 navbar navbar-expand-lg">    
-            <div className="px-md-3 px-1 py-0 container-fluid bg-dark-3 translucent-100">
-                <NavLink className=" m-0 me-md-1 my-1 d-flex flex-row justify-content-center align-items-center text-decoration-none color-light-1" to={ADDRESSES.LANDING_PAGE}>
+            <div className={`px-md-3 px-1 py-0 container-fluid ${navBarClass}`}>
+                <NavLink className=" m-0 me-md-1 my-lg-2 my-1 d-flex flex-row justify-content-center align-items-center text-decoration-none color-light-1" to={ADDRESSES.LANDING_PAGE}>
                     <img src='/lucso-logo-no-bg.png' alt="CSO_LOGO" className='header-logo'/>
                     <p className='m-0 p-0 ps-2 d-lg-block d-none fs-4 bolder'>
                         CSO:DS
