@@ -5,7 +5,7 @@ import { useProjectDetails } from "@/hooks";
 const DEFAULT_PROJECT_IMAGES = DEFAULTS.DEFAULT_PROJECT_IMAGES;
 
 interface ProjectImagesProps {
-    galleryRef?: React.Ref<HTMLDivElement | null>;
+    galleryRef?: React.RefObject<HTMLDivElement | null>;
 }
 
 export default function ProjectImages({ galleryRef }: ProjectImagesProps) {

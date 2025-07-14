@@ -3,7 +3,7 @@ import { useProjectDetails } from "@/hooks";
 import '../styles/scrollableStyles.module.css';
 
 interface AboutProps {
-    aboutRef?: React.Ref<HTMLDivElement | null>
+    aboutRef?: React.RefObject<HTMLDivElement | null>
 }
 
 export default function About({ aboutRef }: AboutProps) {
