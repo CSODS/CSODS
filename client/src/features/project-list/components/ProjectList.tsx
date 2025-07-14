@@ -13,25 +13,26 @@ export default function ProjectList () {
         const totalPages = projectsPage.TotalPages;
         
         return (
-            <div className="row">
-                <div className='mx-0 mt-md-5 mt-3 px-3 row row-cols-1 row-cols-sm-2 row-gap-lg-4 row-gap-2 d-flex justify-content-center'>
+            <div className="container-fluid p-0">
+                <div className='mx-0 mt-md-5 mt-3 px-lg-3 px-sm-1 px-3 row row-cols-1 row-cols-sm-2 row-gap-lg-4 row-gap-2 d-flex justify-content-center'>
                     <TagColorProvider allTags={allTags}>
                         <ProjectDataServiceProvider allTags={allTags}>
                             {
                                 projectList.map((project, index) => {
-                                    const contextKey = `project-context-${index}`;
                                     const cardKey = `project-card-${index}`;
                                     return (
-                                        <ProjectDetailsProvider key={contextKey} projectDetails={project}>
-                                            <ProjectCard key={cardKey}/>
-                                        </ProjectDetailsProvider>
+                                        <div key={cardKey} className="col px-lg-3 px-1" style={{ maxWidth:700 }}>
+                                            <ProjectDetailsProvider projectDetails={project}>
+                                                <ProjectCard/>
+                                            </ProjectDetailsProvider>
+                                        </div>
                                     )
                                 })
                             }
                         </ProjectDataServiceProvider>
                     </TagColorProvider>
                 </div>
-                <div className="row">
+                <div className="row m-0">
                     <TotalPagesProvider totalPages={totalPages}>
                         <Paginator/>
                     </TotalPagesProvider>
