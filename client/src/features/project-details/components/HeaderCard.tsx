@@ -1,10 +1,7 @@
 import { createContext, useContext } from "react";
-import { useNavigate } from "react-router-dom";
 import { BtnPill } from "@/components";
 import { ICONS } from "@/constants";
-import { useProjectDataService, useProjectDetails, useProjectIcon, useTagCategoryMap, useUser } from "@/hooks";
-import { IProjectSearchParameters } from "@/types";
-import { getProjectsPageLink } from "@/utils";
+import { useNavigateWithTag, useProjectDataService, useProjectDetails, useProjectIcon, useUser } from "@/hooks";
 
 const DevIconContext = createContext<string>('');
 
@@ -110,19 +107,7 @@ interface TagProps {
 }
 
 function Tag({ tag }: TagProps) {
-    const tagCategoryMap = useTagCategoryMap();
-    const tagDetails = tagCategoryMap.get(tag);
-
-    const navigate = useNavigate();
-    const callbackFn = () => {
-        if (tagDetails) {
-            const tagCategory = tagDetails.tagCategory;
-            const tagId = tagDetails.tagId;
-            const searchParameters = { [tagCategory]: tagId };
-            const link = getProjectsPageLink(1, searchParameters as IProjectSearchParameters);
-            navigate(link);
-        }
-    }
+    const callbackFn = useNavigateWithTag(tag);
 
     return (
         <BtnPill 

@@ -1,9 +1,8 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { BtnBare } from "@/components";
 import { DEFAULTS, ICONS } from "@/constants";
-import { useProjectDataService, useProjectDetails, useProjectIcon, useTagCategoryMap } from "@/hooks";
-import { IProjectSearchParameters } from "@/types";
-import { getProjectsPageLink, getProjectLink, redirectToUrl } from "@/utils";
+import { useNavigateWithTag, useProjectDataService, useProjectDetails, useProjectIcon } from "@/hooks";
+import { getProjectLink, redirectToUrl } from "@/utils";
 import { useTagColorMap } from "../hooks/context";
 
 export default function ProjectCard () {
@@ -102,20 +101,7 @@ function Tag({ tag }: TagProps) {
   const iconClass = `m-0 p-0 bi bi-circle-fill fs-xxs ${iconColor}`;
   const textOnHover = `hover-${iconColor}`;
 
-  const tagCategoryMap = useTagCategoryMap();
-  const tagDetails = tagCategoryMap.get(tag);
-
-  const navigate = useNavigate();
-  const callbackFn = () => {
-    if (tagDetails) {
-      const tagCategory = tagDetails.tagCategory;
-      const tagId = tagDetails.tagId;
-      const searchParameters = { [tagCategory]: tagId };
-      const link = getProjectsPageLink(1, searchParameters as IProjectSearchParameters);
-      console.log(link);
-      navigate(link);
-    }
-  }
+  const callbackFn = useNavigateWithTag(tag);
 
   return (
     <BtnBare flex="row" justify="center" align="center" margin={[{breakpoint: 'lg', b: 1}, { m: 0}]} callBackFn={callbackFn}>
