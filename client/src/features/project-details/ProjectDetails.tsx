@@ -69,6 +69,6 @@ export default function ProjectDetails() {
     )
   }
   else {
-    return <p>no data</p>
+    return <p></p>
   }
 }
