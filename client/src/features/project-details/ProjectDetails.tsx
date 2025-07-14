@@ -51,27 +51,24 @@ export default function ProjectDetails() {
             <HeaderCard/>
           </section>
 
-          <section className="row m-0 mt-2 p-0 row-cols-lg-2 row-cols-1 row-gap-2">
+          <section className="row m-0 mt-1 p-0 row-cols-lg-2 row-cols-1 row-gap-1">
             <div className="col-lg-4 px-1">
               <About aboutRef={aboutRef}/>
             </div>
             <div className="col-lg-8 px-1">
 
-              <section ref={subContainerRef} className="d-grid row-gap-2">
+              <section ref={subContainerRef} className="d-grid row-gap-1">
 
-                <div className="row m-0 row-gap-2 column-gap-2">
+                <div className="row m-0 row-gap-1 column-gap-2">
                   <div className="col-md p-0">
                     <ProjectImages galleryRef={galleryRef}/>
-                  </div>
-                  <div className="col d-md-none d-block p-0">
-                    <GitHubStatistics/>
                   </div>
                   <div className="col-md p-0">
                     <Contributors contributorsRef={contributorsRef}/>
                   </div>
                 </div>
 
-                <div className="row-md d-md-block d-none m-0">
+                <div className="row m-0 order-md-last order-first">
                   <GitHubStatistics/>
                 </div>
 
