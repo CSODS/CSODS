@@ -15,14 +15,14 @@ export default function HeaderCard() {
 
     return (
         <DevIconContext.Provider value={devTypeIcon}>
-            <section className="bg-frost-gradient-1 mx-0 px-sm-5 px-4 pt-sm-4 pb-sm-2 pt-2 pb-1">
+            <section className="bg-frost-gradient-1 mx-0 px-lg-5 px-sm-4 px-3 pt-sm-4 pb-sm-2 pt-2 pb-1">
                 {/* Row 1 */}
-                <section className="row row-cols-sm-2 row-cols-1 d-flex">
+                <section className="m-0 row row-cols-sm-2 row-cols-1 d-flex">
                     <Icon/>
                     <TitleAndStatus status="Ongoing"/>
                 </section>
                 {/* Row 2 */}
-                <section className="row mt-1 pb-md-3 pb-2 border-bottom border-3">
+                <section className="m-0 mt-1 pb-md-3 pb-2 row border-bottom border-3">
                     <ProjectOwner/>
                 </section>
                 {/* Tag row */}
@@ -89,7 +89,7 @@ interface TagRowProps {
 
 function TagRow({ tagList }: TagRowProps) {
     return (
-        <section className="row w-100 my-sm-3 mt-1 mb-2">
+        <section className="w-100 m-0 my-sm-3 mt-1 mb-2 row">
             <div className="col m-0 p-0 d-flex flex-wrap align-items-start">
                 {
                     tagList.map((tag, index) => {
