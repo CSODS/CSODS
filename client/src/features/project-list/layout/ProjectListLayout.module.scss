@@ -4,13 +4,13 @@
 .navbar-variant-1 {
     @extend .bg-default-grey-blue;
     @extend .shadow-mulled-wine;
-    animation-duration: 2s;
+    animation-duration: 0.4s;
     animation-name: black-to-grey-blue;
 }
 
 .navbar-variant-2 {
     @extend .bg-default-black;
-    animation-duration: 2s;
+    animation-duration: 0.4s;
     animation-name: grey-blue-to-black;
 }
 
