@@ -1,4 +1,5 @@
-const CracoAlias = require('craco-alias')
+const CracoAlias = require('craco-alias');
+const path = require('path');
 
 module.exports = {
   plugins: [
@@ -11,4 +12,13 @@ module.exports = {
       },
     },
   ],
+  style: {
+    sass: {
+      loaderOptions: {
+        sassOptions: {
+          includePaths: [path.resolve(__dirname, 'src')]
+        }
+      }
+    }
+  }
 }
