@@ -9,13 +9,14 @@ export default function Paginator() {
     <div className="d-flex flex-column align-items-center justify-content-center">
       <nav aria-label="projects navigation v2" className='m-0 mt-3 d-flex flex-row justify-content-center'>
         <ul className="pagination">
-          <PaginationButton isPrevious/>
+          <PaginationButton key={`pagination-previous-page`} isPrevious/>
           {
             [...Array(totalPages)].map((_, i) => {
-              return <PaginationButton page={i + 1}/>
+              const pageNumber = i + 1;
+              return <PaginationButton key={`pagination-page-${pageNumber}`} page={pageNumber}/>
             })
           }
-          <PaginationButton isNext/>
+          <PaginationButton key={`pagination-next-page`} isNext/>
         </ul>
       </nav>
     </div>
