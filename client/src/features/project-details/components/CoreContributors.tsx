@@ -2,7 +2,7 @@ import { useProjectDetails } from "@/hooks";
 import '../styles/scrollableStyles.module.css';
 
 interface ContributorsProps {
-    contributorsRef?: React.Ref<HTMLDivElement | null>;
+    contributorsRef?: React.RefObject<HTMLDivElement | null>;
 }
 
 export default function Contributors({ contributorsRef }: ContributorsProps) {
