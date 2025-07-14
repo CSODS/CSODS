@@ -3,6 +3,7 @@ import { ADDRESSES } from "@/constants";
 import { ReactNode, useEffect, useState } from "react";
 import { IProjectSearchParameters } from "@/types";
 import { getProjectsPageLink } from "@/utils";
+import styles from './ProjectListLayout.module.scss';
 
 interface ProjectListLayoutProps {
     navBarVariant?: 1 | 2;
@@ -32,10 +33,12 @@ function NavBar({ navBarVariant = 1, children }: NavBarProps) {
     
     useEffect(() => {
         if (navBarVariant === 1) {
-            setNavBarClass('bg-default-grey-blue shadow-mulled-wine translucent-100');
+            // setNavBarClass('bg-default-grey-blue shadow-mulled-wine translucent-100');
+            setNavBarClass(`${styles['navbar-variant-1']} translucent-100`);
         }
         else if (navBarVariant === 2) {
-            setNavBarClass('bg-default-black translucent-100');
+            // setNavBarClass('bg-default-black translucent-100');
+            setNavBarClass(`${styles['navbar-variant-2']} translucent-100`);
         }
     }, [navBarVariant]);
 
