@@ -1,17 +1,12 @@
 import { createContext, useContext } from "react";
 import { BtnPill } from "@/components";
-import { ICONS } from "@/constants";
-import { useNavigateWithTag, useProjectDataService, useProjectDetails, useProjectIcon, useUser } from "@/hooks";
+import { useNavigateWithTag, useProjectDetails, useProjectIcon, useProjectTagList, useUser } from "@/hooks";
 
 const DevIconContext = createContext<string>('');
 
 export default function HeaderCard() {
-    const project = useProjectDetails();
-    const projectDataService = useProjectDataService();
-    const projectTags = projectDataService.getProjectTagValues(project);
-    const projectTagList = projectDataService.getProjectTagList(projectTags);
-
-    const devTypeIcon = useProjectIcon(projectTags.DevType as keyof typeof ICONS);
+    const projectTagList = useProjectTagList();
+    const devTypeIcon = useProjectIcon();
 
     return (
         <DevIconContext.Provider value={devTypeIcon}>
