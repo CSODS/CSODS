@@ -106,6 +106,17 @@
     }
 }
 
+@mixin color-scheme-shadow($color-scheme) {
+    @each $name, $value in $color-scheme {
+        $shadow-1: color.change($value, $alpha: 0.24);
+        $shadow-2: color.change($value, $alpha: 0.19);
+
+        .shadow-#{$name} {
+            box-shadow: 0 12px 16px 0 $shadow-1, 0 17px 50px 0 $shadow-2;
+        }
+    }
+}
+
 @include color-scheme-bg('default', v.$color-scheme-default);
 @include color-scheme-color('default', v.$color-scheme-default);
 @include color-scheme-border('default', v.$color-scheme-default);
@@ -121,3 +132,7 @@
 @include color-scheme-color('frost', v.$color-scheme-frost);
 @include color-scheme-border('frost', v.$color-scheme-frost);
 @include color-scheme-hover-colorize('frost', v.$color-scheme-frost);
+
+@include color-scheme-shadow(v.$color-scheme-default);
+@include color-scheme-shadow(v.$color-scheme-utility);
+@include color-scheme-shadow(v.$color-scheme-frost);
