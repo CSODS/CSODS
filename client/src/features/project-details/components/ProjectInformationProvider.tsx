@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 import { IAllProjectTags, IProjectDetails, IUser } from "@/types";
-import { ProjectDataServiceProvider, ProjectDetailsProvider, UserContextProvider } from "@/components";
+import { ProjectDataServiceProvider, ProjectDetailsProvider, TagCategoryProvider, UserContextProvider } from "@/components";
 
 interface ProjectInformationProviderProps {
     children: ReactNode;
@@ -19,9 +19,11 @@ export default function ProjectInformationProvider({
         <div>
             <ProjectDetailsProvider projectDetails={project}>
                 <ProjectDataServiceProvider allTags={allTags}>
-                    <UserContextProvider user={user}>
-                        {children}
-                    </UserContextProvider>
+                    <TagCategoryProvider allTags={allTags}>
+                        <UserContextProvider user={user}>
+                            {children}
+                        </UserContextProvider>
+                    </TagCategoryProvider>
                 </ProjectDataServiceProvider>
             </ProjectDetailsProvider>
         </div>
