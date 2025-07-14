@@ -1,7 +1,7 @@
 import Header from "./Header";
 import Paginator from "./Paginator";
-import ProjectCard from "./ProjectCards";
-import ProjectList from "./ProjectList";
+import ProjectCard from "./ProjectList/ProjectCard";
+import ProjectList from "./ProjectList/ProjectList";
 import SearchBar from "./SearchBar";
 import UpButton from "./UpButton";
 
