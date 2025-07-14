@@ -25,8 +25,10 @@ function App() {
               <Route path={ADDRESSES.HOME} element={<Home />} />
               <Route path={ADDRESSES.ABOUT} />
             </Route>
-            <Route element={<ProjectListLayout />}>
+            <Route element={<ProjectListLayout navBarVariant={1}/>}>
               <Route path={ADDRESSES.STUDENT_PROJECTS.PATH} element={<StudentProjects />}/>
+            </Route>
+            <Route element={<ProjectListLayout navBarVariant={2}/>}>
               <Route path={ADDRESSES.PROJECT_DETAILS.PATH} element={<ProjectDetails />}/>
             </Route>
           </Route>
