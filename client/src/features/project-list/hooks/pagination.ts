@@ -1,7 +1,7 @@
 import { usePageNumber } from "@/hooks";
 import { useTotalPages } from "./context";
 import { useEffect, useState } from "react";
-import { getPageLink } from "../utils";
+import { getProjectsPageLink } from "@/utils";
 
 interface NumberedBtn {
     page: number;
@@ -39,7 +39,7 @@ export function usePaginationBtnState(props: PaginationButtonProps) {
         
         if (page) {
             setBtnText(page.toString());
-            setLink(getPageLink(page));
+            setLink(getProjectsPageLink(page));
         }
     }, [totalPages, page, currentPage]);
 
@@ -52,7 +52,7 @@ export function usePaginationBtnState(props: PaginationButtonProps) {
 
         if (isPrevious) {
             setBtnText('Previous');
-            setLink(getPageLink(currentPage - 1));
+            setLink(getProjectsPageLink(currentPage - 1));
         }
     }, [currentPage, isPrevious]);
 
@@ -65,7 +65,7 @@ export function usePaginationBtnState(props: PaginationButtonProps) {
 
         if (isNext) {
             setBtnText('Next');
-            setLink(getPageLink(currentPage + 1));
+            setLink(getProjectsPageLink(currentPage + 1));
         }
     }, [totalPages, currentPage, isNext]);
 

@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { RadioBtnPill } from "@/components";
 import { useAllTags, useTagCategoryMap } from "@/hooks";
 import { IProjectSearchParameters } from "@/types";
-import { getPageLink } from "../utils";
+import { getProjectsPageLink } from "@/utils";
 
 export default function SearchBar() {
   const tagCategoryMap = useTagCategoryMap();
@@ -31,7 +31,7 @@ export default function SearchBar() {
       if (searchString.trim() !== '') {
         searchParameters.projectTitle = searchString;
       }
-      const link = getPageLink(1, searchParameters);
+      const link = getProjectsPageLink(1, searchParameters);
       navigate(link);
       return;
     }

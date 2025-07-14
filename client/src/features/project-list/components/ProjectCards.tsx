@@ -2,10 +2,9 @@ import { useNavigate, useParams } from "react-router-dom";
 import { BtnBare } from "@/components";
 import { DEFAULTS, ICONS } from "@/constants";
 import { useProjectDataService, useProjectDetails, useProjectIcon, useTagCategoryMap } from "@/hooks";
-import { redirectToUrl } from "@/utils";
-import { getPageLink, getProjectLink } from "../utils";
-import { useTagColorMap } from "../hooks/context";
 import { IProjectSearchParameters } from "@/types";
+import { getProjectsPageLink, getProjectLink, redirectToUrl } from "@/utils";
+import { useTagColorMap } from "../hooks/context";
 
 export default function ProjectCard () {
   const navigate = useNavigate();
@@ -112,7 +111,7 @@ function Tag({ tag }: TagProps) {
       const tagCategory = tagDetails.tagCategory;
       const tagId = tagDetails.tagId;
       const searchParameters = { [tagCategory]: tagId };
-      const link = getPageLink(1, searchParameters as IProjectSearchParameters);
+      const link = getProjectsPageLink(1, searchParameters as IProjectSearchParameters);
       console.log(link);
       navigate(link);
     }

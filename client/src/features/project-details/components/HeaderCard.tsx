@@ -4,7 +4,7 @@ import { BtnPill } from "@/components";
 import { ICONS } from "@/constants";
 import { useProjectDataService, useProjectDetails, useProjectIcon, useTagCategoryMap, useUser } from "@/hooks";
 import { IProjectSearchParameters } from "@/types";
-import { getPageLink } from "@/features/project-list/utils";
+import { getProjectsPageLink } from "@/utils";
 
 const DevIconContext = createContext<string>('');
 
@@ -119,7 +119,7 @@ function Tag({ tag }: TagProps) {
             const tagCategory = tagDetails.tagCategory;
             const tagId = tagDetails.tagId;
             const searchParameters = { [tagCategory]: tagId };
-            const link = getPageLink(1, searchParameters as IProjectSearchParameters);
+            const link = getProjectsPageLink(1, searchParameters as IProjectSearchParameters);
             navigate(link);
         }
     }
