@@ -14,7 +14,7 @@ export default function ProjectList () {
         
         return (
             <div className="row">
-                <div className='mx-0 mt-md-5 mt-3 px-3 row row-cols-1 row-cols-md-2 row-gap-lg-4 row-gap-2 d-flex justify-content-center'>
+                <div className='mx-0 mt-md-5 mt-3 px-3 row row-cols-1 row-cols-sm-2 row-gap-lg-4 row-gap-2 d-flex justify-content-center'>
                     <TagColorProvider allTags={allTags}>
                         <ProjectDataServiceProvider allTags={allTags}>
                             {
