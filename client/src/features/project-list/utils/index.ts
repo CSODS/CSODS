@@ -1,1 +1,0 @@
-export { getPageLink, getProjectLink } from "./navigation";

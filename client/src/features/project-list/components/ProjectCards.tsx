@@ -1,11 +1,9 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { BtnBare } from "@/components";
-import { DEFAULTS, ICONS } from "@/constants";
-import { useProjectDataService, useProjectDetails, useProjectIcon, useTagCategoryMap } from "@/hooks";
-import { redirectToUrl } from "@/utils";
-import { getPageLink, getProjectLink } from "../utils";
+import { DEFAULTS } from "@/constants";
+import { useNavigateWithTag, useProjectDataService, useProjectDetails, useProjectIcon, useProjectTagList } from "@/hooks";
+import { getProjectLink, redirectToUrl } from "@/utils";
 import { useTagColorMap } from "../hooks/context";
-import { IProjectSearchParameters } from "@/types";
 
 export default function ProjectCard () {
   const navigate = useNavigate();
@@ -14,11 +12,10 @@ export default function ProjectCard () {
   const { pageNumber } = useParams();
   const projectDetails = useProjectDetails();
   const projectDataService = useProjectDataService();
-
-  const projectTags = projectDataService.getProjectTagValues(projectDetails);
-  const tagList = projectDataService.getProjectTagList(projectTags);
   const projectDescription = projectDataService.omitProjectDescription(DEFAULTS.LOREM_IPSUM);
-  const iconClass = useProjectIcon(projectTags.DevType as keyof typeof ICONS);
+
+  const tagList = useProjectTagList();
+  const iconClass = useProjectIcon();
 
   const projectId: number = projectDetails.Project.ProjectId;
 
@@ -103,20 +100,7 @@ function Tag({ tag }: TagProps) {
   const iconClass = `m-0 p-0 bi bi-circle-fill fs-xxs ${iconColor}`;
   const textOnHover = `hover-${iconColor}`;
 
-  const tagCategoryMap = useTagCategoryMap();
-  const tagDetails = tagCategoryMap.get(tag);
-
-  const navigate = useNavigate();
-  const callbackFn = () => {
-    if (tagDetails) {
-      const tagCategory = tagDetails.tagCategory;
-      const tagId = tagDetails.tagId;
-      const searchParameters = { [tagCategory]: tagId };
-      const link = getPageLink(1, searchParameters as IProjectSearchParameters);
-      console.log(link);
-      navigate(link);
-    }
-  }
+  const callbackFn = useNavigateWithTag(tag);
 
   return (
     <BtnBare flex="row" justify="center" align="center" margin={[{breakpoint: 'lg', b: 1}, { m: 0}]} callBackFn={callbackFn}>

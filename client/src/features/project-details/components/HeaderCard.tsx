@@ -1,20 +1,12 @@
 import { createContext, useContext } from "react";
-import { useNavigate } from "react-router-dom";
 import { BtnPill } from "@/components";
-import { ICONS } from "@/constants";
-import { useProjectDataService, useProjectDetails, useProjectIcon, useTagCategoryMap, useUser } from "@/hooks";
-import { IProjectSearchParameters } from "@/types";
-import { getPageLink } from "@/features/project-list/utils";
+import { useNavigateWithTag, useProjectDetails, useProjectIcon, useProjectTagList, useUser } from "@/hooks";
 
 const DevIconContext = createContext<string>('');
 
 export default function HeaderCard() {
-    const project = useProjectDetails();
-    const projectDataService = useProjectDataService();
-    const projectTags = projectDataService.getProjectTagValues(project);
-    const projectTagList = projectDataService.getProjectTagList(projectTags);
-
-    const devTypeIcon = useProjectIcon(projectTags.DevType as keyof typeof ICONS);
+    const projectTagList = useProjectTagList();
+    const devTypeIcon = useProjectIcon();
 
     return (
         <DevIconContext.Provider value={devTypeIcon}>
@@ -110,19 +102,7 @@ interface TagProps {
 }
 
 function Tag({ tag }: TagProps) {
-    const tagCategoryMap = useTagCategoryMap();
-    const tagDetails = tagCategoryMap.get(tag);
-
-    const navigate = useNavigate();
-    const callbackFn = () => {
-        if (tagDetails) {
-            const tagCategory = tagDetails.tagCategory;
-            const tagId = tagDetails.tagId;
-            const searchParameters = { [tagCategory]: tagId };
-            const link = getPageLink(1, searchParameters as IProjectSearchParameters);
-            navigate(link);
-        }
-    }
+    const callbackFn = useNavigateWithTag(tag);
 
     return (
         <BtnPill 

@@ -2,7 +2,7 @@ import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import { ADDRESSES } from "@/constants";
 import { ReactNode, useState } from "react";
 import { IProjectSearchParameters } from "@/types";
-import { getPageLink } from "../utils";
+import { getProjectsPageLink } from "@/utils";
 
 export function ProjectListLayout() {
     return (
@@ -74,7 +74,7 @@ function SearchBar() {
         if (searchString.trim() !== '') {
             searchParameters.projectTitle = searchString;
         }
-        const link = getPageLink(1, searchParameters);
+        const link = getProjectsPageLink(1, searchParameters);
         navigate(link);
         return;
         }

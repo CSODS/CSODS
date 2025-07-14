@@ -1,7 +1,7 @@
 import ApiHandler from "./api/ApiHandler";
 import { ProjectDataService, IProjectTags } from "./data/ProjectDataService";
 import { JsonHandler } from "./json/jsonHandler";
-import { redirectToUrl, assembleQuery } from "./navigation/navigation";
+import { redirectToUrl, assembleQuery, getProjectsPageLink, getProjectLink } from "./navigation/navigation";
 import { getBootstrapSpacing } from "./styles/spacing";
 
 export {
@@ -10,6 +10,8 @@ export {
     JsonHandler,
     redirectToUrl,
     assembleQuery,
+    getProjectsPageLink,
+    getProjectLink,
     getBootstrapSpacing
 };
 
