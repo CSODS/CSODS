@@ -27,7 +27,7 @@ function NavBar({ children }: NavBarProps) {
     return (
         <div className="p-0 navbar navbar-expand-lg">    
             <div className="px-md-3 px-1 py-0 container-fluid bg-dark-3 translucent-100">
-                <NavLink className="me-md-1 mx-0 navbar-brand d-flex flex-row justify-content-center align-items-center color-light-1" to={ADDRESSES.LANDING_PAGE}>
+                <NavLink className=" m-0 me-md-1 my-1 d-flex flex-row justify-content-center align-items-center text-decoration-none color-light-1" to={ADDRESSES.LANDING_PAGE}>
                     <img src='/lucso-logo-no-bg.png' alt="CSO_LOGO" className='header-logo'/>
                     <p className='m-0 p-0 ps-2 d-lg-block d-none fs-4 bolder'>
                         CSO:DS
