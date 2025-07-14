@@ -1,4 +1,5 @@
 import { useProjectDetails } from "@/hooks";
+import '../styles/scrollableStyles.module.css';
 
 interface ContributorsProps {
     contributorsRef?: React.Ref<HTMLDivElement | null>;
@@ -64,7 +65,7 @@ export default function Contributors({ contributorsRef }: ContributorsProps) {
                         Contributors
                     </h2>
                 </div>
-                <div className="row m-0 pt-2 row-gap-1 overflow-y-auto">
+                <div className="row m-0 pt-2 row-gap-1 scrollbar-azure overflow-y-auto">
                     {
                         contributors.map(({Name, Email, Roles}, index) => {
                             return <ContributorRow key={`contributor-${index}`} contributorName={Name} contributorEmail={Email} contributorRoles={Roles}/>

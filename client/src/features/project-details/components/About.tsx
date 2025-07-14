@@ -1,5 +1,6 @@
 import { PROJECT_DESCRIPTION } from "@/constants/defaults";
 import { useProjectDetails } from "@/hooks";
+import '../styles/scrollableStyles.module.css';
 
 interface AboutProps {
     aboutRef?: React.Ref<HTMLDivElement | null>
@@ -13,7 +14,7 @@ export default function About({ aboutRef }: AboutProps) {
             <h2 className="m-0 pb-1 p-0 border-bottom border-2 border-frost-midnight fw-bold text-start color-frost-midnight">
                 About
             </h2>
-            <p className="m-0 pt-2 p-0 lh-sm text-start fs-p color-frost-midnight overflow-y-auto">
+            <p className="m-0 pt-2 p-0 lh-sm text-start fs-p color-frost-midnight scrollbar-azure overflow-y-auto">
                 {PROJECT_DESCRIPTION}
             </p>
         </div>
