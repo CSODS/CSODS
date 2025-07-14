@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { DEFAULT_USER } from "@constants/defaults";
 import { useFetchProject, useFetchTagData } from "@/hooks";
 import { IUser } from "@/types";
@@ -10,6 +10,7 @@ import {
   ProjectImages,
   ProjectInformationProvider
 } from "./components";
+import useSetUniformHeights from "./hooks/useSetUniformHeights";
 
 export default function ProjectDetails() {
   const allTags = useFetchTagData();
@@ -19,31 +20,15 @@ export default function ProjectDetails() {
   const contributorsRef = useRef<HTMLDivElement>(null);
   const aboutRef = useRef<HTMLDivElement>(null);
   const subContainerRef = useRef<HTMLDivElement>(null);
-  
-  useEffect(() => {
-    if (!allTags || !project) return;
 
-    const setUniformHeights = () => {
-      const gallery = galleryRef.current;
-      const contributors = contributorsRef.current;
-      const about = aboutRef.current;
-      const subContainer = subContainerRef.current;
-
-      if (gallery && contributors) {
-        contributors.style.height = `${gallery.clientHeight}px`;
-      }
-      if (about && subContainer) {
-        about.style.maxHeight = `${subContainer.clientHeight}px`;
-      }
-    }
-
-    setUniformHeights();
-    window.addEventListener('resize', setUniformHeights);
-
-    return () => {
-      window.removeEventListener('resize', setUniformHeights);
-    };
-  }, [allTags, project]);
+  useSetUniformHeights(
+    allTags,
+    project,
+    galleryRef,
+    contributorsRef,
+    aboutRef,
+    subContainerRef
+  );
 
   if (allTags && project) { 
     return (
