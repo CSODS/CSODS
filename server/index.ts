@@ -23,7 +23,7 @@ const evictionJob = createEvictionJobService();
 evictionJob.scheduleProjectCacheEviction();
 evictionJob.scheduleCachePageEviction();
 
-app.listen(3001, async () => {
+app.listen(3001, '0.0.0.0', async () => {
     console.log("Server running on port 3001");
     await evictionJob.evictProjectCache();
     await evictionJob.evictCachePages();
