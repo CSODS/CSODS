@@ -3,7 +3,7 @@ import { BtnBare } from "@/components";
 import { DEFAULTS } from "@/constants";
 import { useNavigateWithTag, useProjectDataService, useProjectDetails, useProjectIcon, useProjectTagList } from "@/hooks";
 import { getProjectLink, redirectToUrl } from "@/utils";
-import { useTagColorMap } from "../hooks/context";
+import { useTagColorMap } from "../../hooks/context";
 
 export default function ProjectCard () {
   const navigate = useNavigate();
