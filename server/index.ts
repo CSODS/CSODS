@@ -5,6 +5,7 @@ import projectTagsRouter from './routes/projectTagsRoute.js';
 import { ROUTES } from './data/constants/constants.js';
 import { attachProjectCacheHandler, attachTagsCacheHandler } from './middleware/attacheMiddleware.js';
 import { createEvictionJobService } from './utils/jobs/evictionJob.js';
+import { projectsRouteLimiter, projectTagsRouteLimiter } from './utils/rateLimit/rateLimiter.js';
 
 const app = express()
 
@@ -16,8 +17,8 @@ app.use(attachProjectCacheHandler);
 app.use(attachTagsCacheHandler);
 
 //  for routes
-app.use(ROUTES.PROJECTS, projectsRouter);
-app.use(ROUTES.PROJECT_TAGS, projectTagsRouter);
+app.use(ROUTES.PROJECTS, projectsRouteLimiter, projectsRouter);
+app.use(ROUTES.PROJECT_TAGS, projectTagsRouteLimiter, projectTagsRouter);
 
 const evictionJob = createEvictionJobService();
 evictionJob.scheduleProjectCacheEviction();
