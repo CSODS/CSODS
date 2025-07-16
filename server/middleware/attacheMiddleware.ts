@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
-import { createProjectCacheHandler, ProjectCacheHandler } from "../utils/cache/projectCacheHandler.js";
-import { createTagsCacheHandler, TagsCacheHandler } from "../utils/cache/tagsCacheHandler.js";
+import { createProjectCacheHandler, ProjectCacheHandler } from "../services/cache/projectCacheHandler.js";
+import { createTagsCacheHandler, TagsCacheHandler } from "../services/cache/tagsCacheHandler.js";
 
 export async function attachProjectCacheHandler(req: Request, res: Response, next: NextFunction) {
     (req as any).projectCacheHandler = await createProjectCacheHandler();
