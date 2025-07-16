@@ -1,6 +1,5 @@
-import { ICache } from "../../viewmodels/cache/cacheInterfaces.js";
-import { JsonFileHandler, IFile } from "../file/fileHandler.js";
-
+import { JsonFileHandler, IFile } from "@services";
+import { ICache } from "@viewmodels";
 
 export class BaseCacheEvictor<TCache extends ICache> {
     protected readonly _jsonFileHandler: JsonFileHandler<TCache>;

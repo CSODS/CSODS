@@ -1,5 +1,5 @@
-import { ICache } from "../../viewmodels/cache/cacheInterfaces.js";
-import { JsonFileHandler } from "../file/fileHandler.js";
+import { ICache } from "@viewmodels";
+import { JsonFileHandler } from "@services";
 
 type decayFunc<TCache extends ICache> = (cache: TCache, now: Date) => TCache | Promise<TCache>;
 

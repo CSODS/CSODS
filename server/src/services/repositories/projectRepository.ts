@@ -1,9 +1,9 @@
-import { Projects } from '../../models/schema.js';
-import { Repository } from './abstractRepository.js';
-import { DbContext, Project } from '../../viewmodels/dbModels.js';
 import { eq, and, or, like } from 'drizzle-orm';
+import { Projects } from '@models';
+import { DbContext, Project } from '@viewmodels';
+import { Repository } from './abstractRepository.js';
 
-export default class ProjectRepository extends Repository<typeof Projects>{
+export class ProjectRepository extends Repository<typeof Projects>{
 
     public constructor (context: DbContext) {
         super(context, Projects);

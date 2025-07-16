@@ -1,9 +1,9 @@
-import { ProjectFrameworks } from '../../models/schema.js';
-import { Repository } from './abstractRepository.js';
-import { DbContext, ProjectFramework } from '../../viewmodels/dbModels.js';
 import { eq } from 'drizzle-orm';
+import { ProjectFrameworks } from '@models';
+import { DbContext, ProjectFramework } from '@viewmodels';
+import { Repository } from './abstractRepository.js';
 
-export default class ProjectFrameworkRepository extends Repository<typeof ProjectFrameworks>{
+export class ProjectFrameworkRepository extends Repository<typeof ProjectFrameworks>{
 
     public constructor (context: DbContext) {
         super(context, ProjectFrameworks);
