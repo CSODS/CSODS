@@ -8,16 +8,14 @@ export function createEvictionJobService(): EvictionJobService {
 
     const cacheEvictionOptions: IEvictionOptions = {
         Strategy: 'ttl',
-        Duration: 1000 * 60 * 60 * 24 * 1,
-        Granularity: 1000 * 60 * 60 * 24,
-        ViewThreshold: 5
+        Duration: 1000 * 60 * 60 * 24 * 1
     };
 
     const pageEvictionOptions: IEvictionOptions = {
         Strategy: 'ttl+lfu',
         Duration: 1000 * 60 * 60 * 3,
         Granularity: 1000 * 60 * 60,
-        ViewThreshold: 5
+        ViewThreshold: 10
     };
 
     const projectCacheEvictor = createProjectCacheEvictor(
@@ -74,12 +72,38 @@ export class EvictionJobService {
     /**
      * @public
      * @description
-     * Schedules a cron job to evict stale **pages** within the cache files every 3 hours.
+     * Schedules a cron job to evict stale project search cache **files** every hour at the 3rd minute.
      * 
-     * Cron Expression: (Every 3rd hour, on the hour)
+     * @remarks
+     * Uses a combined TTL (Time-To-Live) and LFU (Least Frequently Used) eviction strategy.
+     * 
+     * @cron 0 3 * * * * — Every hour at minute 3 (e.g., 12:03, 1:03, 2:03, ...)
+     * 
+     * @example
+     * // Schedules eviction with:
+     * // - TTL: 1 hour
+     * // - View threshold: 10
+     * // - Excludes unfiltered searches from eviction
+     */
+    public scheduleSearchCacheEviction() {
+        cron.schedule('0 3 * * * *', async () => {
+            const evictionOptions: IEvictionOptions = {
+                Strategy: 'ttl+lfu',
+                Duration: 1000 * 60 * 60,    // 1 hour
+                ViewThreshold: 10
+            }
+            await this._projectCacheEvictor.evictStaleCache(evictionOptions, {excludeNoFilter: true});
+        })
+    }
+    /**
+     * @public
+     * @description
+     * Schedules a cron job to evict stale **pages** within the cache files every hour on the 5th minute.
+     * 
+     * Cron Expression: (Every hour, on the fifth minute)
      */
     public scheduleCachePageEviction() {
-        cron.schedule('0 0 */3 * * *', async () => {
+        cron.schedule('0 5 * * * *', async () => {
             await this.evictCachePages();
         });
     }

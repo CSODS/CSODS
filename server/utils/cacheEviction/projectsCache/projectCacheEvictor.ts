@@ -41,12 +41,25 @@ export class ProjectCacheEvictor extends BaseCacheEvictor<IProjectCache> {
      * @description
      * Scans the project cache directory and attempts to evict cache files 
      * that meet the given eviction criteria.
+     * If `excludeNoFilter` is set to true, excludes files whose names contain `'nofilter'`.
      * 
-     * @param {IEvictionOptions} [evictionOptions] - Optional eviction strategy options.
+     * @param {IEvictionOptions} [evictionOptions] - Optional strategy options that define eviction behavior (e.g., based on age, access frequency, etc.).
+     * @param {{ excludeNoFilter?: boolean }} [IEvictionFilter] - Optional filter settings.
+     * @param {boolean} [IEvictionFilter.excludeNoFilter=false] - If `true`, excludes files whose names contain `'nofilter'`.
      * 
      * @returns {Promise<number>} - A promise that resolves to the number of cache files evicted.
      */
-    public async evictStaleCache(evictionOptions?: IEvictionOptions): Promise<number> {
+    public async evictStaleCache(
+        evictionOptions?: IEvictionOptions,
+        { excludeNoFilter=false}: IEvictionFilter = {}
+    ): Promise<number> {
+        const filterFunc = (filename: string) => {
+            if (excludeNoFilter) {
+                return !filename.includes('nofilter');
+            }
+            return true;
+        }
+
         let evictionCount = 0;
 
         await this._jsonFileHandler.processFiles(this._cacheDirectory, async (file) => {
@@ -56,7 +69,7 @@ export class ProjectCacheEvictor extends BaseCacheEvictor<IProjectCache> {
                 evictionCount++;
                 console.log(`Evicted file no. ${evictionCount}: ${file.Filename}`);
             }
-        });
+        }, filterFunc);
         return evictionCount;
     }
     /**
@@ -137,7 +150,7 @@ export class ProjectCacheEvictor extends BaseCacheEvictor<IProjectCache> {
  */
 interface IEvictionFilter {
     /**
-     * Set to true if 'nofilter' cache should be included in eviction.
+     * Set to true if 'nofilter' cache should be excluded from eviction.
      */
-    IncludeNoFilter: boolean
+    excludeNoFilter?: boolean
 }

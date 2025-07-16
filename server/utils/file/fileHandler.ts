@@ -2,7 +2,6 @@ import { existsSync, promises as fs} from 'fs';
 import * as lockfile from 'proper-lockfile';
 import path from 'path';
 import { OperationOptions } from 'retry';
-import { boolean } from 'drizzle-orm/gel-core';
 
 export function createJsonFileHandler<TModel>(modelName: string) {
     return new JsonFileHandler<TModel>(modelName);
@@ -37,12 +36,31 @@ export class JsonFileHandler<TModel> {
 
     /**
      * @public
+     * @async
+     * @function getDirectoryFilenames
      * @description
-     * Retrieves a list of filenames of all files existing in a directory.
-     * @param directory 
-     * @returns 
+     * Retrieves a list of filenames from the specified directory. Optionally filters the filenames using a custom predicate function.
+     * 
+     * If the directory does not exist, an empty array is returned. If a filter condition is provided, only filenames for which
+     * the condition returns a truthy value will be included in the result.
+     * 
+     * @param {string} directory - The absolute or relative path to the directory whose filenames should be retrieved.
+     * @param {(filename: string, index: number, array: string[]) => boolean} [filterCondition] - 
+     * An optional predicate function used to filter the filenames. Receives each filename, its index, and the full list of filenames.
+     * 
+     * @returns {Promise<string[]>} A promise that resolves to an array of filenames (optionally filtered).
+     * 
+     * @example
+     * // Get all filenames
+     * const allFiles = await getDirectoryFilenames('./my-folder');
+     * 
+     * // Get only .json files
+     * const jsonFiles = await getDirectoryFilenames('./my-folder', (name) => name.endsWith('.json'));
      */
-    public async getDirectoryFilenames(directory: string): Promise<string[]> {
+    public async getDirectoryFilenames(
+        directory: string, 
+        filterCondition?: (filename: string, index: number, array: string[]) => boolean
+    ): Promise<string[]> {
         console.log(`Attempting to access directory ${directory}`);
 
         if (!existsSync(directory)) {
@@ -51,7 +69,12 @@ export class JsonFileHandler<TModel> {
         }
 
         try {
-            const filenames = await fs.readdir(directory);
+            let filenames = await fs.readdir(directory);
+
+            if (filterCondition) {
+                filenames = filenames.filter(filterCondition);
+            }
+
             return filenames;
         }
         catch (err) {
@@ -241,20 +264,33 @@ export class JsonFileHandler<TModel> {
     /**
      * @private
      * 
+     * @async
+     * @function processFiles
      * @description
-     * Retrieves a list of JSON files from the specified directory and applies
-     * a given asynchronous function to each file.
+     * Retrieves a list of JSON files (or other files based on the optional filter) from the specified directory,
+     * and applies a given asynchronous function to each file.
      * 
-     * @param {string} directory - The path to the cache directory.
-     * @param {(file: IFile) => Promise<void>} callbackFn - An async function to apply to each cache file.
+     * Useful for batch-processing files such as cache entries, logs, or configuration files.
      * 
-     * @returns {Promise<void>} - A promise that resolves once all files have been processed.
+     * @param {string} directory - The path to the directory containing the files to process.
+     * @param {(file: IFile) => Promise<void>} callbackFn - An asynchronous function to apply to each file. Receives an object with `Filepath` and `Filename`.
+     * @param {(filename: string, index: number, filenames: string[]) => boolean} [filenameFilter] - 
+     * An optional predicate function used to filter which filenames should be included for processing.
+     * 
+     * @returns {Promise<void>} A promise that resolves once all applicable files have been processed.
+     * 
+     * @example
+     * await processFiles('./cache', async (file) => {
+     *     const data = await readFile(join(file.Filepath, file.Filename), 'utf-8');
+     *     console.log(JSON.parse(data));
+     * }, (name) => name.endsWith('.json'));
      */
     public async processFiles(
         directory: string,
-        callbackFn: (file: IFile) => Promise<void>
+        callbackFn: (file: IFile) => Promise<void>,
+        filenameFilter?: (filename: string, index: number, filenames: string[]) => boolean
     ): Promise<void> {
-        const filenames = await this.getDirectoryFilenames(directory);
+        const filenames = await this.getDirectoryFilenames(directory, filenameFilter);
 
         if (filenames.length === 0) {
             console.log('There are no cache files in the directory.');
