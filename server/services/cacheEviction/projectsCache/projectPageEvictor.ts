@@ -1,5 +1,5 @@
 import { IProjectCachePage } from "../../../viewmodels/cache/cacheInterfaces.js";
-import { createJsonFileHandler, JsonFileHandler } from "../../../utils/file/fileHandler.js";
+import { createJsonFileHandler, JsonFileHandler } from "../../file/fileHandler.js";
 import { BaseCacheEvictor, IEvictionOptions } from "../baseCacheEvictor.js";
 
 export function createProjectPageEvictor (evictionOptions: IEvictionOptions): ProjectPageEvictor {

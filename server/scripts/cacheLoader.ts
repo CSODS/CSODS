@@ -1,5 +1,5 @@
 import { IProjectTags } from "../viewmodels/cache/cacheInterfaces.js";
-import { createJsonFileHandler } from "../utils/file/fileHandler.js";
+import { createJsonFileHandler } from "../services/file/fileHandler.js";
 import { createContext } from "../db/csods.js";
 import { CACHE } from "../data/constants/constants.js";
 import dotenv from 'dotenv';

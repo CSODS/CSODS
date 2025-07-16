@@ -1,5 +1,5 @@
 import mock from "mock-fs";
-import { createJsonFileHandler, JsonFileHandler } from "../utils/file/fileHandler";
+import { createJsonFileHandler, JsonFileHandler } from "../services/file/fileHandler";
 import {describe, beforeEach, afterEach, it, expect} from "vitest";
 import path from 'path';
 import { IProjectCache } from "../viewmodels/cache/cacheInterfaces";

@@ -1,4 +1,4 @@
-import { JsonFileHandler, createJsonFileHandler } from "../../utils/file/fileHandler.js";
+import { JsonFileHandler, createJsonFileHandler } from "../file/fileHandler.js";
 import { IProjectTags } from "../../viewmodels/cache/cacheInterfaces.js";
 import { CACHE } from "../../data/constants/constants.js";
 import dotenv from 'dotenv';

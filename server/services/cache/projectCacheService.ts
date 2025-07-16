@@ -1,7 +1,7 @@
 import { CACHE } from '../../data/constants/constants.js';
 import { IProjectCachePage, IProjectCache, CachePageRecord, IProjectDetails } from '../../viewmodels/cache/cacheInterfaces.js';
 import { IProjectFilter, ProjectFilter } from '../../data/repositories/projectRepository.js';
-import { createJsonFileHandler, JsonFileHandler } from '../../utils/file/fileHandler.js';
+import { createJsonFileHandler, JsonFileHandler } from '../file/fileHandler.js';
 import { createProjectDataService, ProjectDataService } from '../data/projectDataService.js';
 import { startRedis } from '../../redis/redisClient.js';
 import dotenv from 'dotenv';
