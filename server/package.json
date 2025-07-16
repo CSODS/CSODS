@@ -2,16 +2,18 @@
   "name": "server",
   "version": "1.0.0",
   "main": "index.js",
-  "type": "module",
   "scripts": {
     "test": "vitest",
+    "build": "node config/esbuild.config.cjs",
+    "start": "node dist/index.js",
+    "dev": "nodemon --watch src --ext ts,js,json --exec \"npm run build && node dist/index.js\"",
     "compilets": "npx tsc --incremental",
-    "start": "nodemon",
     "seed": "node dist/scripts/seeder.js",
-    "loadCache:tags": "node dist/scripts/cacheLoader.js",
-    "db:generate": "drizzle-kit generate",
-    "db:migrate": "drizzle-kit migrate",
-    "db:studio": "drizzle-kit studio"
+    "load:tags": "node dist/scripts/cacheLoader.js",
+    "db:generate": "drizzle-kit generate --config=./config/drizzle.config.ts",
+    "db:migrate": "drizzle-kit migrate --config=./config/drizzle.config.ts",
+    "db:studio": "drizzle-kit studio --config=./config/drizzle.config.ts",
+    "db:push": "drizzle-kit push --config=./config/drizzle.config.ts"
   },
   "author": "",
   "license": "ISC",
@@ -41,6 +43,8 @@
     "@types/redis": "^4.0.10",
     "@types/retry": "^0.12.5",
     "drizzle-kit": "^0.31.1",
+    "esbuild": "^0.25.6",
+    "esbuild-plugin-tsc": "^0.5.0",
     "mock-fs": "^5.5.0",
     "typescript": "^5.8.3",
     "vitest": "^3.2.3"

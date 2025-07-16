@@ -1,8 +1,8 @@
 import mock from "mock-fs";
-import { createJsonFileHandler, JsonFileHandler } from "../utils/file/fileHandler";
+import { createJsonFileHandler, JsonFileHandler } from "../src/services/file/fileHandler";
 import {describe, beforeEach, afterEach, it, expect} from "vitest";
 import path from 'path';
-import { IProjectCache } from "../viewmodels/cache/cacheInterfaces";
+import { IProjectCache } from "../src/viewmodels/cache/cacheInterfaces";
 import { promises as fs } from "fs";
 
 describe('fileHandler', async () => {

@@ -1,5 +1,5 @@
-import { createContext } from "../db/csods.js";
-import * as schema from "../db/schema.js";
+import { createContext } from "../src/db/csods.js";
+import * as schema from "../src/models/schema.js";
 
 async function main() {
     const context = await createContext();
