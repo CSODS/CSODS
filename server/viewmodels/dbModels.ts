@@ -1,4 +1,4 @@
-import * as schema from '../db/schema.js';
+import * as schema from '../models/schema.js';
 import { InferSelectModel } from 'drizzle-orm';
 import { createContext } from '../db/csods.js';
 

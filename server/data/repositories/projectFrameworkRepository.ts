@@ -1,4 +1,4 @@
-import { ProjectFrameworks } from '../../db/schema.js';
+import { ProjectFrameworks } from '../../models/schema.js';
 import { Repository } from './abstractRepository.js';
 import { DbContext, ProjectFramework } from '../../viewmodels/dbModels.js';
 import { eq } from 'drizzle-orm';

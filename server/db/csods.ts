@@ -2,7 +2,7 @@ import { drizzle as drizzleTurso } from "drizzle-orm/libsql";
 import { drizzle as drizzleLocal } from "drizzle-orm/better-sqlite3";
 import Database from "better-sqlite3";
 import { createClient } from "@libsql/client";
-import * as schema from './schema.js';
+import * as schema from '../models/schema.js';
 import dotenv from "dotenv";
 dotenv.config()
 

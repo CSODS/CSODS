@@ -1,4 +1,4 @@
-import { Projects } from '../../db/schema.js';
+import { Projects } from '../../models/schema.js';
 import { Repository } from './abstractRepository.js';
 import { DbContext, Project } from '../../viewmodels/dbModels.js';
 import { eq, and, or, like } from 'drizzle-orm';
