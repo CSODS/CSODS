@@ -8,10 +8,11 @@
     "compilets": "npx tsc --incremental",
     "start": "nodemon",
     "seed": "node dist/scripts/seeder.js",
-    "loadCache:tags": "node dist/scripts/cacheLoader.js",
+    "load:tags": "node dist/scripts/cacheLoader.js",
     "db:generate": "drizzle-kit generate --config=./config/drizzle.config.ts",
     "db:migrate": "drizzle-kit migrate --config=./config/drizzle.config.ts",
-    "db:studio": "drizzle-kit studio --config=./config/drizzle.config.ts"
+    "db:studio": "drizzle-kit studio --config=./config/drizzle.config.ts",
+    "db:push": "drizzle-kit push --config=./config/drizzle.config.ts"
   },
   "author": "",
   "license": "ISC",
