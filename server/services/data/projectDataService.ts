@@ -1,8 +1,8 @@
 import { createContext } from '../../db/csods.js'; 
 import { Project } from '../../viewmodels/dbModels.js';
 import { IProjectDetails } from '../../viewmodels/cache/cacheInterfaces.js';
-import ProjectRepository, { IProjectFilter } from '../../data/repositories/projectRepository.js';
-import ProjectFrameworkRepository from '../../data/repositories/projectFrameworkRepository.js';
+import ProjectRepository, { IProjectFilter } from '../repositories/projectRepository.js';
+import ProjectFrameworkRepository from '../repositories/projectFrameworkRepository.js';
 
 export async function createProjectDataService() {
     const dbContext = await createContext();
