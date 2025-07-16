@@ -5,7 +5,7 @@ import projectTagsRouter from './routes/projectTagsRoute.js';
 import { ROUTES } from './data/constants/constants.js';
 import { attachProjectCacheHandler, attachTagsCacheHandler } from './middleware/attacheMiddleware.js';
 import { createEvictionJobService } from './utils/jobs/evictionJob.js';
-import { projectsRouteLimiter, projectTagsRouteLimiter } from './utils/rateLimit/rateLimiter.js';
+import { projectsRouteLimiter, projectTagsRouteLimiter } from './middleware/rateLimiter.js';
 import { createViewsDecayJobService } from './utils/jobs/viewsDecayJob.js';
 
 const app = express()
