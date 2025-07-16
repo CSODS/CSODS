@@ -1,7 +1,9 @@
 import express, { Request } from 'express';
-import { PROJECT_ROUTES } from '../data/constants/constants.js';
-import { IProjectDetails } from '../viewmodels/cache/cacheInterfaces.js';
-import { IProjectFilter } from '../services/repositories/projectRepository.js';
+import { CONSTANTS } from '@data';
+import { IProjectDetails } from '@viewmodels';
+import { IProjectFilter } from '@services';
+
+const PROJECT_ROUTES = CONSTANTS.PROJECT_ROUTES;
 
 const projectsRouter = express.Router();
 
