@@ -238,6 +238,38 @@ export class JsonFileHandler<TModel> {
         const fileName: string = nameElements.join('-');
         return `${fileName}.${fileExtension}`;
     }
+    /**
+     * @private
+     * 
+     * @description
+     * Retrieves a list of JSON files from the specified directory and applies
+     * a given asynchronous function to each file.
+     * 
+     * @param {string} directory - The path to the cache directory.
+     * @param {(file: IFile) => Promise<void>} callbackFn - An async function to apply to each cache file.
+     * 
+     * @returns {Promise<void>} - A promise that resolves once all files have been processed.
+     */
+    public async processFiles(
+        directory: string,
+        callbackFn: (file: IFile) => Promise<void>
+    ): Promise<void> {
+        const filenames = await this.getDirectoryFilenames(directory);
+
+        if (filenames.length === 0) {
+            console.log('There are no cache files in the directory.');
+            return;
+        }
+
+        for (const filename of filenames) {
+            const file: IFile = {
+                Filepath: directory,
+                Filename: filename
+            };
+
+            await callbackFn(file);
+        }
+    }
     //#endregion
 }
 

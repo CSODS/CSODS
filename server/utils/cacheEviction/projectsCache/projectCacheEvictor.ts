@@ -49,7 +49,7 @@ export class ProjectCacheEvictor extends BaseCacheEvictor<IProjectCache> {
     public async evictStaleCache(evictionOptions?: IEvictionOptions): Promise<number> {
         let evictionCount = 0;
 
-        await this.processCacheFiles(this._cacheDirectory, async (file) => {
+        await this._jsonFileHandler.processFiles(this._cacheDirectory, async (file) => {
             const isEvicted = await this.tryEvict(file, evictionOptions);
             
             if (isEvicted) {
@@ -73,7 +73,7 @@ export class ProjectCacheEvictor extends BaseCacheEvictor<IProjectCache> {
     public async evictPagesFromCaches(evictionOptions?: IEvictionOptions): Promise<number> {
         let totalEvictedPages = 0;
 
-        await this.processCacheFiles(this._cacheDirectory, async (file) => {
+        await this._jsonFileHandler.processFiles(this._cacheDirectory, async (file) => {
             const evictedPages = await this.evictStaleCachePages(file, evictionOptions);
             totalEvictedPages += evictedPages;
         });
@@ -127,39 +127,6 @@ export class ProjectCacheEvictor extends BaseCacheEvictor<IProjectCache> {
         catch (err) {
             console.error('Error evicting cache pages: ', err);
             return 0;
-        }
-    }
-    /**
-     * @private
-     * 
-     * @description
-     * Retrieves a list of JSON cache files from the specified directory and applies
-     * a given asynchronous function to each file.
-     * 
-     * @param {string} directory - The path to the cache directory.
-     * @param {(file: IFile) => Promise<void>} func - An async function to apply to each cache file.
-     * 
-     * @returns {Promise<void>} - A promise that resolves once all files have been processed.
-     */
-    private async processCacheFiles(
-        directory: string, 
-        func: (file: IFile) => Promise<void>
-    ): Promise<void> {
-        
-        const filenames = await this._jsonFileHandler.getDirectoryFilenames(directory);
-
-        if (filenames.length === 0) {
-            console.log('There are no cache files in the directory.');
-            return;
-        }
-
-        for (const filename of filenames) {
-            const file: IFile = {
-                Filepath: this._cacheDirectory,
-                Filename: filename
-            };
-
-            await func(file);
         }
     }
 }

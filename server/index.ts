@@ -6,6 +6,7 @@ import { ROUTES } from './data/constants/constants.js';
 import { attachProjectCacheHandler, attachTagsCacheHandler } from './middleware/attacheMiddleware.js';
 import { createEvictionJobService } from './utils/jobs/evictionJob.js';
 import { projectsRouteLimiter, projectTagsRouteLimiter } from './utils/rateLimit/rateLimiter.js';
+import { createViewsDecayJobService } from './utils/jobs/viewsDecayJob.js';
 
 const app = express()
 
@@ -23,6 +24,9 @@ app.use(ROUTES.PROJECT_TAGS, projectTagsRouteLimiter, projectTagsRouter);
 const evictionJob = createEvictionJobService();
 evictionJob.scheduleProjectCacheEviction();
 evictionJob.scheduleCachePageEviction();
+
+const viewsDecayJob = createViewsDecayJobService();
+viewsDecayJob.scheduleViewsDecay();
 
 app.listen(3001, '0.0.0.0', async () => {
     console.log("Server running on port 3001");
