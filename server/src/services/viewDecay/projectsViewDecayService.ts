@@ -1,4 +1,4 @@
-import { IProjectCache } from "../../viewmodels/cache/cacheInterfaces.js";
+import { IProjectCache } from "@viewmodels";
 import { ViewsDecayService } from "./viewsDecayService.js";
 
 /**

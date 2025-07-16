@@ -1,5 +1,7 @@
-import { PROJECT_TAG_ROUTES } from '../../data/constants/constants.js';
 import express from 'express';
+import { CONSTANTS } from '@data';
+
+const PROJECT_TAG_ROUTES = CONSTANTS.PROJECT_TAG_ROUTES;
 
 const projectTagsRouter = express.Router();
 

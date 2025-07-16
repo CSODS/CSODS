@@ -6,7 +6,7 @@ const isProduction = process.env.NODE_ENV === 'production';
 
 export default {
   schema: "./dist/src/models/schema.js",
-  out: "./db/migrations",
+  out: "./migrations",
   // dialect: "turso",
   dialect: isProduction ? "turso" : "sqlite",
   dbCredentials: isProduction

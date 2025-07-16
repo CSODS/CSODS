@@ -1,5 +1,5 @@
 import cron from "node-cron";
-import { ProjectsViewsDecayService } from "../../services/viewDecay/projectsViewDecayService.js";
+import { ProjectsViewsDecayService } from "@services";
 
 export function createViewsDecayJobService() {
     return new ViewsDecayJobService();

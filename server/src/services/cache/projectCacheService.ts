@@ -1,12 +1,13 @@
-import { CACHE } from '../../../data/constants/constants.js';
-import { IProjectCachePage, IProjectCache, CachePageRecord, IProjectDetails } from '../../viewmodels/cache/cacheInterfaces.js';
-import { IProjectFilter, ProjectFilter } from '../repositories/projectRepository.js';
-import { createJsonFileHandler, JsonFileHandler } from '../file/fileHandler.js';
-import { createProjectDataService, ProjectDataService } from '../data/projectDataService.js';
-import { startRedis } from '../../redis/redisClient.js';
 import dotenv from 'dotenv';
-import { HashService } from '../../utils/hash/hashService.js';
+import { CONSTANTS } from '@data';
+import { IProjectFilter, ProjectFilter, createJsonFileHandler, JsonFileHandler, createProjectDataService, ProjectDataService } from '@services';
+import { HashService } from '@utils';
+import { IProjectCachePage, IProjectCache, CachePageRecord, IProjectDetails } from '@viewmodels';
+import { startRedis } from '@/redis/redisClient';
+
 dotenv.config();
+
+const CACHE = CONSTANTS.CACHE;
 
 export async function createProjectCacheHandler() {
     const projectDataServiceInstance = await createProjectDataService();
