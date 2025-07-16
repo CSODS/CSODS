@@ -24,6 +24,7 @@ app.use(ROUTES.PROJECT_TAGS, projectTagsRouteLimiter, projectTagsRouter);
 const evictionJob = createEvictionJobService();
 evictionJob.scheduleProjectCacheEviction();
 evictionJob.scheduleCachePageEviction();
+evictionJob.scheduleSearchCacheEviction();
 
 const viewsDecayJob = createViewsDecayJobService();
 viewsDecayJob.scheduleViewsDecay();

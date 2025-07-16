@@ -72,6 +72,32 @@ export class EvictionJobService {
     /**
      * @public
      * @description
+     * Schedules a cron job to evict stale project search cache **files** every hour at the 3rd minute.
+     * 
+     * @remarks
+     * Uses a combined TTL (Time-To-Live) and LFU (Least Frequently Used) eviction strategy.
+     * 
+     * @cron 0 3 * * * * — Every hour at minute 3 (e.g., 12:03, 1:03, 2:03, ...)
+     * 
+     * @example
+     * // Schedules eviction with:
+     * // - TTL: 1 hour
+     * // - View threshold: 10
+     * // - Excludes unfiltered searches from eviction
+     */
+    public scheduleSearchCacheEviction() {
+        cron.schedule('0 3 * * * *', async () => {
+            const evictionOptions: IEvictionOptions = {
+                Strategy: 'ttl+lfu',
+                Duration: 1000 * 60 * 60,    // 1 hour
+                ViewThreshold: 10
+            }
+            await this._projectCacheEvictor.evictStaleCache(evictionOptions, {excludeNoFilter: true});
+        })
+    }
+    /**
+     * @public
+     * @description
      * Schedules a cron job to evict stale **pages** within the cache files every hour on the 5th minute.
      * 
      * Cron Expression: (Every hour, on the fifth minute)
