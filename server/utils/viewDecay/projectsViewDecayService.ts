@@ -25,20 +25,32 @@ export class ProjectsViewsDecayService extends ViewsDecayService<IProjectCache> 
      * @public
      * @async
      * @description
-     * Applies view count decay to all project cache pages in the specified cache directory.
+     * Applies exponential view count decay to all project cache files and their individual cache pages.
      * 
      * For each cache file:
-     * - Iterates through all cache pages.
-     * - Applies the decay function to each page based on its last accessed time.
-     * - Updates the page view count using exponential decay.
-     * - Writes the updated cache back to the original file.
+     * - Optionally applies decay to the overall project-level `ViewCount` (if `decayTopLevel` is `true`).
+     * - Iterates through all entries in `CachePages`.
+     * - Applies exponential decay to each page's view count using its `LastAccessed` timestamp.
+     * - Writes the updated cache object back to its original JSON file.
      * 
-     * This method uses a custom decay function passed to {@link ViewsDecayService.decayAllCache}.
+     * This method overrides the default behavior by supplying a custom decay function
+     * to {@link ViewsDecayService.decayAllCache}, enabling fine-grained page-level decay
+     * with optional support for top-level cache view decay.
      *
-     * @returns {Promise<void>} A promise that resolves once all cache files are processed.
+     * @param {DecayOptions} [options={}] - Optional configuration for the decay operation.
+     * @param {boolean} [options.decayTopLevel=true] - Whether to apply decay to the top-level `ViewCount`
+     * of the cache file. If set to `false`, only individual pages will be decayed.
+     * 
+     * @returns {Promise<void>} A promise that resolves once all cache files have been processed and updated.
      */
-    public async decayCachePagesViews(): Promise<void> {
+    public async decayCachePagesViews({ decayTopLevel= true }: DecayOptions= {}): Promise<void> {
         await this.decayAllCache((cache, now) => {
+
+            if (decayTopLevel)
+                //  Decay the entire cache (default decay behavior).
+                cache = this.defaultDecayFunc(cache, now);
+
+            //  Decay the cache pages.
             const decayedCachePages = Object.entries(cache.CachePages).map(([pageNumber, cachePage]) => {
                 const viewCount = cachePage.ViewCount;
                 const lastAccessed = new Date(cachePage.LastAccessed);
@@ -52,4 +64,19 @@ export class ProjectsViewsDecayService extends ViewsDecayService<IProjectCache> 
             return cache;
         });
     }
+}
+
+/**
+ * @interface DecayOptions
+ * @description
+ * Configuration options for a cache view decay operation.
+ * Used to control whether top-level view count decay should be applied in addition
+ * to per-page decay.
+ *
+ * @property {boolean} [decayTopLevel=true] - 
+ * If `true`, applies decay to the top-level `ViewCount` of the cache.
+ * If `false`, only the individual `CachePages` view counts are decayed.
+ */
+interface DecayOptions {
+    decayTopLevel?: boolean
 }
