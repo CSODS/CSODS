@@ -1,6 +1,6 @@
 import { asc, desc, InferSelectModel, SQL } from "drizzle-orm";
 import { AnySQLiteColumn, SQLiteTable } from "drizzle-orm/sqlite-core";
-import { createContext } from "../../db/csods";
+import { createContext } from "../../../db/csods";
 
 type DbContext = Awaited<ReturnType<typeof createContext>>;
 

@@ -2,7 +2,7 @@ import cors from 'cors';
 import express from 'express';
 import projectsRouter from './routes/projectsRoute.js';
 import projectTagsRouter from './routes/projectTagsRoute.js';
-import { ROUTES } from './data/constants/constants.js';
+import { ROUTES } from '../data/constants/constants.js';
 import { attachProjectCacheHandler, attachTagsCacheHandler } from './middleware/attacheMiddleware.js';
 import { createEvictionJobService } from './utils/jobs/evictionJob.js';
 import { projectsRouteLimiter, projectTagsRouteLimiter } from './middleware/rateLimiter.js';

@@ -1,4 +1,4 @@
-import { PROJECT_TAG_ROUTES } from '../data/constants/constants.js';
+import { PROJECT_TAG_ROUTES } from '../../data/constants/constants.js';
 import express from 'express';
 
 const projectTagsRouter = express.Router();
