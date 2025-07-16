@@ -10,6 +10,7 @@ esbuild.build({
     sourcemap: true,
     alias: {
         '@': './src',
+        '@data': './src/data',
         '@middleware': './src/middleware',
         '@models': './src/models',
         '@redis': './src/redis',
