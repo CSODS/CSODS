@@ -17,8 +17,7 @@ export class ViewsDecayJobService {
 
     public scheduleViewsDecay() {
         cron.schedule('0 * * * * *', async () => {
-            await this._projectsViewsDecayService.decayAllCache();
-            await this._projectsViewsDecayService.decayCachePagesViews();
+            await this._projectsViewsDecayService.decayCachePagesViews({ decayTopLevel: true });    // include top level decay
         });
     }
 }
