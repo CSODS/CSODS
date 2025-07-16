@@ -1,5 +1,5 @@
 import { CachePageRecord, IProjectCache, IProjectCachePage } from "../../../viewmodels/cache/cacheInterfaces.js";
-import { JsonFileHandler, createJsonFileHandler, IFile } from "../../file/fileHandler.js";
+import { JsonFileHandler, createJsonFileHandler, IFile } from "../../../utils/file/fileHandler.js";
 import { BaseCacheEvictor, IEvictionOptions } from "../baseCacheEvictor.js";
 import dotenv from 'dotenv';
 import { createProjectPageEvictor, ProjectPageEvictor } from "./projectPageEvictor.js";

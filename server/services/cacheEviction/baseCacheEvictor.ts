@@ -1,5 +1,5 @@
 import { ICache } from "../../viewmodels/cache/cacheInterfaces.js";
-import { JsonFileHandler, IFile } from "../file/fileHandler.js";
+import { JsonFileHandler, IFile } from "../../utils/file/fileHandler.js";
 
 
 export class BaseCacheEvictor<TCache extends ICache> {

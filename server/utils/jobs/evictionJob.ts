@@ -1,6 +1,6 @@
 import cron from 'node-cron';
-import { createProjectCacheEvictor, ProjectCacheEvictor } from '../cacheEviction/projectsCache/projectCacheEvictor.js';
-import { IEvictionOptions } from '../cacheEviction/baseCacheEvictor.js';
+import { createProjectCacheEvictor, ProjectCacheEvictor } from '../../services/cacheEviction/projectsCache/projectCacheEvictor.js';
+import { IEvictionOptions } from '../../services/cacheEviction/baseCacheEvictor.js';
 import dotenv from 'dotenv';
 dotenv.config();
 
