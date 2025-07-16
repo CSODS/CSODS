@@ -61,10 +61,8 @@ export class JsonFileHandler<TModel> {
         directory: string, 
         filterCondition?: (filename: string, index: number, array: string[]) => boolean
     ): Promise<string[]> {
-        console.log(`Attempting to access directory ${directory}`);
 
         if (!existsSync(directory)) {
-            console.warn('Directory does not exist');
             return [];
         }
 
@@ -78,7 +76,6 @@ export class JsonFileHandler<TModel> {
             return filenames;
         }
         catch (err) {
-            console.error('Error retrieving directory filenames: ', err);
             return [];
             }
     }
@@ -101,11 +98,9 @@ export class JsonFileHandler<TModel> {
     ): Promise<TModel | null> 
     {
         const fullPath = path.join(filePath, fileName);
-        console.log(`Attempting to access .json file from ${fullPath}...`);
         
         //  Return null if the file does not exist.
         if (!existsSync(fullPath)) {
-            console.log(`${fullPath} does not exist. Returning null...`);
             return null;
         }
 
@@ -114,11 +109,9 @@ export class JsonFileHandler<TModel> {
         //  Read from json file
         try {
             //  Attempt to read file.
-            console.log(`.json file found. Attempting to parse...`);
             
             //  Lock file.
             release = await lockfile.lock(fullPath, {retries: this._retryOptions});
-            console.log('File lock acquired');
 
             //  Parse Json as a TModel object and return.
             //  Additionally apply a reviver function if provided.
@@ -130,17 +123,15 @@ export class JsonFileHandler<TModel> {
             );
             
             this.assertDataNotNull(data);
-            console.log('.json file has been parsed successfully.');
+
             return data;
         } catch (err) {
             //  log error and return null.
-            console.error('Error parsing cache: ', err);
             return null;
         } finally {
             if (release) {
                 //  release lock.
                 await release();
-                console.log('File lock released');
             }
         }
     }
@@ -165,31 +156,24 @@ export class JsonFileHandler<TModel> {
             //  Attempt to write to json file.
             const dataJson = JSON.stringify(data, null, 2);
             //  Ensure the directory exists. Create it recursively if it doesn't.
-            console.log(`Ensuring directory exists: ${filePath}`);
             await fs.mkdir(filePath, { recursive: true });
-            console.log('Directory ensured.');
             
             const fullPath = path.join(filePath, fileName);
 
             if (existsSync(fullPath)) {
                 release = await lockfile.lock(fullPath, {retries: this._retryOptions});
-                console.log('Lock acqquired.');                
             }
 
 
             //  attempt to write to file.
-            console.log('Attempting to write json file...');
             await fs.writeFile(fullPath, dataJson);
-            console.log('Json file written.');
             
             return data!;
         } catch (err) {
-            console.error('Error writing cache: ', err);
             throw err;
         } finally {
             if (release) {
                 await release();
-                console.log('File lock released.');
             }
         }
     }
@@ -211,21 +195,16 @@ export class JsonFileHandler<TModel> {
         try {            
             if (existsSync(fullPath)) {
                 release = await lockfile.lock(fullPath, {retries: this._retryOptions});
-                console.log('Lock acqquired.');                
             }
 
             //  attempt to write to file.
-            console.log(`Attempting to delete ${fileName}...`);
             await fs.unlink(fullPath);
-            console.log('Json file deleted.');
             return true;
         } catch (err) {
-            console.log('Json file failed deleting: ', err);
             return false;
         } finally {
             if (release) {
                 await release();
-                console.log('File lock released.');
             }
         }
     }
@@ -293,7 +272,6 @@ export class JsonFileHandler<TModel> {
         const filenames = await this.getDirectoryFilenames(directory, filenameFilter);
 
         if (filenames.length === 0) {
-            console.log('There are no cache files in the directory.');
             return;
         }
 

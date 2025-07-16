@@ -65,9 +65,7 @@ export class EvictionJobService {
      * Logs the total number of files evicted.
      */
     public async evictProjectCache(): Promise<void> {
-        console.log('[Cron] Evicting projects cache.');
         const evictedFiles = await this._projectCacheEvictor.evictStaleCache();
-        console.log(`[Cron] Evicted ${evictedFiles} files`);
     }
     /**
      * @public
@@ -116,8 +114,6 @@ export class EvictionJobService {
      * Logs the total number of pages evicted.
      */
     public async evictCachePages() {
-        console.log('Evicting cache pages.');
         const evictedPages = await this._projectCacheEvictor.evictPagesFromCaches();
-        console.log(`[Cron] Evicted a total of ${evictedPages} pages`);
     }
 }

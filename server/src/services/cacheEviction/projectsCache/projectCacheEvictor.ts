@@ -66,7 +66,6 @@ export class ProjectCacheEvictor extends BaseCacheEvictor<IProjectCache> {
             
             if (isEvicted) {
                 evictionCount++;
-                console.log(`Evicted file no. ${evictionCount}: ${file.Filename}`);
             }
         }, filterFunc);
         return evictionCount;
@@ -117,7 +116,6 @@ export class ProjectCacheEvictor extends BaseCacheEvictor<IProjectCache> {
         const hasPages = pageEntries.length > 0;
 
         if (!hasPages) {
-            console.log(`Cache ${file.Filename} has no pages.`);
             return 0;
         }
 
@@ -133,11 +131,9 @@ export class ProjectCacheEvictor extends BaseCacheEvictor<IProjectCache> {
         
         try {
             await this._jsonFileHandler.writeToJsonFile(file.Filepath, file.Filename, data);
-            console.log(`Successfully evicted ${evictedPages} pages from ${file.Filename}`);
             return evictedPages;
         } 
         catch (err) {
-            console.error('Error evicting cache pages: ', err);
             return 0;
         }
     }

@@ -87,14 +87,10 @@ export class ProjectDataService {
         // Calculate the logical start and end row numbers for logging purposes, based on the page range and page size.
         const startRow = (pageStart - 1) * pageSize;
         const endRow = pageEnd * pageSize;
-        console.log(
-            `- Fetching rows ${startRow} to ${endRow}...
-            - Paginated with page size: ${pageSize} from database...`
-        );
+
         let projectDetails: Record<number, IProjectDetails[]> = {};
 
         for (let pageNumber = pageStart; pageNumber <= pageEnd; pageNumber++ ) {
-            console.log(`Fetching page ${pageNumber} from database...`);
 
             const projectArr: Project[] = await this._projectRepo.getProjects({
                 isAscending: isAscending,
@@ -110,9 +106,7 @@ export class ProjectDataService {
             //  Build project details for this page.
             projectDetails[pageNumber] = await this.constructProjectDetails(projectArr);
 
-            console.log(`Page ${pageNumber} fetched.`);
         }
-        console.log(`Rows fetched from database.`);
         return projectDetails;
     }
     /**

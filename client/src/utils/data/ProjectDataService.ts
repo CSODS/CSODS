@@ -14,7 +14,6 @@ export class ProjectDataService {
 
     public constructor(projectTags: IAllProjectTags) {
         this._allProjectTags = projectTags;
-        console.log(this._allProjectTags);
     }
 
     public getDevType(devTypeId: number) : string {
@@ -66,8 +65,6 @@ export class ProjectDataService {
     public getProjectTagValues(projectDetails: IProjectDetails) : IProjectTags {
         const project: IProject = projectDetails.Project;
         const frameworks: IProjectFramework[] = projectDetails.ProjectFrameworks;
-        console.log(this._allProjectTags);
-        console.log(`ID: ${project.DevTypeId}, DEVTYPE: ${this.getDevType(project.DevTypeId)}`);
         return {
             DevType: this.getDevType(project.DevTypeId),
             PrimaryLanguage: this.getProgrammingLanguage(project.PrimaryLanguageId)!,
