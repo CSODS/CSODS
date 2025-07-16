@@ -1,7 +1,7 @@
 import cron from 'node-cron';
-import { createProjectCacheEvictor, ProjectCacheEvictor } from '../../services/cacheEviction/projectsCache/projectCacheEvictor.js';
-import { IEvictionOptions } from '../../services/cacheEviction/baseCacheEvictor.js';
 import dotenv from 'dotenv';
+import { createProjectCacheEvictor, ProjectCacheEvictor, IEvictionOptions } from '@services';
+
 dotenv.config();
 
 export function createEvictionJobService(): EvictionJobService {
