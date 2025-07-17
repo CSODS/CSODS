@@ -4,6 +4,7 @@ import { CONSTANTS } from '@data';
 import { attachProjectCacheHandler, attachTagsCacheHandler, projectsRouteLimiter, projectTagsRouteLimiter } from '@middleware';
 import { projectsRouter, projectTagsRouter} from '@routes';
 import { createEvictionJobService, createViewsDecayJobService } from '@utils';
+import { attachProjectCachePageService } from './middleware/attacheMiddleware';
 
 const ROUTES = CONSTANTS.ROUTES;
 
@@ -15,6 +16,7 @@ app.use(express.json());
 app.use(cors());
 app.use(attachProjectCacheHandler);
 app.use(attachTagsCacheHandler);
+app.use(attachProjectCachePageService);
 
 //  for routes
 app.use(ROUTES.PROJECTS, projectsRouteLimiter, projectsRouter);
