@@ -84,7 +84,7 @@ projectsRouter.get(PROJECT_ROUTES.BY_ID, async (req, res) => {
     const cacheService = req.projectCachePageService;
     await cacheService.setCache(filter);
 
-    const project: IProjectDetails | null = await req.projectCacheHandler.getProjectByPageAndId(page, id);
+    const project: IProjectDetails | null = await cacheService.getProjectByPageAndId(page, id);
     project
         ? res.json(project)
         : res.status(404).json({error : "Project Not Found."});
