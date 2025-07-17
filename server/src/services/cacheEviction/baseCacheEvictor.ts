@@ -100,19 +100,15 @@ export class BaseCacheEvictor<TCache extends ICache> {
         const strategy = evictionOptions.Strategy;
         switch (strategy) {
             case 'ttl':
-                console.log('Verifying if cache is up for eviction by ttl strategy.');
                 return this.verifyEvictByTtl(data, evictionOptions);
             case 'lfu':
-                console.log('Verifying if cache is up for eviction by lfu strategy.');
                 return this.verifyEvictByLfu(data, evictionOptions);
             case 'ttl+lfu':
-                console.log('Verifying if cache is up for eviction by ttl+lfu strategy.');
                 const isEvictByTtl = this.verifyEvictByTtl(data, evictionOptions);
                 const isEvictByLfu = this.verifyEvictByLfu(data, evictionOptions);
                 const isEvictFinal = isEvictByTtl && isEvictByLfu;
                 return isEvictFinal;
             default:
-                console.warn(`Unknown eviction strategy: ${evictionOptions.Strategy}`);
                 return false;
         }
     }

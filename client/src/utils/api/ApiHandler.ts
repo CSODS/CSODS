@@ -21,7 +21,6 @@ export default class ApiHandler {
             return projectsPage;
         }
         catch (err) {
-            console.error('Failed to fetch project list: ', err);
             return null;
         }
     }
@@ -36,7 +35,6 @@ export default class ApiHandler {
             return project;
         }
         catch (err) {
-            console.error('Failed to fetch project: ', err);
             return null;
         }
     }
@@ -51,7 +49,6 @@ export default class ApiHandler {
             return response.data;
         }
         catch (err) {
-            console.error(`Failed to fetch tag data: ${err}`);
             return null;
         }
     }

@@ -1,5 +1,6 @@
 import cron from "node-cron";
 import { ProjectsViewsDecayService } from "@services";
+import { JobsLogger } from "../logger/loggerService";
 
 export function createViewsDecayJobService() {
     return new ViewsDecayJobService();
@@ -17,6 +18,7 @@ export class ViewsDecayJobService {
 
     public scheduleViewsDecay() {
         cron.schedule('0 * * * * *', async () => {
+            JobsLogger.info('Decaying view counts of project caches.');
             await this._projectsViewsDecayService.decayCachePagesViews({ decayTopLevel: true });    // include top level decay
         });
     }
