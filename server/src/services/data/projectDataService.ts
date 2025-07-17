@@ -1,6 +1,7 @@
 import { createContext } from '@/db/csods'; 
 import { Project, IProjectDetails } from '@viewmodels';
-import { ProjectRepository, IProjectFilter, ProjectFrameworkRepository} from '@services';
+import { ProjectRepository, IProjectFilter, ProjectFrameworkRepository } from '@services';
+import { DbLogger } from '@/utils';
 
 export async function createProjectDataService() {
     const dbContext = await createContext();
@@ -88,10 +89,11 @@ export class ProjectDataService {
         const startRow = (pageStart - 1) * pageSize;
         const endRow = pageEnd * pageSize;
 
+        DbLogger.info(`[Projects] Fetching pages ${pageStart} to ${pageEnd} with size ${pageSize} from database.`);
         let projectDetails: Record<number, IProjectDetails[]> = {};
 
         for (let pageNumber = pageStart; pageNumber <= pageEnd; pageNumber++ ) {
-
+            DbLogger.info(`[Projects] Fetching page ${pageNumber}...`);
             const projectArr: Project[] = await this._projectRepo.getProjects({
                 isAscending: isAscending,
                 filter: filter,
@@ -101,12 +103,16 @@ export class ProjectDataService {
 
             //  If no projects are returned for the current page, it signifies the end of available data,
             //  so stop fetching further pages.
-            if (projectArr.length == 0 ) break;
+            if (projectArr.length == 0 ) {
+                DbLogger.info(`[Projects] No rows found at page ${pageNumber}. Ending fetch...`);
+                break;
+            };
             
             //  Build project details for this page.
             projectDetails[pageNumber] = await this.constructProjectDetails(projectArr);
 
         }
+        DbLogger.info(`[Projects] Finished fetching pages.`);
         return projectDetails;
     }
     /**

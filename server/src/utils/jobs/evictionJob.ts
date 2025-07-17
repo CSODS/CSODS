@@ -1,6 +1,7 @@
 import cron from 'node-cron';
 import dotenv from 'dotenv';
 import { createProjectCacheEvictor, ProjectCacheEvictor, IEvictionOptions } from '@services';
+import { JobsLogger } from '../logger/loggerService';
 
 dotenv.config();
 
@@ -65,7 +66,9 @@ export class EvictionJobService {
      * Logs the total number of files evicted.
      */
     public async evictProjectCache(): Promise<void> {
+        JobsLogger.info('Evicting stale daily projects cache.');
         const evictedFiles = await this._projectCacheEvictor.evictStaleCache();
+        JobsLogger.info(`Evicted ${evictedFiles} files.`);
     }
     /**
      * @public
@@ -90,7 +93,9 @@ export class EvictionJobService {
                 Duration: 1000 * 60 * 60,    // 1 hour
                 ViewThreshold: 10
             }
-            await this._projectCacheEvictor.evictStaleCache(evictionOptions, {excludeNoFilter: true});
+            JobsLogger.info('Evicting stale projects search cache.');
+            const evictedFiles = await this._projectCacheEvictor.evictStaleCache(evictionOptions, {excludeNoFilter: true});
+            JobsLogger.info(`Evicted ${evictedFiles} files.`);
         })
     }
     /**
@@ -114,6 +119,8 @@ export class EvictionJobService {
      * Logs the total number of pages evicted.
      */
     public async evictCachePages() {
+        JobsLogger.info('Evicting stale pages from project caches.');
         const evictedPages = await this._projectCacheEvictor.evictPagesFromCaches();
+        JobsLogger.info(`Evicted ${evictedPages} pages.`);
     }
 }

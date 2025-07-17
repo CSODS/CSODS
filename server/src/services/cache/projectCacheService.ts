@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
 import { CONSTANTS } from '@data';
 import { IProjectFilter, ProjectFilter, createJsonFileHandler, JsonFileHandler, createProjectDataService, ProjectDataService } from '@services';
-import { HashService } from '@utils';
+import { HashService, ProjectsCacheLogger } from '@utils';
 import { IProjectCachePage, IProjectCache, CachePageRecord, IProjectDetails } from '@viewmodels';
 import { startRedis } from '@/redis/redisClient';
 
@@ -90,7 +90,15 @@ export class ProjectCacheHandler {
      */
     public async getProjectByPageAndId(pageNumber: number, projectId: number) : Promise<IProjectDetails | null> {
         const cachePage: IProjectCachePage | null = await this.getOrCreatePage(pageNumber);
-        return cachePage?.Projects.find(p => p.Project.ProjectId == projectId) ?? null;
+
+        ProjectsCacheLogger.info(`Attempting to retrieve project with id: ${projectId}...`);
+        const project = cachePage?.Projects.find(p => p.Project.ProjectId == projectId) ?? null;
+
+        project
+            ? ProjectsCacheLogger.info(`Project found...`)
+            : ProjectsCacheLogger.warn(`Project not found. Returning null...`);
+
+        return project;
     }
     //#region Cache Page Retrieval
     /**
@@ -108,6 +116,7 @@ export class ProjectCacheHandler {
      * @throws {Error} If the page cannot be fetched or cached properly.
      */
     public async getOrCreatePage(pageNumber: number): Promise<IProjectCachePage | null> {
+
         //  Verify if page is out of bounds.
         function isPageOutOfBounds(totalPages:number, pageNumber: number): boolean {
             return pageNumber === 0 || pageNumber > totalPages;
@@ -118,16 +127,19 @@ export class ProjectCacheHandler {
             //  Throws an exception if _jsonCache is null.
             this._jsonFileHandler.assertDataNotNull(this._jsonCache);
 
+            ProjectsCacheLogger.info(`Attempting to retrieve page ${pageNumber}`);
 
-            if (isPageOutOfBounds(this._jsonCache.TotalPages, pageNumber))
-                throw new Error('That page does not exist.');
+            if (isPageOutOfBounds(this._jsonCache.TotalPages, pageNumber)) {
+                ProjectsCacheLogger.warn(`Page ${pageNumber} is out of bounds. Returning null...`);
+                return null;
+            }
 
             //  Attempt to retrieve page from cache.
             const cachePages: CachePageRecord = this._jsonCache.CachePages;
 
             if (this.isPageMissingFromCache(cachePages, pageNumber)) {
-
                 if (this._jsonCache.IsBackup) {
+                    ProjectsCacheLogger.warn(`Page ${pageNumber} is not available in backup cache. Returning null...`);
                     return null;
                 }
 
@@ -138,11 +150,13 @@ export class ProjectCacheHandler {
 
             //  Return the cache page if found in the cache.
             await this.updatePageViewCount(pageNumber);
+            ProjectsCacheLogger.info('Success loading page.');
             return cachePages[pageNumber];
         }
         catch (err)
         {
             //  Return null on error. 
+            ProjectsCacheLogger.error('Failed retrieving cache page.', err);
             return null;
         }
     }
@@ -266,7 +280,6 @@ export class ProjectCacheHandler {
         this._filter = filter.isEmpty() ? undefined : filter;
 
         const isFiltered = filter ? true : false;
-        
         this._filename = this.getFilename({isToday: true, isFiltered: isFiltered});
         
         let cachedProjects: IProjectCache | null = await this.tryParseOrCreateJsonCache();
@@ -274,6 +287,7 @@ export class ProjectCacheHandler {
         //  Fallback logic for invalid cache.
         if (!this.cacheHasPages(cachedProjects)) {
             if (this._filter) {
+                ProjectsCacheLogger.warn('Backup cache can only be loaded without filters. Returning null...');
                 return null;
             }
 
@@ -281,6 +295,10 @@ export class ProjectCacheHandler {
         }
         
         this._jsonCache = cachedProjects;
+
+        if (!this._jsonCache) 
+            ProjectsCacheLogger.warn('All cache retrieval fallback routines failed. Returning null...');
+
         return this._jsonCache;
     }
     /**
@@ -294,22 +312,25 @@ export class ProjectCacheHandler {
         let cachedProjects: IProjectCache | null = await this.parseJsonCache();
 
         if (this.cacheHasPages(cachedProjects)) {
+            ProjectsCacheLogger.info('Success parsing cache.');
             return cachedProjects;
         }
         
         else {
-            
+            ProjectsCacheLogger.info('Failed parsing cache. Attempting to create new cache...');
             //  Up to three attempts.
             for (let i = 0; i < 3; i++) {
 
                 const newCache = await this.tryCreateCache();
                 
                 if (this.cacheHasPages(newCache)) {
+                    ProjectsCacheLogger.info('Success creating new cache.');
                     return newCache;
                 }
             }
         }
 
+        ProjectsCacheLogger.warn('Fail parsing existing cache and creating new cache.');
         //  Return null if cache creation failed.
         return null;
     }
@@ -337,6 +358,8 @@ export class ProjectCacheHandler {
      * @returns A valid cache from backups or `null` if all attempts fail.
      */
     private async parseBackupJsonCache(cDate: Date): Promise<IProjectCache | null> {
+        ProjectsCacheLogger.info('Attempting to parse backup cache.');
+
         const backupDate: Date = new Date(cDate);
         for (let i = 1; i <= 3; i++) {
 
@@ -346,6 +369,7 @@ export class ProjectCacheHandler {
             const cachedProjects: IProjectCache | null = await this.parseJsonCache();
             
             if (this.cacheHasPages(cachedProjects)) {
+                ProjectsCacheLogger.info(`Success loading backup cache ${this._filename}`);
                 cachedProjects!.IsBackup = true;
                 return cachedProjects;
             }
@@ -354,7 +378,14 @@ export class ProjectCacheHandler {
 
         this._filename = this.getFilename({isHardBackup: true});
         const hardBackupCache: IProjectCache | null = await this.parseJsonCache(true);
-        return hardBackupCache;
+
+        if (this.cacheHasPages(hardBackupCache)) {
+            ProjectsCacheLogger.info(`Success loading hard backup cache.`);
+            hardBackupCache!.IsBackup = true;
+            return hardBackupCache;
+        }
+
+        return null;
     }
     /**
      * @private
@@ -368,11 +399,14 @@ export class ProjectCacheHandler {
     private async parseJsonCache(isHardBackup: boolean = false): Promise<IProjectCache | null> {
         // Determine the base file path based on whether it's a hard backup.
         const filePath = isHardBackup ? process.env.DEFAULT_CACHE_PATH! : process.env.PROJECT_CACHE_PATH!;
+
+        ProjectsCacheLogger.info(`Parsing projects cache at ${filePath}/${this._filename}`);
+        
         return await this._jsonFileHandler.parseJsonFile(
-                filePath, 
-                this._filename,
-                this.reviver
-            );
+            filePath, 
+            this._filename,
+            this.reviver
+        );
     }
     /**
      * @private
