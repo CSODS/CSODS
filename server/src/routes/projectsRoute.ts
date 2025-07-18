@@ -10,12 +10,12 @@ const projectsRouter = express.Router();
 
 //  for testing
 projectsRouter.get(PROJECT_ROUTES.LOAD_PROJECTS, async (req, res) => {
-    const projectCacheHandler = req.projectCacheHandler;
+    const cacheService = req.projectCachePageService;
 
     const filter = assembleFilter(req);
 
-    await projectCacheHandler.setProjectsCache(filter);
-    res.json(projectCacheHandler.getJsonCache());
+    await cacheService.setCache(filter);
+    res.json(cacheService.getCache());
 });
 
 /**
@@ -41,10 +41,10 @@ projectsRouter.get(PROJECT_ROUTES.BY_PAGE, async (req, res) => {
 
     const filter = assembleFilter(req);
 
-    const projectCacheHandler = req.projectCacheHandler;
-    await projectCacheHandler.setProjectsCache(filter);
+    const cacheService = req.projectCachePageService;
+    await cacheService.setCache(filter);
     
-    const page = await projectCacheHandler.getOrCreatePage(Number(req.params.pageNumber));
+    const page = await cacheService.getOrCreatePage(Number(req.params.pageNumber));
     
     page
         ? res.json(page)
@@ -81,10 +81,10 @@ projectsRouter.get(PROJECT_ROUTES.BY_ID, async (req, res) => {
 
     const filter = assembleFilter(req);
 
-    const projectCacheHandler = req.projectCacheHandler;
-    await projectCacheHandler.setProjectsCache(filter);
+    const cacheService = req.projectCachePageService;
+    await cacheService.setCache(filter);
 
-    const project: IProjectDetails | null = await req.projectCacheHandler.getProjectByPageAndId(page, id);
+    const project: IProjectDetails | null = await cacheService.getProjectByPageAndId(page, id);
     project
         ? res.json(project)
         : res.status(404).json({error : "Project Not Found."});

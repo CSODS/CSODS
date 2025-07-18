@@ -1,9 +1,10 @@
 import cors from 'cors';
 import express from 'express';
 import { CONSTANTS } from '@data';
-import { attachProjectCacheHandler, attachTagsCacheHandler, projectsRouteLimiter, projectTagsRouteLimiter } from '@middleware';
+import { attachTagsCacheHandler, projectsRouteLimiter, projectTagsRouteLimiter } from '@middleware';
 import { projectsRouter, projectTagsRouter} from '@routes';
 import { createEvictionJobService, createViewsDecayJobService } from '@utils';
+import { attachProjectCachePageService } from './middleware/attacheMiddleware';
 
 const ROUTES = CONSTANTS.ROUTES;
 
@@ -13,8 +14,8 @@ const app = express()
 app.use(express.json());
 //  whitelist api so connection works and you can make requests.
 app.use(cors());
-app.use(attachProjectCacheHandler);
 app.use(attachTagsCacheHandler);
+app.use(attachProjectCachePageService);
 
 //  for routes
 app.use(ROUTES.PROJECTS, projectsRouteLimiter, projectsRouter);
