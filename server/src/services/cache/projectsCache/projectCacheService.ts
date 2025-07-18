@@ -3,7 +3,7 @@ import { CONSTANTS } from '@data';
 import { createJsonFileHandler, createProjectDataService, IProjectFilter, JsonFileHandler, ProjectDataService, ProjectFilter } from "@services";
 import { HashService, ProjectsCacheLogger } from "@utils";
 import { CachePageRecord, IProjectCache, IProjectCachePage, IProjectDetails } from "@viewmodels";
-import { AbstractCacheService } from "../cacheService";
+import { AbstractCacheService } from "../abstractCacheService";
 
 dotenv.config();
 
