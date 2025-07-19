@@ -1,10 +1,9 @@
 import cors from 'cors';
 import express from 'express';
 import { CONSTANTS } from '@data';
-import { attachTagsCacheHandler, authRouteLimiter, projectsRouteLimiter, projectTagsRouteLimiter } from '@middleware';
+import { attachProjectCachePageService, attachTagsCacheHandler, authRouteLimiter, routeLogger, projectsRouteLimiter, projectTagsRouteLimiter } from '@middleware';
 import { projectsRouter, projectTagsRouter} from '@routes';
 import { createEvictionJobService, createViewsDecayJobService } from '@utils';
-import { attachProjectCachePageService } from './middleware/attacheMiddleware';
 import authRouter from './routes/authRoute';
 
 const ROUTES = CONSTANTS.ROUTES;
@@ -13,15 +12,21 @@ const app = express()
 
 //  for express json parsing
 app.use(express.json());
+
 //  whitelist api so connection works and you can make requests.
 app.use(cors());
-app.use(attachTagsCacheHandler);
-app.use(attachProjectCachePageService);
+
+//  route logging middleware for profiling route request methods.
+app.use(routeLogger);
 
 //  for routes
 app.use(ROUTES.AUTH, authRouteLimiter, authRouter);
 //  TODO: add app.use(verifyJWT); for jwt verification middleware
+
+app.use(attachProjectCachePageService);
 app.use(ROUTES.PROJECTS, projectsRouteLimiter, projectsRouter);
+
+app.use(attachTagsCacheHandler);
 app.use(ROUTES.PROJECT_TAGS, projectTagsRouteLimiter, projectTagsRouter);
 
 const evictionJob = createEvictionJobService();
