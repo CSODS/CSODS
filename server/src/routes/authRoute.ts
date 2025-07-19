@@ -38,6 +38,15 @@ authRouter.post(AUTH_ROUTES.REFRESH, async (req, res) => {
     profiler.done({ message: `[${AUTH_ROUTES.REFRESH}] Request processed.` });
 });
 
+authRouter.post(AUTH_ROUTES.SIGN_OUT, async (req, res) => {
+    RouteLogger.info(`[${AUTH_ROUTES.SIGN_OUT}] Processing request...`);
+    const profiler = RouteLogger.startTimer();
+
+    //  controller logic here.
+
+    profiler.done({ message: `[${AUTH_ROUTES.SIGN_OUT}] Request processed.` });
+});
+
 export default authRouter;
 
 /**
@@ -166,4 +175,32 @@ const handleRefreshToken = (req: Request, res: Response) => {
     catch (err) {
         return res.sendStatus(403); //  forbidden
     }
+}
+
+const handleLogout = (req: Request, res: Response) => {
+    //  delete the access token in the client.
+    const cookies = req.cookies;
+    if (!cookies?.jwt) return res.sendStatus(204);  //  no content/not logged-in anyway
+
+    const refreshToken = cookies.jwt;
+    console.log(refreshToken);
+
+    
+    //  TODO: replace this with querying the database/cache for the user with matching refresh token.
+    const foundUser = { user: 'someuser', password: 'someHash'};
+    if (!foundUser) {
+        res.clearCookie('jwt', {
+            httpOnly: true
+        });
+        return res.sendStatus(204); // successfuly but no content.
+    }
+
+    //  Delete refresh token in db/cache.
+    
+    //  TODO: filter otherUsers that are not the found user
+    //  set found user and refresh token to the current user.
+
+    res.clearCookie('jwt', { httpOnly: true }); //  secure: true, only serves on https.
+    res.sendStatus(204);
+
 }

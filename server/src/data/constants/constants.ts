@@ -23,7 +23,8 @@ export const AUTH_ROUTES = {
     ROOT: '/',
     SIGN_IN: '/signIn',
     REGISTER: '/register',
-    REFRESH: '/refresh'
+    REFRESH: '/refresh',
+    SIGN_OUT: '/signOut'
 }
 
 export const CACHE = {
