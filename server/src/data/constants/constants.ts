@@ -22,7 +22,8 @@ export const PROJECT_TAG_ROUTES = {
 export const AUTH_ROUTES = {
     ROOT: '/',
     SIGN_IN: '/signIn',
-    REGISTER: '/register'
+    REGISTER: '/register',
+    REFRESH: '/refresh'
 }
 
 export const CACHE = {
