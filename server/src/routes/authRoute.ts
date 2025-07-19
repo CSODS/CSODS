@@ -3,7 +3,6 @@ import bcrypt from 'bcryptjs';
 import dotenv from 'dotenv';
 import jwt from 'jsonwebtoken';
 import { CONSTANTS } from "@data";
-import { RouteLogger } from "@utils";
 
 dotenv.config();
 
@@ -12,39 +11,19 @@ const AUTH_ROUTES = CONSTANTS.AUTH_ROUTES;
 const authRouter = Router();
 
 authRouter.post(AUTH_ROUTES.SIGN_IN, async (req, res) => {
-    RouteLogger.info(`[${[AUTH_ROUTES.SIGN_IN]}] Processing request...`);
-    const profiler = RouteLogger.startTimer();
-
     //  controller logic here
-
-    profiler.done({ message: `[${AUTH_ROUTES.SIGN_IN}] Request processed.`} );
 });
 
 authRouter.post(AUTH_ROUTES.REGISTER, async (req, res) => {
-    RouteLogger.info(`[${AUTH_ROUTES.REGISTER}] Processing request...`);
-    const profiler = RouteLogger.startTimer();
-
     //  controller logic here.
-
-    profiler.done({ message: `[${AUTH_ROUTES.REGISTER}] Request processed.` });
 });
 
 authRouter.post(AUTH_ROUTES.REFRESH, async (req, res) => {
-    RouteLogger.info(`[${AUTH_ROUTES.REFRESH}] Processing request...`);
-    const profiler = RouteLogger.startTimer();
-
     //  controller logic here.
-
-    profiler.done({ message: `[${AUTH_ROUTES.REFRESH}] Request processed.` });
 });
 
 authRouter.post(AUTH_ROUTES.SIGN_OUT, async (req, res) => {
-    RouteLogger.info(`[${AUTH_ROUTES.SIGN_OUT}] Processing request...`);
-    const profiler = RouteLogger.startTimer();
-
     //  controller logic here.
-
-    profiler.done({ message: `[${AUTH_ROUTES.SIGN_OUT}] Request processed.` });
 });
 
 export default authRouter;
