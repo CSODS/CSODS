@@ -18,7 +18,7 @@ export function verifyJWT(req: Request, res: Response, next: NextFunction) {
         const payload = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET!);    //  CAST to payload interface if available for stronger typing.
         
         // TODO: add better typing for payload and req. or better yet modify the Req interface to add the necessary fields
-        (<any>req).user = (<any>payload).username;
+        (<any>req).user = (<any>payload).user;
 
         next();
     }
