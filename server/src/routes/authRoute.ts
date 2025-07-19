@@ -118,6 +118,7 @@ const handleLogin = async (req: Request, res: Response) => {
     const match = await bcrypt.compare(password, foundUser.password);
 
     if (match) {
+        const roles = ['someRole', 'someRole2'];    // ideally add to accessToken payload. This should come from the userModel queried in the database.
         //  create JWT token
         const accessToken = jwt.sign(
             { 'username': foundUser.user }, // ideally add roles too
@@ -165,6 +166,7 @@ const handleRefreshToken = (req: Request, res: Response) => {
         //  TODO: implement better typing. better yet, with an interface.
         if (foundUser.user !== (<any>payload).user) return res.sendStatus(403); //  forbidden
 
+        const roles = ['someRole', 'someRole2'];    // ideally add to accessToken payload. This should come from the userModel queried in the database.
         const accessToken = jwt.sign(
             { 'username': (<any>payload).user },
             process.env.ACCESS_TOKEN_SECRET!,
