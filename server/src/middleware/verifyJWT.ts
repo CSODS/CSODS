@@ -8,7 +8,7 @@ dotenv.config();
 export function verifyJWT(req: Request, res: Response, next: NextFunction) {
     const authHeader = req.headers['authorization'];
     
-    if(!authHeader) return res.status(401);    //  unauthorized.
+    if(!authHeader?.startsWith('Bearer ')) return res.status(401);    //  unauthorized. Auth header does not exist or is not properly constructed.
     
     console.log(authHeader);    //  bearer token
 
@@ -19,7 +19,9 @@ export function verifyJWT(req: Request, res: Response, next: NextFunction) {
         
         // TODO: add better typing for payload and req. or better yet modify the Req interface to add the necessary fields
         (<any>req).user = (<any>payload).user;
-
+        //  sueggestion(?) on improved logic when roles are implemented at auth.
+        //  req.user = payload.userInfo.user;
+        //  req.roles = payload.userinfo.roles;
         next();
     }
     catch (err) {
