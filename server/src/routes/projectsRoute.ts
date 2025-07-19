@@ -2,7 +2,6 @@ import express, { Request } from 'express';
 import { CONSTANTS } from '@data';
 import { IProjectDetails } from '@viewmodels';
 import { IProjectFilter } from '@services';
-import { RouteLogger } from '@/utils';
 
 const PROJECT_ROUTES = CONSTANTS.PROJECT_ROUTES;
 
@@ -36,9 +35,6 @@ projectsRouter.get(PROJECT_ROUTES.LOAD_PROJECTS, async (req, res) => {
  * Returns a JSON object representing a single page of project data from the cache.
  */
 projectsRouter.get(PROJECT_ROUTES.BY_PAGE, async (req, res) => {
-    RouteLogger.info(`[${PROJECT_ROUTES.BY_PAGE}] Processing request...`);
-    const profiler = RouteLogger.startTimer();
-
     const filter = assembleFilter(req);
 
     const cacheService = req.projectCachePageService;
@@ -49,8 +45,6 @@ projectsRouter.get(PROJECT_ROUTES.BY_PAGE, async (req, res) => {
     page
         ? res.json(page)
         : res.status(404).json({error: `Page ${req.params.pageNumber} not found.`});
-
-    profiler.done({message: `[${PROJECT_ROUTES.BY_PAGE}] Request processed.`});
 });
 /**
  * GET @see PROJECT_ROUTES.BY_ID for the route's address.
@@ -73,9 +67,6 @@ projectsRouter.get(PROJECT_ROUTES.BY_PAGE, async (req, res) => {
  * Returns a JSON object representing a single project.
  */
 projectsRouter.get(PROJECT_ROUTES.BY_ID, async (req, res) => {
-    RouteLogger.info(`[${PROJECT_ROUTES.BY_ID}] Processing request...`);
-    const profiler = RouteLogger.startTimer();
-
     const page: number = Number(req.params.pageNumber);
     const id: number = Number(req.params.projectId);
 
@@ -88,8 +79,6 @@ projectsRouter.get(PROJECT_ROUTES.BY_ID, async (req, res) => {
     project
         ? res.json(project)
         : res.status(404).json({error : "Project Not Found."});
-
-    profiler.done({message: `[${PROJECT_ROUTES.BY_PAGE}] Request processed.`});
 });
 
 // router.post();
