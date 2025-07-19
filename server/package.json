@@ -21,7 +21,7 @@
   "dependencies": {
     "@libsql/client": "^0.15.8",
     "@types/cors": "^2.8.19",
-    "bcrypt": "^6.0.0",
+    "bcryptjs": "^3.0.2",
     "better-sqlite3": "^11.10.0",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
@@ -39,7 +39,7 @@
     "winston": "^3.17.0"
   },
   "devDependencies": {
-    "@types/bcrypt": "^6.0.0",
+    "@types/bcryptjs": "^2.4.6",
     "@types/better-sqlite3": "^7.6.13",
     "@types/express": "^5.0.3",
     "@types/jsonwebtoken": "^9.0.10",
