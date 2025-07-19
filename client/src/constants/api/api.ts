@@ -17,8 +17,18 @@ const PROJECT_TAG_PATHS = {
     ALL_DATA: '/all_data'
 } as const;
 
+const AUTH_PATHS = {
+    PATH: '/auth',
+    ROOT: '/',
+    SIGN_IN: '/sign-in',
+    REGISTER: '/register',
+    REFRESH: '/refresh',
+    SIGN_OUT: '/sign-out'
+} as const;
+
 export const CSODS_API_PATHS = {
     BASE: CSODS_API_BASE,
     PROJECTS: PROJECT_PATHS,
-    PROJECT_TAGS: PROJECT_TAG_PATHS
+    PROJECT_TAGS: PROJECT_TAG_PATHS,
+    AUTH: AUTH_PATHS
 } as const;

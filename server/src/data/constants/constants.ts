@@ -2,7 +2,8 @@ export const BASE = "http://localhost:3001";
 
 export const ROUTES = {
     PROJECTS: '/projects',
-    PROJECT_TAGS: '/project_tags'
+    PROJECT_TAGS: '/project_tags',
+    AUTH: '/auth'
 } as const;
 
 export const PROJECT_ROUTES = {
@@ -16,6 +17,14 @@ export const PROJECT_ROUTES = {
 export const PROJECT_TAG_ROUTES = {
     ROOT: '/',
     ALL_DATA: '/all_data'
+}
+
+export const AUTH_ROUTES = {
+    ROOT: '/',
+    SIGN_IN: '/sign-in',
+    REGISTER: '/register',
+    REFRESH: '/refresh',
+    SIGN_OUT: '/sign-out'
 }
 
 export const CACHE = {
