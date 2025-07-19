@@ -1,10 +1,9 @@
 import cors from 'cors';
 import express from 'express';
 import { CONSTANTS } from '@data';
-import { attachTagsCacheHandler, authRouteLimiter, projectsRouteLimiter, projectTagsRouteLimiter } from '@middleware';
+import { attachProjectCachePageService, attachTagsCacheHandler, authRouteLimiter, projectsRouteLimiter, projectTagsRouteLimiter } from '@middleware';
 import { projectsRouter, projectTagsRouter} from '@routes';
 import { createEvictionJobService, createViewsDecayJobService } from '@utils';
-import { attachProjectCachePageService } from './middleware/attacheMiddleware';
 import authRouter from './routes/authRoute';
 
 const ROUTES = CONSTANTS.ROUTES;
