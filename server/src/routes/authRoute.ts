@@ -11,7 +11,7 @@ const AUTH_ROUTES = CONSTANTS.AUTH_ROUTES;
 
 const authRouter = Router();
 
-authRouter.get(AUTH_ROUTES.SIGN_IN, async (req, res) => {
+authRouter.post(AUTH_ROUTES.SIGN_IN, async (req, res) => {
     RouteLogger.info(`[${[AUTH_ROUTES.SIGN_IN]}] Processing request...`);
     const profiler = RouteLogger.startTimer();
 
@@ -20,14 +20,23 @@ authRouter.get(AUTH_ROUTES.SIGN_IN, async (req, res) => {
     profiler.done({ message: `[${AUTH_ROUTES.SIGN_IN}] Request processed.`} );
 });
 
-authRouter.get(AUTH_ROUTES.REGISTER, async (req, res) => {
+authRouter.post(AUTH_ROUTES.REGISTER, async (req, res) => {
     RouteLogger.info(`[${AUTH_ROUTES.REGISTER}] Processing request...`);
     const profiler = RouteLogger.startTimer();
 
-    //  controller logic here
+    //  controller logic here.
 
     profiler.done({ message: `[${AUTH_ROUTES.REGISTER}] Request processed.` });
-})
+});
+
+authRouter.post(AUTH_ROUTES.REFRESH, async (req, res) => {
+    RouteLogger.info(`[${AUTH_ROUTES.REFRESH}] Processing request...`);
+    const profiler = RouteLogger.startTimer();
+
+    //  controller logic here.
+
+    profiler.done({ message: `[${AUTH_ROUTES.REFRESH}] Request processed.` });
+});
 
 export default authRouter;
 
@@ -112,7 +121,7 @@ const handleLogin = async (req: Request, res: Response) => {
             { expiresIn: '1d'}  //  1 day
         );
 
-        //  filter otherUsers that are not the found user
+        //  TODO: filter otherUsers that are not the found user
         //  set found user and refresh token to the current user.
         
         res.cookie(
@@ -128,4 +137,33 @@ const handleLogin = async (req: Request, res: Response) => {
         res.json({ accessToken });
     }
     else return res.sendStatus(401);    // unauthorized.
+}
+
+const handleRefreshToken = (req: Request, res: Response) => {
+    const cookies = req.cookies;
+    if (!cookies?.jwt) return res.status(401);  //  unauthorized
+
+    const refreshToken = cookies.jwt;
+    console.log(refreshToken);
+
+    //  TODO: replace this with querying the database/cache for the user with matching refresh token.
+    const foundUser = { user: 'someuser', password: 'someHash'};
+
+    //  evaluate jwt
+    try {
+        const payload = jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET!);
+
+        //  TODO: implement better typing. better yet, with an interface.
+        if (foundUser.user !== (<any>payload).user) return res.sendStatus(403); //  forbidden
+
+        const accessToken = jwt.sign(
+            { 'username': (<any>payload).user },
+            process.env.ACCESS_TOKEN_SECRET!,
+            { expiresIn: '10m'}
+        )
+        res.json({ accessToken });
+    }
+    catch (err) {
+        return res.sendStatus(403); //  forbidden
+    }
 }
