@@ -19,9 +19,10 @@ app.use(attachTagsCacheHandler);
 app.use(attachProjectCachePageService);
 
 //  for routes
+app.use(ROUTES.AUTH, authRouteLimiter, authRouter);
+//  TODO: add app.use(verifyJWT); for jwt verification middleware
 app.use(ROUTES.PROJECTS, projectsRouteLimiter, projectsRouter);
 app.use(ROUTES.PROJECT_TAGS, projectTagsRouteLimiter, projectTagsRouter);
-app.use(ROUTES.AUTH, authRouteLimiter, authRouter);
 
 const evictionJob = createEvictionJobService();
 evictionJob.scheduleProjectCacheEviction();
