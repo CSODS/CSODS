@@ -3,12 +3,12 @@ import { createTagsCacheHandler, TagsCacheHandler, createProjectCachePageService
 
 
 export function attachTagsCacheHandler(req: Request, res: Response, next: NextFunction) {
-    (req as any).tagsCacheHandler = createTagsCacheHandler();
+    req.tagsCacheHandler = createTagsCacheHandler();
     next();
 }
 
 export async function attachProjectCachePageService(req: Request, res: Response, next: NextFunction) {
-    (req as any).projectCachePageService = await createProjectCachePageService();
+    req.projectCachePageService = await createProjectCachePageService();
     next();
 }
 
