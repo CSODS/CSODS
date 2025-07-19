@@ -1,5 +1,5 @@
 import { Router, Request, Response } from "express";
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 import dotenv from 'dotenv';
 import jwt from 'jsonwebtoken';
 import { CONSTANTS } from "@data";
