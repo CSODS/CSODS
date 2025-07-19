@@ -21,6 +21,7 @@
   "dependencies": {
     "@libsql/client": "^0.15.8",
     "@types/cors": "^2.8.19",
+    "bcrypt": "^6.0.0",
     "better-sqlite3": "^11.10.0",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
