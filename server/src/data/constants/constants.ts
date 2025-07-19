@@ -21,10 +21,10 @@ export const PROJECT_TAG_ROUTES = {
 
 export const AUTH_ROUTES = {
     ROOT: '/',
-    SIGN_IN: '/signIn',
+    SIGN_IN: '/sign-in',
     REGISTER: '/register',
     REFRESH: '/refresh',
-    SIGN_OUT: '/signOut'
+    SIGN_OUT: '/sign-out'
 }
 
 export const CACHE = {
