@@ -42,6 +42,7 @@
     "@types/bcrypt": "^6.0.0",
     "@types/better-sqlite3": "^7.6.13",
     "@types/express": "^5.0.3",
+    "@types/jsonwebtoken": "^9.0.10",
     "@types/mock-fs": "^4.13.4",
     "@types/node-cron": "^3.0.11",
     "@types/proper-lockfile": "^4.1.4",
