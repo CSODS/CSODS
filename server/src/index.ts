@@ -1,10 +1,11 @@
 import cors from 'cors';
 import express from 'express';
 import { CONSTANTS } from '@data';
-import { attachTagsCacheHandler, projectsRouteLimiter, projectTagsRouteLimiter } from '@middleware';
+import { attachTagsCacheHandler, authRouteLimiter, projectsRouteLimiter, projectTagsRouteLimiter } from '@middleware';
 import { projectsRouter, projectTagsRouter} from '@routes';
 import { createEvictionJobService, createViewsDecayJobService } from '@utils';
 import { attachProjectCachePageService } from './middleware/attacheMiddleware';
+import authRouter from './routes/authRoute';
 
 const ROUTES = CONSTANTS.ROUTES;
 
@@ -20,6 +21,7 @@ app.use(attachProjectCachePageService);
 //  for routes
 app.use(ROUTES.PROJECTS, projectsRouteLimiter, projectsRouter);
 app.use(ROUTES.PROJECT_TAGS, projectTagsRouteLimiter, projectTagsRouter);
+app.use(ROUTES.AUTH, authRouteLimiter, authRouter);
 
 const evictionJob = createEvictionJobService();
 evictionJob.scheduleProjectCacheEviction();
