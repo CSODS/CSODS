@@ -139,7 +139,7 @@ const handleLogin = async (req: Request, res: Response) => {
             {
                 httpOnly: true, // httpOnly is not available to js, much more secure
                 secure: true,
-                sameSite: 'strict',
+                sameSite: 'none',
                 maxAge: 24 * 60 * 60 * 1000 // 1 day
             }
         )
@@ -189,9 +189,7 @@ const handleLogout = (req: Request, res: Response) => {
     //  TODO: replace this with querying the database/cache for the user with matching refresh token.
     const foundUser = { user: 'someuser', password: 'someHash'};
     if (!foundUser) {
-        res.clearCookie('jwt', {
-            httpOnly: true
-        });
+        res.clearCookie('jwt', { httpOnly: true, sameSite: 'none', secure: true });
         return res.sendStatus(204); // successfuly but no content.
     }
 
@@ -200,7 +198,7 @@ const handleLogout = (req: Request, res: Response) => {
     //  TODO: filter otherUsers that are not the found user
     //  set found user and refresh token to the current user.
 
-    res.clearCookie('jwt', { httpOnly: true }); //  secure: true, only serves on https.
+    res.clearCookie('jwt', { httpOnly: true, sameSite: 'none', secure: true }); //  secure: true, only serves on https.
     res.sendStatus(204);
 
 }
