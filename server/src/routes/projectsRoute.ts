@@ -2,7 +2,6 @@ import express, { Request } from 'express';
 import { CONSTANTS } from '@data';
 import { IProjectDetails } from '@viewmodels';
 import { IProjectFilter } from '@services';
-import { RouteLogger } from '@/utils';
 
 const PROJECT_ROUTES = CONSTANTS.PROJECT_ROUTES;
 
