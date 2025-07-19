@@ -1,7 +1,11 @@
 import { Router, Request, Response } from "express";
 import bcrypt from 'bcrypt';
+import dotenv from 'dotenv';
+import jwt from 'jsonwebtoken';
 import { CONSTANTS } from "@data";
 import { RouteLogger } from "@utils";
+
+dotenv.config();
 
 const AUTH_ROUTES = CONSTANTS.AUTH_ROUTES;
 
@@ -65,7 +69,7 @@ const handlerNewUser = async (req: Request, res: Response) => {
         //  set new user to database.
         
         res.status(201).json({ 'success': 'New user created.'});
-    } 
+    }   
     catch (err) {
         res.status(500).json({ 'message': 'server error'});
     }
@@ -97,7 +101,31 @@ const handleLogin = async (req: Request, res: Response) => {
 
     if (match) {
         //  create JWT token
-        return res.json({ 'success': 'User is authenticated.'});
+        const accessToken = jwt.sign(
+            { 'username': foundUser.user }, // ideally add roles too
+            process.env.ACCESS_TOKEN_SECRET!,
+            { expiresIn: '10m'} //  ideally 5-10 mins
+        );
+        const refreshToken = jwt.sign(
+            { 'username': foundUser.user },
+            process.env.REFRESH_TOKEN_SECRET!,
+            { expiresIn: '1d'}  //  1 day
+        );
+
+        //  filter otherUsers that are not the found user
+        //  set found user and refresh token to the current user.
+        
+        res.cookie(
+            'jwt',   //  cookie name (could be anything really)
+            refreshToken,
+            {
+                httpOnly: true, // httpOnly is not available to js, much more secure
+                secure: true,
+                sameSite: 'strict',
+                maxAge: 24 * 60 * 60 * 1000 // 1 day
+            }
+        )
+        res.json({ accessToken });
     }
     else return res.sendStatus(401);    // unauthorized.
 }
