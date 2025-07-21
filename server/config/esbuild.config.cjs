@@ -1,7 +1,7 @@
 const esbuild = require('esbuild');
 
 esbuild.build({
-    entryPoints: ['src/index.ts'],
+    entryPoints: ['src/index.ts', 'scripts/cacheLoader.ts', 'scripts/seeder.ts'],
     bundle:true,
     platform: 'node',
     target: 'node18',
