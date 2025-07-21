@@ -193,19 +193,18 @@ export class ProjectCacheService extends AbstractCacheService<IProjectCache> {
                     Projects: projects
                 };
             }
-            function createCachePages(date: Date, pageRecord: Record<number, IProjectDetails[]>): CachePageRecord {
+            function createCachePages(totalPages: number, date: Date, pageRecord: Record<number, IProjectDetails[]>): CachePageRecord {
                 let cachePages: CachePageRecord = {};
                 const recordEntries = Object.entries(pageRecord);
-                const totalEntries = recordEntries.length;
                 recordEntries.map((keyPagePair) => {
                     const numericKey = Number(keyPagePair[0]);
-                    cachePages[numericKey] = createCachePage(date, totalEntries, keyPagePair[1])
+                    cachePages[numericKey] = createCachePage(date, totalPages, keyPagePair[1])
                 });
                 return cachePages;
             }
-            function createCache(projectsCount: number, date: Date, cachePages: CachePageRecord): IProjectCache {
+            function createCache(totalPages: number, date: Date, cachePages: CachePageRecord): IProjectCache {
                 return {
-                    TotalPages: Math.ceil(projectsCount / CACHE.PAGE_SIZE ),
+                    TotalPages: totalPages,
                     CreatedOn: date,
                     LastAccessed: date,
                     ViewCount: 1,
@@ -225,8 +224,9 @@ export class ProjectCacheService extends AbstractCacheService<IProjectCache> {
     
             //  Assemble cache.
             const projectsCount: number = await this._projectDataService.fetchProjectsCount(this._filter);
-            const cachePages: CachePageRecord = createCachePages(this._cDate, pageRecord);
-            const projectCache: IProjectCache = createCache(projectsCount, this._cDate, cachePages);
+            const totalPages = Math.ceil(projectsCount / CACHE.PAGE_SIZE);
+            const cachePages: CachePageRecord = createCachePages(totalPages, this._cDate, pageRecord);
+            const projectCache: IProjectCache = createCache(totalPages, this._cDate, cachePages);
             return projectCache;
     }
     /**
