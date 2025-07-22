@@ -1,6 +1,6 @@
-import * as schema from '../models/schema.js';
 import { InferSelectModel } from 'drizzle-orm';
 import { createContext } from '../db/csods.js';
+import * as schema from '@models';
 
 export type DbContext = Awaited<ReturnType<typeof createContext>>;
 export type User = InferSelectModel<typeof schema.Users>;
