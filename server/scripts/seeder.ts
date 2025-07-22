@@ -1,9 +1,26 @@
-import { createContext } from "../src/db/csods.js";
+import { DbContext, createContext } from "../src/db/csods.js";
 import * as schema from "../src/models/schema.js";
 
 async function main() {
     const context = await createContext();
 
+    await seedDevtypes(context);
+
+    await seedLanguages(context);
+    
+    await seedDbTechnologies(context);
+    
+    await seedApplicationIndustries(context);
+    
+    await seedGameDevFrameworks(context);
+    await seedWebDevFrameworks(context);
+    await seedSoftwareDevFrameworks(context);
+    await seedApiDevFrameworks(context);
+}
+
+main();
+
+async function seedDevtypes(context: DbContext) {
     const devTypes = 'Game Development, Web Development, Software Development, API Development';
     await context.insert(schema.DevTypes)
     .values(
@@ -13,7 +30,9 @@ async function main() {
             })
         )
     ).onConflictDoNothing();
+}
 
+async function seedLanguages(context: DbContext) {
     const languages = 'C#, C, C++, Java, JavaScript/TypeScript, Python, Ruby';
     await context.insert(schema.ProgrammingLanguages)
     .values(
@@ -23,7 +42,9 @@ async function main() {
             })
         )
     ).onConflictDoNothing();
+}
 
+async function seedDbTechnologies(context: DbContext) {
     const dbTechs = 'MySQL, PostgreSQL, Microsoft SQL Server, Oracle Database, SQLite, ' 
                     +'MariaDB, MongoDB, Cassandra, Redis, Firebase, DynamoDB';
     await context.insert(schema.DatabaseTechnologies)
@@ -34,7 +55,9 @@ async function main() {
             })
         )
     ).onConflictDoNothing();
+}
 
+async function seedApplicationIndustries(context: DbContext) {
     const appIndustries = 'Medical, Finance, Education, Retail, Manufacturing, '
                         + 'Telecommunications, Government, Non-profit, Sports';
     await context.insert(schema.ApplicationIndustry)
@@ -45,8 +68,9 @@ async function main() {
             })
         )
     ).onConflictDoNothing();
+}
 
-
+async function seedGameDevFrameworks(context: DbContext) {
     const gameDevFrameworks = 'Unity, Unreal Engine, Godot';
     await context.insert(schema.Frameworks)
     .values(
@@ -57,7 +81,9 @@ async function main() {
             })
         )
     ).onConflictDoNothing();
+}
 
+async function seedWebDevFrameworks(context: DbContext) {
     const webDevFrameworks = 'React, Angular, Vue.js, Svelte, Next.js, '
                             +'Nuxt.js, Django, Flask, Ruby on Rails, '
                             +'ASP.NET Core, Laravel, Spring Boot, Symfony';
@@ -71,8 +97,11 @@ async function main() {
             })
         )
     ).onConflictDoNothing();
+}
 
+async function seedSoftwareDevFrameworks(context: DbContext) {
     const softwareDevFrameworks = 'React Native, Flutter, Xamarin, Ionic, Electron, Qt, WPF';
+    
     await context.insert(schema.Frameworks)
     .values(
         softwareDevFrameworks.split(", ")
@@ -82,7 +111,9 @@ async function main() {
             })
         )
     ).onConflictDoNothing();
+}
 
+async function seedApiDevFrameworks(context: DbContext) {
     const apiDevFrameworks = 'FastAPI, Express.js, Spring Boot, Gin, Koa';
     await context.insert(schema.Frameworks)
     .values(
@@ -94,5 +125,3 @@ async function main() {
         )
     ).onConflictDoNothing();
 }
-
-main();
