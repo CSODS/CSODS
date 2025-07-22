@@ -1,8 +1,7 @@
 import { asc, desc, InferSelectModel, SQL } from "drizzle-orm";
 import { AnySQLiteColumn, SQLiteTable } from "drizzle-orm/sqlite-core";
-import { createContext } from "@/db/csods";
-
-type DbContext = Awaited<ReturnType<typeof createContext>>;
+import { DbContext } from "@/db/csods";
+import { DbLogger } from "@/utils";
 
 export abstract class Repository<
     TTable extends SQLiteTable, 
@@ -14,6 +13,38 @@ export abstract class Repository<
     protected constructor (context: DbContext, table:TTable) {
         this._dbContext = context;
         this._table = table;
+    }
+    /**
+     * @protected
+     * @async
+     * @function GetFirst
+     * @description Asynchronously retrieves a row from the database table, optionally applaying 
+     * a `WHERE` clause.
+     * 
+     * @param options.whereClause - Optional SQL `WHERE` clause to filter the result. 
+     * @returns A promise that resolves to a typed row (`TResult`) or null if no row is found
+     * or an error results while querying the database.
+     */
+    protected async GetFirst(options? : { whereClause?: SQL}): Promise<TResult | null> {
+        try {
+            const whereClause = options?.whereClause;
+
+            const result = await this._dbContext
+                .select()
+                .from(this._table)
+                .where(whereClause)
+                .limit(1)
+                .then((result) => result[0]);
+            
+            return result
+                ? result as TResult
+                : null;
+        }
+        catch (err) {
+            DbLogger.error(`[Repository] Failed fetch operation 'getFirst.`, err);
+            return null;
+        }
+
     }
     /**
      * Retrieves a paginated list of rows from the database table, optionally applying a `WHERE` clause.
