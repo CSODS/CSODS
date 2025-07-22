@@ -1,7 +1,7 @@
 import cors from 'cors';
 import express from 'express';
 import { CONSTANTS } from '@data';
-import { attachProjectCachePageService, attachTagsCacheHandler, authRouteLimiter, routeLogger, projectsRouteLimiter, projectTagsRouteLimiter } from '@middleware';
+import { attachProjectCachePageService, attachTagsCacheHandler, authRouteLimiter, routeLogger, projectsRouteLimiter, projectTagsRouteLimiter, attachUserDataService } from '@middleware';
 import { projectsRouter, projectTagsRouter} from '@routes';
 import { createEvictionJobService, createViewsDecayJobService } from '@utils';
 import authRouter from './routes/authRoute';
@@ -20,7 +20,7 @@ app.use(cors());
 app.use(routeLogger);
 
 //  for routes
-app.use(ROUTES.AUTH, authRouteLimiter, authRouter);
+app.use(ROUTES.AUTH, authRouteLimiter, attachUserDataService, authRouter);
 //  TODO: add app.use(verifyJWT); for jwt verification middleware
 
 app.use(attachProjectCachePageService);
