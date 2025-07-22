@@ -1,11 +1,12 @@
-import { asc, desc, InferSelectModel, SQL } from "drizzle-orm";
+import { asc, desc, InferInsertModel, InferSelectModel, SQL } from "drizzle-orm";
 import { AnySQLiteColumn, SQLiteTable } from "drizzle-orm/sqlite-core";
 import { DbContext } from "@/db/csods";
 import { DbLogger } from "@/utils";
 
 export abstract class Repository<
     TTable extends SQLiteTable, 
-    TResult = InferSelectModel<TTable>
+    TSelectResult = InferSelectModel<TTable>,
+    TInsertModel = InferInsertModel<TTable>
 > {
     protected _dbContext: DbContext;
     protected _table: SQLiteTable;
@@ -13,6 +14,26 @@ export abstract class Repository<
     protected constructor (context: DbContext, table:TTable) {
         this._dbContext = context;
         this._table = table;
+    }
+    /**
+     * @protected
+     * @async
+     * @function insertRow
+     * @description Asynchronously inserts a new row into a table and returns the inserted row if successful.
+     * If the insert operation fails, logs the error and returns `null`.
+     * @param newRow - The new row to be inserted.
+     * @returns The inserted object if successful or `null` if the insert operation fails.
+     */
+    protected async insertRow(newRow: TInsertModel): Promise<TSelectResult | null> {
+        const inserted = await this._dbContext
+            .insert(this._table)
+            .values({newRow})
+            .onConflictDoNothing()
+            .returning()
+            .then((result) => result[0]);
+        return inserted
+            ? inserted as TSelectResult
+            : null;
     }
     /**
      * @protected
@@ -25,7 +46,7 @@ export abstract class Repository<
      * @returns A promise that resolves to a typed row (`TResult`) or null if no row is found
      * or an error results while querying the database.
      */
-    protected async GetFirst(options? : { whereClause?: SQL}): Promise<TResult | null> {
+    protected async GetFirst(options? : { whereClause?: SQL}): Promise<TSelectResult | null> {
         try {
             const whereClause = options?.whereClause;
 
@@ -37,11 +58,11 @@ export abstract class Repository<
                 .then((result) => result[0]);
             
             return result
-                ? result as TResult
+                ? result as TSelectResult
                 : null;
         }
         catch (err) {
-            DbLogger.error(`[Repository] Failed fetch operation 'getFirst.`, err);
+            DbLogger.error(`[Repository] Failed fetch operation 'getFirst'.`, err);
             return null;
         }
 
@@ -79,7 +100,7 @@ export abstract class Repository<
             pageNumber?: number | undefined,
             whereClause?: SQL | undefined
         }
-    ): Promise<TResult[]> {
+    ): Promise<TSelectResult[]> {
         const column = options.column;
         const isAscending = options.isAscending ?? true;
         const whereClause = options.whereClause;
@@ -96,7 +117,7 @@ export abstract class Repository<
             .limit(pageSize)
             .offset(pageSize * (pageNumber - 1));
         
-        return rows as TResult[];
+        return rows as TSelectResult[];
     }
     /**
      * Counts the number of rows in the current table, optionally using a WHERE clause.
