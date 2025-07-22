@@ -2,7 +2,7 @@ export { ApplicationIndustry } from "./ApplicationIndustry.js";
 export { DatabaseTechnologies } from "./DatabaseTechnologies.js";
 export { ProgrammingLanguages } from "./ProgrammingLanguages.js";
 export { Roles } from "./Roles.js";
-export { Users } from "./Users.js"; 
+export { Users } from './Users.js';
 export { Projects } from "./Projects.js";
 export { ProjectImages } from "./ProjectImages.js";
 export { DevTypes } from "./DevTypes.js";
