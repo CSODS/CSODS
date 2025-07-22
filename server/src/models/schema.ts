@@ -8,3 +8,4 @@ export { ProjectImages } from "./project_images.js";
 export { DevTypes } from "./DevTypes.js";
 export { Frameworks } from "./Frameworks.js";
 export { ProjectFrameworks } from "./ProjectFrameworks.js";
+export { UserRoles } from './UserRoles.js';
