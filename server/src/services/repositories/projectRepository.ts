@@ -1,6 +1,7 @@
 import { eq, and, or, like } from 'drizzle-orm';
+import { DbContext } from '@/db/csods.js';
 import { Projects } from '@models';
-import { DbContext, ProjectViewModel } from '@viewmodels';
+import { ProjectViewModel } from '@viewmodels';
 import { Repository } from './abstractRepository.js';
 
 export class ProjectRepository extends Repository<typeof Projects>{
