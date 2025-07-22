@@ -33,3 +33,5 @@ export async function createContext() {
         return drizzleLocal({client: sqlite, schema});
     }
 }
+
+export type DbContext = Awaited<ReturnType<typeof createContext>>;
