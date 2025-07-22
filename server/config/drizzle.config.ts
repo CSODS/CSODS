@@ -5,7 +5,7 @@ import type { Config } from "drizzle-kit";
 const isProduction = process.env.NODE_ENV === 'production';
 
 export default {
-  schema: "./dist/src/models/schema.js",
+  schema: "./dist/src/models/index.js",
   out: "./migrations",
   // dialect: "turso",
   dialect: isProduction ? "turso" : "sqlite",
