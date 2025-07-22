@@ -1,5 +1,18 @@
 import * as schema from '@models';
 
+// table types
+export type ApplicationIndustryTable = typeof schema.ApplicationIndustry;
+export type DatabaseTechnologyTable = typeof schema.DatabaseTechnologies;
+export type DevTypeTable = typeof schema.DevTypes;
+export type FrameworkTable = typeof schema.Frameworks;
+export type ProgrammingLanguageTable = typeof schema.ProgrammingLanguages;
+export type ProjectFrameworksTable = typeof schema.ProjectFrameworks;
+export type ProjectImagesTable = typeof schema.ProjectImages;
+export type ProjectsTable = typeof schema.Projects;
+export type RolesTable = typeof schema.Roles;
+export type UsersTable = typeof schema.Users;
+export type UserRolesTable = typeof schema.UserRoles;
+
 // infer select
 export type ApplicationIndustryViewModel = typeof schema.ApplicationIndustry.$inferSelect;
 export type DatabaseTechnologyViewModel = typeof schema.DatabaseTechnologies.$inferSelect;
