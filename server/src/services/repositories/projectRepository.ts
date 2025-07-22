@@ -1,6 +1,6 @@
 import { eq, and, or, like } from 'drizzle-orm';
 import { Projects } from '@models';
-import { DbContext, Project } from '@viewmodels';
+import { DbContext, ProjectViewModel } from '@viewmodels';
 import { Repository } from './abstractRepository.js';
 
 export class ProjectRepository extends Repository<typeof Projects>{
@@ -31,7 +31,7 @@ export class ProjectRepository extends Repository<typeof Projects>{
             pageSize?: number | undefined, 
             pageNumber?: number | undefined
         }
-    ): Promise<Project[]> {
+    ): Promise<ProjectViewModel[]> {
         const isAscending = options?.isAscending ?? true;
         const filter = options?.filter;
         const pageSize = options?.pageSize ?? 100;

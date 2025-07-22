@@ -1,4 +1,4 @@
-import * as tableTypes from "../dbModels.js";
+import * as tableTypes from "../DbModels.js";
 
 //#region ProjectsCache
 
@@ -51,13 +51,13 @@ export interface IProjectDetails {
     /**
      * The main project entity containing metadata such as title, description, associated tags, etc.
      */
-    Project: tableTypes.Project;
+    Project: tableTypes.ProjectViewModel;
 
     /**
      * A list of frameworks associated with the project.
      * Each entry links a framework to the project through a many-to-many relationship.
      */
-    ProjectFrameworks: tableTypes.ProjectFramework[];
+    ProjectFrameworks: tableTypes.ProjectFrameworkViewModel[];
 }
 
 /**
@@ -72,23 +72,23 @@ export interface IProjectTags {
     /**
      * A list of all available development types (e.g., Web, Mobile, Desktop).
      */
-    DevTypes: tableTypes.DevType[];
+    DevTypes: tableTypes.DevTypeViewModel[];
     /**
      * A list of programming languages used across projects (e.g., JavaScript, Python).
      */
-    ProgrammingLanguages: tableTypes.ProgrammingLanguage[];
+    ProgrammingLanguages: tableTypes.ProgrammingLanguageViewModel[];
     /**
      * A list of frameworks that can be associated with projects (e.g., React, Django).
      */
-    Frameworks: tableTypes.Framework[];
+    Frameworks: tableTypes.FrameworkViewModel[];
     /**
      * A list of database technologies (e.g., MySQL, MongoDB).
      */
-    DatabaseTechnologies: tableTypes.DatabaseTechnology[];
+    DatabaseTechnologies: tableTypes.DatabaseTechnologyViewModel[];
     /**
      * A list of industries or sectors for project applications (e.g., Education, Healthcare).
      */
-    ApplicationIndustries: tableTypes.ApplicationIndustry[];
+    ApplicationIndustries: tableTypes.ApplicationIndustryViewModel[];
 }
 
 //#endregion ProjectsCache
@@ -120,7 +120,7 @@ export interface IProjectSearchCache {
  * Each key is a username, and the corresponding value is the user object.
  */
 export interface IUserCache {
-    Users: Record<string, tableTypes.User>
+    Users: Record<string, tableTypes.UserViewModel>
 }
 
 //#endregion UserCache

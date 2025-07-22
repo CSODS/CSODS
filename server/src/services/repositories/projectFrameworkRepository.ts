@@ -1,6 +1,6 @@
 import { eq } from 'drizzle-orm';
 import { ProjectFrameworks } from '@models';
-import { DbContext, ProjectFramework } from '@viewmodels';
+import { DbContext, ProjectFrameworkViewModel } from '@viewmodels';
 import { Repository } from './abstractRepository.js';
 
 export class ProjectFrameworkRepository extends Repository<typeof ProjectFrameworks>{
@@ -9,7 +9,7 @@ export class ProjectFrameworkRepository extends Repository<typeof ProjectFramewo
         super(context, ProjectFrameworks);
     }
 
-    public async FindManyByProjectId(projectId: number): Promise<ProjectFramework[]> {
+    public async FindManyByProjectId(projectId: number): Promise<ProjectFrameworkViewModel[]> {
         return await this._dbContext.query.ProjectFrameworks.findMany({
             where: eq(ProjectFrameworks.ProjectId, projectId)
         });

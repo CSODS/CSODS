@@ -1,5 +1,5 @@
 import { createContext } from '@/db/csods'; 
-import { Project, IProjectDetails } from '@viewmodels';
+import { ProjectViewModel, IProjectDetails } from '@viewmodels';
 import { ProjectRepository, IProjectFilter, ProjectFrameworkRepository } from '@services';
 import { DbLogger } from '@/utils';
 
@@ -94,7 +94,7 @@ export class ProjectDataService {
 
         for (let pageNumber = pageStart; pageNumber <= pageEnd; pageNumber++ ) {
             DbLogger.info(`[Projects] Fetching page ${pageNumber}...`);
-            const projectArr: Project[] = await this._projectRepo.getProjects({
+            const projectArr: ProjectViewModel[] = await this._projectRepo.getProjects({
                 isAscending: isAscending,
                 filter: filter,
                 pageSize: pageSize,
@@ -129,7 +129,7 @@ export class ProjectDataService {
      * const details = await constructProjectDetails(projects);
      * // details: [{ Project: ..., ProjectFrameworks: [...] }, ...]
      */
-    private async constructProjectDetails(projectArr: Project[]) : Promise<IProjectDetails[]> {
+    private async constructProjectDetails(projectArr: ProjectViewModel[]) : Promise<IProjectDetails[]> {
         return await Promise.all(
             projectArr.map(async (project) => ({
                 Project: project, // The core project data.
