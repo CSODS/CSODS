@@ -16,6 +16,8 @@ async function main() {
     await seedWebDevFrameworks(context);
     await seedSoftwareDevFrameworks(context);
     await seedApiDevFrameworks(context);
+
+    await seedRoles(context);
 }
 
 main();
@@ -123,5 +125,15 @@ async function seedApiDevFrameworks(context: DbContext) {
                 FrameworkName: name
             })
         )
+    ).onConflictDoNothing();
+}
+
+async function seedRoles(context: DbContext) {
+    const roles = ['Guest', 'Student', 'Moderator', 'Administrator'];
+    await context.insert(schema.Roles)
+    .values(
+        roles.map((role) => ({
+            RoleName: role
+        }))
     ).onConflictDoNothing();
 }
