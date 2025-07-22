@@ -78,7 +78,7 @@ export class UserDataService {
             UserIconUrl: any
         }
     ): asserts fields is NewUser {
-        const { Email: email, Username: username, Password: password, StudentName: studentName, StudentNumber: studentNumber, UserIconUrl: userIconUrl } = fields;
+        const { Email, Username, Password, StudentName, StudentNumber, UserIconUrl } = fields;
 
         const EMAIL_REGEX = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
         const USERNAME_REGEX = /^[a-zA-Z][a-zA-Z0-9-_]{3,23}$/;
@@ -86,14 +86,14 @@ export class UserDataService {
         const STUDENT_NAME_REGEX = /^[a-zA-Z]+(?:\s[a-zA-Z]+){0,9}$/;
         const STUDENT_NUMBER_REGEX = /^[0-9]{3}-[0-9]{4}$/;
 
-        const isValidEmail = typeof email === 'string' && EMAIL_REGEX.test(email);
-        const isValidUsername = typeof email === 'string' && USERNAME_REGEX.test(username);
-        const isValidPassword = typeof password === 'string' && PASSWORD_REGEX.test(password);
-        const isValidStudentName = typeof studentName === 'string' 
-            ? STUDENT_NAME_REGEX.test(studentName) || studentName.trim() === ''
+        const isValidEmail = typeof Email === 'string' && EMAIL_REGEX.test(Email);
+        const isValidUsername = typeof Email === 'string' && USERNAME_REGEX.test(Username);
+        const isValidPassword = typeof Password === 'string' && PASSWORD_REGEX.test(Password);
+        const isValidStudentName = typeof StudentName === 'string' 
+            ? STUDENT_NAME_REGEX.test(StudentName) || StudentName.trim() === ''
             : true;
-        const isValidStudentNumber = typeof studentNumber === 'string' 
-            ? STUDENT_NUMBER_REGEX.test(studentNumber) || studentNumber.trim() === ''
+        const isValidStudentNumber = typeof StudentNumber === 'string' 
+            ? STUDENT_NUMBER_REGEX.test(StudentNumber) || StudentNumber.trim() === ''
             : true;
 
         if (!isValidEmail) throw new Error('Invalid email.');
