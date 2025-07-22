@@ -3,7 +3,7 @@ import { DbLogger } from "@/utils";
 import { Users } from "@models";
 import { DbContext } from "@/db/csods";
 import { Repository } from "./abstractRepository";
-import { User } from "@/viewmodels";
+import { UserViewModel } from "@/viewmodels";
 
 
 export class UserRepository extends Repository<typeof Users> {
@@ -19,9 +19,9 @@ export class UserRepository extends Repository<typeof Users> {
      * {@link IUserFilter}.
      * 
      * @param filter - The filter to apply to the table.
-     * @returns - A {@link Promise} resolving to the found {@link User} or `null`.
+     * @returns - A {@link Promise} resolving to the found {@link UserViewModel} or `null`.
      */
-    public async getUser(filter?: IUserFilter): Promise<User | null> {
+    public async getUser(filter?: IUserFilter): Promise<UserViewModel | null> {
         const filterInfo = filter ? JSON.stringify(filter) : 'none';
         DbLogger.info(`[User] Fetching a user with filter: ${filterInfo}`);
 

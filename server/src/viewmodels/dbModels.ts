@@ -1,13 +1,14 @@
-import { InferSelectModel } from 'drizzle-orm';
-import { createContext } from '../db/csods.js';
 import * as schema from '@models';
 
-export type DbContext = Awaited<ReturnType<typeof createContext>>;
-export type User = InferSelectModel<typeof schema.Users>;
-export type Project = InferSelectModel<typeof schema.Projects>;
-export type DevType = InferSelectModel<typeof schema.DevTypes>;
-export type ProgrammingLanguage = InferSelectModel<typeof schema.ProgrammingLanguages>;
-export type DatabaseTechnology = InferSelectModel<typeof schema.DatabaseTechnologies>;
-export type Framework = InferSelectModel<typeof schema.Frameworks>;
-export type ApplicationIndustry = InferSelectModel<typeof schema.ApplicationIndustry>;
-export type ProjectFramework = InferSelectModel<typeof schema.ProjectFrameworks>;
+// infer select
+export type ApplicationIndustryViewModel = typeof schema.ApplicationIndustry.$inferSelect;
+export type DatabaseTechnologyViewModel = typeof schema.DatabaseTechnologies.$inferSelect;
+export type DevTypeViewModel = typeof schema.DevTypes.$inferSelect;
+export type FrameworkViewModel = typeof schema.Frameworks.$inferSelect
+export type ProgrammingLanguageViewModel = typeof schema.ProgrammingLanguages.$inferSelect;
+export type ProjectFrameworkViewModel = typeof schema.ProjectFrameworks.$inferSelect;
+export type ProjectImageViewModel = typeof schema.ProjectImages.$inferSelect;
+export type ProjectViewModel = typeof schema.Projects.$inferSelect;
+export type RoleViewModel = typeof schema.Roles.$inferSelect;
+export type UserViewModel = typeof schema.Users.$inferSelect;
+export type UserRoleViewModel = typeof schema.UserRoles.$inferSelect;
