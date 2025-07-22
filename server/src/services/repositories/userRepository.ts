@@ -1,12 +1,12 @@
 import { and, eq, or, SQL } from "drizzle-orm";
-import { DbLogger } from "@/utils";
-import { Users } from "@models";
 import { DbContext } from "@/db/csods";
+import { Users } from "@models";
+import { DbLogger } from "@/utils";
+import { UsersTable, UserViewModel } from "@/viewmodels";
 import { Repository } from "./abstractRepository";
-import { UserViewModel } from "@/viewmodels";
 
 
-export class UserRepository extends Repository<typeof Users> {
+export class UserRepository extends Repository<UsersTable> {
     public constructor (context: DbContext) {
         super(context, Users);
     }
