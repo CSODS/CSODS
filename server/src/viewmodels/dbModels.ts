@@ -25,3 +25,6 @@ export type ProjectViewModel = typeof schema.Projects.$inferSelect;
 export type RoleViewModel = typeof schema.Roles.$inferSelect;
 export type UserViewModel = typeof schema.Users.$inferSelect;
 export type UserRoleViewModel = typeof schema.UserRoles.$inferSelect;
+
+// infer insert
+export type NewUser = typeof schema.Users.$inferInsert;

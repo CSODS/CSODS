@@ -2,7 +2,7 @@ import { and, eq, or, SQL } from "drizzle-orm";
 import { DbContext } from "@/db/csods";
 import { Users } from "@models";
 import { DbLogger } from "@/utils";
-import { UsersTable, UserViewModel } from "@/viewmodels";
+import { NewUser, UsersTable, UserViewModel } from "@/viewmodels";
 import { Repository } from "./abstractRepository";
 
 
@@ -11,6 +11,36 @@ export class UserRepository extends Repository<UsersTable> {
         super(context, Users);
     }
 
+    /**
+     * @public
+     * @async
+     * @function insertUser
+     * @description Asynchronously inserts a {@link NewUser} object into the {@link UsersTable}.
+     * 
+     * @param user - The {@link NewUser} object to be inserted. 
+     * @returns - The {@link Users.UserId} if the insert operation is successful, `null` otherwise.
+     */
+    public async insertUser(user: NewUser): Promise<number | null> {
+
+        try {
+            DbLogger.info(`[User] Attempting to insert new user...`);
+
+            const inserted = await this.insertRow(user);
+            
+            if (inserted) {
+                DbLogger.info(`[User] User successfully inserted with id: ${inserted.UserId}`);
+                return inserted.UserId;
+            }
+            else {
+                DbLogger.warn(`[User] Failed inserting user due to conflict.`);
+                return null;
+            }
+        }
+        catch(err) {
+            DbLogger.error(`[User] Insert operation failed.`, err);
+            return null;
+        }
+    }
     /**
      * @public
      * @async
