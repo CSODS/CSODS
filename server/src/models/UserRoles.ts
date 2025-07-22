@@ -1,6 +1,6 @@
 import { integer, sqliteTable, primaryKey } from "drizzle-orm/sqlite-core";
-import { Users } from "./users";
-import { Roles } from "./roles";
+import { Users } from "./Users.js";
+import { Roles } from "./Roles.js";
 
 export const UserRoles = sqliteTable(
     'UserRoles',

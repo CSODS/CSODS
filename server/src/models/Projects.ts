@@ -1,5 +1,5 @@
 import { integer, text, sqliteTable } from "drizzle-orm/sqlite-core";
-import { Users } from "./users.js";
+import { Users } from "./Users.js";
 import { DevTypes } from "./DevTypes.js";
 import { ProgrammingLanguages } from "./ProgrammingLanguages.js";
 import { DatabaseTechnologies } from "./DatabaseTechnologies.js";
