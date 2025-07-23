@@ -1,4 +1,4 @@
-import { CONSTANTS } from "@data";
+import { CACHE } from "@data";
 import {
   createJsonFileService,
   createProjectDataService,
@@ -12,8 +12,6 @@ import {
   IProjectDetails,
 } from "@viewmodels";
 import { ProjectCacheService } from "./project-cache.service";
-
-const CACHE = CONSTANTS.CACHE;
 
 export async function createProjectCachePageService() {
   const projectDataServiceInstance = await createProjectDataService();
@@ -167,7 +165,7 @@ export class ProjectCachePageService extends ProjectCacheService {
       const projects = (
         await this._projectDataService.fetchProjectsPages({
           pageStart: pageNumber,
-          pageSize: CACHE.PAGE_SIZE,
+          pageSize: CACHE.PROJECT_CACHE.PAGE_SIZE,
           isAscending: false,
           filter: this._filter,
         })

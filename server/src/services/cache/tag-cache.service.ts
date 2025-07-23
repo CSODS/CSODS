@@ -1,11 +1,12 @@
 import dotenv from "dotenv";
 import { JsonFileService, createJsonFileService } from "@services";
 import { IProjectTags } from "@viewmodels";
-import { CONSTANTS } from "@/data";
+import { CACHE } from "@/data";
 
 dotenv.config();
 
-const CACHE = CONSTANTS.CACHE;
+const TAGS_CACHE = CACHE.TAGS_CACHE;
+const AS_JSON = CACHE.EXTENSION.JSON;
 
 export function createTagsCacheHandler() {
   const jsonFileHandlerInstance =
@@ -22,7 +23,7 @@ export class TagsCacheHandler {
   public constructor(jsonFileHandler: JsonFileService<IProjectTags>) {
     this._jsonFileHandler = jsonFileHandler;
     this._filepath = process.env.TAGS_CACHE_PATH!;
-    this._filename = CACHE.TAGS_CACHE + CACHE.AS_JSON;
+    this._filename = TAGS_CACHE.BASE_NAME + AS_JSON;
   }
 
   public async getDevTypes() {

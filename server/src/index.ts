@@ -1,6 +1,6 @@
 import cors from "cors";
 import express from "express";
-import { CONSTANTS } from "@data";
+import { API } from "@data";
 import {
   attachProjectCachePageService,
   attachTagsCacheHandler,
@@ -13,7 +13,7 @@ import {
 import { authRouter, projectsRouter, projectTagsRouter } from "@/routers";
 import { createEvictionJobService, createViewsDecayJobService } from "@utils";
 
-const ROUTES = CONSTANTS.ROUTES;
+const ROUTES = API.ROUTES;
 
 const app = express();
 

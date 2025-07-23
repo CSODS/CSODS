@@ -3,13 +3,13 @@ import bcrypt from "bcryptjs";
 import dotenv from "dotenv";
 import jwt from "jsonwebtoken";
 import { handleNewUser } from "@controllers";
-import { CONSTANTS } from "@data";
+import { API } from "@data";
 import { validateRequest } from "@middleware";
 import { registerSchema } from "@viewmodels";
 
 dotenv.config();
 
-const AUTH_ROUTES = CONSTANTS.AUTH_ROUTES;
+const AUTH_ROUTES = API.AUTH_ROUTES;
 
 const authRouter = Router();
 
