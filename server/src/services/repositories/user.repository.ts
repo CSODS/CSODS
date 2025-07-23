@@ -3,7 +3,7 @@ import { DbContext } from "@/db/csods";
 import { User } from "@models";
 import { DbLogger } from "@/utils";
 import { NewUser, UsersTable, UserViewModel } from "@/viewmodels";
-import { Repository } from "./abstractRepository";
+import { Repository } from "./abstract.repository";
 
 export class UserRepository extends Repository<UsersTable> {
   public constructor(context: DbContext) {

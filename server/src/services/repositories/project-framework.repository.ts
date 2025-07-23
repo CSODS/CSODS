@@ -2,7 +2,7 @@ import { eq } from "drizzle-orm";
 import { DbContext } from "@/db/csods.js";
 import { ProjectFramework } from "@models";
 import { ProjectFrameworksTable, ProjectFrameworkViewModel } from "@viewmodels";
-import { Repository } from "./abstractRepository.js";
+import { Repository } from "./abstract.repository.js";
 
 export class ProjectFrameworkRepository extends Repository<ProjectFrameworksTable> {
   public constructor(context: DbContext) {
@@ -12,7 +12,7 @@ export class ProjectFrameworkRepository extends Repository<ProjectFrameworksTabl
   public async FindManyByProjectId(
     projectId: number
   ): Promise<ProjectFrameworkViewModel[]> {
-    return await this._dbContext.query.ProjectFrameworks.findMany({
+    return await this._dbContext.query.ProjectFramework.findMany({
       where: eq(ProjectFramework.ProjectId, projectId),
     });
   }
