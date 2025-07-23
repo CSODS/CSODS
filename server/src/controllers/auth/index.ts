@@ -1,1 +1,1 @@
-export * from './HandleNewUser';
+export * from "./handle-new-user";
