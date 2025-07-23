@@ -4,14 +4,14 @@ import { Framework } from "./framework.js";
 export const ProjectFramework = sqliteTable(
   "project_frameworks",
   {
-    ProjectId: integer("project_id")
+    projectId: integer("project_id")
       .notNull()
-      .references(() => Project.ProjectId, { onDelete: "restrict" }),
-    FrameworkId: integer("framework_id")
+      .references(() => Project.projectId, { onDelete: "restrict" }),
+    frameworkId: integer("framework_id")
       .notNull()
-      .references(() => Framework.FrameworkId, { onDelete: "restrict" }),
+      .references(() => Framework.frameworkId, { onDelete: "restrict" }),
   },
   (table) => ({
-    pk: primaryKey({ columns: [table.ProjectId, table.FrameworkId] }),
+    pk: primaryKey({ columns: [table.projectId, table.frameworkId] }),
   })
 );

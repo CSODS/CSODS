@@ -40,7 +40,7 @@ export class ProjectRepository extends Repository<ProjectsTable> {
 
     //  get rows and return.
     return await this.GetRows({
-      column: Project.ProjectId,
+      column: Project.projectId,
       isAscending: isAscending,
       whereClause: whereClause,
       pageSize: pageSize,
@@ -90,25 +90,25 @@ export class ProjectRepository extends Repository<ProjectsTable> {
     if (filter) {
       if (filter.ProjectTitle !== undefined)
         conditions.push(
-          like(Project.ProjectTitleLower, `${filter.ProjectTitle}%`)
+          like(Project.projectTitleLower, `${filter.ProjectTitle}%`)
         );
 
       if (filter.DevTypeId !== undefined)
-        conditions.push(eq(Project.DevTypeId, filter.DevTypeId));
+        conditions.push(eq(Project.devTypeId, filter.DevTypeId));
 
       if (filter.LanguageId !== undefined)
         conditions.push(
           or(
-            eq(Project.PrimaryLanguageId, filter.LanguageId),
-            eq(Project.SecondaryLanguageId, filter.LanguageId)
+            eq(Project.primaryLanguageId, filter.LanguageId),
+            eq(Project.secondaryLanguageId, filter.LanguageId)
           )
         );
 
       if (filter.DatabaseId !== undefined)
-        conditions.push(eq(Project.DatabaseTechnologyId, filter.DatabaseId));
+        conditions.push(eq(Project.databaseTechnologyId, filter.DatabaseId));
 
       if (filter.IndustryId !== undefined)
-        conditions.push(eq(Project.ApplicationIndustryId, filter.IndustryId));
+        conditions.push(eq(Project.applicationIndustryId, filter.IndustryId));
     }
 
     //  build where clause.

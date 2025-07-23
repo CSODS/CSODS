@@ -70,7 +70,7 @@ export class ProjectCachePageService extends ProjectCacheService {
       `Attempting to retrieve project with id: ${projectId}...`
     );
     const project =
-      cachePage?.Projects.find((p) => p.Project.ProjectId == projectId) ?? null;
+      cachePage?.Projects.find((p) => p.Project.projectId == projectId) ?? null;
 
     project
       ? this._logger.info(`Project found...`)

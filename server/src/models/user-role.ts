@@ -5,12 +5,12 @@ import { Role } from "./role.js";
 export const UserRole = sqliteTable(
   "user_roles",
   {
-    UserId: integer("user_id")
+    userId: integer("user_id")
       .notNull()
-      .references(() => User.UserId, { onDelete: "restrict" }),
-    RoleId: integer("role_id")
+      .references(() => User.userId, { onDelete: "restrict" }),
+    roleId: integer("role_id")
       .notNull()
-      .references(() => Role.RoleId, { onDelete: "restrict" }),
+      .references(() => Role.roleId, { onDelete: "restrict" }),
   },
-  (table) => [primaryKey({ columns: [table.UserId, table.RoleId] })]
+  (table) => [primaryKey({ columns: [table.userId, table.roleId] })]
 );

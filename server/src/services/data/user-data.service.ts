@@ -31,7 +31,7 @@ export class UserDataService {
    * @returns The `id` of the {@link NewUser} inserted, or null if the insertion failed.
    */
   public async insertUser(user: NewUser): Promise<number | null> {
-    user.Password = await bcrypt.hash(user.Password, 10);
+    user.password = await bcrypt.hash(user.password, 10);
     const insertedId = await this._userRepository.insertUser(user);
     return insertedId;
   }
@@ -50,10 +50,10 @@ export class UserDataService {
     //  TODO: use lowercase columns in buildWhereClause function.
     const userFilter: IUserFilter = {
       filterType: "or",
-      email: user.Email,
-      username: user.Username,
-      studentName: user.StudentName,
-      studentNumber: user.StudentNumber,
+      email: user.email,
+      username: user.username,
+      studentName: user.studentName,
+      studentNumber: user.studentNumber,
     };
     const existingUser = await this._userRepository.getUser(userFilter);
 
