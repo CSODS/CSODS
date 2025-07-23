@@ -1,11 +1,10 @@
 import { Router, Request, Response } from "express";
-import bcrypt from "bcryptjs";
 import dotenv from "dotenv";
 import jwt from "jsonwebtoken";
-import { handleNewUser } from "@controllers";
+import { handleNewUser, handleLogin } from "@controllers";
 import { API } from "@data";
 import { validateRequest } from "@middleware";
-import { registerSchema } from "@viewmodels";
+import { loginSchema, registerSchema } from "@viewmodels";
 
 dotenv.config();
 
@@ -13,9 +12,7 @@ const AUTH_ROUTES = API.AUTH_ROUTES;
 
 const authRouter = Router();
 
-authRouter.post(AUTH_ROUTES.SIGN_IN, async (req, res) => {
-  //  controller logic here
-});
+authRouter.post(AUTH_ROUTES.SIGN_IN, validateRequest(loginSchema), handleLogin);
 
 authRouter.post(
   AUTH_ROUTES.REGISTER,
@@ -32,64 +29,6 @@ authRouter.post(AUTH_ROUTES.SIGN_OUT, async (req, res) => {
 });
 
 export default authRouter;
-
-/**
- * @public
- * @async
- * @function handleLogin
- * @description Controller for handling login.
- * - Receives username, email, and password from the request body.
- * - Validates if the username and/or email fields exist.
- * - If they don't, respond with status 404. If they exist, check if the username and/or email exists in the database.
- * - If they don't, respond with status 401. If they exist in the database, validate the password with bcrypt.
- * - If the password doesn't match, responsd with status 401. If they match, return a success message.
- * @param req
- * @param res
- */
-const handleLogin = async (req: Request, res: Response) => {
-  const { username, email, password } = req.body;
-  if (!username || !email || !password)
-    return res
-      .status(404)
-      .json({ message: "username, password, and email are required." });
-
-  //  find the user in the database.
-  const foundUser = { user: "someuser", password: "someHash" };
-
-  if (!foundUser) return res.sendStatus(401); // unauthorized
-
-  const match = await bcrypt.compare(password, foundUser.password);
-
-  if (match) {
-    const roles = ["someRole", "someRole2"]; // ideally add to accessToken payload. This should come from the userModel queried in the database.
-    //  create JWT token
-    const accessToken = jwt.sign(
-      { username: foundUser.user }, // ideally add roles too
-      process.env.ACCESS_TOKEN_SECRET!,
-      { expiresIn: "10m" } //  ideally 5-10 mins
-    );
-    const refreshToken = jwt.sign(
-      { username: foundUser.user },
-      process.env.REFRESH_TOKEN_SECRET!,
-      { expiresIn: "1d" } //  1 day
-    );
-
-    //  TODO: filter otherUsers that are not the found user
-    //  set found user and refresh token to the current user.
-
-    res.cookie(
-      "jwt", //  cookie name (could be anything really)
-      refreshToken,
-      {
-        httpOnly: true, // httpOnly is not available to js, much more secure
-        secure: true,
-        sameSite: "none",
-        maxAge: 24 * 60 * 60 * 1000, // 1 day
-      }
-    );
-    res.json({ accessToken });
-  } else return res.sendStatus(401); // unauthorized.
-};
 
 const handleRefreshToken = (req: Request, res: Response) => {
   const cookies = req.cookies;
