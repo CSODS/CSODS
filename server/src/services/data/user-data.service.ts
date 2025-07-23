@@ -2,11 +2,13 @@ import bcrypt from "bcryptjs";
 import { createContext } from "@/db/csods";
 import { UserRepository, IUserFilter } from "@services";
 import { LoginSchema, NewUser, UserViewModel } from "@viewmodels";
+import { UserRoleRepository } from "../repositories/user-role.repository";
 
 export async function createUserDataService() {
   const dbContext = await createContext();
   const userRepoInstance = new UserRepository(dbContext);
-  return new UserDataService(userRepoInstance);
+  const userRoleRepoInstance = new UserRoleRepository(dbContext);
+  return new UserDataService(userRepoInstance, userRoleRepoInstance);
 }
 /**
  * @public
@@ -15,9 +17,14 @@ export async function createUserDataService() {
  */
 export class UserDataService {
   private readonly _userRepository: UserRepository;
+  private readonly _userRoleRepository: UserRoleRepository;
 
-  public constructor(userRepository: UserRepository) {
+  public constructor(
+    userRepository: UserRepository,
+    userRoleRepository: UserRoleRepository
+  ) {
     this._userRepository = userRepository;
+    this._userRoleRepository = userRoleRepository;
   }
 
   /**
