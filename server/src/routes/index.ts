@@ -1,4 +1,5 @@
-import projectsRouter from "./projectsRoute";
-import projectTagsRouter from "./projectTagsRoute";
+import authRouter from "./auth.router";
+import projectsRouter from "./projects.router";
+import projectTagsRouter from "./project-tags.router";
 
-export { projectsRouter, projectTagsRouter };
+export { authRouter, projectsRouter, projectTagsRouter };
