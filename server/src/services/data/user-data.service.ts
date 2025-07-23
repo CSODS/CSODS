@@ -1,7 +1,7 @@
 import bcrypt from "bcryptjs";
 import { createContext } from "@/db/csods";
 import { UserRepository, IUserFilter } from "@services";
-import { NewUser } from "@viewmodels";
+import { LoginSchema, NewUser, UserViewModel } from "@viewmodels";
 
 export async function createUserDataService() {
   const dbContext = await createContext();
@@ -37,6 +37,7 @@ export class UserDataService {
   }
 
   /**
+   * @deprecated
    * @public
    * @async
    * @function isUserExists
@@ -59,4 +60,58 @@ export class UserDataService {
 
     return existingUser !== null;
   }
+  /**
+   * @public
+   * @async
+   * @function getExistingUser
+   * @description Asynchronously retrieves a `User` from the database filtered using fields
+   * provided by either a {@link NewUser} or {@link LoginSchema} object.
+   * @param options.user - A {@link NewUser} object used for filtering the database query
+   * during register operations.
+   * @param options.login - A {@link LoginSchema} object used for filtering the databse query
+   * during login operations.
+   * @returns A `promise` resolving to a {@link UserViewModel} if a `User` is found, or
+   * `null` if no `User` is found.
+   */
+  public async getExistingUser(
+    options: GetExistingUserOptions
+  ): Promise<UserViewModel | null> {
+    const { user, login } = options;
+
+    const userFilter: IUserFilter = {};
+
+    if (user) {
+      const { Email, Username, StudentName, StudentNumber } = user;
+
+      userFilter.filterType = "or";
+      userFilter.email = Email;
+      userFilter.username = Username;
+      userFilter.studentName = StudentName;
+      userFilter.studentNumber = StudentNumber;
+    } else if (login) {
+      const { Email, Username } = login;
+      //  either email or username will always be undefined due to how `LoginSchema` is
+      //  declared.
+      userFilter.email = Email;
+      userFilter.username = Username;
+      //  filter type isn't really needed but is still defined for robustness.
+      userFilter.filterType = "and";
+    }
+
+    const existingUser = await this._userRepository.getUser(userFilter);
+
+    return existingUser;
+  }
 }
+
+type GetExistingUserOptions = withUser | withLogin;
+
+type withUser = {
+  user: NewUser;
+  login?: undefined;
+};
+
+type withLogin = {
+  user?: undefined;
+  login: LoginSchema;
+};
