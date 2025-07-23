@@ -1,13 +1,5 @@
 import { Request, Response } from "express";
-
-interface RegisterBody {
-    Email: string,
-    Username: string,
-    Password: string,
-    StudentName?: string,
-    StudentNumber?: string,
-    UserIconUrl?: string
-}
+import z from "zod";
 
 /**
  * @public
@@ -20,55 +12,83 @@ interface RegisterBody {
  * - Performs validation checks on the received data.
  * - Hashes the password.
  * - Stores to database.
- * 
- * @param req 
- * @param res 
- * @returns 
+ *
+ * @param req
+ * @param res
+ * @returns
  */
-export async function handleNewUser(req: Request<{}, {}, RegisterBody>, res: Response) {
-    //  data retrieval from request body.
-    //  usericon url is not required for now but will be implemented later.
-    const { Email, Username, Password, }: RegisterBody = req.body;
+export async function handleNewUser(
+  req: Request<{}, {}, RegisterBody>,
+  res: Response
+) {
+  //  data retrieval from request body.
+  //  usericon url is not required for now but will be implemented later.
+  const fields: RegisterBody = req.body;
+  const validatedFields = RegisterSchema.safeParse(fields);
 
-    const fields = {
-        Email: req.body.Email,
-        Username: req.body.Username,
-        Password: req.body.Password,
-        StudentName: req.body.StudentName ?? '',
-        StudentNumber: req.body.StudentNumber ?? '',
-        UserIconUrl: req.body.UserIconUrl ?? ''
-    }
+  if (!validatedFields.success) {
+    const msg = z.prettifyError(validatedFields.error);
+    res.status(404).json({ message: msg });
+    return;
+  }
 
-    console.log(JSON.stringify(fields));
+  //  run a check through db to see if the new user's username, studentName, or email already exists.
+  const isExistingUser = await req.userDataService.isUserExists(
+    validatedFields.data
+  );
+  //  duplicate conflict.
+  if (isExistingUser) {
+    res.sendStatus(409).json({ message: "user already exists" });
+    return;
+  }
 
-    //  validation
-    try {
-        console.log('validating user');
-        req.userDataService.validateUser(fields);
-    }
-    catch (err) {
-        console.error(err);
-        res.status(404).json({ 'message': (<Error>err).message});
-        return; 
-    }
+  try {
+    console.log("inserting");
+    await req.userDataService.insertUser(validatedFields.data);
 
-    //  run a check through db to see if the new user's username, studentName, or email already exists.
-    const isExistingUser = await req.userDataService.isUserExists(fields);  
-    //  duplicate conflict.
-    if (isExistingUser) {
-        res.sendStatus(409).json({ 'message': 'user already exists'});
-        return;
-    } 
-    
-    try {
-        console.log('inserting');
-        await req.userDataService.insertUser(fields);
-
-        res.status(201).json({ 'success': 'New user created.'});
-    }   
-    catch (err) {
-        res.status(500).json({ 'message': 'server error'});
-    }
-
-
+    res.status(201).json({ success: "New user created." });
+  } catch (err) {
+    res.status(500).json({ message: "server error" });
+  }
 }
+
+type RegisterBody = z.infer<typeof RegisterSchema>;
+
+const RegisterSchema = z.object({
+  Email: z.email({
+    error: (iss) =>
+      iss.input === undefined ? "Email is required." : "Invalid email.",
+  }),
+
+  Username: z
+    .string({
+      error: (iss) =>
+        iss.input === undefined ? "Username is required." : "Invalid username.",
+    })
+    .regex(/^[a-zA-Z][a-zA-Z0-9-_]{3,23}$/, { error: "Invalid username." }),
+
+  Password: z
+    .string({
+      error: (iss) =>
+        iss.input === undefined ? "Password is required." : "Invalid Password",
+    })
+    .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/, {
+      error: "Invalid password.",
+    }),
+
+  StudentName: z
+    .string()
+    .regex(/^[a-zA-Z]+(?:\s[a-zA-Z]+){0,9}$/, {
+      error: "Invalid student name.",
+    })
+    .or(z.literal(""))
+    .default(""),
+
+  StudentNumber: z
+    .string()
+    .regex(/^[0-9]{3}-[0-9]{4}$/, { error: "Invalid student number." })
+    .or(z.literal(""))
+    .default(""),
+
+  UserIconUrl: z.string().default(""),
+});
