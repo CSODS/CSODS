@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
-import z from "zod";
-import { registerSchema, RegisterSchema } from "@viewmodels";
+import { RegisterSchema } from "@viewmodels";
 
 /**
  * @public
@@ -9,10 +8,8 @@ import { registerSchema, RegisterSchema } from "@viewmodels";
  * @description Handles validating of new user from POST request and storing to the database if
  * all validation checks are passed.
  * Executes the following actions:
- * - Retrieves the fields from the request body following the {@link RegisterSchema}.
- * - Validates the fields against the {@link registerSchema}
  * - Validates if a `user` already exists in the database.
- * - Stores to database if all validity checks are passed.
+ * - Stores new user to database if validity checks are passed.
  *
  * @param req
  * @param res
@@ -23,19 +20,10 @@ export async function handleNewUser(
   res: Response
 ) {
   //  usericon url is not required for now but will be implemented later.
-  const fields: RegisterSchema = req.body;
-  const validationResult = registerSchema.safeParse(fields);
-
-  if (!validationResult.success) {
-    const msg = z.prettifyError(validationResult.error);
-    res.status(404).json({ message: msg });
-    return;
-  }
-
-  const validatedUser = validationResult.data;
+  const user = req.body;
 
   //  validate existing email, username, student name, and student number.
-  const isExistingUser = await req.userDataService.isUserExists(validatedUser);
+  const isExistingUser = await req.userDataService.isUserExists(user);
 
   if (isExistingUser) {
     res.sendStatus(409).json({ message: "user already exists" });
@@ -43,7 +31,7 @@ export async function handleNewUser(
   }
 
   try {
-    await req.userDataService.insertUser(validatedUser);
+    await req.userDataService.insertUser(user);
 
     res.status(201).json({ success: "New user created." });
   } catch (err) {
