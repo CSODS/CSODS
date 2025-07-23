@@ -1,3 +1,3 @@
-export * from "./tagsCacheService";
-export * from './abstractCacheService';
-export * from './projectsCache';
+export * from "./tag-cache.service";
+export * from "./abstract-cache.service";
+export * from "./project-cache";

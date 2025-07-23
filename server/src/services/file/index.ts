@@ -1,1 +1,1 @@
-export * from "./fileHandler";
+export * from "./json-file.service";

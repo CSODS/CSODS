@@ -1,1 +1,1 @@
-export * from './cacheInterfaces';
+export * from "./cache.interface";

@@ -1,14 +1,21 @@
-import cors from 'cors';
-import express from 'express';
-import { CONSTANTS } from '@data';
-import { attachProjectCachePageService, attachTagsCacheHandler, authRouteLimiter, routeLogger, projectsRouteLimiter, projectTagsRouteLimiter, attachUserDataService } from '@middleware';
-import { projectsRouter, projectTagsRouter} from '@routes';
-import { createEvictionJobService, createViewsDecayJobService } from '@utils';
-import authRouter from './routes/authRoute';
+import cors from "cors";
+import express from "express";
+import { CONSTANTS } from "@data";
+import {
+  attachProjectCachePageService,
+  attachTagsCacheHandler,
+  authRouteLimiter,
+  routeLogger,
+  projectsRouteLimiter,
+  projectTagsRouteLimiter,
+  attachUserDataService,
+} from "@middleware";
+import { authRouter, projectsRouter, projectTagsRouter } from "@/routers";
+import { createEvictionJobService, createViewsDecayJobService } from "@utils";
 
 const ROUTES = CONSTANTS.ROUTES;
 
-const app = express()
+const app = express();
 
 //  for express json parsing
 app.use(express.json());
@@ -37,9 +44,8 @@ evictionJob.scheduleSearchCacheEviction();
 const viewsDecayJob = createViewsDecayJobService();
 viewsDecayJob.scheduleViewsDecay();
 
-app.listen(3001, '0.0.0.0', async () => {
-    console.log("Server running on port 3001");
-    await evictionJob.evictProjectCache();
-    await evictionJob.evictCachePages();
+app.listen(3001, "0.0.0.0", async () => {
+  console.log("Server running on port 3001");
+  await evictionJob.evictProjectCache();
+  await evictionJob.evictCachePages();
 });
-
