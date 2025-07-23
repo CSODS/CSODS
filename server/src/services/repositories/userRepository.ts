@@ -1,13 +1,13 @@
 import { and, eq, or, SQL } from "drizzle-orm";
 import { DbContext } from "@/db/csods";
-import { Users } from "@models";
+import { User } from "@models";
 import { DbLogger } from "@/utils";
 import { NewUser, UsersTable, UserViewModel } from "@/viewmodels";
 import { Repository } from "./abstractRepository";
 
 export class UserRepository extends Repository<UsersTable> {
   public constructor(context: DbContext) {
-    super(context, Users);
+    super(context, User);
   }
 
   /**
@@ -17,7 +17,7 @@ export class UserRepository extends Repository<UsersTable> {
    * @description Asynchronously inserts a {@link NewUser} object into the {@link UsersTable}.
    *
    * @param user - The {@link NewUser} object to be inserted.
-   * @returns - The {@link Users.UserId} if the insert operation is successful, `null` otherwise.
+   * @returns - The {@link User.UserId} if the insert operation is successful, `null` otherwise.
    */
   public async insertUser(user: NewUser): Promise<number | null> {
     try {
@@ -89,19 +89,19 @@ export class UserRepository extends Repository<UsersTable> {
         studentNumber,
       } = filter;
       if (email && email.trim()) {
-        conditions.push(eq(Users.Email, email));
+        conditions.push(eq(User.Email, email));
       }
 
       if (username && username.trim()) {
-        conditions.push(eq(Users.Username, username));
+        conditions.push(eq(User.Username, username));
       }
 
       if (studentName && studentName.trim()) {
-        conditions.push(eq(Users.StudentName, studentName));
+        conditions.push(eq(User.StudentName, studentName));
       }
 
       if (studentNumber && studentNumber.trim()) {
-        conditions.push(eq(Users.StudentNumber, studentNumber));
+        conditions.push(eq(User.StudentNumber, studentNumber));
       }
 
       if (conditions.length > 0) {
@@ -118,7 +118,7 @@ export class UserRepository extends Repository<UsersTable> {
 
 /**
  * @interface IUserFilter
- * @description An interface for the filter used for Db queries on the {@link Users} table.
+ * @description An interface for the filter used for Db queries on the {@link User} table.
  * Contains the following fields:
  * ### Filters:
  * - {@link filterType}: Option to decide whether the filter is an `or` or an `and`.

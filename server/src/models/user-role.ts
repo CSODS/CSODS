@@ -1,16 +1,16 @@
 import { integer, sqliteTable, primaryKey } from "drizzle-orm/sqlite-core";
-import { Users } from "./user.js";
-import { Roles } from "./role.js";
+import { User } from "./user.js";
+import { Role } from "./role.js";
 
-export const UserRoles = sqliteTable(
+export const UserRole = sqliteTable(
   "UserRoles",
   {
     UserId: integer("UserId")
       .notNull()
-      .references(() => Users.UserId, { onDelete: "restrict" }),
+      .references(() => User.UserId, { onDelete: "restrict" }),
     RoleId: integer("RoleId")
       .notNull()
-      .references(() => Roles.RoleId, { onDelete: "restrict" }),
+      .references(() => Role.RoleId, { onDelete: "restrict" }),
   },
   (table) => [primaryKey({ columns: [table.UserId, table.RoleId] })]
 );
