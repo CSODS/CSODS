@@ -1,3 +1,3 @@
 export * from "./cache";
-export * from "./DbModels";
+export * from "./dbModels";
 export * from "./schemas";
