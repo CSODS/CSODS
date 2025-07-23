@@ -81,14 +81,12 @@ const RegisterSchema = z.object({
     .regex(/^[a-zA-Z]+(?:\s[a-zA-Z]+){0,9}$/, {
       error: "Invalid student name.",
     })
-    .or(z.literal(""))
-    .default(""),
+    .optional(),
 
   StudentNumber: z
     .string()
     .regex(/^[0-9]{3}-[0-9]{4}$/, { error: "Invalid student number." })
-    .or(z.literal(""))
-    .default(""),
+    .optional(),
 
-  UserIconUrl: z.string().default(""),
+  UserIconUrl: z.string().optional(),
 });
