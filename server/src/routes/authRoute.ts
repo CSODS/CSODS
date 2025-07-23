@@ -3,6 +3,7 @@ import bcrypt from 'bcryptjs';
 import dotenv from 'dotenv';
 import jwt from 'jsonwebtoken';
 import { CONSTANTS } from "@data";
+import { handleNewUser } from '@controllers';
 
 dotenv.config();
 
@@ -14,9 +15,7 @@ authRouter.post(AUTH_ROUTES.SIGN_IN, async (req, res) => {
     //  controller logic here
 });
 
-authRouter.post(AUTH_ROUTES.REGISTER, async (req, res) => {
-    //  controller logic here.
-});
+authRouter.post(AUTH_ROUTES.REGISTER, handleNewUser);
 
 authRouter.post(AUTH_ROUTES.REFRESH, async (req, res) => {
     //  controller logic here.
@@ -27,50 +26,6 @@ authRouter.post(AUTH_ROUTES.SIGN_OUT, async (req, res) => {
 });
 
 export default authRouter;
-
-/**
- * @public
- * @async
- * @function handlerNewUser
- * @description Handles validating of new user from POST request and storing to the database if
- * all validation checks are passed.
- * Executes the following actions:
- * - Retrieves the username, student name, email, password from {@link req.body}.
- * - Performs validation checks on the received data.
- * - Hashes the password.
- * - Stores to database.
- * 
- * @param req 
- * @param res 
- * @returns 
- */
-const handlerNewUser = async (req: Request, res: Response) => {
-    //  data retrieval from request body.
-    //  usericon url is not required for now but will be implemented later.
-    const { username, studentName, email, password, userIconUrl = '' } = req.body;
-
-    //  validation
-    if (!username || !studentName || !email || !password) {
-        return res.status(404).json({ 'message': 'Username, Student name, Email, and Password are required.'});
-    }
-    
-    //  run a check through db to see if the new user's username, studentName, or email already exists.
-    const isExistingUser = false;  
-    //  duplicate conflict.
-    if (isExistingUser) return res.sendStatus(409).json({ 'message': 'user already exists'}); 
-    
-    try {
-        //  encrypt password
-        const hashedPassword = await bcrypt.hash(password, 10); //  10 salt rounds for protection.
-        const newUser = {};
-        //  set new user to database.
-        
-        res.status(201).json({ 'success': 'New user created.'});
-    }   
-    catch (err) {
-        res.status(500).json({ 'message': 'server error'});
-    }
-}
 
 /**
  * @public
