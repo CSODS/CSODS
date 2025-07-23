@@ -1,8 +1,8 @@
 import { integer, text, sqliteTable } from "drizzle-orm/sqlite-core";
 
-export const ProgrammingLanguage = sqliteTable("ProgrammingLanguages", {
-  LanguageId: integer("LanguageId")
+export const ProgrammingLanguage = sqliteTable("programming_languages", {
+  languageId: integer("language_id")
     .unique()
     .primaryKey({ autoIncrement: true }),
-  LanguageName: text("LanguageName").unique(),
+  languageName: text("language_name").unique(),
 });

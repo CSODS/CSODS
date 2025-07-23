@@ -2,16 +2,16 @@ import { integer, sqliteTable, primaryKey } from "drizzle-orm/sqlite-core";
 import { Project } from "./project.js";
 import { Framework } from "./framework.js";
 export const ProjectFramework = sqliteTable(
-  "ProjectFrameworks",
+  "project_frameworks",
   {
-    ProjectId: integer("ProjectId")
+    projectId: integer("project_id")
       .notNull()
-      .references(() => Project.ProjectId, { onDelete: "restrict" }),
-    FrameworkId: integer("FrameworkId")
+      .references(() => Project.projectId, { onDelete: "restrict" }),
+    frameworkId: integer("framework_id")
       .notNull()
-      .references(() => Framework.FrameworkId, { onDelete: "restrict" }),
+      .references(() => Framework.frameworkId, { onDelete: "restrict" }),
   },
   (table) => ({
-    pk: primaryKey({ columns: [table.ProjectId, table.FrameworkId] }),
+    pk: primaryKey({ columns: [table.projectId, table.frameworkId] }),
   })
 );

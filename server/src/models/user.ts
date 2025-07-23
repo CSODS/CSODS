@@ -1,17 +1,17 @@
 import { integer, text, sqliteTable } from "drizzle-orm/sqlite-core";
 
-export const User = sqliteTable("Users", {
-  UserId: integer("UserId").unique().primaryKey({ autoIncrement: true }),
+export const User = sqliteTable("users_", {
+  userId: integer("user_id").unique().primaryKey({ autoIncrement: true }),
 
-  Email: text("Email").unique().notNull(),
+  email: text("email").unique().notNull(),
 
-  Username: text("Username").unique().notNull(),
+  username: text("username").unique().notNull(),
 
-  StudentName: text("StudentName"),
+  studentName: text("student_name"),
 
-  Password: text("Password").notNull(),
+  password: text("password").notNull(),
 
-  StudentNumber: text("StudentNumber").unique(),
+  studentNumber: text("student_number").unique(),
 
-  UserIconUrl: text("UserIconImg"),
+  userIconUrl: text("user_icon_url"),
 });

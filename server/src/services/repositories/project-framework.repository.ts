@@ -13,7 +13,7 @@ export class ProjectFrameworkRepository extends Repository<ProjectFrameworksTabl
     projectId: number
   ): Promise<ProjectFrameworkViewModel[]> {
     return await this._dbContext.query.ProjectFramework.findMany({
-      where: eq(ProjectFramework.ProjectId, projectId),
+      where: eq(ProjectFramework.projectId, projectId),
     });
   }
 }

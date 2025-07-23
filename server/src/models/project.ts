@@ -5,33 +5,33 @@ import { ProgrammingLanguage } from "./programming-language.js";
 import { DatabaseTechnology } from "./database-technology.js";
 import { ApplicationIndustry } from "./application-industry.js";
 
-export const Project = sqliteTable("Projects", {
-  ProjectId: integer("ProjectId").primaryKey({ autoIncrement: true }).unique(),
-  ProjectNumber: text("ProjectNumber").unique(),
-  UserId: integer("UserId")
+export const Project = sqliteTable("projects_", {
+  projectId: integer("project_id").primaryKey({ autoIncrement: true }).unique(),
+  projectNumber: text("project_number").unique(),
+  userId: integer("user_id")
     .notNull()
-    .references(() => User.UserId, { onDelete: "restrict" }),
-  ProjectTitle: text("ProjectTitle"),
-  ProjectTitleLower: text("ProjectTitleLower"),
-  DevTypeId: integer("DevTypeId")
+    .references(() => User.userId, { onDelete: "restrict" }),
+  projectTitle: text("project_title"),
+  projectTitleLower: text("project_title_lower"),
+  devTypeId: integer("dev_type_id")
     .notNull()
-    .references(() => DevType.DevTypeId, { onDelete: "restrict" }),
-  PrimaryLanguageId: integer("PrimaryLanguageId")
+    .references(() => DevType.devTypeId, { onDelete: "restrict" }),
+  primaryLanguageId: integer("primary_language_id")
     .notNull()
-    .references(() => ProgrammingLanguage.LanguageId, {
+    .references(() => ProgrammingLanguage.languageId, {
       onDelete: "restrict",
     }),
-  SecondaryLanguageId: integer("SecondaryLanguageId").references(
-    () => ProgrammingLanguage.LanguageId,
+  secondaryLanguageId: integer("secondary_language_id").references(
+    () => ProgrammingLanguage.languageId,
     { onDelete: "restrict" }
   ),
-  DatabaseTechnologyId: integer("DatabaseTechnologyId").references(
-    () => DatabaseTechnology.DatabaseId,
+  databaseTechnologyId: integer("database_technology_id").references(
+    () => DatabaseTechnology.databaseId,
     { onDelete: "restrict" }
   ),
-  ApplicationIndustryId: integer("ApplicationIndustryId").references(
-    () => ApplicationIndustry.IndustryId,
+  applicationIndustryId: integer("application_industry_id").references(
+    () => ApplicationIndustry.industryId,
     { onDelete: "restrict" }
   ),
-  GitHubUrl: text("GitHubUrl"),
+  gitHubUrl: text("github_url"),
 });
