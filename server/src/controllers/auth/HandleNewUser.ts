@@ -23,18 +23,18 @@ export async function handleNewUser(
 ) {
   //  usericon url is not required for now but will be implemented later.
   const fields: RegisterBody = req.body;
-  const validatedFields = RegisterSchema.safeParse(fields);
+  const validationResult = RegisterSchema.safeParse(fields);
 
-  if (!validatedFields.success) {
-    const msg = z.prettifyError(validatedFields.error);
+  if (!validationResult.success) {
+    const msg = z.prettifyError(validationResult.error);
     res.status(404).json({ message: msg });
     return;
   }
 
+  const validatedUser = validationResult.data;
+
   //  validate existing email, username, student name, and student number.
-  const isExistingUser = await req.userDataService.isUserExists(
-    validatedFields.data
-  );
+  const isExistingUser = await req.userDataService.isUserExists(validatedUser);
 
   if (isExistingUser) {
     res.sendStatus(409).json({ message: "user already exists" });
@@ -42,7 +42,7 @@ export async function handleNewUser(
   }
 
   try {
-    await req.userDataService.insertUser(validatedFields.data);
+    await req.userDataService.insertUser(validatedUser);
 
     res.status(201).json({ success: "New user created." });
   } catch (err) {
