@@ -8,10 +8,10 @@ import z from "zod";
  * @description Handles validating of new user from POST request and storing to the database if
  * all validation checks are passed.
  * Executes the following actions:
- * - Retrieves the username, student name, email, password from {@link req.body}.
- * - Performs validation checks on the received data.
- * - Hashes the password.
- * - Stores to database.
+ * - Retrieves the fields from the request body following the {@link RegisterBody}.
+ * - Validates the fields against the {@link RegisterSchema}
+ * - Validates if a `user` already exists in the database.
+ * - Stores to database if all validity checks are passed.
  *
  * @param req
  * @param res
@@ -21,7 +21,6 @@ export async function handleNewUser(
   req: Request<{}, {}, RegisterBody>,
   res: Response
 ) {
-  //  data retrieval from request body.
   //  usericon url is not required for now but will be implemented later.
   const fields: RegisterBody = req.body;
   const validatedFields = RegisterSchema.safeParse(fields);
@@ -32,18 +31,17 @@ export async function handleNewUser(
     return;
   }
 
-  //  run a check through db to see if the new user's username, studentName, or email already exists.
+  //  validate existing email, username, student name, and student number.
   const isExistingUser = await req.userDataService.isUserExists(
     validatedFields.data
   );
-  //  duplicate conflict.
+
   if (isExistingUser) {
     res.sendStatus(409).json({ message: "user already exists" });
     return;
   }
 
   try {
-    console.log("inserting");
     await req.userDataService.insertUser(validatedFields.data);
 
     res.status(201).json({ success: "New user created." });
