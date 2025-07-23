@@ -1,5 +1,5 @@
 import dotenv from "dotenv";
-import { JsonFileService, createJsonFileHandler } from "@services";
+import { JsonFileService, createJsonFileService } from "@services";
 import { IProjectTags } from "@viewmodels";
 import { CONSTANTS } from "@/data";
 
@@ -9,7 +9,7 @@ const CACHE = CONSTANTS.CACHE;
 
 export function createTagsCacheHandler() {
   const jsonFileHandlerInstance =
-    createJsonFileHandler<IProjectTags>("IProjectTags");
+    createJsonFileService<IProjectTags>("IProjectTags");
   return new TagsCacheHandler(jsonFileHandlerInstance);
 }
 

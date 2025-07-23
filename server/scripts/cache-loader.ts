@@ -1,5 +1,5 @@
 import { CONSTANTS } from "@data";
-import { createJsonFileHandler } from "@services";
+import { createJsonFileService } from "@services";
 import { IProjectTags } from "@viewmodels";
 import { createContext } from "@/db/csods";
 import dotenv from "dotenv";
@@ -41,7 +41,7 @@ async function tagsLoader() {
   data.ApplicationIndustries =
     await context.query.ApplicationIndustry.findMany();
 
-  const jsonFileHandler = createJsonFileHandler<IProjectTags>("IProjectTags");
+  const jsonFileHandler = createJsonFileService<IProjectTags>("IProjectTags");
   const fileName = CACHE.TAGS_CACHE + CACHE.AS_JSON;
   await jsonFileHandler.writeToJsonFile(
     process.env.TAGS_CACHE_PATH!,

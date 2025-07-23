@@ -4,7 +4,7 @@ import path from "path";
 import { OperationOptions } from "retry";
 import { FileLogger } from "@utils";
 
-export function createJsonFileHandler<TModel>(modelName: string) {
+export function createJsonFileService<TModel>(modelName: string) {
   return new JsonFileService<TModel>(modelName);
 }
 

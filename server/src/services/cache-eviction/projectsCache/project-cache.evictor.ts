@@ -2,7 +2,7 @@ import dotenv from "dotenv";
 import { CachePageRecord, IProjectCache } from "@viewmodels";
 import {
   JsonFileService,
-  createJsonFileHandler,
+  createJsonFileService,
   IFile,
   createProjectPageEvictor,
   ProjectPageEvictor,
@@ -15,7 +15,7 @@ export function createProjectCacheEvictor(
   cacheEvictionOptions: IEvictionOptions,
   pageEvictionOptions: IEvictionOptions
 ): ProjectCacheEvictor {
-  const jsonFileHandler = createJsonFileHandler<IProjectCache>("IProjectCache");
+  const jsonFileHandler = createJsonFileService<IProjectCache>("IProjectCache");
   const pageEvictorInstance = createProjectPageEvictor(pageEvictionOptions);
   const cacheEvictorInstance = new ProjectCacheEvictor(
     jsonFileHandler,

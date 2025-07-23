@@ -1,4 +1,4 @@
-import { createJsonFileHandler, JsonFileService } from "@services";
+import { createJsonFileService, JsonFileService } from "@services";
 import { IProjectCachePage } from "@viewmodels";
 import { IEvictionOptions, BaseCacheEvictor } from "../base-cache.evictor";
 
@@ -6,7 +6,7 @@ export function createProjectPageEvictor(
   evictionOptions: IEvictionOptions
 ): ProjectPageEvictor {
   const jsonFileHandler =
-    createJsonFileHandler<IProjectCachePage>("IProjectCachePage");
+    createJsonFileService<IProjectCachePage>("IProjectCachePage");
   const evictor = new ProjectPageEvictor(jsonFileHandler, evictionOptions);
   return evictor;
 }

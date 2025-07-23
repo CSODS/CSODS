@@ -1,7 +1,7 @@
 import dotenv from "dotenv";
 import { CONSTANTS } from "@data";
 import {
-  createJsonFileHandler,
+  createJsonFileService,
   createProjectDataService,
   IProjectFilter,
   JsonFileService,
@@ -24,7 +24,7 @@ const CACHE = CONSTANTS.CACHE;
 export async function createProjectCacheService() {
   const projectDataServiceInstance = await createProjectDataService();
   const jsonFileHandlerInstance =
-    createJsonFileHandler<IProjectCache>("IProjectCache");
+    createJsonFileService<IProjectCache>("IProjectCache");
   return new ProjectCacheService(
     projectDataServiceInstance,
     jsonFileHandlerInstance

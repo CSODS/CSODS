@@ -1,6 +1,6 @@
 import { CONSTANTS } from "@data";
 import {
-  createJsonFileHandler,
+  createJsonFileService,
   createProjectDataService,
   JsonFileService,
   ProjectDataService,
@@ -18,7 +18,7 @@ const CACHE = CONSTANTS.CACHE;
 export async function createProjectCachePageService() {
   const projectDataServiceInstance = await createProjectDataService();
   const jsonFileHandlerInstance =
-    createJsonFileHandler<IProjectCache>("IProjectCache");
+    createJsonFileService<IProjectCache>("IProjectCache");
 
   return new ProjectCachePageService(
     projectDataServiceInstance,
