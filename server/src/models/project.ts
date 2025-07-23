@@ -5,33 +5,33 @@ import { ProgrammingLanguage } from "./programming-language.js";
 import { DatabaseTechnology } from "./database-technology.js";
 import { ApplicationIndustry } from "./application-industry.js";
 
-export const Project = sqliteTable("Projects", {
-  ProjectId: integer("ProjectId").primaryKey({ autoIncrement: true }).unique(),
-  ProjectNumber: text("ProjectNumber").unique(),
-  UserId: integer("UserId")
+export const Project = sqliteTable("projects_", {
+  ProjectId: integer("project_id").primaryKey({ autoIncrement: true }).unique(),
+  ProjectNumber: text("project_number").unique(),
+  UserId: integer("user_id")
     .notNull()
     .references(() => User.UserId, { onDelete: "restrict" }),
-  ProjectTitle: text("ProjectTitle"),
-  ProjectTitleLower: text("ProjectTitleLower"),
-  DevTypeId: integer("DevTypeId")
+  ProjectTitle: text("project_title"),
+  ProjectTitleLower: text("project_title_lower"),
+  DevTypeId: integer("dev_type_id")
     .notNull()
     .references(() => DevType.DevTypeId, { onDelete: "restrict" }),
-  PrimaryLanguageId: integer("PrimaryLanguageId")
+  PrimaryLanguageId: integer("primary_language_id")
     .notNull()
     .references(() => ProgrammingLanguage.LanguageId, {
       onDelete: "restrict",
     }),
-  SecondaryLanguageId: integer("SecondaryLanguageId").references(
+  SecondaryLanguageId: integer("secondary_language_id").references(
     () => ProgrammingLanguage.LanguageId,
     { onDelete: "restrict" }
   ),
-  DatabaseTechnologyId: integer("DatabaseTechnologyId").references(
+  DatabaseTechnologyId: integer("database_technology_id").references(
     () => DatabaseTechnology.DatabaseId,
     { onDelete: "restrict" }
   ),
-  ApplicationIndustryId: integer("ApplicationIndustryId").references(
+  ApplicationIndustryId: integer("application_industry_id").references(
     () => ApplicationIndustry.IndustryId,
     { onDelete: "restrict" }
   ),
-  GitHubUrl: text("GitHubUrl"),
+  GitHubUrl: text("github_url"),
 });
