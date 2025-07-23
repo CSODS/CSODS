@@ -5,7 +5,7 @@ import {
 } from "../src/services/file/json-file.service";
 import { describe, beforeEach, afterEach, it, expect } from "vitest";
 import path from "path";
-import { IProjectCache } from "../src/viewmodels/cache/cacheInterfaces";
+import { IProjectCache } from "../src/viewmodels/cache/cache.interface";
 import { promises as fs } from "fs";
 
 describe("fileHandler", async () => {

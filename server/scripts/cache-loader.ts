@@ -1,9 +1,11 @@
-import { IProjectTags } from "../src/viewmodels/cache/cacheInterfaces.js";
-import { createJsonFileHandler } from "../src/services/file/fileHandler.js";
-import { createContext } from "../src/db/csods.js";
-import { CACHE } from "../src/data/constants/constants.js";
+import { CONSTANTS } from "@data";
+import { createJsonFileHandler } from "@services";
+import { IProjectTags } from "@viewmodels";
+import { createContext } from "@/db/csods";
 import dotenv from "dotenv";
 dotenv.config();
+
+const CACHE = CONSTANTS.CACHE;
 
 /**
  * @typedef {object} IProjectTags
@@ -31,12 +33,11 @@ async function tagsLoader() {
 
   const context = await createContext();
 
-  data.DevTypes = await context.query.DevTypes.findMany();
+  data.DevTypes = await context.query.DevType.findMany();
   data.ProgrammingLanguages =
-    await context.query.ProgrammingLanguages.findMany();
-  data.Frameworks = await context.query.Frameworks.findMany();
-  data.DatabaseTechnologies =
-    await context.query.DatabaseTechnologies.findMany();
+    await context.query.ProgrammingLanguage.findMany();
+  data.Frameworks = await context.query.Framework.findMany();
+  data.DatabaseTechnologies = await context.query.DatabaseTechnology.findMany();
   data.ApplicationIndustries =
     await context.query.ApplicationIndustry.findMany();
 

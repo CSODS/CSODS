@@ -1,4 +1,4 @@
-import * as tableTypes from "../dbModels.js";
+import * as tableTypes from "../schema.types.js";
 
 //#region ProjectsCache
 
