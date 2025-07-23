@@ -10,7 +10,7 @@ import {
   projectTagsRouteLimiter,
   attachUserDataService,
 } from "@middleware";
-import { authRouter, projectsRouter, projectTagsRouter } from "@routes";
+import { authRouter, projectsRouter, projectTagsRouter } from "@/routers";
 import { createEvictionJobService, createViewsDecayJobService } from "@utils";
 
 const ROUTES = CONSTANTS.ROUTES;

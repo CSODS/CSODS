@@ -21,7 +21,7 @@ esbuild
       "@middleware": "./src/middleware",
       "@models": "./src/models",
       "@redis": "./src/redis",
-      "@routes": "./src/routes",
+      "@routers": "./src/routers",
       "@services": "./src/services",
       "@utils": "./src/utils",
       "@viewmodels": "./src/viewmodels",
