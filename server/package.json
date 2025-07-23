@@ -36,7 +36,8 @@
     "node-redis": "^0.1.7",
     "nodemon": "^3.1.10",
     "proper-lockfile": "^4.1.2",
-    "winston": "^3.17.0"
+    "winston": "^3.17.0",
+    "zod": "^4.0.5"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.6",
