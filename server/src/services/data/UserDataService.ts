@@ -70,12 +70,12 @@ export class UserDataService {
      */
     public validateUser(
         fields: {
-            Email: any,
-            Username: any,
-            Password: any,
-            StudentName: any,
-            StudentNumber: any,
-            UserIconUrl: any
+            Email: string,
+            Username: string,
+            Password: string,
+            StudentName?: string | undefined,
+            StudentNumber?: string | undefined,
+            UserIconUrl?: string | undefined
         }
     ): asserts fields is NewUser {
         const { Email, Username, Password, StudentName, StudentNumber, UserIconUrl } = fields;
