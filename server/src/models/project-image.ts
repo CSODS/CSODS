@@ -1,10 +1,10 @@
 import { integer, text, sqliteTable } from "drizzle-orm/sqlite-core";
 import { Project } from "./project.js";
 
-export const ProjectImage = sqliteTable("ProjectImages", {
-  ImageId: integer("ImageId").unique().primaryKey({ autoIncrement: true }),
-  ProjectId: integer("ProjectId").references(() => Project.ProjectId, {
+export const ProjectImage = sqliteTable("project_images", {
+  imageId: integer("image_id").unique().primaryKey({ autoIncrement: true }),
+  projectId: integer("project_id").references(() => Project.projectId, {
     onDelete: "cascade",
   }),
-  ImageUrl: text("ImageUrl"),
+  imageUrl: text("image_url"),
 });

@@ -17,7 +17,7 @@ export class UserRepository extends Repository<UsersTable> {
    * @description Asynchronously inserts a {@link NewUser} object into the {@link UsersTable}.
    *
    * @param user - The {@link NewUser} object to be inserted.
-   * @returns - The {@link User.UserId} if the insert operation is successful, `null` otherwise.
+   * @returns - The {@link User.userId} if the insert operation is successful, `null` otherwise.
    */
   public async insertUser(user: NewUser): Promise<number | null> {
     try {
@@ -27,9 +27,9 @@ export class UserRepository extends Repository<UsersTable> {
 
       if (inserted) {
         DbLogger.info(
-          `[User] User successfully inserted with id: ${inserted.UserId}`
+          `[User] User successfully inserted with id: ${inserted.userId}`
         );
-        return inserted.UserId;
+        return inserted.userId;
       } else {
         DbLogger.warn(`[User] Failed inserting user due to conflict.`);
         return null;
@@ -59,7 +59,7 @@ export class UserRepository extends Repository<UsersTable> {
 
     if (user)
       DbLogger.info(
-        `[User] Successfuly fetched a user with id: ${user.UserId}`
+        `[User] Successfuly fetched a user with id: ${user.userId}`
       );
     else DbLogger.info(`[Users] No user was found for filter: ${filterInfo}`);
 
@@ -89,19 +89,19 @@ export class UserRepository extends Repository<UsersTable> {
         studentNumber,
       } = filter;
       if (email && email.trim()) {
-        conditions.push(eq(User.Email, email));
+        conditions.push(eq(User.email, email));
       }
 
       if (username && username.trim()) {
-        conditions.push(eq(User.Username, username));
+        conditions.push(eq(User.username, username));
       }
 
       if (studentName && studentName.trim()) {
-        conditions.push(eq(User.StudentName, studentName));
+        conditions.push(eq(User.studentName, studentName));
       }
 
       if (studentNumber && studentNumber.trim()) {
-        conditions.push(eq(User.StudentNumber, studentNumber));
+        conditions.push(eq(User.studentNumber, studentNumber));
       }
 
       if (conditions.length > 0) {

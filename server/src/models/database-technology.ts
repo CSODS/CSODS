@@ -1,8 +1,8 @@
 import { integer, text, sqliteTable } from "drizzle-orm/sqlite-core";
 
-export const DatabaseTechnology = sqliteTable("DatabaseTechnologies", {
-  DatabaseId: integer("DatabaseId")
+export const DatabaseTechnology = sqliteTable("database_technologies", {
+  databaseId: integer("database_id")
     .unique()
     .primaryKey({ autoIncrement: true }),
-  Database: text("Database").unique(),
+  database: text("database").unique(),
 });

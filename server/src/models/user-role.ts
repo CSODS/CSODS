@@ -3,14 +3,14 @@ import { User } from "./user.js";
 import { Role } from "./role.js";
 
 export const UserRole = sqliteTable(
-  "UserRoles",
+  "user_roles",
   {
-    UserId: integer("UserId")
+    userId: integer("user_id")
       .notNull()
-      .references(() => User.UserId, { onDelete: "restrict" }),
-    RoleId: integer("RoleId")
+      .references(() => User.userId, { onDelete: "restrict" }),
+    roleId: integer("role_id")
       .notNull()
-      .references(() => Role.RoleId, { onDelete: "restrict" }),
+      .references(() => Role.roleId, { onDelete: "restrict" }),
   },
-  (table) => [primaryKey({ columns: [table.UserId, table.RoleId] })]
+  (table) => [primaryKey({ columns: [table.userId, table.roleId] })]
 );
