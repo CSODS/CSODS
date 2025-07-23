@@ -27,7 +27,7 @@ export abstract class Repository<
     protected async insertRow(newRow: TInsertModel): Promise<TSelectResult | null> {
         const inserted = await this._dbContext
             .insert(this._table)
-            .values({newRow})
+            .values([newRow])
             .onConflictDoNothing()
             .returning()
             .then((result) => result[0]);
