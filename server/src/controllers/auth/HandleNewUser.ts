@@ -31,9 +31,10 @@ export async function handleNewUser(
   }
 
   try {
-    await req.userDataService.insertUser(user);
-
-    res.status(201).json({ success: "New user created." });
+    const inserted = await req.userDataService.insertUser(user);
+    inserted
+      ? res.status(201).json({ success: "New user created." })
+      : res.status(409).json({ failed: "Failed creating new user." });
   } catch (err) {
     res.status(500).json({ message: "server error" });
   }
