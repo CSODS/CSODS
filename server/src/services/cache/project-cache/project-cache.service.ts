@@ -1,5 +1,5 @@
 import dotenv from "dotenv";
-import { CONSTANTS } from "@data";
+import { CACHE } from "@data";
 import {
   createJsonFileService,
   createProjectDataService,
@@ -19,7 +19,8 @@ import { AbstractCacheService } from "../abstract-cache.service";
 
 dotenv.config();
 
-const CACHE = CONSTANTS.CACHE;
+const PROJECT_CACHE = CACHE.PROJECT_CACHE;
+const AS_JSON = CACHE.EXTENSION.JSON;
 
 export async function createProjectCacheService() {
   const projectDataServiceInstance = await createProjectDataService();
@@ -170,7 +171,9 @@ export class ProjectCacheService extends AbstractCacheService<IProjectCache> {
     const isFiltered: boolean = options?.isFiltered ?? false;
 
     //  Assemble filename elements.
-    const baseName = isHardBackup ? CACHE.HARD_BACKUP : CACHE.BASE_NAME;
+    const baseName = isHardBackup
+      ? PROJECT_CACHE.HARD_BACKUP
+      : PROJECT_CACHE.BASE_NAME;
 
     const date: Date | undefined = isToday ? this._cDate : options?.date;
     const dateString = date?.toISOString().split("T")[0] ?? "";
@@ -187,7 +190,7 @@ export class ProjectCacheService extends AbstractCacheService<IProjectCache> {
     const filterString = isFiltered ? filterList.join("_") : "nofilter";
 
     return this._jsonFileHandler.generateFileName(
-      CACHE.AS_JSON,
+      AS_JSON,
       baseName,
       filterString,
       dateString
@@ -264,7 +267,7 @@ export class ProjectCacheService extends AbstractCacheService<IProjectCache> {
     //  Fetch data
     const pageRecord = await this._projectDataService.fetchProjectsPages({
       pageStart: 1,
-      pageSize: CACHE.PAGE_SIZE,
+      pageSize: PROJECT_CACHE.PAGE_SIZE,
       isAscending: false,
       filter: this._filter,
     });
@@ -272,7 +275,7 @@ export class ProjectCacheService extends AbstractCacheService<IProjectCache> {
     //  Assemble cache.
     const projectsCount: number =
       await this._projectDataService.fetchProjectsCount(this._filter);
-    const totalPages = Math.ceil(projectsCount / CACHE.PAGE_SIZE);
+    const totalPages = Math.ceil(projectsCount / PROJECT_CACHE.PAGE_SIZE);
     const cachePages: CachePageRecord = createCachePages(
       totalPages,
       this._cDate,
