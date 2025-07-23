@@ -4,14 +4,14 @@ import { REGEX } from "@/data";
 const AUTH_REGEX = REGEX.AUTH_REGEX;
 
 const loginWithEmail = z.object({
-  Email: z.email({
+  email: z.email({
     error: (iss) =>
       iss.input === undefined ? "Email is required." : "Invalid email.",
   }),
 
-  Username: z.undefined().optional(),
+  username: z.undefined().optional(),
 
-  Password: z
+  password: z
     .string({
       error: (iss) =>
         iss.input === undefined ? "Password is required." : "Invalid Password",
@@ -22,16 +22,16 @@ const loginWithEmail = z.object({
 });
 
 const loginWithUsername = z.object({
-  Email: z.undefined().optional(),
+  email: z.undefined().optional(),
 
-  Username: z
+  username: z
     .string({
       error: (iss) =>
         iss.input === undefined ? "Username is required." : "Invalid username.",
     })
     .regex(AUTH_REGEX.USERNAME, { error: "Invalid username." }),
 
-  Password: z
+  password: z
     .string({
       error: (iss) =>
         iss.input === undefined ? "Password is required." : "Invalid Password",

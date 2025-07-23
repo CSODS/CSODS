@@ -17,7 +17,7 @@ export async function verifyPassword(
   user: UserViewModel,
   passwordInput: string
 ): Promise<boolean> {
-  const match = await bcrypt.compare(passwordInput, user.Password);
+  const match = await bcrypt.compare(passwordInput, user.password);
 
   return match;
 }

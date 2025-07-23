@@ -32,17 +32,17 @@ export async function handleLogin(
     return;
   }
 
-  const match = await verifyPassword(foundUser, loginFields.Password);
+  const match = await verifyPassword(foundUser, loginFields.password);
 
   if (match) {
-    const roles = await req.userDataService.getUserRoles(foundUser.UserId);
+    const roles = await req.userDataService.getUserRoles(foundUser.userId);
 
     const payload: TokenPayload = {
       userInfo: {
-        email: foundUser.Email,
-        username: foundUser.Username,
-        studentName: foundUser.StudentName,
-        studentNumber: foundUser.StudentNumber,
+        email: foundUser.email,
+        username: foundUser.username,
+        studentName: foundUser.studentName,
+        studentNumber: foundUser.studentNumber,
         userIconUrl: "",
         roles: roles,
       },

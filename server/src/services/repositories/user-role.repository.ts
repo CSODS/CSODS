@@ -21,7 +21,7 @@ export class UserRoleRepository extends Repository<UserRolesTable> {
    */
   public async getRolesByUserId(userId: number): Promise<UserRoleViewModel[]> {
     const userRoles = await this._dbContext.query.UserRole.findMany({
-      where: eq(UserRole.UserId, userId),
+      where: eq(UserRole.userId, userId),
     });
 
     return userRoles;

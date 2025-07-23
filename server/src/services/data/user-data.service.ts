@@ -96,19 +96,19 @@ export class UserDataService {
     const userFilter: IUserFilter = {};
 
     if (user) {
-      const { Email, Username, StudentName, StudentNumber } = user;
+      const { email, username, studentName, studentNumber } = user;
 
       userFilter.filterType = "or";
-      userFilter.email = Email;
-      userFilter.username = Username;
-      userFilter.studentName = StudentName;
-      userFilter.studentNumber = StudentNumber;
+      userFilter.email = email;
+      userFilter.username = username;
+      userFilter.studentName = studentName;
+      userFilter.studentNumber = studentNumber;
     } else if (login) {
-      const { Email, Username } = login;
+      const { email, username } = login;
       //  either email or username will always be undefined due to how `LoginSchema` is
       //  declared.
-      userFilter.email = Email;
-      userFilter.username = Username;
+      userFilter.email = email;
+      userFilter.username = username;
       //  filter type isn't really needed but is still defined for robustness.
       userFilter.filterType = "and";
     }
@@ -134,7 +134,7 @@ export class UserDataService {
     const userRoles = await this._userRoleRepository.getRolesByUserId(userId);
 
     const roleList = userRoles.map(
-      (userRole) => ROLES[userRole.RoleId as keyof typeof ROLES]
+      (userRole) => ROLES[userRole.roleId as keyof typeof ROLES]
     );
 
     return roleList;
