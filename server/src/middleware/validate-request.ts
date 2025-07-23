@@ -22,7 +22,7 @@ export function validateRequest(
 
     if (!validationResult.success) {
       const msg = z.prettifyError(validationResult.error);
-      res.status(404).json({ message: msg });
+      res.status(404).send(msg);
       return;
     }
 
