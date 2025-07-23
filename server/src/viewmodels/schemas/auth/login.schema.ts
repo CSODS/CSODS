@@ -9,6 +9,8 @@ const loginWithEmail = z.object({
       iss.input === undefined ? "Email is required." : "Invalid email.",
   }),
 
+  Username: z.undefined().optional(),
+
   Password: z
     .string({
       error: (iss) =>
@@ -20,6 +22,8 @@ const loginWithEmail = z.object({
 });
 
 const loginWithUsername = z.object({
+  Email: z.undefined().optional(),
+
   Username: z
     .string({
       error: (iss) =>
