@@ -1,8 +1,16 @@
 import bcrypt from "bcryptjs";
 import { createContext } from "@/db/csods";
+import { AUTH } from "@data";
 import { UserRepository, IUserFilter } from "@services";
-import { LoginSchema, NewUser, UserViewModel } from "@viewmodels";
+import {
+  LoginSchema,
+  NewUser,
+  UserRoleViewModel,
+  UserViewModel,
+} from "@viewmodels";
 import { UserRoleRepository } from "../repositories/user-role.repository";
+
+const ROLES = AUTH.ROLES;
 
 export async function createUserDataService() {
   const dbContext = await createContext();
@@ -108,6 +116,28 @@ export class UserDataService {
     const existingUser = await this._userRepository.getUser(userFilter);
 
     return existingUser;
+  }
+
+  /**
+   * @public
+   * @async
+   * @function getUserRoles
+   * @description Asynchronously retrieves a list of roles linked to the provided
+   * {@link userId}. First, the function retrieves a list of {@link UserRoleViewModel}
+   * queried from the database, then maps each row a new list containing strings representing
+   * the actual names of the role looked up from the {@link ROLES} constants.
+   * TODO: Use a roles cache for look-up instead of the constants.
+   * @param userId
+   * @returns
+   */
+  public async getUserRoles(userId: number): Promise<string[]> {
+    const userRoles = await this._userRoleRepository.getRolesByUserId(userId);
+
+    const roleList = userRoles.map(
+      (userRole) => ROLES[userRole.RoleId as keyof typeof ROLES]
+    );
+
+    return roleList;
   }
 }
 
