@@ -26,7 +26,7 @@ export async function handleNewUser(
   const isExistingUser = await req.userDataService.isUserExists(user);
 
   if (isExistingUser) {
-    res.sendStatus(409).json({ message: "user already exists" });
+    res.status(409).json({ message: "user already exists" });
     return;
   }
 
