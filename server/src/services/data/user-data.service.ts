@@ -11,7 +11,7 @@ import {
 } from "@viewmodels";
 import { UserRoleRepository } from "../repositories/user-role.repository";
 
-const ROLES = AUTH.ROLES;
+const ROLES_MAP = AUTH.ROLES_MAP;
 
 export async function createUserDataService() {
   const dbContext = await createContext();
@@ -126,7 +126,7 @@ export class UserDataService {
    * @description Asynchronously retrieves a list of roles linked to the provided
    * {@link userId}. First, the function retrieves a list of {@link UserRoleViewModel}
    * queried from the database, then maps each row a new list containing strings representing
-   * the actual names of the role looked up from the {@link ROLES} constants.
+   * the actual names of the role looked up from the {@link ROLES_MAP} constants.
    * TODO: Use a roles cache for look-up instead of the constants.
    * @param userId
    * @returns
@@ -134,11 +134,16 @@ export class UserDataService {
   public async getUserRoles(userId: number): Promise<string[]> {
     const userRoles = await this._userRoleRepository.getRolesByUserId(userId);
 
-    const roleList = userRoles.map(
-      (userRole) => ROLES[userRole.roleId as keyof typeof ROLES]
-    );
+    const rolesMapValues = Object.values(ROLES_MAP);
 
-    return roleList;
+    const roleList = userRoles.map((userRole) => {
+      const role = rolesMapValues.find(
+        (roleDetails) => roleDetails.roleId === userRole.roleId
+      );
+      return role?.roleName;
+    });
+
+    return roleList.filter((role) => role !== undefined);
   }
   /**
    * @public
