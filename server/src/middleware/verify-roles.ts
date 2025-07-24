@@ -11,14 +11,14 @@ export function verifyRoles(...allowedRoles: string[]) {
 
     const rolesArray = [...allowedRoles];
 
-    const result = roles
+    const hasAllowedRole = roles
       //  compare each role to verify if it is included in the allowed roles
       .map((role) => rolesArray.includes(role))
       //  find a true value (first value). if there is one, request is authorized
       //  since the request would have an allowed role.
       .find((value) => value === true);
 
-    if (!result) {
+    if (!hasAllowedRole) {
       res
         .status(401)
         .json({ message: "User is not authorized to access this route." });
