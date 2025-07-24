@@ -59,7 +59,7 @@ export async function handleLogin(
       refreshToken,
       {
         httpOnly: true, // httpOnly is not available to js, much more secure
-        secure: true,
+        secure: false, // * set to false when testing with thunderclient
         sameSite: "none",
         maxAge: 24 * 60 * 60 * 1000, // 1 day
       }
