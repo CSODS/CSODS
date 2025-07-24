@@ -1,6 +1,11 @@
 import { Router, Request, Response } from "express";
 import dotenv from "dotenv";
-import { handleNewUser, handleLogin, handleRefreshToken } from "@controllers";
+import {
+  handleNewUser,
+  handleLogin,
+  handleRefreshToken,
+  handleLogout,
+} from "@controllers";
 import { API, COOKIES } from "@data";
 import { validateCookies, validateRequest } from "@middleware";
 import { loginSchema, registerSchema } from "@viewmodels";
@@ -27,32 +32,10 @@ authRouter.post(
   handleRefreshToken
 );
 
-authRouter.post(AUTH_ROUTES.SIGN_OUT, async (req, res) => {
-  //  controller logic here.
-});
+authRouter.post(
+  AUTH_ROUTES.SIGN_OUT,
+  validateCookies(COOKIE_NAMES.REFRESH_TOKEN),
+  handleLogout
+);
 
 export default authRouter;
-
-const handleLogout = (req: Request, res: Response) => {
-  //  delete the access token in the client.
-  const cookies = req.cookies;
-  if (!cookies?.jwt) return res.sendStatus(204); //  no content/not logged-in anyway
-
-  const refreshToken = cookies.jwt;
-  console.log(refreshToken);
-
-  //  TODO: replace this with querying the database/cache for the user with matching refresh token.
-  const foundUser = { user: "someuser", password: "someHash" };
-  if (!foundUser) {
-    res.clearCookie("jwt", { httpOnly: true, sameSite: "none", secure: true });
-    return res.sendStatus(204); // successfuly but no content.
-  }
-
-  //  Delete refresh token in db/cache.
-
-  //  TODO: filter otherUsers that are not the found user
-  //  set found user and refresh token to the current user.
-
-  res.clearCookie("jwt", { httpOnly: true, sameSite: "none", secure: true }); //  secure: true, only serves on https.
-  res.sendStatus(204);
-};
