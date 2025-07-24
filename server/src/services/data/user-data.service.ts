@@ -81,11 +81,14 @@ export class UserDataService {
    * @async
    * @function getExistingUser
    * @description Asynchronously retrieves a `User` from the database filtered using fields
-   * provided by either a {@link NewUser} or {@link LoginSchema} object.
-   * @param options.user - A {@link NewUser} object used for filtering the database query
+   * provided by either a {@link NewUser}, a {@link LoginSchema} object, or a `refreshToken`.
+   * If a `refreshToken` is provided, it will be hashed with {@link HashService.hashToken()}
+   * before getting submitted to the `userFilter`.
+   * @param options.user A {@link NewUser} object used for filtering the database query
    * during register operations.
-   * @param options.login - A {@link LoginSchema} object used for filtering the databse query
+   * @param options.login A {@link LoginSchema} object used for filtering the databse query
    * during login operations.
+   * @param options.refreshToken A string representing the `refreshToken`.
    * @returns A `promise` resolving to a {@link UserViewModel} if a `User` is found, or
    * `null` if no `User` is found.
    */
