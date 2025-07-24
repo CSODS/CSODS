@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { RegisterSchema } from "@viewmodels";
+import { RouteLogger } from "@/utils";
 
 /**
  * @public
@@ -19,8 +20,12 @@ export async function handleNewUser(
   req: Request<{}, {}, RegisterSchema>,
   res: Response
 ) {
+  const reqMethod = req.method;
+  const originalUrl = req.originalUrl;
+  const logHeader = `[${reqMethod} ${originalUrl}]`;
+
   //  usericon url is not required for now but will be implemented later.
-  const user = req.body;
+  const user: RegisterSchema = req.body;
 
   //  validate existing email, username, student name, and student number.
   const existingUser = await req.userDataService.getExistingUser({
@@ -29,15 +34,20 @@ export async function handleNewUser(
 
   if (existingUser) {
     res.status(409).json({ message: "user already exists" });
+    RouteLogger.debug(
+      `${logHeader} User with id: ${existingUser.userId} already exists.`
+    );
     return;
   }
 
-  try {
-    const inserted = await req.userDataService.insertUser(user);
-    inserted
-      ? res.status(201).json({ success: "New user created." })
-      : res.status(409).json({ failed: "Failed creating new user." });
-  } catch (err) {
-    res.status(500).json({ message: "server error" });
+  RouteLogger.debug(`${logHeader} Inserting new user.`);
+  const inserted = await req.userDataService.insertUser(user);
+
+  if (inserted) {
+    RouteLogger.debug(`${logHeader} New user inserted.`);
+    res.status(201).json({ success: "Registration success." });
+  } else {
+    RouteLogger.debug(`${logHeader} Failed inserting new user.`);
+    res.status(409).json({ failed: "Failed creating new user." });
   }
 }
