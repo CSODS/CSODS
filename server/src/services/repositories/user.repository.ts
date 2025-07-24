@@ -130,6 +130,7 @@ export class UserRepository extends Repository<UsersTable> {
         username,
         studentName,
         studentNumber,
+        refreshToken,
       } = filter;
       if (email && email.trim()) {
         conditions.push(eq(User.email, email));
@@ -145,6 +146,10 @@ export class UserRepository extends Repository<UsersTable> {
 
       if (studentNumber && studentNumber.trim()) {
         conditions.push(eq(User.studentNumber, studentNumber));
+      }
+
+      if (refreshToken && refreshToken.trim()) {
+        conditions.push(eq(User.refreshToken, refreshToken));
       }
 
       if (conditions.length > 0) {
@@ -176,4 +181,5 @@ export interface IUserFilter {
   username?: string;
   studentName?: string | null;
   studentNumber?: string | null;
+  refreshToken?: string | null;
 }
