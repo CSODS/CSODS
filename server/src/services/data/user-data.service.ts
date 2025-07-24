@@ -2,6 +2,7 @@ import bcrypt from "bcryptjs";
 import { createContext } from "@/db/csods";
 import { AUTH } from "@data";
 import { UserRepository, IUserFilter } from "@services";
+import { HashService } from "@/utils";
 import {
   LoginSchema,
   NewUser,
@@ -138,6 +139,32 @@ export class UserDataService {
     );
 
     return roleList;
+  }
+  /**
+   * @public
+   * @async
+   * @function updateRefreshToken
+   * @description Asynchronously updates the `refreshToken` of a `User` in the database.
+   * Hashes the refresh token first with the {@link HashService.hashToken()} method then
+   * calls the {@link UserRepository.updateRefreshToken()} method to persist the changes
+   * to the database.
+   * @param userId The `userId` of the `User` whose `refreshToken` needs to be updated.
+   * @param refreshToken The `string` representing the `refreshToken` to be stored.
+   * @returns A `Promise` that resolves to the `userId` of the updated `User` or `null`
+   * if the update fails.
+   */
+  public async updateRefreshToken(
+    userId: number,
+    refreshToken: string
+  ): Promise<number | null> {
+    const refreshTokenHash = HashService.hashToken(refreshToken);
+
+    const updatedUserId = await this._userRepository.updateRefreshToken(
+      userId,
+      refreshTokenHash
+    );
+
+    return updatedUserId;
   }
 }
 
