@@ -6,8 +6,23 @@ import jwt from "jsonwebtoken";
 
 const COOKIE_NAMES = COOKIES.COOKIE_NAMES;
 
+/**
+ * @public
+ * @function handleRefreshToken
+ * @description Controller for refreshing the access token with the refresh token.
+ * - Retrieves the `refreshToken` from the request `cookies` and uses it to find the
+ * corresponding `User` in the database.
+ * - If the `User` is found and the `username` matches the one in the `payload`, refresh the
+ * `accessToken`.
+ * - If the `foundUser` and the `payload` do not match, respond with status code `403`.
+ * - If an error occurs while verifying the `refreshToken` or creating a new `accessToken`,
+ * respond with status code `403`.
+ * @param req
+ * @param res
+ * @returns
+ */
 export async function handleRefreshToken(req: Request, res: Response) {
-  const refreshToken = req.cookies[COOKIE_NAMES.REFRESH_TOKEN];
+  const refreshToken = req.cookies[COOKIE_NAMES.REFRESH_TOKEN] as string;
 
   const foundUser = await req.userDataService.getExistingUser({
     refreshToken: refreshToken,
