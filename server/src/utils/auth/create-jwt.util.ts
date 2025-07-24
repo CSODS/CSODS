@@ -51,13 +51,13 @@ const tokenConfigRecord: TokenConfigRecord = {
   access: {
     secret: process.env.ACCESS_TOKEN_SECRET,
     signOptions: {
-      expiresIn: "10m",
+      expiresIn: "30s",
     } as jwt.SignOptions,
   },
   refresh: {
     secret: process.env.REFRESH_TOKEN_SECRET,
     signOptions: {
-      expiresIn: "1d",
+      expiresIn: "30d",
     } as jwt.SignOptions,
   },
 };
