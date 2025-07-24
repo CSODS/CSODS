@@ -20,34 +20,35 @@ export async function handleNewUser(
   req: Request<{}, {}, RegisterSchema>,
   res: Response
 ) {
-  const reqMethod = req.method;
-  const originalUrl = req.originalUrl;
-  const logHeader = `[${reqMethod} ${originalUrl}]`;
+  const { method, originalUrl, body: user } = req;
+  const logHeader = `[${method} ${originalUrl}]`;
 
-  //  usericon url is not required for now but will be implemented later.
-  const user: RegisterSchema = req.body;
+  //  utility functions
+  const log = (msg: string) => RouteLogger.debug(`${logHeader} ${msg}.`);
+  const logSuccess = (logMsg: string, resMsg: string) => {
+    log(logMsg);
+    res.status(201).json({ success: resMsg });
+  };
+  const logFail = (logMsg: string, resMsg: string) => {
+    log(logMsg);
+    res.status(409).json({ failed: resMsg });
+  };
 
   //  validate existing email, username, student name, and student number.
   const existingUser = await req.userDataService.getExistingUser({
     user: user,
   });
 
-  if (existingUser) {
-    res.status(409).json({ message: "user already exists" });
-    RouteLogger.debug(
-      `${logHeader} User with id: ${existingUser.userId} already exists.`
+  if (existingUser)
+    return logFail(
+      "User already exists",
+      `User with id: ${existingUser.userId} already exists`
     );
-    return;
-  }
 
-  RouteLogger.debug(`${logHeader} Inserting new user.`);
+  log(`Inserting new user.`);
   const inserted = await req.userDataService.insertUser(user);
 
-  if (inserted) {
-    RouteLogger.debug(`${logHeader} New user inserted.`);
-    res.status(201).json({ success: "Registration success." });
-  } else {
-    RouteLogger.debug(`${logHeader} Failed inserting new user.`);
-    res.status(409).json({ failed: "Failed creating new user." });
-  }
+  return inserted
+    ? logSuccess("New user inserted", "Registration success")
+    : logFail("Failed inserting new user", "Failed registration.");
 }
