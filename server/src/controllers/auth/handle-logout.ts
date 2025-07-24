@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { AUTH } from "@data";
+import { RouteLogger } from "@/utils";
 
 const { refresh } = AUTH.TOKEN_CONFIG_RECORD;
 const { cookieConfig: refreshCookie } = refresh;
@@ -17,11 +18,17 @@ const { cookieConfig: refreshCookie } = refresh;
  * @returns
  */
 export async function handleLogout(req: Request, res: Response) {
-  const cookies = req.cookies;
-  if (!cookies?.[refreshCookie!.cookieName]) {
-    res.status(204).json({ message: "Already logged out." });
-    return;
-  }
+  const { method, originalUrl, cookies } = req;
+  const logHeader = `[${method} ${originalUrl}]`;
+
+  const log = (msg: string) => RouteLogger.debug(`${logHeader} ${msg}.`);
+  const loggedOut = (msg: string) => {
+    log(msg);
+    res.status(204).json({ message: `Status 204. ${msg}.` });
+  };
+
+  if (!cookies?.[refreshCookie!.cookieName])
+    return loggedOut("Already logged out");
 
   const refreshToken: string = cookies[refreshCookie!.cookieName];
 
@@ -29,10 +36,11 @@ export async function handleLogout(req: Request, res: Response) {
     refreshToken: refreshToken,
   });
 
-  if (foundUser)
+  if (foundUser) {
+    log(`Deleting refresh token of user with id: ${foundUser.userId}`);
     await req.userDataService.updateRefreshToken(foundUser.userId, null);
+  }
 
   res.clearCookie(refreshCookie!.cookieName, refreshCookie!.clearOptions);
-
-  res.status(204).json({ message: "Logged out successfully." });
+  return loggedOut("Logged out successfully");
 }
