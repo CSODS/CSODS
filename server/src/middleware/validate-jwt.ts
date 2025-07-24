@@ -6,7 +6,7 @@ import { TokenPayload } from "@viewmodels";
 dotenv.config();
 
 //  TODO: add handling for anonymous users (signed in as guest).
-export function verifyJWT(req: Request, res: Response, next: NextFunction) {
+export function validateJWT(req: Request, res: Response, next: NextFunction) {
   const authHeader = req.headers["authorization"];
 
   if (!authHeader?.startsWith("Bearer ")) {
