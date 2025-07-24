@@ -2,14 +2,15 @@ import { Request, Response, NextFunction } from "express";
 
 export function verifyRoles(...allowedRoles: string[]) {
   return (req: Request, res: Response, next: NextFunction) => {
-    const roles = ((<any>req)?.roles as string[]) ?? null;
-    //  ideally use an interface or extend the Request body for better typing.
-    if (!roles) return res.sendStatus(401); // unauthorized. no roles.
+    const roles = req.authPayload?.userInfo.roles ?? null;
+
+    if (!roles) {
+      res.status(401).json({ message: "Unauthorized. User has no roles." });
+      return;
+    }
+
     const rolesArray = [...allowedRoles];
-    //  logging. remove when development is done.
-    console.log(rolesArray); // roles from params
-    console.log(roles); //  roles from jwt
-    //
+
     const result = roles
       //  compare each role to verify if it is included in the allowed roles
       .map((role) => rolesArray.includes(role))
@@ -17,7 +18,12 @@ export function verifyRoles(...allowedRoles: string[]) {
       //  since the request would have an allowed role.
       .find((value) => value === true);
 
-    if (!result) return res.sendStatus(401); //  unauthorized. no allowed roles.
+    if (!result) {
+      res
+        .status(401)
+        .json({ message: "User is not authorized to access this route." });
+      return;
+    }
 
     next();
   };
