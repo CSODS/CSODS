@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 import { Request, Response } from "express";
 import { LoginSchema, TokenPayload } from "@viewmodels";
-import { verifyPassword } from "@utils";
+import { createPayload, verifyPassword } from "@utils";
 
 /**
  * @public
@@ -35,18 +35,12 @@ export async function handleLogin(
   const match = await verifyPassword(foundUser, loginFields.password);
 
   if (match) {
-    const roles = await req.userDataService.getUserRoles(foundUser.userId);
+    const roles: string[] = await req.userDataService.getUserRoles(
+      foundUser.userId
+    );
 
-    const payload: TokenPayload = {
-      userInfo: {
-        email: foundUser.email,
-        username: foundUser.username,
-        studentName: foundUser.studentName,
-        studentNumber: foundUser.studentNumber,
-        userIconUrl: "",
-        roles: roles,
-      },
-    };
+    const payload: TokenPayload = createPayload(foundUser, roles);
+
     //  create JWT token
     const accessToken = jwt.sign(
       payload,
