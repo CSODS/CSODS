@@ -28,7 +28,6 @@ app.use(routeLogger);
 
 //  for routes
 app.use(ROUTES.AUTH, authRouteLimiter, attachUserDataService, authRouter);
-//  TODO: add app.use(verifyJWT); for jwt verification middleware
 
 app.use(attachProjectCachePageService);
 app.use(ROUTES.PROJECTS, projectsRouteLimiter, projectsRouter);
