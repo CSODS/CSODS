@@ -14,4 +14,6 @@ export const User = sqliteTable("users_", {
   studentNumber: text("student_number").unique(),
 
   userIconUrl: text("user_icon_url"),
+
+  refreshToken: text("refresh_token"),
 });
