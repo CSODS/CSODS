@@ -1,5 +1,5 @@
 import { AUTH } from "@data";
-import { createJwt } from "@utils";
+import { createJwt, RouteLogger } from "@utils";
 import { tokenPayload, TokenPayload } from "@viewmodels";
 import { Request, Response } from "express";
 import jwt from "jsonwebtoken";
@@ -23,6 +23,10 @@ const { cookieName: REFRESH_TOKEN } = refresh.cookieConfig!;
  * @returns
  */
 export async function handleRefreshToken(req: Request, res: Response) {
+  const reqMethod = req.method;
+  const originalUrl = req.originalUrl;
+  const logHeader = `[${reqMethod} ${originalUrl}]`;
+
   const refreshToken = req.cookies[REFRESH_TOKEN] as string;
 
   const foundUser = await req.userDataService.getExistingUser({
@@ -31,27 +35,31 @@ export async function handleRefreshToken(req: Request, res: Response) {
 
   //  evaluate jwt
   try {
+    RouteLogger.debug(`${logHeader} Attempting to refresh token.`);
+
     const payload: TokenPayload = jwt.verify(
       refreshToken,
       process.env.REFRESH_TOKEN_SECRET!
     ) as TokenPayload;
 
     const verifiedPayload: TokenPayload = tokenPayload.parse(payload);
+    RouteLogger.debug(`${logHeader} New payload created.`);
 
-    if (foundUser?.username !== payload.userInfo.username) {
+    if (foundUser?.username !== verifiedPayload.userInfo.username) {
       res
         .status(403)
         .json({ message: "403 Forbidden. Refresh token invalid." });
+      RouteLogger.debug(`${logHeader} Invalid refresh token.`);
       return;
     }
 
     const accessToken = createJwt(verifiedPayload, { tokenType: "access" });
+    RouteLogger.debug(`${logHeader} Access token refreshed.`);
 
     res.json({ accessToken });
     return;
   } catch (err) {
-    // todo: ADD WINSTON LOGGING
-    console.error("Failed access token refresh.", err);
+    RouteLogger.error(`${logHeader} Failed to refresh access token.`, err);
     res.sendStatus(403);
     return;
   }
