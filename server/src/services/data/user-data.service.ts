@@ -92,7 +92,7 @@ export class UserDataService {
   public async getExistingUser(
     options: GetExistingUserOptions
   ): Promise<UserViewModel | null> {
-    const { user, login } = options;
+    const { user, login, refreshToken } = options;
 
     const userFilter: IUserFilter = {};
 
@@ -112,6 +112,10 @@ export class UserDataService {
       userFilter.username = username;
       //  filter type isn't really needed but is still defined for robustness.
       userFilter.filterType = "and";
+    } else if (refreshToken) {
+      const hashedToken = HashService.hashToken(refreshToken);
+
+      userFilter.refreshToken = hashedToken;
     }
 
     const existingUser = await this._userRepository.getUser(userFilter);
@@ -173,14 +177,22 @@ export class UserDataService {
   }
 }
 
-type GetExistingUserOptions = withUser | withLogin;
+type GetExistingUserOptions = withUser | withLogin | withRefreshToken;
 
 type withUser = {
   user: NewUser;
   login?: undefined;
+  refreshToken?: undefined;
 };
 
 type withLogin = {
   user?: undefined;
   login: LoginSchema;
+  refreshToken?: undefined;
+};
+
+type withRefreshToken = {
+  user?: undefined;
+  login?: undefined;
+  refreshToken: string;
 };
