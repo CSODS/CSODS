@@ -1,7 +1,6 @@
-import jwt from "jsonwebtoken";
 import { Request, Response } from "express";
 import { LoginSchema, TokenPayload } from "@viewmodels";
-import { createPayload, verifyPassword } from "@utils";
+import { createJwt, createPayload, verifyPassword } from "@utils";
 
 /**
  * @public
@@ -41,17 +40,8 @@ export async function handleLogin(
 
     const payload: TokenPayload = createPayload(foundUser, roles);
 
-    //  create JWT token
-    const accessToken = jwt.sign(
-      payload,
-      process.env.ACCESS_TOKEN_SECRET!,
-      { expiresIn: "10m" } //  ideally 5-10 mins
-    );
-    const refreshToken = jwt.sign(
-      payload,
-      process.env.REFRESH_TOKEN_SECRET!,
-      { expiresIn: "1d" } //  1 day
-    );
+    const accessToken = createJwt(payload, { tokenType: "access" });
+    const refreshToken = createJwt(payload, { tokenType: "refresh" });
 
     //  TODO: filter otherUsers that are not the found user
     //  set found user and refresh token to the current user.
