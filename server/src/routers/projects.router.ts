@@ -1,11 +1,14 @@
 import express, { Request } from "express";
 import { API } from "@data";
+import { verifyJWT } from "@middleware";
 import { IProjectDetails } from "@viewmodels";
 import { IProjectFilter } from "@services";
 
 const PROJECT_ROUTES = API.PROJECT_ROUTES;
 
 const projectsRouter = express.Router();
+
+projectsRouter.use(verifyJWT);
 
 //  for testing
 projectsRouter.get(PROJECT_ROUTES.LOAD_PROJECTS, async (req, res) => {

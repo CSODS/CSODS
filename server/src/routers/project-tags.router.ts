@@ -1,9 +1,12 @@
 import express from "express";
 import { API } from "@data";
+import { verifyJWT } from "@/middleware";
 
 const PROJECT_TAG_ROUTES = API.PROJECT_TAG_ROUTES;
 
 const projectTagsRouter = express.Router();
+
+projectTagsRouter.use(verifyJWT);
 
 projectTagsRouter.get(PROJECT_TAG_ROUTES.ALL_DATA, async (req, res) => {
   const tagsCache = await req.tagsCacheHandler.getTagsCache();
