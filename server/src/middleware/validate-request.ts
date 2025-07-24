@@ -1,3 +1,4 @@
+import { RouteLogger } from "@/utils";
 import { Request, Response, NextFunction } from "express";
 import z, { ZodType } from "zod";
 
@@ -16,20 +17,29 @@ export function validateRequest(
   schema: ZodType
 ): (req: Request, res: Response, next: NextFunction) => void {
   return (req: Request, res: Response, next: NextFunction) => {
-    const fields: ZodType = req.body;
+    const { method, originalUrl, body } = req;
+    const logHeader = `[${method} ${originalUrl}]`;
 
+    const log = (msg: string) => {
+      RouteLogger.debug(`${logHeader} ${msg}`);
+    };
+    const validationFail = (msg: string) => {
+      log(msg);
+      res.status(404).json({ message: msg });
+    };
+
+    const fields: ZodType = body;
+
+    log("Validating request schema...");
     const validationResult = schema.safeParse(fields);
 
-    if (!validationResult.success) {
-      const msg = z.prettifyError(validationResult.error);
-      res.status(404).send(msg);
-      return;
-    }
+    if (!validationResult.success)
+      return validationFail(z.prettifyError(validationResult.error));
 
     const validatedData = validationResult.data;
 
     req.body = validatedData;
-
+    log("Request schema validated.");
     next();
   };
 }
