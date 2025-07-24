@@ -26,6 +26,7 @@ export async function handleLogin(
   const { method, originalUrl, body: loginFields } = req;
   const logHeader = `[${method} ${originalUrl}]`;
 
+  //  utility functions
   const log = (msg: string) => RouteLogger.debug(`${logHeader} ${msg}`);
   const loginFail = (reason: string) => {
     log(`Login failed: ${reason}`);
@@ -35,6 +36,7 @@ export async function handleLogin(
   const { email, username } = loginFields;
   const loginMethod = email ? "email" : username ? "username" : "";
 
+  //  user verification
   log("Validating login credentials.");
   const foundUser = await req.userDataService.getExistingUser({
     login: loginFields,
@@ -46,12 +48,11 @@ export async function handleLogin(
   if (!isUserVerified)
     return loginFail(`Incorrect password for ${email ?? username}`);
 
+  //  token creation
   const roles: string[] = await req.userDataService.getUserRoles(
     foundUser.userId
   );
-
   const payload: TokenPayload = createPayload(foundUser, roles);
-
   const accessToken = createJwt(payload, { tokenType: "access" });
   const refreshToken = createJwt(payload, { tokenType: "refresh" });
 
@@ -68,6 +69,7 @@ export async function handleLogin(
     return;
   }
 
+  //  cookie creation
   res.cookie(
     refreshCookie!.cookieName, //  cookie name (could be anything really)
     refreshToken,
