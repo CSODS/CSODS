@@ -159,21 +159,25 @@ export class UserDataService {
    * @description Asynchronously updates the `refreshToken` of a `User` in the database.
    * Hashes the refresh token first with the {@link HashService.hashToken()} method then
    * calls the {@link UserRepository.updateRefreshToken()} method to persist the changes
+   * to the database. If the `refreshToken` is null, skip hashing and store null directly
    * to the database.
    * @param userId The `userId` of the `User` whose `refreshToken` needs to be updated.
-   * @param refreshToken The `string` representing the `refreshToken` to be stored.
+   * @param refreshToken The `string` or `null` representing the `refreshToken` value
+   * to be stored.
    * @returns A `Promise` that resolves to the `userId` of the updated `User` or `null`
    * if the update fails.
    */
   public async updateRefreshToken(
     userId: number,
-    refreshToken: string
+    refreshToken: string | null
   ): Promise<number | null> {
-    const refreshTokenHash = HashService.hashToken(refreshToken);
+    const tokenValue = refreshToken
+      ? HashService.hashToken(refreshToken)
+      : null;
 
     const updatedUserId = await this._userRepository.updateRefreshToken(
       userId,
-      refreshTokenHash
+      tokenValue
     );
 
     return updatedUserId;
