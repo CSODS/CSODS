@@ -21,7 +21,6 @@ export async function handleLogin(
 ) {
   const loginFields: LoginSchema = req.body;
 
-  //  find the user in the database.
   const foundUser = await req.userDataService.getExistingUser({
     login: loginFields,
   });
@@ -43,8 +42,17 @@ export async function handleLogin(
     const accessToken = createJwt(payload, { tokenType: "access" });
     const refreshToken = createJwt(payload, { tokenType: "refresh" });
 
-    //  TODO: filter otherUsers that are not the found user
-    //  set found user and refresh token to the current user.
+    const updatedUserId = await req.userDataService.updateRefreshToken(
+      foundUser.userId,
+      refreshToken
+    );
+
+    if (!updatedUserId) {
+      res.status(500).json({
+        message: "Failed updating refresh token. Please try again later.", //  database update operation failed.
+      });
+      return;
+    }
 
     res.cookie(
       "jwt", //  cookie name (could be anything really)
