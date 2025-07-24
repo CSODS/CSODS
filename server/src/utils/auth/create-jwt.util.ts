@@ -1,10 +1,12 @@
 import dotenv from "dotenv";
 import jwt from "jsonwebtoken";
+import { AUTH } from "@data";
 import { TokenPayload } from "@viewmodels";
 
 dotenv.config();
 
-type TokenType = "access" | "refresh";
+const TOKEN_CONFIG_RECORD = AUTH.TOKEN_CONFIG_RECORD;
+type TokenType = AUTH.TokenType;
 
 interface JwtOptions {
   tokenType: TokenType;
@@ -22,7 +24,7 @@ interface JwtOptions {
  */
 export function createJwt(payload: TokenPayload, options: JwtOptions): string {
   const { tokenType } = options;
-  const { secret, signOptions } = tokenConfigRecord[tokenType];
+  const { secret, signOptions } = TOKEN_CONFIG_RECORD[tokenType];
 
   if (!secret) {
     throw new Error(
@@ -34,30 +36,3 @@ export function createJwt(payload: TokenPayload, options: JwtOptions): string {
 
   return token;
 }
-
-type TokenConfigRecord = Record<TokenType, TokenConfig>;
-
-interface TokenConfig {
-  secret: string | undefined;
-  signOptions: jwt.SignOptions;
-}
-
-/**
- * @constant tokenConfigRecord
- * @description A {@link TokenConfigRecord} object containing config details about different
- * token types. It's key is of type {@link TokenType}.
- */
-const tokenConfigRecord: TokenConfigRecord = {
-  access: {
-    secret: process.env.ACCESS_TOKEN_SECRET,
-    signOptions: {
-      expiresIn: "30s",
-    } as jwt.SignOptions,
-  },
-  refresh: {
-    secret: process.env.REFRESH_TOKEN_SECRET,
-    signOptions: {
-      expiresIn: "30d",
-    } as jwt.SignOptions,
-  },
-};
