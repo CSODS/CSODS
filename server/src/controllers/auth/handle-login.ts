@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { AUTH } from "@data";
 import { LoginSchema, TokenPayload } from "@viewmodels";
-import { createJwt, createPayload, verifyPassword } from "@utils";
+import { createJwt, createPayload, RouteLogger, verifyPassword } from "@utils";
 
 const { refresh } = AUTH.TOKEN_CONFIG_RECORD;
 const { cookieConfig: refreshCookie } = refresh;
@@ -23,49 +23,57 @@ export async function handleLogin(
   req: Request<{}, {}, LoginSchema>,
   res: Response
 ) {
-  const loginFields: LoginSchema = req.body;
+  const { method, originalUrl, body: loginFields } = req;
+  const logHeader = `[${method} ${originalUrl}]`;
 
+  const log = (msg: string) => RouteLogger.debug(`${logHeader} ${msg}`);
+  const loginFail = (reason: string) => {
+    log(`Login failed: ${reason}`);
+    res.status(401).json({ message: `Incorrect ${loginMethod} or password.` });
+  };
+
+  const { email, username } = loginFields;
+  const loginMethod = email ? "email" : username ? "username" : "";
+
+  log("Validating login credentials.");
   const foundUser = await req.userDataService.getExistingUser({
     login: loginFields,
   });
 
-  if (!foundUser) {
-    res.sendStatus(401); // unauthorized
-    return;
-  }
+  if (!foundUser) return loginFail(`${loginMethod} doesn't exist.`);
 
   const isUserVerified = await verifyPassword(foundUser, loginFields.password);
+  if (!isUserVerified)
+    return loginFail(`Incorrect password for ${email ?? username}`);
 
-  if (isUserVerified) {
-    const roles: string[] = await req.userDataService.getUserRoles(
-      foundUser.userId
-    );
+  const roles: string[] = await req.userDataService.getUserRoles(
+    foundUser.userId
+  );
 
-    const payload: TokenPayload = createPayload(foundUser, roles);
+  const payload: TokenPayload = createPayload(foundUser, roles);
 
-    const accessToken = createJwt(payload, { tokenType: "access" });
-    const refreshToken = createJwt(payload, { tokenType: "refresh" });
+  const accessToken = createJwt(payload, { tokenType: "access" });
+  const refreshToken = createJwt(payload, { tokenType: "refresh" });
 
-    const updatedUserId = await req.userDataService.updateRefreshToken(
-      foundUser.userId,
-      refreshToken
-    );
+  const updatedUserId = await req.userDataService.updateRefreshToken(
+    foundUser.userId,
+    refreshToken
+  );
 
-    if (!updatedUserId) {
-      res.status(500).json({
-        message: "Failed updating refresh token. Please try again later.", //  database update operation failed.
-      });
-      return;
-    }
-
-    res.cookie(
-      refreshCookie!.cookieName, //  cookie name (could be anything really)
-      refreshToken,
-      refreshCookie!.cookieOptions
-    );
-    res.json({ accessToken });
-  } else {
-    res.sendStatus(401); // unauthorized.
+  if (!updatedUserId) {
+    RouteLogger.error(`${logHeader} Failed updating refresh token.`);
+    res.status(500).json({
+      message: "Failed updating refresh token. Please try again later.", //  database update operation failed.
+    });
     return;
   }
+
+  res.cookie(
+    refreshCookie!.cookieName, //  cookie name (could be anything really)
+    refreshToken,
+    refreshCookie!.cookieOptions
+  );
+
+  log("Login success.");
+  res.json({ accessToken });
 }
