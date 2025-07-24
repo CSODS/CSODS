@@ -1,3 +1,6 @@
+import { CookieOptions } from "express";
+import jwt from "jsonwebtoken";
+
 /**
  * TODO: REPLACE WITH ACTUAL CACHE!!!
  * @deprecated
@@ -19,4 +22,44 @@ export const ROLES_MAP: RolesMap = {
   Student: { roleId: 4, roleName: "Student" },
   Moderator: { roleId: 5, roleName: "Moderator" },
   Administrator: { roleId: 6, roleName: "Administrator" },
+} as const;
+
+export type TokenType = "access" | "refresh";
+type CookieConfig = {
+  cookieName: string;
+  cookieOptions: CookieOptions;
+};
+type TokenConfig = {
+  secret: string | undefined;
+  signOptions: jwt.SignOptions;
+  cookieConfig?: CookieConfig;
+};
+type TokenConfigRecord = Record<TokenType, TokenConfig>;
+
+/**
+ * @constant tokenConfigRecord
+ * @description A {@link TokenConfigRecord} object containing config details about different
+ * token types. It's key is of type {@link TokenType}.
+ */
+export const TOKEN_CONFIG_RECORD: TokenConfigRecord = {
+  access: {
+    secret: process.env.ACCESS_TOKEN_SECRET,
+    signOptions: {
+      expiresIn: "30s",
+    } as jwt.SignOptions,
+  },
+  refresh: {
+    secret: process.env.REFRESH_TOKEN_SECRET,
+    signOptions: {
+      expiresIn: "30d",
+    } as jwt.SignOptions,
+    cookieConfig: {
+      cookieName: "refresh_token",
+      cookieOptions: {
+        httpOnly: true,
+        sameSite: "none",
+        secure: false, // *change to true in production/when not using thunderclient
+      },
+    },
+  },
 } as const;
