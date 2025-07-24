@@ -1,11 +1,13 @@
 import { Router, Request, Response } from "express";
 import dotenv from "dotenv";
 import { handleNewUser, handleLogin, handleRefreshToken } from "@controllers";
-import { API } from "@data";
+import { API, COOKIES } from "@data";
 import { validateCookies, validateRequest } from "@middleware";
 import { loginSchema, registerSchema } from "@viewmodels";
 
 dotenv.config();
+
+const COOKIE_NAMES = COOKIES.COOKIE_NAMES;
 
 const AUTH_ROUTES = API.AUTH_ROUTES;
 
@@ -21,7 +23,7 @@ authRouter.post(
 
 authRouter.post(
   AUTH_ROUTES.REFRESH,
-  validateCookies("jwt"),
+  validateCookies(COOKIE_NAMES.REFRESH_TOKEN),
   handleRefreshToken
 );
 

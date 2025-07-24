@@ -1,6 +1,9 @@
 import { Request, Response } from "express";
+import { COOKIES } from "@data";
 import { LoginSchema, TokenPayload } from "@viewmodels";
 import { createJwt, createPayload, verifyPassword } from "@utils";
+
+const COOKIE_NAMES = COOKIES.COOKIE_NAMES;
 
 /**
  * @public
@@ -55,7 +58,7 @@ export async function handleLogin(
     }
 
     res.cookie(
-      "jwt", //  cookie name (could be anything really)
+      COOKIE_NAMES.REFRESH_TOKEN, //  cookie name (could be anything really)
       refreshToken,
       {
         httpOnly: true, // httpOnly is not available to js, much more secure

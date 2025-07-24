@@ -1,10 +1,13 @@
-import { createJwt } from "@/utils";
-import { tokenPayload, TokenPayload } from "@/viewmodels";
+import { COOKIES } from "@data";
+import { createJwt } from "@utils";
+import { tokenPayload, TokenPayload } from "@viewmodels";
 import { Request, Response } from "express";
 import jwt from "jsonwebtoken";
 
+const COOKIE_NAMES = COOKIES.COOKIE_NAMES;
+
 export async function handleRefreshToken(req: Request, res: Response) {
-  const refreshToken = req.cookies["jwt"];
+  const refreshToken = req.cookies[COOKIE_NAMES.REFRESH_TOKEN];
 
   const foundUser = await req.userDataService.getExistingUser({
     refreshToken: refreshToken,
