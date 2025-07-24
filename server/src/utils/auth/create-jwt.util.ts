@@ -1,9 +1,6 @@
-import dotenv from "dotenv";
 import jwt from "jsonwebtoken";
 import { AUTH } from "@data";
 import { TokenPayload } from "@viewmodels";
-
-dotenv.config();
 
 const TOKEN_CONFIG_RECORD = AUTH.TOKEN_CONFIG_RECORD;
 type TokenType = AUTH.TokenType;

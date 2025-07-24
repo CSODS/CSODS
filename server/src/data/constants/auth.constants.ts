@@ -1,5 +1,8 @@
 import { CookieOptions } from "express";
+import dotenv from "dotenv";
 import jwt from "jsonwebtoken";
+
+dotenv.config();
 
 /**
  * TODO: REPLACE WITH ACTUAL CACHE!!!
