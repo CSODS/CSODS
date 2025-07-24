@@ -1,3 +1,4 @@
+import cookieParser from "cookie-parser";
 import cors from "cors";
 import express from "express";
 import { API } from "@data";
@@ -17,13 +18,13 @@ const ROUTES = API.ROUTES;
 
 const app = express();
 
-//  for express json parsing
-app.use(express.json());
-
 //  whitelist api so connection works and you can make requests.
 app.use(cors());
 
-//  route logging middleware for profiling route request methods.
+//  for express json parsing
+app.use(express.json());
+
+app.use(cookieParser());
 app.use(routeLogger);
 
 //  for routes
