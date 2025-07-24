@@ -20,7 +20,7 @@ export async function handleNewUser(
   req: Request<{}, {}, RegisterSchema>,
   res: Response
 ) {
-  const { method, originalUrl, body: user } = req;
+  const { method, originalUrl, body: user, userDataService } = req;
   const logHeader = `[${method} ${originalUrl}]`;
 
   //  utility functions
@@ -35,7 +35,7 @@ export async function handleNewUser(
   };
 
   //  validate existing email, username, student name, and student number.
-  const existingUser = await req.userDataService.getExistingUser({
+  const existingUser = await userDataService.getExistingUser({
     user: user,
   });
 
@@ -46,7 +46,7 @@ export async function handleNewUser(
     );
 
   log(`Inserting new user.`);
-  const inserted = await req.userDataService.insertUser(user);
+  const inserted = await userDataService.insertUser(user);
 
   return inserted
     ? logSuccess("New user inserted", "Registration success")

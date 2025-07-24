@@ -23,8 +23,10 @@ export async function handleLogin(
   req: Request<{}, {}, LoginSchema>,
   res: Response
 ) {
-  const { method, originalUrl, body: loginFields } = req;
+  const { method, originalUrl, body: loginFields, userDataService } = req;
   const logHeader = `[${method} ${originalUrl}]`;
+  const { email, username } = loginFields;
+  const loginMethod = email ? "email" : username ? "username" : "";
 
   //  utility functions
   const log = (msg: string) => RouteLogger.debug(`${logHeader} ${msg}`);
@@ -32,13 +34,16 @@ export async function handleLogin(
     log(`Login failed: ${reason}`);
     res.status(401).json({ message: `Incorrect ${loginMethod} or password.` });
   };
-
-  const { email, username } = loginFields;
-  const loginMethod = email ? "email" : username ? "username" : "";
+  const internalError = (reason: string) => {
+    log(reason);
+    res
+      .status(500)
+      .json({ message: `Status 500. ${reason}. Please try again later.` });
+  };
 
   //  user verification
   log("Validating login credentials.");
-  const foundUser = await req.userDataService.getExistingUser({
+  const foundUser = await userDataService.getExistingUser({
     login: loginFields,
   });
 
@@ -49,25 +54,17 @@ export async function handleLogin(
     return loginFail(`Incorrect password for ${email ?? username}`);
 
   //  token creation
-  const roles: string[] = await req.userDataService.getUserRoles(
-    foundUser.userId
-  );
+  const roles: string[] = await userDataService.getUserRoles(foundUser.userId);
   const payload: TokenPayload = createPayload(foundUser, roles);
   const accessToken = createJwt(payload, { tokenType: "access" });
   const refreshToken = createJwt(payload, { tokenType: "refresh" });
 
-  const updatedUserId = await req.userDataService.updateRefreshToken(
+  const updatedUserId = await userDataService.updateRefreshToken(
     foundUser.userId,
     refreshToken
   );
 
-  if (!updatedUserId) {
-    RouteLogger.error(`${logHeader} Failed updating refresh token.`);
-    res.status(500).json({
-      message: "Failed updating refresh token. Please try again later.", //  database update operation failed.
-    });
-    return;
-  }
+  if (!updatedUserId) return internalError("Failed updating refresh token.");
 
   //  cookie creation
   res.cookie(

@@ -23,19 +23,19 @@ const { cookieName: REFRESH_TOKEN } = refresh.cookieConfig!;
  * @returns
  */
 export async function handleRefreshToken(req: Request, res: Response) {
-  const { method, originalUrl, cookies } = req;
+  const { method, originalUrl, cookies, userDataService } = req;
   const logHeader = `[${method} ${originalUrl}]`;
 
   //  utility functions
   const log = (msg: string) => RouteLogger.debug(`${logHeader} ${msg}.`);
   const logFail = (msg: string) => {
     log(msg);
-    res.status(403).json({ message: `403 Forbidden. ${msg}` });
+    res.status(403).json({ message: `403 Forbidden. ${msg}.` });
   };
 
   const refreshToken = cookies[REFRESH_TOKEN] as string;
 
-  const foundUser = await req.userDataService.getExistingUser({
+  const foundUser = await userDataService.getExistingUser({
     refreshToken: refreshToken,
   });
 
@@ -50,17 +50,17 @@ export async function handleRefreshToken(req: Request, res: Response) {
 
     const verifiedPayload: TokenPayload = tokenPayload.parse(payload);
 
-    if (foundUser?.username !== verifiedPayload.userInfo.username)
-      return logFail("Invalid refresh token");
+    const dbUsername = foundUser?.username;
+    const payloadUsername = verifiedPayload.userInfo.username;
+
+    if (dbUsername !== payloadUsername) return logFail("Invalid refresh token");
 
     const accessToken = createJwt(verifiedPayload, { tokenType: "access" });
     log("Access token refreshed successfully");
 
     res.json({ accessToken });
-    return;
   } catch (err) {
     RouteLogger.error(`${logHeader} Failed to refresh access token.`, err);
     res.sendStatus(403);
-    return;
   }
 }

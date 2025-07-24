@@ -18,9 +18,10 @@ const { cookieConfig: refreshCookie } = refresh;
  * @returns
  */
 export async function handleLogout(req: Request, res: Response) {
-  const { method, originalUrl, cookies } = req;
+  const { method, originalUrl, cookies, userDataService } = req;
   const logHeader = `[${method} ${originalUrl}]`;
 
+  // utility functions
   const log = (msg: string) => RouteLogger.debug(`${logHeader} ${msg}.`);
   const loggedOut = (msg: string) => {
     log(msg);
@@ -32,13 +33,13 @@ export async function handleLogout(req: Request, res: Response) {
 
   const refreshToken: string = cookies[refreshCookie!.cookieName];
 
-  const foundUser = await req.userDataService.getExistingUser({
+  const foundUser = await userDataService.getExistingUser({
     refreshToken: refreshToken,
   });
 
   if (foundUser) {
     log(`Deleting refresh token of user with id: ${foundUser.userId}`);
-    await req.userDataService.updateRefreshToken(foundUser.userId, null);
+    await userDataService.updateRefreshToken(foundUser.userId, null);
   }
 
   res.clearCookie(refreshCookie!.cookieName, refreshCookie!.clearOptions);
