@@ -31,9 +31,9 @@ export async function handleLogin(
     return;
   }
 
-  const match = await verifyPassword(foundUser, loginFields.password);
+  const isUserVerified = await verifyPassword(foundUser, loginFields.password);
 
-  if (match) {
+  if (isUserVerified) {
     const roles: string[] = await req.userDataService.getUserRoles(
       foundUser.userId
     );
