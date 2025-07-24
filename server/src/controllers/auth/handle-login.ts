@@ -1,9 +1,10 @@
 import { Request, Response } from "express";
-import { COOKIES } from "@data";
+import { AUTH } from "@data";
 import { LoginSchema, TokenPayload } from "@viewmodels";
 import { createJwt, createPayload, verifyPassword } from "@utils";
 
-const COOKIE_NAMES = COOKIES.COOKIE_NAMES;
+const { refresh } = AUTH.TOKEN_CONFIG_RECORD;
+const { cookieConfig: refreshCookie } = refresh;
 
 /**
  * @public
@@ -58,14 +59,9 @@ export async function handleLogin(
     }
 
     res.cookie(
-      COOKIE_NAMES.REFRESH_TOKEN, //  cookie name (could be anything really)
+      refreshCookie!.cookieName, //  cookie name (could be anything really)
       refreshToken,
-      {
-        httpOnly: true, // httpOnly is not available to js, much more secure
-        secure: false, // * set to false when testing with thunderclient
-        sameSite: "none",
-        maxAge: 24 * 60 * 60 * 1000, // 1 day
-      }
+      refreshCookie!.cookieOptions
     );
     res.json({ accessToken });
   } else {

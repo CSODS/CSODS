@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
-import { COOKIES } from "@data";
+import { AUTH } from "@data";
 
-const COOKIE_NAMES = COOKIES.COOKIE_NAMES;
-
+const { refresh } = AUTH.TOKEN_CONFIG_RECORD;
+const { cookieConfig: refreshCookie } = refresh;
 /**
  * @public
  * @async
@@ -18,12 +18,12 @@ const COOKIE_NAMES = COOKIES.COOKIE_NAMES;
  */
 export async function handleLogout(req: Request, res: Response) {
   const cookies = req.cookies;
-  if (!cookies?.[COOKIE_NAMES.REFRESH_TOKEN]) {
+  if (!cookies?.[refreshCookie!.cookieName]) {
     res.status(204).json({ message: "Already logged out." });
     return;
   }
 
-  const refreshToken: string = cookies[COOKIE_NAMES.REFRESH_TOKEN];
+  const refreshToken: string = cookies[refreshCookie!.cookieName];
 
   const foundUser = await req.userDataService.getExistingUser({
     refreshToken: refreshToken,
@@ -32,11 +32,7 @@ export async function handleLogout(req: Request, res: Response) {
   if (foundUser)
     await req.userDataService.updateRefreshToken(foundUser.userId, null);
 
-  res.clearCookie(COOKIE_NAMES.REFRESH_TOKEN, {
-    httpOnly: true,
-    sameSite: "none",
-    secure: false,
-  });
+  res.clearCookie(refreshCookie!.cookieName, refreshCookie!.clearOptions);
 
   res.status(204).json({ message: "Logged out successfully." });
 }

@@ -1,10 +1,11 @@
-import { COOKIES } from "@data";
+import { AUTH } from "@data";
 import { createJwt } from "@utils";
 import { tokenPayload, TokenPayload } from "@viewmodels";
 import { Request, Response } from "express";
 import jwt from "jsonwebtoken";
 
-const COOKIE_NAMES = COOKIES.COOKIE_NAMES;
+const { refresh } = AUTH.TOKEN_CONFIG_RECORD;
+const { cookieName: REFRESH_TOKEN } = refresh.cookieConfig!;
 
 /**
  * @public
@@ -22,7 +23,7 @@ const COOKIE_NAMES = COOKIES.COOKIE_NAMES;
  * @returns
  */
 export async function handleRefreshToken(req: Request, res: Response) {
-  const refreshToken = req.cookies[COOKIE_NAMES.REFRESH_TOKEN] as string;
+  const refreshToken = req.cookies[REFRESH_TOKEN] as string;
 
   const foundUser = await req.userDataService.getExistingUser({
     refreshToken: refreshToken,

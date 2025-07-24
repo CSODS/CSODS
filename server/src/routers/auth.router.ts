@@ -6,13 +6,14 @@ import {
   handleRefreshToken,
   handleLogout,
 } from "@controllers";
-import { API, COOKIES } from "@data";
+import { API, AUTH } from "@data";
 import { validateCookies, validateRequest } from "@middleware";
 import { loginSchema, registerSchema } from "@viewmodels";
 
 dotenv.config();
 
-const COOKIE_NAMES = COOKIES.COOKIE_NAMES;
+const { refresh } = AUTH.TOKEN_CONFIG_RECORD;
+const { cookieName: REFRESH_TOKEN } = refresh.cookieConfig!;
 
 const AUTH_ROUTES = API.AUTH_ROUTES;
 
@@ -28,13 +29,13 @@ authRouter.post(
 
 authRouter.post(
   AUTH_ROUTES.REFRESH,
-  validateCookies(COOKIE_NAMES.REFRESH_TOKEN),
+  validateCookies(REFRESH_TOKEN),
   handleRefreshToken
 );
 
 authRouter.post(
   AUTH_ROUTES.SIGN_OUT,
-  validateCookies(COOKIE_NAMES.REFRESH_TOKEN),
+  validateCookies(REFRESH_TOKEN),
   handleLogout
 );
 
