@@ -7,6 +7,7 @@ import {
   UserDataService,
   createUserDataService,
 } from "@services";
+import { TokenPayload } from "@viewmodels";
 
 export function attachTagsCacheHandler(
   req: Request,
@@ -41,6 +42,7 @@ declare global {
       tagsCacheHandler: TagsCacheHandler;
       projectCachePageService: ProjectCachePageService;
       userDataService: UserDataService;
+      authPayload?: TokenPayload;
     }
   }
 }
