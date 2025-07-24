@@ -4,15 +4,7 @@ import { Request, Response } from "express";
 import jwt from "jsonwebtoken";
 
 export async function handleRefreshToken(req: Request, res: Response) {
-  const cookies = req.cookies;
-  if (!cookies?.jwt) {
-    res.status(401).json({
-      message: "Unable to refresh token. User is unauthenticated/unauthorized.",
-    });
-    return;
-  }
-
-  const refreshToken = cookies.jwt;
+  const refreshToken = req.cookies["jwt"];
 
   const foundUser = await req.userDataService.getExistingUser({
     refreshToken: refreshToken,

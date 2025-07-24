@@ -2,7 +2,7 @@ import { Router, Request, Response } from "express";
 import dotenv from "dotenv";
 import { handleNewUser, handleLogin, handleRefreshToken } from "@controllers";
 import { API } from "@data";
-import { validateRequest } from "@middleware";
+import { validateCookies, validateRequest } from "@middleware";
 import { loginSchema, registerSchema } from "@viewmodels";
 
 dotenv.config();
@@ -19,7 +19,11 @@ authRouter.post(
   handleNewUser
 );
 
-authRouter.post(AUTH_ROUTES.REFRESH, handleRefreshToken);
+authRouter.post(
+  AUTH_ROUTES.REFRESH,
+  validateCookies("jwt"),
+  handleRefreshToken
+);
 
 authRouter.post(AUTH_ROUTES.SIGN_OUT, async (req, res) => {
   //  controller logic here.
