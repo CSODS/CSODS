@@ -23,9 +23,11 @@ export async function handleNewUser(
   const user = req.body;
 
   //  validate existing email, username, student name, and student number.
-  const isExistingUser = await req.userDataService.isUserExists(user);
+  const existingUser = await req.userDataService.getExistingUser({
+    user: user,
+  });
 
-  if (isExistingUser) {
+  if (existingUser) {
     res.status(409).json({ message: "user already exists" });
     return;
   }
