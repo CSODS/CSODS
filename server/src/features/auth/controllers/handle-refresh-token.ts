@@ -1,8 +1,9 @@
 import { AUTH } from "@data";
-import { createJwt, RouteLogHelper } from "@utils";
-import { tokenPayload, TokenPayload } from "@viewmodels";
+import { RouteLogHelper } from "@utils";
 import { Request, Response } from "express";
 import jwt from "jsonwebtoken";
+import { createJwt } from "../utils";
+import { tokenPayload, TokenPayload } from "../schemas";
 
 const { refresh } = AUTH.TOKEN_CONFIG_RECORD;
 const { cookieName: REFRESH_TOKEN } = refresh.cookieConfig!;

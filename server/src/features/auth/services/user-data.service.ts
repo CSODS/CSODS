@@ -1,15 +1,14 @@
 import bcrypt from "bcryptjs";
 import { createContext } from "@/db/csods";
 import { AUTH } from "@data";
-import { UserRepository, IUserFilter } from "@services";
 import { HashService } from "@/utils";
+import { NewUser, UserRoleViewModel, UserViewModel } from "@viewmodels";
+import { LoginSchema } from "../schemas";
 import {
-  LoginSchema,
-  NewUser,
-  UserRoleViewModel,
-  UserViewModel,
-} from "@viewmodels";
-import { UserRoleRepository } from "../repositories/user-role.repository";
+  UserRoleRepository,
+  UserRepository,
+  IUserFilter,
+} from "./repositories";
 
 const ROLES_MAP = AUTH.ROLES_MAP;
 

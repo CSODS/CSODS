@@ -1,12 +1,9 @@
 import { Request, Response } from "express";
 import { AUTH } from "@data";
-import { LoginSchema, TokenPayload, UserViewModel } from "@viewmodels";
-import {
-  createJwt,
-  createPayload,
-  RouteLogHelper,
-  verifyPassword,
-} from "@utils";
+import { UserViewModel } from "@viewmodels";
+import { RouteLogHelper } from "@utils";
+import { LoginSchema, TokenPayload } from "../schemas";
+import { createJwt, createPayload, verifyPassword } from "../utils";
 
 const { refresh } = AUTH.TOKEN_CONFIG_RECORD;
 const { cookieConfig: refreshCookie } = refresh;

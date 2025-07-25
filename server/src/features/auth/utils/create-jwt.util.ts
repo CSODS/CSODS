@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 import { AUTH } from "@data";
-import { TokenPayload } from "@viewmodels";
+import { TokenPayload } from "../schemas";
 
 const TOKEN_CONFIG_RECORD = AUTH.TOKEN_CONFIG_RECORD;
 type TokenType = AUTH.TokenType;

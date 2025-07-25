@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { RouteLogHelper } from "@utils";
-import { RegisterSchema } from "@viewmodels";
+import { RegisterSchema } from "../schemas";
 
 /**
  * @public

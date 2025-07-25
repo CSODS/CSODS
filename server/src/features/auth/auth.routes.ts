@@ -1,14 +1,15 @@
 import { Router } from "express";
 import dotenv from "dotenv";
+import { API, AUTH } from "@data";
+import { validateCookies, validateRequest } from "@middleware";
 import {
   handleNewUser,
   handleLogin,
   handleRefreshToken,
   handleLogout,
-} from "@controllers";
-import { API, AUTH } from "@data";
-import { validateCookies, validateRequest } from "@middleware";
-import { loginSchema, registerSchema } from "@viewmodels";
+} from "./controllers";
+import { loginSchema, registerSchema } from "./schemas";
+import { attachUserDataService } from "./auth.middleware";
 
 dotenv.config();
 
@@ -17,7 +18,9 @@ const { cookieName: REFRESH_TOKEN } = refresh.cookieConfig!;
 
 const AUTH_ROUTES = API.AUTH_ROUTES;
 
-const authRouter = Router();
+export const authRouter = Router();
+
+authRouter.use(attachUserDataService);
 
 authRouter.post(AUTH_ROUTES.SIGN_IN, validateRequest(loginSchema), handleLogin);
 
@@ -38,5 +41,3 @@ authRouter.post(
   validateCookies(REFRESH_TOKEN),
   handleLogout
 );
-
-export default authRouter;

@@ -9,10 +9,10 @@ import {
   routeLogger,
   projectsRouteLimiter,
   projectTagsRouteLimiter,
-  attachUserDataService,
 } from "@middleware";
-import { authRouter, projectsRouter, projectTagsRouter } from "@/routers";
+import { projectsRouter, projectTagsRouter } from "@/routers";
 import { createEvictionJobService, createViewsDecayJobService } from "@utils";
+import { authRouter } from "@/features";
 
 const ROUTES = API.ROUTES;
 
@@ -28,7 +28,7 @@ app.use(cookieParser());
 app.use(routeLogger);
 
 //  for routes
-app.use(ROUTES.AUTH, authRouteLimiter, attachUserDataService, authRouter);
+app.use(ROUTES.AUTH, authRouteLimiter, authRouter);
 
 app.use(attachProjectCachePageService);
 app.use(ROUTES.PROJECTS, projectsRouteLimiter, projectsRouter);

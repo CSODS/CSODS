@@ -4,10 +4,7 @@ import {
   TagsCacheHandler,
   createProjectCachePageService,
   ProjectCachePageService,
-  UserDataService,
-  createUserDataService,
 } from "@services";
-import { TokenPayload } from "@viewmodels";
 
 export function attachTagsCacheHandler(
   req: Request,
@@ -27,22 +24,11 @@ export async function attachProjectCachePageService(
   next();
 }
 
-export async function attachUserDataService(
-  req: Request,
-  res: Response,
-  next: NextFunction
-) {
-  req.userDataService = await createUserDataService();
-  next();
-}
-
 declare global {
   namespace Express {
     interface Request {
       tagsCacheHandler: TagsCacheHandler;
       projectCachePageService: ProjectCachePageService;
-      userDataService: UserDataService;
-      authPayload?: TokenPayload;
     }
   }
 }

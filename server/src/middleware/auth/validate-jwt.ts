@@ -1,7 +1,7 @@
 import dotenv from "dotenv";
 import { Response, Request, NextFunction } from "express";
 import jwt from "jsonwebtoken";
-import { TokenPayload } from "@viewmodels";
+import { TokenPayload } from "@/features/auth/schemas";
 import { RouteLogHelper } from "@utils";
 
 dotenv.config();

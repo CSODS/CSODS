@@ -1,4 +1,5 @@
-import { TokenPayload, UserViewModel } from "@viewmodels";
+import { UserViewModel } from "@/viewmodels";
+import { TokenPayload } from "../schemas";
 
 /**
  * @public
