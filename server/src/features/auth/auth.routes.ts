@@ -2,12 +2,7 @@ import { Router } from "express";
 import dotenv from "dotenv";
 import { API, AUTH } from "@data";
 import { validateCookies, validateRequest } from "@middleware";
-import {
-  handleNewUser,
-  handleLogin,
-  handleRefreshToken,
-  handleLogout,
-} from "./controllers";
+import * as controllers from "./controllers";
 import { attachUserDataService, authRouteLimiter } from "./middleware";
 import { loginSchema, registerSchema } from "./schemas";
 
@@ -23,22 +18,26 @@ export const authRouter = Router();
 authRouter.use(authRouteLimiter);
 authRouter.use(attachUserDataService);
 
-authRouter.post(AUTH_ROUTES.SIGN_IN, validateRequest(loginSchema), handleLogin);
+authRouter.post(
+  AUTH_ROUTES.SIGN_IN,
+  validateRequest(loginSchema),
+  controllers.handleLogin
+);
 
 authRouter.post(
   AUTH_ROUTES.REGISTER,
   validateRequest(registerSchema),
-  handleNewUser
+  controllers.handleNewUser
 );
 
 authRouter.post(
   AUTH_ROUTES.REFRESH,
   validateCookies(REFRESH_TOKEN),
-  handleRefreshToken
+  controllers.handleRefreshToken
 );
 
 authRouter.post(
   AUTH_ROUTES.SIGN_OUT,
   validateCookies(REFRESH_TOKEN),
-  handleLogout
+  controllers.handleLogout
 );
