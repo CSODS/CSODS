@@ -83,3 +83,31 @@ export async function handleLogin(
   logger.log("debug", "Login success.");
   res.json({ accessToken });
 }
+
+async function userVerificationHelper(req: Request, res: Response) {
+  const logger = new RouteLogHelper(req, res);
+
+  logger.log("debug", "Validating login credentials.");
+
+  const loginFields = req.body;
+  const loginMethod = loginFields.email ? "email" : "username";
+  const loginValue = loginFields.email ?? loginFields.username;
+
+  const foundUser = await req.userDataService.getExistingUser({
+    login: loginFields,
+  });
+  if (!foundUser)
+    return logger.logStatus(401, {
+      logMsg: `${loginMethod}: ${loginValue} doesn't exist.`,
+      resMsg: "Incorrect email/username or password.",
+    });
+
+  const isUserVerified = await verifyPassword(foundUser, loginFields.password);
+  if (!isUserVerified)
+    return logger.logStatus(401, {
+      logMsg: `Incorrect password for ${loginValue}.`,
+      resMsg: "Incorrect email/username or password.",
+    });
+
+  return foundUser;
+}
