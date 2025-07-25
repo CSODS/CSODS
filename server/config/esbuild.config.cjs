@@ -18,6 +18,7 @@ esbuild
       "@": "./src",
       "@controllers": "./src/controllers",
       "@data": "./src/data",
+      "@feature-auth": "./src/features/auth",
       "@middleware": "./src/middleware",
       "@models": "./src/models",
       "@redis": "./src/redis",
