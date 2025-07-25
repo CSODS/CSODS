@@ -1,8 +1,8 @@
 import { eq } from "drizzle-orm";
 import { DbContext } from "@/db/csods.js";
 import { ProjectFramework } from "@models";
-import { ProjectFrameworksTable, ProjectFrameworkViewModel } from "@viewmodels";
 import { Repository } from "@services";
+import { ProjectFrameworksTable, ProjectFrameworkViewModel } from "../../types";
 
 export class ProjectFrameworkRepository extends Repository<ProjectFrameworksTable> {
   public constructor(context: DbContext) {

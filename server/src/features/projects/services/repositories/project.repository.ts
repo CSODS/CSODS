@@ -1,8 +1,8 @@
 import { eq, and, or, like } from "drizzle-orm";
 import { DbContext } from "@/db/csods.js";
 import { Project } from "@models";
-import { ProjectsTable, ProjectViewModel } from "@viewmodels";
 import { Repository } from "@services";
+import { ProjectsTable, ProjectViewModel } from "../../types";
 
 export class ProjectRepository extends Repository<ProjectsTable> {
   public constructor(context: DbContext) {

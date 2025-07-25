@@ -1,7 +1,6 @@
 import { createContext } from "@/db/csods";
-import { ProjectViewModel } from "@viewmodels";
 import { DbLogger } from "@/utils";
-import { IProjectDetails } from "../types";
+import { IProjectDetails, ProjectViewModel } from "../types";
 import {
   IProjectFilter,
   ProjectFrameworkRepository,
