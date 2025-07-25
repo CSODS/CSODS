@@ -1,5 +1,5 @@
-import { UserViewModel } from "@/viewmodels";
 import bcrypt from "bcryptjs";
+import { UserViewModel } from "../types";
 
 /**
  * @public

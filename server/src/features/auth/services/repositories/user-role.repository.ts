@@ -1,8 +1,8 @@
 import { eq } from "drizzle-orm";
 import { UserRole } from "@models";
-import { UserRolesTable, UserRoleViewModel } from "@viewmodels";
 import { DbContext } from "@/db/csods";
 import { Repository } from "@services";
+import { UserRolesTable, UserRoleViewModel } from "../../types";
 
 export class UserRoleRepository extends Repository<UserRolesTable> {
   public constructor(context: DbContext) {

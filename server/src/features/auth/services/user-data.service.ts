@@ -2,8 +2,8 @@ import bcrypt from "bcryptjs";
 import { createContext } from "@/db/csods";
 import { AUTH } from "@data";
 import { HashService } from "@/utils";
-import { NewUser, UserRoleViewModel, UserViewModel } from "@viewmodels";
 import { LoginSchema } from "../schemas";
+import { NewUser, UserRoleViewModel, UserViewModel } from "../types";
 import {
   UserRoleRepository,
   UserRepository,

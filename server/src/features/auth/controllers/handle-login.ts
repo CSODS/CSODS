@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
 import { AUTH } from "@data";
-import { UserViewModel } from "@viewmodels";
 import { RouteLogHelper } from "@utils";
 import { LoginSchema, TokenPayload } from "../schemas";
+import { UserViewModel } from "../types";
 import { createJwt, createPayload, verifyPassword } from "../utils";
 
 const { refresh } = AUTH.TOKEN_CONFIG_RECORD;
