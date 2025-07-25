@@ -27,12 +27,31 @@ export class RouteLogHelper {
       : this._logger.log(level, logMsg);
   }
 
-  public logStatus(statusCode: number, resMsg: string, err?: unknown): void {
-    if (err) this.log("error", resMsg, err);
-    else this.log("debug", resMsg);
+  public logStatus(
+    statusCode: number,
+    msg: string | MsgOptions,
+    err?: unknown
+  ): void {
+    const { logMsg, resMsg } = this.__extractMessages(msg);
+
+    if (err) this.log("error", logMsg, err);
+    else this.log("debug", logMsg);
 
     this._res
       .status(statusCode)
       .json({ message: `[Status ${statusCode}] ${resMsg}` });
   }
+
+  private __extractMessages(msg: string | MsgOptions): MsgOptions {
+    if (typeof msg === "string") {
+      return { logMsg: msg, resMsg: msg } as MsgOptions;
+    }
+
+    return msg;
+  }
 }
+
+type MsgOptions = {
+  logMsg: string;
+  resMsg: string;
+};
