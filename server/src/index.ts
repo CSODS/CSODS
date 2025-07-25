@@ -2,7 +2,7 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import express from "express";
 import { API } from "@data";
-import { authRouteLimiter, routeLogger } from "@middleware";
+import { routeLogger } from "@middleware";
 import {
   authRouter,
   projectsRouter,
@@ -26,7 +26,7 @@ app.use(cookieParser());
 app.use(routeLogger);
 
 //  for routes
-app.use(ROUTES.AUTH, authRouteLimiter, authRouter);
+app.use(ROUTES.AUTH, authRouter);
 
 app.use(validateJWT);
 

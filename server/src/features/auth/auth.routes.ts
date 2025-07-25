@@ -8,8 +8,8 @@ import {
   handleRefreshToken,
   handleLogout,
 } from "./controllers";
+import { attachUserDataService, authRouteLimiter } from "./middleware";
 import { loginSchema, registerSchema } from "./schemas";
-import { attachUserDataService } from "./middleware";
 
 dotenv.config();
 
@@ -20,6 +20,7 @@ const AUTH_ROUTES = API.AUTH_ROUTES;
 
 export const authRouter = Router();
 
+authRouter.use(authRouteLimiter);
 authRouter.use(attachUserDataService);
 
 authRouter.post(AUTH_ROUTES.SIGN_IN, validateRequest(loginSchema), handleLogin);
