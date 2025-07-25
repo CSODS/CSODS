@@ -1,4 +1,4 @@
 export * from "./hash/hash.util";
 export * from "./jobs";
-export * from "./logger/logger.util";
+export * from "./logger";
 export * from "./auth";
