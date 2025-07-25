@@ -5,8 +5,8 @@ export function verifyRoles(...allowedRoles: string[]) {
   return (req: Request, res: Response, next: NextFunction) => {
     const logger = new RouteLogHelper(req, res);
 
+    logger.log("debug", "Verifying user role access.");
     const { authPayload } = req;
-    //  retrieving user info from authPayload.
     const userInfo = authPayload?.userInfo ?? null;
     if (!userInfo) return logger.logStatus(401, "Unauthenticated.");
 

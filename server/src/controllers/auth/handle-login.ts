@@ -30,28 +30,31 @@ export async function handleLogin(
 ) {
   //  utility
   const logger = new RouteLogHelper(req, res);
-  const loginFail = (logMsg: string) => {
-    logger.log("debug", `Login failed. ${logMsg}`);
-    res.status(401).json({ message: `Incorrect email/username or password.` });
-  };
 
   const loginFields = req.body;
   const loginMethod = loginFields.email ? "email" : "username";
   const loginValue = loginFields.email ?? loginFields.username;
 
-  //  user verification
   logger.log("debug", "Validating login credentials.");
+
   const foundUser = await req.userDataService.getExistingUser({
     login: loginFields,
   });
-
   if (!foundUser)
-    return loginFail(`${loginMethod}: ${loginValue} doesn't exist.`);
+    return logger.logStatus(401, {
+      logMsg: `${loginMethod}: ${loginValue} doesn't exist.`,
+      resMsg: "Incorrect email/username or password.",
+    });
 
   const isUserVerified = await verifyPassword(foundUser, loginFields.password);
-  if (!isUserVerified) return loginFail(`Incorrect password for ${loginValue}`);
+  if (!isUserVerified)
+    return logger.logStatus(401, {
+      logMsg: `Incorrect password for ${loginValue}.`,
+      resMsg: "Incorrect email/username or password.",
+    });
 
-  //  token creation
+  logger.log("debug", "Creating tokens.");
+
   const roles: string[] = await req.userDataService.getUserRoles(
     foundUser.userId
   );

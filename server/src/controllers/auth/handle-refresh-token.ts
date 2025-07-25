@@ -1,5 +1,5 @@
 import { AUTH } from "@data";
-import { createJwt, RouteLogger, RouteLogHelper } from "@utils";
+import { createJwt, RouteLogHelper } from "@utils";
 import { tokenPayload, TokenPayload } from "@viewmodels";
 import { Request, Response } from "express";
 import jwt from "jsonwebtoken";

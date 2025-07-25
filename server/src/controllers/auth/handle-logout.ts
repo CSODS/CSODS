@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { AUTH } from "@data";
-import { RouteLogHelper } from "@/utils";
+import { RouteLogHelper } from "@utils";
 
 const { refresh } = AUTH.TOKEN_CONFIG_RECORD;
 const { cookieConfig: refreshCookie } = refresh;

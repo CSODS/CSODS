@@ -20,12 +20,7 @@ export async function handleNewUser(
   req: Request<{}, {}, RegisterSchema>,
   res: Response
 ) {
-  //  utility functions
   const logger = new RouteLogHelper(req, res);
-  const logFail = (logMsg: string, resMsg: string) => {
-    logger.log("debug", logMsg);
-    res.status(409).json({ failed: resMsg });
-  };
 
   //  validate existing email, username, student name, and student number.
   const user = req.body;
@@ -34,15 +29,15 @@ export async function handleNewUser(
   });
 
   if (existingUser)
-    return logFail(
-      "User already exists",
-      `User with id: ${existingUser.userId} already exists`
-    );
+    return logger.logStatus(409, {
+      logMsg: `User with id: ${existingUser.userId} already exists.`,
+      resMsg: "User already exists.",
+    });
 
   logger.log("debug", `Inserting new user.`);
   const inserted = await req.userDataService.insertUser(user);
 
   return inserted
     ? logger.logStatus(201, "User registration success.")
-    : logger.logStatus(409, "User registration faild.");
+    : logger.logStatus(409, "User registration failed.");
 }

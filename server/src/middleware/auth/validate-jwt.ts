@@ -25,15 +25,15 @@ export function validateJWT(req: Request, res: Response, next: NextFunction) {
     );
 
   try {
-    logger.log("debug", "Validating JWT...");
+    logger.log("debug", "Validating access JWT...");
     const payload = jwt.verify(token, ACCESS_TOKEN_SECRET) as TokenPayload;
     req.authPayload = payload;
-    logger.log("debug", "JWT validated.");
+    logger.log("debug", "Access JWT validated.");
     next();
   } catch (err) {
     return logger.logStatus(
       403,
-      "JWT verification failed. Invalid or expired token.",
+      "Access JWT verification failed. Invalid or expired token.",
       err
     );
   }
