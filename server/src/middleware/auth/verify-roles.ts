@@ -1,19 +1,14 @@
-import { RouteLogger } from "@/utils";
 import { Request, Response, NextFunction } from "express";
+import { RouteLogHelper } from "@utils";
 
 export function verifyRoles(...allowedRoles: string[]) {
   return (req: Request, res: Response, next: NextFunction) => {
-    const { method, originalUrl, authPayload } = req;
-    const logHeader = `[${method} ${originalUrl}]`;
+    const logger = new RouteLogHelper(req, res);
+
+    const { authPayload } = req;
+    //  retrieving user info from authPayload.
     const userInfo = authPayload?.userInfo ?? null;
-
-    const log = (msg: string) => RouteLogger.debug(`${logHeader} ${msg}`);
-    const unauthorized = (msg: string) => {
-      log(msg);
-      res.status(401).json({ message: `Status 401. ${msg}` });
-    };
-
-    if (!userInfo) return unauthorized("Unauthenticated.");
+    if (!userInfo) return logger.logStatus(401, "Unauthenticated.");
 
     const { roles } = userInfo;
     const rolesArray = [...allowedRoles];
@@ -26,7 +21,10 @@ export function verifyRoles(...allowedRoles: string[]) {
       .find((value) => value === true);
 
     if (!hasAllowedRole)
-      return unauthorized("User is not authorized to access this route.");
+      return logger.logStatus(
+        401,
+        "User is not authorized to access this route."
+      );
 
     next();
   };

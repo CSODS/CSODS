@@ -1,7 +1,6 @@
-import { RouteLogger } from "@/utils";
 import { Request, Response, NextFunction } from "express";
 import z, { ZodType } from "zod";
-
+import { RouteLogHelper } from "@utils";
 /**
  * @function validateRequest
  * @description A `middleware factory` for validating request body schema.
@@ -17,29 +16,19 @@ export function validateRequest(
   schema: ZodType
 ): (req: Request, res: Response, next: NextFunction) => void {
   return (req: Request, res: Response, next: NextFunction) => {
-    const { method, originalUrl, body } = req;
-    const logHeader = `[${method} ${originalUrl}]`;
+    const logger = new RouteLogHelper(req, res);
 
-    const log = (msg: string) => {
-      RouteLogger.debug(`${logHeader} ${msg}`);
-    };
-    const validationFail = (msg: string) => {
-      log(msg);
-      res.status(404).json({ message: msg });
-    };
+    logger.log("debug", "Validating request schema...");
 
-    const fields: ZodType = body;
-
-    log("Validating request schema...");
-    const validationResult = schema.safeParse(fields);
+    const validationResult = schema.safeParse(req.body);
 
     if (!validationResult.success)
-      return validationFail(z.prettifyError(validationResult.error));
+      return logger.logStatus(404, z.prettifyError(validationResult.error));
 
-    const validatedData = validationResult.data;
+    const validatedBody = validationResult.data;
 
-    req.body = validatedData;
-    log("Request schema validated.");
+    req.body = validatedBody;
+    logger.log("debug", "Request schema validated.");
     next();
   };
 }
