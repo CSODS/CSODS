@@ -9,7 +9,7 @@ import {
   handleLogout,
 } from "./controllers";
 import { loginSchema, registerSchema } from "./schemas";
-import { attachUserDataService } from "./auth.middleware";
+import { attachUserDataService } from "./middleware";
 
 dotenv.config();
 

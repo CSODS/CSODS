@@ -14,6 +14,7 @@ import {
   projectTagsRouter,
   createEvictionJobService,
   createViewsDecayJobService,
+  validateJWT,
 } from "@/features";
 
 const ROUTES = API.ROUTES;
@@ -31,6 +32,8 @@ app.use(routeLogger);
 
 //  for routes
 app.use(ROUTES.AUTH, authRouteLimiter, authRouter);
+
+app.use(validateJWT);
 
 app.use(ROUTES.PROJECTS, projectsRouteLimiter, projectsRouter);
 

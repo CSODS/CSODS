@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import { createUserDataService } from "./services";
+import { createUserDataService } from "../services";
 
 export async function attachUserDataService(
   req: Request,
