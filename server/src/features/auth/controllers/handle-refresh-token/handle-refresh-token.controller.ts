@@ -1,9 +1,8 @@
 import { AUTH } from "@data";
 import { RouteLogHelper } from "@utils";
 import { Request, Response } from "express";
-import jwt from "jsonwebtoken";
-import { createJwt } from "../utils";
-import { tokenPayload, TokenPayload } from "../schemas";
+import { createJwt } from "../../utils";
+import { verifyRefreshToken } from "./verify-refresh-token";
 
 const { refresh } = AUTH.TOKEN_CONFIG_RECORD;
 const { cookieName: REFRESH_TOKEN } = refresh.cookieConfig!;
@@ -37,20 +36,10 @@ export async function handleRefreshToken(req: Request, res: Response) {
   try {
     logger.log("debug", "Attempting to refresh token");
 
-    const payload: TokenPayload = jwt.verify(
-      refreshToken,
-      process.env.REFRESH_TOKEN_SECRET!
-    ) as TokenPayload;
+    const payload = verifyRefreshToken(req, res, refreshToken, foundUser);
+    if (!payload) return;
 
-    const verifiedPayload: TokenPayload = tokenPayload.parse(payload);
-
-    const dbUsername = foundUser?.username;
-    const payloadUsername = verifiedPayload.userInfo.username;
-
-    if (dbUsername !== payloadUsername)
-      return logger.logStatus(403, "Invalid refresh token");
-
-    const accessToken = createJwt(verifiedPayload, { tokenType: "access" });
+    const accessToken = createJwt(payload, { tokenType: "access" });
     logger.log("debug", "Access token refreshed successfully");
 
     res.json({ accessToken });

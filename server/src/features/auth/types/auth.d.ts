@@ -1,4 +1,4 @@
-import { UserDataService } from "@/services";
+import { UserDataService } from "../services";
 import { TokenPayload } from "../schemas";
 
 declare global {
