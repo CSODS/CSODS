@@ -34,6 +34,8 @@
       "@/*": ["src/*"],
       "@controllers": ["src/controllers"],
       "@data": ["src/data/index.ts"],
+      "@feature-auth": ["src/features/auth/index.ts"],
+      "@feature-projects": ["src/features/projects/index.ts"],
       "@middleware": ["src/middleware/index.ts"],
       "@models": ["src/models/index.ts"],
       "@redis": ["src/redis/index.ts"],

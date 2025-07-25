@@ -2,10 +2,10 @@ import mock from "mock-fs";
 import {
   createJsonFileService,
   JsonFileService,
-} from "../src/services/file/json-file.service";
+} from "../src/services/json-file.service";
 import { describe, beforeEach, afterEach, it, expect } from "vitest";
 import path from "path";
-import { IProjectCache } from "../src/viewmodels/cache/cache.interface";
+import { IProjectCache } from "../src/viewmodels/cache.interface";
 import { promises as fs } from "fs";
 
 describe("fileHandler", async () => {

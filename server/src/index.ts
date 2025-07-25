@@ -2,17 +2,13 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import express from "express";
 import { API } from "@data";
+import { authRoutes, authMiddlewares } from "@feature-auth";
 import {
-  attachProjectCachePageService,
-  attachTagsCacheHandler,
-  authRouteLimiter,
-  routeLogger,
-  projectsRouteLimiter,
-  projectTagsRouteLimiter,
-  attachUserDataService,
-} from "@middleware";
-import { authRouter, projectsRouter, projectTagsRouter } from "@/routers";
-import { createEvictionJobService, createViewsDecayJobService } from "@utils";
+  projectsRouter,
+  projectTagsRouter,
+  projectsJobs,
+} from "@feature-projects";
+import { routeLogger } from "@middleware";
 
 const ROUTES = API.ROUTES;
 
@@ -27,21 +23,24 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(routeLogger);
 
-//  for routes
-app.use(ROUTES.AUTH, authRouteLimiter, attachUserDataService, authRouter);
+//  routes
 
-app.use(attachProjectCachePageService);
-app.use(ROUTES.PROJECTS, projectsRouteLimiter, projectsRouter);
+//  auth feature
+app.use(ROUTES.AUTH, authRoutes.authRouter);
 
-app.use(attachTagsCacheHandler);
-app.use(ROUTES.PROJECT_TAGS, projectTagsRouteLimiter, projectTagsRouter);
+const { validateJWT } = authMiddlewares;
 
-const evictionJob = createEvictionJobService();
+//  projects feature
+app.use(ROUTES.PROJECTS, validateJWT, projectsRouter);
+
+app.use(ROUTES.PROJECT_TAGS, validateJWT, projectTagsRouter);
+
+const evictionJob = projectsJobs.createEvictionJobService();
+const viewsDecayJob = projectsJobs.createViewsDecayJobService();
+
 evictionJob.scheduleProjectCacheEviction();
 evictionJob.scheduleCachePageEviction();
 evictionJob.scheduleSearchCacheEviction();
-
-const viewsDecayJob = createViewsDecayJobService();
 viewsDecayJob.scheduleViewsDecay();
 
 app.listen(3001, "0.0.0.0", async () => {

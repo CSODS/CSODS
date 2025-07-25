@@ -29,7 +29,7 @@ async function seedDevtypes(context: DbContext) {
     .insert(schema.DevType)
     .values(
       devTypes.split(", ").map((name) => ({
-        DevTypeName: name,
+        devTypeName: name,
       }))
     )
     .onConflictDoNothing();
@@ -41,7 +41,7 @@ async function seedLanguages(context: DbContext) {
     .insert(schema.ProgrammingLanguage)
     .values(
       languages.split(", ").map((name) => ({
-        LanguageName: name,
+        languageName: name,
       }))
     )
     .onConflictDoNothing();
@@ -55,7 +55,7 @@ async function seedDbTechnologies(context: DbContext) {
     .insert(schema.DatabaseTechnology)
     .values(
       dbTechs.split(", ").map((name) => ({
-        Database: name,
+        database: name,
       }))
     )
     .onConflictDoNothing();
@@ -69,7 +69,7 @@ async function seedApplicationIndustries(context: DbContext) {
     .insert(schema.ApplicationIndustry)
     .values(
       appIndustries.split(", ").map((name) => ({
-        Industry: name,
+        industry: name,
       }))
     )
     .onConflictDoNothing();
@@ -81,8 +81,8 @@ async function seedGameDevFrameworks(context: DbContext) {
     .insert(schema.Framework)
     .values(
       gameDevFrameworks.split(", ").map((name) => ({
-        DevTypeId: 1,
-        FrameworkName: name,
+        devTypeId: 1,
+        frameworkName: name,
       }))
     )
     .onConflictDoNothing();
@@ -98,8 +98,8 @@ async function seedWebDevFrameworks(context: DbContext) {
     .insert(schema.Framework)
     .values(
       webDevFrameworks.split(", ").map((name) => ({
-        DevTypeId: 2,
-        FrameworkName: name,
+        devTypeId: 2,
+        frameworkName: name,
       }))
     )
     .onConflictDoNothing();
@@ -113,8 +113,8 @@ async function seedSoftwareDevFrameworks(context: DbContext) {
     .insert(schema.Framework)
     .values(
       softwareDevFrameworks.split(", ").map((name) => ({
-        DevTypeId: 3,
-        FrameworkName: name,
+        devTypeId: 3,
+        frameworkName: name,
       }))
     )
     .onConflictDoNothing();
@@ -126,8 +126,8 @@ async function seedApiDevFrameworks(context: DbContext) {
     .insert(schema.Framework)
     .values(
       apiDevFrameworks.split(", ").map((name) => ({
-        DevTypeId: 4,
-        FrameworkName: name,
+        devTypeId: 4,
+        frameworkName: name,
       }))
     )
     .onConflictDoNothing();
@@ -139,7 +139,7 @@ async function seedRoles(context: DbContext) {
     .insert(schema.Role)
     .values(
       roles.map((role) => ({
-        RoleName: role,
+        roleName: role,
       }))
     )
     .onConflictDoNothing();
