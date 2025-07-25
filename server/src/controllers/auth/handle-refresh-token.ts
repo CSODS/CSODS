@@ -1,5 +1,5 @@
 import { AUTH } from "@data";
-import { createJwt, RouteLogger } from "@utils";
+import { createJwt, RouteLogger, RouteLogHelper } from "@utils";
 import { tokenPayload, TokenPayload } from "@viewmodels";
 import { Request, Response } from "express";
 import jwt from "jsonwebtoken";
@@ -23,16 +23,9 @@ const { cookieName: REFRESH_TOKEN } = refresh.cookieConfig!;
  * @returns
  */
 export async function handleRefreshToken(req: Request, res: Response) {
-  const { method, originalUrl, cookies, userDataService } = req;
-  const logHeader = `[${method} ${originalUrl}]`;
+  const logger = new RouteLogHelper(req, res);
 
-  //  utility functions
-  const log = (msg: string) => RouteLogger.debug(`${logHeader} ${msg}.`);
-  const logFail = (msg: string) => {
-    log(msg);
-    res.status(403).json({ message: `403 Forbidden. ${msg}.` });
-  };
-
+  const { cookies, userDataService } = req;
   const refreshToken = cookies[REFRESH_TOKEN] as string;
 
   const foundUser = await userDataService.getExistingUser({
@@ -41,7 +34,7 @@ export async function handleRefreshToken(req: Request, res: Response) {
 
   //  evaluate jwt
   try {
-    log("Attempting to refresh token");
+    logger.log("debug", "Attempting to refresh token");
 
     const payload: TokenPayload = jwt.verify(
       refreshToken,
@@ -53,14 +46,14 @@ export async function handleRefreshToken(req: Request, res: Response) {
     const dbUsername = foundUser?.username;
     const payloadUsername = verifiedPayload.userInfo.username;
 
-    if (dbUsername !== payloadUsername) return logFail("Invalid refresh token");
+    if (dbUsername !== payloadUsername)
+      return logger.logStatus(403, "Invalid refresh token");
 
     const accessToken = createJwt(verifiedPayload, { tokenType: "access" });
-    log("Access token refreshed successfully");
+    logger.log("debug", "Access token refreshed successfully");
 
     res.json({ accessToken });
   } catch (err) {
-    RouteLogger.error(`${logHeader} Failed to refresh access token.`, err);
-    res.sendStatus(403);
+    logger.logStatus(403, "Failed to refresh access token.", err);
   }
 }

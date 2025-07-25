@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
+import { RouteLogHelper } from "@utils";
 import { RegisterSchema } from "@viewmodels";
-import { RouteLogger } from "@/utils";
 
 /**
  * @public
@@ -20,22 +20,16 @@ export async function handleNewUser(
   req: Request<{}, {}, RegisterSchema>,
   res: Response
 ) {
-  const { method, originalUrl, body: user, userDataService } = req;
-  const logHeader = `[${method} ${originalUrl}]`;
-
   //  utility functions
-  const log = (msg: string) => RouteLogger.debug(`${logHeader} ${msg}.`);
-  const logSuccess = (logMsg: string, resMsg: string) => {
-    log(logMsg);
-    res.status(201).json({ success: resMsg });
-  };
+  const logger = new RouteLogHelper(req, res);
   const logFail = (logMsg: string, resMsg: string) => {
-    log(logMsg);
+    logger.log("debug", logMsg);
     res.status(409).json({ failed: resMsg });
   };
 
   //  validate existing email, username, student name, and student number.
-  const existingUser = await userDataService.getExistingUser({
+  const user = req.body;
+  const existingUser = await req.userDataService.getExistingUser({
     user: user,
   });
 
@@ -45,10 +39,10 @@ export async function handleNewUser(
       `User with id: ${existingUser.userId} already exists`
     );
 
-  log(`Inserting new user.`);
-  const inserted = await userDataService.insertUser(user);
+  logger.log("debug", `Inserting new user.`);
+  const inserted = await req.userDataService.insertUser(user);
 
   return inserted
-    ? logSuccess("New user inserted", "Registration success")
-    : logFail("Failed inserting new user", "Failed registration.");
+    ? logger.logStatus(201, "User registration success.")
+    : logger.logStatus(409, "User registration faild.");
 }
