@@ -16,11 +16,10 @@ const { cookieConfig: refreshCookie } = refresh;
  * @async
  * @function handleLogin
  * @description Controller for handling login.
- * - Receives username, email, and password from the request body.
- * - Validates if the username and/or email fields exist.
- * - If they don't, respond with status 404. If they exist, check if the username and/or email exists in the database.
- * - If they don't, respond with status 401. If they exist in the database, validate the password with bcrypt.
- * - If the password doesn't match, responsd with status 401. If they match, return a success message.
+ * - Verifies the user from the request body.
+ * - Creates access and refresh tokens if user is verified.
+ * - Updates user's refresh token in the database.
+ * - Returns a JSON containing the access token and a cookie containing the refresh token.
  * TODO: IMPLEMENT BETTER ERROR HANDLING
  * @param req
  * @param res
@@ -55,11 +54,29 @@ export async function handleLogin(
     refreshToken,
     refreshCookie!.cookieOptions
   );
+  res.json({ accessToken });
 
   logger.log("debug", "Login success.");
-  res.json({ accessToken });
 }
 
+/**
+ * @public
+ * @async
+ * @function getVerifiedUser
+ * @description A helper for the {@link handleLogin} controller. Asynchronously handles
+ * verifying the user from the provided credentials in the request body.
+ * - Retrieves the `email` or `username`, and `password` from the request body.
+ * - Attempts to read an existing `User` from the database with the provided login fields.
+ * - If no `User` is found, respond with status code `401` and log the failed log-in attempt.
+ * - If a `User` is found, verify if the provided password is correct.
+ * - If the password is incorrect, respond with status code `401` and log the failed log-in
+ * attempt.
+ * - If the password is correct, return the {@link UserViewModel}.
+ * @param req The request object.
+ * @param res The response object.
+ * @returns A `Promise` that resolves to a {@link UserViewModel} that contains details about
+ * the verified `User` or `null` if validation or verification fails..
+ */
 async function getVerifiedUser(
   req: Request,
   res: Response
@@ -100,6 +117,23 @@ type Tokens = {
   refreshToken: string;
 };
 
+/**
+ * @public
+ * @async
+ * @function createTokens
+ * @description A helper for the {@link handleLogin} controller. Asynchronously handles access
+ * and refresh token creation.
+ * - Retrieves a list of `role`s associated with the `User`.
+ * - Creates a token payload containing the `verifiedUser` and the list of `role`s.
+ * - Creates JWT `access` and `refresh` tokens containing the payload.
+ * - Returns both tokens.
+ * @param req
+ * @param res
+ * @param verifiedUser A {@link UserViewModel} used for retrieving the `User`'s `role`s and
+ * creating the token `payload`.
+ * @returns A `Promise` that resolves to a {@link Tokens} object containing the `accessToken`
+ * and `refreshToken`.
+ */
 async function createTokens(
   req: Request,
   res: Response,
@@ -119,6 +153,22 @@ async function createTokens(
   return { accessToken, refreshToken };
 }
 
+/**
+ * @public
+ * @async
+ * @function updateUserRefreshToken
+ * @description A helper for the {@link handleLogin} controller. Asynchronously handles updating
+ * the refresh token of a `User` in the database.
+ * - Utilizes the {@link userDataService} middleware to update the refresh token.
+ * - If the update fails, log it and respond with status code `500`.
+ * - Otherwise, simply return the updatedUserId.
+ * @param req
+ * @param res
+ * @param verifiedUser The {@link UserViewModel} containing the userId needed for updating
+ * the refresh token.
+ * @param refreshToken The new refresh token to be stored to the database.
+ * @returns A `Promise` that resolves to the updated `User`'s `id` or `null` if the update fails.
+ */
 async function updateUserRefreshToken(
   req: Request,
   res: Response,
