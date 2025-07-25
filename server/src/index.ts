@@ -2,14 +2,13 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import express from "express";
 import { API } from "@data";
-import { routeLogger } from "@middleware";
+import { authRoutes, authMiddlewares } from "@feature-auth";
 import {
   projectsRouter,
   projectTagsRouter,
-  createEvictionJobService,
-  createViewsDecayJobService,
-} from "@/features";
-import { authRoutes, authMiddlewares } from "@feature-auth";
+  projectsJobs,
+} from "@feature-projects";
+import { routeLogger } from "@middleware";
 
 const ROUTES = API.ROUTES;
 
@@ -36,12 +35,12 @@ app.use(ROUTES.PROJECTS, validateJWT, projectsRouter);
 
 app.use(ROUTES.PROJECT_TAGS, validateJWT, projectTagsRouter);
 
-const evictionJob = createEvictionJobService();
+const evictionJob = projectsJobs.createEvictionJobService();
+const viewsDecayJob = projectsJobs.createViewsDecayJobService();
+
 evictionJob.scheduleProjectCacheEviction();
 evictionJob.scheduleCachePageEviction();
 evictionJob.scheduleSearchCacheEviction();
-
-const viewsDecayJob = createViewsDecayJobService();
 viewsDecayJob.scheduleViewsDecay();
 
 app.listen(3001, "0.0.0.0", async () => {
