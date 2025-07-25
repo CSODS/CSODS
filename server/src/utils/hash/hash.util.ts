@@ -1,3 +1,4 @@
+import crypto from "crypto";
 export class HashService {
   public static simpleHash(str: string): string {
     let hash = 0;
@@ -9,5 +10,9 @@ export class HashService {
     }
 
     return Math.abs(hash).toString(36); // convert to base36 for compactness
+  }
+
+  public static hashToken(token: string): string {
+    return crypto.createHash("sha256").update(token).digest("hex");
   }
 }

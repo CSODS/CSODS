@@ -2,7 +2,7 @@ export const BASE = "http://localhost:3001";
 
 export const ROUTES = {
   PROJECTS: "/projects",
-  PROJECT_TAGS: "/project_tags",
+  PROJECT_TAGS: "/project-tags",
   AUTH: "/auth",
 } as const;
 
@@ -10,13 +10,12 @@ export const PROJECT_ROUTES = {
   ROOT: "/",
   BY_PAGE: "/:pageNumber",
   BY_ID: "/:pageNumber/:projectId",
-  TITLE_SEARCH: "/:title_search",
-  LOAD_PROJECTS: "/load_projects",
+  LOAD_PROJECTS: "/load-projects",
 } as const;
 
 export const PROJECT_TAG_ROUTES = {
   ROOT: "/",
-  ALL_DATA: "/all_data",
+  ALL_DATA: "/all-data",
 } as const;
 
 export const AUTH_ROUTES = {

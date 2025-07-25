@@ -1,21 +1,29 @@
 import express, { Request } from "express";
-import { API } from "@data";
+import { API, AUTH } from "@data";
+import { validateJWT, verifyRoles } from "@middleware";
 import { IProjectDetails } from "@viewmodels";
 import { IProjectFilter } from "@services";
 
 const PROJECT_ROUTES = API.PROJECT_ROUTES;
+const { Guest, Student, Moderator, Administrator } = AUTH.ROLES_MAP;
 
 const projectsRouter = express.Router();
 
+projectsRouter.use(validateJWT);
+
 //  for testing
-projectsRouter.get(PROJECT_ROUTES.LOAD_PROJECTS, async (req, res) => {
-  const cacheService = req.projectCachePageService;
+projectsRouter.get(
+  PROJECT_ROUTES.LOAD_PROJECTS,
+  verifyRoles(Administrator.roleName),
+  async (req, res) => {
+    const cacheService = req.projectCachePageService;
 
-  const filter = assembleFilter(req);
+    const filter = assembleFilter(req);
 
-  await cacheService.setCache(filter);
-  res.json(cacheService.getCache());
-});
+    await cacheService.setCache(filter);
+    res.json(cacheService.getCache());
+  }
+);
 
 /**
  * GET @see PROJECT_ROUTES.BY_PAGE for the route's address.
@@ -34,22 +42,31 @@ projectsRouter.get(PROJECT_ROUTES.LOAD_PROJECTS, async (req, res) => {
  * ### Response:
  * Returns a JSON object representing a single page of project data from the cache.
  */
-projectsRouter.get(PROJECT_ROUTES.BY_PAGE, async (req, res) => {
-  const filter = assembleFilter(req);
+projectsRouter.get(
+  PROJECT_ROUTES.BY_PAGE,
+  verifyRoles(
+    Guest.roleName,
+    Student.roleName,
+    Moderator.roleName,
+    Administrator.roleName
+  ),
+  async (req, res) => {
+    const filter = assembleFilter(req);
 
-  const cacheService = req.projectCachePageService;
-  await cacheService.setCache(filter);
+    const cacheService = req.projectCachePageService;
+    await cacheService.setCache(filter);
 
-  const page = await cacheService.getOrCreatePage(
-    Number(req.params.pageNumber)
-  );
+    const page = await cacheService.getOrCreatePage(
+      Number(req.params.pageNumber)
+    );
 
-  page
-    ? res.json(page)
-    : res
-        .status(404)
-        .json({ error: `Page ${req.params.pageNumber} not found.` });
-});
+    page
+      ? res.json(page)
+      : res
+          .status(404)
+          .json({ error: `Page ${req.params.pageNumber} not found.` });
+  }
+);
 /**
  * GET @see PROJECT_ROUTES.BY_ID for the route's address.
  *
@@ -70,21 +87,30 @@ projectsRouter.get(PROJECT_ROUTES.BY_PAGE, async (req, res) => {
  * ### Response:
  * Returns a JSON object representing a single project.
  */
-projectsRouter.get(PROJECT_ROUTES.BY_ID, async (req, res) => {
-  const page: number = Number(req.params.pageNumber);
-  const id: number = Number(req.params.projectId);
+projectsRouter.get(
+  PROJECT_ROUTES.BY_ID,
+  verifyRoles(
+    Guest.roleName,
+    Student.roleName,
+    Moderator.roleName,
+    Administrator.roleName
+  ),
+  async (req, res) => {
+    const page: number = Number(req.params.pageNumber);
+    const id: number = Number(req.params.projectId);
 
-  const filter = assembleFilter(req);
+    const filter = assembleFilter(req);
 
-  const cacheService = req.projectCachePageService;
-  await cacheService.setCache(filter);
+    const cacheService = req.projectCachePageService;
+    await cacheService.setCache(filter);
 
-  const project: IProjectDetails | null =
-    await cacheService.getProjectByPageAndId(page, id);
-  project
-    ? res.json(project)
-    : res.status(404).json({ error: "Project Not Found." });
-});
+    const project: IProjectDetails | null =
+      await cacheService.getProjectByPageAndId(page, id);
+    project
+      ? res.json(project)
+      : res.status(404).json({ error: "Project Not Found." });
+  }
+);
 
 // router.post();
 

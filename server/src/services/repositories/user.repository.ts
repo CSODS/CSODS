@@ -65,7 +65,50 @@ export class UserRepository extends Repository<UsersTable> {
 
     return user;
   }
+  /**
+   * @public
+   * @async
+   * @function updateRefreshToken
+   * @description Asynchronously attempts to udpate the `refresh_token` column of a
+   * {@link User} `row` with a provided `userId`.
+   * @param userId The `id` of the {@link User} row to be updated.
+   * @param refreshTokenHash The **`hash`** of the `refresh token` to be stored into
+   * the database.
+   * @returns Returns a Promise resolving to the `userId` of the updated row if the update
+   * succeeds or `null` if the update fails.
+   */
+  public async updateRefreshToken(
+    userId: number,
+    refreshTokenHash: string | null
+  ): Promise<number | null> {
+    try {
+      DbLogger.info(
+        `[User] Attempting to update refresh token of user with id: ${userId}.`
+      );
 
+      const updatedUserId: number | null = await this._dbContext
+        .update(User)
+        .set({ refreshToken: refreshTokenHash })
+        .where(eq(User.userId, userId))
+        .returning()
+        .then((result) => result[0]?.userId ?? null);
+
+      if (!updatedUserId) throw new Error();
+
+      DbLogger.info(
+        `[User] Success updating refresh token of user with id: ${updatedUserId}.`
+      );
+
+      return updatedUserId;
+    } catch (err) {
+      DbLogger.error(
+        `[User] Failed updating refresh token of user with id ${userId}`,
+        err
+      );
+
+      return null;
+    }
+  }
   /**
    * @protected
    * @function buildWhereClause
@@ -87,6 +130,7 @@ export class UserRepository extends Repository<UsersTable> {
         username,
         studentName,
         studentNumber,
+        refreshToken,
       } = filter;
       if (email && email.trim()) {
         conditions.push(eq(User.email, email));
@@ -102,6 +146,10 @@ export class UserRepository extends Repository<UsersTable> {
 
       if (studentNumber && studentNumber.trim()) {
         conditions.push(eq(User.studentNumber, studentNumber));
+      }
+
+      if (refreshToken && refreshToken.trim()) {
+        conditions.push(eq(User.refreshToken, refreshToken));
       }
 
       if (conditions.length > 0) {
@@ -133,4 +181,5 @@ export interface IUserFilter {
   username?: string;
   studentName?: string | null;
   studentNumber?: string | null;
+  refreshToken?: string | null;
 }

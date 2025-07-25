@@ -79,7 +79,7 @@ export const DbLogger = winston.createLogger({
 });
 
 export const RouteLogger = winston.createLogger({
-  level: "info",
+  level: "debug",
   format: combine(
     errors({ stack: true }),
     timestamp({
@@ -95,7 +95,7 @@ export const RouteLogger = winston.createLogger({
     })
   ),
   transports: [
-    new winston.transports.Console(),
+    new winston.transports.Console({ level: "error" }),
     new winston.transports.File({ dirname: "logs", filename: "routes.log" }),
   ],
 });
