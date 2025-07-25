@@ -1,13 +1,14 @@
 import express from "express";
 import { API, AUTH } from "@data";
 import { validateRoles } from "@middleware";
-import { attachTagsCacheHandler } from "./projects.middleware";
+import { attachTagsCacheHandler, projectTagsRouteLimiter } from "./middleware";
 
 const PROJECT_TAG_ROUTES = API.PROJECT_TAG_ROUTES;
 const { Guest, Student, Moderator, Administrator } = AUTH.ROLES_MAP;
 
 export const projectTagsRouter = express.Router();
 
+projectTagsRouter.use(projectTagsRouteLimiter);
 projectTagsRouter.use(attachTagsCacheHandler);
 
 projectTagsRouter.get(

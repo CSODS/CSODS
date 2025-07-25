@@ -2,12 +2,7 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import express from "express";
 import { API } from "@data";
-import {
-  authRouteLimiter,
-  routeLogger,
-  projectsRouteLimiter,
-  projectTagsRouteLimiter,
-} from "@middleware";
+import { authRouteLimiter, routeLogger } from "@middleware";
 import {
   authRouter,
   projectsRouter,
@@ -35,9 +30,9 @@ app.use(ROUTES.AUTH, authRouteLimiter, authRouter);
 
 app.use(validateJWT);
 
-app.use(ROUTES.PROJECTS, projectsRouteLimiter, projectsRouter);
+app.use(ROUTES.PROJECTS, projectsRouter);
 
-app.use(ROUTES.PROJECT_TAGS, projectTagsRouteLimiter, projectTagsRouter);
+app.use(ROUTES.PROJECT_TAGS, projectTagsRouter);
 
 const evictionJob = createEvictionJobService();
 evictionJob.scheduleProjectCacheEviction();

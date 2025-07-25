@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import {
   createProjectCachePageService,
   createTagsCacheHandler,
-} from "./services";
+} from "../services";
 
 export function attachTagsCacheHandler(
   req: Request,
