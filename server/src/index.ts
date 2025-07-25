@@ -4,13 +4,12 @@ import express from "express";
 import { API } from "@data";
 import { routeLogger } from "@middleware";
 import {
-  authRouter,
   projectsRouter,
   projectTagsRouter,
   createEvictionJobService,
   createViewsDecayJobService,
-  validateJWT,
 } from "@/features";
+import { authRoutes, authMiddlewares } from "@feature-auth";
 
 const ROUTES = API.ROUTES;
 
@@ -25,14 +24,17 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(routeLogger);
 
-//  for routes
-app.use(ROUTES.AUTH, authRouter);
+//  routes
 
-app.use(validateJWT);
+//  auth feature
+app.use(ROUTES.AUTH, authRoutes.authRouter);
 
-app.use(ROUTES.PROJECTS, projectsRouter);
+const { validateJWT } = authMiddlewares;
 
-app.use(ROUTES.PROJECT_TAGS, projectTagsRouter);
+//  projects feature
+app.use(ROUTES.PROJECTS, validateJWT, projectsRouter);
+
+app.use(ROUTES.PROJECT_TAGS, validateJWT, projectTagsRouter);
 
 const evictionJob = createEvictionJobService();
 evictionJob.scheduleProjectCacheEviction();
