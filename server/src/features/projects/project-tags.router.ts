@@ -1,6 +1,6 @@
 import express from "express";
 import { API, AUTH } from "@data";
-import { verifyRoles } from "@middleware";
+import { validateRoles } from "@middleware";
 import { attachTagsCacheHandler } from "./projects.middleware";
 
 const PROJECT_TAG_ROUTES = API.PROJECT_TAG_ROUTES;
@@ -12,7 +12,7 @@ projectTagsRouter.use(attachTagsCacheHandler);
 
 projectTagsRouter.get(
   PROJECT_TAG_ROUTES.ALL_DATA,
-  verifyRoles(
+  validateRoles(
     Guest.roleName,
     Student.roleName,
     Moderator.roleName,

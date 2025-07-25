@@ -1,11 +1,11 @@
 import { Request, Response, NextFunction } from "express";
 import { RouteLogHelper } from "@utils";
 
-export function verifyRoles(...allowedRoles: string[]) {
+export function validateRoles(...allowedRoles: string[]) {
   return (req: Request, res: Response, next: NextFunction) => {
     const logger = new RouteLogHelper(req, res);
 
-    logger.log("debug", "Verifying user role access.");
+    logger.log("debug", "Validating user role access.");
     const { authPayload } = req;
     const userInfo = authPayload?.userInfo ?? null;
     if (!userInfo) return logger.logStatus(401, "Unauthenticated.");

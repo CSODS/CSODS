@@ -1,6 +1,6 @@
 import express, { Request } from "express";
 import { API, AUTH } from "@data";
-import { verifyRoles } from "@middleware";
+import { validateRoles } from "@middleware";
 import { attachProjectCachePageService } from "./projects.middleware";
 import { IProjectFilter } from "./services";
 import { IProjectDetails } from "./types";
@@ -15,7 +15,7 @@ projectsRouter.use(attachProjectCachePageService);
 //  for testing
 projectsRouter.get(
   PROJECT_ROUTES.LOAD_PROJECTS,
-  verifyRoles(Administrator.roleName),
+  validateRoles(Administrator.roleName),
   async (req, res) => {
     const cacheService = req.projectCachePageService;
 
@@ -45,7 +45,7 @@ projectsRouter.get(
  */
 projectsRouter.get(
   PROJECT_ROUTES.BY_PAGE,
-  verifyRoles(
+  validateRoles(
     Guest.roleName,
     Student.roleName,
     Moderator.roleName,
@@ -90,7 +90,7 @@ projectsRouter.get(
  */
 projectsRouter.get(
   PROJECT_ROUTES.BY_ID,
-  verifyRoles(
+  validateRoles(
     Guest.roleName,
     Student.roleName,
     Moderator.roleName,
