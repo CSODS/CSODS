@@ -1,10 +1,8 @@
 import { Request, Response, NextFunction } from "express";
 import {
-  createTagsCacheHandler,
-  TagsCacheHandler,
   createProjectCachePageService,
-  ProjectCachePageService,
-} from "@services";
+  createTagsCacheHandler,
+} from "./services";
 
 export function attachTagsCacheHandler(
   req: Request,
@@ -22,13 +20,4 @@ export async function attachProjectCachePageService(
 ) {
   req.projectCachePageService = await createProjectCachePageService();
   next();
-}
-
-declare global {
-  namespace Express {
-    interface Request {
-      tagsCacheHandler: TagsCacheHandler;
-      projectCachePageService: ProjectCachePageService;
-    }
-  }
 }

@@ -1,13 +1,15 @@
 import express from "express";
 import { API, AUTH } from "@data";
 import { validateJWT, verifyRoles } from "@middleware";
+import { attachTagsCacheHandler } from "./projects.middleware";
 
 const PROJECT_TAG_ROUTES = API.PROJECT_TAG_ROUTES;
 const { Guest, Student, Moderator, Administrator } = AUTH.ROLES_MAP;
 
-const projectTagsRouter = express.Router();
+export const projectTagsRouter = express.Router();
 
 projectTagsRouter.use(validateJWT);
+projectTagsRouter.use(attachTagsCacheHandler);
 
 projectTagsRouter.get(
   PROJECT_TAG_ROUTES.ALL_DATA,
@@ -25,5 +27,3 @@ projectTagsRouter.get(
       : res.status(404).json({ error: "Failed loading tags cache." });
   }
 );
-
-export default projectTagsRouter;

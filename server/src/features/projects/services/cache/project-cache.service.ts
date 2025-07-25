@@ -1,12 +1,9 @@
 import dotenv from "dotenv";
 import { CACHE } from "@data";
 import {
+  AbstractCacheService,
   createJsonFileService,
-  createProjectDataService,
-  IProjectFilter,
   JsonFileService,
-  ProjectDataService,
-  ProjectFilter,
 } from "@services";
 import { HashService, ProjectsCacheLogger } from "@utils";
 import {
@@ -14,8 +11,12 @@ import {
   IProjectCache,
   IProjectCachePage,
   IProjectDetails,
-} from "@viewmodels";
-import { AbstractCacheService } from "../abstract-cache.service";
+} from "../../types";
+import {
+  createProjectDataService,
+  ProjectDataService,
+} from "../project-data.service";
+import { IProjectFilter, ProjectFilter } from "../repositories";
 
 dotenv.config();
 

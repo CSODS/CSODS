@@ -1,5 +1,5 @@
-import { IProjectCache } from "@viewmodels";
-import { ViewsDecayService } from "./views-decay.service.js";
+import { ViewsDecayService } from "@services";
+import { IProjectCache } from "../types/projects-cache.interface";
 
 /**
  * @class ProjectsViewDecayService

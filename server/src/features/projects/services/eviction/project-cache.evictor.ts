@@ -1,13 +1,16 @@
 import dotenv from "dotenv";
-import { CachePageRecord, IProjectCache } from "@viewmodels";
 import {
   JsonFileService,
   createJsonFileService,
   IFile,
+  IEvictionOptions,
+  BaseCacheEvictor,
+} from "@services";
+import { CachePageRecord, IProjectCache } from "../../types";
+import {
   createProjectPageEvictor,
   ProjectPageEvictor,
-} from "@services";
-import { IEvictionOptions, BaseCacheEvictor } from "../base-cache.evictor";
+} from "./project-page.evictor";
 
 dotenv.config();
 

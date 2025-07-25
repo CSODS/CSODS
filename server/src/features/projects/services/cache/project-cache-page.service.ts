@@ -1,16 +1,15 @@
 import { CACHE } from "@data";
-import {
-  createJsonFileService,
-  createProjectDataService,
-  JsonFileService,
-  ProjectDataService,
-} from "@services";
+import { createJsonFileService, JsonFileService } from "@services";
 import {
   CachePageRecord,
   IProjectCache,
   IProjectCachePage,
   IProjectDetails,
-} from "@viewmodels";
+} from "../../types";
+import {
+  createProjectDataService,
+  ProjectDataService,
+} from "../project-data.service";
 import { ProjectCacheService } from "./project-cache.service";
 
 export async function createProjectCachePageService() {

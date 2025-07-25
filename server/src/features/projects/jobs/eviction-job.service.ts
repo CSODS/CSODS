@@ -1,11 +1,8 @@
 import cron from "node-cron";
 import dotenv from "dotenv";
-import {
-  createProjectCacheEvictor,
-  ProjectCacheEvictor,
-  IEvictionOptions,
-} from "@services";
-import { JobsLogger } from "../logger/logger.util";
+import { IEvictionOptions } from "@services";
+import { JobsLogger } from "@utils";
+import { createProjectCacheEvictor, ProjectCacheEvictor } from "../services";
 
 dotenv.config();
 

@@ -1,6 +1,6 @@
 import { CACHE } from "@data";
 import { createJsonFileService } from "@services";
-import { IProjectTags } from "@viewmodels";
+import { IProjectTagsCache } from "@/features/projects";
 import { createContext } from "@/db/csods";
 import dotenv from "dotenv";
 dotenv.config();
@@ -21,7 +21,7 @@ dotenv.config();
  * @returns {Promise<void>}
  */
 async function tagsLoader() {
-  const data: IProjectTags = {
+  const data: IProjectTagsCache = {
     DevTypes: [],
     ProgrammingLanguages: [],
     Frameworks: [],
@@ -39,7 +39,8 @@ async function tagsLoader() {
   data.ApplicationIndustries =
     await context.query.ApplicationIndustry.findMany();
 
-  const jsonFileHandler = createJsonFileService<IProjectTags>("IProjectTags");
+  const jsonFileHandler =
+    createJsonFileService<IProjectTagsCache>("IProjectTags");
   const fileName = CACHE.TAGS_CACHE.BASE_NAME + CACHE.EXTENSION.JSON;
   await jsonFileHandler.writeToJsonFile(
     process.env.TAGS_CACHE_PATH!,

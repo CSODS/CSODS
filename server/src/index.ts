@@ -3,16 +3,18 @@ import cors from "cors";
 import express from "express";
 import { API } from "@data";
 import {
-  attachProjectCachePageService,
-  attachTagsCacheHandler,
   authRouteLimiter,
   routeLogger,
   projectsRouteLimiter,
   projectTagsRouteLimiter,
 } from "@middleware";
-import { projectsRouter, projectTagsRouter } from "@/routers";
-import { createEvictionJobService, createViewsDecayJobService } from "@utils";
-import { authRouter } from "@/features";
+import {
+  authRouter,
+  projectsRouter,
+  projectTagsRouter,
+  createEvictionJobService,
+  createViewsDecayJobService,
+} from "@/features";
 
 const ROUTES = API.ROUTES;
 
@@ -30,10 +32,8 @@ app.use(routeLogger);
 //  for routes
 app.use(ROUTES.AUTH, authRouteLimiter, authRouter);
 
-app.use(attachProjectCachePageService);
 app.use(ROUTES.PROJECTS, projectsRouteLimiter, projectsRouter);
 
-app.use(attachTagsCacheHandler);
 app.use(ROUTES.PROJECT_TAGS, projectTagsRouteLimiter, projectTagsRouter);
 
 const evictionJob = createEvictionJobService();

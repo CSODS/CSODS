@@ -1,6 +1,6 @@
 import cron from "node-cron";
-import { ProjectsViewsDecayService } from "@services";
-import { JobsLogger } from "../logger/logger.util";
+import { JobsLogger } from "@utils";
+import { ProjectsViewsDecayService } from "../services";
 
 export function createViewsDecayJobService() {
   return new ViewsDecayJobService();

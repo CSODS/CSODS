@@ -1,11 +1,12 @@
 import { createContext } from "@/db/csods";
-import { ProjectViewModel, IProjectDetails } from "@viewmodels";
+import { ProjectViewModel } from "@viewmodels";
+import { DbLogger } from "@/utils";
+import { IProjectDetails } from "../types";
 import {
-  ProjectRepository,
   IProjectFilter,
   ProjectFrameworkRepository,
-} from "@services";
-import { DbLogger } from "@/utils";
+  ProjectRepository,
+} from "./repositories";
 
 export async function createProjectDataService() {
   const dbContext = await createContext();

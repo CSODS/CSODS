@@ -1,6 +1,10 @@
-import { createJsonFileService, JsonFileService } from "@services";
-import { IProjectCachePage } from "@viewmodels";
-import { IEvictionOptions, BaseCacheEvictor } from "../base-cache.evictor";
+import {
+  createJsonFileService,
+  JsonFileService,
+  IEvictionOptions,
+  BaseCacheEvictor,
+} from "@services";
+import { IProjectCachePage } from "../../types";
 
 export function createProjectPageEvictor(
   evictionOptions: IEvictionOptions

@@ -1,15 +1,17 @@
 import express, { Request } from "express";
 import { API, AUTH } from "@data";
 import { validateJWT, verifyRoles } from "@middleware";
-import { IProjectDetails } from "@viewmodels";
-import { IProjectFilter } from "@services";
+import { attachProjectCachePageService } from "./projects.middleware";
+import { IProjectFilter } from "./services";
+import { IProjectDetails } from "./types";
 
 const PROJECT_ROUTES = API.PROJECT_ROUTES;
 const { Guest, Student, Moderator, Administrator } = AUTH.ROLES_MAP;
 
-const projectsRouter = express.Router();
+export const projectsRouter = express.Router();
 
 projectsRouter.use(validateJWT);
+projectsRouter.use(attachProjectCachePageService);
 
 //  for testing
 projectsRouter.get(
@@ -113,8 +115,6 @@ projectsRouter.get(
 );
 
 // router.post();
-
-export default projectsRouter;
 
 /**
  * Extracts and parses query parameters from the request object to construct an `IProjectFilter`.
