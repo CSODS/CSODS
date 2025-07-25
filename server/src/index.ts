@@ -4,9 +4,10 @@ import express from "express";
 import { API } from "@data";
 import { authRoutes, authMiddlewares } from "@feature-auth";
 import {
+  projectsJobs,
+  projectsMiddlewares,
   projectsRouter,
   projectTagsRouter,
-  projectsJobs,
 } from "@feature-projects";
 import { routeLogger } from "@middleware";
 
@@ -28,12 +29,18 @@ app.use(routeLogger);
 //  auth feature
 app.use(ROUTES.AUTH, authRoutes.authRouter);
 
+const { projectsRouteLimiter } = projectsMiddlewares;
 const { validateJWT } = authMiddlewares;
 
 //  projects feature
-app.use(ROUTES.PROJECTS, validateJWT, projectsRouter);
+app.use(ROUTES.PROJECTS, projectsRouteLimiter, validateJWT, projectsRouter);
 
-app.use(ROUTES.PROJECT_TAGS, validateJWT, projectTagsRouter);
+app.use(
+  ROUTES.PROJECT_TAGS,
+  projectsRouteLimiter,
+  validateJWT,
+  projectTagsRouter
+);
 
 const evictionJob = projectsJobs.createEvictionJobService();
 const viewsDecayJob = projectsJobs.createViewsDecayJobService();

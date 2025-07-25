@@ -1,10 +1,7 @@
 import express, { Request } from "express";
 import { API, AUTH } from "@data";
 import { validateRoles } from "@middleware";
-import {
-  attachProjectCachePageService,
-  projectsRouteLimiter,
-} from "./middleware";
+import { attachProjectCachePageService } from "./middleware";
 import { IProjectFilter } from "./services";
 import { IProjectDetails } from "./types";
 
@@ -13,7 +10,6 @@ const { Guest, Student, Moderator, Administrator } = AUTH.ROLES_MAP;
 
 export const projectsRouter = express.Router();
 
-projectsRouter.use(projectsRouteLimiter);
 projectsRouter.use(attachProjectCachePageService);
 
 //  for testing
