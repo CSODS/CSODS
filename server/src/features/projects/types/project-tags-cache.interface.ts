@@ -1,4 +1,4 @@
-import * as tableTypes from "@/viewmodels/schema.types";
+import * as tableTypes from "./projects-viewmodels.type";
 
 /**
  * Represents a structured cache of all project-related tags used for categorization and filtering.

@@ -1,5 +1,5 @@
-import * as tableTypes from "@/viewmodels/schema.types";
 import { ICache } from "@/viewmodels";
+import * as tableTypes from "./projects-viewmodels.type";
 
 /**
  * A View Model for the Project Cache.
