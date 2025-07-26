@@ -8,8 +8,8 @@ export const ROUTES = {
 
 export const PROJECT_ROUTES = {
   ROOT: "/",
-  BY_PAGE: "/:pageNumber",
-  BY_ID: "/:pageNumber/:projectId",
+  BY_PAGE: "/:page-number",
+  BY_ID: "/:page-number/:project-id",
   LOAD_PROJECTS: "/load-projects",
 } as const;
 
