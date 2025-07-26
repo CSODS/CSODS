@@ -126,8 +126,13 @@ projectsRouter.get(
  * @see parseNumberParam - Utility function used to safely parse numeric query parameters.
  */
 function assembleFilter(request: Request): IProjectFilter {
-  const { projectTitle, devTypeId, languageId, databaseId, industryId } =
-    request.query;
+  const {
+    ["project-title"]: projectTitle,
+    ["dev-type-id"]: devTypeId,
+    ["language-id"]: languageId,
+    ["database-id"]: databaseId,
+    ["industry-id"]: industryId,
+  } = request.query;
 
   const filter: IProjectFilter = {
     ProjectTitle: parseStringParam(projectTitle),
