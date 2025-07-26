@@ -9,7 +9,7 @@ import { JsonFileService } from "./json-file.service";
  * Provides CRUD methods for with default behaviors for `json` cache handling and a method signature for a
  * {@link constructCache} method that **must** be implemented for default cache creation logic.
  * Contains the following fields:
- * - {@link _logger} - An instance of {@link winston.logger}. Used for logging.
+ * - {@link _logger} - An instance of {@link winston.Logger}. Used for logging.
  * - {@link _jsonFileHandler} - An instance of the {@link JsonFileService} class. A core component for the default
  * CRUD operations of the cache service.
  * - {@link _cachePath} - The path to the cache folder.
