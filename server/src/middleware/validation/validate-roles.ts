@@ -1,14 +1,13 @@
 import { Request, Response, NextFunction } from "express";
-import { RequestLogContext } from "@utils";
 
 export function validateRoles(...allowedRoles: string[]) {
   return (req: Request, res: Response, next: NextFunction) => {
-    const logger = new RequestLogContext(req, res);
+    const { requestLogContext: requestLogger } = req;
 
-    logger.log("debug", "Validating user role access.");
+    requestLogger.log("debug", "Validating user role access.");
     const { authPayload } = req;
     const userInfo = authPayload?.userInfo ?? null;
-    if (!userInfo) return logger.logStatus(401, "Unauthenticated.");
+    if (!userInfo) return requestLogger.logStatus(401, "Unauthenticated.");
 
     const { roles } = userInfo;
     const rolesArray = [...allowedRoles];
@@ -21,7 +20,7 @@ export function validateRoles(...allowedRoles: string[]) {
       .find((value) => value === true);
 
     if (!hasAllowedRole)
-      return logger.logStatus(
+      return requestLogger.logStatus(
         401,
         "User is not authorized to access this route."
       );
