@@ -43,11 +43,41 @@ export class RequestLogContext {
   private readonly _req: Request;
   private readonly _res: Response;
   private readonly _logger: winston.Logger;
+  private _profiler?: winston.Profiler;
 
   public constructor(req: Request, res: Response) {
     this._req = req;
     this._res = res;
     this._logger = RouteLogger;
+  }
+
+  /**
+   * @public
+   * @function getRequestProfiler
+   * @description Wrapper function for starting a {@link winston.Profiler}
+   * object of the {@link RouteLogger} class.
+   */
+  public startRequestProfiler(): void {
+    this.log("debug", "Processing request...");
+
+    this._profiler = this._logger.startTimer();
+  }
+
+  /**
+   * @public
+   * @function setProfilerDone
+   * @description Checks if the {@link _profiler} has been started and sets it to done.
+   * Afterwards, logs a message and the request's status code to notify that the request
+   * was completed.
+   */
+  public endRequestProfiler(): void {
+    if (!this._profiler) return;
+
+    const logHeader = this.__constructLogHeader();
+    const statusCode = this._res.statusCode;
+    const profilerMsg = `${logHeader} Request completed with status ${statusCode}.`;
+
+    this._profiler.done({ message: profilerMsg });
   }
 
   /**
