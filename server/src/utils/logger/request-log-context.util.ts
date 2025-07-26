@@ -99,8 +99,7 @@ export class RequestLogContext {
     msg: string,
     err?: unknown
   ): void {
-    const { method, originalUrl } = this._req;
-    const logHeader = `[${method} ${originalUrl}]`;
+    const logHeader = this.__constructLogHeader();
     const logMsg = `${logHeader} ${msg}`;
 
     level === "error" && err
@@ -125,5 +124,18 @@ export class RequestLogContext {
     }
 
     return msg;
+  }
+  /**
+   * @private
+   * @function __getLogHeader
+   * @description Helper function for constructing the log header from the `method`
+   * and `originalUrl` in the {@link Request} object.
+   * @returns A `string` containing the `logHeader`.
+   */
+  private __constructLogHeader(): string {
+    const { method, originalUrl } = this._req;
+    const logHeader = `[${method} ${originalUrl}]`;
+
+    return logHeader;
   }
 }
