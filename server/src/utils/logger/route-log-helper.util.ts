@@ -2,6 +2,14 @@ import { Request, Response } from "express";
 import winston from "winston";
 import { RouteLogger } from "./logger.util";
 
+export function createRouteLogHelper(req: Request, res: Response) {
+  return new RouteLogHelper(req, res);
+}
+
+type MsgOptions = {
+  logMsg: string;
+  resMsg: string;
+};
 export class RouteLogHelper {
   private readonly _req: Request;
   private readonly _res: Response;
@@ -50,8 +58,3 @@ export class RouteLogHelper {
     return msg;
   }
 }
-
-type MsgOptions = {
-  logMsg: string;
-  resMsg: string;
-};
