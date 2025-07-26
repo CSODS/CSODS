@@ -6,8 +6,8 @@ const CSODS_API_BASE =
 const PROJECT_PATHS = {
   PATH: "/projects",
   ROOT: "/",
-  BY_PAGE: "/:pageNumber",
-  BY_ID: "/:pageNumber/:projectId",
+  BY_PAGE: "/:page-number",
+  BY_ID: "/:page-number/:project-id",
 } as const;
 
 const PROJECT_TAG_PATHS = {
