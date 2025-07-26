@@ -1,4 +1,3 @@
-import { RouteLogger } from "@/utils";
 import { Request, Response, NextFunction } from "express";
 
 /**
@@ -15,17 +14,12 @@ export function requestProfiler(
   res: Response,
   next: NextFunction
 ) {
-  const reqMethod = req.method;
-  const originalUrl = req.originalUrl;
+  const { requestLogContext: requestLogger } = req;
 
-  RouteLogger.info(`[${reqMethod} ${originalUrl}] Processing request...`);
-
-  const profiler = RouteLogger.startTimer();
+  requestLogger.startRequestProfiler();
 
   res.on("finish", () => {
-    profiler.done({
-      message: `[${reqMethod} ${originalUrl}] completed with status ${res.statusCode}.`,
-    });
+    requestLogger.endRequestProfiler();
   });
 
   next();
