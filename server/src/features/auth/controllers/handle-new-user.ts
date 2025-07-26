@@ -1,5 +1,4 @@
 import { Request, Response } from "express";
-import { RouteLogHelper } from "@utils";
 import { RegisterSchema } from "../schemas";
 
 /**
@@ -20,7 +19,7 @@ export async function handleNewUser(
   req: Request<{}, {}, RegisterSchema>,
   res: Response
 ) {
-  const logger = new RouteLogHelper(req, res);
+  const { requestLogContext: requestLogger } = req;
 
   //  validate existing email, username, student name, and student number.
   const user = req.body;
@@ -29,15 +28,15 @@ export async function handleNewUser(
   });
 
   if (existingUser)
-    return logger.logStatus(409, {
+    return requestLogger.logStatus(409, {
       logMsg: `User with id: ${existingUser.userId} already exists.`,
       resMsg: "User already exists.",
     });
 
-  logger.log("debug", `Inserting new user.`);
+  requestLogger.log("debug", `Inserting new user.`);
   const inserted = await req.userDataService.insertUser(user);
 
   return inserted
-    ? logger.logStatus(201, "User registration success.")
-    : logger.logStatus(409, "User registration failed.");
+    ? requestLogger.logStatus(201, "User registration success.")
+    : requestLogger.logStatus(409, "User registration failed.");
 }

@@ -1,5 +1,4 @@
 import { AUTH } from "@data";
-import { RouteLogHelper } from "@utils";
 import { Request, Response } from "express";
 import { createJwt } from "../../utils";
 import { verifyRefreshToken } from "./verify-refresh-token";
@@ -23,9 +22,7 @@ const { cookieName: REFRESH_TOKEN } = refresh.cookieConfig!;
  * @returns
  */
 export async function handleRefreshToken(req: Request, res: Response) {
-  const logger = new RouteLogHelper(req, res);
-
-  const { cookies, userDataService } = req;
+  const { cookies, requestLogContext: requestLogger, userDataService } = req;
   const refreshToken = cookies[REFRESH_TOKEN] as string;
 
   const foundUser = await userDataService.getExistingUser({
@@ -34,16 +31,16 @@ export async function handleRefreshToken(req: Request, res: Response) {
 
   //  evaluate jwt
   try {
-    logger.log("debug", "Attempting to refresh token");
+    requestLogger.log("debug", "Attempting to refresh token");
 
-    const payload = verifyRefreshToken(req, res, refreshToken, foundUser);
+    const payload = verifyRefreshToken(req, refreshToken, foundUser);
     if (!payload) return;
 
     const accessToken = createJwt(payload, { tokenType: "access" });
-    logger.log("debug", "Access token refreshed successfully");
+    requestLogger.log("debug", "Access token refreshed successfully");
 
     res.json({ accessToken });
   } catch (err) {
-    logger.logStatus(403, "Failed to refresh access token.", err);
+    requestLogger.logStatus(403, "Failed to refresh access token.", err);
   }
 }

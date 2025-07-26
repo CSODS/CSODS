@@ -9,7 +9,7 @@ import {
   projectsRouter,
   projectTagsRouter,
 } from "@feature-projects";
-import { routeLogger } from "@middleware";
+import { attachRequestLogContext, requestProfiler } from "@middleware";
 
 const ROUTES = API.ROUTES;
 
@@ -22,7 +22,10 @@ app.use(cors());
 app.use(express.json());
 
 app.use(cookieParser());
-app.use(routeLogger);
+
+//  logging middleware
+app.use(attachRequestLogContext);
+app.use(requestProfiler);
 
 //  routes
 
