@@ -1,5 +1,5 @@
 import { AUTH } from "@data";
-import { RouteLogHelper } from "@utils";
+import { RequestLogContext } from "@utils";
 import { Request, Response } from "express";
 import { createJwt } from "../../utils";
 import { verifyRefreshToken } from "./verify-refresh-token";
@@ -23,7 +23,7 @@ const { cookieName: REFRESH_TOKEN } = refresh.cookieConfig!;
  * @returns
  */
 export async function handleRefreshToken(req: Request, res: Response) {
-  const logger = new RouteLogHelper(req, res);
+  const logger = new RequestLogContext(req, res);
 
   const { cookies, userDataService } = req;
   const refreshToken = cookies[REFRESH_TOKEN] as string;

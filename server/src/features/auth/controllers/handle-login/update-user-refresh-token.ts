@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { RouteLogHelper } from "@utils";
+import { RequestLogContext } from "@utils";
 import { UserViewModel } from "../../types";
 
 /**
@@ -24,7 +24,7 @@ export async function updateUserRefreshToken(
   verifiedUser: UserViewModel,
   refreshToken: string
 ): Promise<number | null> {
-  const logger = new RouteLogHelper(req, res);
+  const logger = new RequestLogContext(req, res);
 
   const updatedUserId = await req.userDataService.updateRefreshToken(
     verifiedUser.userId,

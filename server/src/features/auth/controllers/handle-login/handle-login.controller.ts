@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { AUTH } from "@data";
-import { RouteLogHelper } from "@utils";
+import { RequestLogContext } from "@utils";
 import { LoginSchema } from "../../schemas";
 import { getVerifiedUser } from "./get-verified-user";
 import { createTokens } from "./create-tokens";
@@ -26,7 +26,7 @@ export async function handleLogin(
   req: Request<{}, {}, LoginSchema>,
   res: Response
 ) {
-  const logger = new RouteLogHelper(req, res);
+  const logger = new RequestLogContext(req, res);
 
   const verifiedUser = await getVerifiedUser(req, res);
   if (!verifiedUser) return;

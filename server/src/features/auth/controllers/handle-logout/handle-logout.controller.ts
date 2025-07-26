@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { AUTH } from "@data";
-import { RouteLogHelper } from "@utils";
+import { RequestLogContext } from "@utils";
 import { getRefreshToken } from "./get-refresh-token";
 
 const { refresh } = AUTH.TOKEN_CONFIG_RECORD;
@@ -19,7 +19,7 @@ const { cookieConfig: refreshCookie } = refresh;
  * @returns
  */
 export async function handleLogout(req: Request, res: Response) {
-  const logger = new RouteLogHelper(req, res);
+  const logger = new RequestLogContext(req, res);
   const { userDataService } = req;
 
   const refreshToken: string | null = getRefreshToken(req, res);

@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import dotenv from "dotenv";
 import jwt from "jsonwebtoken";
-import { RouteLogHelper } from "@utils";
+import { RequestLogContext } from "@utils";
 import { authSchemas, authTypes } from "../..";
 
 dotenv.config();
@@ -28,7 +28,7 @@ export function verifyRefreshToken(
   refreshToken: string,
   user: UserViewModel | null
 ): TokenPayload | null {
-  const logger = new RouteLogHelper(req, res);
+  const logger = new RequestLogContext(req, res);
 
   let payload;
   try {

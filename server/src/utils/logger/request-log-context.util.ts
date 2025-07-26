@@ -5,20 +5,20 @@ import { RouteLogger } from "./logger.util";
 /**
  * @public
  * @function createRouteLogHelper
- * @description Creates a new instance of the {@link RouteLogHelper} using
+ * @description Creates a new instance of the {@link RequestLogContext} using
  * the `request` and `response` objects. Used for attaching to the `request`
  * as a middleware.
  * @param req
  * @param res
  * @returns
  */
-export function createRouteLogHelper(req: Request, res: Response) {
-  return new RouteLogHelper(req, res);
+export function createRequestLogContext(req: Request, res: Response) {
+  return new RequestLogContext(req, res);
 }
 
 /**
  * @type MsgOptions
- * @description A type used for the `msg` parameter of the {@link RouteLogHelper.logStatus()}
+ * @description A type used for the `msg` parameter of the {@link RequestLogContext.logStatus()}
  * method. Contains the fields:
  * - {@link logMsg} - The log message.
  * - {@link resMsg} - The response message.
@@ -30,7 +30,7 @@ type MsgOptions = {
 
 /**
  * @public
- * @class RouteLogHelper
+ * @class
  * @description A utility logger class used for logging request lifecycles.
  * Used for logging requests from arrivals, to middleware, until the controller
  * finishes executing.
@@ -39,7 +39,7 @@ type MsgOptions = {
  * - Uses the {@link Request} object for creating a log message header.
  * - Uses the {@link RouteLogger} for logging to transports.
  */
-export class RouteLogHelper {
+export class RequestLogContext {
   private readonly _req: Request;
   private readonly _res: Response;
   private readonly _logger: winston.Logger;

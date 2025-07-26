@@ -1,11 +1,11 @@
 import { Request, Response, NextFunction } from "express";
-import { RouteLogHelper } from "@utils";
+import { RequestLogContext } from "@utils";
 
 export function validateCookies(
   ...cookieNames: string[]
 ): (req: Request, res: Response, next: NextFunction) => void {
   return (req: Request, res: Response, next: NextFunction) => {
-    const logger = new RouteLogHelper(req, res);
+    const logger = new RequestLogContext(req, res);
 
     const { cookies } = req;
     const nameList = [...cookieNames];

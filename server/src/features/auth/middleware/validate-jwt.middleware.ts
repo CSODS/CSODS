@@ -1,14 +1,14 @@
 import dotenv from "dotenv";
 import { Response, Request, NextFunction } from "express";
 import jwt from "jsonwebtoken";
-import { RouteLogHelper } from "@utils";
+import { RequestLogContext } from "@utils";
 import { TokenPayload } from "../schemas";
 
 dotenv.config();
 
 //  TODO: add handling for anonymous users (signed in as guest).
 export function validateJWT(req: Request, res: Response, next: NextFunction) {
-  const logger = new RouteLogHelper(req, res);
+  const logger = new RequestLogContext(req, res);
 
   const authHeader = req.headers["authorization"];
 

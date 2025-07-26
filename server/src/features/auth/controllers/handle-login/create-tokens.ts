@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { RouteLogHelper } from "@/utils";
+import { RequestLogContext } from "@/utils";
 import { authSchemas, authTypes, authUtils } from "../..";
 
 type UserViewModel = authTypes.UserViewModel;
@@ -33,7 +33,7 @@ export async function createTokens(
   res: Response,
   verifiedUser: UserViewModel
 ): Promise<Tokens> {
-  const logger = new RouteLogHelper(req, res);
+  const logger = new RequestLogContext(req, res);
 
   logger.log("debug", "Creating tokens.");
 

@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { RouteLogHelper } from "@utils";
+import { RequestLogContext } from "@utils";
 import { RegisterSchema } from "../schemas";
 
 /**
@@ -20,7 +20,7 @@ export async function handleNewUser(
   req: Request<{}, {}, RegisterSchema>,
   res: Response
 ) {
-  const logger = new RouteLogHelper(req, res);
+  const logger = new RequestLogContext(req, res);
 
   //  validate existing email, username, student name, and student number.
   const user = req.body;

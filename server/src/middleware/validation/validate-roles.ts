@@ -1,9 +1,9 @@
 import { Request, Response, NextFunction } from "express";
-import { RouteLogHelper } from "@utils";
+import { RequestLogContext } from "@utils";
 
 export function validateRoles(...allowedRoles: string[]) {
   return (req: Request, res: Response, next: NextFunction) => {
-    const logger = new RouteLogHelper(req, res);
+    const logger = new RequestLogContext(req, res);
 
     logger.log("debug", "Validating user role access.");
     const { authPayload } = req;

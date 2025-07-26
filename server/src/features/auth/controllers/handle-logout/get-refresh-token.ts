@@ -1,5 +1,5 @@
 import { AUTH } from "@data";
-import { RouteLogHelper } from "@utils";
+import { RequestLogContext } from "@utils";
 import { Request, Response } from "express";
 
 const tokenConfig = AUTH.TOKEN_CONFIG_RECORD.refresh;
@@ -17,7 +17,7 @@ const REFRESH_TOKEN = cookieConfig.cookieName;
  * @returns
  */
 export function getRefreshToken(req: Request, res: Response): string | null {
-  const logger = new RouteLogHelper(req, res);
+  const logger = new RequestLogContext(req, res);
 
   const { cookies } = req;
   if (!cookies?.[REFRESH_TOKEN]) {
