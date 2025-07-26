@@ -2,7 +2,6 @@ import { Request } from "express";
 import { authTypes, authUtils } from "../..";
 
 type UserViewModel = authTypes.UserViewModel;
-const { verifyPassword } = authUtils;
 
 /**
  * @public
@@ -43,7 +42,10 @@ export async function getVerifiedUser(
     return null;
   }
 
-  const isUserVerified = await verifyPassword(foundUser, loginFields.password);
+  const isUserVerified = await authUtils.verifyPassword(
+    foundUser,
+    loginFields.password
+  );
   if (!isUserVerified) {
     requestLogger.logStatus(401, {
       logMsg: `Incorrect password for ${loginValue}.`,

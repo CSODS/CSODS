@@ -12,7 +12,7 @@ esbuild
     platform: "node",
     target: "node18",
     outdir: "dist",
-    format: "esm",
+    format: "cjs",
     sourcemap: true,
     alias: {
       "@": "./src",

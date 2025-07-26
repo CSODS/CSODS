@@ -5,10 +5,6 @@ import { authSchemas, authTypes } from "../..";
 
 dotenv.config();
 
-type UserViewModel = authTypes.UserViewModel;
-type TokenPayload = authSchemas.TokenPayload;
-const tokenPayload = authSchemas.tokenPayload;
-
 /**
  * @public
  * @function verifyRefreshToken
@@ -23,8 +19,8 @@ const tokenPayload = authSchemas.tokenPayload;
 export function verifyRefreshToken(
   req: Request,
   refreshToken: string,
-  user: UserViewModel | null
-): TokenPayload | null {
+  user: authTypes.UserViewModel | null
+): authSchemas.TokenPayload | null {
   const { requestLogContext: requestLogger } = req;
 
   let payload;
@@ -35,7 +31,7 @@ export function verifyRefreshToken(
     return null;
   }
 
-  const verifiedPayload: TokenPayload = tokenPayload.parse(payload);
+  const verifiedPayload = authSchemas.tokenPayload.parse(payload);
 
   const dbUsername = user?.username;
   const payloadUsername = verifiedPayload.userInfo.username;

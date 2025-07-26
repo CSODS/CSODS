@@ -1,10 +1,6 @@
 import { Request } from "express";
 import { authSchemas, authTypes, authUtils } from "../..";
 
-type UserViewModel = authTypes.UserViewModel;
-type TokenPayload = authSchemas.TokenPayload;
-const { createJwt, createPayload } = authUtils;
-
 type Tokens = {
   accessToken: string;
   refreshToken: string;
@@ -21,15 +17,19 @@ type Tokens = {
  * - Creates JWT `access` and `refresh` tokens containing the payload.
  * - Returns both tokens.
  * @param req
- * @param verifiedUser A {@link UserViewModel} used for retrieving the `User`'s `role`s and
+ * @param verifiedUser A {@link authSchemas.UserViewModel} used for retrieving the `User`'s `role`s and
  * creating the token `payload`.
  * @returns A `Promise` that resolves to a {@link Tokens} object containing the `accessToken`
  * and `refreshToken`.
  */
 export async function createTokens(
   req: Request,
-  verifiedUser: UserViewModel
+  verifiedUser: authTypes.UserViewModel
 ): Promise<Tokens> {
+  const createJwt = authUtils.createJwt;
+  const createPayload = authUtils.createPayload;
+  // const { createJwt, createPayload } = authUtils;
+
   const { requestLogContext: requestLogger } = req;
 
   requestLogger.log("debug", "Creating tokens.");
@@ -37,7 +37,7 @@ export async function createTokens(
   const roles: string[] = await req.userDataService.getUserRoles(
     verifiedUser.userId
   );
-  const payload: TokenPayload = createPayload(verifiedUser, roles);
+  const payload: authSchemas.TokenPayload = createPayload(verifiedUser, roles);
   const accessToken = createJwt(payload, { tokenType: "access" });
   const refreshToken = createJwt(payload, { tokenType: "refresh" });
 
