@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
 import { AUTH } from "@data";
-import { RequestLogContext } from "@utils";
 import { LoginSchema } from "../../schemas";
 import { getVerifiedUser } from "./get-verified-user";
 import { createTokens } from "./create-tokens";
@@ -26,20 +25,13 @@ export async function handleLogin(
   req: Request<{}, {}, LoginSchema>,
   res: Response
 ) {
-  const logger = new RequestLogContext(req, res);
-
-  const verifiedUser = await getVerifiedUser(req, res);
+  const verifiedUser = await getVerifiedUser(req);
   if (!verifiedUser) return;
 
-  const { accessToken, refreshToken } = await createTokens(
-    req,
-    res,
-    verifiedUser
-  );
+  const { accessToken, refreshToken } = await createTokens(req, verifiedUser);
 
   const updatedUserId = await updateUserRefreshToken(
     req,
-    res,
     verifiedUser,
     refreshToken
   );
@@ -54,5 +46,5 @@ export async function handleLogin(
   );
   res.json({ accessToken });
 
-  logger.log("debug", "Login success.");
+  req.requestLogContext.log("debug", "Login success.");
 }

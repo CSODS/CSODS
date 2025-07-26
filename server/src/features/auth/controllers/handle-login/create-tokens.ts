@@ -1,5 +1,4 @@
-import { Request, Response } from "express";
-import { RequestLogContext } from "@/utils";
+import { Request } from "express";
 import { authSchemas, authTypes, authUtils } from "../..";
 
 type UserViewModel = authTypes.UserViewModel;
@@ -22,7 +21,6 @@ type Tokens = {
  * - Creates JWT `access` and `refresh` tokens containing the payload.
  * - Returns both tokens.
  * @param req
- * @param res
  * @param verifiedUser A {@link UserViewModel} used for retrieving the `User`'s `role`s and
  * creating the token `payload`.
  * @returns A `Promise` that resolves to a {@link Tokens} object containing the `accessToken`
@@ -30,12 +28,11 @@ type Tokens = {
  */
 export async function createTokens(
   req: Request,
-  res: Response,
   verifiedUser: UserViewModel
 ): Promise<Tokens> {
-  const logger = new RequestLogContext(req, res);
+  const { requestLogContext: requestLogger } = req;
 
-  logger.log("debug", "Creating tokens.");
+  requestLogger.log("debug", "Creating tokens.");
 
   const roles: string[] = await req.userDataService.getUserRoles(
     verifiedUser.userId

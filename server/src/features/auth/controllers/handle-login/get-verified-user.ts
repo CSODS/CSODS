@@ -1,5 +1,4 @@
-import { Request, Response } from "express";
-import { RequestLogContext } from "@utils";
+import { Request } from "express";
 import { authTypes, authUtils } from "../..";
 
 type UserViewModel = authTypes.UserViewModel;
@@ -19,17 +18,15 @@ const { verifyPassword } = authUtils;
  * attempt.
  * - If the password is correct, return the {@link UserViewModel}.
  * @param req The request object.
- * @param res The response object.
  * @returns A `Promise` that resolves to a {@link UserViewModel} that contains details about
  * the verified `User` or `null` if validation or verification fails..
  */
 export async function getVerifiedUser(
-  req: Request,
-  res: Response
+  req: Request
 ): Promise<UserViewModel | null> {
-  const logger = new RequestLogContext(req, res);
+  const { requestLogContext: requestLogger } = req;
 
-  logger.log("debug", "Validating login credentials.");
+  requestLogger.log("debug", "Validating login credentials.");
 
   const loginFields = req.body;
   const loginMethod = loginFields.email ? "email" : "username";
@@ -39,7 +36,7 @@ export async function getVerifiedUser(
     login: loginFields,
   });
   if (!foundUser) {
-    logger.logStatus(401, {
+    requestLogger.logStatus(401, {
       logMsg: `${loginMethod}: ${loginValue} doesn't exist.`,
       resMsg: "Incorrect email/username or password.",
     });
@@ -48,7 +45,7 @@ export async function getVerifiedUser(
 
   const isUserVerified = await verifyPassword(foundUser, loginFields.password);
   if (!isUserVerified) {
-    logger.logStatus(401, {
+    requestLogger.logStatus(401, {
       logMsg: `Incorrect password for ${loginValue}.`,
       resMsg: "Incorrect email/username or password.",
     });

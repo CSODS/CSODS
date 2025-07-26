@@ -1,6 +1,5 @@
 import { AUTH } from "@data";
-import { RequestLogContext } from "@utils";
-import { Request, Response } from "express";
+import { Request } from "express";
 
 const tokenConfig = AUTH.TOKEN_CONFIG_RECORD.refresh;
 const cookieConfig = tokenConfig.cookieConfig!;
@@ -16,12 +15,11 @@ const REFRESH_TOKEN = cookieConfig.cookieName;
  * @param res
  * @returns
  */
-export function getRefreshToken(req: Request, res: Response): string | null {
-  const logger = new RequestLogContext(req, res);
-
+export function getRefreshToken(req: Request): string | null {
   const { cookies } = req;
+
   if (!cookies?.[REFRESH_TOKEN]) {
-    logger.logStatus(204, "Already logged out.");
+    req.requestLogContext.logStatus(204, "Already logged out.");
     return null;
   }
 

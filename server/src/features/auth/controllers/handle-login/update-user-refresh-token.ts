@@ -1,5 +1,4 @@
-import { Request, Response } from "express";
-import { RequestLogContext } from "@utils";
+import { Request } from "express";
 import { UserViewModel } from "../../types";
 
 /**
@@ -12,7 +11,6 @@ import { UserViewModel } from "../../types";
  * - If the update fails, log it and respond with status code `500`.
  * - Otherwise, simply return the updatedUserId.
  * @param req
- * @param res
  * @param verifiedUser The {@link UserViewModel} containing the userId needed for updating
  * the refresh token.
  * @param refreshToken The new refresh token to be stored to the database.
@@ -20,11 +18,10 @@ import { UserViewModel } from "../../types";
  */
 export async function updateUserRefreshToken(
   req: Request,
-  res: Response,
   verifiedUser: UserViewModel,
   refreshToken: string
 ): Promise<number | null> {
-  const logger = new RequestLogContext(req, res);
+  const { requestLogContext: requestLogger } = req;
 
   const updatedUserId = await req.userDataService.updateRefreshToken(
     verifiedUser.userId,
@@ -32,7 +29,7 @@ export async function updateUserRefreshToken(
   );
 
   if (!updatedUserId)
-    logger.logStatus(
+    requestLogger.logStatus(
       500,
       "Failed updating refresh token. Please try again later."
     );
