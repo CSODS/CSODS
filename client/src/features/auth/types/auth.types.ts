@@ -1,8 +1,3 @@
-export type SignInForm = {
-  identifier: string;
-  password: string;
-};
-
 export type TokenPayload = {
   userInfo: {
     email: string;

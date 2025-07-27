@@ -13,7 +13,7 @@ import StudentProjects from "./features/project-list/StudentProjects";
 import ProjectDetails from "./features/project-details/ProjectDetails";
 import SubmitProject from "./features/submit-project/SubmitProject";
 import { ProjectListLayout } from "./features/project-list/layout/ProjectListLayout";
-import { authComponents, SignIn } from "./features/auth";
+import { authComponents } from "./features/auth";
 
 function App() {
   return (
@@ -26,7 +26,10 @@ function App() {
                 <Route index element={<LandingPage />} />
 
                 <Route path={ADDRESSES.AUTH.PATH}>
-                  <Route path={ADDRESSES.AUTH.SIGN_IN} element={<SignIn />} />
+                  <Route
+                    path={ADDRESSES.AUTH.SIGN_IN}
+                    element={<authComponents.SignIn />}
+                  />
                 </Route>
 
                 <Route path={ADDRESSES.HOME} element={<Home />} />

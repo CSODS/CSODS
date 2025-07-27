@@ -1,7 +1,6 @@
 import { CSODS_API_PATHS } from "@/constants";
 import axios, { AxiosResponse } from "axios";
-import { SignInForm } from "../types/auth.types";
-
+import { SignInFormData } from "../types";
 type ResponseObject = {
   accessToken: string;
 };
@@ -14,7 +13,7 @@ type AuthResponse = {
   };
 };
 
-export async function trySignIn(form: SignInForm): Promise<AuthResponse> {
+export async function trySignIn(form: SignInFormData): Promise<AuthResponse> {
   const { BASE, AUTH } = CSODS_API_PATHS;
   const { PATH, SIGN_IN } = AUTH;
   const endpoint = BASE + PATH + SIGN_IN;
