@@ -1,9 +1,9 @@
 const AUTH = {
   PATH: "/auth",
-  SIGN_IN: "/sign-in",
-  REGISTER: "/register",
-  REFRESH: "/refresh",
-  SIGN_OUT: "/sign-out",
+  SIGN_IN: "sign-in",
+  REGISTER: "register",
+  REFRESH: "refresh",
+  SIGN_OUT: "sign-out",
 } as const;
 
 const STUDENT_PROJECTS = {
