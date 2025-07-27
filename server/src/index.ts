@@ -1,7 +1,10 @@
+import dotenv from "dotenv";
+dotenv.config();
+
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import express from "express";
-import { API } from "@data";
+import { API, CORS } from "@data";
 import { authRoutes, authMiddlewares } from "@feature-auth";
 import {
   projectsJobs,
@@ -9,14 +12,19 @@ import {
   projectsRouter,
   projectTagsRouter,
 } from "@feature-projects";
-import { attachRequestLogContext, requestProfiler } from "@middleware";
+import {
+  attachRequestLogContext,
+  requestProfiler,
+  setHeaderCredentials,
+} from "@middleware";
 
 const ROUTES = API.ROUTES;
 
 const app = express();
 
+app.use(setHeaderCredentials);
 //  whitelist api so connection works and you can make requests.
-app.use(cors());
+app.use(cors(CORS.getCorsOptions()));
 
 //  for express json parsing
 app.use(express.json());
