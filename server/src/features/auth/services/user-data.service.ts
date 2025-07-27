@@ -2,7 +2,7 @@ import bcrypt from "bcryptjs";
 import { createContext } from "@/db/csods";
 import { AUTH } from "@data";
 import { HashService } from "@/utils";
-import { LoginOptions, LoginSchema } from "../schemas";
+import { LoginOptions } from "../schemas";
 import { NewUser, UserRoleViewModel, UserViewModel } from "../types";
 import {
   UserRoleRepository,
@@ -50,57 +50,6 @@ export class UserDataService {
     user.password = await bcrypt.hash(user.password, 10);
     const insertedId = await this._userRepository.insertUser(user);
     return insertedId;
-  }
-
-  /**
-   * @deprecated Please user {@link tryGetUser}
-   * @public
-   * @async
-   * @function getExistingUser
-   * @description Asynchronously retrieves a `User` from the database filtered using fields
-   * provided by either a {@link NewUser}, a {@link LoginSchema} object, or a `refreshToken`.
-   * If a `refreshToken` is provided, it will be hashed with {@link HashService.hashToken()}
-   * before getting submitted to the `userFilter`.
-   * @param options.user A {@link NewUser} object used for filtering the database query
-   * during register operations.
-   * @param options.login A {@link LoginSchema} object used for filtering the databse query
-   * during login operations.
-   * @param options.refreshToken A string representing the `refreshToken`.
-   * @returns A `promise` resolving to a {@link UserViewModel} if a `User` is found, or
-   * `null` if no `User` is found.
-   */
-  public async getExistingUser(
-    options: GetExistingUserOptions
-  ): Promise<UserViewModel | null> {
-    const { user, login, refreshToken } = options;
-
-    const userFilter: IUserFilter = {};
-
-    if (user) {
-      const { email, username, studentName, studentNumber } = user;
-
-      userFilter.filterType = "or";
-      userFilter.email = email;
-      userFilter.username = username;
-      userFilter.studentName = studentName;
-      userFilter.studentNumber = studentNumber;
-    } else if (login) {
-      const { email, username } = login;
-      //  either email or username will always be undefined due to how `LoginSchema` is
-      //  declared.
-      userFilter.email = email;
-      userFilter.username = username;
-      //  filter type isn't really needed but is still defined for robustness.
-      userFilter.filterType = "and";
-    } else if (refreshToken) {
-      const hashedToken = HashService.hashToken(refreshToken);
-
-      userFilter.refreshToken = hashedToken;
-    }
-
-    const existingUser = await this._userRepository.getUser(userFilter);
-
-    return existingUser;
   }
 
   /**
@@ -218,26 +167,6 @@ export class UserDataService {
     return updatedUserId;
   }
 }
-
-type GetExistingUserOptions = withUser | withLogin | withRefreshToken;
-
-type withUser = {
-  user: NewUser;
-  login?: undefined;
-  refreshToken?: undefined;
-};
-
-type withLogin = {
-  user?: undefined;
-  login: LoginSchema;
-  refreshToken?: undefined;
-};
-
-type withRefreshToken = {
-  user?: undefined;
-  login?: undefined;
-  refreshToken: string;
-};
 
 type TryGetUserOptions = WithUser | WithLogin | WithRefreshToken;
 
