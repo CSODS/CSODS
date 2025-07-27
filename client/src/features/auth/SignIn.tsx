@@ -1,10 +1,14 @@
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { authTypes } from "./types";
 import { ADDRESSES } from "@/constants";
 import { NavLink, useNavigate } from "react-router-dom";
+import { AuthContext } from "./components";
+import { trySignIn } from "./utils";
 
 export function SignIn() {
   const registerLink = ADDRESSES.AUTH.PATH + "/" + ADDRESSES.AUTH.REGISTER;
+
+  const { setAuth } = useContext(AuthContext)!;
 
   const identifierRef = useRef<HTMLInputElement>(null);
   const errRef = useRef<HTMLParagraphElement>(null);
@@ -23,8 +27,8 @@ export function SignIn() {
   }, []);
 
   useEffect(() => {
-    console.log("Identifier:", signInForm.identifier);
-    console.log("Password:", signInForm.password);
+    // console.log("Identifier:", signInForm.identifier);
+    // console.log("Password:", signInForm.password);
     setErrMsg("");
   }, [signInForm.identifier, signInForm.password]);
 
@@ -44,12 +48,16 @@ export function SignIn() {
 
   const navigate = useNavigate();
   const handleSignIn = async (e: React.FormEvent<HTMLFormElement>) => {
-    console.log("Identifier:", signInForm.identifier);
-    console.log("Password:", signInForm.password);
-    setSignInForm({ identifier: "", password: "" });
     e.preventDefault();
 
-    navigate("/home");
+    console.log("Identifier:", signInForm.identifier);
+    console.log("Password:", signInForm.password);
+
+    await trySignIn(signInForm);
+
+    // setSignInForm({ identifier: "", password: "" });
+
+    // navigate("/home");
   };
 
   return (
@@ -72,7 +80,7 @@ export function SignIn() {
               id="identifier"
               ref={identifierRef}
               placeholder="Email/Username"
-              className="m-0 p-0 row border"
+              className="m-0 p-0 row border color-default-white"
               autoComplete="off"
               onChange={(e) => handleType(e)}
               value={signInForm.identifier}
@@ -81,7 +89,7 @@ export function SignIn() {
             <input
               type="password"
               id="password"
-              className="m-0 p-0 row border"
+              className="m-0 p-0 row border color-black"
               onChange={(e) => handleType(e)}
               value={signInForm.password}
               required
