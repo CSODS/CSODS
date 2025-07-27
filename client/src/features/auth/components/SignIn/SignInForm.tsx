@@ -3,6 +3,7 @@ import { useAuth } from "../../hooks";
 import { useSignInForm } from "./hooks";
 import { handleSignIn } from "./utils";
 import { useNavigate } from "react-router-dom";
+import { ErrorMessage } from "./ErrorMessage";
 
 export function SignInForm() {
   const { setAuth } = useAuth();
@@ -17,8 +18,6 @@ export function SignInForm() {
   }, []);
 
   useEffect(() => {
-    // console.log("Identifier:", signInForm.identifier);
-    // console.log("Password:", signInForm.password);
     setErrMsg("");
   }, [signInForm.identifier, signInForm.password]);
 
@@ -31,13 +30,7 @@ export function SignInForm() {
 
   return (
     <article className="p-0">
-      <p
-        ref={errRef}
-        className={`row ${errMsg ? "" : "visually-hidden"}`}
-        aria-live="assertive"
-      >
-        {errMsg}
-      </p>
+      <ErrorMessage message={errMsg} errRef={errRef} />
 
       <h1 className="m-0 p-0 text-center">Welcome</h1>
 
