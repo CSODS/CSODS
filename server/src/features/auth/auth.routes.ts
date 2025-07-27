@@ -4,7 +4,7 @@ import { API, AUTH } from "@data";
 import { validateCookies, validateRequest } from "@middleware";
 import * as controllers from "./controllers";
 import { attachUserDataService, authRouteLimiter } from "./middleware";
-import { loginSchema, registerSchema } from "./schemas";
+import { loginOptions, registerSchema } from "./schemas";
 
 dotenv.config();
 
@@ -20,7 +20,7 @@ authRouter.use(attachUserDataService);
 
 authRouter.post(
   AUTH_ROUTES.SIGN_IN,
-  validateRequest(loginSchema),
+  validateRequest(loginOptions),
   controllers.handleLogin
 );
 

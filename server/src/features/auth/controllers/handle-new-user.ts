@@ -23,7 +23,8 @@ export async function handleNewUser(
 
   //  validate existing email, username, student name, and student number.
   const user = req.body;
-  const existingUser = await req.userDataService.getExistingUser({
+  const existingUser = await req.userDataService.tryGetUser({
+    type: "user",
     user: user,
   });
 
