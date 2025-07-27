@@ -1,12 +1,13 @@
 import { CSODS_API_PATHS } from "@/constants";
 import axios, { AxiosResponse } from "axios";
 import { SignInFormData } from "../types";
-type ResponseObject = {
+
+type ResponseData = {
   accessToken: string;
 };
 
 type AuthResponse = {
-  response: ResponseObject | null;
+  accessToken: string | null;
   errDetails?: {
     message: string;
     statusCode: string | number;
@@ -19,31 +20,25 @@ export async function trySignIn(form: SignInFormData): Promise<AuthResponse> {
   const endpoint = BASE + PATH + SIGN_IN;
 
   const authResponse: AuthResponse = await axios
-    .post<string, AxiosResponse<string, string>, string>(
-      endpoint,
-      JSON.stringify(form),
-      {
-        headers: { "Content-Type": "application/json" },
-        withCredentials: true,
-      }
-    )
+    .post<ResponseData>(endpoint, JSON.stringify(form), {
+      headers: { "Content-Type": "application/json" },
+      withCredentials: true,
+    })
     .then((response) => {
-      const accessToken = response.data;
-
+      const { data } = response;
       const authResponse: AuthResponse = {
-        response: {
-          accessToken: accessToken,
-        },
+        accessToken: data.accessToken,
       };
 
       return authResponse;
     })
     .catch((err) => {
+      console.log(err.response.data);
       const authResponse: AuthResponse = {
-        response: null,
+        accessToken: null,
         errDetails: {
-          message: err.message,
-          statusCode: err.status,
+          message: err.response.message,
+          statusCode: err.response.status,
         },
       };
 

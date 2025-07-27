@@ -2,6 +2,7 @@ import { NavigateFunction } from "react-router-dom";
 import { authTypes } from "../../../types";
 import { SignInFormData } from "../types";
 import { trySignIn } from "./try-sign-in";
+import { jwtDecode } from "jwt-decode";
 
 export async function handleSignIn(
   form: SignInFormData,
@@ -9,16 +10,15 @@ export async function handleSignIn(
   setAuth: (payload: authTypes.TokenPayload) => void,
   navigate: NavigateFunction
 ) {
-  const { response, errDetails } = await trySignIn(form);
+  const { accessToken, errDetails } = await trySignIn(form);
 
   if (errDetails) {
-    const { message, statusCode } = errDetails;
+    const { message } = errDetails;
 
-    if (statusCode === 429)
-      setErrMsg("Too many sign-in attempts. Please try again later.");
-  } else {
-    // todo: SET AUTH STATE
-    // setAuth(response)
+    setErrMsg(message);
+  } else if (accessToken) {
+    const payload: authTypes.TokenPayload = jwtDecode(accessToken);
+    setAuth(payload);
     // navigate("/home");
   }
 }
