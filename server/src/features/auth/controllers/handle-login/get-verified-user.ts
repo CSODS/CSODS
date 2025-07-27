@@ -1,7 +1,6 @@
 import { Request } from "express";
-import { authTypes, authUtils } from "../..";
-
-type UserViewModel = authTypes.UserViewModel;
+import { authSchemas, authTypes, authUtils } from "../..";
+import { AUTH_REGEX } from "@/data/constants/regex.constants";
 
 /**
  * @public
@@ -21,19 +20,23 @@ type UserViewModel = authTypes.UserViewModel;
  * the verified `User` or `null` if validation or verification fails..
  */
 export async function getVerifiedUser(
-  req: Request
-): Promise<UserViewModel | null> {
+  req: Request<{}, {}, authSchemas.LoginOptions>
+): Promise<authTypes.UserViewModel | null> {
   const { requestLogContext: requestLogger } = req;
 
   requestLogger.log("debug", "Validating login credentials.");
 
   const loginFields = req.body;
-  const loginMethod = loginFields.email ? "email" : "username";
-  const loginValue = loginFields.email ?? loginFields.username;
 
-  const foundUser = await req.userDataService.getExistingUser({
+  const isEmail = AUTH_REGEX.EMAIL.test(loginFields.identifier);
+  const loginMethod = isEmail ? "email" : "username";
+  const loginValue = loginFields.identifier;
+
+  const foundUser = await req.userDataService.tryGetUser({
+    type: "login",
     login: loginFields,
   });
+
   if (!foundUser) {
     requestLogger.logStatus(401, {
       logMsg: `${loginMethod}: ${loginValue} doesn't exist.`,

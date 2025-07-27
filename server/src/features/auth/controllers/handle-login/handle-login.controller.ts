@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { AUTH } from "@data";
-import { LoginSchema } from "../../schemas";
+import { LoginOptions } from "../../schemas";
 import { getVerifiedUser } from "./get-verified-user";
 import { createTokens } from "./create-tokens";
 import { updateUserRefreshToken } from "./update-user-refresh-token";
@@ -22,7 +22,7 @@ const { cookieConfig: refreshCookie } = refresh;
  * @param res
  */
 export async function handleLogin(
-  req: Request<{}, {}, LoginSchema>,
+  req: Request<{}, {}, LoginOptions>,
   res: Response
 ) {
   const verifiedUser = await getVerifiedUser(req);
