@@ -6,7 +6,10 @@ export function getCorsOptions() {
 
   const corsOptions: CorsOptions = {
     origin: (origin, callback) => {
-      if (!origin || !whitelist.includes(origin)) {
+      // ! wrong : !origin || !whitelist.includes(origin)
+      // Let this very idiotic blunder remind you that things as simple as FLIPPED conditions
+      // can still fuck you up from behind.
+      if (origin && whitelist.includes(origin)) {
         callback(null, true);
       } else {
         callback(new Error("Not allowed by CORS."));
