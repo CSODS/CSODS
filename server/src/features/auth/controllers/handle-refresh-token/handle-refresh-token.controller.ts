@@ -3,9 +3,6 @@ import { Request, Response } from "express";
 import { createJwt } from "../../utils";
 import { verifyRefreshToken } from "./verify-refresh-token";
 
-const { refresh } = AUTH.TOKEN_CONFIG_RECORD;
-const { cookieName: REFRESH_TOKEN } = refresh.cookieConfig!;
-
 /**
  * @public
  * @function handleRefreshToken
@@ -22,10 +19,15 @@ const { cookieName: REFRESH_TOKEN } = refresh.cookieConfig!;
  * @returns
  */
 export async function handleRefreshToken(req: Request, res: Response) {
+  //  cookie configuration
+  const { refresh } = AUTH.TOKEN_CONFIG_RECORD;
+  const { cookieName: refreshTokenCookie } = refresh.cookieConfig!;
+  //  get refresh token
   const { cookies, requestLogContext: requestLogger, userDataService } = req;
-  const refreshToken = cookies[REFRESH_TOKEN] as string;
+  const refreshToken = cookies[refreshTokenCookie] as string;
 
-  const foundUser = await userDataService.getExistingUser({
+  const foundUser = await userDataService.tryGetUser({
+    type: "refresh",
     refreshToken: refreshToken,
   });
 
