@@ -14,9 +14,9 @@ export const ICONS = {
 
 //  TODO: ADD FRAMEWORKS TO THE QUERY PARAMETERS WHEN THE BACKEND SUPPORTS IT.
 export const PROJECT_QUERY_PARAMETERS = {
-  PROJECT_TITLE: "project-title",
-  DEVELOPMENT_TYPE: "dev-type-id",
-  PROGRAMMING_LANGUAGE: "language-id",
-  DATABASE_TECHNOLOGY: "database-id",
-  APPLICATION_INDUSTRY: "industry-id",
+  PROJECT_TITLE: "project_title",
+  DEVELOPMENT_TYPE: "dev_type_id",
+  PROGRAMMING_LANGUAGE: "language_id",
+  DATABASE_TECHNOLOGY: "database_id",
+  APPLICATION_INDUSTRY: "industry_id",
 } as const;
