@@ -23,7 +23,9 @@ export function RequireAuth({ allowedRoles }: RequireAuthProps) {
   //  if all roles are allowed, user is automatically authorized.
   const hasRequiredRoles =
     allRolesAllowed ||
-    auth?.userInfo.roles.some((role) => normalizedRoles.includes(role));
+    auth?.tokenPayload.userInfo.roles.some((role) =>
+      normalizedRoles.includes(role)
+    );
 
   const isAuthorized = isAuthenticated && hasRequiredRoles;
 

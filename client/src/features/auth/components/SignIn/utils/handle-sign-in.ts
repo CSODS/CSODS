@@ -3,11 +3,12 @@ import { authTypes } from "@/types";
 import { SignInFormData } from "../types";
 import { trySignIn } from "./try-sign-in";
 import { jwtDecode } from "jwt-decode";
+import { AuthSession } from "@/components";
 
 export async function handleSignIn(
   form: SignInFormData,
   setErrMsg: (msg: string) => void,
-  setAuth: (payload: authTypes.TokenPayload) => void,
+  setAuth: (authSession: AuthSession) => void,
   navigate: NavigateFunction,
   location: Location
 ) {
@@ -19,7 +20,13 @@ export async function handleSignIn(
     setErrMsg(message);
   } else if (accessToken) {
     const payload: authTypes.TokenPayload = jwtDecode(accessToken);
-    setAuth(payload);
+
+    const authSession: AuthSession = {
+      tokenPayload: payload,
+      accessToken: accessToken,
+    };
+
+    setAuth(authSession);
 
     // get the previous location if the user attempted to access a page
     // that required auth. Otherwise, set it to the home page.
