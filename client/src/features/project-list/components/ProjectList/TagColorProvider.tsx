@@ -10,7 +10,10 @@ export interface TagColorProviderProps {
   allTags: IAllProjectTags;
 }
 
-export function TagColorProvider({ children, allTags }: TagColorProviderProps) {
+export default function TagColorProvider({
+  children,
+  allTags,
+}: TagColorProviderProps) {
   const tagColorMap = useMemo(() => {
     const map = new Map<string, string>();
 

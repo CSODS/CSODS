@@ -5,7 +5,7 @@ import {
 import { useAllTags } from "@/hooks";
 import { useProjectsPage } from "../../hooks";
 import ProjectCard from "./ProjectCard";
-import { TagColorProvider } from "./TagColorProvider";
+import TagColorProvider from "./TagColorProvider";
 
 export function ProjectList() {
   const projectsPage = useProjectsPage();
