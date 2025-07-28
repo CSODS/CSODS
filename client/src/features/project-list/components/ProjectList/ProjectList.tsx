@@ -4,8 +4,8 @@ import {
 } from "@/components";
 import { useAllTags } from "@/hooks";
 import { useProjectsPage } from "../../hooks";
-import { TagColorProvider } from "../Provider";
 import ProjectCard from "./ProjectCard";
+import { TagColorProvider } from "./TagColorProvider";
 
 export function ProjectList() {
   const projectsPage = useProjectsPage();

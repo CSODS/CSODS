@@ -9,7 +9,7 @@ import {
   useProjectTagList,
 } from "@/hooks";
 import { getProjectLink, redirectToUrl } from "@/utils";
-import { useTagColorMap } from "../../hooks/context";
+import { useTagColorMap } from "./hooks";
 
 export default function ProjectCard() {
   const navigate = useNavigate();

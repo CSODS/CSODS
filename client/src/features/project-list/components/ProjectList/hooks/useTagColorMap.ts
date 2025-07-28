@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { TagColorContext } from "../components/Provider";
+import { TagColorContext } from "../TagColorProvider";
 
 export function useTagColorMap() {
   const tagColorMap = useContext(TagColorContext);

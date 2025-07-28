@@ -1,10 +1,10 @@
 import { AllTagsProvider, TagCategoryProvider } from "@/components";
 import { useFetchTagData } from "@/hooks";
-import { SearchBar } from "./SearchBar";
-import { ProjectList } from "./ProjectList";
 import { useFetchProjectsPage } from "../hooks";
 import { ProjectsPageProvider } from "../ProjectsPageProvider";
 import { Paginator } from "./Paginator";
+import { ProjectList } from "./ProjectList";
+import { SearchBar } from "./SearchBar";
 
 export function ProjectsDisplay() {
   const projectsPage = useFetchProjectsPage();
