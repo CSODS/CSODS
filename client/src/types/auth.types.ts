@@ -8,3 +8,13 @@ export type TokenPayload = {
     roles: string[];
   };
 };
+
+export type AuthSession = {
+  tokenPayload: TokenPayload;
+  accessToken: string;
+};
+
+export type AuthContextType = {
+  auth: AuthSession | undefined;
+  setAuth: React.Dispatch<React.SetStateAction<AuthSession | undefined>>;
+};

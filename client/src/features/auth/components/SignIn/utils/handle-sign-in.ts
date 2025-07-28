@@ -3,12 +3,11 @@ import { authTypes } from "@/types";
 import { SignInFormData } from "../types";
 import { trySignIn } from "./try-sign-in";
 import { jwtDecode } from "jwt-decode";
-import { AuthSession } from "@/components";
 
 export async function handleSignIn(
   form: SignInFormData,
   setErrMsg: (msg: string) => void,
-  setAuth: (authSession: AuthSession) => void,
+  setAuth: (authSession: authTypes.AuthSession) => void,
   navigate: NavigateFunction,
   location: Location
 ) {
@@ -21,7 +20,7 @@ export async function handleSignIn(
   } else if (accessToken) {
     const payload: authTypes.TokenPayload = jwtDecode(accessToken);
 
-    const authSession: AuthSession = {
+    const authSession: authTypes.AuthSession = {
       tokenPayload: payload,
       accessToken: accessToken,
     };
