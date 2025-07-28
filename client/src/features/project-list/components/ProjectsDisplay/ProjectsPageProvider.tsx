@@ -8,7 +8,7 @@ type ProjectsPageProviderProps = {
   projectsPage: IProjectsPage;
 };
 
-export function ProjectsPageProvider({
+export default function ProjectsPageProvider({
   children,
   projectsPage,
 }: ProjectsPageProviderProps) {

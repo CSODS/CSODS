@@ -3,11 +3,11 @@ import {
   ProjectDataServiceProvider,
 } from "@/components";
 import { useAllTags } from "@/hooks";
-import { useProjectsPage } from "../../hooks";
+import useProjectsPage from "../useProjectsPageContext";
 import ProjectCard from "./ProjectCard";
 import TagColorProvider from "./TagColorProvider";
 
-export function ProjectList() {
+export default function ProjectList() {
   const projectsPage = useProjectsPage();
   const allTags = useAllTags();
 

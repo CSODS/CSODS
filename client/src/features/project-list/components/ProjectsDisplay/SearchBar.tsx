@@ -5,7 +5,7 @@ import { useAllTags, useTagCategoryMap } from "@/hooks";
 import { IProjectSearchParameters } from "@/types";
 import { getProjectsPageLink } from "@/utils";
 
-export function SearchBar() {
+export default function SearchBar() {
   const tagCategoryMap = useTagCategoryMap();
   const [searchString, setSearchString] = useState<string>("");
   const [searchFilter, setSearchFilter] = useState<string>("");

@@ -1,7 +1,7 @@
 import { useContext } from "react";
-import { ProjectsPageContext } from "../ProjectsPageProvider";
+import { ProjectsPageContext } from "./ProjectsPageProvider";
 
-export function useProjectsPage() {
+export default function useProjectsPage() {
   const projectsPage = useContext(ProjectsPageContext);
 
   if (!projectsPage) {
