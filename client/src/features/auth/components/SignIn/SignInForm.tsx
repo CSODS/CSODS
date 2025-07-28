@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "@/hooks";
 import { useSignInForm } from "./hooks";
 import { handleSignIn } from "./utils";
@@ -19,10 +19,11 @@ export function SignInForm() {
   }, [signInForm.identifier, signInForm.password]);
 
   const navigate = useNavigate();
+  const location = useLocation();
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    handleSignIn(signInForm, setErrMsg, setAuth, navigate);
+    handleSignIn(signInForm, setErrMsg, setAuth, navigate, location);
   };
 
   return (
