@@ -3,9 +3,9 @@ import {
   ProjectDataServiceProvider,
 } from "@/components";
 import { useAllTags, useFetchProjectsPage } from "@/hooks";
-import ProjectCard from "./ProjectCard";
-import Paginator from "../Paginator";
 import { TagColorProvider, TotalPagesProvider } from "../Provider";
+import ProjectCard from "./ProjectCard";
+import Paginator from "./Paginator";
 
 export function ProjectList() {
   const projectsPage = useFetchProjectsPage();
