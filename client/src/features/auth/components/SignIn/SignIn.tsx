@@ -1,13 +1,17 @@
 import { ADDRESSES } from "@/constants";
 import { SignInForm } from "./SignInForm";
 import { NavLink } from "react-router-dom";
+import styles from "./SignIn.module.scss";
 
 export function SignIn() {
   const registerLink = ADDRESSES.AUTH.PATH + "/" + ADDRESSES.AUTH.REGISTER;
+  const loginContainer = styles["login-container"];
 
   return (
-    <section>
-      <section className="card-dark-purple border border-1 border-white rounded-3">
+    <section
+      className={`mt-2 px-2 h-100 bg-default-dark-purple ${loginContainer}`}
+    >
+      <section className="">
         <SignInForm />
         <NavLink to={registerLink}>Create Account</NavLink>
       </section>

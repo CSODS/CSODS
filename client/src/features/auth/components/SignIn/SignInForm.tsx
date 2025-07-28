@@ -5,6 +5,7 @@ import { useSignInForm } from "./hooks";
 import { handleSignIn } from "./utils";
 import { ErrorMessage } from "./ErrorMessage";
 import { SignInFields } from "./SignInFields";
+import { SignInButton } from "./SignInButton";
 
 export function SignInForm() {
   const { setAuth } = useAuth();
@@ -28,11 +29,14 @@ export function SignInForm() {
     <article className="p-0">
       <ErrorMessage message={errMsg} errRef={errRef} />
 
-      <h1 className="m-0 p-0 text-center">Welcome</h1>
+      <p className="m-0 p-0 px-3 text-center fs-1 fw-bold">Welcome</p>
 
-      <form className="m-0 p-0 row" onSubmit={handleSubmit}>
+      <form
+        className="m-0 mt-4 p-0 px-3 d-grid row-gap-4"
+        onSubmit={handleSubmit}
+      >
         <SignInFields signInForm={signInForm} onType={onType} />
-        <button>Sign In</button>
+        <SignInButton />
       </form>
     </article>
   );

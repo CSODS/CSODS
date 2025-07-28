@@ -1,0 +1,12 @@
+@use "~@/assets/sass/variables.scss" as v;
+@use "~@/assets/sass/colors.scss" as *;
+
+.login-container {
+  border-top-left-radius: 3.5rem;
+  padding-top: 3.5rem;
+
+  @media (min-width: 576px) {
+    border-top-left-radius: 0;
+    padding-top: 0px;
+  }
+}

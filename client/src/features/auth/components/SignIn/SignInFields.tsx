@@ -14,25 +14,30 @@ export function SignInFields({ signInForm, onType }: SignInFieldsProps) {
   }, []);
   return (
     <>
-      <input
-        type="text"
-        id="identifier"
-        ref={identifierRef}
-        placeholder="Email/Username"
-        className="m-0 p-0 row border color-default-white"
-        autoComplete="off"
-        onChange={(e) => onType(e)}
-        value={signInForm.identifier}
-        required
-      />
-      <input
-        type="password"
-        id="password"
-        className="m-0 p-0 row border color-black"
-        onChange={(e) => onType(e)}
-        value={signInForm.password}
-        required
-      />
+      <div className="m-0 px-3 py-2 row border border-1 rounded-pill">
+        <input
+          type="text"
+          id="identifier"
+          ref={identifierRef}
+          placeholder="Email/Username"
+          className="m-0 p-0 color-default-white fs-6"
+          autoComplete="off"
+          onChange={(e) => onType(e)}
+          value={signInForm.identifier}
+          required
+        />
+      </div>
+      <div className="m-0 px-3 py-2 row border border-1 rounded-pill">
+        <input
+          type="password"
+          id="password"
+          className="m-0 p-0 color-default-white fs-6"
+          placeholder="Password"
+          onChange={(e) => onType(e)}
+          value={signInForm.password}
+          required
+        />
+      </div>
     </>
   );
 }
