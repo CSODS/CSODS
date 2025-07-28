@@ -24,6 +24,10 @@ function App() {
                     path={ADDRESSES.AUTH.SIGN_IN}
                     element={<authComponents.SignIn />}
                   />
+                  <Route
+                    path={ADDRESSES.AUTH.UNAUTHORIZED}
+                    element={<authComponents.Unauthorized />}
+                  />
                 </Route>
 
                 <Route path={ADDRESSES.HOME} element={<Home />} />

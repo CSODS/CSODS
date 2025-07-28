@@ -4,6 +4,7 @@ const AUTH = {
   REGISTER: "register",
   REFRESH: "refresh",
   SIGN_OUT: "sign-out",
+  UNAUTHORIZED: "unauthorized",
 } as const;
 
 const STUDENT_PROJECTS = {
