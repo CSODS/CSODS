@@ -8,11 +8,12 @@
     "baseUrl": "src",
     "paths": {
       "@/*": ["./*"],
-      "@utils/*": ["utils/*"],
-      "@types/*": ["types/*"],
-      "@constants/*": ["constants/*"],
+      "@assets/*": ["assets/*"],
       "@components/*": ["components/*"],
-      "@assets/*": ["assets/*"]
+      "@constants/*": ["constants/*"],
+      "@features/projects/*": ["features/projects/*"],
+      "@types/*": ["types/*"],
+      "@utils/*": ["utils/*"]
     },
     "resolveJsonModule": true,
     "outDir": "./src/dist/",
