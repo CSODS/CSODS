@@ -3,7 +3,7 @@ import { ADDRESSES } from "@/constants";
 import { useAuth } from "@/hooks";
 
 type RequireAuthProps = {
-  allowedRoles: string[];
+  allowedRoles?: string[];
 };
 
 export function RequireAuth({ allowedRoles }: RequireAuthProps) {
@@ -18,11 +18,12 @@ export function RequireAuth({ allowedRoles }: RequireAuthProps) {
   //  check if user is authenticated
   const isAuthenticated = auth !== undefined;
 
+  const normalizedRoles = allowedRoles ?? [];
+  const allRolesAllowed = normalizedRoles.length === 0;
   //  if all roles are allowed, user is automatically authorized.
-  const allRolesAllowed = allowedRoles.length === 0;
   const hasRequiredRoles =
     allRolesAllowed ||
-    auth?.userInfo.roles.some((role) => allowedRoles.includes(role));
+    auth?.userInfo.roles.some((role) => normalizedRoles.includes(role));
 
   const isAuthorized = isAuthenticated && hasRequiredRoles;
 

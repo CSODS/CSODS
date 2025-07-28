@@ -1,3 +1,3 @@
 export * as authComponents from "./components";
-export * from "./RequireAuth";
+export * as authGuards from "./RequireAuth";
 export * as authConstants from "./auth.constants";
