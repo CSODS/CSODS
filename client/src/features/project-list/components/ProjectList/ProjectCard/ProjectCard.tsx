@@ -1,15 +1,13 @@
 import { useNavigate, useParams } from "react-router-dom";
-import { BtnBare } from "@/components";
 import { DEFAULTS } from "@/constants";
 import {
-  useNavigateWithTag,
   useProjectDataService,
   useProjectDetails,
   useProjectIcon,
   useProjectTagList,
 } from "@/hooks";
 import { getProjectLink, redirectToUrl } from "@/utils";
-import { useTagColorMap } from "./hooks";
+import TagRow from "./TagRow";
 
 export default function ProjectCard() {
   const navigate = useNavigate();
@@ -102,55 +100,5 @@ export default function ProjectCard() {
         </div>
       </div>
     </div>
-  );
-}
-
-interface TagRowProps {
-  tagList: string[];
-}
-
-function TagRow({ tagList }: TagRowProps) {
-  const colSelectors = ["p-0 col d-flex flex-wrap align-items-start"];
-
-  return (
-    <div className="mx-0 mt-2 row w-100">
-      <div className={colSelectors.join(" ")}>
-        {tagList.map((tag, index) => {
-          return <Tag key={`${tag}-${index}`} tag={tag} />;
-        })}
-      </div>
-    </div>
-  );
-}
-
-interface TagProps {
-  tag: string;
-}
-
-function Tag({ tag }: TagProps) {
-  const tagColorMap = useTagColorMap();
-  const iconColor = tagColorMap.get(tag);
-  const iconClass = `m-0 p-0 bi bi-circle-fill fs-xxs ${iconColor}`;
-  const textOnHover = `hover-${iconColor}`;
-
-  const callbackFn = useNavigateWithTag(tag);
-
-  return (
-    <BtnBare
-      flex="row"
-      justify="center"
-      align="center"
-      margin={[{ breakpoint: "lg", b: 1 }, { m: 0 }]}
-      callBackFn={callbackFn}
-    >
-      <div className="flex-col p-0 m-0 me-1 d-flex justify-content-center align-items-center fs-xs">
-        <i className={iconClass}></i>
-      </div>
-      <div
-        className={`flex-col p-0 pe-2 m-0 text-center text-nowrap fs-xs fst-italic color-light-1 ${textOnHover}`}
-      >
-        {tag}
-      </div>
-    </BtnBare>
   );
 }
