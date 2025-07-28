@@ -19,5 +19,5 @@ export async function requestProject(
     .then((response) => response.data)
     .catch((err) => null);
 
-  return data as IProjectDetails;
+  return data as IProjectDetails | null;
 }
