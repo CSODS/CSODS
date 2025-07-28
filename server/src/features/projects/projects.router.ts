@@ -126,20 +126,15 @@ projectsRouter.get(
  * @see parseNumberParam - Utility function used to safely parse numeric query parameters.
  */
 function assembleFilter(request: Request): IProjectFilter {
-  const {
-    ["project-title"]: projectTitle,
-    ["dev-type-id"]: devTypeId,
-    ["language-id"]: languageId,
-    ["database-id"]: databaseId,
-    ["industry-id"]: industryId,
-  } = request.query;
+  const { project_title, dev_type_id, language_id, database_id, industry_id } =
+    request.query;
 
   const filter: IProjectFilter = {
-    ProjectTitle: parseStringParam(projectTitle),
-    DevTypeId: parseNumberParam(devTypeId),
-    LanguageId: parseNumberParam(languageId),
-    DatabaseId: parseNumberParam(databaseId),
-    IndustryId: parseNumberParam(industryId),
+    ProjectTitle: parseStringParam(project_title),
+    DevTypeId: parseNumberParam(dev_type_id),
+    LanguageId: parseNumberParam(language_id),
+    DatabaseId: parseNumberParam(database_id),
+    IndustryId: parseNumberParam(industry_id),
   };
   return filter;
 }
