@@ -1,5 +1,5 @@
 import { NavigateFunction } from "react-router-dom";
-import { authTypes } from "../../../types";
+import { authTypes } from "@/types";
 import { SignInFormData } from "../types";
 import { trySignIn } from "./try-sign-in";
 import { jwtDecode } from "jwt-decode";

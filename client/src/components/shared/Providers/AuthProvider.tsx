@@ -1,5 +1,5 @@
-import React, { createContext, ReactNode, useState } from "react";
-import { authTypes } from "../types";
+import React, { createContext, useState } from "react";
+import { authTypes } from "@/types";
 import { Outlet } from "react-router-dom";
 
 type AuthContextType = {

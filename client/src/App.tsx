@@ -6,7 +6,7 @@ import "./assets/stylesheets/borders.css";
 import "./assets/stylesheets/font.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { ADDRESSES } from "@/constants";
-import { CsodsBackground, NavBar } from "@/components";
+import { CsodsBackground, NavBar, AuthProvider } from "@/components";
 import LandingPage from "./features/landing/LandingPage";
 import Home from "./features/home/Home";
 import StudentProjects from "./features/project-list/StudentProjects";
@@ -20,7 +20,7 @@ function App() {
     <div className="App">
       <Router>
         <Routes>
-          <Route element={<authComponents.AuthProvider />}>
+          <Route element={<AuthProvider />}>
             <Route path={ADDRESSES.LANDING_PAGE} element={<CsodsBackground />}>
               <Route element={<NavBar />}>
                 <Route index element={<LandingPage />} />
