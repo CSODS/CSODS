@@ -1,32 +1,34 @@
+import axios from "axios";
 import { CSODS_API_PATHS } from "@/constants";
-import axios, { AxiosResponse } from "axios";
-import { SignInFormData } from "../types";
+import {
+  SignInFormData,
+  AuthAttemptResult,
+  SignInResponse,
+  SignInRequest,
+} from "../types";
 
-type ResponseData = {
-  accessToken: string;
-};
-
-type AuthResponse = {
-  accessToken: string | null;
-  errDetails?: {
-    message: string;
-    statusCode: string | number;
-  };
-};
-
-export async function trySignIn(form: SignInFormData): Promise<AuthResponse> {
+export async function trySignIn(
+  form: SignInFormData
+): Promise<AuthAttemptResult> {
   const { BASE, AUTH } = CSODS_API_PATHS;
   const { PATH, SIGN_IN } = AUTH;
   const endpoint = BASE + PATH + SIGN_IN;
 
-  const authResponse: AuthResponse = await axios
-    .post<ResponseData>(endpoint, JSON.stringify(form), {
+  const SignInRequest: SignInRequest = {
+    identifier: form.identifier,
+    password: form.password,
+  };
+
+  const jsonRequest = JSON.stringify(SignInRequest);
+
+  const authResponse: AuthAttemptResult = await axios
+    .post<SignInResponse>(endpoint, jsonRequest, {
       headers: { "Content-Type": "application/json" },
       withCredentials: true,
     })
     .then((response) => {
       const { data } = response;
-      const authResponse: AuthResponse = {
+      const authResponse: AuthAttemptResult = {
         accessToken: data.accessToken,
       };
 
@@ -34,7 +36,7 @@ export async function trySignIn(form: SignInFormData): Promise<AuthResponse> {
     })
     .catch((err) => {
       console.log(err.response.data);
-      const authResponse: AuthResponse = {
+      const authResponse: AuthAttemptResult = {
         accessToken: null,
         errDetails: {
           message: err.response.message,
