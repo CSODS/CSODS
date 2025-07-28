@@ -1,10 +1,10 @@
 import { IProjectDetails, IProjectSearchParameters } from "@/types";
-import { csodsClient } from "./csodsClient";
+import { csodsClient } from "../../utils/api/csodsClient";
 import { CSODS_API_PATHS } from "@/constants";
-import { assembleQuery } from "../navigation/navigation";
+import { assembleQuery } from "../../utils/navigation/navigation";
 
 // todo: add better type guarding
-export async function requestProjects(
+export async function requestProject(
   pageNumber: string | number,
   projectId: string | number,
   searchParameters?: IProjectSearchParameters
