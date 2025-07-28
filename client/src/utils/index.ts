@@ -1,4 +1,3 @@
-import ApiHandler from "./api/ApiHandler";
 import { ProjectDataService, IProjectTags } from "./data/ProjectDataService";
 import { JsonHandler } from "./json/jsonHandler";
 import {
@@ -10,7 +9,6 @@ import {
 import { getBootstrapSpacing } from "./styles/spacing";
 
 export {
-  ApiHandler,
   ProjectDataService,
   JsonHandler,
   redirectToUrl,

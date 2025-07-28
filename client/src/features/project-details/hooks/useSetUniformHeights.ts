@@ -1,15 +1,14 @@
-import { IAllProjectTags, IProjectDetails } from "@/types";
 import { useEffect } from "react";
+import { IAllProjectTags, IProjectDetails } from "@/types";
 
-export default function useSetUniformHeights(
-    allTags: IAllProjectTags | null | undefined,
-    project: IProjectDetails | null | undefined,
-    galleryRef: React.RefObject<HTMLDivElement | null>,
-    contributorsRef: React.RefObject<HTMLDivElement | null>,
-    aboutRef: React.RefObject<HTMLDivElement | null>,
-    subContainerRef: React.RefObject<HTMLDivElement | null>,
-) 
-{
+export function useSetUniformHeights(
+  allTags: IAllProjectTags | null | undefined,
+  project: IProjectDetails | null | undefined,
+  galleryRef: React.RefObject<HTMLDivElement | null>,
+  contributorsRef: React.RefObject<HTMLDivElement | null>,
+  aboutRef: React.RefObject<HTMLDivElement | null>,
+  subContainerRef: React.RefObject<HTMLDivElement | null>
+) {
   useEffect(() => {
     if (!allTags || !project) return;
 
@@ -25,13 +24,20 @@ export default function useSetUniformHeights(
       if (about && subContainer) {
         about.style.maxHeight = `${subContainer.clientHeight}px`;
       }
-    }
+    };
 
     setUniformHeights();
-    window.addEventListener('resize', setUniformHeights);
+    window.addEventListener("resize", setUniformHeights);
 
     return () => {
-      window.removeEventListener('resize', setUniformHeights);
+      window.removeEventListener("resize", setUniformHeights);
     };
-  }, [allTags, project, galleryRef, contributorsRef, aboutRef, subContainerRef]);
+  }, [
+    allTags,
+    project,
+    galleryRef,
+    contributorsRef,
+    aboutRef,
+    subContainerRef,
+  ]);
 }

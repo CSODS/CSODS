@@ -8,7 +8,6 @@ export {
 } from "./context";
 
 export {
-  useFetchProject,
   useFetchTagData,
   useNavigateWithTag,
   useProjectIcon,

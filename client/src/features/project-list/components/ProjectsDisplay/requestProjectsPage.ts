@@ -17,5 +17,5 @@ export async function requestProjectsPage(
     .then((response) => response.data)
     .catch((err) => null);
 
-  return data as IProjectsPage;
+  return data as IProjectsPage | null;
 }

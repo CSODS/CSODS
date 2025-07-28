@@ -12,5 +12,5 @@ export async function requestAllTags(): Promise<IAllProjectTags | null> {
     .then((response) => response.data)
     .catch((err) => null);
 
-  return data as IAllProjectTags;
+  return data as IAllProjectTags | null;
 }

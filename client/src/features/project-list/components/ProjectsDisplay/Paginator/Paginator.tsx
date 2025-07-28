@@ -1,5 +1,5 @@
 import PaginationButton from "./PaginationBtn";
-import { useProjectsPage } from "../../../hooks";
+import { useProjectsPage } from "../hooks";
 
 export default function Paginator() {
   const { TotalPages } = useProjectsPage();
