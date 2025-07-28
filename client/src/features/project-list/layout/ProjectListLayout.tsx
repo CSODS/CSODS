@@ -122,7 +122,7 @@ function SearchBar() {
     if (evt.key === "Enter") {
       let searchParameters: IProjectSearchParameters = {};
       if (searchString.trim() !== "") {
-        searchParameters["project-title"] = searchString;
+        searchParameters["project_title"] = searchString;
       }
       const link = getProjectsPageLink(1, searchParameters);
       navigate(link);
