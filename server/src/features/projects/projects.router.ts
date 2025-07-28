@@ -58,14 +58,14 @@ projectsRouter.get(
     await cacheService.setCache(filter);
 
     const page = await cacheService.getOrCreatePage(
-      Number(req.params.pageNumber)
+      Number(req.params.page_number)
     );
 
     page
       ? res.json(page)
       : res
           .status(404)
-          .json({ error: `Page ${req.params.pageNumber} not found.` });
+          .json({ error: `Page ${req.params.page_number} not found.` });
   }
 );
 /**
@@ -97,8 +97,8 @@ projectsRouter.get(
     Administrator.roleName
   ),
   async (req, res) => {
-    const page: number = Number(req.params.pageNumber);
-    const id: number = Number(req.params.projectId);
+    const page: number = Number(req.params.page_number);
+    const id: number = Number(req.params.project_id);
 
     const filter = assembleFilter(req);
 
