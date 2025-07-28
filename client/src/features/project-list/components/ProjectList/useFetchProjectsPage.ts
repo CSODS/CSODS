@@ -6,7 +6,7 @@ import { requestProjectsPage } from "./requestProjectsPage";
 export function useFetchProjectsPage() {
   const pageNumber = usePageNumber();
   const projectSearchParams = useProjectSearchParams();
-  const [projectsPage, setProjectsPage] = useState<IProjectsPage | null>();
+  const [projectsPage, setProjectsPage] = useState<IProjectsPage | null>(null);
   useEffect(() => {
     const loadProjectPage = async () => {
       const loadedPage = await requestProjectsPage(
