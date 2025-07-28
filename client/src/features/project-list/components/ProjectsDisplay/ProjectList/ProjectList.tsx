@@ -3,7 +3,7 @@ import {
   ProjectDataServiceProvider,
 } from "@/components";
 import { useAllTags } from "@/hooks";
-import useProjectsPage from "../useProjectsPageContext";
+import { useProjectsPage } from "../hooks";
 import ProjectCard from "./ProjectCard";
 import TagColorProvider from "./TagColorProvider";
 

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { usePageNumber, useProjectSearchParams } from "@/hooks";
 import { IProjectsPage } from "@/types";
-import { requestProjectsPage } from "../requestProjectsPage";
+import { requestProjectsPage } from "../../requestProjectsPage";
 
 export function useFetchProjectsPage() {
   const pageNumber = usePageNumber();
