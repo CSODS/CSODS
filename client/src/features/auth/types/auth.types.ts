@@ -5,6 +5,6 @@ export type TokenPayload = {
     studentName: string;
     studentNumber: string;
     userIconUrl: string;
-    roles: string;
+    roles: string[];
   };
 };
