@@ -4,6 +4,7 @@ import { SearchBar } from "./SearchBar";
 import { ProjectList } from "./ProjectList";
 import { useFetchProjectsPage } from "../hooks";
 import { ProjectsPageProvider } from "../ProjectsPageProvider";
+import { Paginator } from "./Paginator";
 
 export function ProjectsDisplay() {
   const projectsPage = useFetchProjectsPage();
@@ -15,6 +16,7 @@ export function ProjectsDisplay() {
         <TagCategoryProvider allTags={allTags}>
           <SearchBar />
           <ProjectList />
+          <Paginator />
         </TagCategoryProvider>
       </AllTagsProvider>
     </ProjectsPageProvider>
