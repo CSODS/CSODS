@@ -7,7 +7,7 @@ import StudentProjects from "./features/project-list/StudentProjects";
 import ProjectDetails from "./features/project-details/ProjectDetails";
 import SubmitProject from "./features/submit-project/SubmitProject";
 import { ProjectListLayout } from "./features/project-list/layout/ProjectListLayout";
-import { authComponents } from "./features/auth";
+import { authComponents, authGuards } from "./features/auth";
 
 function App() {
   return (
@@ -33,17 +33,20 @@ function App() {
                 <Route path={ADDRESSES.HOME} element={<Home />} />
                 <Route path={ADDRESSES.ABOUT} />
               </Route>
-              <Route element={<ProjectListLayout navBarVariant={1} />}>
-                <Route
-                  path={ADDRESSES.STUDENT_PROJECTS.PATH}
-                  element={<StudentProjects />}
-                />
-              </Route>
-              <Route element={<ProjectListLayout navBarVariant={2} />}>
-                <Route
-                  path={ADDRESSES.PROJECT_DETAILS.PATH}
-                  element={<ProjectDetails />}
-                />
+
+              <Route element={<authGuards.RequireAuth />}>
+                <Route element={<ProjectListLayout navBarVariant={1} />}>
+                  <Route
+                    path={ADDRESSES.STUDENT_PROJECTS.PATH}
+                    element={<StudentProjects />}
+                  />
+                </Route>
+                <Route element={<ProjectListLayout navBarVariant={2} />}>
+                  <Route
+                    path={ADDRESSES.PROJECT_DETAILS.PATH}
+                    element={<ProjectDetails />}
+                  />
+                </Route>
               </Route>
             </Route>
             <Route
