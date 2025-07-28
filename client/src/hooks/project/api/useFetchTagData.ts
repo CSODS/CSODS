@@ -1,14 +1,13 @@
 import { useEffect, useState } from "react";
 import { IAllProjectTags } from "@/types";
-import { ApiHandler } from "@/utils";
+import { requestAllTags } from "@/utils";
 
 export function useFetchTagData() {
-  const [allTags, setAllTags] = useState<IAllProjectTags>();
+  const [allTags, setAllTags] = useState<IAllProjectTags | null>(null);
 
   useEffect(() => {
-    const apiHandler = new ApiHandler();
     const loadTagData = async () => {
-      const tagData = await apiHandler.GetAllTags();
+      const tagData = await requestAllTags();
       if (tagData) {
         setAllTags(tagData);
       }
