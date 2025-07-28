@@ -1,27 +1,17 @@
-import axios from "axios";
 import { CSODS_API_PATHS } from "@/constants";
-import {
-  SignInFormData,
-  AuthAttemptResult,
-  SignInResponse,
-  SignInRequest,
-} from "../types";
+import { AuthAttemptResult, SignInRequest, SignInResponse } from "../types";
+import axios from "axios";
 
-export async function trySignIn(
-  form: SignInFormData
+export async function requestSignIn(
+  signInRequest: SignInRequest
 ): Promise<AuthAttemptResult> {
   const { BASE, AUTH } = CSODS_API_PATHS;
   const { PATH, SIGN_IN } = AUTH;
   const endpoint = BASE + PATH + SIGN_IN;
 
-  const SignInRequest: SignInRequest = {
-    identifier: form.identifier,
-    password: form.password,
-  };
+  const jsonRequest = JSON.stringify(signInRequest);
 
-  const jsonRequest = JSON.stringify(SignInRequest);
-
-  const authResponse: AuthAttemptResult = await axios
+  const result: AuthAttemptResult = await axios
     .post<SignInResponse>(endpoint, jsonRequest, {
       headers: { "Content-Type": "application/json" },
       withCredentials: true,
@@ -47,5 +37,5 @@ export async function trySignIn(
       return authResponse;
     });
 
-  return authResponse;
+  return result;
 }

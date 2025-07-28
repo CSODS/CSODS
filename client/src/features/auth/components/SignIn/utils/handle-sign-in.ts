@@ -1,8 +1,8 @@
 import { Location, NavigateFunction } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
 import { authTypes } from "@/types";
 import { SignInFormData } from "../types";
-import { trySignIn } from "./try-sign-in";
-import { jwtDecode } from "jwt-decode";
+import { requestSignIn } from "./request-sign-in";
 
 export async function handleSignIn(
   form: SignInFormData,
@@ -11,7 +11,12 @@ export async function handleSignIn(
   navigate: NavigateFunction,
   location: Location
 ) {
-  const { accessToken, errDetails } = await trySignIn(form);
+  const { identifier, password } = form;
+
+  const { accessToken, errDetails } = await requestSignIn({
+    identifier,
+    password,
+  });
 
   if (errDetails) {
     const { message } = errDetails;
