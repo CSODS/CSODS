@@ -1,5 +1,5 @@
-import { PROJECT_DESCRIPTION } from "@/constants/defaults";
-import { useProjectDetails } from "@/hooks";
+import { PROJECT } from "@features/projects/constants";
+import { useProjectDetails } from "@features/projects/hooks";
 import "../styles/scrollableStyles.module.css";
 
 interface AboutProps {
@@ -8,6 +8,7 @@ interface AboutProps {
 
 export function About({ aboutRef }: AboutProps) {
   const project = useProjectDetails();
+  const { PROJECT_DESCRIPTION } = PROJECT;
 
   return (
     <div

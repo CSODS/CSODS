@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { RadioBtnPill } from "@/components";
-import { useAllTags, useTagCategoryMap } from "@/hooks";
-import { IProjectSearchParameters } from "@/types";
-import { getProjectsPageLink } from "@/utils";
+import { useAllTags, useTagCategoryMap } from "@/features/projects/hooks";
+import { IProjectSearchParameters } from "@/features/projects/types";
+import { getProjectsPageLink } from "@/features/projects/utils";
 
 export default function SearchBar() {
   const tagCategoryMap = useTagCategoryMap();

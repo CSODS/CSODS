@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { usePageNumber } from "@/hooks";
-import { getProjectsPageLink } from "@/utils";
+import { usePageNumber } from "@features/projects/hooks";
+import { getProjectsPageLink } from "@features/projects/utils";
 import { useProjectsPage } from "../hooks";
 
 interface NumberedBtn {

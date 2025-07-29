@@ -1,7 +1,7 @@
 import { IProjectDetails, IProjectSearchParameters } from "@/types";
-import { csodsClient } from "../../utils/api/csodsClient";
-import { CSODS_API_PATHS } from "@/constants";
-import { assembleQuery } from "../../utils/navigation/navigation";
+import { csodsClient } from "@/utils";
+import { API } from "@features/projects/constants";
+import { assembleQuery } from "@features/projects/utils";
 
 // todo: add better type guarding
 export async function requestProject(
@@ -9,7 +9,7 @@ export async function requestProject(
   projectId: string | number,
   searchParameters?: IProjectSearchParameters
 ): Promise<IProjectDetails | null> {
-  const { PATH } = CSODS_API_PATHS.PROJECTS;
+  const { PATH } = API.PROJECT_ENDPOINTS;
   const projectsPath = `${PATH}/${pageNumber}/${projectId}`;
   const query = assembleQuery(searchParameters);
   const endpoint = projectsPath + query;

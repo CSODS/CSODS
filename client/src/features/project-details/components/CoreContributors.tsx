@@ -1,4 +1,4 @@
-import { useProjectDetails } from "@/hooks";
+import { useProjectDetails } from "@features/projects/hooks";
 import "../styles/scrollableStyles.module.css";
 
 interface ContributorsProps {

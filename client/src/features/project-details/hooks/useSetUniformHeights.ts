@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { IAllProjectTags, IProjectDetails } from "@/types";
+import { IAllProjectTags, IProjectDetails } from "@/features/projects/types";
 
 export function useSetUniformHeights(
   allTags: IAllProjectTags | null | undefined,

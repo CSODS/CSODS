@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
-import { DEFAULT_USER } from "@constants/defaults";
-import { useFetchTagData } from "@/hooks";
-import { IUser } from "@/types";
+import { PROJECT } from "@features/projects/constants";
+import { useFetchTagData } from "@features/projects/hooks";
+import { IProjectOwner } from "@features/projects/types";
 import {
   About,
   Contributors,
@@ -13,9 +13,11 @@ import {
 import { useFetchProject, useSetUniformHeights } from "./hooks";
 
 export default function ProjectDetails() {
+  const { DEFAULT_USER } = PROJECT;
+
   const allTags = useFetchTagData();
   const project = useFetchProject();
-  const [user] = useState<IUser>(DEFAULT_USER);
+  const [user] = useState<IProjectOwner>(DEFAULT_USER);
   const galleryRef = useRef<HTMLDivElement>(null);
   const contributorsRef = useRef<HTMLDivElement>(null);
   const aboutRef = useRef<HTMLDivElement>(null);

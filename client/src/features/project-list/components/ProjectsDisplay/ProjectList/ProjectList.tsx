@@ -1,8 +1,8 @@
 import {
   ProjectDetailsProvider,
   ProjectDataServiceProvider,
-} from "@/components";
-import { useAllTags } from "@/hooks";
+} from "@features/projects/providers";
+import { useAllTags } from "@features/projects/hooks";
 import { useProjectsPage } from "../hooks";
 import ProjectCard from "./ProjectCard";
 import TagColorProvider from "./TagColorProvider";

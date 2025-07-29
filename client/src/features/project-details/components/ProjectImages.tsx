@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { DEFAULTS } from "@/constants";
-import { useProjectDetails } from "@/hooks";
+import { PROJECT } from "@features/projects/constants";
+import { useProjectDetails } from "@features/projects/hooks";
 
-const DEFAULT_PROJECT_IMAGES = DEFAULTS.DEFAULT_PROJECT_IMAGES;
+const { DEFAULT_PROJECT_IMAGES } = PROJECT;
 
 interface ProjectImagesProps {
   galleryRef?: React.RefObject<HTMLDivElement | null>;

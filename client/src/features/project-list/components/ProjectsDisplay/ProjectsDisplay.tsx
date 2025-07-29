@@ -1,5 +1,8 @@
-import { AllTagsProvider, TagCategoryProvider } from "@/components";
-import { useFetchTagData } from "@/hooks";
+import {
+  AllTagsProvider,
+  TagCategoryProvider,
+} from "@features/projects/providers";
+import { useFetchTagData } from "@features/projects/hooks";
 import { useFetchProjectsPage } from "./hooks";
 import Paginator from "./Paginator";
 import ProjectList from "./ProjectList";

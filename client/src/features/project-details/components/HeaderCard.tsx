@@ -5,8 +5,8 @@ import {
   useProjectDetails,
   useProjectIcon,
   useProjectTagList,
-  useUser,
-} from "@/hooks";
+  useProjectOwner,
+} from "@features/projects/hooks";
 
 const DevIconContext = createContext<string>("");
 
@@ -68,7 +68,7 @@ function TitleAndStatus({ status }: TitleAndStatusProps) {
 }
 
 function ProjectOwner() {
-  const user = useUser();
+  const user = useProjectOwner();
 
   return (
     <div className="col m-0">

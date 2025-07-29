@@ -1,13 +1,14 @@
 import { IProjectSearchParameters, IProjectsPage } from "@/types";
-import { CSODS_API_PATHS } from "@/constants";
-import { assembleQuery, csodsClient } from "@/utils";
+import { API } from "@/features/projects/constants";
+import { assembleQuery } from "@/features/projects/utils";
+import { csodsClient } from "@/utils";
 
 // todo: add better type guarding
 export async function requestProjectsPage(
   pageNumber: string | number,
   searchParameters?: IProjectSearchParameters
 ): Promise<IProjectsPage | null> {
-  const { PATH } = CSODS_API_PATHS.PROJECTS;
+  const { PATH } = API.PROJECT_ENDPOINTS;
   const projectsPath = `${PATH}/${pageNumber}`;
   const query = assembleQuery(searchParameters);
   const endpoint = projectsPath + query;

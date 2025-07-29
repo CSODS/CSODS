@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
-import { usePageNumber, useProjectSearchParams } from "@/hooks";
-import { IProjectsPage } from "@/types";
+import {
+  usePageNumber,
+  useProjectSearchParams,
+} from "@features/projects/hooks";
+import { IProjectsPage } from "@features/projects/types";
 import { requestProjectsPage } from "../../requestProjectsPage";
 
 export function useFetchProjectsPage() {

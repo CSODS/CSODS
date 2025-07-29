@@ -1,5 +1,5 @@
 import { createContext, ReactNode, useMemo } from "react";
-import { IAllProjectTags } from "@/types";
+import { IAllProjectTags } from "@features/projects/types";
 
 export const TagColorContext = createContext<Map<string, string> | undefined>(
   undefined

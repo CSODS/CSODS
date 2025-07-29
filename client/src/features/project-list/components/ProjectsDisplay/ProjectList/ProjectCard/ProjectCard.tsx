@@ -1,13 +1,16 @@
 import { useNavigate, useParams } from "react-router-dom";
-import { DEFAULTS } from "@/constants";
+import { PROJECT } from "@features/projects/constants";
 import {
   useProjectDataService,
   useProjectDetails,
   useProjectIcon,
   useProjectTagList,
-} from "@/hooks";
-import { getProjectLink, redirectToUrl } from "@/utils";
+} from "@features/projects/hooks";
+import { getProjectLink } from "@features/projects/utils";
+import { redirectToUrl } from "@/utils";
 import TagRow from "./TagRow";
+
+const { LOREM_IPSUM } = PROJECT;
 
 export default function ProjectCard() {
   const navigate = useNavigate();
@@ -18,9 +21,8 @@ export default function ProjectCard() {
   const { pageNumber } = useParams();
   const projectDetails = useProjectDetails();
   const projectDataService = useProjectDataService();
-  const projectDescription = projectDataService.omitProjectDescription(
-    DEFAULTS.LOREM_IPSUM
-  );
+  const projectDescription =
+    projectDataService.omitProjectDescription(LOREM_IPSUM);
 
   const tagList = useProjectTagList();
   const iconClass = useProjectIcon();
