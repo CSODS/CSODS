@@ -4,13 +4,13 @@ import { useAuth } from "./useAuth";
 
 // todo: add handling for invalid access token
 export function useRefreshToken() {
-  const { REFRESH } = AuthConstants.AUTH_ENDPOINTS;
-
+  const { PATH, REFRESH } = AuthConstants.AUTH_ENDPOINTS;
+  const endpoint = PATH + REFRESH;
   const { setAuth } = useAuth();
 
   const refresh = async () => {
     const accessToken: string | null = await AuthUtils.securedAxios
-      .post(REFRESH, null, {
+      .post(endpoint, null, {
         withCredentials: true,
       })
       .then((response) => response.data.accessToken)

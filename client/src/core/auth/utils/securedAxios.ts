@@ -1,10 +1,9 @@
 import { CSODS_API_PATHS } from "@/constants";
-import { AUTH_ENDPOINTS } from "../constants";
 import axios from "axios";
 
-const baseUrl = CSODS_API_PATHS.BASE + AUTH_ENDPOINTS.PATH;
+const { BASE } = CSODS_API_PATHS;
 
 export const securedAxios = axios.create({
-  baseURL: baseUrl,
+  baseURL: BASE,
   withCredentials: true,
 });

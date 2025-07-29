@@ -4,12 +4,13 @@ import { AuthAttemptResult, SignInRequest, SignInResponse } from "../types";
 export async function requestSignIn(
   signInRequest: SignInRequest
 ): Promise<AuthAttemptResult> {
-  const { SIGN_IN } = AuthConstants.AUTH_ENDPOINTS;
+  const { PATH, SIGN_IN } = AuthConstants.AUTH_ENDPOINTS;
+  const endpoint = PATH + SIGN_IN;
 
   const jsonRequest = JSON.stringify(signInRequest);
 
   const result: AuthAttemptResult = await AuthUtils.securedAxios
-    .post<SignInResponse>(SIGN_IN, jsonRequest, {
+    .post<SignInResponse>(endpoint, jsonRequest, {
       headers: { "Content-Type": "application/json" },
       withCredentials: true,
     })
