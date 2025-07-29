@@ -1,13 +1,13 @@
 import { Location, NavigateFunction } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
-import { authTypes } from "@/types";
+import { AuthTypes } from "@/core/auth";
 import { SignInFormData } from "../types";
 import { requestSignIn } from "./request-sign-in";
 
 export async function handleSignIn(
   form: SignInFormData,
   setErrMsg: (msg: string) => void,
-  setAuth: (authSession: authTypes.AuthSession) => void,
+  setAuth: (authSession: AuthTypes.AuthSession) => void,
   navigate: NavigateFunction,
   location: Location
 ) {
@@ -23,9 +23,9 @@ export async function handleSignIn(
 
     setErrMsg(message);
   } else if (accessToken) {
-    const payload: authTypes.TokenPayload = jwtDecode(accessToken);
+    const payload: AuthTypes.TokenPayload = jwtDecode(accessToken);
 
-    const authSession: authTypes.AuthSession = {
+    const authSession: AuthTypes.AuthSession = {
       tokenPayload: payload,
       accessToken: accessToken,
     };

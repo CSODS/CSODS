@@ -1,8 +1,8 @@
-import { AxiosInstance } from "axios";
-import { useAuth } from "@/hooks";
-import { useRefreshToken } from "./useRefreshToken";
 import { useEffect } from "react";
-import { securedAxios } from "../utils";
+import { AxiosInstance } from "axios";
+import { AuthUtils } from "..";
+import { useAuth } from "./useAuth";
+import { useRefreshToken } from "./useRefreshToken";
 
 /**
  * @public
@@ -12,6 +12,7 @@ import { securedAxios } from "../utils";
  * interceptors.
  */
 export function useSecuredAxios(): AxiosInstance {
+  const { securedAxios } = AuthUtils;
   const refresh = useRefreshToken();
   const { auth } = useAuth();
 

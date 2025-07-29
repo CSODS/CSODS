@@ -1,5 +1,5 @@
 import { CSODS_API_PATHS } from "@/constants";
-import { AUTH_ENDPOINTS } from "@/features/auth/constants";
+import { AUTH_ENDPOINTS } from "../constants";
 import axios from "axios";
 
 const baseUrl = CSODS_API_PATHS.BASE + AUTH_ENDPOINTS.PATH;

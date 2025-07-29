@@ -7,6 +7,4 @@ export {
   BtnBare,
   LinkButton,
   BtnGroup,
-  AuthContext,
-  AuthProvider,
 } from "./shared";

@@ -1,7 +1,6 @@
 import { useEffect, useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useAuth } from "@/hooks";
-import { useRefreshToken } from "../../hooks";
+import { AuthHooks } from "@/core/auth";
 import { useSignInForm } from "./hooks";
 import { handleSignIn } from "./utils";
 import { ErrorMessage } from "./ErrorMessage";
@@ -9,8 +8,8 @@ import { SignInFields } from "./SignInFields";
 import { SignInButton } from "./SignInButton";
 
 export function SignInForm() {
-  const { setAuth } = useAuth();
-  const refresh = useRefreshToken();
+  const { setAuth } = AuthHooks.useAuth();
+  const refresh = AuthHooks.useRefreshToken();
   const errRef = useRef<HTMLParagraphElement>(null);
 
   const { signInForm, onType, errMsg, setErrMsg } = useSignInForm();

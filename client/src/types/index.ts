@@ -23,5 +23,3 @@ export type {
   BorderSelector,
   CssSelector,
 } from "./themes/styles";
-
-export * as authTypes from "./auth.types";

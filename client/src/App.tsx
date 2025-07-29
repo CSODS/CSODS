@@ -1,8 +1,9 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { ADDRESSES } from "./constants";
-import { AuthProvider, CsodsBackground, NavBar } from "./components";
+import { CsodsBackground, NavBar } from "./components";
 import { Home, LandingPage } from "./pages";
-import { Pages as AuthPages, Guards as AuthGuards } from "./features/auth";
+import { AuthGuards, AuthProvider } from "./core/auth";
+import { Pages as AuthPages } from "./features/auth";
 import { Pages as ProjectsPages } from "./features/projects";
 
 function App() {
