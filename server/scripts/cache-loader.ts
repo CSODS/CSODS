@@ -1,6 +1,6 @@
 import { CACHE } from "@data";
 import { createJsonFileService } from "@services";
-import { IProjectTagsCache } from "@/features/projects";
+import { IProjectTagsCache } from "@/features/projects/types";
 import { createContext } from "@/db/csods";
 import dotenv from "dotenv";
 dotenv.config();
@@ -22,21 +22,21 @@ dotenv.config();
  */
 async function tagsLoader() {
   const data: IProjectTagsCache = {
-    DevTypes: [],
-    ProgrammingLanguages: [],
-    Frameworks: [],
-    DatabaseTechnologies: [],
-    ApplicationIndustries: [],
+    devTypes: [],
+    programmingLanguages: [],
+    frameworks: [],
+    databaseTechnologies: [],
+    applicationIndustries: [],
   };
 
   const context = await createContext();
 
-  data.DevTypes = await context.query.DevType.findMany();
-  data.ProgrammingLanguages =
+  data.devTypes = await context.query.DevType.findMany();
+  data.programmingLanguages =
     await context.query.ProgrammingLanguage.findMany();
-  data.Frameworks = await context.query.Framework.findMany();
-  data.DatabaseTechnologies = await context.query.DatabaseTechnology.findMany();
-  data.ApplicationIndustries =
+  data.frameworks = await context.query.Framework.findMany();
+  data.databaseTechnologies = await context.query.DatabaseTechnology.findMany();
+  data.applicationIndustries =
     await context.query.ApplicationIndustry.findMany();
 
   const jsonFileHandler =
