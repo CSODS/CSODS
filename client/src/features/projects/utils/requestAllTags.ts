@@ -1,10 +1,10 @@
-import { CSODS_API_PATHS } from "@/constants";
-import { IAllProjectTags } from "@/types";
 import { csodsClient } from "@/utils";
+import { API } from "../constants";
+import { IAllProjectTags } from "../types";
 
 // todo: add better type guarding
 export async function requestAllTags(): Promise<IAllProjectTags | null> {
-  const { PATH, ALL_DATA } = CSODS_API_PATHS.PROJECT_TAGS;
+  const { PATH, ALL_DATA } = API.PROJECT_TAG_ENDPOINTS;
   const endpoint = PATH + ALL_DATA;
 
   const data = await csodsClient

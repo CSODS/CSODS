@@ -1,4 +1,4 @@
-import { useNavigateWithTag } from "@/hooks";
+import { useNavigateWithTag } from "@/features/projects/hooks";
 import { useTagColorMap } from "../hooks";
 import { BtnBare } from "@/components";
 

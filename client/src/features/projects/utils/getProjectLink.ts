@@ -1,6 +1,6 @@
 import { ADDRESSES } from "@/constants";
 import { IProjectSearchParameters } from "../types";
-import { assembleQuery } from "@/utils";
+import { assembleQuery } from "./assembleQuery";
 
 export function getProjectLink(
   pageNumber: number,

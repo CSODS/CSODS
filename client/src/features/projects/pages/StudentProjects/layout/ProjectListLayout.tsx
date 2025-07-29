@@ -1,8 +1,8 @@
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import { ADDRESSES } from "@/constants";
 import { ReactNode, useEffect, useState } from "react";
-import { IProjectSearchParameters } from "@/types";
-import { getProjectsPageLink } from "@/utils";
+import { IProjectSearchParameters } from "@/features/projects/types";
+import { getProjectsPageLink } from "@/features/projects/utils";
 import styles from "./ProjectListLayout.module.scss";
 
 interface ProjectListLayoutProps {

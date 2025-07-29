@@ -1,4 +1,4 @@
-import { useProjectDataService, useProjectDetails } from "@/hooks";
+import { useProjectDataService, useProjectDetails } from "../context";
 import { useMemo } from "react";
 
 export function useProjectTags() {
