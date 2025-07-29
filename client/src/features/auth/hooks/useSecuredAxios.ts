@@ -2,21 +2,21 @@ import { AxiosInstance } from "axios";
 import { useAuth } from "@/hooks";
 import { useRefreshToken } from "./useRefreshToken";
 import { useEffect } from "react";
-import { authClient } from "../utils";
+import { securedAxios } from "../utils";
 
 /**
  * @public
  * @function useAuthClient
  * @description Adds interceptors to the secured axios client.
- * @returns An {@link AxiosInstance} of the {@link authClient} with the
+ * @returns An {@link AxiosInstance} of the {@link securedAxios} with the
  * interceptors.
  */
-export function useAuthClient(): AxiosInstance {
+export function useSecuredAxios(): AxiosInstance {
   const refresh = useRefreshToken();
   const { auth } = useAuth();
 
   useEffect(() => {
-    const requestIntercept = authClient.interceptors.request.use(
+    const requestIntercept = securedAxios.interceptors.request.use(
       (config) => {
         // means the request not a retry, it's the first attempt.
         if (!config.headers["Authorization"]) {
@@ -30,7 +30,7 @@ export function useAuthClient(): AxiosInstance {
       }
     );
 
-    const responseIntercept = authClient.interceptors.response.use(
+    const responseIntercept = securedAxios.interceptors.response.use(
       (response) => response,
       async (err) => {
         const prevRequest = err?.config;
@@ -43,7 +43,7 @@ export function useAuthClient(): AxiosInstance {
           prevRequest.sent = true;
           const newAccessToken = await refresh();
           prevRequest.headers["Authorization"] = `Bearer ${newAccessToken}`;
-          return authClient(prevRequest);
+          return securedAxios(prevRequest);
         }
         return Promise.reject(err);
       }
@@ -51,10 +51,10 @@ export function useAuthClient(): AxiosInstance {
 
     return () => {
       // clean up the interceptors so it doesn't pileup.
-      authClient.interceptors.request.eject(requestIntercept);
-      authClient.interceptors.response.eject(responseIntercept);
+      securedAxios.interceptors.request.eject(requestIntercept);
+      securedAxios.interceptors.response.eject(responseIntercept);
     };
   }, [auth, refresh]);
 
-  return authClient;
+  return securedAxios;
 }

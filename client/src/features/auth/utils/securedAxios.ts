@@ -4,7 +4,7 @@ import axios from "axios";
 
 const baseUrl = CSODS_API_PATHS.BASE + AUTH_ENDPOINTS.PATH;
 
-export const authClient = axios.create({
+export const securedAxios = axios.create({
   baseURL: baseUrl,
   withCredentials: true,
 });

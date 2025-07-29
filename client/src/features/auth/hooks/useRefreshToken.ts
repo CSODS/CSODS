@@ -2,7 +2,7 @@ import { jwtDecode } from "jwt-decode";
 import { useAuth } from "@/hooks";
 import { authTypes } from "@/types";
 import { AUTH_ENDPOINTS } from "../constants";
-import { authClient } from "../utils";
+import { securedAxios } from "../utils";
 
 // todo: add handling for invalid access token
 export function useRefreshToken() {
@@ -11,7 +11,7 @@ export function useRefreshToken() {
   const { setAuth } = useAuth();
 
   const refresh = async () => {
-    const accessToken: string | null = await authClient
+    const accessToken: string | null = await securedAxios
       .post(REFRESH, null, {
         withCredentials: true,
       })
