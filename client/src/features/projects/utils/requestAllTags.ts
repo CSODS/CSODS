@@ -1,5 +1,5 @@
 import { CSODS_API_PATHS } from "@/constants";
-import { IAllProjectTags } from "@/types";
+import { IAllProjectTags } from "@/features/projects/types";
 import { csodsClient } from "@/utils";
 
 // todo: add better type guarding

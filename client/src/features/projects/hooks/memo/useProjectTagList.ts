@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { useProjectDataService } from "@/hooks";
+import { useProjectDataService } from "../context";
 import { useProjectTags } from "./useProjectTags";
 
 export function useProjectTagList() {

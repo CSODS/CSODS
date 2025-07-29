@@ -1,5 +1,8 @@
-import { IProjectSearchParameters, IProjectsPage } from "@/types";
 import { API } from "@/features/projects/constants";
+import {
+  IProjectSearchParameters,
+  IProjectsPage,
+} from "@/features/projects/types";
 import { assembleQuery } from "@/features/projects/utils";
 import { csodsClient } from "@/utils";
 

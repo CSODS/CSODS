@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { IAllProjectTags } from "@/types";
+import { IAllProjectTags } from "@/features/projects/types";
 import { requestAllTags } from "../utils";
 
 export function useFetchTagData() {
