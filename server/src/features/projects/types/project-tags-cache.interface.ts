@@ -12,21 +12,21 @@ export interface IProjectTagsCache {
   /**
    * A list of all available development types (e.g., Web, Mobile, Desktop).
    */
-  DevTypes: tableTypes.DevTypeViewModel[];
+  devTypes: tableTypes.DevTypeViewModel[];
   /**
    * A list of programming languages used across projects (e.g., JavaScript, Python).
    */
-  ProgrammingLanguages: tableTypes.ProgrammingLanguageViewModel[];
+  programmingLanguages: tableTypes.ProgrammingLanguageViewModel[];
   /**
    * A list of frameworks that can be associated with projects (e.g., React, Django).
    */
-  Frameworks: tableTypes.FrameworkViewModel[];
+  frameworks: tableTypes.FrameworkViewModel[];
   /**
    * A list of database technologies (e.g., MySQL, MongoDB).
    */
-  DatabaseTechnologies: tableTypes.DatabaseTechnologyViewModel[];
+  databaseTechnologies: tableTypes.DatabaseTechnologyViewModel[];
   /**
    * A list of industries or sectors for project applications (e.g., Education, Healthcare).
    */
-  ApplicationIndustries: tableTypes.ApplicationIndustryViewModel[];
+  applicationIndustries: tableTypes.ApplicationIndustryViewModel[];
 }
