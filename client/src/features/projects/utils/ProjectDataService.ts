@@ -6,12 +6,12 @@ import {
 } from "../types";
 
 export type IProjectTags = {
-  DevType: string;
-  PrimaryLanguage: string;
-  SecondaryLanguage: string | null;
-  DatabaseTechnology: string | null;
-  ApplicationIndustry: string | null;
-  Frameworks: (string | null)[];
+  devType: string;
+  primaryLanguage: string;
+  secondaryLanguage: string | null;
+  databaseTechnology: string | null;
+  applicationIndustry: string | null;
+  frameworks: (string | null)[];
 };
 
 export class ProjectDataService {
@@ -69,18 +69,18 @@ export class ProjectDataService {
     const project: IProject = projectDetails.project;
     const frameworks: IProjectFramework[] = projectDetails.projectFrameworks;
     return {
-      DevType: this.getDevType(project.devTypeId),
-      PrimaryLanguage: this.getProgrammingLanguage(project.primaryLanguageId)!,
-      SecondaryLanguage: this.getProgrammingLanguage(
+      devType: this.getDevType(project.devTypeId),
+      primaryLanguage: this.getProgrammingLanguage(project.primaryLanguageId)!,
+      secondaryLanguage: this.getProgrammingLanguage(
         project.secondaryLanguageId
       ),
-      DatabaseTechnology: this.getDatabaseTechnology(
+      databaseTechnology: this.getDatabaseTechnology(
         project.databaseTechnologyId
       ),
-      ApplicationIndustry: this.getApplicationIndustry(
+      applicationIndustry: this.getApplicationIndustry(
         project.applicationIndustryId
       ),
-      Frameworks: frameworks.map((value) =>
+      frameworks: frameworks.map((value) =>
         this.getFramework(value.frameworkId)
       ),
     };

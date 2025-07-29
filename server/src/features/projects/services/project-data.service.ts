@@ -148,8 +148,8 @@ export class ProjectDataService {
   ): Promise<IProjectDetails[]> {
     return await Promise.all(
       projectArr.map(async (project) => ({
-        Project: project, // The core project data.
-        ProjectFrameworks: await this._projectFrameworkRepo.FindManyByProjectId(
+        project, // The core project data.
+        projectFrameworks: await this._projectFrameworkRepo.FindManyByProjectId(
           project.projectId
         ), // Associated frameworks.
       }))
