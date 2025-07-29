@@ -11,7 +11,7 @@ export function useProjectIcon(devType?: keyof typeof ICONS) {
 
   useEffect(() => {
     const getIconClass = (devType: keyof typeof ICONS) => ICONS[devType];
-    setIconClass(getIconClass(projectTags.DevType as keyof typeof ICONS));
+    setIconClass(getIconClass(projectTags.devType as keyof typeof ICONS));
   }, [projectTags]);
 
   return iconClass;
