@@ -15,6 +15,6 @@ export type AuthSession = {
 };
 
 export type AuthContextType = {
-  auth: AuthSession | undefined;
-  setAuth: React.Dispatch<React.SetStateAction<AuthSession | undefined>>;
+  auth: AuthSession | null;
+  setAuth: React.Dispatch<React.SetStateAction<AuthSession | null>>;
 };

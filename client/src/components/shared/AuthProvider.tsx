@@ -7,7 +7,7 @@ export const AuthContext = createContext<authTypes.AuthContextType | null>(
 );
 
 export function AuthProvider() {
-  const [auth, setAuth] = useState<authTypes.AuthSession>();
+  const [auth, setAuth] = useState<authTypes.AuthSession | null>(null);
 
   return (
     <AuthContext.Provider value={{ auth, setAuth }}>
