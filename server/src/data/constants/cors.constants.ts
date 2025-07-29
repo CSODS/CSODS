@@ -15,6 +15,7 @@ export function getCorsOptions() {
         callback(new Error("Not allowed by CORS."));
       }
     },
+    credentials: true,
   };
 
   return corsOptions;
