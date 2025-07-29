@@ -9,7 +9,6 @@ import { SignInButton } from "./SignInButton";
 
 export function SignInForm() {
   const { setAuth } = AuthHooks.useAuth();
-  const refresh = AuthHooks.useRefreshToken();
   const errRef = useRef<HTMLParagraphElement>(null);
 
   const { signInForm, onType, errMsg, setErrMsg } = useSignInForm();
@@ -39,9 +38,6 @@ export function SignInForm() {
         <SignInFields signInForm={signInForm} onType={onType} />
         <SignInButton />
       </form>
-      <button type="button" onClick={() => refresh()}>
-        Refresh
-      </button>
     </article>
   );
 }
