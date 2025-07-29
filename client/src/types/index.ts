@@ -12,21 +12,6 @@ export type {
 } from "./themes/spacing";
 
 export type {
-  IAllProjectTags,
-  IDevType,
-  IProgrammingLanguage,
-  IFramework,
-  IProjectFramework,
-  IDatabaseTechnology,
-  IApplicationIndustry,
-  IProjectDetails,
-  IProject,
-  IProjectsPage,
-  IProjectSearchParameters,
-  IUser,
-} from "./api/csods";
-
-export type {
   Opacity,
   ColorScheme,
   Color,

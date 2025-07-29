@@ -1,12 +1,11 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { ADDRESSES } from "@/constants";
-import { CsodsBackground, NavBar, AuthProvider } from "@/components";
+import { ADDRESSES } from "./constants";
+import { AuthProvider, CsodsBackground, NavBar } from "./components";
 import LandingPage from "./features/landing/LandingPage";
 import Home from "./features/home/Home";
-import StudentProjects from "./features/project-list/StudentProjects";
-import ProjectDetails from "./features/project-details/ProjectDetails";
+import { StudentProjects, ProjectDetails } from "./features/projects";
 import SubmitProject from "./features/submit-project/SubmitProject";
-import { ProjectListLayout } from "./features/project-list/layout/ProjectListLayout";
+import { ProjectListLayout } from "./features/projects/pages/StudentProjects/layout/ProjectListLayout";
 import { authComponents, authGuards } from "./features/auth";
 
 function App() {

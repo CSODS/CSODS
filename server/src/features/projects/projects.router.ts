@@ -58,14 +58,14 @@ projectsRouter.get(
     await cacheService.setCache(filter);
 
     const page = await cacheService.getOrCreatePage(
-      Number(req.params.pageNumber)
+      Number(req.params.page_number)
     );
 
     page
       ? res.json(page)
       : res
           .status(404)
-          .json({ error: `Page ${req.params.pageNumber} not found.` });
+          .json({ error: `Page ${req.params.page_number} not found.` });
   }
 );
 /**
@@ -97,8 +97,8 @@ projectsRouter.get(
     Administrator.roleName
   ),
   async (req, res) => {
-    const page: number = Number(req.params.pageNumber);
-    const id: number = Number(req.params.projectId);
+    const page: number = Number(req.params.page_number);
+    const id: number = Number(req.params.project_id);
 
     const filter = assembleFilter(req);
 
@@ -126,20 +126,15 @@ projectsRouter.get(
  * @see parseNumberParam - Utility function used to safely parse numeric query parameters.
  */
 function assembleFilter(request: Request): IProjectFilter {
-  const {
-    ["project-title"]: projectTitle,
-    ["dev-type-id"]: devTypeId,
-    ["language-id"]: languageId,
-    ["database-id"]: databaseId,
-    ["industry-id"]: industryId,
-  } = request.query;
+  const { project_title, dev_type_id, language_id, database_id, industry_id } =
+    request.query;
 
   const filter: IProjectFilter = {
-    ProjectTitle: parseStringParam(projectTitle),
-    DevTypeId: parseNumberParam(devTypeId),
-    LanguageId: parseNumberParam(languageId),
-    DatabaseId: parseNumberParam(databaseId),
-    IndustryId: parseNumberParam(industryId),
+    ProjectTitle: parseStringParam(project_title),
+    DevTypeId: parseNumberParam(dev_type_id),
+    LanguageId: parseNumberParam(language_id),
+    DatabaseId: parseNumberParam(database_id),
+    IndustryId: parseNumberParam(industry_id),
   };
   return filter;
 }
