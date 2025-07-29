@@ -16,7 +16,7 @@ export default function ProjectList() {
       <div className="mx-0 mt-md-5 mt-3 px-lg-3 px-sm-1 px-3 row row-cols-1 row-cols-sm-2 row-gap-lg-4 row-gap-2 d-flex justify-content-center">
         <TagColorProvider allTags={allTags}>
           <ProjectDataServiceProvider allTags={allTags}>
-            {projectsPage.Projects.map((project, index) => {
+            {projectsPage.projects.map((project, index) => {
               const cardKey = `project-card-${index}`;
               return (
                 <div

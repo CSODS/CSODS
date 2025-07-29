@@ -17,20 +17,20 @@ export default function TagColorProvider({
   const tagColorMap = useMemo(() => {
     const map = new Map<string, string>();
 
-    allTags.DevTypes.forEach((dt) => {
-      map.set(dt.DevTypeName, "color-util-error");
+    allTags.devTypes.forEach((dt) => {
+      map.set(dt.devTypeName, "color-util-error");
     });
-    allTags.ProgrammingLanguages.forEach((pl) => {
-      map.set(pl.LanguageName, "color-neutral-1");
+    allTags.programmingLanguages.forEach((pl) => {
+      map.set(pl.languageName, "color-neutral-1");
     });
-    allTags.Frameworks.forEach((fw) => {
-      map.set(fw.FrameworkName, "color-util-alert");
+    allTags.frameworks.forEach((fw) => {
+      map.set(fw.frameworkName, "color-util-alert");
     });
-    allTags.DatabaseTechnologies.forEach((db) => {
-      map.set(db.Database, "color-util-notify");
+    allTags.databaseTechnologies.forEach((db) => {
+      map.set(db.database, "color-util-notify");
     });
-    allTags.ApplicationIndustries.forEach((ai) => {
-      map.set(ai.Industry, "color-neutral-2");
+    allTags.applicationIndustries.forEach((ai) => {
+      map.set(ai.industry, "color-neutral-2");
     });
 
     return map;

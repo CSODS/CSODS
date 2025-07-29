@@ -71,7 +71,7 @@ interface FilterButtonsProps {
 function FilterButtons({ onRadioBtnChange }: FilterButtonsProps) {
   const allTags = useAllTags();
   //  TO DO: include the filter button contents in FilterButtonProps
-  const devTypes = allTags.DevTypes;
+  const devTypes = allTags.devTypes;
 
   return (
     <div className="mt-4 d-flex flex-wrap justify-content-center">
@@ -89,8 +89,8 @@ function FilterButtons({ onRadioBtnChange }: FilterButtonsProps) {
         defaultChecked
       />
       {devTypes.map((devType) => {
-        const filterId = devType.DevTypeId;
-        const filterName = devType.DevTypeName;
+        const filterId = devType.devTypeId;
+        const filterName = devType.devTypeName;
         const componentKey = `filter-devType-${filterId}`;
         const componentId = `filter-devType-option-${filterId}`;
         return (
