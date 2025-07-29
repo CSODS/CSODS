@@ -1,6 +1,8 @@
 const CSODS_API_BASE =
   process.env.REACT_APP_ENV === "testing"
     ? process.env.REACT_APP_CSODS_LOCAL_API_BASE_URL
+    : process.env.REACT_APP_ENV === "dev"
+    ? process.env.REACT_APP_CSODS_DEV_API_BASE_URL
     : process.env.REACT_APP_CSODS_API_BASE_URL;
 
 const AUTH_PATHS = {
