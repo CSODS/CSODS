@@ -11,17 +11,17 @@ export interface IProjectCache extends ICache {
   /**
    * The total number of available pages of projects.
    */
-  TotalPages: number;
+  totalPages: number;
   /**
    * Flags if the cache is a backup cache.
    */
-  IsBackup: boolean;
+  isBackup: boolean;
   /**
    * A mapping of page numbers to CachePage objects.
    * Each key is a page number, and the corresponding value is a CachePage instance
    * representing cached data for that page.
    */
-  CachePages: CachePageRecord;
+  cachePages: CachePageRecord;
 }
 
 export type CachePageRecord = Record<number, IProjectCachePage>;
@@ -33,11 +33,11 @@ export interface IProjectCachePage extends ICache {
   /**
    * The total number of available pages of projects.
    */
-  TotalPages: number;
+  totalPages: number;
   /**
    * The project list associated with this page.
    */
-  Projects: IProjectDetails[];
+  projects: IProjectDetails[];
 }
 /**
  * Represents the fully detailed view of a project, including its core project data and
@@ -50,11 +50,11 @@ export interface IProjectDetails {
   /**
    * The main project entity containing metadata such as title, description, associated tags, etc.
    */
-  Project: tableTypes.ProjectViewModel;
+  project: tableTypes.ProjectViewModel;
 
   /**
    * A list of frameworks associated with the project.
    * Each entry links a framework to the project through a many-to-many relationship.
    */
-  ProjectFrameworks: tableTypes.ProjectFrameworkViewModel[];
+  projectFrameworks: tableTypes.ProjectFrameworkViewModel[];
 }

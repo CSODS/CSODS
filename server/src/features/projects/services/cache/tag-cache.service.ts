@@ -28,27 +28,27 @@ export class TagsCacheHandler {
 
   public async getDevTypes() {
     this._tagsCache = await this.getTagsCache();
-    return this._tagsCache?.DevTypes ?? null;
+    return this._tagsCache?.devTypes ?? null;
   }
 
   public async getProgrammingLanguages() {
     const data = await this.getTagsCache();
-    return data?.ProgrammingLanguages ?? null;
+    return data?.programmingLanguages ?? null;
   }
 
   public async getFrameworks() {
     const data = await this.getTagsCache();
-    return data?.Frameworks ?? null;
+    return data?.frameworks ?? null;
   }
 
   public async getDatabaseTechnologies() {
     const data = await this.getTagsCache();
-    return data?.DatabaseTechnologies ?? null;
+    return data?.databaseTechnologies ?? null;
   }
 
   public async getApplicationIndustries() {
     const data = await this.getTagsCache();
-    return data?.ApplicationIndustries ?? null;
+    return data?.applicationIndustries ?? null;
   }
 
   public async getTagsCache() {

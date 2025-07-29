@@ -154,7 +154,7 @@ export class BaseCacheEvictor<TCache extends ICache> {
     data: TCache,
     evictionOptions: IEvictionOptions
   ): boolean {
-    const { LastAccessed } = data;
+    const { lastAccessed: LastAccessed } = data;
     const { Duration } = evictionOptions;
 
     if (
@@ -188,7 +188,7 @@ export class BaseCacheEvictor<TCache extends ICache> {
     data: TCache,
     evictionOptions: IEvictionOptions
   ): boolean {
-    const { ViewCount } = data;
+    const { viewCount: ViewCount } = data;
     const { ViewThreshold } = evictionOptions;
 
     if (typeof ViewCount !== "number" || typeof ViewThreshold !== "number") {

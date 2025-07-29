@@ -69,7 +69,7 @@ export class ProjectCachePageService extends ProjectCacheService {
       `Attempting to retrieve project with id: ${projectId}...`
     );
     const project =
-      cachePage?.Projects.find((p) => p.Project.projectId == projectId) ?? null;
+      cachePage?.projects.find((p) => p.project.projectId == projectId) ?? null;
 
     project
       ? this._logger.info(`Project found...`)
@@ -110,7 +110,7 @@ export class ProjectCachePageService extends ProjectCacheService {
 
       this._logger.info(`Attempting to retrieve page ${pageNumber}`);
 
-      if (isPageOutOfBounds(this._cache.TotalPages, pageNumber)) {
+      if (isPageOutOfBounds(this._cache.totalPages, pageNumber)) {
         this._logger.warn(
           `Page ${pageNumber} is out of bounds. Returning null...`
         );
@@ -118,10 +118,10 @@ export class ProjectCachePageService extends ProjectCacheService {
       }
 
       //  Attempt to retrieve page from cache.
-      const cachePages: CachePageRecord = this._cache.CachePages;
+      const cachePages: CachePageRecord = this._cache.cachePages;
 
       if (this.isPageMissingFromCache(cachePages, pageNumber)) {
-        if (this._cache.IsBackup) {
+        if (this._cache.isBackup) {
           this._logger.warn(
             `Page ${pageNumber} is not available in backup cache. Returning null...`
           );
@@ -172,16 +172,16 @@ export class ProjectCachePageService extends ProjectCacheService {
 
       //  Assemble cache page.
       const cachePage: IProjectCachePage = {
-        CreatedOn: this._cDate,
-        LastAccessed: this._cDate,
-        ViewCount: 1,
-        TotalPages: this._cache.TotalPages,
-        Projects: projects,
+        createdOn: this._cDate,
+        lastAccessed: this._cDate,
+        viewCount: 1,
+        totalPages: this._cache.totalPages,
+        projects: projects,
       };
 
-      this._cache.LastAccessed = this._cDate;
-      this._cache.ViewCount += 1;
-      this._cache.CachePages[pageNumber] = cachePage;
+      this._cache.lastAccessed = this._cDate;
+      this._cache.viewCount += 1;
+      this._cache.cachePages[pageNumber] = cachePage;
 
       await this._jsonFileHandler.writeToJsonFile(
         process.env.PROJECT_CACHE_PATH!,
@@ -195,9 +195,9 @@ export class ProjectCachePageService extends ProjectCacheService {
       //  from the in memory cache.
       if (
         this._cache != null &&
-        !this.isPageMissingFromCache(this._cache.CachePages, pageNumber)
+        !this.isPageMissingFromCache(this._cache.cachePages, pageNumber)
       ) {
-        delete this._cache.CachePages[pageNumber];
+        delete this._cache.cachePages[pageNumber];
       }
       throw err;
     }
@@ -225,7 +225,7 @@ export class ProjectCachePageService extends ProjectCacheService {
    * and persists the updated cache to a JSON file.
    *
    * This method first ensures that the JSON cache ({@link _cache}) is not null. It then attempts to:
-   * 1. Increment the {@link IProjectCache.ViewCount} and {@link IProjectCache.LastAccessed} property of the
+   * 1. Increment the {@link IProjectCache.viewCount} and {@link IProjectCache.lastAccessed} property of the
    * {@link _cache} and the specified `pageNumber` within the `CachePages` object in the in-memory cache.
    * 2. Asynchronously write the entire updated cache object to the designated JSON file path.
    *
@@ -239,10 +239,10 @@ export class ProjectCachePageService extends ProjectCacheService {
   private async updateViewCount(pageNumber: number): Promise<void> {
     //  Throws TypeError if data is null.
     this._jsonFileHandler.assertDataNotNull(this._cache);
-    this._cache.LastAccessed = this._cDate;
-    this._cache.ViewCount += 1;
-    this._cache.CachePages[pageNumber].LastAccessed = this._cDate;
-    this._cache.CachePages[pageNumber].ViewCount += 1;
+    this._cache.lastAccessed = this._cDate;
+    this._cache.viewCount += 1;
+    this._cache.cachePages[pageNumber].lastAccessed = this._cDate;
+    this._cache.cachePages[pageNumber].viewCount += 1;
 
     //  throws an exception if update fails.
     await this._jsonFileHandler.writeToJsonFile(

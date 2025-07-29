@@ -25,28 +25,28 @@ export function TagCategoryProvider({
   const tagCategoryMap = useMemo(() => {
     const map: tagMap = new Map();
 
-    allTags.DevTypes.forEach((dt) => {
-      map.set(dt.DevTypeName, {
+    allTags.devTypes.forEach((dt) => {
+      map.set(dt.devTypeName, {
         tagCategory: PROJECT_QUERY_PARAMETERS.DEVELOPMENT_TYPE,
-        tagId: dt.DevTypeId,
+        tagId: dt.devTypeId,
       });
     });
-    allTags.ProgrammingLanguages.forEach((pl) => {
-      map.set(pl.LanguageName, {
+    allTags.programmingLanguages.forEach((pl) => {
+      map.set(pl.languageName, {
         tagCategory: PROJECT_QUERY_PARAMETERS.PROGRAMMING_LANGUAGE,
-        tagId: pl.LanguageId,
+        tagId: pl.languageId,
       });
     });
-    allTags.DatabaseTechnologies.forEach((db) => {
-      map.set(db.Database, {
+    allTags.databaseTechnologies.forEach((db) => {
+      map.set(db.database, {
         tagCategory: PROJECT_QUERY_PARAMETERS.DATABASE_TECHNOLOGY,
-        tagId: db.DatabaseId,
+        tagId: db.databaseId,
       });
     });
-    allTags.ApplicationIndustries.forEach((ai) => {
-      map.set(ai.Industry, {
+    allTags.applicationIndustries.forEach((ai) => {
+      map.set(ai.industry, {
         tagCategory: PROJECT_QUERY_PARAMETERS.APPLICATION_INDUSTRY,
-        tagId: ai.IndustryId,
+        tagId: ai.industryId,
       });
     });
     //  TODO: ADD FRAMEWORKS TO THE TAG CATEGORIES WHEN THE BACK-END SUPPORTS IT.

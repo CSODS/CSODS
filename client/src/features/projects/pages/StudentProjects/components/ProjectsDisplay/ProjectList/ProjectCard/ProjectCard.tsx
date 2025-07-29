@@ -27,7 +27,7 @@ export default function ProjectCard() {
   const tagList = useProjectTagList();
   const iconClass = useProjectIcon();
 
-  const projectId: number = projectDetails.Project.ProjectId;
+  const projectId: number = projectDetails.project.projectId;
 
   return (
     <div className="card project-card-dark-3 translucent-40 border border-0 rounded-2">
@@ -49,7 +49,7 @@ export default function ProjectCard() {
           >
             {/* project title  */}
             <h5 className="card-title text-start fs-3 color-light-2 bolder">
-              {projectDetails.Project.ProjectTitle}
+              {projectDetails.project.projectTitle}
             </h5>
             {/* project description */}
             <small className="card-text my-1 text-start lh-sm">
@@ -65,7 +65,7 @@ export default function ProjectCard() {
                   type="button"
                   className="col-3 px-3 py-2 ms-0 me-3 btn-dark-4 hover-lighten rounded-2 border border-0"
                   onClick={() =>
-                    redirectToUrl(projectDetails.Project.GitHubUrl)
+                    redirectToUrl(projectDetails.project.gitHubUrl)
                   }
                 >
                   GitHub
@@ -87,7 +87,7 @@ export default function ProjectCard() {
             <button
               type="button"
               className="m-1 mx-2 px-1 btn-dark-3 translucent-50 hover-lighten rounded-2 border border-0 justify-content-center align-items-center"
-              onClick={() => redirectToUrl(projectDetails.Project.GitHubUrl)}
+              onClick={() => redirectToUrl(projectDetails.project.gitHubUrl)}
             >
               <i className="m-0 bi bi-github" />
             </button>

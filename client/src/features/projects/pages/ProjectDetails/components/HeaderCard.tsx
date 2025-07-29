@@ -53,7 +53,7 @@ function TitleAndStatus({ status }: TitleAndStatusProps) {
   return (
     <div className="col m-0 p-0 d-flex flex-fill align-items-center">
       <h5 className="col m-0 p-0 text-start fs-1 fw-bold color-frost-light-azure">
-        {project.Project.ProjectTitle}
+        {project.project.projectTitle}
       </h5>
       <div className="col p-0 d-flex justify-content-end align-items-center">
         <div className="m-0 px-2 py-1 bg-frost-midnight translucent-90 color-util-alert border border-0 rounded-3">
@@ -75,7 +75,7 @@ function ProjectOwner() {
       <div className="row">
         <p className="col m-0 p-0 text-start fs-p color-frost-light-azure">
           {" "}
-          {user.Name}{" "}
+          {user.name}{" "}
         </p>
         <p className="col m-0 p-0 text-end fs-p color-frost-light-azure">
           Uploaded: January 1, 1001
@@ -84,7 +84,7 @@ function ProjectOwner() {
       <div className="row">
         <p className="m-0 p-0 text-start fs-p color-frost-pastel-gray-azure">
           {" "}
-          {user.Email}{" "}
+          {user.email}{" "}
         </p>
       </div>
     </div>

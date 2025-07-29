@@ -52,12 +52,12 @@ export class ProjectsViewsDecayService extends ViewsDecayService<IProjectCache> 
         cache = this.defaultDecayFunc(cache, now);
 
       //  Decay the cache pages.
-      const decayedCachePages = Object.entries(cache.CachePages).map(
+      const decayedCachePages = Object.entries(cache.cachePages).map(
         ([pageNumber, cachePage]) => {
-          const viewCount = cachePage.ViewCount;
-          const lastAccessed = new Date(cachePage.LastAccessed);
+          const viewCount = cachePage.viewCount;
+          const lastAccessed = new Date(cachePage.lastAccessed);
 
-          cachePage.ViewCount = this.getDecayedViews(
+          cachePage.viewCount = this.getDecayedViews(
             viewCount,
             lastAccessed,
             now
@@ -66,7 +66,7 @@ export class ProjectsViewsDecayService extends ViewsDecayService<IProjectCache> 
         }
       );
 
-      cache.CachePages = Object.fromEntries(decayedCachePages);
+      cache.cachePages = Object.fromEntries(decayedCachePages);
 
       return cache;
     });

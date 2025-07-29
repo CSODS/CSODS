@@ -2,7 +2,7 @@ import PaginationButton from "./PaginationBtn";
 import { useProjectsPage } from "../hooks";
 
 export default function Paginator() {
-  const { TotalPages } = useProjectsPage();
+  const { totalPages: TotalPages } = useProjectsPage();
 
   return (
     <div className="m-0 row">

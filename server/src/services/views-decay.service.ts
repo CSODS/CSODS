@@ -105,10 +105,10 @@ export class ViewsDecayService<TCache extends ICache> {
    * @returns The updated cache object with the decayed view count.
    */
   protected defaultDecayFunc(cache: TCache, now: Date) {
-    const viewCount = cache.ViewCount;
-    const lastAccessed = cache.LastAccessed;
+    const viewCount = cache.viewCount;
+    const lastAccessed = cache.lastAccessed;
 
-    cache.ViewCount = this.getDecayedViews(viewCount, lastAccessed, now);
+    cache.viewCount = this.getDecayedViews(viewCount, lastAccessed, now);
     return cache;
   }
 
