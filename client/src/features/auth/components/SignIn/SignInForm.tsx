@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "@/hooks";
+import { useRefreshToken } from "../../hooks";
 import { useSignInForm } from "./hooks";
 import { handleSignIn } from "./utils";
 import { ErrorMessage } from "./ErrorMessage";
@@ -9,7 +10,7 @@ import { SignInButton } from "./SignInButton";
 
 export function SignInForm() {
   const { setAuth } = useAuth();
-
+  const refresh = useRefreshToken();
   const errRef = useRef<HTMLParagraphElement>(null);
 
   const { signInForm, onType, errMsg, setErrMsg } = useSignInForm();
@@ -39,6 +40,9 @@ export function SignInForm() {
         <SignInFields signInForm={signInForm} onType={onType} />
         <SignInButton />
       </form>
+      <button type="button" onClick={() => refresh()}>
+        Refresh
+      </button>
     </article>
   );
 }
