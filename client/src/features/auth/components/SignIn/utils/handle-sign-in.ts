@@ -35,6 +35,6 @@ export async function handleSignIn(
     // get the previous location if the user attempted to access a page
     // that required auth. Otherwise, set it to the home page.
     const from = location.state?.from?.pathname || "/home";
-    // navigate(from, { replace: true });
+    navigate(from, { replace: true });
   }
 }
