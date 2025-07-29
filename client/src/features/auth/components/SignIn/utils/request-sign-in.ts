@@ -1,17 +1,16 @@
-import { CSODS_API_PATHS } from "@/constants";
+import { AUTH_ENDPOINTS } from "@/features/auth/constants";
 import { AuthAttemptResult, SignInRequest, SignInResponse } from "../types";
-import axios from "axios";
+import { csodsClient } from "@/utils";
 
 export async function requestSignIn(
   signInRequest: SignInRequest
 ): Promise<AuthAttemptResult> {
-  const { BASE, AUTH } = CSODS_API_PATHS;
-  const { PATH, SIGN_IN } = AUTH;
-  const endpoint = BASE + PATH + SIGN_IN;
+  const { PATH, SIGN_IN } = AUTH_ENDPOINTS;
+  const endpoint = PATH + SIGN_IN;
 
   const jsonRequest = JSON.stringify(signInRequest);
 
-  const result: AuthAttemptResult = await axios
+  const result: AuthAttemptResult = await csodsClient
     .post<SignInResponse>(endpoint, jsonRequest, {
       headers: { "Content-Type": "application/json" },
       withCredentials: true,
