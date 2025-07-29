@@ -53,11 +53,11 @@ export abstract class AbstractCacheService<TCache extends ICache> {
   /**
    * @public
    * @method getLastAccessed
-   * @description Accessor for the {@link ICache.LastAccessed} field of {@link _cache}.
-   * @returns The value of the {@link ICache.LastAccessed} field. `null` if {@link _cache} is `null`.
+   * @description Accessor for the {@link ICache.lastAccessed} field of {@link _cache}.
+   * @returns The value of the {@link ICache.lastAccessed} field. `null` if {@link _cache} is `null`.
    */
   public getLastAccessed(): Date | null {
-    return this._cache?.LastAccessed ?? null;
+    return this._cache?.lastAccessed ?? null;
   }
 
   /**
@@ -172,7 +172,7 @@ export abstract class AbstractCacheService<TCache extends ICache> {
    *
    * Revives certain fields.
    *
-   * By default, converts fields {@link ICache.CreatedOn}, and {@link ICache.LastAccessed} fields back
+   * By default, converts fields {@link ICache.createdOn}, and {@link ICache.lastAccessed} fields back
    * into `Date` type.
    *
    * @param key - The property name.

@@ -207,7 +207,7 @@ export class ProjectCacheService extends AbstractCacheService<IProjectCache> {
    * @returns `true` if the cache is not `null` and has pages, otherwise `false`.
    */
   protected override isCacheValid(cache: IProjectCache | null): boolean {
-    return cache !== null && Object.keys(cache.CachePages).length > 0;
+    return cache !== null && Object.keys(cache.cachePages).length > 0;
   }
   /**
    * @protected
@@ -227,11 +227,11 @@ export class ProjectCacheService extends AbstractCacheService<IProjectCache> {
       projects: IProjectDetails[]
     ): IProjectCachePage {
       return {
-        CreatedOn: date,
-        LastAccessed: date,
-        ViewCount: 0,
-        TotalPages: totalPages,
-        Projects: projects,
+        createdOn: date,
+        lastAccessed: date,
+        viewCount: 0,
+        totalPages: totalPages,
+        projects: projects,
       };
     }
     function createCachePages(
@@ -257,12 +257,12 @@ export class ProjectCacheService extends AbstractCacheService<IProjectCache> {
       cachePages: CachePageRecord
     ): IProjectCache {
       return {
-        TotalPages: totalPages,
-        CreatedOn: date,
-        LastAccessed: date,
-        ViewCount: 1,
-        IsBackup: false,
-        CachePages: cachePages,
+        totalPages: totalPages,
+        createdOn: date,
+        lastAccessed: date,
+        viewCount: 1,
+        isBackup: false,
+        cachePages: cachePages,
       };
     }
     //  Fetch data
@@ -308,7 +308,7 @@ export class ProjectCacheService extends AbstractCacheService<IProjectCache> {
 
       if (this.isCacheValid(cachedProjects)) {
         this._logger.info(`Success loading backup cache ${this._filename}`);
-        cachedProjects!.IsBackup = true;
+        cachedProjects!.isBackup = true;
         return cachedProjects;
       }
     }
@@ -321,7 +321,7 @@ export class ProjectCacheService extends AbstractCacheService<IProjectCache> {
 
     if (this.isCacheValid(hardBackupCache)) {
       ProjectsCacheLogger.info(`Success loading hard backup cache.`);
-      hardBackupCache!.IsBackup = true;
+      hardBackupCache!.isBackup = true;
       return hardBackupCache;
     }
 

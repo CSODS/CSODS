@@ -6,13 +6,13 @@ export interface ICache {
   /**
    * The timestamp when the cache was created.
    */
-  CreatedOn: Date;
+  createdOn: Date;
   /**
    * The timestamp when this cache was last loaded or refreshed.
    */
-  LastAccessed: Date;
+  lastAccessed: Date;
   /**
    *
    */
-  ViewCount: number;
+  viewCount: number;
 }

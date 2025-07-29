@@ -131,7 +131,7 @@ export class ProjectCacheEvictor extends BaseCacheEvictor<IProjectCache> {
 
     const data = await this.readFile(file);
 
-    const cachePageRecord: CachePageRecord = data?.CachePages ?? {};
+    const cachePageRecord: CachePageRecord = data?.cachePages ?? {};
 
     const pageEntries = Object.entries(cachePageRecord);
 
