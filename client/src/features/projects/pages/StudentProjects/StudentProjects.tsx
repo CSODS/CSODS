@@ -1,6 +1,6 @@
 import { Header, UpButton, ProjectsDisplay } from "./components";
 
-export default function StudentProjects() {
+export function StudentProjects() {
   return (
     <div>
       <Header />

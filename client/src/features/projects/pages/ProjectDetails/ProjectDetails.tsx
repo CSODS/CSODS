@@ -12,7 +12,7 @@ import {
 } from "./components";
 import { useFetchProject, useSetUniformHeights } from "./hooks";
 
-export default function ProjectDetails() {
+export function ProjectDetails() {
   const { DEFAULT_USER } = PROJECT;
 
   const allTags = useFetchTagData();
