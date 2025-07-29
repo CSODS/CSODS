@@ -8,7 +8,7 @@ type ErrorMessageProps = {
 export function ErrorMessage({ message, errRef }: ErrorMessageProps) {
   useEffect(() => {
     if (errRef.current && message) errRef.current.focus();
-  }, [message]);
+  }, [errRef, message]);
 
   return (
     <p

@@ -15,7 +15,7 @@ export function useFetchTagData() {
       }
     };
     loadTagData();
-  }, []);
+  }, [securedAxios]);
 
   return allTags;
 }

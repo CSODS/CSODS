@@ -55,7 +55,7 @@ export function useSecuredAxios(): AxiosInstance {
       securedAxios.interceptors.request.eject(requestIntercept);
       securedAxios.interceptors.response.eject(responseIntercept);
     };
-  }, [auth, refresh]);
+  }, [auth, refresh, securedAxios]);
 
   return securedAxios;
 }

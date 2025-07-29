@@ -23,7 +23,7 @@ export function useFetchProjectsPage() {
       setProjectsPage(loadedPage);
     };
     loadProjectPage();
-  }, [pageNumber, projectSearchParams]);
+  }, [pageNumber, projectSearchParams, securedAxios]);
 
   return projectsPage;
 }

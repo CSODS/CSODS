@@ -15,7 +15,7 @@ export function SignInForm() {
 
   useEffect(() => {
     setErrMsg("");
-  }, [signInForm.identifier, signInForm.password]);
+  }, [setErrMsg, signInForm.identifier, signInForm.password]);
 
   const navigate = useNavigate();
   const location = useLocation();
