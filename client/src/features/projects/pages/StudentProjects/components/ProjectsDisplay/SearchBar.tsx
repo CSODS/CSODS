@@ -2,7 +2,10 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { RadioBtnPill } from "@/components";
 import { useAllTags, useTagCategoryMap } from "@/features/projects/hooks";
-import { IProjectSearchParameters } from "@/features/projects/types";
+import {
+  IAllProjectTags,
+  IProjectSearchParameters,
+} from "@/features/projects/types";
 import { getProjectsPageLink } from "@/features/projects/utils";
 
 export default function SearchBar() {
@@ -69,7 +72,7 @@ interface FilterButtonsProps {
 }
 
 function FilterButtons({ onRadioBtnChange }: FilterButtonsProps) {
-  const allTags = useAllTags();
+  const allTags: IAllProjectTags = useAllTags();
   //  TO DO: include the filter button contents in FilterButtonProps
   const devTypes = allTags.DevTypes;
 
