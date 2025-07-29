@@ -3,19 +3,6 @@ const CSODS_API_BASE =
     ? process.env.REACT_APP_CSODS_LOCAL_API_BASE_URL
     : process.env.REACT_APP_CSODS_API_BASE_URL;
 
-const PROJECT_PATHS = {
-  PATH: "/projects",
-  ROOT: "/",
-  BY_PAGE: "/:page-number",
-  BY_ID: "/:page-number/:project-id",
-} as const;
-
-const PROJECT_TAG_PATHS = {
-  PATH: "/project-tags",
-  ROOT: "/",
-  ALL_DATA: "/all-data",
-} as const;
-
 const AUTH_PATHS = {
   PATH: "/auth",
   ROOT: "/",
@@ -27,7 +14,5 @@ const AUTH_PATHS = {
 
 export const CSODS_API_PATHS = {
   BASE: CSODS_API_BASE,
-  PROJECTS: PROJECT_PATHS,
-  PROJECT_TAGS: PROJECT_TAG_PATHS,
   AUTH: AUTH_PATHS,
 } as const;
