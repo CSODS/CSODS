@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { AuthHooks } from "@/core/auth";
 import {
   usePageNumber,
   useProjectId,
@@ -8,6 +9,7 @@ import { IProjectDetails } from "@features/projects/types";
 import { requestProject } from "../requestProject";
 
 export function useFetchProject() {
+  const securedAxios = AuthHooks.useSecuredAxios();
   const pageNumber = usePageNumber();
   const projectId = useProjectId();
   const projectSearchParams = useProjectSearchParams();
@@ -16,6 +18,7 @@ export function useFetchProject() {
   useEffect(() => {
     const loadProject = async () => {
       const loadedProject = await requestProject(
+        securedAxios,
         pageNumber,
         projectId,
         projectSearchParams
