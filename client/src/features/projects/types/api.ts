@@ -1,61 +1,61 @@
 export type IProjectsPage = {
-  TotalPages: number;
-  Projects: IProjectDetails[];
+  totalPages: number;
+  projects: IProjectDetails[];
 };
 
 export type IProjectDetails = {
-  Project: IProject;
-  ProjectFrameworks: IProjectFramework[];
+  project: IProject;
+  projectFrameworks: IProjectFramework[];
 };
 
 export type IProject = {
-  ProjectId: number;
-  ProjectNumber: string;
-  UserId: number;
-  ProjectTitle: string;
-  DevTypeId: number;
-  PrimaryLanguageId: number;
-  SecondaryLanguageId: number | null;
-  DatabaseTechnologyId: number | null;
-  ApplicationIndustryId: number | null;
-  GitHubUrl: string;
+  projectId: number;
+  projectNumber: string;
+  userId: number;
+  projectTitle: string;
+  devTypeId: number;
+  primaryLanguageId: number;
+  secondaryLanguageId: number | null;
+  databaseTechnologyId: number | null;
+  applicationIndustryId: number | null;
+  gitHubUrl: string;
 };
 
 export type IAllProjectTags = {
-  DevTypes: IDevType[];
-  ProgrammingLanguages: IProgrammingLanguage[];
-  Frameworks: IFramework[];
-  DatabaseTechnologies: IDatabaseTechnology[];
-  ApplicationIndustries: IApplicationIndustry[];
+  devTypes: IDevType[];
+  programmingLanguages: IProgrammingLanguage[];
+  frameworks: IFramework[];
+  databaseTechnologies: IDatabaseTechnology[];
+  applicationIndustries: IApplicationIndustry[];
 };
 
 export type IDevType = {
-  DevTypeId: number;
-  DevTypeName: string;
+  devTypeId: number;
+  devTypeName: string;
 };
 export type IProgrammingLanguage = {
-  LanguageId: number;
-  LanguageName: string;
+  languageId: number;
+  languageName: string;
 };
 export type IFramework = {
-  FrameworkId: number;
-  FrameworkName: string;
-  DevTypeId: number;
+  frameworkId: number;
+  frameworkName: string;
+  devTypeId: number;
 };
 export type IProjectFramework = {
-  ProjectId: number;
-  FrameworkId: number;
+  projectId: number;
+  frameworkId: number;
 };
 export type IDatabaseTechnology = {
-  DatabaseId: number;
-  Database: string;
+  databaseId: number;
+  database: string;
 };
 export type IApplicationIndustry = {
-  IndustryId: number;
-  Industry: string;
+  industryId: number;
+  industry: string;
 };
 
 export type IProjectOwner = {
-  Name: string;
-  Email: string;
+  name: string;
+  email: string;
 };

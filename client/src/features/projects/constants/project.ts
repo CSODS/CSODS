@@ -28,8 +28,8 @@ export const DEFAULT_PROJECT_IMAGES = [
 ];
 
 export const DEFAULT_USER = {
-  Name: "Project Owner",
-  Email: "projectowner@gmail.com",
+  name: "Project Owner",
+  email: "projectowner@gmail.com",
 };
 export const PROJECT_LIST = [
   {

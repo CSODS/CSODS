@@ -25,7 +25,7 @@ export type PaginationButtonProps = NumberedBtn | PreviousBtn | NextBtn;
 
 export function usePaginationBtnState(props: PaginationButtonProps) {
   const { page, isPrevious, isNext } = props;
-  const { TotalPages: totalPages } = useProjectsPage();
+  const { totalPages: totalPages } = useProjectsPage();
   const currentPage = usePageNumber();
 
   const [btnText, setBtnText] = useState<string>("");

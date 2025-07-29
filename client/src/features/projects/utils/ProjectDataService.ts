@@ -23,39 +23,39 @@ export class ProjectDataService {
 
   public getDevType(devTypeId: number): string {
     return (
-      this._allProjectTags.DevTypes.find((dt) => dt.DevTypeId === devTypeId)
-        ?.DevTypeName ?? ""
+      this._allProjectTags.devTypes.find((dt) => dt.devTypeId === devTypeId)
+        ?.devTypeName ?? ""
     );
   }
 
   public getProgrammingLanguage(languageId: number | null): string | null {
     return (
-      this._allProjectTags.ProgrammingLanguages.find(
-        (pl) => pl.LanguageId === languageId
-      )?.LanguageName ?? null
+      this._allProjectTags.programmingLanguages.find(
+        (pl) => pl.languageId === languageId
+      )?.languageName ?? null
     );
   }
 
   public getFramework(frameworkId: number | null): string | null {
     return (
-      this._allProjectTags.Frameworks.find((f) => f.FrameworkId === frameworkId)
-        ?.FrameworkName ?? null
+      this._allProjectTags.frameworks.find((f) => f.frameworkId === frameworkId)
+        ?.frameworkName ?? null
     );
   }
 
   public getDatabaseTechnology(databaseId: number | null): string | null {
     return (
-      this._allProjectTags.DatabaseTechnologies.find(
-        (dt) => dt.DatabaseId === databaseId
-      )?.Database ?? null
+      this._allProjectTags.databaseTechnologies.find(
+        (dt) => dt.databaseId === databaseId
+      )?.database ?? null
     );
   }
 
   public getApplicationIndustry(industryId: number | null): string | null {
     return (
-      this._allProjectTags.ApplicationIndustries.find(
-        (ai) => ai.IndustryId === industryId
-      )?.Industry ?? null
+      this._allProjectTags.applicationIndustries.find(
+        (ai) => ai.industryId === industryId
+      )?.industry ?? null
     );
   }
 
@@ -66,22 +66,22 @@ export class ProjectDataService {
   }
 
   public getProjectTagValues(projectDetails: IProjectDetails): IProjectTags {
-    const project: IProject = projectDetails.Project;
-    const frameworks: IProjectFramework[] = projectDetails.ProjectFrameworks;
+    const project: IProject = projectDetails.project;
+    const frameworks: IProjectFramework[] = projectDetails.projectFrameworks;
     return {
-      DevType: this.getDevType(project.DevTypeId),
-      PrimaryLanguage: this.getProgrammingLanguage(project.PrimaryLanguageId)!,
+      DevType: this.getDevType(project.devTypeId),
+      PrimaryLanguage: this.getProgrammingLanguage(project.primaryLanguageId)!,
       SecondaryLanguage: this.getProgrammingLanguage(
-        project.SecondaryLanguageId
+        project.secondaryLanguageId
       ),
       DatabaseTechnology: this.getDatabaseTechnology(
-        project.DatabaseTechnologyId
+        project.databaseTechnologyId
       ),
       ApplicationIndustry: this.getApplicationIndustry(
-        project.ApplicationIndustryId
+        project.applicationIndustryId
       ),
       Frameworks: frameworks.map((value) =>
-        this.getFramework(value.FrameworkId)
+        this.getFramework(value.frameworkId)
       ),
     };
   }

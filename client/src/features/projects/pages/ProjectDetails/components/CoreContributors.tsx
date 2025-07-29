@@ -7,7 +7,7 @@ interface ContributorsProps {
 
 export function Contributors({ contributorsRef }: ContributorsProps) {
   const project = useProjectDetails();
-  const githubLink = project.Project.GitHubUrl;
+  const githubLink = project.project.gitHubUrl;
 
   const contributors = [
     {
