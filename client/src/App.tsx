@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { ADDRESSES } from "./constants";
-import { CsodsBackground, NavBar } from "./components";
+import { CsodsBackground, NavBar, NavBarLayout } from "./components";
 import { Home, LandingPage } from "./pages";
 import { AuthGuards, AuthProvider, PersistAuth } from "./core/auth";
 import { Pages as AuthPages } from "./features/auth";
@@ -14,7 +14,7 @@ function App() {
         <Routes>
           <Route element={<AuthProvider />}>
             <Route path={ADDRESSES.LANDING_PAGE} element={<CsodsBackground />}>
-              <Route element={<NavBar />}>
+              <Route element={<NavBarLayout />}>
                 <Route index element={<LandingPage />} />
 
                 <Route path={ADDRESSES.AUTH.PATH}>

@@ -12,8 +12,6 @@ export function NavBarLayout({
   navBarControls,
   collapsedControls,
 }: NavBarMainProps) {
-  const projectsFirstPage = `${ADDRESSES.STUDENT_PROJECTS.ROOT}/1`;
-
   return (
     <>
       <nav className="p-0 navbar navbar-expand-lg sticky-top">
