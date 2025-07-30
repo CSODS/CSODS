@@ -11,14 +11,13 @@ export function PersistAuth() {
   useEffect(() => {
     const verifyRefreshToken = async () => {
       await refresh();
+      setIsLoading(false);
     };
 
     const isTokenInvalid = !auth?.accessToken;
 
-    if (isTokenInvalid) verifyRefreshToken();
-
-    setIsLoading(false);
-  }, [refresh]);
+    isTokenInvalid ? verifyRefreshToken() : setIsLoading(false);
+  }, [auth]);
 
   useEffect(() => {
     console.log("isLoading: ", isLoading);
