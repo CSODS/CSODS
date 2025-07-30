@@ -20,5 +20,7 @@ export type SetAuthSession = React.Dispatch<
 
 export type AuthContextType = {
   auth: AuthSession | null;
-  setAuth: React.Dispatch<React.SetStateAction<AuthSession | null>>;
+  setAuth: SetAuthSession;
+  persist: boolean;
+  setPersist: React.Dispatch<React.SetStateAction<boolean>>;
 };
