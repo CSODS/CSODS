@@ -5,5 +5,5 @@
     "data/tags_cache/**"
   ],
   "ext": "js,json",
-  "exec": "node dist/index.js"
+  "exec": "node dist/src/index.js"
 }

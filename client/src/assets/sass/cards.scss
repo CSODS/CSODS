@@ -1,4 +1,5 @@
 @use "variables.scss" as v;
+@use "mixins.scss" as m;
 @use "sass:color";
 
 @each $name, $value in v.$color-scheme {
@@ -41,3 +42,49 @@
         }
     }
 }
+
+@mixin color-scheme-cards($color-scheme) {
+    @each $name, $value in $color-scheme {
+        $is-light-bg: v.is-color-light($value);
+
+        .card-#{$name} {
+            transition-duration: 0.4s;
+            background-color: $value;
+
+            @if ($is-light-bg) {
+                color: v.$black;
+            }
+            @else {
+                color: v.$white;
+            }
+
+            @include m.hover-float(4px);
+            @include m.hover-shadow();
+            @include m.hover-darken($value, 70%);
+
+            @each $opacity in v.$opacities {
+                &.translucent-#{$opacity * 100} {
+                    @include m.background-opacity($value, $opacity);
+                    @include m.hover-solidify($value, $opacity)                                        
+                }
+            }
+        }
+    }
+}
+
+@mixin gradient-cards($scheme-name, $gradient-map) {
+    @each $name, $gradient in $gradient-map {
+        .card-#{$scheme-name}-#{$name} {
+            transition-duration: 0.4s;
+            background-image: $gradient;
+
+            @include m.hover-float(4px);
+            @include m.hover-shadow();
+        }
+    }
+}
+
+@include color-scheme-cards(v.$color-scheme-default);
+@include color-scheme-cards(v.$color-scheme-utility);
+@include color-scheme-cards(v.$color-scheme-frost);
+@include gradient-cards('frost', v.$frost-gradients);

@@ -1,0 +1,45 @@
+.fs-small {
+    font-size: 0.5rem;
+}
+
+.fs-p {
+    font-size: 0.75rem;
+}
+
+.contributor-card-text {
+    font-size: 0.75rem;
+}
+
+@media (min-width: 576px) {
+    .fs-small {
+        font-size: 0.75rem;
+    }
+
+    .fs-p {
+        font-size: 1rem;
+    }
+}
+
+@media (min-width: 576px) and (max-width: 767.98px) {
+    .contributor-card-text {
+        font-size: 1rem;
+    }
+}
+
+@media (min-width: 992px) {
+    .contributor-card-text {
+        font-size: 0.75rem;
+    }
+}
+
+@media (min-width: 992px) and (max-width: 1199.98px) {
+    .fs-small {
+        font-size: 0.5rem;
+    }
+}
+
+@media (min-width: 1200px) and (max-width: 1399.98px) {
+    .fs-small {
+        font-size: 0.5rem;
+    }
+}

@@ -2,8 +2,12 @@ server/.env
 server/sqlite.db
 server/sqlite.db
 server/node_modules/
+server/cache
+server/cache/project_cache/
+server/cache/tags_cache/
 server/data/project_cache/
 server/data/tags_cache/
+server/logs/
 server/temp/
 server/dist/
 client/.env
