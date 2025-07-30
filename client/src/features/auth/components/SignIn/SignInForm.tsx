@@ -27,8 +27,6 @@ export function SignInForm() {
 
   return (
     <article className="p-0">
-      <ErrorMessage message={errMsg} errRef={errRef} />
-
       <p className="m-0 p-0 px-3 text-center fs-1 fw-bold">Welcome</p>
 
       <form
@@ -36,7 +34,10 @@ export function SignInForm() {
         onSubmit={handleSubmit}
       >
         <SignInFields signInForm={signInForm} onType={onType} />
-        <SignInButton />
+        <div className="m-0 p-0 d-grid row-gap-1">
+          <ErrorMessage message={errMsg} errRef={errRef} />
+          <SignInButton />
+        </div>
       </form>
     </article>
   );
