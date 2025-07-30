@@ -8,6 +8,7 @@ import { csodsClient } from "@/utils";
 
 // todo: add better type guarding
 export async function requestProject(
+  abortSignal: AbortSignal,
   pageNumber: string | number,
   projectId: string | number,
   searchParameters?: IProjectSearchParameters
@@ -18,7 +19,9 @@ export async function requestProject(
   const endpoint = projectsPath + query;
 
   const data = await csodsClient
-    .get(endpoint)
+    .get(endpoint, {
+      signal: abortSignal,
+    })
     .then((response) => response.data)
     .catch((err) => null);
 

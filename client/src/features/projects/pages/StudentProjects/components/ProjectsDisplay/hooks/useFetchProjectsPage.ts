@@ -11,15 +11,23 @@ export function useFetchProjectsPage() {
   const projectSearchParams = useProjectSearchParams();
   const [projectsPage, setProjectsPage] = useState<IProjectsPage | null>(null);
   useEffect(() => {
+    let isMounted = true;
+    const controller = new AbortController();
+
     const loadProjectPage = async () => {
       const loadedPage = await requestProjectsPage(
+        controller.signal,
         pageNumber,
         projectSearchParams
       );
-
-      setProjectsPage(loadedPage);
+      isMounted && setProjectsPage(loadedPage);
     };
     loadProjectPage();
+
+    return () => {
+      isMounted = false;
+      controller.abort();
+    };
   }, [pageNumber, projectSearchParams]);
 
   return projectsPage;

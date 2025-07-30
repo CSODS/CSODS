@@ -6,13 +6,21 @@ export function useFetchTagData() {
   const [allTags, setAllTags] = useState<IAllProjectTags | null>(null);
 
   useEffect(() => {
+    let isMounted = true;
+    const controller = new AbortController();
+
     const loadTagData = async () => {
-      const tagData = await requestAllTags();
+      const tagData = await requestAllTags(controller.signal);
       if (tagData) {
         setAllTags(tagData);
       }
     };
     loadTagData();
+
+    return () => {
+      isMounted = false;
+      controller.abort();
+    };
   }, []);
 
   return allTags;
