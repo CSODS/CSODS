@@ -1,3 +1,4 @@
+export * as AuthComponents from "./components";
 export * as AuthConstants from "./constants";
 export * as AuthHooks from "./hooks";
 export * as AuthTypes from "./authTypes";
