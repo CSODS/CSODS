@@ -4,13 +4,29 @@ import { ADDRESSES } from "@/constants";
 import { CollapseControls, NavBarControls } from "../shared";
 
 type NavBarMainProps = {
+  /**
+   * @deprecated
+   */
   navBarControls?: ReactNode;
+  navBarControlsLeft?: ReactNode;
+  navBarControlsRight?: ReactNode;
+  /**
+   * @deprecated
+   */
   collapsedControls?: ReactNode;
+  hasCollapsed?: boolean;
+  collapsedControlsLeft?: ReactNode;
+  collapsedControlsRight?: ReactNode;
 };
 
 export function NavBarLayout({
   navBarControls,
   collapsedControls,
+  navBarControlsLeft,
+  navBarControlsRight,
+  hasCollapsed,
+  collapsedControlsLeft,
+  collapsedControlsRight,
 }: NavBarMainProps) {
   return (
     <>
@@ -39,10 +55,15 @@ export function NavBarLayout({
             <i className="bi bi-list fs-1 color-light-1"></i>
           </button>
           <article className="collapse navbar-collapse" id="navbar">
-            <NavBarControls hasCollapsed={!!collapsedControls}>
-              {navBarControls}
-            </NavBarControls>
-            <CollapseControls>{collapsedControls}</CollapseControls>
+            <NavBarControls
+              hasCollapsed={!!hasCollapsed}
+              controlsLeft={navBarControlsLeft}
+              controlsRight={navBarControlsRight}
+            />
+            <CollapseControls
+              controlsLeft={collapsedControlsLeft}
+              controlsRight={collapsedControlsRight}
+            />
           </article>
         </div>
       </nav>
