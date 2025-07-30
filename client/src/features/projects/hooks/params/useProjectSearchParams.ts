@@ -4,10 +4,10 @@ import { PROJECT } from "@features/projects/constants";
 import { IProjectSearchParameters } from "@features/projects/types";
 
 export function useProjectSearchParams() {
-  const { PROJECT_QUERY_PARAMETERS } = PROJECT;
-
   const [searchParameters] = useSearchParams();
   const projectSearchParameters = useMemo(() => {
+    const { PROJECT_QUERY_PARAMETERS } = PROJECT;
+
     const projectSearchParameters: IProjectSearchParameters = {};
     Object.values(PROJECT_QUERY_PARAMETERS).forEach((paramName) => {
       const paramValue = searchParameters.get(paramName);

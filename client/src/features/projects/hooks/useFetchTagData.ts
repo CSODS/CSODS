@@ -14,7 +14,7 @@ export function useFetchTagData() {
     const loadTagData = async () => {
       const tagData = await requestAllTags(securedAxios, controller.signal);
       if (tagData) {
-        setAllTags(tagData);
+        isMounted && setAllTags(tagData);
       }
     };
     loadTagData();
@@ -23,7 +23,7 @@ export function useFetchTagData() {
       isMounted = false;
       controller.abort();
     };
-  }, []);
+  }, [securedAxios]);
 
   return allTags;
 }

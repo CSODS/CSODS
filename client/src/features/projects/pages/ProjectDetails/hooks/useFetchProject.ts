@@ -36,7 +36,7 @@ export function useFetchProject() {
       isMounted = false;
       controller.abort();
     };
-  }, [pageNumber, projectId, projectSearchParams]);
+  }, [pageNumber, projectId, projectSearchParams, securedAxios]);
 
   return project;
 }

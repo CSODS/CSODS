@@ -20,9 +20,8 @@ export function TagCategoryProvider({
   children,
   allTags,
 }: TagCategoryProviderProps) {
-  const { PROJECT_QUERY_PARAMETERS } = PROJECT;
-
   const tagCategoryMap = useMemo(() => {
+    const { PROJECT_QUERY_PARAMETERS } = PROJECT;
     const map: tagMap = new Map();
 
     allTags.devTypes.forEach((dt) => {
