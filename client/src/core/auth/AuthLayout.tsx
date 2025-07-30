@@ -4,7 +4,7 @@ import { useAuth } from "./hooks";
 import { useEffect, useState } from "react";
 
 export function AuthLayout() {
-  return <NavBarLayout navBarControls={<AuthControls />} />;
+  return <NavBarLayout navBarControlsRight={<AuthControls />} />;
 }
 
 type NavBarDetails = {
