@@ -3,7 +3,7 @@ import { useAuth, useRefreshToken } from "./hooks";
 import { Outlet } from "react-router-dom";
 
 export function PersistAuth() {
-  const { auth } = useAuth();
+  const { auth, persist } = useAuth();
   const refresh = useRefreshToken();
 
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -19,5 +19,5 @@ export function PersistAuth() {
     isTokenInvalid ? verifyRefreshToken() : setIsLoading(false);
   }, [auth]);
 
-  return isLoading ? <p>Loading...</p> : <Outlet />;
+  return !persist ? <Outlet /> : isLoading ? <p>Loading...</p> : <Outlet />;
 }
