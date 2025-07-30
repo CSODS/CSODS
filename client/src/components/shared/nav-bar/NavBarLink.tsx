@@ -12,7 +12,7 @@ export function NavBarLink({ children, to, isCollapsed }: NavBarLinkProps) {
     <NavLink
       to={to}
       className={`${
-        isCollapsed ? "" : "mx-2"
+        isCollapsed ? "" : "mx-2 d-flex align-items-center"
       } header-nav-element color-light-2`}
     >
       {children}
