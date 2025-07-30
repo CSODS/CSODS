@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 import { useSignOut } from "../hooks";
 
 type SignOutBtnProps = {
-  children: ReactNode;
+  children?: ReactNode;
   className: string;
 };
 
@@ -11,7 +11,7 @@ export function SignOutBtn({ children, className }: SignOutBtnProps) {
 
   return (
     <button onClick={signOut} className={className}>
-      {children || "Sign Out"}
+      {children ?? "Sign Out"}
     </button>
   );
 }
