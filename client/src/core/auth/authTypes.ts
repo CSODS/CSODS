@@ -14,6 +14,10 @@ export type AuthSession = {
   accessToken: string;
 };
 
+export type SetAuthSession = React.Dispatch<
+  React.SetStateAction<AuthSession | null>
+>;
+
 export type AuthContextType = {
   auth: AuthSession | null;
   setAuth: React.Dispatch<React.SetStateAction<AuthSession | null>>;
