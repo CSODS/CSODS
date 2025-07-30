@@ -19,10 +19,5 @@ export function PersistAuth() {
     isTokenInvalid ? verifyRefreshToken() : setIsLoading(false);
   }, [auth]);
 
-  useEffect(() => {
-    console.log("isLoading: ", isLoading);
-    console.log(`access token: `, auth?.accessToken);
-  }, [isLoading, auth]);
-
   return isLoading ? <p>Loading...</p> : <Outlet />;
 }
