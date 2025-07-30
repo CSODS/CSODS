@@ -13,7 +13,9 @@ export function ErrorMessage({ message, errRef }: ErrorMessageProps) {
   return (
     <p
       ref={errRef}
-      className={`row ${message ? "" : "visually-hidden"}`}
+      className={`m-0 p-0 flex-row color-util-error ${
+        message ? "" : "visually-hidden"
+      }`}
       aria-live="assertive"
       tabIndex={-1}
     >
