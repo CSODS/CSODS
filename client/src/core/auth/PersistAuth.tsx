@@ -9,14 +9,19 @@ export function PersistAuth() {
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
+    let isMounted = true;
+
     const verifyRefreshToken = async () => {
       await refresh();
-      setIsLoading(false);
+      isMounted && setIsLoading(false);
     };
 
     const isTokenInvalid = !auth?.accessToken;
 
     isTokenInvalid ? verifyRefreshToken() : setIsLoading(false);
+    return () => {
+      isMounted = false;
+    };
   }, [auth]);
 
   return !persist ? <Outlet /> : isLoading ? <p>Loading...</p> : <Outlet />;
