@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { ADDRESSES } from "./constants";
 import { CsodsBackground, NavBar } from "./components";
 import { Home, LandingPage } from "./pages";
-import { AuthGuards, AuthProvider } from "./core/auth";
+import { AuthGuards, AuthProvider, PersistAuth } from "./core/auth";
 import { Pages as AuthPages } from "./features/auth";
 import { Pages as ProjectsPages } from "./features/projects";
 
@@ -31,31 +31,32 @@ function App() {
                 <Route path={ADDRESSES.HOME} element={<Home />} />
                 <Route path={ADDRESSES.ABOUT} />
               </Route>
-
-              <Route element={<AuthGuards.RequireAuth />}>
-                <Route
-                  element={
-                    <ProjectsLayouts.ProjectListLayout navBarVariant={1} />
-                  }
-                >
+              <Route element={<PersistAuth />}>
+                <Route element={<AuthGuards.RequireAuth />}>
                   <Route
-                    path={ADDRESSES.STUDENT_PROJECTS.PATH}
-                    element={<ProjectsPages.StudentProjects />}
-                  />
-                </Route>
-                <Route
-                  element={
-                    <ProjectsLayouts.ProjectListLayout navBarVariant={2} />
-                  }
-                >
+                    element={
+                      <ProjectsLayouts.ProjectListLayout navBarVariant={1} />
+                    }
+                  >
+                    <Route
+                      path={ADDRESSES.STUDENT_PROJECTS.PATH}
+                      element={<ProjectsPages.StudentProjects />}
+                    />
+                  </Route>
                   <Route
-                    path={ADDRESSES.PROJECT_DETAILS.PATH}
-                    element={<ProjectsPages.ProjectDetails />}
-                  />
-                  <Route
-                    path={ADDRESSES.SUBMIT_PROJECT}
-                    element={<ProjectsPages.SubmitProject />}
-                  />
+                    element={
+                      <ProjectsLayouts.ProjectListLayout navBarVariant={2} />
+                    }
+                  >
+                    <Route
+                      path={ADDRESSES.PROJECT_DETAILS.PATH}
+                      element={<ProjectsPages.ProjectDetails />}
+                    />
+                    <Route
+                      path={ADDRESSES.SUBMIT_PROJECT}
+                      element={<ProjectsPages.SubmitProject />}
+                    />
+                  </Route>
                 </Route>
               </Route>
             </Route>
