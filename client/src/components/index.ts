@@ -1,3 +1,3 @@
-export { NavBar, InvertedNavBar, CsodsBackground } from "./layouts/MainLayout";
+export * from "./layouts";
 
 export * from "./shared";
