@@ -8,13 +8,9 @@ export const AuthContext = createContext<AuthTypes.AuthContextType | null>(
 
 export function AuthProvider() {
   const [auth, setAuth] = useState<AuthTypes.AuthSession | null>(null);
-  const [persist, setPersist] = useState<boolean>(false);
-
-  useEffect(() => {
-    const isPersist = localStorage.getItem("persist");
-
-    setPersist(isPersist === "true");
-  }, []);
+  const [persist, setPersist] = useState<boolean>(() => {
+    return localStorage.getItem("persist") === "true";
+  });
 
   return (
     <AuthContext.Provider value={{ auth, setAuth, persist, setPersist }}>
