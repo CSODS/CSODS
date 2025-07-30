@@ -8,14 +8,22 @@ export function useFetchTagData() {
   const securedAxios = AuthHooks.useSecuredAxios();
 
   useEffect(() => {
+    let isMounted = true;
+    const controller = new AbortController();
+
     const loadTagData = async () => {
-      const tagData = await requestAllTags(securedAxios);
+      const tagData = await requestAllTags(securedAxios, controller.signal);
       if (tagData) {
         setAllTags(tagData);
       }
     };
     loadTagData();
-  }, [securedAxios]);
+
+    return () => {
+      isMounted = false;
+      controller.abort();
+    };
+  }, []);
 
   return allTags;
 }

@@ -9,6 +9,7 @@ import { assembleQuery } from "@/features/projects/utils";
 // todo: add better type guarding
 export async function requestProjectsPage(
   securedAxios: AxiosInstance,
+  abortSignal: AbortSignal,
   pageNumber: string | number,
   searchParameters?: IProjectSearchParameters
 ): Promise<IProjectsPage | null> {
@@ -19,7 +20,7 @@ export async function requestProjectsPage(
 
   const data = await securedAxios
     .get(endpoint, {
-      withCredentials: true,
+      signal: abortSignal,
     })
     .then((response) => response.data)
     .catch((err) => null);

@@ -16,18 +16,27 @@ export function useFetchProject() {
   const [project, setProject] = useState<IProjectDetails | null>();
 
   useEffect(() => {
+    let isMounted = true;
+    const controller = new AbortController();
+
     const loadProject = async () => {
       const loadedProject = await requestProject(
         securedAxios,
+        controller.signal,
         pageNumber,
         projectId,
         projectSearchParams
       );
 
-      setProject(loadedProject);
+      isMounted && setProject(loadedProject);
     };
     loadProject();
-  }, [pageNumber, projectId, projectSearchParams, securedAxios]);
+
+    return () => {
+      isMounted = false;
+      controller.abort();
+    };
+  }, [pageNumber, projectId, projectSearchParams]);
 
   return project;
 }

@@ -4,13 +4,16 @@ import { IAllProjectTags } from "../types";
 
 // todo: add better type guarding
 export async function requestAllTags(
-  securedAxios: AxiosInstance
+  securedAxios: AxiosInstance,
+  abortSignal: AbortSignal
 ): Promise<IAllProjectTags | null> {
   const { PATH, ALL_DATA } = API.PROJECT_TAG_ENDPOINTS;
   const endpoint = PATH + ALL_DATA;
 
   const data = await securedAxios
-    .get(endpoint)
+    .get(endpoint, {
+      signal: abortSignal,
+    })
     .then((response) => response.data)
     .catch((err) => null);
 
