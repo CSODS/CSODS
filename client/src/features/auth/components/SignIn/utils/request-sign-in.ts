@@ -23,12 +23,11 @@ export async function requestSignIn(
       return authResponse;
     })
     .catch((err) => {
-      console.log(err.response.data);
       const authResponse: AuthAttemptResult = {
         accessToken: null,
         errDetails: {
-          message: err.response.message,
-          statusCode: err.response.status,
+          message: err.message,
+          statusCode: err.status,
         },
       };
 
