@@ -23,8 +23,8 @@ export function useRefreshToken() {
         accessToken,
         tokenPayload,
       };
+      setAuth(authSession);
     }
-    setAuth(authSession);
   };
 
   return refresh;
