@@ -16,7 +16,7 @@ export function RequireAuth({ allowedRoles }: RequireAuthProps) {
   const location = useLocation();
 
   //  check if user is authenticated
-  const isAuthenticated = auth !== undefined;
+  const isAuthenticated = !!auth;
 
   const normalizedRoles = allowedRoles ?? [];
   const allRolesAllowed = normalizedRoles.length === 0;
