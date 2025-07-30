@@ -36,9 +36,7 @@ function AuthControls() {
           role="button"
           data-bs-toggle="dropdown"
           aria-expanded="false"
-        >
-          Dropdown
-        </div>
+        ></div>
         <ul className="dropdown-menu">
           <li>
             <NavBarLink to={navBar.link}>
