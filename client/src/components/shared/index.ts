@@ -3,3 +3,4 @@ import BtnGroup from "./ButtonGroup";
 import { RadioBtnPill } from "./Input";
 
 export { Button, BtnPill, RadioBtnPill, BtnBare, LinkButton, BtnGroup };
+export * from "./CheckBox";
