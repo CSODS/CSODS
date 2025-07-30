@@ -28,8 +28,10 @@ function App() {
                   />
                 </Route>
 
-                <Route path={ADDRESSES.HOME} element={<Home />} />
-                <Route path={ADDRESSES.ABOUT} />
+                <Route element={<PersistAuth />}>
+                  <Route path={ADDRESSES.HOME} element={<Home />} />
+                  <Route path={ADDRESSES.ABOUT} />
+                </Route>
               </Route>
               <Route element={<PersistAuth />}>
                 <Route element={<AuthGuards.RequireAuth />}>
