@@ -4,7 +4,7 @@ module.exports = function (app) {
   app.use(
     "/api",
     createProxyMiddleware({
-      target: "http://192.168.100.25:3001", // your backend
+      target: process.env.REACT_APP_CSODS_PROXY, // your backend
       changeOrigin: true,
     })
   );
