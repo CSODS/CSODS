@@ -1,67 +1,32 @@
-import { NavBarLayout, NavBarLink } from "@/components";
-import { ADDRESSES } from "@/constants";
+import { ReactNode } from "react";
+import { NavBarLayout } from "@/components";
 import { NavBarLayoutProps } from "@/types";
-import { useAuth } from "../hooks";
-import { useEffect, useState } from "react";
+import { NavBarControlsRight } from "./NavBarControlsRight";
+
+type AuthLayoutProps = {
+  dropDownControls?: ReactNode;
+} & NavBarLayoutProps;
 
 export function AuthLayout({
+  className,
   navBarElements,
   navBarControlsLeft,
   navBarControlsRight,
   hasCollapsed,
   collapsedControlsLeft,
   collapsedControlsRight,
-}: NavBarLayoutProps) {
+}: AuthLayoutProps) {
   return (
     <NavBarLayout
+      className={className}
       navBarElements={navBarElements}
       navBarControlsLeft={navBarControlsLeft}
-      navBarControlsRight={<AuthControls />}
+      navBarControlsRight={
+        <NavBarControlsRight controls={navBarControlsRight} />
+      }
       hasCollapsed={hasCollapsed}
       collapsedControlsLeft={collapsedControlsLeft}
       collapsedControlsRight={collapsedControlsRight}
     />
-  );
-}
-
-type NavBarDetails = {
-  link: string;
-  text: string;
-};
-
-function AuthControls() {
-  const { PATH, SIGN_IN, SIGN_OUT } = ADDRESSES.AUTH;
-  const { auth } = useAuth();
-  const [navBar, setNavBar] = useState<NavBarDetails>({
-    link: PATH + "/" + SIGN_IN,
-    text: "Sign In",
-  });
-
-  useEffect(() => {
-    if (auth)
-      setNavBar({
-        link: PATH + "/" + SIGN_OUT,
-        text: "Sign Out",
-      });
-  }, [auth]);
-
-  return (
-    <>
-      <li className="nav-item dropdown">
-        <div
-          className="dropdown-toggle header-nav-element color-light-2"
-          role="button"
-          data-bs-toggle="dropdown"
-          aria-expanded="false"
-        ></div>
-        <ul className="dropdown-menu dropdown-menu-end">
-          <li>
-            <NavBarLink to={navBar.link}>
-              <p className="m-0 color-default-black">{navBar.text}</p>
-            </NavBarLink>
-          </li>
-        </ul>
-      </li>
-    </>
   );
 }
