@@ -1,6 +1,6 @@
 import { AUTH_ENDPOINTS } from "../constants";
 import { securedAxios } from "../utils";
-import { useAuth } from "./useAuth";
+import { useAuth } from "../hooks";
 
 export function useSignOut() {
   const { setAuth } = useAuth();
