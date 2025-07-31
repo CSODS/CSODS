@@ -4,6 +4,7 @@ import { ADDRESSES } from "@/constants";
 import { CollapseControls, NavBarControls } from "../shared";
 
 type NavBarMainProps = {
+  navBarElements?: ReactNode;
   /**
    * @deprecated
    */
@@ -20,6 +21,7 @@ type NavBarMainProps = {
 };
 
 export function NavBarLayout({
+  navBarElements,
   navBarControls,
   collapsedControls,
   navBarControlsLeft,
@@ -45,6 +47,7 @@ export function NavBarLayout({
             />
             <p className="m-0 p-0 ps-2 d-lg-block d-none fs-4 bolder">CSO:DS</p>
           </Link>
+          {navBarElements}
           <button
             className="mx-1 p-1 navbar-toggler bg-transparent border-0"
             type="button"
