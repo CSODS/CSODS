@@ -1,6 +1,6 @@
 import { NavBarLayout, NavBarLink } from "@/components";
 import { ADDRESSES } from "@/constants";
-import { useAuth } from "./hooks";
+import { useAuth } from "../hooks";
 import { useEffect, useState } from "react";
 
 export function AuthLayout() {
