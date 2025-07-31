@@ -1,8 +1,4 @@
-export type {
-  CustomBtnProps,
-  CustomVoidElementProps,
-  CustomProps,
-} from "./props/props";
+export * from "./props";
 
 export type {
   spacing,
