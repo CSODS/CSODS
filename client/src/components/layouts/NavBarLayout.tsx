@@ -1,9 +1,15 @@
 import { ReactNode } from "react";
-import { Link, NavLink, Outlet } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import { ADDRESSES } from "@/constants";
 import { CollapseControls, NavBarControls } from "../shared";
 
 type NavBarMainProps = {
+  /**
+   * @field
+   * css class extensions for the navbar container.
+   */
+  className?: string;
+  navBarElements?: ReactNode;
   /**
    * @deprecated
    */
@@ -19,7 +25,10 @@ type NavBarMainProps = {
   collapsedControlsRight?: ReactNode;
 };
 
+//  todo: add dynamic styling for child components as well
 export function NavBarLayout({
+  className,
+  navBarElements,
   navBarControls,
   collapsedControls,
   navBarControlsLeft,
@@ -31,7 +40,7 @@ export function NavBarLayout({
   return (
     <>
       <nav className="p-0 navbar navbar-expand-lg sticky-top">
-        <div className="px-md-3 px-1 py-0 container-fluid bg-default-grey-blue translucent-50">
+        <div className={`py-1 ps-3 container-fluid ${className}`}>
           <Link
             to={ADDRESSES.LANDING_PAGE}
             className="m-0 me-md-1 my-lg-2 my-1 d-flex flex-row justify-content-center align-items-center text-decoration-none color-light-1"
@@ -43,6 +52,7 @@ export function NavBarLayout({
             />
             <p className="m-0 p-0 ps-2 d-lg-block d-none fs-4 bolder">CSO:DS</p>
           </Link>
+          {navBarElements}
           <button
             className="mx-1 p-1 navbar-toggler bg-transparent border-0"
             type="button"
