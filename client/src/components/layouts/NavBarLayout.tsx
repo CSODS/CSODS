@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { Link, NavLink, Outlet } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import { ADDRESSES } from "@/constants";
 import { CollapseControls, NavBarControls } from "../shared";
 
