@@ -4,6 +4,11 @@ import { ADDRESSES } from "@/constants";
 import { CollapseControls, NavBarControls } from "../shared";
 
 type NavBarMainProps = {
+  /**
+   * @field
+   * css class extensions for the navbar container.
+   */
+  className?: string;
   navBarElements?: ReactNode;
   /**
    * @deprecated
@@ -21,6 +26,7 @@ type NavBarMainProps = {
 };
 
 export function NavBarLayout({
+  className,
   navBarElements,
   navBarControls,
   collapsedControls,
