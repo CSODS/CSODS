@@ -2,13 +2,8 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { ADDRESSES } from "./constants";
 import { CsodsBackground } from "./components";
 import { Home, LandingPage } from "./pages";
-import {
-  AuthGuards,
-  BaseAuthLayout,
-  AuthProvider,
-  PersistAuth,
-} from "./core/auth";
-import { Pages as AuthPages } from "./features/auth";
+import { AuthGuards, AuthProvider, PersistAuth } from "./core/auth";
+import { Pages as AuthPages, AuthLayout } from "./features/auth";
 import { Pages as ProjectsPages } from "./features/projects";
 
 function App() {
@@ -19,7 +14,7 @@ function App() {
         <Routes>
           <Route element={<AuthProvider />}>
             <Route path={ADDRESSES.LANDING_PAGE} element={<CsodsBackground />}>
-              <Route element={<BaseAuthLayout />}>
+              <Route element={<AuthLayout />}>
                 <Route index element={<LandingPage />} />
 
                 <Route path={ADDRESSES.AUTH.PATH}>
