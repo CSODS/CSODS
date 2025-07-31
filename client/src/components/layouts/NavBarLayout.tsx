@@ -25,6 +25,7 @@ type NavBarMainProps = {
   collapsedControlsRight?: ReactNode;
 };
 
+//  todo: add dynamic styling for child components as well
 export function NavBarLayout({
   className,
   navBarElements,
@@ -39,7 +40,7 @@ export function NavBarLayout({
   return (
     <>
       <nav className="p-0 navbar navbar-expand-lg sticky-top">
-        <div className="py-1 ps-3 container-fluid bg-default-grey-blue translucent-50">
+        <div className={`py-1 ps-3 container-fluid ${className}`}>
           <Link
             to={ADDRESSES.LANDING_PAGE}
             className="m-0 me-md-1 my-lg-2 my-1 d-flex flex-row justify-content-center align-items-center text-decoration-none color-light-1"
