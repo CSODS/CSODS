@@ -40,7 +40,7 @@ export function NavBarLayout({
   return (
     <>
       <nav className="p-0 navbar navbar-expand-lg sticky-top">
-        <div className={`py-1 ps-3 container-fluid ${className}`}>
+        <div className={`px-md-3 px-1 py-0 container-fluid ${className}`}>
           <Link
             to={ADDRESSES.LANDING_PAGE}
             className="m-0 me-md-1 my-lg-2 my-1 d-flex flex-row justify-content-center align-items-center text-decoration-none color-light-1"
