@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { useSignOut } from "../hooks";
+import { useSignOut } from "./useSignOut";
 
 type SignOutBtnProps = {
   children?: ReactNode;
