@@ -1,10 +1,27 @@
 import { NavBarLayout, NavBarLink } from "@/components";
 import { ADDRESSES } from "@/constants";
+import { NavBarLayoutProps } from "@/types";
 import { useAuth } from "../hooks";
 import { useEffect, useState } from "react";
 
-export function AuthLayout() {
-  return <NavBarLayout navBarControlsRight={<AuthControls />} />;
+export function AuthLayout({
+  navBarElements,
+  navBarControlsLeft,
+  navBarControlsRight,
+  hasCollapsed,
+  collapsedControlsLeft,
+  collapsedControlsRight,
+}: NavBarLayoutProps) {
+  return (
+    <NavBarLayout
+      navBarElements={navBarElements}
+      navBarControlsLeft={navBarControlsLeft}
+      navBarControlsRight={<AuthControls />}
+      hasCollapsed={hasCollapsed}
+      collapsedControlsLeft={collapsedControlsLeft}
+      collapsedControlsRight={collapsedControlsRight}
+    />
+  );
 }
 
 type NavBarDetails = {
