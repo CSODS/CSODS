@@ -21,6 +21,10 @@ function App() {
 
                 <Route path={ADDRESSES.AUTH.PATH}>
                   <Route
+                    path={ADDRESSES.AUTH.REGISTER}
+                    element={<AuthPages.Register />}
+                  />
+                  <Route
                     path={ADDRESSES.AUTH.SIGN_IN}
                     element={<AuthPages.SignIn />}
                   />
