@@ -4,7 +4,7 @@ import { useRecord } from "@/hooks/useInput";
 
 export function useSignInForm() {
   const [errMsg, setErrMsg] = useState<string>("");
-  const [signInForm, reset, onType] = useRecord<SignInFormData>(
+  const [signInForm, resetSignIn, onType] = useRecord<SignInFormData>(
     "csods:auth-sign-in",
     {
       identifier: "",
@@ -14,5 +14,5 @@ export function useSignInForm() {
     { resetKeys: ["password"], defaultValues: { password: "" } }
   );
 
-  return { signInForm, reset, onType, errMsg, setErrMsg };
+  return { signInForm, reset: resetSignIn, onType, errMsg, setErrMsg };
 }
