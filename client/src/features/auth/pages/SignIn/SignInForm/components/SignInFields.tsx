@@ -6,6 +6,12 @@ type SignInFieldsProps = {
   onType: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
+/**
+ * sign in fields
+ * each field is a rounded pill div
+ * @param param0
+ * @returns
+ */
 export function SignInFields({ signInForm, onType }: SignInFieldsProps) {
   const identifierRef = useRef<HTMLInputElement>(null);
 

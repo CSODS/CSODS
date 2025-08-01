@@ -17,13 +17,15 @@ export function RegisterForm() {
 
   const { registerForm, onType } = useRegisterForm();
 
+  //  clear err msg on type.
   useEffect(() => {
     setErrMsg("");
   }, [registerForm]);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
+    //  todo: add notification for registration success
+    //  * rightnow both err and success messages are both on err msg component
     handleRegister(registerForm, setErrMsg);
   };
 
@@ -35,7 +37,10 @@ export function RegisterForm() {
         className="m-0 mt-4 p-0 px-3 d-grid row-gap-4"
         onSubmit={handleSubmit}
       >
-        {/* form fields */}
+        {/* 
+          form fields
+          each field is a rounded pill div 
+        */}
         <AuthFields registerForm={registerForm} onType={onType} />
         <StudentFields registerForm={registerForm} onType={onType} />
 

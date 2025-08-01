@@ -11,6 +11,8 @@ export function SignIn() {
     <section
       className={`mt-2 px-2 h-100 bg-default-dark-purple ${loginContainer}`}
     >
+      {/* 1st half here */}
+      {/* 2nd half */}
       <section className="">
         <SignInForm />
         <NavLink to={registerLink}>Create Account</NavLink>

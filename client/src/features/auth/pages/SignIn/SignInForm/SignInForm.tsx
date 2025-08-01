@@ -11,9 +11,10 @@ export function SignInForm() {
 
   const { signInForm, onType, errMsg, setErrMsg } = useSignInForm();
 
+  //  clear err msg on type
   useEffect(() => {
     setErrMsg("");
-  }, [setErrMsg, signInForm.identifier, signInForm.password]);
+  }, [signInForm]);
 
   const navigate = useNavigate();
   const location = useLocation();

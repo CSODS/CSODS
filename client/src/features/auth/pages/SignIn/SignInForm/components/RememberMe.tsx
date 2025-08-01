@@ -2,6 +2,10 @@ import { useEffect } from "react";
 import { CheckBox } from "@/components";
 import { AuthHooks } from "@/core/auth";
 
+/**
+ * toggler for persistent log in
+ * @returns
+ */
 export function RememberMe() {
   const { persist, setPersist } = AuthHooks.useAuth();
 
