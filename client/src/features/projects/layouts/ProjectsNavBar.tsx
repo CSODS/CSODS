@@ -9,7 +9,7 @@ interface ProjectsNavBarProps {
 export function ProjectsNavBar({ navBarVariant }: ProjectsNavBarProps) {
   let navBarClass;
 
-  switch (navBarVariant) {
+  switch (navBarVariant ?? 1) {
     case 1: {
       navBarClass = `${styles["navbar-variant-1"]} translucent-100`;
       break;
