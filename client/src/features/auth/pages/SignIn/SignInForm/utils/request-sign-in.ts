@@ -1,5 +1,5 @@
 import { AuthConstants, AuthUtils } from "@/core/auth";
-import { AuthAttemptResult, SignInRequest, SignInResponse } from "../types";
+import { AuthAttemptResult, SignInRequest, SignInResponse } from "../../types";
 
 export async function requestSignIn(
   signInRequest: SignInRequest

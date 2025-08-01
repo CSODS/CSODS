@@ -1,7 +1,7 @@
 import { Location, NavigateFunction } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import { AuthTypes } from "@/core/auth";
-import { SignInFormData } from "../types";
+import { SignInFormData } from "../../types";
 import { requestSignIn } from "./request-sign-in";
 
 export async function handleSignIn(
