@@ -1,12 +1,12 @@
 import { BaseAuthNavBar } from "@/core/auth";
-import styles from "./ProjectListLayout.module.scss";
+import styles from "./ProjectsNavBar.module.scss";
 import { SearchBar } from "./SearchBar";
 
-interface ProjectListLayoutProps {
+interface ProjectsNavBarProps {
   navBarVariant?: 1 | 2;
 }
 
-export function ProjectListLayout({ navBarVariant }: ProjectListLayoutProps) {
+export function ProjectsNavBar({ navBarVariant }: ProjectsNavBarProps) {
   let navBarClass;
 
   switch (navBarVariant) {

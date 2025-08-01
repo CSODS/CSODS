@@ -4,10 +4,12 @@ import { CsodsBackground } from "./components";
 import { Home, LandingPage } from "./pages";
 import { AuthGuards, AuthProvider, PersistAuth } from "./core/auth";
 import { Pages as AuthPages, AuthNavBar } from "./features/auth";
-import { Pages as ProjectsPages } from "./features/projects";
+import {
+  Pages as ProjectsPages,
+  Layouts as ProjectsLayouts,
+} from "./features/projects";
 
 function App() {
-  const { Layouts: ProjectsLayouts } = ProjectsPages;
   return (
     <div className="App">
       <Router>
@@ -37,7 +39,7 @@ function App() {
                 <Route element={<AuthGuards.RequireAuth />}>
                   <Route
                     element={
-                      <ProjectsLayouts.ProjectListLayout navBarVariant={1} />
+                      <ProjectsLayouts.ProjectsNavBar navBarVariant={1} />
                     }
                   >
                     <Route
@@ -47,7 +49,7 @@ function App() {
                   </Route>
                   <Route
                     element={
-                      <ProjectsLayouts.ProjectListLayout navBarVariant={2} />
+                      <ProjectsLayouts.ProjectsNavBar navBarVariant={2} />
                     }
                   >
                     <Route
