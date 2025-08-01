@@ -4,9 +4,11 @@ import { useAuthFocus } from "./useAuthFocus";
 import { useAuthValidation } from "./useAuthValidation";
 
 // todo: add visual cues for valid/invalid inputs
+// todo: better design for input notes(?)
 export function AuthFields({ registerForm, onType }: RegisterFieldsProps) {
   const emailRef = useRef<HTMLInputElement>(null);
 
+  //  use these for the visual cues
   const { validEmail, validUser, validPwd, validMatch } =
     useAuthValidation(registerForm);
 

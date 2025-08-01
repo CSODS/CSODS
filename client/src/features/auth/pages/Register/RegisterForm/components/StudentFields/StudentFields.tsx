@@ -2,10 +2,13 @@ import { RegisterFieldsProps } from "../../types";
 import { useStudentFocus } from "./useStudentFocus";
 import { useStudentValidation } from "./useStudentValidation";
 
+// todo: add visual cues for valid/invalid inputs
+// todo: better design for input notes(?)
 export function StudentFields({ registerForm, onType }: RegisterFieldsProps) {
   const { nameFocus, setNameFocus, numberFocus, setNumberFocus } =
     useStudentFocus();
 
+  //  use this for visual cues
   const { validName, validNumber } = useStudentValidation(registerForm);
 
   return (
