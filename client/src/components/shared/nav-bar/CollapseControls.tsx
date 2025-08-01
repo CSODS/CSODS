@@ -3,27 +3,20 @@ import { ADDRESSES } from "@/constants";
 import { NavBarLink } from "./NavBarLink";
 
 type CollapseControlsProps = {
-  /**
-   * @deprecated
-   */
-  children?: ReactNode;
   controlsLeft?: ReactNode;
   controlsRight?: ReactNode;
 };
 
 export function CollapseControls({
-  children,
   controlsLeft,
   controlsRight,
 }: CollapseControlsProps) {
-  return children ? (
+  return (
     <div className="navbar-nav d-flex d-lg-none flex-column rounded-2">
       {controlsLeft}
       <DefaultCollapseControls />
       {controlsRight}
     </div>
-  ) : (
-    <></>
   );
 }
 
