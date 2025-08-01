@@ -1,2 +1,2 @@
 export * as Pages from "./pages";
-export * from "./AuthLayout";
+export * from "./AuthNavBar";

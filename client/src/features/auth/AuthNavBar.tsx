@@ -1,5 +1,5 @@
 import { BaseAuthNavBar } from "@/core/auth";
 
-export function AuthLayout() {
+export function AuthNavBar() {
   return <BaseAuthNavBar className="bg-default-mulled-wine" />;
 }

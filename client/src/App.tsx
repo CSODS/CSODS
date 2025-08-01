@@ -3,7 +3,7 @@ import { ADDRESSES } from "./constants";
 import { CsodsBackground } from "./components";
 import { Home, LandingPage } from "./pages";
 import { AuthGuards, AuthProvider, PersistAuth } from "./core/auth";
-import { Pages as AuthPages, AuthLayout } from "./features/auth";
+import { Pages as AuthPages, AuthNavBar } from "./features/auth";
 import { Pages as ProjectsPages } from "./features/projects";
 
 function App() {
@@ -14,7 +14,7 @@ function App() {
         <Routes>
           <Route element={<AuthProvider />}>
             <Route path={ADDRESSES.LANDING_PAGE} element={<CsodsBackground />}>
-              <Route element={<AuthLayout />}>
+              <Route element={<AuthNavBar />}>
                 <Route index element={<LandingPage />} />
 
                 <Route path={ADDRESSES.AUTH.PATH}>
