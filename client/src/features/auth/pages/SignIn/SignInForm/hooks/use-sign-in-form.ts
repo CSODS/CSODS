@@ -1,21 +1,18 @@
 import { useState } from "react";
 import { SignInFormData } from "../../types";
+import { useRecord } from "@/hooks/useInput";
 
 export function useSignInForm() {
   const [errMsg, setErrMsg] = useState<string>("");
-  const [signInForm, setSignInForm] = useState<SignInFormData>({
-    identifier: "",
-    password: "",
-  });
+  const [signInForm, reset, onType] = useRecord<SignInFormData>(
+    "csods:auth-sign-in",
+    {
+      identifier: "",
+      password: "",
+    },
+    "id",
+    { resetKeys: ["password"], defaultValues: { password: "" } }
+  );
 
-  const onType = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { id, value } = e.target;
-
-    setSignInForm((prev) => ({
-      ...prev,
-      [id]: value,
-    }));
-  };
-
-  return { signInForm, setSignInForm, onType, errMsg, setErrMsg };
+  return { signInForm, reset, onType, errMsg, setErrMsg };
 }
