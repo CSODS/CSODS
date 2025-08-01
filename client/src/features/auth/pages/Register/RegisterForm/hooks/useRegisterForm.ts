@@ -1,26 +1,37 @@
-import { useState } from "react";
 import { RegisterFormData } from "../types";
+import { useRecord } from "@/hooks/useInput";
 
 export function useRegisterForm() {
-  const [registerForm, setRegisterForm] = useState<RegisterFormData>({
-    email: "",
-    username: "",
-    password: "",
-    passwordMatch: "",
-  });
-
-  const onType = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { id, value } = e.target;
-
-    setRegisterForm((prev) => ({
-      ...prev,
-      [id]: value,
-    }));
-  };
+  const [registerForm, resetRegister, onType] = useRecord<RegisterFormData>(
+    "csods:auth-register",
+    {
+      email: "",
+      username: "",
+      password: "",
+      passwordMatch: "",
+    },
+    "id",
+    {
+      resetKeys: [
+        "password",
+        "passwordMatch",
+        "studentName",
+        "studentNumber",
+        "userIconUrl",
+      ],
+      defaultValues: {
+        password: "",
+        passwordMatch: "",
+        studentName: "",
+        studentNumber: "",
+        userIconUrl: "",
+      },
+    }
+  );
 
   return {
     registerForm,
-    setRegisterForm,
+    resetRegister,
     onType,
   };
 }
