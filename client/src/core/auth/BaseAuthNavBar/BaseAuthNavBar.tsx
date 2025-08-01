@@ -15,6 +15,7 @@ export function BaseAuthNavBar({
   hasCollapsed,
   collapsedControlsLeft,
   collapsedControlsRight,
+  dropDownControls,
 }: AuthLayoutProps) {
   return (
     <NavBarLayout
@@ -22,7 +23,10 @@ export function BaseAuthNavBar({
       navBarElements={navBarElements}
       navBarControlsLeft={navBarControlsLeft}
       navBarControlsRight={
-        <NavBarControlsRight controls={navBarControlsRight} />
+        <NavBarControlsRight
+          controls={navBarControlsRight}
+          dropDownControls={dropDownControls}
+        />
       }
       hasCollapsed={hasCollapsed}
       collapsedControlsLeft={collapsedControlsLeft}
