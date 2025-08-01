@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { SignInFormData } from "./types";
+import { SignInFormData } from "../../types";
 
 type SignInFieldsProps = {
   signInForm: SignInFormData;

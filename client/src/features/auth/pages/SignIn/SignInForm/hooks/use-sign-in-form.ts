@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { SignInFormData } from "../types";
+import { SignInFormData } from "../../types";
 
 export function useSignInForm() {
   const [errMsg, setErrMsg] = useState<string>("");

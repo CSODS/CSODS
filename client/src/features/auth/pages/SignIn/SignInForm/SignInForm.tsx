@@ -1,11 +1,9 @@
 import { useEffect, useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { AuthHooks } from "@/core/auth";
+import { ErrorMessage, SignInFields, SignInButton } from "./components";
 import { useSignInForm } from "./hooks";
 import { handleSignIn } from "./utils";
-import { ErrorMessage } from "./ErrorMessage";
-import { SignInFields } from "./SignInFields";
-import { SignInButton } from "./SignInButton";
 
 export function SignInForm() {
   const { setAuth } = AuthHooks.useAuth();
