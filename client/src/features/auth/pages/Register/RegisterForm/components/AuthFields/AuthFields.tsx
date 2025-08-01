@@ -102,7 +102,7 @@ export function AuthFields({ registerForm, onType }: RegisterFieldsProps) {
           onBlur={() => setPwdFocus(false)}
         />
       </div>
-      <p
+      <div
         id="pwd-note"
         className={
           pwdFocus && registerForm.password && !validPwd
@@ -118,7 +118,7 @@ export function AuthFields({ registerForm, onType }: RegisterFieldsProps) {
           <li>At least one number</li>
           <li>At least one number At least one special character: ! @ # $ %</li>
         </ul>
-      </p>
+      </div>
       {/* confirm password */}
       <div className="m-0 px-3 py-2 row border border-1 rounded-pill">
         <input
