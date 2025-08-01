@@ -7,7 +7,7 @@ type AuthLayoutProps = {
   dropDownControls?: ReactNode;
 } & NavBarLayoutProps;
 
-export function BaseAuthLayout({
+export function BaseAuthNavBar({
   className,
   navBarElements,
   navBarControlsLeft,

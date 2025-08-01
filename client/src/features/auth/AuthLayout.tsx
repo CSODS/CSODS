@@ -1,5 +1,5 @@
-import { BaseAuthLayout } from "@/core/auth";
+import { BaseAuthNavBar } from "@/core/auth";
 
 export function AuthLayout() {
-  return <BaseAuthLayout className="bg-default-mulled-wine" />;
+  return <BaseAuthNavBar className="bg-default-mulled-wine" />;
 }

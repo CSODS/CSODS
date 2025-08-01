@@ -1,4 +1,4 @@
-import { BaseAuthLayout } from "@/core/auth";
+import { BaseAuthNavBar } from "@/core/auth";
 import styles from "./ProjectListLayout.module.scss";
 import { SearchBar } from "./SearchBar";
 
@@ -25,6 +25,6 @@ export function ProjectListLayout({ navBarVariant }: ProjectListLayoutProps) {
   }
 
   return (
-    <BaseAuthLayout className={navBarClass} navBarElements={<SearchBar />} />
+    <BaseAuthNavBar className={navBarClass} navBarElements={<SearchBar />} />
   );
 }
