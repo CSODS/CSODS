@@ -16,11 +16,14 @@ function App() {
               <Route element={<AuthNavBar />}>
                 <Route index element={<LandingPage />} />
 
+                {/* Auth related pages */}
                 <AuthRoutes />
 
+                {/* Miscellaneous pages: Home, Landing page, etc. */}
                 <HomeRoutes />
               </Route>
 
+              {/* Projects feature pages */}
               <ProjectsRoutes />
             </Route>
           </Route>
