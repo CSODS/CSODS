@@ -1,6 +1,6 @@
 import { AUTH } from "@data";
 import { Request, Response } from "express";
-import { createJwt } from "../../utils";
+import { createJwtDeprecated } from "../../utils";
 import { verifyRefreshToken } from "./verify-refresh-token";
 
 /**
@@ -38,7 +38,7 @@ export async function handleRefreshToken(req: Request, res: Response) {
     const payload = verifyRefreshToken(req, refreshToken, foundUser);
     if (!payload) return;
 
-    const accessToken = createJwt(payload, { tokenType: "access" });
+    const accessToken = createJwtDeprecated(payload, { tokenType: "access" });
     requestLogger.log("debug", "Access token refreshed successfully");
 
     res.json({ accessToken });

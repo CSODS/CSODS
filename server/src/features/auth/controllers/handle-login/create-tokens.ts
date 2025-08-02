@@ -26,7 +26,7 @@ export async function createTokens(
   req: Request,
   verifiedUser: authTypes.UserViewModel
 ): Promise<Tokens> {
-  const { createJwt, createPayload } = authUtils;
+  const { createJwtDeprecated, createPayload } = authUtils;
 
   const { requestLogContext: requestLogger } = req;
 
@@ -39,8 +39,8 @@ export async function createTokens(
     verifiedUser,
     roles
   );
-  const accessToken = createJwt(payload, { tokenType: "access" });
-  const refreshToken = createJwt(payload, { tokenType: "refresh" });
+  const accessToken = createJwtDeprecated(payload, { tokenType: "access" });
+  const refreshToken = createJwtDeprecated(payload, { tokenType: "refresh" });
 
   return { accessToken, refreshToken };
 }
