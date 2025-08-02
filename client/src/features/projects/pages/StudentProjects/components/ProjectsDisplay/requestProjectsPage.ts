@@ -1,13 +1,14 @@
+import { AxiosInstance } from "axios";
 import { API } from "@/features/projects/constants";
 import {
   IProjectSearchParameters,
   IProjectsPage,
 } from "@/features/projects/types";
 import { assembleQuery } from "@/features/projects/utils";
-import { csodsClient } from "@/utils";
 
 // todo: add better type guarding
 export async function requestProjectsPage(
+  securedAxios: AxiosInstance,
   abortSignal: AbortSignal,
   pageNumber: string | number,
   searchParameters?: IProjectSearchParameters
@@ -17,7 +18,7 @@ export async function requestProjectsPage(
   const query = assembleQuery(searchParameters);
   const endpoint = projectsPath + query;
 
-  const data = await csodsClient
+  const data = await securedAxios
     .get(endpoint, {
       signal: abortSignal,
     })

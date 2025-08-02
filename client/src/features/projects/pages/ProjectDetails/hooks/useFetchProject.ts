@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { AuthHooks } from "@/core/auth";
 import {
   usePageNumber,
   useProjectId,
@@ -8,6 +9,7 @@ import { IProjectDetails } from "@features/projects/types";
 import { requestProject } from "../requestProject";
 
 export function useFetchProject() {
+  const securedAxios = AuthHooks.useSecuredAxios();
   const pageNumber = usePageNumber();
   const projectId = useProjectId();
   const projectSearchParams = useProjectSearchParams();
@@ -19,6 +21,7 @@ export function useFetchProject() {
 
     const loadProject = async () => {
       const loadedProject = await requestProject(
+        securedAxios,
         controller.signal,
         pageNumber,
         projectId,
@@ -33,7 +36,7 @@ export function useFetchProject() {
       isMounted = false;
       controller.abort();
     };
-  }, [pageNumber, projectId, projectSearchParams]);
+  }, [pageNumber, projectId, projectSearchParams, securedAxios]);
 
   return project;
 }

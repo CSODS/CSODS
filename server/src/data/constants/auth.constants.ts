@@ -49,7 +49,7 @@ export const TOKEN_CONFIG_RECORD: TokenConfigRecord = {
   access: {
     secret: process.env.ACCESS_TOKEN_SECRET,
     signOptions: {
-      expiresIn: "30s",
+      expiresIn: "5m",
     } as jwt.SignOptions,
   },
   refresh: {
@@ -62,12 +62,12 @@ export const TOKEN_CONFIG_RECORD: TokenConfigRecord = {
       clearOptions: {
         httpOnly: true,
         sameSite: "none",
-        secure: false, // *change to true in production/when not using thunderclient
+        secure: true, // *change to true in production/when not using thunderclient
       },
       cookieOptions: {
         httpOnly: true,
         sameSite: "none",
-        secure: false,
+        secure: true,
         maxAge: 24 * 60 * 60 * 1000, // 1 day
       },
     },

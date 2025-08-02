@@ -1,29 +1,7 @@
-import { ReactNode } from "react";
 import { Link, Outlet } from "react-router-dom";
 import { ADDRESSES } from "@/constants";
 import { CollapseControls, NavBarControls } from "../shared";
-
-type NavBarMainProps = {
-  /**
-   * @field
-   * css class extensions for the navbar container.
-   */
-  className?: string;
-  navBarElements?: ReactNode;
-  /**
-   * @deprecated
-   */
-  navBarControls?: ReactNode;
-  navBarControlsLeft?: ReactNode;
-  navBarControlsRight?: ReactNode;
-  /**
-   * @deprecated
-   */
-  collapsedControls?: ReactNode;
-  hasCollapsed?: boolean;
-  collapsedControlsLeft?: ReactNode;
-  collapsedControlsRight?: ReactNode;
-};
+import { NavBarLayoutProps } from "@/types";
 
 //  todo: add dynamic styling for child components as well
 export function NavBarLayout({
@@ -36,7 +14,7 @@ export function NavBarLayout({
   hasCollapsed,
   collapsedControlsLeft,
   collapsedControlsRight,
-}: NavBarMainProps) {
+}: NavBarLayoutProps) {
   return (
     <>
       <nav className="p-0 navbar navbar-expand-lg sticky-top">

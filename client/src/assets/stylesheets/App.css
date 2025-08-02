@@ -18,6 +18,12 @@ input[type=text] {
   outline: none;
 }
 
+input[type=password] {
+  background-color: transparent;
+  border: none;
+  outline: none;
+}
+
 /* Animated Background */
 .bg-container {
   position: fixed;
@@ -310,7 +316,7 @@ input[type=text] {
 }
 
 .text-shadow-m {
-  text-shadow: 2px 2px 30px #2A1F2D;
+  text-shadow: 2px 2px 30px #2a1f2d;
 }
 
 /* shapes */

@@ -4,3 +4,4 @@ import { RadioBtnPill } from "./Input";
 
 export * from "./nav-bar";
 export { Button, BtnPill, RadioBtnPill, BtnBare, LinkButton, BtnGroup };
+export * from "./CheckBox";
