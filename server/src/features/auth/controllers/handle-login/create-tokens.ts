@@ -26,9 +26,7 @@ export async function createTokens(
   req: Request,
   verifiedUser: authTypes.UserViewModel
 ): Promise<Tokens> {
-  const createJwt = authUtils.createJwt;
-  const createPayload = authUtils.createPayload;
-  // const { createJwt, createPayload } = authUtils;
+  const { createJwt, createPayload } = authUtils;
 
   const { requestLogContext: requestLogger } = req;
 
