@@ -2,7 +2,7 @@ import dotenv from "dotenv";
 import { Response, Request, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 import { RequestLogContext } from "@utils";
-import { TokenPayload } from "../schemas";
+import { AccessTokenPayload } from "../schemas";
 
 dotenv.config();
 
@@ -26,7 +26,10 @@ export function validateJWT(req: Request, res: Response, next: NextFunction) {
 
   try {
     requestLogger.log("debug", "Validating access JWT...");
-    const payload = jwt.verify(token, ACCESS_TOKEN_SECRET) as TokenPayload;
+    const payload = jwt.verify(
+      token,
+      ACCESS_TOKEN_SECRET
+    ) as AccessTokenPayload;
     req.authPayload = payload;
     requestLogger.log("debug", "Access JWT validated.");
     next();

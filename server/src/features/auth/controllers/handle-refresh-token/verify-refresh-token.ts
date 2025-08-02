@@ -20,7 +20,7 @@ export function verifyRefreshToken(
   req: Request,
   refreshToken: string,
   user: authTypes.UserViewModel | null
-): authSchemas.TokenPayload | null {
+): authSchemas.AccessTokenPayload | null {
   const { requestLogContext: requestLogger } = req;
 
   let payload;
@@ -31,7 +31,7 @@ export function verifyRefreshToken(
     return null;
   }
 
-  const verifiedPayload = authSchemas.tokenPayload.parse(payload);
+  const verifiedPayload = authSchemas.accessTokenPayload.parse(payload);
 
   const dbUsername = user?.username;
   const payloadUsername = verifiedPayload.userInfo.username;

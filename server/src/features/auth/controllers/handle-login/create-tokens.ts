@@ -37,7 +37,10 @@ export async function createTokens(
   const roles: string[] = await req.userDataService.getUserRoles(
     verifiedUser.userId
   );
-  const payload: authSchemas.TokenPayload = createPayload(verifiedUser, roles);
+  const payload: authSchemas.AccessTokenPayload = createPayload(
+    verifiedUser,
+    roles
+  );
   const accessToken = createJwt(payload, { tokenType: "access" });
   const refreshToken = createJwt(payload, { tokenType: "refresh" });
 
