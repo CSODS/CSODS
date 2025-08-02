@@ -1,9 +1,10 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { ADDRESSES } from "./constants";
 import { CsodsBackground } from "./components";
-import { LandingPage } from "./pages";
 import { AuthGuards, AuthProvider, PersistAuth } from "./core/auth";
 import { Pages as AuthPages, AuthNavBar } from "./features/auth";
+import { HomePage } from "./features/HomePage";
+import { LandingPage } from "./features/LandingPage";
 import {
   Pages as ProjectsPages,
   Layouts as ProjectsLayouts,
@@ -35,7 +36,7 @@ function App() {
                 </Route>
 
                 <Route element={<PersistAuth />}>
-                  {/* <Route path={ADDRESSES.HOME} element={<HomePage />} /> */}
+                  <Route path={ADDRESSES.HOME} element={<HomePage />} />
                   <Route path={ADDRESSES.ABOUT} />
                 </Route>
               </Route>
