@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-import { useAuth, useRefreshToken } from "./hooks";
+import { useAuth, useRefreshToken, useTogglePersistAuth } from "./hooks";
 import { Outlet } from "react-router-dom";
 
 export function PersistAuth() {
-  const { auth, persist } = useAuth();
+  const { auth } = useAuth();
+  const [persist] = useTogglePersistAuth();
   const refresh = useRefreshToken();
 
   const [isLoading, setIsLoading] = useState<boolean>(true);
