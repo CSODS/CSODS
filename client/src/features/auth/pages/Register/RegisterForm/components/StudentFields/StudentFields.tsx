@@ -22,6 +22,7 @@ export function StudentFields({ registerForm, onType }: RegisterFieldsProps) {
           className="m-0 p-0 color-default-white fs-6"
           autoComplete="off"
           onChange={(e) => onType(e)}
+          value={registerForm.studentName ?? ""}
           aria-invalid={validName ? "false" : "true"}
           aria-describedby="name-note"
           onFocus={() => setNameFocus(true)}
@@ -47,6 +48,7 @@ export function StudentFields({ registerForm, onType }: RegisterFieldsProps) {
           className="m-0 p-0 color-default-white fs-6"
           autoComplete="off"
           onChange={(e) => onType(e)}
+          value={registerForm.studentNumber ?? ""}
           aria-invalid={validNumber ? "false" : "true"}
           aria-describedby="number-note"
           onFocus={() => setNumberFocus(true)}
