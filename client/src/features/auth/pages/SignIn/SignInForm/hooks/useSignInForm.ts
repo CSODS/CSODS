@@ -14,5 +14,5 @@ export function useSignInForm() {
     { resetKeys: ["password"], defaultValues: { password: "" } }
   );
 
-  return { signInForm, reset: resetSignIn, onType, errMsg, setErrMsg };
+  return { signInForm, resetSignIn, onType, errMsg, setErrMsg };
 }
