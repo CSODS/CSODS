@@ -5,8 +5,9 @@ import {
   RegisterBtn,
   StudentFields,
 } from "./components";
-import { useErrMsg, useRegisterForm } from "./hooks";
+import { useErrMsg, useRegisterForm, useToggleStudentFields } from "./hooks";
 import { handleRegister } from "./utils";
+import { CheckBox } from "@/components";
 
 /**
  * The register form itself
@@ -15,7 +16,11 @@ import { handleRegister } from "./utils";
 export function RegisterForm() {
   const { errRef, errMsg, setErrMsg } = useErrMsg();
 
-  const { registerForm, onType } = useRegisterForm();
+  const { registerForm, resetRegister, onType } = useRegisterForm();
+
+  //  toggler for student. form data is always reset on toggle change.
+  const [toggleStudents, resetToggle, onToggleStudents] =
+    useToggleStudentFields(resetRegister);
 
   //  clear err msg on type.
   useEffect(() => {
@@ -42,8 +47,19 @@ export function RegisterForm() {
           each field is a rounded pill div 
         */}
         <AuthFields registerForm={registerForm} onType={onType} />
-        <StudentFields registerForm={registerForm} onType={onType} />
 
+        <CheckBox
+          id="toggle-student-fields"
+          checked={toggleStudents}
+          onChange={onToggleStudents}
+        >
+          Are you a student?
+        </CheckBox>
+        {toggleStudents ? (
+          <StudentFields registerForm={registerForm} onType={onType} />
+        ) : (
+          <></>
+        )}
         <div className="m-0 p-0 d-grid row-gap-1">
           <ErrorMessage message={errMsg} errRef={errRef} />
           <RegisterBtn />
