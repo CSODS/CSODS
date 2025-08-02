@@ -61,6 +61,12 @@ type PayloadRequirements = AccessTokenRequirements | RefreshTokenRequirements;
  * ! depending on the token type.
  */
 export function createPayload(
+  payloadRequirements: AccessTokenRequirements
+): AccessTokenPayload;
+export function createPayload(
+  payloadRequirements: RefreshTokenRequirements
+): RefreshTokenPayload;
+export function createPayload(
   payloadRequirements: PayloadRequirements
 ): AccessTokenPayload | RefreshTokenPayload {
   switch (payloadRequirements.tokenType) {
@@ -68,7 +74,7 @@ export function createPayload(
       return createAccessTokenPayload(payloadRequirements);
     }
     case "refresh": {
-      return createRefreshTokenPayloazd(payloadRequirements);
+      return createRefreshTokenPayload(payloadRequirements);
     }
     default: {
       throw new Error("Invalid token type.");
@@ -107,7 +113,7 @@ function createAccessTokenPayload(
  * @param payloadRequirements
  * @returns
  */
-function createRefreshTokenPayloazd(
+function createRefreshTokenPayload(
   payloadRequirements: RefreshTokenRequirements
 ) {
   const { userId } = payloadRequirements;
