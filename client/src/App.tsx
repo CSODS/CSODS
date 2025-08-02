@@ -17,14 +17,14 @@ function App() {
                 <Route index element={<LandingPage />} />
 
                 {/* Auth related pages */}
-                <AuthRoutes />
+                {AuthRoutes()}
 
                 {/* Miscellaneous pages: Home, Landing page, etc. */}
-                <HomeRoutes />
+                {HomeRoutes()}
               </Route>
 
               {/* Projects feature pages */}
-              <ProjectsRoutes />
+              {ProjectsRoutes()}
             </Route>
           </Route>
         </Routes>
