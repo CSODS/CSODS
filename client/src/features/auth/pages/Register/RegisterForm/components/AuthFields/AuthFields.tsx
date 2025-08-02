@@ -39,6 +39,7 @@ export function AuthFields({ registerForm, onType }: RegisterFieldsProps) {
           className="m-0 p-0 color-default-white fs-6"
           autoComplete="off"
           onChange={(e) => onType(e)}
+          value={registerForm.email}
           required
           aria-invalid={validEmail ? "false" : "true"}
           aria-describedby="email-note"
@@ -68,6 +69,7 @@ export function AuthFields({ registerForm, onType }: RegisterFieldsProps) {
           className="m-0 p-0 color-default-white fs-6"
           autoComplete="off"
           onChange={(e) => onType(e)}
+          value={registerForm.username}
           required
           aria-invalid={validUser ? "false" : "true"}
           aria-describedby="user-note"
@@ -95,6 +97,7 @@ export function AuthFields({ registerForm, onType }: RegisterFieldsProps) {
           className="m-0 p-0 color-default-white fs-6"
           placeholder="Password"
           onChange={(e) => onType(e)}
+          value={registerForm.password}
           required
           aria-invalid={validPwd ? "false" : "true"}
           aria-describedby="pwd-note"
@@ -127,6 +130,7 @@ export function AuthFields({ registerForm, onType }: RegisterFieldsProps) {
           className="m-0 p-0 color-default-white fs-6"
           placeholder="Confirm Password"
           onChange={(e) => onType(e)}
+          value={registerForm.passwordMatch}
           required
           aria-invalid={validMatch ? "false" : "true"}
           aria-describedby="confirm-note"
