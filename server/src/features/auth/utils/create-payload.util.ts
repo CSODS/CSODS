@@ -2,35 +2,6 @@ import { AUTH } from "@/data";
 import { AccessTokenPayload, RefreshTokenPayload } from "../schemas";
 import { UserViewModel } from "../types";
 
-/**
- * @deprecated Please use createPayload
- * @public
- * @function createPayloadDeprecated
- * @description Creates a {@link AccessTokenPayload} object from a provided {@link UserViewModel}
- * and a list of `roles`.
- * @param user The {@link UserViewModel} containing user info details which will be used for
- * creating the payload.
- * @param roles A list of `string` containing the `User`'s `roles`.
- * @returns A {@link AccessTokenPayload} object which will be used for creating a `JwtToken`.
- */
-export function createPayloadDeprecated(
-  user: UserViewModel,
-  roles: string[]
-): AccessTokenPayload {
-  const payload: AccessTokenPayload = {
-    userInfo: {
-      email: user.email,
-      username: user.username,
-      studentName: user.studentName,
-      studentNumber: user.studentNumber,
-      userIconUrl: "",
-      roles: roles,
-    },
-  };
-
-  return payload;
-}
-
 type AccessTokenRequirements = {
   tokenType: Extract<AUTH.TokenType, "access">;
   user: UserViewModel;
