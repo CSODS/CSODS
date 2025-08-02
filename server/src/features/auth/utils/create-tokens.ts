@@ -1,7 +1,7 @@
 import { Request } from "express";
-import { AccessTokenPayload, RefreshTokenPayload } from "../../schemas";
-import { UserViewModel } from "../../types";
-import { createJwt, createPayload } from "../../utils";
+import { AccessTokenPayload, RefreshTokenPayload } from "../schemas";
+import { UserViewModel } from "../types";
+import { createJwt, createPayload } from ".";
 
 type Tokens = {
   accessToken: string;

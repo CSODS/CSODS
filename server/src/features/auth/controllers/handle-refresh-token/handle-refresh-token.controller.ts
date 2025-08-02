@@ -1,8 +1,7 @@
 import { Request, Response } from "express";
 import { AUTH } from "@data";
+import { createTokens, updateUserRefreshToken } from "../../utils";
 import { verifyRefreshToken } from "./verify-refresh-token";
-import { createTokens } from "../handle-login/create-tokens";
-import { updateUserRefreshToken } from "../handle-login/update-user-refresh-token";
 
 /**
  * @public

@@ -1,9 +1,8 @@
 import { Request, Response } from "express";
 import { AUTH } from "@data";
 import { LoginOptions } from "../../schemas";
+import { createTokens, updateUserRefreshToken } from "../../utils";
 import { getVerifiedUser } from "./get-verified-user";
-import { createTokens } from "./create-tokens";
-import { updateUserRefreshToken } from "./update-user-refresh-token";
 
 const { refresh } = AUTH.TOKEN_CONFIG_RECORD;
 const { cookieConfig: refreshCookie } = refresh;

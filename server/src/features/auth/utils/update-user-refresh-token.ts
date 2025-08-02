@@ -1,5 +1,5 @@
 import { Request } from "express";
-import { UserViewModel } from "../../types";
+import { UserViewModel } from "../types";
 
 /**
  * @public
