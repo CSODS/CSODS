@@ -1,14 +1,10 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { ADDRESSES } from "./constants";
 import { CsodsBackground } from "./components";
-import { AuthGuards, AuthProvider, PersistAuth } from "./core/auth";
-import { Pages as AuthPages, AuthNavBar } from "./features/auth";
-import { HomePage } from "./features/HomePage";
+import { AuthProvider } from "./core/auth";
+import { AuthNavBar } from "./features/auth";
 import { LandingPage } from "./features/LandingPage";
-import {
-  Pages as ProjectsPages,
-  Layouts as ProjectsLayouts,
-} from "./features/projects";
+import { AuthRoutes, HomeRoutes, ProjectsRoutes } from "./routes";
 
 function App() {
   return (
@@ -20,54 +16,15 @@ function App() {
               <Route element={<AuthNavBar />}>
                 <Route index element={<LandingPage />} />
 
-                <Route path={ADDRESSES.AUTH.PATH}>
-                  <Route
-                    path={ADDRESSES.AUTH.REGISTER}
-                    element={<AuthPages.Register />}
-                  />
-                  <Route
-                    path={ADDRESSES.AUTH.SIGN_IN}
-                    element={<AuthPages.SignIn />}
-                  />
-                  <Route
-                    path={ADDRESSES.AUTH.UNAUTHORIZED}
-                    element={<AuthPages.Unauthorized />}
-                  />
-                </Route>
+                {/* Auth related pages */}
+                <AuthRoutes />
 
-                <Route element={<PersistAuth />}>
-                  <Route path={ADDRESSES.HOME} element={<HomePage />} />
-                  <Route path={ADDRESSES.ABOUT} />
-                </Route>
+                {/* Miscellaneous pages: Home, Landing page, etc. */}
+                <HomeRoutes />
               </Route>
-              <Route element={<PersistAuth />}>
-                <Route element={<AuthGuards.RequireAuth />}>
-                  <Route
-                    element={
-                      <ProjectsLayouts.ProjectsNavBar navBarVariant={1} />
-                    }
-                  >
-                    <Route
-                      path={ADDRESSES.STUDENT_PROJECTS.PATH}
-                      element={<ProjectsPages.StudentProjects />}
-                    />
-                  </Route>
-                  <Route
-                    element={
-                      <ProjectsLayouts.ProjectsNavBar navBarVariant={2} />
-                    }
-                  >
-                    <Route
-                      path={ADDRESSES.PROJECT_DETAILS.PATH}
-                      element={<ProjectsPages.ProjectDetails />}
-                    />
-                    <Route
-                      path={ADDRESSES.SUBMIT_PROJECT}
-                      element={<ProjectsPages.SubmitProject />}
-                    />
-                  </Route>
-                </Route>
-              </Route>
+
+              {/* Projects feature pages */}
+              <ProjectsRoutes />
             </Route>
           </Route>
         </Routes>
