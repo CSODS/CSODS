@@ -5,7 +5,7 @@ import { LatestNews } from "./components/LatestNews";
 import { WelcomeToCSODS } from "./components/WelcomeToCSODS";
 import { FAB } from "./components/FAB";
 
-export function Home() {
+export function HomePage() {
   return (
     <main className="position-relative fs-responsive">
       <CarouselWrapper>
