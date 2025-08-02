@@ -26,7 +26,7 @@ export async function createTokens(
   req: Request,
   verifiedUser: authTypes.UserViewModel
 ): Promise<Tokens> {
-  const { createJwtDeprecated, createPayload } = authUtils;
+  const { createJwtDeprecated, createPayloadDeprecated } = authUtils;
 
   const { requestLogContext: requestLogger } = req;
 
@@ -35,7 +35,7 @@ export async function createTokens(
   const roles: string[] = await req.userDataService.getUserRoles(
     verifiedUser.userId
   );
-  const payload: authSchemas.AccessTokenPayload = createPayload(
+  const payload: authSchemas.AccessTokenPayload = createPayloadDeprecated(
     verifiedUser,
     roles
   );
