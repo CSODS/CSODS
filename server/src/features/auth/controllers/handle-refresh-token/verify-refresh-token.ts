@@ -20,7 +20,7 @@ export function verifyRefreshToken(
   req: Request,
   refreshToken: string,
   user: authTypes.UserViewModel | null
-): authSchemas.TokenPayload | null {
+): authSchemas.RefreshTokenPayload | null {
   const { requestLogContext: requestLogger } = req;
 
   let payload;
@@ -31,12 +31,12 @@ export function verifyRefreshToken(
     return null;
   }
 
-  const verifiedPayload = authSchemas.tokenPayload.parse(payload);
+  const verifiedPayload = authSchemas.refreshTokenPayload.parse(payload);
 
-  const dbUsername = user?.username;
-  const payloadUsername = verifiedPayload.userInfo.username;
+  const dbUserId = user?.userId;
+  const payloadUserId = verifiedPayload.userId;
 
-  if (dbUsername !== payloadUsername) {
+  if (dbUserId !== payloadUserId) {
     requestLogger.logStatus(403, "Refresh token mismatch.");
     return null;
   }

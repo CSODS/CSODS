@@ -1,5 +1,7 @@
 import { Request } from "express";
-import { authSchemas, authTypes, authUtils } from "../..";
+import { AccessTokenPayload, RefreshTokenPayload } from "../schemas";
+import { UserViewModel } from "../types";
+import { createJwt, createPayload } from ".";
 
 type Tokens = {
   accessToken: string;
@@ -17,19 +19,15 @@ type Tokens = {
  * - Creates JWT `access` and `refresh` tokens containing the payload.
  * - Returns both tokens.
  * @param req
- * @param verifiedUser A {@link authSchemas.UserViewModel} used for retrieving the `User`'s `role`s and
+ * @param verifiedUser A {@link UserViewModel} used for retrieving the `User`'s `role`s and
  * creating the token `payload`.
  * @returns A `Promise` that resolves to a {@link Tokens} object containing the `accessToken`
  * and `refreshToken`.
  */
 export async function createTokens(
   req: Request,
-  verifiedUser: authTypes.UserViewModel
+  verifiedUser: UserViewModel
 ): Promise<Tokens> {
-  const createJwt = authUtils.createJwt;
-  const createPayload = authUtils.createPayload;
-  // const { createJwt, createPayload } = authUtils;
-
   const { requestLogContext: requestLogger } = req;
 
   requestLogger.log("debug", "Creating tokens.");
@@ -37,9 +35,25 @@ export async function createTokens(
   const roles: string[] = await req.userDataService.getUserRoles(
     verifiedUser.userId
   );
-  const payload: authSchemas.TokenPayload = createPayload(verifiedUser, roles);
-  const accessToken = createJwt(payload, { tokenType: "access" });
-  const refreshToken = createJwt(payload, { tokenType: "refresh" });
+
+  const accessTokenPayload: AccessTokenPayload = createPayload({
+    tokenType: "access",
+    user: verifiedUser,
+    roles,
+  });
+  const refreshTokenPayload: RefreshTokenPayload = createPayload({
+    tokenType: "refresh",
+    userId: verifiedUser.userId,
+  });
+
+  const accessToken = createJwt({
+    tokenType: "access",
+    payload: accessTokenPayload,
+  });
+  const refreshToken = createJwt({
+    tokenType: "refresh",
+    payload: refreshTokenPayload,
+  });
 
   return { accessToken, refreshToken };
 }
