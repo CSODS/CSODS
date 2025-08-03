@@ -15,7 +15,17 @@ export function SignIn() {
       {/* 2nd half */}
       <section className="">
         <SignInForm />
-        <NavLink to={registerLink}>Create Account</NavLink>
+      </section>
+      <section className="mt-3 text-center">
+        <p className="m-0 p-0 color-light-2 small">
+          Don't have an account?{" "}
+          <NavLink
+            to={registerLink}
+            className="text-decoration-none"
+          >
+            Sign Up
+          </NavLink>
+        </p>
       </section>
     </section>
   );

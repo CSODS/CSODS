@@ -26,7 +26,7 @@ export function SignInForm() {
 
   return (
     <article className="p-0">
-      <p className="m-0 p-0 px-3 text-center fs-1 fw-bold">Welcome</p>
+      <p className="px-3 text-center fs-2 fw-bold">Welcome Back!</p>
 
       <form
         className="m-0 mt-4 p-0 px-3 d-grid row-gap-4"

@@ -2,9 +2,9 @@ import { RememberMe } from "./RememberMe";
 
 export function SignInButton() {
   return (
-    <div className="m-0 px-3 row row-cols-1">
+    <div className="mb-2 px-3 row row-cols-1 gap-2">
       <RememberMe />
-      <button className="col">Sign In</button>
+      <button className="col btn btn-dark-4 hover-color-light-3 py-1 rounded-1">Login</button>
     </div>
   );
 }

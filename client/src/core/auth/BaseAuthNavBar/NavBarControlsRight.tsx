@@ -19,13 +19,15 @@ export function NavBarControlsRight({
   return (
     <>
       {controls}
-      <NavBarDropDown>
-        {dropDownControls}
-        {auth ? (
+      {auth ? (
           <SignOutBtn className="m-0 color-default-black" />
         ) : (
-          <SignInBtn className="m-0 color-default-black" />
+          <SignInBtn className="m-0 color-default-light-grey" />
         )}
+        
+      <NavBarDropDown>
+        {dropDownControls}
+        
       </NavBarDropDown>
     </>
   );

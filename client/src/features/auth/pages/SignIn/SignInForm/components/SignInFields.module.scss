@@ -1,0 +1,46 @@
+@use "~@/assets/sass/variables.scss" as v;
+@use "~@/assets/sass/colors.scss" as *;
+
+.form-group-floating {
+  position: relative;
+  border-radius: 5rem;
+}
+
+.form-control-floating {
+  width: 100%;
+  padding: 0.85rem 1rem 0.25rem;
+  border-radius: 5rem;
+  background-color: transparent;
+  color: white;
+  transition: all 0.2s ease;
+}
+
+.not-empty {
+    
+}
+
+.form-control-floating:focus + label,
+.form-control-floating.not-empty + label,
+.form-control-floating:-webkit-autofill + label {
+  top: 0.6rem;
+  font-size: 0.6rem;
+  color: darkgrey; 
+}
+
+.form-group-floating label {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: grey;
+  transition: all 0.2s ease;
+  font-size: 0.7rem;
+  pointer-events: none;
+}
+
+//box shadow made transparent as solution for autofill issue
+input:-webkit-autofill {
+  -webkit-text-fill-color: white;
+  box-shadow: 0 0 0 1000px transparent inset !important;
+  transition: background-color 5000s ease-in-out 0s;
+}

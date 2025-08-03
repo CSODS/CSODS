@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import { SignInFormData } from "../../types";
+import styles from "./SignInFields.module.scss";
 
 type SignInFieldsProps = {
   signInForm: SignInFormData;
@@ -14,35 +15,46 @@ type SignInFieldsProps = {
  */
 export function SignInFields({ signInForm, onType }: SignInFieldsProps) {
   const identifierRef = useRef<HTMLInputElement>(null);
+  const groupForm = styles["form-group-floating"];
+  const controlForm = styles["form-control-floating"];
+
 
   useEffect(() => {
     if (identifierRef?.current) identifierRef.current.focus();
   }, []);
+
   return (
     <>
-      <div className="m-0 px-3 py-2 row border border-1 rounded-pill">
+      <div className={`position-relative border border-1 ${groupForm}`}>
         <input
           type="text"
           id="identifier"
           ref={identifierRef}
-          placeholder="Email/Username"
-          className="m-0 p-0 color-default-white fs-6"
+          className={`color-default-white pe-5 small ${controlForm} ${signInForm.identifier ? styles["not-empty"] : ""}`}
           autoComplete="off"
           onChange={(e) => onType(e)}
           value={signInForm.identifier}
           required
         />
+        <label htmlFor="identifier">Email/Username</label>
+        <span className="position-absolute top-50 end-0 translate-middle-y me-3">
+          <i className="bi bi-envelope-fill"></i>
+        </span>
       </div>
-      <div className="m-0 px-3 py-2 row border border-1 rounded-pill">
+
+      <div className={`form-group-floating position-relative border border-1 ${groupForm}`}>
         <input
           type="password"
           id="password"
-          className="m-0 p-0 color-default-white fs-6"
-          placeholder="Password"
+          className={`color-default-white pe-5 small ${controlForm} ${signInForm.password ? styles["not-empty"] : ""}`}
           onChange={(e) => onType(e)}
           value={signInForm.password}
           required
         />
+        <label htmlFor="password">Password</label>
+        <span className="position-absolute top-50 end-0 translate-middle-y me-3">
+          <i className="bi bi-lock-fill"></i>
+        </span>
       </div>
     </>
   );
