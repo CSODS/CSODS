@@ -17,6 +17,8 @@ export function useSecuredAxios(): AxiosInstance {
   const { auth } = useAuth();
 
   useEffect(() => {
+    if (!auth?.accessToken) return;
+
     const requestIntercept = securedAxios.interceptors.request.use(
       (config) => {
         // means the request not a retry, it's the first attempt.
