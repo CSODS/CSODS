@@ -47,7 +47,7 @@ export async function createTokens(
   const refreshTokenPayload: RefreshTokenPayload = createPayload({
     tokenType: "refresh",
     userId: verifiedUser.userId,
-    isPersist: isPersistentAuth,
+    isPersistentAuth,
   });
 
   const accessToken = createJwt({

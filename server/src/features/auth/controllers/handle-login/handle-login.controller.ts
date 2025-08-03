@@ -24,6 +24,7 @@ export async function handleLogin(
   const verifiedUser = await getVerifiedUser(req);
   if (!verifiedUser) return;
 
+  const { isPersistentAuth } = req.body;
   const { accessToken, refreshToken } = await createTokens(req, verifiedUser);
 
   const updatedUserId = await updateUserRefreshToken(
@@ -41,13 +42,12 @@ export async function handleLogin(
     throw new Error("Refresh token cookie configuration not set.");
 
   const { cookieName, persistentCookie, sessionCookie } = refreshCookie;
-  const { isPersist } = req.body;
 
   //  cookie creation
   res.cookie(
     cookieName, //  cookie name (could be anything really)
     refreshToken,
-    isPersist ? persistentCookie : sessionCookie
+    isPersistentAuth ? persistentCookie : sessionCookie
   );
   res.json({ accessToken });
 

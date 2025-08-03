@@ -15,7 +15,7 @@ export const loginOptions = z.object({
     },
   }),
 
-  isPersist: z.boolean().optional(),
+  isPersistentAuth: z.boolean().optional(),
 });
 
 export type LoginOptions = z.infer<typeof loginOptions>;
