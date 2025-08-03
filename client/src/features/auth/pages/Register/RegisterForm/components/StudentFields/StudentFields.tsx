@@ -1,6 +1,7 @@
 import { RegisterFieldsProps } from "../../types";
 import { useStudentFocus } from "./useStudentFocus";
 import { useStudentValidation } from "./useStudentValidation";
+import styles from "./StudentFields.module.scss";
 
 // todo: add visual cues for valid/invalid inputs
 // todo: better design for input notes(?)
@@ -11,15 +12,17 @@ export function StudentFields({ registerForm, onType }: RegisterFieldsProps) {
   //  use this for visual cues
   const { validName, validNumber } = useStudentValidation(registerForm);
 
+  const groupForm = styles["form-group-floating"];
+  const controlForm = styles["form-control-floating"];
+
   return (
     <>
       {/* student name */}
-      <div className="m-0 px-3 py-2 row border border-1 rounded-pill">
+      <div className={`position-relative border border-1 ${groupForm}`}>
         <input
           type="text"
           id="studentName"
-          placeholder="Student Name"
-          className="m-0 p-0 color-default-white fs-6"
+          className={`color-default-white pe-5 small ${controlForm} ${registerForm.studentName ? styles["not-empty"] : ""}`}
           autoComplete="off"
           onChange={(e) => onType(e)}
           value={registerForm.studentName ?? ""}
@@ -28,6 +31,10 @@ export function StudentFields({ registerForm, onType }: RegisterFieldsProps) {
           onFocus={() => setNameFocus(true)}
           onBlur={() => setNameFocus(false)}
         />
+        <label htmlFor="studentName">Student Name</label>
+        <span className="position-absolute top-50 end-0 translate-middle-y me-3">
+          <i className="bi bi-person-fill"></i>
+        </span>
       </div>
       <p
         id="name-note"
@@ -40,12 +47,11 @@ export function StudentFields({ registerForm, onType }: RegisterFieldsProps) {
         Invalid name format.
       </p>
       {/* student number */}
-      <div className="m-0 px-3 py-2 row border border-1 rounded-pill">
+      <div className={`position-relative border border-1 ${groupForm}`}>
         <input
           type="text"
           id="studentNumber"
-          placeholder="Student Number"
-          className="m-0 p-0 color-default-white fs-6"
+          className={`color-default-white pe-5 small ${controlForm} ${registerForm.studentNumber ? styles["not-empty"] : ""}`}
           autoComplete="off"
           onChange={(e) => onType(e)}
           value={registerForm.studentNumber ?? ""}
@@ -54,6 +60,10 @@ export function StudentFields({ registerForm, onType }: RegisterFieldsProps) {
           onFocus={() => setNumberFocus(true)}
           onBlur={() => setNumberFocus(false)}
         />
+        <label htmlFor="studentNumber">Student Number</label>
+        <span className="position-absolute top-50 end-0 translate-middle-y me-3">
+          <i className="bi bi-key-fill"></i>
+        </span>
       </div>
       <p
         id="number-note"
