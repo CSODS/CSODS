@@ -17,6 +17,8 @@ export function useSecuredAxios(): AxiosInstance {
   const { auth } = useAuth();
 
   useEffect(() => {
+    if (!auth?.accessToken) return;
+
     const requestIntercept = securedAxios.interceptors.request.use(
       (config) => {
         // means the request not a retry, it's the first attempt.
@@ -43,6 +45,7 @@ export function useSecuredAxios(): AxiosInstance {
           // if a retry wasn't attempted yet, retry.
           prevRequest.sent = true;
           const newAccessToken = await refresh();
+          if (!newAccessToken) return Promise.reject(err); //  token refresh failed
           prevRequest.headers["Authorization"] = `Bearer ${newAccessToken}`;
           return securedAxios(prevRequest);
         }

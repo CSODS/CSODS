@@ -14,6 +14,8 @@ export const loginOptions = z.object({
       if (!iss.input) return "Password is required.";
     },
   }),
+
+  isPersistentAuth: z.boolean().optional(),
 });
 
 export type LoginOptions = z.infer<typeof loginOptions>;

@@ -1,8 +1,8 @@
 import z from "zod";
 
-export type TokenPayload = z.infer<typeof tokenPayload>;
+export type AccessTokenPayload = z.infer<typeof accessTokenPayload>;
 
-export const tokenPayload = z.object({
+export const accessTokenPayload = z.object({
   userInfo: z.object({
     email: z.string(),
     username: z.string(),

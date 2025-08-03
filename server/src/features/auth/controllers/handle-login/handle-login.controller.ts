@@ -1,12 +1,8 @@
 import { Request, Response } from "express";
 import { AUTH } from "@data";
 import { LoginOptions } from "../../schemas";
+import { createTokens, updateUserRefreshToken } from "../../utils";
 import { getVerifiedUser } from "./get-verified-user";
-import { createTokens } from "./create-tokens";
-import { updateUserRefreshToken } from "./update-user-refresh-token";
-
-const { refresh } = AUTH.TOKEN_CONFIG_RECORD;
-const { cookieConfig: refreshCookie } = refresh;
 
 /**
  * @public
@@ -28,7 +24,12 @@ export async function handleLogin(
   const verifiedUser = await getVerifiedUser(req);
   if (!verifiedUser) return;
 
-  const { accessToken, refreshToken } = await createTokens(req, verifiedUser);
+  const { isPersistentAuth } = req.body;
+  const { accessToken, refreshToken } = await createTokens(
+    req,
+    verifiedUser,
+    isPersistentAuth
+  );
 
   const updatedUserId = await updateUserRefreshToken(
     req,
@@ -38,11 +39,19 @@ export async function handleLogin(
 
   if (!updatedUserId) return;
 
+  const { refresh } = AUTH.TOKEN_CONFIG_RECORD;
+  const { cookieConfig: refreshCookie } = refresh;
+
+  if (!refreshCookie)
+    throw new Error("Refresh token cookie configuration not set.");
+
+  const { cookieName, persistentCookie, sessionCookie } = refreshCookie;
+
   //  cookie creation
   res.cookie(
-    refreshCookie!.cookieName, //  cookie name (could be anything really)
+    cookieName, //  cookie name (could be anything really)
     refreshToken,
-    refreshCookie!.cookieOptions
+    isPersistentAuth ? persistentCookie : sessionCookie
   );
   res.json({ accessToken });
 
