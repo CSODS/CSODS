@@ -24,8 +24,9 @@ export function useRefreshToken() {
         tokenPayload,
       };
       setAuth(authSession);
-      return accessToken;
-    }
+    } else setAuth(null);
+
+    return accessToken;
   };
 
   return refresh;
