@@ -40,7 +40,8 @@ export async function handleRefreshToken(req: Request, res: Response) {
 
     const { accessToken, refreshToken: newRefreshToken } = await createTokens(
       req,
-      foundUser
+      foundUser,
+      payload.isPersistentAuth
     );
 
     const updatedUserId = await updateUserRefreshToken(
@@ -54,10 +55,15 @@ export async function handleRefreshToken(req: Request, res: Response) {
     const { refresh } = AUTH.TOKEN_CONFIG_RECORD;
     const { cookieConfig: refreshCookie } = refresh;
 
+    if (!refreshCookie)
+      throw new Error("Refresh token cookie configuration not set.");
+
+    const { cookieName, persistentCookie, sessionCookie } = refreshCookie;
+
     res.cookie(
-      refreshCookie!.cookieName, //  cookie name (could be anything really)
+      cookieName, //  cookie name (could be anything really)
       newRefreshToken,
-      refreshCookie!.cookieOptions
+      payload.isPersistentAuth ? persistentCookie : sessionCookie
     );
     res.json({ accessToken });
   } catch (err) {

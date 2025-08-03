@@ -29,6 +29,7 @@ export function RequireAuth({ allowedRoles }: RequireAuthProps) {
 
   const isAuthorized = isAuthenticated && hasRequiredRoles;
 
+  //  todo: add notification for invalid/expired session.
   return isAuthorized ? (
     <Outlet />
   ) : isAuthenticated ? (

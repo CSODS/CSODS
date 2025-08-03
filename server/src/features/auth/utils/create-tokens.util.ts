@@ -21,12 +21,15 @@ type Tokens = {
  * @param req
  * @param verifiedUser A {@link UserViewModel} used for retrieving the `User`'s `role`s and
  * creating the token `payload`.
+ * @param isPersistentAuth An optional boolean representing the persistence of the authentication state.
+ * `true` if the auth is persistent. `false` otherwise.
  * @returns A `Promise` that resolves to a {@link Tokens} object containing the `accessToken`
  * and `refreshToken`.
  */
 export async function createTokens(
   req: Request,
-  verifiedUser: UserViewModel
+  verifiedUser: UserViewModel,
+  isPersistentAuth?: boolean
 ): Promise<Tokens> {
   const { requestLogContext: requestLogger } = req;
 
@@ -44,6 +47,7 @@ export async function createTokens(
   const refreshTokenPayload: RefreshTokenPayload = createPayload({
     tokenType: "refresh",
     userId: verifiedUser.userId,
+    isPersistentAuth,
   });
 
   const accessToken = createJwt({
