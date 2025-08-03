@@ -29,6 +29,7 @@ export function useRefreshToken() {
           setAuth(authSession);
           return accessToken;
         } catch {
+          setAuth(null);
           return null;
         } finally {
           refreshPromise = null;
