@@ -35,7 +35,7 @@ export function SignInForm() {
         <SignInFields signInForm={signInForm} onType={onChange} />
         <div className="m-0 p-0 d-grid row-gap-1">
           <ErrorMessage message={errMsg} errRef={errRef} />
-          <SignInButton />
+          <SignInButton form={signInForm} onChange={onChange} />
         </div>
       </form>
     </article>
