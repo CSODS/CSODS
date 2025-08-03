@@ -33,7 +33,8 @@ export function AuthFields({ registerForm, onType }: RegisterFieldsProps) {
   return (
     <>
       {/* email */}
-      <div className={`position-relative border border-1 ${groupForm}`}>
+      <div className={`position-relative border border-1 ${groupForm} 
+      ${validEmail ? styles.valid : registerForm.email ? styles.invalid : ""}`}>
         <input
           type="email"
           id="email"
@@ -50,7 +51,7 @@ export function AuthFields({ registerForm, onType }: RegisterFieldsProps) {
         />
         <label htmlFor="email">Email</label>
         <span className="position-absolute top-50 end-0 translate-middle-y me-3">
-          <i className="bi bi-envelope-fill"></i>
+          <i className={`${validEmail ? "bi bi-envelope-check-fill text-success" : registerForm.email ? "bi bi-envelope-exclamation-fill text-danger" : "bi bi-envelope-fill"}`}></i>
         </span>
       </div>
       <p
@@ -67,7 +68,8 @@ export function AuthFields({ registerForm, onType }: RegisterFieldsProps) {
         Must end with a valid domain (e.g. example.com)
       </p>
       {/* username */}
-      <div className={`position-relative border border-1 ${groupForm}`}>
+      <div className={`position-relative border border-1 ${groupForm} 
+      ${validUser ? styles.valid : registerForm.username ? styles.invalid : ""}`}>
         <input
           type="text"
           id="username"
@@ -83,7 +85,7 @@ export function AuthFields({ registerForm, onType }: RegisterFieldsProps) {
         />
         <label htmlFor="username">Username</label>
         <span className="position-absolute top-50 end-0 translate-middle-y me-3">
-          <i className="bi bi-person-fill"></i>
+          <i className={`${validUser ? "bi bi-person-fill-check text-success" : registerForm.username ? "bi bi-person-fill-x text-danger" : "bi bi-person-fill"}`}></i>
         </span>
       </div>
       <p
@@ -99,7 +101,8 @@ export function AuthFields({ registerForm, onType }: RegisterFieldsProps) {
         Letters, numbers, hyphens (-), and underscores (_) allowed
       </p>
       {/* password */}
-      <div className={`position-relative border border-1 ${groupForm}`}>
+      <div className={`position-relative border border-1 ${groupForm} 
+      ${validPwd ? styles.valid : registerForm.password ? styles.invalid : ""}`}>
         <input
           type="password"
           id="password"
@@ -114,7 +117,7 @@ export function AuthFields({ registerForm, onType }: RegisterFieldsProps) {
         />
         <label htmlFor="password">Password</label>
         <span className="position-absolute top-50 end-0 translate-middle-y me-3">
-          <i className="bi bi-lock-fill"></i>
+          <i className={`${validPwd ? "bi bi-check text-success" : registerForm.password ? "bi bi-exclamation-circle text-danger" : "bi bi-lock-fill"}`}></i>
         </span>
       </div>
       <div
@@ -135,7 +138,8 @@ export function AuthFields({ registerForm, onType }: RegisterFieldsProps) {
         </ul>
       </div>
       {/* confirm password */}
-      <div className={`position-relative border border-1 ${groupForm}`}>
+      <div className={`position-relative border border-1 ${groupForm} 
+      ${validMatch ? styles.valid : registerForm.passwordMatch ? styles.invalid : ""}`}>
         <input
           type="password"
           id="passwordMatch"
@@ -150,7 +154,7 @@ export function AuthFields({ registerForm, onType }: RegisterFieldsProps) {
         />
         <label htmlFor="passwordMatch">Confirm Password</label>
         <span className="position-absolute top-50 end-0 translate-middle-y me-3">
-          <i className="bi bi-lock-fill"></i>
+          <i className={`${validMatch ? "bi bi-check text-success" : registerForm.passwordMatch ? "bi bi-exclamation-circle text-danger" : "bi bi-lock-fill"}`}></i>
         </span>
       </div>
       <p
