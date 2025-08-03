@@ -9,9 +9,13 @@ export function useSignInForm() {
     {
       identifier: "",
       password: "",
+      isPersistentAuth: false,
     },
     "id",
-    { resetKeys: ["password"], defaultValues: { password: "" } }
+    {
+      resetKeys: ["password", "isPersistentAuth"],
+      defaultValues: { password: "", isPersistentAuth: false },
+    }
   );
 
   return { signInForm, resetSignIn, onChange, errMsg, setErrMsg };

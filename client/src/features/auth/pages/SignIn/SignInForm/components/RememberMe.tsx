@@ -15,7 +15,7 @@ export function RememberMe({ form, onChange }: RememberMeProps) {
   return (
     <CheckBox
       id="isPersistentAuth"
-      checked={form.isPersistentAuth ?? false}
+      checked={form.isPersistentAuth}
       onChange={onChange}
     >
       Remember Me
