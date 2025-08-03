@@ -25,7 +25,11 @@ export async function handleLogin(
   if (!verifiedUser) return;
 
   const { isPersistentAuth } = req.body;
-  const { accessToken, refreshToken } = await createTokens(req, verifiedUser);
+  const { accessToken, refreshToken } = await createTokens(
+    req,
+    verifiedUser,
+    isPersistentAuth
+  );
 
   const updatedUserId = await updateUserRefreshToken(
     req,
