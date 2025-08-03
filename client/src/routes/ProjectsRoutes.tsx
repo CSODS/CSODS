@@ -9,22 +9,22 @@ import {
 export function ProjectsRoutes() {
   return (
     <>
-      <Route element={<AuthGuards.PersistAuth />}>
-        <Route element={<AuthGuards.RequireAuth />}>
-          <Route element={<ProjectsLayouts.ProjectsNavBar navBarVariant={1} />}>
-            <Route
-              path={ADDRESSES.STUDENT_PROJECTS.PATH}
-              element={<ProjectsPages.StudentProjects />}
-            />
-          </Route>
+      <Route element={<ProjectsLayouts.ProjectsNavBar navBarVariant={1} />}>
+        {AuthGuards.getProtectedRoutes(
+          <Route
+            path={ADDRESSES.STUDENT_PROJECTS.PATH}
+            element={<ProjectsPages.StudentProjects />}
+          />
+        )}
+      </Route>
 
-          <Route element={<ProjectsLayouts.ProjectsNavBar navBarVariant={2} />}>
-            <Route
-              path={ADDRESSES.PROJECT_DETAILS.PATH}
-              element={<ProjectsPages.ProjectDetails />}
-            />
-          </Route>
-        </Route>
+      <Route element={<ProjectsLayouts.ProjectsNavBar navBarVariant={2} />}>
+        {AuthGuards.getProtectedRoutes(
+          <Route
+            path={ADDRESSES.PROJECT_DETAILS.PATH}
+            element={<ProjectsPages.ProjectDetails />}
+          />
+        )}
       </Route>
     </>
   );
