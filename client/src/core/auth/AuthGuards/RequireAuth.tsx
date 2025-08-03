@@ -1,6 +1,6 @@
 import { useLocation, Navigate, Outlet } from "react-router-dom";
 import { ADDRESSES } from "@/constants";
-import { useAuth } from "./hooks";
+import { useAlertInvalidSession, useAuth } from "../hooks";
 
 type RequireAuthProps = {
   allowedRoles?: string[];
@@ -29,11 +29,16 @@ export function RequireAuth({ allowedRoles }: RequireAuthProps) {
 
   const isAuthorized = isAuthenticated && hasRequiredRoles;
 
+  const [alertInvalidSession] = useAlertInvalidSession();
+
   //  todo: add notification for invalid/expired session.
   return isAuthorized ? (
     <Outlet />
   ) : isAuthenticated ? (
     <Navigate to={unauthorizedPage} state={{ from: location }} replace />
+  ) : alertInvalidSession ? (
+    //  ! make this a bootstrap alert or something.
+    <p>Invalid/Expired Session. Please sign-in again.</p>
   ) : (
     <Navigate to={signInPage} state={{ from: location }} replace />
   );
