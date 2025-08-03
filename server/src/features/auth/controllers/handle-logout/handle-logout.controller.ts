@@ -36,6 +36,6 @@ export async function handleLogout(req: Request, res: Response) {
     await userDataService.updateRefreshToken(foundUser.userId, null);
   }
 
-  res.clearCookie(refreshCookie!.cookieName, refreshCookie!.clearOptions);
+  res.clearCookie(refreshCookie!.cookieName, refreshCookie!.clearCookie);
   return requestLogger.logStatus(204, "Logged out successfully.");
 }

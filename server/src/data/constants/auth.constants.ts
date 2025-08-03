@@ -30,8 +30,8 @@ export const ROLES_MAP: RolesMap = {
 export type TokenType = "access" | "refresh";
 type CookieConfig = {
   cookieName: string;
-  clearOptions: CookieOptions;
-  cookieOptions: CookieOptions;
+  clearCookie: CookieOptions;
+  persistentCookie: CookieOptions;
 };
 type TokenConfig = {
   secret: string | undefined;
@@ -59,12 +59,12 @@ export const TOKEN_CONFIG_RECORD: TokenConfigRecord = {
     } as jwt.SignOptions,
     cookieConfig: {
       cookieName: "refresh_token",
-      clearOptions: {
+      clearCookie: {
         httpOnly: true,
         sameSite: "none",
         secure: true, // *change to true in production/when not using thunderclient
       },
-      cookieOptions: {
+      persistentCookie: {
         httpOnly: true,
         sameSite: "none",
         secure: true,

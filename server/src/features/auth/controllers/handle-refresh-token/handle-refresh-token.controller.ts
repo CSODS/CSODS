@@ -57,7 +57,7 @@ export async function handleRefreshToken(req: Request, res: Response) {
     res.cookie(
       refreshCookie!.cookieName, //  cookie name (could be anything really)
       newRefreshToken,
-      refreshCookie!.cookieOptions
+      refreshCookie!.persistentCookie
     );
     res.json({ accessToken });
   } catch (err) {

@@ -41,7 +41,7 @@ export async function handleLogin(
   res.cookie(
     refreshCookie!.cookieName, //  cookie name (could be anything really)
     refreshToken,
-    refreshCookie!.cookieOptions
+    refreshCookie!.persistentCookie
   );
   res.json({ accessToken });
 
