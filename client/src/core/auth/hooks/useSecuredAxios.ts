@@ -43,6 +43,7 @@ export function useSecuredAxios(): AxiosInstance {
           // if a retry wasn't attempted yet, retry.
           prevRequest.sent = true;
           const newAccessToken = await refresh();
+          if (!newAccessToken) return Promise.reject(err); //  token refresh failed
           prevRequest.headers["Authorization"] = `Bearer ${newAccessToken}`;
           return securedAxios(prevRequest);
         }
