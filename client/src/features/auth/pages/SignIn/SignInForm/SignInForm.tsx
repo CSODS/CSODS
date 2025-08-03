@@ -9,7 +9,7 @@ export function SignInForm() {
   const { setAuth } = AuthHooks.useAuth();
   const errRef = useRef<HTMLParagraphElement>(null);
 
-  const { signInForm, onType, errMsg, setErrMsg } = useSignInForm();
+  const { signInForm, onChange, errMsg, setErrMsg } = useSignInForm();
 
   //  clear err msg on type
   useEffect(() => {
@@ -32,7 +32,7 @@ export function SignInForm() {
         className="m-0 mt-4 p-0 px-3 d-grid row-gap-4"
         onSubmit={handleSubmit}
       >
-        <SignInFields signInForm={signInForm} onType={onType} />
+        <SignInFields signInForm={signInForm} onType={onChange} />
         <div className="m-0 p-0 d-grid row-gap-1">
           <ErrorMessage message={errMsg} errRef={errRef} />
           <SignInButton />
