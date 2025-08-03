@@ -4,15 +4,19 @@ import { useRecord } from "@/hooks/useInput";
 
 export function useSignInForm() {
   const [errMsg, setErrMsg] = useState<string>("");
-  const [signInForm, resetSignIn, onType] = useRecord<SignInFormData>(
+  const [signInForm, resetSignIn, onChange] = useRecord<SignInFormData>(
     "csods:auth-sign-in",
     {
       identifier: "",
       password: "",
+      isPersistentAuth: false,
     },
     "id",
-    { resetKeys: ["password"], defaultValues: { password: "" } }
+    {
+      resetKeys: ["password", "isPersistentAuth"],
+      defaultValues: { password: "", isPersistentAuth: false },
+    }
   );
 
-  return { signInForm, resetSignIn, onType, errMsg, setErrMsg };
+  return { signInForm, resetSignIn, onChange, errMsg, setErrMsg };
 }

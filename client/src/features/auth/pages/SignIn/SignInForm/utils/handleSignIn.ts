@@ -11,11 +11,12 @@ export async function handleSignIn(
   navigate: NavigateFunction,
   location: Location
 ) {
-  const { identifier, password } = form;
+  const { identifier, password, isPersistentAuth } = form;
 
   const { accessToken, errDetails } = await requestSignIn({
     identifier,
     password,
+    isPersistentAuth,
   });
 
   if (errDetails) {
