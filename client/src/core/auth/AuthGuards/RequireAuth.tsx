@@ -1,6 +1,6 @@
 import { useLocation, Navigate, Outlet } from "react-router-dom";
 import { ADDRESSES } from "@/constants";
-import { useAlertInvalidSession, useAuth } from "./hooks";
+import { useAlertInvalidSession, useAuth } from "../hooks";
 
 type RequireAuthProps = {
   allowedRoles?: string[];

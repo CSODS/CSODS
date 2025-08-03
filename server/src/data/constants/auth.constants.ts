@@ -50,7 +50,7 @@ export const TOKEN_CONFIG_RECORD: TokenConfigRecord = {
   access: {
     secret: process.env.ACCESS_TOKEN_SECRET,
     signOptions: {
-      expiresIn: "5m",
+      expiresIn: "5s",
     } as jwt.SignOptions,
   },
   refresh: {

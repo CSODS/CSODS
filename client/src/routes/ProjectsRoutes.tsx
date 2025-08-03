@@ -1,6 +1,6 @@
 import { Route } from "react-router-dom";
 import { ADDRESSES } from "@/constants";
-import { AuthGuards, PersistAuth } from "@/core/auth";
+import { AuthGuards } from "@/core/auth";
 import {
   Layouts as ProjectsLayouts,
   Pages as ProjectsPages,
@@ -9,7 +9,7 @@ import {
 export function ProjectsRoutes() {
   return (
     <>
-      <Route element={<PersistAuth />}>
+      <Route element={<AuthGuards.PersistAuth />}>
         <Route element={<AuthGuards.RequireAuth />}>
           <Route element={<ProjectsLayouts.ProjectsNavBar navBarVariant={1} />}>
             <Route
