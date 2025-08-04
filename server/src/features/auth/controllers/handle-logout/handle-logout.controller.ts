@@ -25,7 +25,7 @@ export async function handleLogout(req: Request, res: Response) {
 
   const foundUser = await userDataService.tryGetUser({
     type: "refresh",
-    refreshToken: refreshToken,
+    userId: 0,
   });
 
   if (foundUser) {
