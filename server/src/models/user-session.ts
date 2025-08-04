@@ -21,6 +21,7 @@ export const UserSession = sqliteTable(
     lastUsedAt: text("last_used_at"),
   },
   (table) => [
+    index("user_sessions_user_id_idx").on(table.userId),
     uniqueIndex("token_hash_idx").on(table.refreshTokenHash),
     index("persistent_clean_up_idx").on(table.expiresAt),
     index("session_clean_up_idx")
