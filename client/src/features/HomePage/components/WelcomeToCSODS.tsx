@@ -21,8 +21,6 @@ export function WelcomeToCSODS() {
       <button
         type="button"
         className="btn btn-dark-4 px-md-5 px-3 me-2 "
-        data-bs-toggle="modal"
-        data-bs-target="#loginModal"
         onClick={() => goToSignUp()}
       >
         <span>Sign Up</span>
