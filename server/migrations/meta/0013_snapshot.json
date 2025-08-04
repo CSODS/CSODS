@@ -1,0 +1,824 @@
+{
+  "version": "6",
+  "dialect": "sqlite",
+  "id": "5aad835e-5404-4bd3-8345-34538221a443",
+  "prevId": "f8293b0d-1c32-4c76-ba5f-da811dcc16b0",
+  "tables": {
+    "application_industries": {
+      "name": "application_industries",
+      "columns": {
+        "industry_id": {
+          "name": "industry_id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "industry": {
+          "name": "industry",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "application_industries_industry_id_unique": {
+          "name": "application_industries_industry_id_unique",
+          "columns": [
+            "industry_id"
+          ],
+          "isUnique": true
+        },
+        "application_industries_industry_unique": {
+          "name": "application_industries_industry_unique",
+          "columns": [
+            "industry"
+          ],
+          "isUnique": true
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "database_technologies": {
+      "name": "database_technologies",
+      "columns": {
+        "database_id": {
+          "name": "database_id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "database": {
+          "name": "database",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "database_technologies_database_id_unique": {
+          "name": "database_technologies_database_id_unique",
+          "columns": [
+            "database_id"
+          ],
+          "isUnique": true
+        },
+        "database_technologies_database_unique": {
+          "name": "database_technologies_database_unique",
+          "columns": [
+            "database"
+          ],
+          "isUnique": true
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "dev_types": {
+      "name": "dev_types",
+      "columns": {
+        "dev_type_id": {
+          "name": "dev_type_id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "dev_type_name": {
+          "name": "dev_type_name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "dev_types_dev_type_id_unique": {
+          "name": "dev_types_dev_type_id_unique",
+          "columns": [
+            "dev_type_id"
+          ],
+          "isUnique": true
+        },
+        "dev_types_dev_type_name_unique": {
+          "name": "dev_types_dev_type_name_unique",
+          "columns": [
+            "dev_type_name"
+          ],
+          "isUnique": true
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "frameworks_": {
+      "name": "frameworks_",
+      "columns": {
+        "framework_id": {
+          "name": "framework_id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "framework_name": {
+          "name": "framework_name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "dev_type_id": {
+          "name": "dev_type_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "frameworks__framework_id_unique": {
+          "name": "frameworks__framework_id_unique",
+          "columns": [
+            "framework_id"
+          ],
+          "isUnique": true
+        },
+        "frameworks__framework_name_unique": {
+          "name": "frameworks__framework_name_unique",
+          "columns": [
+            "framework_name"
+          ],
+          "isUnique": true
+        }
+      },
+      "foreignKeys": {
+        "frameworks__dev_type_id_dev_types_dev_type_id_fk": {
+          "name": "frameworks__dev_type_id_dev_types_dev_type_id_fk",
+          "tableFrom": "frameworks_",
+          "tableTo": "dev_types",
+          "columnsFrom": [
+            "dev_type_id"
+          ],
+          "columnsTo": [
+            "dev_type_id"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "programming_languages": {
+      "name": "programming_languages",
+      "columns": {
+        "language_id": {
+          "name": "language_id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "language_name": {
+          "name": "language_name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "programming_languages_language_id_unique": {
+          "name": "programming_languages_language_id_unique",
+          "columns": [
+            "language_id"
+          ],
+          "isUnique": true
+        },
+        "programming_languages_language_name_unique": {
+          "name": "programming_languages_language_name_unique",
+          "columns": [
+            "language_name"
+          ],
+          "isUnique": true
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "projects_": {
+      "name": "projects_",
+      "columns": {
+        "project_id": {
+          "name": "project_id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "project_number": {
+          "name": "project_number",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "user_id": {
+          "name": "user_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "project_title": {
+          "name": "project_title",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "project_title_lower": {
+          "name": "project_title_lower",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "dev_type_id": {
+          "name": "dev_type_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "primary_language_id": {
+          "name": "primary_language_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "secondary_language_id": {
+          "name": "secondary_language_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "database_technology_id": {
+          "name": "database_technology_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "application_industry_id": {
+          "name": "application_industry_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "github_url": {
+          "name": "github_url",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "projects__project_id_unique": {
+          "name": "projects__project_id_unique",
+          "columns": [
+            "project_id"
+          ],
+          "isUnique": true
+        },
+        "projects__project_number_unique": {
+          "name": "projects__project_number_unique",
+          "columns": [
+            "project_number"
+          ],
+          "isUnique": true
+        }
+      },
+      "foreignKeys": {
+        "projects__user_id_users__user_id_fk": {
+          "name": "projects__user_id_users__user_id_fk",
+          "tableFrom": "projects_",
+          "tableTo": "users_",
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "user_id"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "no action"
+        },
+        "projects__dev_type_id_dev_types_dev_type_id_fk": {
+          "name": "projects__dev_type_id_dev_types_dev_type_id_fk",
+          "tableFrom": "projects_",
+          "tableTo": "dev_types",
+          "columnsFrom": [
+            "dev_type_id"
+          ],
+          "columnsTo": [
+            "dev_type_id"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "no action"
+        },
+        "projects__primary_language_id_programming_languages_language_id_fk": {
+          "name": "projects__primary_language_id_programming_languages_language_id_fk",
+          "tableFrom": "projects_",
+          "tableTo": "programming_languages",
+          "columnsFrom": [
+            "primary_language_id"
+          ],
+          "columnsTo": [
+            "language_id"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "no action"
+        },
+        "projects__secondary_language_id_programming_languages_language_id_fk": {
+          "name": "projects__secondary_language_id_programming_languages_language_id_fk",
+          "tableFrom": "projects_",
+          "tableTo": "programming_languages",
+          "columnsFrom": [
+            "secondary_language_id"
+          ],
+          "columnsTo": [
+            "language_id"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "no action"
+        },
+        "projects__database_technology_id_database_technologies_database_id_fk": {
+          "name": "projects__database_technology_id_database_technologies_database_id_fk",
+          "tableFrom": "projects_",
+          "tableTo": "database_technologies",
+          "columnsFrom": [
+            "database_technology_id"
+          ],
+          "columnsTo": [
+            "database_id"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "no action"
+        },
+        "projects__application_industry_id_application_industries_industry_id_fk": {
+          "name": "projects__application_industry_id_application_industries_industry_id_fk",
+          "tableFrom": "projects_",
+          "tableTo": "application_industries",
+          "columnsFrom": [
+            "application_industry_id"
+          ],
+          "columnsTo": [
+            "industry_id"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "project_frameworks": {
+      "name": "project_frameworks",
+      "columns": {
+        "project_id": {
+          "name": "project_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "framework_id": {
+          "name": "framework_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "project_frameworks_project_id_projects__project_id_fk": {
+          "name": "project_frameworks_project_id_projects__project_id_fk",
+          "tableFrom": "project_frameworks",
+          "tableTo": "projects_",
+          "columnsFrom": [
+            "project_id"
+          ],
+          "columnsTo": [
+            "project_id"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "no action"
+        },
+        "project_frameworks_framework_id_frameworks__framework_id_fk": {
+          "name": "project_frameworks_framework_id_frameworks__framework_id_fk",
+          "tableFrom": "project_frameworks",
+          "tableTo": "frameworks_",
+          "columnsFrom": [
+            "framework_id"
+          ],
+          "columnsTo": [
+            "framework_id"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "project_frameworks_project_id_framework_id_pk": {
+          "columns": [
+            "project_id",
+            "framework_id"
+          ],
+          "name": "project_frameworks_project_id_framework_id_pk"
+        }
+      },
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "project_images": {
+      "name": "project_images",
+      "columns": {
+        "image_id": {
+          "name": "image_id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "project_id": {
+          "name": "project_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "image_url": {
+          "name": "image_url",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "project_images_image_id_unique": {
+          "name": "project_images_image_id_unique",
+          "columns": [
+            "image_id"
+          ],
+          "isUnique": true
+        }
+      },
+      "foreignKeys": {
+        "project_images_project_id_projects__project_id_fk": {
+          "name": "project_images_project_id_projects__project_id_fk",
+          "tableFrom": "project_images",
+          "tableTo": "projects_",
+          "columnsFrom": [
+            "project_id"
+          ],
+          "columnsTo": [
+            "project_id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "roles_": {
+      "name": "roles_",
+      "columns": {
+        "role_id": {
+          "name": "role_id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "role_name": {
+          "name": "role_name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "roles__role_id_unique": {
+          "name": "roles__role_id_unique",
+          "columns": [
+            "role_id"
+          ],
+          "isUnique": true
+        },
+        "roles__role_name_unique": {
+          "name": "roles__role_name_unique",
+          "columns": [
+            "role_name"
+          ],
+          "isUnique": true
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "users_": {
+      "name": "users_",
+      "columns": {
+        "user_id": {
+          "name": "user_id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "email": {
+          "name": "email",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "username": {
+          "name": "username",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "student_name": {
+          "name": "student_name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "password": {
+          "name": "password",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "student_number": {
+          "name": "student_number",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "user_icon_url": {
+          "name": "user_icon_url",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "refresh_token": {
+          "name": "refresh_token",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "users__user_id_unique": {
+          "name": "users__user_id_unique",
+          "columns": [
+            "user_id"
+          ],
+          "isUnique": true
+        },
+        "users__email_unique": {
+          "name": "users__email_unique",
+          "columns": [
+            "email"
+          ],
+          "isUnique": true
+        },
+        "users__username_unique": {
+          "name": "users__username_unique",
+          "columns": [
+            "username"
+          ],
+          "isUnique": true
+        },
+        "users__student_number_unique": {
+          "name": "users__student_number_unique",
+          "columns": [
+            "student_number"
+          ],
+          "isUnique": true
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "user_roles": {
+      "name": "user_roles",
+      "columns": {
+        "user_id": {
+          "name": "user_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "role_id": {
+          "name": "role_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "user_roles_user_id_users__user_id_fk": {
+          "name": "user_roles_user_id_users__user_id_fk",
+          "tableFrom": "user_roles",
+          "tableTo": "users_",
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "user_id"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "no action"
+        },
+        "user_roles_role_id_roles__role_id_fk": {
+          "name": "user_roles_role_id_roles__role_id_fk",
+          "tableFrom": "user_roles",
+          "tableTo": "roles_",
+          "columnsFrom": [
+            "role_id"
+          ],
+          "columnsTo": [
+            "role_id"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "user_roles_user_id_role_id_pk": {
+          "columns": [
+            "user_id",
+            "role_id"
+          ],
+          "name": "user_roles_user_id_role_id_pk"
+        }
+      },
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "user_sessions": {
+      "name": "user_sessions",
+      "columns": {
+        "session_id": {
+          "name": "session_id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "session_number": {
+          "name": "session_number",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "user_id": {
+          "name": "user_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "refresh_token_hash": {
+          "name": "refresh_token_hash",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "expires_at": {
+          "name": "expires_at",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "last_used_at": {
+          "name": "last_used_at",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "user_sessions_user_id_idx": {
+          "name": "user_sessions_user_id_idx",
+          "columns": [
+            "user_id"
+          ],
+          "isUnique": false
+        },
+        "token_hash_idx": {
+          "name": "token_hash_idx",
+          "columns": [
+            "refresh_token_hash"
+          ],
+          "isUnique": true
+        },
+        "persistent_clean_up_idx": {
+          "name": "persistent_clean_up_idx",
+          "columns": [
+            "expires_at"
+          ],
+          "isUnique": false
+        },
+        "session_clean_up_idx": {
+          "name": "session_clean_up_idx",
+          "columns": [
+            "expires_at",
+            "last_used_at"
+          ],
+          "isUnique": false,
+          "where": "\"user_sessions\".\"expires_at\" is null"
+        }
+      },
+      "foreignKeys": {
+        "user_sessions_user_id_users__user_id_fk": {
+          "name": "user_sessions_user_id_users__user_id_fk",
+          "tableFrom": "user_sessions",
+          "tableTo": "users_",
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "user_id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "cascade"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    }
+  },
+  "views": {},
+  "enums": {},
+  "_meta": {
+    "schemas": {},
+    "tables": {},
+    "columns": {}
+  },
+  "internal": {
+    "indexes": {}
+  }
+}

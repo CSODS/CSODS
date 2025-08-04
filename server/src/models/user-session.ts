@@ -12,6 +12,7 @@ export const UserSession = sqliteTable(
   "user_sessions",
   {
     sessionId: integer("session_id").primaryKey(),
+    sessionNumber: text("session_number").notNull(),
     userId: integer("user_id")
       .notNull()
       .references(() => User.userId, {
