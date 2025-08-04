@@ -117,7 +117,7 @@ export class UserSessionService {
       (
         await this._userSessionRepository.tryDeleteSession({
           scope: "user_session",
-          sessionNumber,
+          sessionNumber: sessionNumberHash,
         })
       )?.[0] ?? null;
 
