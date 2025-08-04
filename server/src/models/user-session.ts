@@ -15,7 +15,7 @@ export const UserSession = sqliteTable(
     userId: integer("user_id")
       .notNull()
       .references(() => User.userId, { onDelete: "cascade" }),
-    refreshTokenHash: integer("refresh_token_hash").notNull(),
+    refreshTokenHash: text("refresh_token_hash").notNull(),
     createdAt: text("created_at"),
     expiresAt: text("expires_at"),
     lastUsedAt: text("last_used_at"),

@@ -71,6 +71,13 @@
       "when": 1754299690869,
       "tag": "0009_many_moondragon",
       "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "6",
+      "when": 1754300854948,
+      "tag": "0010_flowery_champions",
+      "breakpoints": true
     }
   ]
 }
