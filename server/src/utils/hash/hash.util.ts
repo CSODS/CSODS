@@ -15,4 +15,14 @@ export class HashService {
   public static hashToken(token: string): string {
     return crypto.createHash("sha256").update(token).digest("hex");
   }
+
+  public static hashSessionNumber(userId: number) {
+    const rawSessionNumber = `${userId}-${Date.now()}-${Math.random()}`;
+    const hashed = crypto
+      .createHash("sha256")
+      .update(rawSessionNumber)
+      .digest("hex");
+
+    return { rawSessionNumber, hashed };
+  }
 }
