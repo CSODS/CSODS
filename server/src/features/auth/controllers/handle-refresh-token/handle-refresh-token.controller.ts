@@ -26,17 +26,20 @@ export async function handleRefreshToken(req: Request, res: Response) {
   const { cookies, requestLogContext: requestLogger, userDataService } = req;
   const refreshToken = cookies[refreshTokenCookie] as string;
 
-  const foundUser = await userDataService.tryGetUser({
-    type: "refresh",
-    refreshToken: refreshToken,
-  });
-
   //  evaluate jwt
   try {
     requestLogger.log("debug", "Attempting to refresh token");
 
     const payload = verifyRefreshToken(req, refreshToken);
-    if (!payload || !foundUser) return;
+
+    if (!payload) return;
+
+    const foundUser = await userDataService.tryGetUser({
+      type: "refresh",
+      userId: payload.userId,
+    });
+
+    if (!foundUser) return;
 
     const { accessToken, refreshToken: newRefreshToken } = await createTokens(
       req,

@@ -98,9 +98,7 @@ export class UserDataService {
         break;
       }
       case "refresh": {
-        const hashedToken = HashService.hashToken(options.refreshToken);
-
-        userFilter.refreshToken = hashedToken;
+        userFilter.userId = options.userId;
         break;
       }
     }
@@ -182,5 +180,5 @@ type WithLogin = {
 
 type WithRefreshToken = {
   type: "refresh";
-  refreshToken: string;
+  userId: number;
 };
