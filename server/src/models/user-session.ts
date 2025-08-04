@@ -8,10 +8,10 @@ import {
 import { User } from "./user";
 import { isNull } from "drizzle-orm";
 
-export const RefreshToken = sqliteTable(
-  "refresh_tokens",
+export const UserSession = sqliteTable(
+  "user_sessions",
   {
-    tokenId: integer("token_id").primaryKey(),
+    sessionId: integer("session_id").primaryKey(),
     userId: integer("user_id")
       .notNull()
       .references(() => User.userId, { onDelete: "cascade" }),

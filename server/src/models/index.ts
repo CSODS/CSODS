@@ -6,7 +6,7 @@ export * from "./programming-language.js";
 export * from "./project-framework.js";
 export * from "./project-image.js";
 export * from "./project.js";
-export * from "./refresh-token.js";
+export * from "./user-session.js";
 export * from "./role.js";
 export * from "./user-role.js";
 export * from "./user.js";
