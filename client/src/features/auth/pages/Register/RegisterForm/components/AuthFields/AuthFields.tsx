@@ -66,19 +66,19 @@ export function AuthFields({ registerForm, onType }: RegisterFieldsProps) {
           ></i>
         </span>
       </div>
-      <p
+      <ul
         id="email-note"
-        className={
+        className={`mb-0 pb-0 ${
           emailFocus && registerForm.email && !validEmail
             ? "text-start fs-small"
             : "visually-hidden"
-        }
-      >
-        Max 254 characters <br />
-        No starting dot (.) or consecutive dots (..) <br />
-        Lowercase letters, numbers, ', ., +, _, - allowed before @ <br />
-        Must end with a valid domain (e.g. example.com)
-      </p>
+          }`}
+        >
+        <li>Max 254 characters</li>
+        <li>No starting dot (.) or consecutive dots (..)</li>
+        <li>Lowercase letters, numbers, ', ., +, _, - allowed before @</li>
+        <li>Must end with a valid domain (e.g. example.com)</li>
+      </ul>
       {/* username */}
       <div
         className={`position-relative border border-1 ${groupForm} 
@@ -114,18 +114,18 @@ export function AuthFields({ registerForm, onType }: RegisterFieldsProps) {
           ></i>
         </span>
       </div>
-      <p
+      <ul
         id="user-note"
-        className={
+        className={`mb-0 pb-0 ${
           userFocus && registerForm.username && !validUser
             ? "text-start fs-small"
             : "visually-hidden"
-        }
-      >
-        4-24 characters <br />
-        Must start with a letter <br />
-        Letters, numbers, hyphens (-), and underscores (_) allowed
-      </p>
+          }`}
+        >
+        <li>4-24 characters</li>
+        <li>Must start with a letter</li>
+        <li>Letters, numbers, hyphens (-), and underscores (_) allowed</li>
+      </ul>
       {/* password */}
       <div
         className={`position-relative border border-1 ${groupForm} 
@@ -152,29 +152,34 @@ export function AuthFields({ registerForm, onType }: RegisterFieldsProps) {
               validPwd
                 ? "bi bi-check text-success"
                 : registerForm.password
-                ? "bi bi-exclamation-circle text-danger"
+                ? "bi bi-exclamation text-danger"
                 : "bi bi-lock-fill"
             }`}
           ></i>
         </span>
       </div>
+
       <div
         id="pwd-note"
         className={
           pwdFocus && registerForm.password && !validPwd
             ? "text-start fs-small"
             : "visually-hidden"
-        }
-      >
-        8-24 characters <br />
-        Must include: <br />
-        <ul>
+          }
+        >
+
+        <span className="ms-2">
+          Password must be 8 – 24 characters and include:
+        </span>
+        <ul className="mb-0 pb-0">
           <li>At least one uppercase letter</li>
           <li>At least one lowercase letter</li>
           <li>At least one number</li>
-          <li>At least one number At least one special character: ! @ # $ %</li>
+          <li>At least one special character<i> (e.g.: ! @ # $ % )</i></li>
         </ul>
+        
       </div>
+
       {/* confirm password */}
       <div
         className={`position-relative border border-1 ${groupForm} 
@@ -205,22 +210,24 @@ export function AuthFields({ registerForm, onType }: RegisterFieldsProps) {
           <i
             className={`${
               registerForm.password && validMatch
-                ? "bi bi-check text-success"
+                ? "bi bi-check-all text-success"
                 : registerForm.passwordMatch
-                ? "bi bi-exclamation-circle text-danger"
+                ? "bi bi-exclamation text-danger"
                 : "bi bi-lock-fill"
             }`}
           ></i>
         </span>
       </div>
-      <p
+      <div
         id="pwd-match-note"
         className={
           matchFocus && !validMatch ? "text-start fs-small" : "visually-hidden"
         }
       >
-        Must match the password input field.
-      </p>
+        <ul className="mb-0 pb-0">
+          <li>Must match the password input field.</li>
+        </ul>
+      </div>
     </>
   );
 }

@@ -18,7 +18,8 @@ export function StudentFields({ registerForm, onType }: RegisterFieldsProps) {
   return (
     <>
       {/* student name */}
-      <div className={`position-relative border border-1 ${groupForm}`}>
+      <div className={`position-relative border border-1 ${groupForm} 
+            ${validName ? styles.valid : registerForm.studentName ? styles.invalid : ""}`}>
         <input
           type="text"
           id="studentName"
@@ -33,21 +34,30 @@ export function StudentFields({ registerForm, onType }: RegisterFieldsProps) {
         />
         <label htmlFor="studentName">Student Name</label>
         <span className="position-absolute top-50 end-0 translate-middle-y me-3">
-          <i className="bi bi-person-fill"></i>
+          <i
+            className={`${
+              validName
+                ? "bi bi-person-fill-check text-success"
+                : registerForm.studentName
+                ? "bi bi-person-fill-x text-danger"
+                : "bi bi-person-fill"
+            }`}
+          ></i>
         </span>
       </div>
-      <p
+      <ul
         id="name-note"
-        className={
+        className={`mb-0 pb-0 ${
           nameFocus && registerForm.studentName && !validName
             ? "text-start fs-small"
             : "visually-hidden"
-        }
+        }`}
       >
-        Invalid name format.
-      </p>
+        <li>Invalid name format.</li>
+      </ul>
       {/* student number */}
-      <div className={`position-relative border border-1 ${groupForm}`}>
+      <div className={`position-relative border border-1 ${groupForm} 
+            ${validNumber ? styles.valid : registerForm.studentNumber ? styles.invalid : ""}`}>
         <input
           type="text"
           id="studentNumber"
@@ -62,19 +72,27 @@ export function StudentFields({ registerForm, onType }: RegisterFieldsProps) {
         />
         <label htmlFor="studentNumber">Student Number</label>
         <span className="position-absolute top-50 end-0 translate-middle-y me-3">
-          <i className="bi bi-key-fill"></i>
+          <i
+            className={`${
+              validNumber
+                ? "bi bi-check-all text-success"
+                : registerForm.studentNumber
+                ? "bi bi-exclamation text-danger"
+                : "bi bi-key-fill"
+            }`}
+          ></i>
         </span>
       </div>
-      <p
+      <ul
         id="number-note"
-        className={
+        className={`mb-0 pb-0 ${
           numberFocus && registerForm.studentNumber && !validNumber
             ? "text-start fs-small"
             : "visually-hidden"
-        }
+        }`}
       >
-        Invalid studentn number format.
-      </p>
+        <li>Invalid student number format.</li>
+      </ul>
     </>
   );
 }

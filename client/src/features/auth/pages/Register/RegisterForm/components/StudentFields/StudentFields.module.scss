@@ -1,6 +1,15 @@
+.valid {
+  border-color: green !important;
+}
+
+.invalid {
+  border-color: red !important;
+}
+
 .form-group-floating {
   position: relative;
   border-radius: 5rem;
+  margin-bottom: 0;
 }
 
 .form-control-floating {
@@ -34,6 +43,6 @@
 //box shadow made transparent as solution for autofill issue
 input:-webkit-autofill {
   -webkit-text-fill-color: white;
-  box-shadow: 0 0 0 1000px transparent inset !important;
+  box-shadow: 0 0 0 1000px transparent inset;
   transition: background-color 5000s ease-in-out 0s;
 }
