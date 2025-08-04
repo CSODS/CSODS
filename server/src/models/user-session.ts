@@ -14,11 +14,14 @@ export const UserSession = sqliteTable(
     sessionId: integer("session_id").primaryKey(),
     userId: integer("user_id")
       .notNull()
-      .references(() => User.userId, { onDelete: "cascade" }),
+      .references(() => User.userId, {
+        onDelete: "cascade",
+        onUpdate: "cascade",
+      }),
     refreshTokenHash: text("refresh_token_hash").notNull(),
-    createdAt: text("created_at"),
+    createdAt: text("created_at").notNull(),
     expiresAt: text("expires_at"),
-    lastUsedAt: text("last_used_at"),
+    lastUsedAt: text("last_used_at").notNull(),
   },
   (table) => [
     index("user_sessions_user_id_idx").on(table.userId),
