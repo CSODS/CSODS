@@ -35,7 +35,7 @@ export async function handleRefreshToken(req: Request, res: Response) {
   try {
     requestLogger.log("debug", "Attempting to refresh token");
 
-    const payload = verifyRefreshToken(req, refreshToken, foundUser);
+    const payload = verifyRefreshToken(req, refreshToken);
     if (!payload || !foundUser) return;
 
     const { accessToken, refreshToken: newRefreshToken } = await createTokens(
