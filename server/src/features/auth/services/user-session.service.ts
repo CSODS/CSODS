@@ -40,7 +40,7 @@ export class UserSessionService {
   public async tryStartNewSession(sessionData: {
     userId: number;
     refreshToken: string;
-    expiresAt?: Date;
+    expiresAt?: Date | null;
   }): Promise<number | null> {
     const { userId, refreshToken, expiresAt } = sessionData;
 
