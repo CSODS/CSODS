@@ -1,6 +1,8 @@
 import { Request, Response } from "express";
 import { AUTH } from "@data";
 import { getRefreshToken } from "./get-refresh-token";
+import { verifyRefreshToken } from "../../utils";
+import { endSession } from "./end-session";
 
 const { refresh } = AUTH.TOKEN_CONFIG_RECORD;
 const { cookieConfig: refreshCookie } = refresh;
@@ -18,24 +20,28 @@ const { cookieConfig: refreshCookie } = refresh;
  * @returns
  */
 export async function handleLogout(req: Request, res: Response) {
-  const { requestLogContext: requestLogger, userDataService } = req;
+  const { requestLogContext: requestLogger } = req;
 
   const refreshToken: string | null = getRefreshToken(req);
   if (!refreshToken) return;
 
-  const foundUser = await userDataService.tryGetUser({
-    type: "refresh",
-    userId: 0,
-  });
+  const payload = verifyRefreshToken(req, refreshToken);
 
-  if (foundUser) {
-    requestLogger.log(
-      "debug",
-      `Deleting refresh token of user with id: ${foundUser.userId}.`
-    );
-    await userDataService.updateRefreshToken(foundUser.userId, null);
-  }
+  if (!payload) return clearCookie(res);
 
-  res.clearCookie(refreshCookie!.cookieName, refreshCookie!.clearCookie);
+  const deletedSessionId = await endSession(req, payload.sessionNumber);
+
+  if (!deletedSessionId) return clearCookie(res);
+
+  clearCookie(res);
   return requestLogger.logStatus(204, "Logged out successfully.");
+}
+
+function clearCookie(res: Response) {
+  if (!refreshCookie)
+    throw new Error("Refresh token cookie configuration not set.");
+
+  const { cookieName, clearCookie } = refreshCookie;
+
+  res.clearCookie(cookieName, clearCookie);
 }
