@@ -1,7 +1,8 @@
 import { Request, Response } from "express";
 import { AUTH } from "@data";
-import { createTokens, updateUserRefreshToken } from "../../utils";
+import { createTokens } from "../../utils";
 import { verifyRefreshToken } from "./verify-refresh-token";
+import { updateSession } from "./update-session";
 
 /**
  * @public
@@ -47,13 +48,13 @@ export async function handleRefreshToken(req: Request, res: Response) {
       payload.isPersistentAuth
     );
 
-    const updatedUserId = await updateUserRefreshToken(
-      req,
-      foundUser,
-      newRefreshToken
-    );
+    const updatedSessionId = await updateSession(req, {
+      userId: foundUser.userId,
+      oldToken: refreshToken,
+      newToken: newRefreshToken,
+    });
 
-    if (!updatedUserId) return;
+    if (!updatedSessionId) return;
 
     const { refresh } = AUTH.TOKEN_CONFIG_RECORD;
     const { cookieConfig: refreshCookie } = refresh;
