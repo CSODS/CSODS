@@ -37,8 +37,15 @@ export function RequireAuth({ allowedRoles }: RequireAuthProps) {
   ) : isAuthenticated ? (
     <Navigate to={unauthorizedPage} state={{ from: location }} replace />
   ) : alertInvalidSession ? (
+
     //  ! make this a bootstrap alert or something.
-    <p>Invalid/Expired Session. Please sign-in again.</p>
+    <div className="alert alert-danger text-center" role="alert">
+      <b>Invalid/Expired Session. </b>Please sign-in again.
+      <button
+        className="btn btn-close"
+        aria-label="Close"
+      ></button>
+    </div>
   ) : (
     <Navigate to={signInPage} state={{ from: location }} replace />
   );
