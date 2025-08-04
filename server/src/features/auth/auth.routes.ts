@@ -4,6 +4,7 @@ import { validateCookies, validateRequest } from "@middleware";
 import * as controllers from "./controllers";
 import { attachUserDataService, Limiters } from "./middleware";
 import { loginOptions, registerSchema } from "./schemas";
+import { attachUserSessionService } from "./middleware/user-session-service.middleware";
 
 const { refresh } = AUTH.TOKEN_CONFIG_RECORD;
 const { cookieName: REFRESH_TOKEN } = refresh.cookieConfig!;
@@ -13,6 +14,7 @@ const AUTH_ROUTES = API.AUTH_ROUTES;
 export const authRouter = Router();
 
 authRouter.use(attachUserDataService);
+authRouter.use(attachUserSessionService);
 
 authRouter.post(
   AUTH_ROUTES.SIGN_IN,
