@@ -73,7 +73,8 @@ export class UserSessionRepository extends Repository<UserSessionsTable> {
    * @public
    * @async
    * @function tryUpdateSessionToken
-   * @description Asynchronously attempts to update {@link UserSession.refreshTokenHash}.
+   * @description Asynchronously attempts to update {@link UserSession.refreshTokenHash} and
+   * {@link UserSession.lastUsedAt}.
    *
    * @param data Contains the following fields:
    * - {@link sessionId} - The id of the session to be updated. Used for logging.
