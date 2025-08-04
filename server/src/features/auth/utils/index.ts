@@ -3,3 +3,4 @@ export * from "./create-payload.util";
 export * from "./create-tokens.util";
 export * from "./update-user-refresh-token.util";
 export * from "./verify-password.util";
+export * from "./verify-refresh-token";

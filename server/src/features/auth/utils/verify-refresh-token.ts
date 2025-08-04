@@ -1,7 +1,7 @@
 import { Request } from "express";
 import dotenv from "dotenv";
 import jwt from "jsonwebtoken";
-import { authSchemas, authTypes } from "../..";
+import { authSchemas, authTypes } from "..";
 
 dotenv.config();
 

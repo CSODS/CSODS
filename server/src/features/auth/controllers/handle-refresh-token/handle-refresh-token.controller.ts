@@ -1,7 +1,6 @@
 import { Request, Response } from "express";
 import { AUTH } from "@data";
-import { createTokens } from "../../utils";
-import { verifyRefreshToken } from "./verify-refresh-token";
+import { createTokens, verifyRefreshToken } from "../../utils";
 import { updateSession } from "./update-session";
 
 /**
