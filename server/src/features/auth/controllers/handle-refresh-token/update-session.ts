@@ -3,6 +3,7 @@ import { Request } from "express";
 export async function updateSession(
   req: Request,
   sessionData: {
+    sessionNumber: string;
     userId: number;
     oldToken: string;
     newToken: string;
@@ -11,9 +12,7 @@ export async function updateSession(
   const { requestLogContext: requestLogger } = req;
 
   //  todo: add session number to be used for this purpose.
-  const sessionId = 0;
   const updatedSessionId = await req.userSessionService.tryUpdateSession({
-    sessionId,
     ...sessionData,
   });
 

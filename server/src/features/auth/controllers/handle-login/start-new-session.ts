@@ -20,6 +20,7 @@ import { UserViewModel } from "../../types";
  */
 export async function startNewSession(
   req: Request,
+  sessionNumber: string,
   verifiedUser: UserViewModel,
   refreshToken: string,
   persistentAuthOptions?: {
@@ -33,6 +34,7 @@ export async function startNewSession(
   persistentTokenExpiry.setDate(persistentTokenExpiry.getDate() + 30);
 
   const newSessionId = await req.userSessionService.tryStartNewSession({
+    sessionNumber,
     userId: verifiedUser.userId,
     refreshToken,
     expiresAt: persistentAuthOptions?.isPersistentAuth

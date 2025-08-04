@@ -29,6 +29,7 @@ type Tokens = {
 export async function createTokens(
   req: Request,
   verifiedUser: UserViewModel,
+  sessionNumber: string,
   isPersistentAuth?: boolean
 ): Promise<Tokens> {
   const { requestLogContext: requestLogger } = req;
@@ -46,6 +47,7 @@ export async function createTokens(
   });
   const refreshTokenPayload: RefreshTokenPayload = createPayload({
     tokenType: "refresh",
+    sessionNumber,
     userId: verifiedUser.userId,
     isPersistentAuth,
   });

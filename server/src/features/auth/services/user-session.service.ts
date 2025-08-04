@@ -38,11 +38,12 @@ export class UserSessionService {
    * if if the session creation fails.
    */
   public async tryStartNewSession(sessionData: {
+    sessionNumber: string;
     userId: number;
     refreshToken: string;
     expiresAt?: Date | null;
   }): Promise<number | null> {
-    const { userId, refreshToken, expiresAt } = sessionData;
+    const { sessionNumber, userId, refreshToken, expiresAt } = sessionData;
 
     const refreshTokenHash = HashService.hashToken(refreshToken);
 
@@ -50,6 +51,7 @@ export class UserSessionService {
     const nowISO = now.toISOString();
 
     const newSession: NewUserSession = {
+      sessionNumber,
       userId,
       refreshTokenHash,
       createdAt: nowISO,
@@ -70,7 +72,7 @@ export class UserSessionService {
    * @function tryUpdateSession
    * @description Asynchronously attempts to update the session's refresh token.
    * @param data Contains the following fields:
-   * - `sessionId` - The `id` of the `session` that will be updated. Only used for logging,
+   * - `sessionNumber` - The `id` of the `session` that will be updated. Only used for logging,
    * not validation.
    * - `userId` - The `id` of the `user` whose `session` will be updated. Only used for
    * logging, not validation.
@@ -81,16 +83,16 @@ export class UserSessionService {
    * session update fails.
    */
   public async tryUpdateSession(data: {
-    sessionId: number;
+    sessionNumber: string;
     userId: number;
     oldToken: string;
     newToken: string;
   }): Promise<number | null> {
-    const { sessionId, userId, oldToken, newToken } = data;
+    const { sessionNumber, userId, oldToken, newToken } = data;
 
     const updatedSessionId =
       await this._userSessionRepository.tryUpdateSessionToken({
-        sessionId,
+        sessionNumber,
         userId,
         oldTokenHash: HashService.hashToken(oldToken),
         newTokenHash: HashService.hashToken(newToken),
@@ -103,17 +105,19 @@ export class UserSessionService {
    * @public
    * @async
    * @function tryEndSession
-   * @description Asynchronously attempts to end a session with the specified `sessionId`.
-   * @param sessionId The `id` of the session that will be deleted.
+   * @description Asynchronously attempts to end a session with the specified `sessionNumber`.
+   * @param sessionNumber The `sessionNumber` of the session that will be deleted.
    * @returns A `Promise` resolving to the `id` of the deleted session, or `null` if the
    * operation fails.
    */
-  public async tryEndSession(sessionId: number): Promise<number | null> {
+  public async tryEndSession(sessionNumber: string): Promise<number | null> {
+    const sessionNumberHash = HashService.hashToken(sessionNumber);
+
     const deletedSessionId =
       (
         await this._userSessionRepository.tryDeleteSession({
           scope: "user_session",
-          sessionId,
+          sessionNumber,
         })
       )?.[0] ?? null;
 

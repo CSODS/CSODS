@@ -45,10 +45,12 @@ export async function handleRefreshToken(req: Request, res: Response) {
     const { accessToken, refreshToken: newRefreshToken } = await createTokens(
       req,
       foundUser,
+      payload.sessionNumber,
       payload.isPersistentAuth
     );
 
     const updatedSessionId = await updateSession(req, {
+      sessionNumber: payload.sessionNumber,
       userId: foundUser.userId,
       oldToken: refreshToken,
       newToken: newRefreshToken,
