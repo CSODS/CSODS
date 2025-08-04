@@ -1,8 +1,9 @@
 import { Request, Response } from "express";
 import { AUTH } from "@data";
 import { LoginOptions } from "../../schemas";
-import { createTokens, updateUserRefreshToken } from "../../utils";
+import { createTokens } from "../../utils";
 import { getVerifiedUser } from "./get-verified-user";
+import { startNewSession } from "./start-new-session";
 
 /**
  * @public
@@ -31,13 +32,11 @@ export async function handleLogin(
     isPersistentAuth
   );
 
-  const updatedUserId = await updateUserRefreshToken(
-    req,
-    verifiedUser,
-    refreshToken
-  );
+  const newSessionId = await startNewSession(req, verifiedUser, refreshToken, {
+    isPersistentAuth,
+  });
 
-  if (!updatedUserId) return;
+  if (!newSessionId) return;
 
   const { refresh } = AUTH.TOKEN_CONFIG_RECORD;
   const { cookieConfig: refreshCookie } = refresh;
