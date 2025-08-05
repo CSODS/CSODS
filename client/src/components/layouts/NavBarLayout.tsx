@@ -2,6 +2,7 @@ import { Link, Outlet } from "react-router-dom";
 import { ADDRESSES } from "@/constants";
 import { CollapseControls, NavBarControls } from "../shared";
 import { NavBarLayoutProps } from "@/types";
+import styles from "./NavBarLayout.module.css";
 
 //  todo: add dynamic styling for child components as well
 export function NavBarLayout({
@@ -15,6 +16,10 @@ export function NavBarLayout({
   collapsedControlsLeft,
   collapsedControlsRight,
 }: NavBarLayoutProps) {
+
+  const wrapper = styles["wrapper"];
+  const navbar = styles["navbar"];
+
   return (
     <>
       <nav className="p-0 navbar navbar-expand-lg sticky-top">
@@ -55,7 +60,7 @@ export function NavBarLayout({
           </article>
         </div>
       </nav>
-      <main className="vh-100">
+      <main className={`${wrapper} border`}>
         <Outlet />
       </main>
     </>
