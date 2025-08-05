@@ -1,0 +1,2 @@
+ALTER TABLE `user_sessions` RENAME COLUMN "session_number" TO "session_number_hash";--> statement-breakpoint
+CREATE UNIQUE INDEX `user_sessions_session_number_hash_uidx` ON `user_sessions` (`session_number_hash`);

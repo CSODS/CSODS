@@ -1,19 +1,23 @@
 import { Request, Response } from "express";
 import { AUTH } from "@data";
-import { createTokens, updateUserRefreshToken } from "../../utils";
-import { verifyRefreshToken } from "./verify-refresh-token";
+import { createTokens, verifyRefreshToken } from "../../utils";
+import { updateSession } from "./update-session";
 
 /**
  * @public
  * @function handleRefreshToken
  * @description Controller for refreshing the access token with the refresh token.
- * - Retrieves the `refreshToken` from the request `cookies` and uses it to find the
- * corresponding `User` in the database.
- * - If the `User` is found and the `username` matches the one in the `payload`, refresh the
- * `accessToken`.
- * - If the `foundUser` and the `payload` do not match, respond with status code `403`.
- * - If an error occurs while verifying the `refreshToken` or creating a new `accessToken`,
+ * - Retrieves the `refreshToken` from the request `cookies` and verifies it.
+ * - Uses the `userId` inside the payload to find the corresponding `User` in the database.
+ * - Creates a new token pair using the found `User`'s details and the previous refresh token's
+ * payload.
+ * - Updates the corresponding `UserSession`. The old token is used for verification, rotated
+ * out, then replaced with the new token.
+ * - The new token pair is sent out with the response.
+ * - If an error occurs while verifying the `refreshToken` or creating a new token pair,
  * respond with status code `403`.
+ * - If the session update fails, respond with status code `500`.
+ * - All other errors are logged and triggers a status code `403` response.
  * @param req
  * @param res
  * @returns
@@ -26,31 +30,36 @@ export async function handleRefreshToken(req: Request, res: Response) {
   const { cookies, requestLogContext: requestLogger, userDataService } = req;
   const refreshToken = cookies[refreshTokenCookie] as string;
 
-  const foundUser = await userDataService.tryGetUser({
-    type: "refresh",
-    refreshToken: refreshToken,
-  });
-
   //  evaluate jwt
   try {
     requestLogger.log("debug", "Attempting to refresh token");
 
-    const payload = verifyRefreshToken(req, refreshToken, foundUser);
-    if (!payload || !foundUser) return;
+    const payload = verifyRefreshToken(req, refreshToken);
+
+    if (!payload) return;
+
+    const foundUser = await userDataService.tryGetUser({
+      type: "refresh",
+      userId: payload.userId,
+    });
+
+    if (!foundUser) return;
 
     const { accessToken, refreshToken: newRefreshToken } = await createTokens(
       req,
       foundUser,
+      payload.sessionNumber,
       payload.isPersistentAuth
     );
 
-    const updatedUserId = await updateUserRefreshToken(
-      req,
-      foundUser,
-      newRefreshToken
-    );
+    const updatedSessionId = await updateSession(req, {
+      sessionNumber: payload.sessionNumber,
+      userId: foundUser.userId,
+      oldToken: refreshToken,
+      newToken: newRefreshToken,
+    });
 
-    if (!updatedUserId) return;
+    if (!updatedSessionId) return;
 
     const { refresh } = AUTH.TOKEN_CONFIG_RECORD;
     const { cookieConfig: refreshCookie } = refresh;

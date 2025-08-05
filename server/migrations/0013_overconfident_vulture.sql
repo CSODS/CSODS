@@ -1,0 +1,1 @@
+ALTER TABLE `user_sessions` ADD `session_number` text NOT NULL;

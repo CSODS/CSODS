@@ -57,6 +57,62 @@
       "when": 1753341403314,
       "tag": "0007_fancy_puma",
       "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "6",
+      "when": 1754297590616,
+      "tag": "0008_nappy_sunfire",
+      "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "6",
+      "when": 1754299690869,
+      "tag": "0009_many_moondragon",
+      "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "6",
+      "when": 1754300854948,
+      "tag": "0010_flowery_champions",
+      "breakpoints": true
+    },
+    {
+      "idx": 11,
+      "version": "6",
+      "when": 1754303227035,
+      "tag": "0011_common_devos",
+      "breakpoints": true
+    },
+    {
+      "idx": 12,
+      "version": "6",
+      "when": 1754306797630,
+      "tag": "0012_whole_felicia_hardy",
+      "breakpoints": true
+    },
+    {
+      "idx": 13,
+      "version": "6",
+      "when": 1754325985999,
+      "tag": "0013_overconfident_vulture",
+      "breakpoints": true
+    },
+    {
+      "idx": 14,
+      "version": "6",
+      "when": 1754382841233,
+      "tag": "0014_mute_the_hood",
+      "breakpoints": true
+    },
+    {
+      "idx": 15,
+      "version": "6",
+      "when": 1754383447812,
+      "tag": "0015_flat_warbound",
+      "breakpoints": true
     }
   ]
 }

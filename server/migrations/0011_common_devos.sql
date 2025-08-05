@@ -1,0 +1,1 @@
+CREATE INDEX `user_sessions_user_id_idx` ON `user_sessions` (`user_id`);

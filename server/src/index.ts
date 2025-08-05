@@ -12,6 +12,7 @@ import {
   projectsRouter,
   projectTagsRouter,
 } from "@feature-projects";
+import "./schedulers/cron-schedulers";
 import {
   attachRequestLogContext,
   requestProfiler,

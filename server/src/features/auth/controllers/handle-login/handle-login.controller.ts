@@ -1,8 +1,9 @@
 import { Request, Response } from "express";
 import { AUTH } from "@data";
 import { LoginOptions } from "../../schemas";
-import { createTokens, updateUserRefreshToken } from "../../utils";
+import { createTokens } from "../../utils";
 import { getVerifiedUser } from "./get-verified-user";
+import { startNewSession } from "./start-new-session";
 
 /**
  * @public
@@ -11,7 +12,7 @@ import { getVerifiedUser } from "./get-verified-user";
  * @description Controller for handling login.
  * - Verifies the user from the request body.
  * - Creates access and refresh tokens if user is verified.
- * - Updates user's refresh token in the database.
+ * - Creates a new session for the user.
  * - Returns a JSON containing the access token and a cookie containing the refresh token.
  * TODO: IMPLEMENT BETTER ERROR HANDLING
  * @param req
@@ -24,20 +25,29 @@ export async function handleLogin(
   const verifiedUser = await getVerifiedUser(req);
   if (!verifiedUser) return;
 
+  const sessionNumber = req.userSessionService.generateSessionNumber(
+    verifiedUser.userId
+  );
+
   const { isPersistentAuth } = req.body;
   const { accessToken, refreshToken } = await createTokens(
     req,
     verifiedUser,
+    sessionNumber,
     isPersistentAuth
   );
 
-  const updatedUserId = await updateUserRefreshToken(
+  const newSessionId = await startNewSession(
     req,
+    sessionNumber,
     verifiedUser,
-    refreshToken
+    refreshToken,
+    {
+      isPersistentAuth,
+    }
   );
 
-  if (!updatedUserId) return;
+  if (!newSessionId) return;
 
   const { refresh } = AUTH.TOKEN_CONFIG_RECORD;
   const { cookieConfig: refreshCookie } = refresh;

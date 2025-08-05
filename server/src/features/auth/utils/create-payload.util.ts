@@ -9,6 +9,7 @@ type AccessTokenRequirements = {
 };
 type RefreshTokenRequirements = {
   tokenType: Extract<AUTH.TokenType, "refresh">;
+  sessionNumber: string;
   userId: number;
   isPersistentAuth?: boolean;
 };
@@ -88,8 +89,9 @@ function createAccessTokenPayload(
 function createRefreshTokenPayload(
   payloadRequirements: RefreshTokenRequirements
 ) {
-  const { userId, isPersistentAuth } = payloadRequirements;
+  const { sessionNumber, userId, isPersistentAuth } = payloadRequirements;
   const payload: RefreshTokenPayload = {
+    sessionNumber,
     userId,
     isPersistentAuth,
   };

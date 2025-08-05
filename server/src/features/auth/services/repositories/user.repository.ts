@@ -126,12 +126,17 @@ export class UserRepository extends Repository<UsersTable> {
     if (filter) {
       const {
         filterType = "or",
+        userId,
         email,
         username,
         studentName,
         studentNumber,
         refreshToken,
       } = filter;
+      if (userId !== undefined) {
+        conditions.push(eq(User.userId, userId));
+      }
+
       if (email && email.trim()) {
         conditions.push(eq(User.email, email));
       }
@@ -170,6 +175,7 @@ export class UserRepository extends Repository<UsersTable> {
  * Contains the following fields:
  * ### Filters:
  * - {@link filterType}: Option to decide whether the filter is an `or` or an `and`.
+ * - {@link userId}: Matches the user's userId.
  * - {@link email}: Matches the user's email.
  * - {@link username}: Matches the user's username.
  * - {@link studentName}: Matches the user's studentName.
@@ -177,6 +183,7 @@ export class UserRepository extends Repository<UsersTable> {
  */
 export interface IUserFilter {
   filterType?: "and" | "or";
+  userId?: number;
   email?: string;
   username?: string;
   studentName?: string | null;

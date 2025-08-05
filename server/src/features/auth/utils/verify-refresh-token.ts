@@ -1,7 +1,7 @@
 import { Request } from "express";
 import dotenv from "dotenv";
 import jwt from "jsonwebtoken";
-import { authSchemas, authTypes } from "../..";
+import { authSchemas, authTypes } from "..";
 
 dotenv.config();
 
@@ -9,8 +9,9 @@ dotenv.config();
  * @public
  * @function verifyRefreshToken
  * @description Helper function for {@link handleRefreshToken} controller. Verifies the
- * refresh token and compares the payload to the `user`. If the token verification fails
- * or the `user` does not match the `payload`, responds with status code `403`.
+ * refresh token. If the token verification fails, responds with status code `403`.
+ * After that, parses the schema with zod `safeParse` method. If the parse fails, responds
+ * with status code `403`.
  * @param req
  * @param refreshToken
  * @param user
@@ -18,8 +19,7 @@ dotenv.config();
  */
 export function verifyRefreshToken(
   req: Request,
-  refreshToken: string,
-  user: authTypes.UserViewModel | null
+  refreshToken: string
 ): authSchemas.RefreshTokenPayload | null {
   const { requestLogContext: requestLogger } = req;
 
@@ -31,15 +31,12 @@ export function verifyRefreshToken(
     return null;
   }
 
-  const verifiedPayload = authSchemas.refreshTokenPayload.parse(payload);
+  const result = authSchemas.refreshTokenPayload.safeParse(payload);
 
-  const dbUserId = user?.userId;
-  const payloadUserId = verifiedPayload.userId;
-
-  if (dbUserId !== payloadUserId) {
-    requestLogger.logStatus(403, "Refresh token mismatch.");
+  if (!result.success) {
+    requestLogger.logStatus(403, "Malformed refresh token.");
     return null;
   }
 
-  return verifiedPayload;
+  return result.data;
 }
