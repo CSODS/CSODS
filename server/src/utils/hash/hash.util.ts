@@ -25,4 +25,8 @@ export class HashService {
 
     return { rawSessionNumber, hashed };
   }
+
+  public static cryptoHash(raw: string) {
+    return crypto.createHash("sha256").update(raw).digest("hex");
+  }
 }
