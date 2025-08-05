@@ -5,7 +5,6 @@ export async function endSession(
   sessionNumber: string
 ): Promise<number | null> {
   const { requestLogContext: requestLogger, userSessionService } = req;
-  console.log(sessionNumber);
 
   const deletedSessionId = await userSessionService.tryEndSession(
     sessionNumber
