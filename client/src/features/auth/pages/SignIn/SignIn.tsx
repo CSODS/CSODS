@@ -14,7 +14,7 @@ export function SignIn() {
     } = styles;
 
   return (
-    <section className={`mt-2 px-2 bg-default-dark-purple ${loginContainer}`}>
+    <section className={`bg-default-dark-purple ${loginContainer}`}>
       <div className={`${loginWrapper}`}>
 
         {/* 1st half */}

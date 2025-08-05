@@ -12,6 +12,13 @@
 }
 
 .login-wrapper {
+  margin-top: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: green;
+  height: 100vh;
 }
 
 .login-left {
