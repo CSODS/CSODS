@@ -91,15 +91,12 @@ export class UserSessionService {
    * @description Asynchronously attempts to update the session's refresh token.
    * Hashes the `sessionNumber`, `oldToken`, and `newToken` fields before proceeding to the repository
    * layer.
-   *
-   * @param data Contains the following fields:
-   * - `sessionNumber` - The unique `sessionNumber` identifier of the `session` that will be updated.
-   * Only used for logging, not validation.
-   * - `userId` - The `id` of the `user` whose `session` will be updated. Only used for
-   * logging, not validation.
-   * - `oldToken` - The token that will be rotated out. Its hash will be the primary means
+   * ! sessionNumber and userId are only used for logging, not validation.
+   * @param data.sessionNumber The unique `sessionNumber` identifier of the `session` that will be updated.
+   * @param data.userId The `id` of the `user` whose `session` will be updated.
+   * @param data.oldToken The token that will be rotated out. Its hash will be the primary means
    * of validation.
-   * - `newToken` - The token that will replace the old token.
+   * @param data.newToken The token that will replace the old token.
    * @returns A `Promise` that resolves to the id of the updated session, or `null` if the
    * session update fails.
    */

@@ -7,10 +7,17 @@ import { updateSession } from "./update-session";
  * @public
  * @function handleRefreshToken
  * @description Controller for refreshing the access token with the refresh token.
- * - Retrieves the `refreshToken` from the request `cookies` and uses it to find the
- * corresponding `User` in the database.
- * - If an error occurs while verifying the `refreshToken` or creating a new `accessToken`,
+ * - Retrieves the `refreshToken` from the request `cookies` and verifies it.
+ * - Uses the `userId` inside the payload to find the corresponding `User` in the database.
+ * - Creates a new token pair using the found `User`'s details and the previous refresh token's
+ * payload.
+ * - Updates the corresponding `UserSession`. The old token is used for verification, rotated
+ * out, then replaced with the new token.
+ * - The new token pair is sent out with the response.
+ * - If an error occurs while verifying the `refreshToken` or creating a new token pair,
  * respond with status code `403`.
+ * - If the session update fails, respond with status code `500`.
+ * - All other errors are logged and triggers a status code `403` response.
  * @param req
  * @param res
  * @returns

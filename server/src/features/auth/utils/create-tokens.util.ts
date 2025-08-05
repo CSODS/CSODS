@@ -21,6 +21,7 @@ type Tokens = {
  * @param req
  * @param verifiedUser A {@link UserViewModel} used for retrieving the `User`'s `role`s and
  * creating the token `payload`.
+ * @param sessionNumber The `sessionNumber` corresponding to the current `UserSession`.
  * @param isPersistentAuth An optional boolean representing the persistence of the authentication state.
  * `true` if the auth is persistent. `false` otherwise.
  * @returns A `Promise` that resolves to a {@link Tokens} object containing the `accessToken`

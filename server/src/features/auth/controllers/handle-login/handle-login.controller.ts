@@ -12,7 +12,7 @@ import { startNewSession } from "./start-new-session";
  * @description Controller for handling login.
  * - Verifies the user from the request body.
  * - Creates access and refresh tokens if user is verified.
- * - Updates user's refresh token in the database.
+ * - Creates a new session for the user.
  * - Returns a JSON containing the access token and a cookie containing the refresh token.
  * TODO: IMPLEMENT BETTER ERROR HANDLING
  * @param req

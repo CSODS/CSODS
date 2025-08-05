@@ -11,10 +11,14 @@ const { cookieConfig: refreshCookie } = refresh;
  * @async
  * @function handleLogout
  * @description A controller for handling log out behavior by retrieving the `cookie` containing
- * the `refreshToken`, removing the `refreshToken` from the corresponding `User` in the database,
- * and clearing the `cookie` itself. Respons with status code `204` when log-out succeeds.
+ * the `refreshToken`, verifying the refresh token, then ending the `userSession` that corresponds
+ * to the `sessionNumber` stored in the payload. Then clearing the `cookie` itself.
+ * Responds with status code `204` when log-out succeeds.
  * - If the cookie does not exist, immediately responds with a status code `204`.
- * - If the `cookie` exist but `User` is not found, immediately clear the `cookie`.
+ * - If the `cookie` exists but the refresh token verification fails, respond with status code
+ * `403`..
+ * - If the session deletion fails, respond with status code `500`.
+ * - The cookie is always cleared regardless of which step in the log out process fails.
  * @param req
  * @param res
  * @returns
