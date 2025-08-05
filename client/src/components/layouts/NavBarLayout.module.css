@@ -1,0 +1,7 @@
+.outlet-wrapper {
+    height: calc(100vh - 61px);
+}
+
+.navbar-layout {
+    max-height: 60px;
+}
