@@ -11,7 +11,6 @@ export async function updateSession(
 ) {
   const { requestLogContext: requestLogger } = req;
 
-  //  todo: add session number to be used for this purpose.
   const updatedSessionId = await req.userSessionService.tryUpdateSession({
     ...sessionData,
   });
