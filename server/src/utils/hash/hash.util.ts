@@ -12,18 +12,13 @@ export class HashService {
     return Math.abs(hash).toString(36); // convert to base36 for compactness
   }
 
+  /**
+   * @deprecated Please use {@link cryptoHash}
+   * @param token
+   * @returns
+   */
   public static hashToken(token: string): string {
     return crypto.createHash("sha256").update(token).digest("hex");
-  }
-
-  public static hashSessionNumber(userId: number) {
-    const rawSessionNumber = `${userId}-${Date.now()}-${Math.random()}`;
-    const hashed = crypto
-      .createHash("sha256")
-      .update(rawSessionNumber)
-      .digest("hex");
-
-    return { rawSessionNumber, hashed };
   }
 
   public static cryptoHash(raw: string) {

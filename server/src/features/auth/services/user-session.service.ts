@@ -43,7 +43,10 @@ export class UserSessionService {
    * @description Asynchronously attempts to start a new session for the user with
    * the provided `userId` and `refreshToken`. Optionally sets an expiry date for the
    * session with the `expiresAt` field.
+   * Both the `sessionNumber` and `refreshToken` will be hashed before storing in the
+   * database.
    * @param sessionData Contains the following fields:
+   * - `sessionNumber` - The new session's unique session number identifier.
    * - `userId` - The user linked to the new session.
    * - `refreshToken` - The refresh token that will be hashed and stored to the database.
    * - `expiresAt` - An optional field specifying the expiry `Date` of the session.
@@ -59,13 +62,14 @@ export class UserSessionService {
   }): Promise<number | null> {
     const { sessionNumber, userId, refreshToken, expiresAt } = sessionData;
 
-    const refreshTokenHash = HashService.hashToken(refreshToken);
+    const sessionNumberHash = HashService.cryptoHash(sessionNumber);
+    const refreshTokenHash = HashService.cryptoHash(refreshToken);
 
     const now = new Date();
     const nowISO = now.toISOString();
 
     const newSession: NewUserSession = {
-      sessionNumber,
+      sessionNumber: sessionNumberHash,
       userId,
       refreshTokenHash,
       createdAt: nowISO,
@@ -85,9 +89,12 @@ export class UserSessionService {
    * @async
    * @function tryUpdateSession
    * @description Asynchronously attempts to update the session's refresh token.
+   * Hashes the `sessionNumber`, `oldToken`, and `newToken` fields before proceeding to the repository
+   * layer.
+   *
    * @param data Contains the following fields:
-   * - `sessionNumber` - The `id` of the `session` that will be updated. Only used for logging,
-   * not validation.
+   * - `sessionNumber` - The unique `sessionNumber` identifier of the `session` that will be updated.
+   * Only used for logging, not validation.
    * - `userId` - The `id` of the `user` whose `session` will be updated. Only used for
    * logging, not validation.
    * - `oldToken` - The token that will be rotated out. Its hash will be the primary means
@@ -106,10 +113,10 @@ export class UserSessionService {
 
     const updatedSessionId =
       await this._userSessionRepository.tryUpdateSessionToken({
-        sessionNumber,
+        sessionNumber: HashService.cryptoHash(sessionNumber),
         userId,
-        oldTokenHash: HashService.hashToken(oldToken),
-        newTokenHash: HashService.hashToken(newToken),
+        oldTokenHash: HashService.cryptoHash(oldToken),
+        newTokenHash: HashService.cryptoHash(newToken),
       });
 
     return updatedSessionId;
@@ -119,13 +126,14 @@ export class UserSessionService {
    * @public
    * @async
    * @function tryEndSession
-   * @description Asynchronously attempts to end a session with the specified `sessionNumber`.
+   * @description Asynchronously attempts to end a session with the hash of a
+   * specified `sessionNumber`.
    * @param sessionNumber The `sessionNumber` of the session that will be deleted.
    * @returns A `Promise` resolving to the `id` of the deleted session, or `null` if the
    * operation fails.
    */
   public async tryEndSession(sessionNumber: string): Promise<number | null> {
-    const sessionNumberHash = HashService.hashToken(sessionNumber);
+    const sessionNumberHash = HashService.cryptoHash(sessionNumber);
 
     const deletedSessionId =
       (

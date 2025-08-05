@@ -4,7 +4,6 @@ import { LoginOptions } from "../../schemas";
 import { createTokens } from "../../utils";
 import { getVerifiedUser } from "./get-verified-user";
 import { startNewSession } from "./start-new-session";
-import { HashService } from "@/utils";
 
 /**
  * @public
@@ -26,7 +25,7 @@ export async function handleLogin(
   const verifiedUser = await getVerifiedUser(req);
   if (!verifiedUser) return;
 
-  const { rawSessionNumber, hashed } = HashService.hashSessionNumber(
+  const sessionNumber = req.userSessionService.generateSessionNumber(
     verifiedUser.userId
   );
 
@@ -34,13 +33,13 @@ export async function handleLogin(
   const { accessToken, refreshToken } = await createTokens(
     req,
     verifiedUser,
-    rawSessionNumber,
+    sessionNumber,
     isPersistentAuth
   );
 
   const newSessionId = await startNewSession(
     req,
-    hashed,
+    sessionNumber,
     verifiedUser,
     refreshToken,
     {
