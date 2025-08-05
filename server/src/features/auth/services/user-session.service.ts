@@ -1,7 +1,8 @@
+import { randomUUID } from "crypto";
 import { createContext } from "@/db/csods";
+import { HashService } from "@/utils";
 import { NewUserSession } from "../types";
 import { UserSessionRepository } from "./repositories";
-import { HashService } from "@/utils";
 
 export async function createUserSessionService() {
   const dbContext = await createContext();
@@ -20,6 +21,19 @@ export class UserSessionService {
 
   public constructor(userSessionRepository: UserSessionRepository) {
     this._userSessionRepository = userSessionRepository;
+  }
+
+  /**
+   * @public
+   * @function generateSessionNumber
+   * @description Generates a session number for the provided `userId`.
+   * Uses the `userId`, current date and a random generated `UUID`.
+   * @param userId The `id` of the user.
+   * @returns A string representing the generated session number.
+   */
+  public generateSessionNumber(userId: number): string {
+    const sessionNumber = `${userId}-${Date.now()}-${randomUUID()}`;
+    return sessionNumber;
   }
 
   /**
