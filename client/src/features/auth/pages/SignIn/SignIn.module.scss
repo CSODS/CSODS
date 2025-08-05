@@ -5,8 +5,47 @@
   border-top-left-radius: 3.5rem;
   padding-top: 3.5rem;
 
-  @media (min-width: 576px) {
-    border-top-left-radius: 0;
+  @media (min-width: 768px) {
     padding-top: 0px;
+    border-top-left-radius: 0;
+  }
+}
+
+.login-wrapper {
+}
+
+.login-left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 50%;
+  color: #30282b;
+  background-color: white;
+  padding: 0;
+  margin: 0;
+}
+
+.login-right {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50%;
+  background-color: rgba($color: #13072e, $alpha: 0.9);
+  padding: 0;
+  margin: 0;
+}
+
+.create-account-button {
+  color: white;
+  background-color: #13072e;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: darkgrey;
+    color: black;
   }
 }
