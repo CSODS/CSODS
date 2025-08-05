@@ -1,4 +1,5 @@
 export * as authControllers from "./controllers";
+export * as authJobs from "./jobs";
 export * as authMiddlewares from "./middleware";
 export * as authSchemas from "./schemas";
 export * as authServices from "./services";
