@@ -17,12 +17,12 @@ export function NavBarLayout({
   collapsedControlsRight,
 }: NavBarLayoutProps) {
 
-  const wrapper = styles["wrapper"];
-  const navbar = styles["navbar"];
+  const outletWrapper = styles["outlet-wrapper"];
+  const navbarLayout = styles["navbar-layout"];
 
   return (
     <>
-      <nav className="p-0 navbar navbar-expand-lg sticky-top">
+      <nav className={`p-0 navbar navbar-expand-lg sticky-top ${navbarLayout}`}>
         <div className={`px-md-3 px-1 py-0 container-fluid ${className}`}>
           <Link
             to={ADDRESSES.LANDING_PAGE}
@@ -60,7 +60,7 @@ export function NavBarLayout({
           </article>
         </div>
       </nav>
-      <main className={`${wrapper} border`}>
+      <main className={`${outletWrapper}`}>
         <Outlet />
       </main>
     </>
