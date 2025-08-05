@@ -10,6 +10,8 @@ dotenv.config();
  * @function verifyRefreshToken
  * @description Helper function for {@link handleRefreshToken} controller. Verifies the
  * refresh token. If the token verification fails, responds with status code `403`.
+ * After that, parses the schema with zod `safeParse` method. If the parse fails, responds
+ * with status code `403`.
  * @param req
  * @param refreshToken
  * @param user
@@ -29,7 +31,12 @@ export function verifyRefreshToken(
     return null;
   }
 
-  const verifiedPayload = authSchemas.refreshTokenPayload.parse(payload);
+  const result = authSchemas.refreshTokenPayload.safeParse(payload);
 
-  return verifiedPayload;
+  if (!result.success) {
+    requestLogger.logStatus(403, "Malformed refresh token.");
+    return null;
+  }
+
+  return result.data;
 }
