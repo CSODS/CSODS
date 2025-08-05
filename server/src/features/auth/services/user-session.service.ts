@@ -142,4 +142,39 @@ export class UserSessionService {
 
     return deletedSessionId;
   }
+
+  /**
+   * @public
+   * @async
+   * @function endIdleSessions
+   * @description Asynchronously ends/deletes idle sessions in the database.
+   * @returns A `Promise` that resolves to an array of `number`s representing
+   * the deleted session ids or `null` if the delete operation fails.
+   */
+  public async endIdleSessions(): Promise<number[] | null> {
+    const deletedSessionIds =
+      await this._userSessionRepository.tryDeleteSession({
+        scope: "idle_session",
+      });
+
+    return deletedSessionIds;
+  }
+
+  /**
+   * @public
+   * @async
+   * @function endExpiredSessions
+   * @description Asynchronously ends/deletes all expired sessions in the
+   * database.
+   * @returns A `Promise` that resolves to an array of `number`s representing
+   * the deleted session ids or `null` if the delete operation fails.
+   */
+  public async endExpiredSessions(): Promise<number[] | null> {
+    const deletedSessionIds =
+      await this._userSessionRepository.tryDeleteSession({
+        scope: "expired_persistent",
+      });
+
+    return deletedSessionIds;
+  }
 }
