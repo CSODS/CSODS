@@ -69,7 +69,7 @@ export class UserSessionService {
     const nowISO = now.toISOString();
 
     const newSession: NewUserSession = {
-      sessionNumber: sessionNumberHash,
+      sessionNumberHash,
       userId,
       refreshTokenHash,
       createdAt: nowISO,
@@ -113,7 +113,7 @@ export class UserSessionService {
 
     const updatedSessionId =
       await this._userSessionRepository.tryUpdateSessionToken({
-        sessionNumber: HashService.cryptoHash(sessionNumber),
+        sessionNumberHash: HashService.cryptoHash(sessionNumber),
         userId,
         oldTokenHash: HashService.cryptoHash(oldToken),
         newTokenHash: HashService.cryptoHash(newToken),
@@ -139,7 +139,7 @@ export class UserSessionService {
       (
         await this._userSessionRepository.tryDeleteSession({
           scope: "user_session",
-          sessionNumber: sessionNumberHash,
+          sessionNumberHash,
         })
       )?.[0] ?? null;
 

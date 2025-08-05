@@ -7,7 +7,7 @@ import { NewUserSession, UserSessionsTable } from "../../types";
 
 type DeleteUserSession = {
   scope: "user_session";
-  sessionNumber: string;
+  sessionNumberHash: string;
 };
 
 type DeleteAllUserSessions = {
@@ -77,7 +77,7 @@ export class UserSessionRepository extends Repository<UserSessionsTable> {
    * {@link UserSession.lastUsedAt}.
    *
    * @param data Contains the following fields:
-   * - {@link sessionNumber} - The id of the session to be updated. Used for logging.
+   * - {@link sessionNumberHash} - The id of the session to be updated. Used for logging.
    * - {@link userId} - The id of the user tied to the session.  Used for logging.
    * - {@link oldTokenHash} - The hash of the refresh token to be rotated out. Used for setting
    * the `where` condition of the update operation.
@@ -86,16 +86,16 @@ export class UserSessionRepository extends Repository<UserSessionsTable> {
    * and `null` otherwise.
    */
   public async tryUpdateSessionToken(data: {
-    sessionNumber: string;
+    sessionNumberHash: string;
     userId: number;
     oldTokenHash: string;
     newTokenHash: string;
   }): Promise<number | null> {
-    const { sessionNumber, userId, oldTokenHash, newTokenHash } = data;
+    const { sessionNumberHash, userId, oldTokenHash, newTokenHash } = data;
 
     try {
       DbLogger.info(
-        `[UserSession] Attempting to update refresh token of session (session_number: ${sessionNumber}, userId: ${userId}).`
+        `[UserSession] Attempting to update refresh token of session (session_number_hash: ${sessionNumberHash}, userId: ${userId}).`
       );
 
       const now = new Date();
@@ -116,7 +116,7 @@ export class UserSessionRepository extends Repository<UserSessionsTable> {
       return updatedSessionId;
     } catch (err) {
       DbLogger.error(
-        `[UserSession] Failed updating refresh token of session (session_id: ${sessionNumber}, userId: ${userId}).`,
+        `[UserSession] Failed updating refresh token of session (session_id: ${sessionNumberHash}, userId: ${userId}).`,
         err
       );
 
@@ -138,8 +138,8 @@ export class UserSessionRepository extends Repository<UserSessionsTable> {
    * @param deleteTarget Contains the following fields:
    * - `scope` - The scope of the delete operation. See {@link DeleteTarget} for possible
    * values.
-   * - `sessionNumber` - The `sessionNumber` of the session to be deleted. Used to identify the target session
-   * when `scope` is set to `user_session`.
+   * - `sessionNumberHash` - The `sessionNumberHash` of the session to be deleted. Used to
+   * identify the target session when `scope` is set to `user_session`.
    * - `userId` - The id of the user whose sessions are to be deleted. Used to identify
    * the target sessions when `scope` is set to `all_sessions`.
    * @returns A `Promise` that resolves to an array of numbers if the delete operation
@@ -151,9 +151,9 @@ export class UserSessionRepository extends Repository<UserSessionsTable> {
     const { scope } = deleteTarget;
     const operationScope =
       scope === "user_session"
-        ? `session_number: ${deleteTarget.sessionNumber}`
+        ? `session_number_hash: ${deleteTarget.sessionNumberHash}.`
         : scope === "all_sessions"
-        ? `user_id: ${deleteTarget.userId}`
+        ? `user_id: ${deleteTarget.userId}.`
         : scope === "expired_persistent"
         ? `idle sessions.`
         : `expired persistent sessions.`;
@@ -197,7 +197,10 @@ export class UserSessionRepository extends Repository<UserSessionsTable> {
       case "all_sessions":
         return eq(UserSession.userId, deleteTarget.userId);
       case "user_session":
-        return eq(UserSession.sessionNumber, deleteTarget.sessionNumber);
+        return eq(
+          UserSession.sessionNumberHash,
+          deleteTarget.sessionNumberHash
+        );
       case "expired_persistent": {
         //  for expiring tokens: past expiration
         const now = new Date();

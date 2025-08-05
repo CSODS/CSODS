@@ -12,7 +12,7 @@ export const UserSession = sqliteTable(
   "user_sessions",
   {
     sessionId: integer("session_id").primaryKey(),
-    sessionNumber: text("session_number_hash").notNull(),
+    sessionNumberHash: text("session_number_hash").notNull(),
     userId: integer("user_id")
       .notNull()
       .references(() => User.userId, {
@@ -26,7 +26,7 @@ export const UserSession = sqliteTable(
   },
   (table) => [
     uniqueIndex("user_sessions_session_number_hash_uidx").on(
-      table.sessionNumber
+      table.sessionNumberHash
     ),
     index("user_sessions_user_id_idx").on(table.userId),
     uniqueIndex("token_hash_idx").on(table.refreshTokenHash),
