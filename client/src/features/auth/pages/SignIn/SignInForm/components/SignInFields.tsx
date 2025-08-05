@@ -30,7 +30,7 @@ export function SignInFields({ signInForm, onType }: SignInFieldsProps) {
           type="text"
           id="identifier"
           ref={identifierRef}
-          className={`color-default-white pe-5 small ${controlForm} ${signInForm.identifier ? styles["not-empty"] : ""}`}
+          className={`color-default-white pe-5 fs-responsive ${controlForm} ${signInForm.identifier ? styles["not-empty"] : ""}`}
           autoComplete="off"
           onChange={(e) => onType(e)}
           value={signInForm.identifier}
@@ -46,7 +46,7 @@ export function SignInFields({ signInForm, onType }: SignInFieldsProps) {
         <input
           type="password"
           id="password"
-          className={`color-default-white pe-5 small ${controlForm} ${signInForm.password ? styles["not-empty"] : ""}`}
+          className={`color-default-white pe-5 fs-responsive ${controlForm} ${signInForm.password ? styles["not-empty"] : ""}`}
           onChange={(e) => onType(e)}
           value={signInForm.password}
           required

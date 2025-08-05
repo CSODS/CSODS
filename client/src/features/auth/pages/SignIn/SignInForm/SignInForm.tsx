@@ -26,10 +26,10 @@ export function SignInForm() {
 
   return (
     <article className="p-0">
-      <p className="px-3 text-center fs-2 bolder">Sign In</p>
+      <p className="px-3 pb-2 text-center fs-2 bolder">Sign In</p>
 
       <form
-        className="m-0 mt-4 p-0 px-3 d-grid row-gap-4"
+        className="d-grid row-gap-4"
         onSubmit={handleSubmit}
       >
         <SignInFields signInForm={signInForm} onType={onChange} />

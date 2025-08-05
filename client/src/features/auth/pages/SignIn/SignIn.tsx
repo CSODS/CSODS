@@ -10,7 +10,11 @@ export function SignIn() {
     "login-wrapper": loginWrapper,
     "login-left": loginLeft,
     "login-right": loginRight,
-    "create-account-button": createAccount, 
+    "login-right-content": loginRightContent,
+    "create-account-button": createAccountButton,
+    "login-left-content": loginLeftContent,
+    "login-left-logo": loginLogo,
+    "google-button": googleButton,
     } = styles;
 
   return (
@@ -19,48 +23,78 @@ export function SignIn() {
 
         {/* 1st half */}
         <div className={`${loginLeft}`}>
-          <img
-            src="/lucso-logo-no-bg.png"
-            alt="CSODS Logo"
-            className="img-fluid mb-3"
-            style={{ maxWidth: "150px" }}
-          />
-
-          <h1 className="bolder">
-            CSODS
-          </h1>
-
-          <p className="text-justify px-3">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-            Curabitur eu mollis leo, at commodo turpis. 
-            Quisque venenatis iaculis facilisis. 
-            Donec tempor eu sem ut tincidunt.
-          </p>
-          
-          <button
-            className={`${createAccount}`}
-            onClick={() => window.location.href = ADDRESSES.AUTH.REGISTER}
-          >
-            CREATE ACCOUNT
-          </button>
-
+          <div className={`${loginLeftContent}`}>
+            <img
+              src="/lucso-logo-no-bg.png"
+              alt="CSODS Logo"
+              className={`img-fluid ${loginLogo}`}
+            />
+            <article className="bolder mb-2">CSO:DS</article>
+            <article className="px-3 fs-responsive">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+              Curabitur eu mollis leo, at commodo turpis. 
+              Quisque venenatis iaculis facilisis. 
+              Donec tempor eu sem ut tincidunt.
+            </article>
+            <button
+              className={`${createAccountButton}`}
+              onClick={() => 
+                (window.location.href = ADDRESSES.AUTH.REGISTER)
+              }
+            >
+              CREATE ACCOUNT
+            </button>
+          </div>
         </div>
 
         {/* 2nd half */}
         <div className={`${loginRight}`}>
-          <div>
-            <SignInForm />
-            <section className="mt-3 text-center">
-              <p className="m-0 p-0 color-light-2 small">
-                Don't have an account?{" "}
-                <NavLink
-                  to={registerLink}
-                  className="text-decoration-none"
-                >
-                  Sign Up
-                </NavLink>
-              </p>
-            </section>
+          <div className={`${loginRightContent}`}>
+            <div className="w-100 px-md-4 px-lg-5">
+              <SignInForm />
+
+              {/* Mobile Sign Up Link */}
+              <section className="d-flex d-md-none mt-3 justify-content-center">
+                <p className="m-0 p-0 color-light-2 small">
+                  Don't have an account?{" "}
+                  <NavLink to={registerLink} className="text-decoration-none">
+                    Sign Up
+                  </NavLink>
+                </p>
+              </section>
+
+              <div className="d-flex align-items-center my-1">
+                <hr className="flex-grow-1" />
+                  <span className="mx-3 color-light-3 fs-responsive">OR</span>
+                <hr className="flex-grow-1" />
+              </div>
+              
+              {/* Desktop Google Login + Forgot Password */}
+              <section className="d-flex mt-md-2 flex-column align-items-center">
+                  <button
+                    className={`${googleButton}`}
+                    onClick={() => 
+                      (window.location.href = ADDRESSES.AUTH.REGISTER)
+                      }
+                    >
+                      <img 
+                          src="/google.png" 
+                          alt="Google Logo"
+                          className="me-2"
+                          style={{maxHeight: "15px"}}
+                        >
+                      </img>
+                      Login with Google
+                  </button>
+
+                  <p className="mt-3 small text-center">
+                    <NavLink to={"/"} className="text-decoration-none color-light-2">
+                      Forgot Password?
+                    </NavLink>
+                  </p>
+              </section>
+
+            </div>
           </div>
         </div>
 
