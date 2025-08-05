@@ -29,9 +29,11 @@ export const UserSession = sqliteTable(
       table.sessionNumberHash
     ),
     index("user_sessions_user_id_idx").on(table.userId),
-    uniqueIndex("token_hash_idx").on(table.refreshTokenHash),
-    index("persistent_clean_up_idx").on(table.expiresAt),
-    index("session_clean_up_idx")
+    uniqueIndex("user_sessions_refresh_token_hash_uidx").on(
+      table.refreshTokenHash
+    ),
+    index("user_sessions_persistent_clean_up_idx").on(table.expiresAt),
+    index("user_sessions_session_clean_up_idx")
       .on(table.expiresAt, table.lastUsedAt)
       .where(isNull(table.expiresAt)),
   ]
