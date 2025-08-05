@@ -17,7 +17,7 @@ export class ViewsDecayJobService {
   }
 
   public scheduleViewsDecay() {
-    cron.schedule("0 * * * * *", async () => {
+    cron.schedule("0 0 * * * *", async () => {
       JobsLogger.info("Decaying view counts of project caches.");
       await this._projectsViewsDecayService.decayCachePagesViews({
         decayTopLevel: true,
