@@ -7,7 +7,6 @@ import express from "express";
 import { API, CORS } from "@data";
 import { authRoutes, authMiddlewares } from "@feature-auth";
 import {
-  projectsJobs,
   projectsMiddlewares,
   projectsRouter,
   projectTagsRouter,
@@ -54,16 +53,6 @@ app.use(
   projectTagsRouter
 );
 
-const evictionJob = projectsJobs.createEvictionJobService();
-const viewsDecayJob = projectsJobs.createViewsDecayJobService();
-
-evictionJob.scheduleProjectCacheEviction();
-evictionJob.scheduleCachePageEviction();
-evictionJob.scheduleSearchCacheEviction();
-viewsDecayJob.scheduleViewsDecay();
-
 app.listen(3001, "0.0.0.0", async () => {
   console.log("Server running on port 3001");
-  await evictionJob.evictProjectCache();
-  await evictionJob.evictCachePages();
 });
