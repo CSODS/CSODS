@@ -105,10 +105,10 @@ export class EvictionJobService {
    * @description
    * Schedules a cron job to evict stale **pages** within the cache files every hour on the 5th minute.
    *
-   * Cron Expression: (Every hour, on the fifth minute)
+   * Cron Expression: (Every hour, on the sixth minute)
    */
   public scheduleCachePageEviction() {
-    cron.schedule("0 5 * * * *", async () => {
+    cron.schedule("0 6 * * * *", async () => {
       await this.evictCachePages();
     });
   }
