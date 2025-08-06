@@ -11,6 +11,7 @@ export function AuthFields({ registerForm, onType }: RegisterFieldsProps) {
   const groupForm = styles["form-group-floating"];
   const controlForm = styles["form-control-floating"];
   const authGrid = styles["auth-grid"];
+  const bubbleContainer = styles["bubble-container"];
 
   //  use these for the visual cues
   const { validEmail, validUser, validPwd, validMatch } =
@@ -35,38 +36,56 @@ export function AuthFields({ registerForm, onType }: RegisterFieldsProps) {
     <>
     <div className={`${authGrid}`}>
       {/* email */}
-      <div
-        className={`position-relative border border-1 ${groupForm} 
-      ${validEmail ? styles.valid : registerForm.email ? styles.invalid : ""}`}
-      >
-        <input
-          type="email"
-          id="email"
-          ref={emailRef}
-          className={`color-default-white pe-5 fs-responsive ${controlForm} ${
-            registerForm.email ? styles["not-empty"] : ""
-          }`}
-          autoComplete="off"
-          onChange={(e) => onType(e)}
-          value={registerForm.email}
-          required
-          aria-invalid={validEmail ? "false" : "true"}
-          aria-describedby="email-note"
-          onFocus={() => setEmailFocus(true)}
-          onBlur={() => setEmailFocus(false)}
-        />
-        <label htmlFor="email">Email</label>
-        <span className="position-absolute top-50 end-0 translate-middle-y me-3">
-          <i
-            className={`${
-              validEmail
-                ? "bi bi-envelope-check-fill text-success"
-                : registerForm.email
-                ? "bi bi-envelope-exclamation-fill text-danger"
-                : "bi bi-envelope-fill"
+      <div className="position-relative">
+        <div
+          className={`position-relative border border-1 ${groupForm} 
+        ${validEmail ? styles.valid : registerForm.email ? styles.invalid : ""}`}
+        >
+          <input
+            type="email"
+            id="email"
+            ref={emailRef}
+            className={`color-default-white pe-5 fs-responsive ${controlForm} ${
+              registerForm.email ? styles["not-empty"] : ""
             }`}
-          ></i>
-        </span>
+            autoComplete="off"
+            onChange={(e) => onType(e)}
+            value={registerForm.email}
+            required
+            aria-invalid={validEmail ? "false" : "true"}
+            aria-describedby="email-note"
+            onFocus={() => setEmailFocus(true)}
+            onBlur={() => setEmailFocus(false)}
+          />
+          <label htmlFor="email">Email</label>
+          <span className="position-absolute top-50 end-0 translate-middle-y me-3">
+            <i
+              className={`${
+                validEmail
+                  ? "bi bi-envelope-check-fill text-success"
+                  : registerForm.email
+                  ? "bi bi-envelope-exclamation-fill text-danger"
+                  : "bi bi-envelope-fill"
+              }`}
+            ></i>
+          </span>
+        </div>
+
+        <div
+          id="email-note"
+          className={`d-flex d-lg-none mb-0 pb-0 ${bubbleContainer} ${
+          emailFocus && registerForm.email && !validEmail
+            ? "text-start fs-small"
+            : "visually-hidden"
+          }`}
+        >
+        <ul className="mb-0 pb-0">
+            <li>Max 254 characters</li>
+            <li>No starting dot (.) or consecutive dots (..)</li>
+            <li>Lowercase letters, numbers, ', ., +, _, - allowed before @</li>
+            <li>Must end with a valid domain (e.g. example.com)</li>
+          </ul>
+        </div>
       </div>
       
       {/* username */}
@@ -103,6 +122,20 @@ export function AuthFields({ registerForm, onType }: RegisterFieldsProps) {
             }`}
           ></i>
         </span>
+
+        <div
+          id="user-note"
+          className={`d-flex d-lg-none mb-0 pb-0 ${bubbleContainer} ${
+            userFocus && registerForm.username && !validUser
+              ? "text-start fs-small"
+              : "visually-hidden"
+            }`}>
+          <ul className="mb-0 pb-0">
+            <li>4-24 characters</li>
+            <li>Must start with a letter</li>
+            <li>Letters, numbers, hyphens (-), and underscores (_) allowed</li>
+          </ul>
+        </div>
       </div>
       
       {/* password */}
@@ -136,6 +169,27 @@ export function AuthFields({ registerForm, onType }: RegisterFieldsProps) {
             }`}
           ></i>
         </span>
+
+            <div
+              id="pwd-note"
+              className={`d-flex d-lg-none mb-0 pb-0 ${bubbleContainer} ${
+                pwdFocus && registerForm.password && !validPwd
+                  ? "text-start fs-small"
+                  : "visually-hidden"
+                }`}
+              >
+
+              <span className="ms-2">
+                Password must be 8 – 24 characters and include:
+              </span>
+
+              <ul className="mb-0 pb-0">
+                <li>At least one uppercase letter</li>
+                <li>At least one lowercase letter</li>
+                <li>At least one number</li>
+                <li>At least one special character<i> (e.g.: ! @ # $ % )</i></li>
+              </ul>
+            </div>
       </div>
 
       {/* confirm password */}
@@ -167,7 +221,7 @@ export function AuthFields({ registerForm, onType }: RegisterFieldsProps) {
         <span className="position-absolute top-50 end-0 translate-middle-y me-3">
           <i
             className={`${
-              registerForm.password && validMatch
+              matchFocus && registerForm.passwordMatch && !validMatch
                 ? "bi bi-check-all text-success"
                 : registerForm.passwordMatch
                 ? "bi bi-exclamation text-danger"
@@ -175,13 +229,24 @@ export function AuthFields({ registerForm, onType }: RegisterFieldsProps) {
             }`}
           ></i>
         </span>
+        <div
+          id="pwd-match-note"
+          className={`d-flex d-lg-none mb-0 pb-0 ${bubbleContainer} ${
+            matchFocus && !validMatch ? "text-start fs-small" : "visually-hidden"
+          }`}
+        >
+          <ul className="mb-0 pb-0">
+            <li>Must match the password input field.</li>
+          </ul>
+        </div>
       </div>
     </div>
 
     <div
       id="email-note"
-      className={`mb-0 pb-0 ${
-      emailFocus && !validEmail
+      className={`d-none d-lg-flex mb-0 pb-0
+      ${
+      emailFocus && registerForm.email && !validEmail
         ? "text-start fs-small"
         : "visually-hidden"
       }`}
@@ -196,8 +261,8 @@ export function AuthFields({ registerForm, onType }: RegisterFieldsProps) {
 
     <div
       id="user-note"
-      className={`mb-0 pb-0 ${
-        userFocus && !validUser
+      className={`d-none d-lg-flex mb-0 pb-0 ${
+        userFocus && registerForm.username && !validUser
           ? "text-start fs-small"
           : "visually-hidden"
         }`}>
@@ -210,11 +275,12 @@ export function AuthFields({ registerForm, onType }: RegisterFieldsProps) {
     
     <div
       id="pwd-note"
-      className={
-        pwdFocus && !validPwd
+      className={`d-none d-lg-flex mb-0 pb-0
+        ${
+        pwdFocus && registerForm.password && !validPwd
           ? "text-start fs-small"
           : "visually-hidden"
-        }
+        }`}
       >
 
       <span className="ms-2">
@@ -231,9 +297,12 @@ export function AuthFields({ registerForm, onType }: RegisterFieldsProps) {
 
     <div
       id="pwd-match-note"
-      className={
-        matchFocus && registerForm.passwordMatch && !validMatch ? "text-start fs-small" : "visually-hidden"
-      }
+      className={`d-none d-lg-flex mb-0 pb-0
+        ${
+        matchFocus && registerForm.passwordMatch && !validMatch 
+        ? "text-start fs-small" 
+        : "visually-hidden"
+      }`}
     >
       <ul className="mb-0 pb-0">
         <li>Must match the password input field.</li>

@@ -39,7 +39,7 @@ export function RegisterForm() {
       <p className="px-3 pb-2 fs-2 bolder">Sign Up</p>
 
       <form
-        className="d-grid row-gap-4"
+        className="d-grid row-gap-3"
         onSubmit={handleSubmit}
       >
         {/* 
@@ -53,7 +53,7 @@ export function RegisterForm() {
           checked={toggleStudents}
           onChange={onToggleStudents}
         >
-          Are you a student?
+          <span className="fs-responsive">Are you a student?</span>
         </CheckBox>
         {toggleStudents ? (
           <StudentFields registerForm={registerForm} onType={onType} />

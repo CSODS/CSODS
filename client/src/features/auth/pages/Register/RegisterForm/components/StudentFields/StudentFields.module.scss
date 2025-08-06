@@ -24,11 +24,15 @@
 
 .form-control-floating {
   width: 100%;
-  padding: 0.85rem 1rem 0.25rem;
+  padding: 0.55rem 1rem;
   border-radius: 5rem;
   background-color: transparent;
   color: white;
   transition: all 0.2s ease;
+
+  @media (min-width: 426px) {
+    padding: 0.4rem 1rem;
+  }
 }
 
 .form-control-floating:focus + label,
