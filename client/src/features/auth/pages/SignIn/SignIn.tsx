@@ -38,14 +38,6 @@ export function SignIn() {
               Quisque venenatis iaculis facilisis. 
               Donec tempor eu sem ut tincidunt.
             </article>
-            <button
-              className={`${createAccountButton}`}
-              onClick={() => 
-                (window.location.href = ADDRESSES.AUTH.REGISTER)
-              }
-            >
-              CREATE ACCOUNT
-            </button>
           </div>
         </div>
 
