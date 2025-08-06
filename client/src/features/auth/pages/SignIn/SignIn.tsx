@@ -1,6 +1,8 @@
 import { ADDRESSES } from "@/constants";
 import { SignInForm } from "./SignInForm";
 import { NavLink } from "react-router-dom";
+import { GoogleSignInButton } from "./SignInForm/components/GoogleSignInButton";
+import { ForgotPassword } from "./SignInForm/components/ForgotPassword";
 import styles from "./SignIn.module.scss";
 
 export function SignIn() {
@@ -71,27 +73,8 @@ export function SignIn() {
               
               {/* Desktop Google Login + Forgot Password */}
               <section className="d-flex mt-md-2 flex-column align-items-center">
-                  <button
-                    className={`${googleButton}`}
-                    onClick={() => 
-                      (window.location.href = ADDRESSES.AUTH.REGISTER)
-                      }
-                    >
-                      <img 
-                          src="/google.png" 
-                          alt="Google Logo"
-                          className="me-2"
-                          style={{maxHeight: "15px"}}
-                        >
-                      </img>
-                      Login with Google
-                  </button>
-
-                  <p className="mt-3 small text-center">
-                    <NavLink to={"/"} className="text-decoration-none color-light-2">
-                      Forgot Password?
-                    </NavLink>
-                  </p>
+                  <GoogleSignInButton />
+                  <ForgotPassword />
               </section>
 
             </div>
