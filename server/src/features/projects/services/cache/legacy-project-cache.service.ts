@@ -13,9 +13,9 @@ import {
   IProjectDetails,
 } from "../../types";
 import {
-  createProjectDataService,
-  ProjectDataService,
-} from "../project-data.service";
+  createLegacyProjectDataService,
+  LegacyProjectDataService,
+} from "../legacy-project-data.service";
 import { IProjectFilter, ProjectFilter } from "../repositories";
 
 dotenv.config();
@@ -28,7 +28,7 @@ const AS_JSON = CACHE.EXTENSION.JSON;
  * @returns
  */
 export async function createLegacyProjectCacheService() {
-  const projectDataServiceInstance = await createProjectDataService();
+  const projectDataServiceInstance = await createLegacyProjectDataService();
   const jsonFileHandlerInstance =
     createJsonFileService<IProjectCache>("IProjectCache");
   return new LegacyProjectCacheService(
@@ -44,7 +44,7 @@ export async function createLegacyProjectCacheService() {
  * handling cache pages, and managing backup strategies. This class ensures efficient
  * retrieval of project data by utilizing an in-memory cache and persistent JSON storage.
  * In addition to the fields of {@link LegacyAbstractCacheService}, contains the following fields:
- * - {@link _projectDataService} - An instance of the {@link ProjectDataService} class. Used for communicating
+ * - {@link _projectDataService} - An instance of the {@link LegacyProjectDataService} class. Used for communicating
  * with the database.
  * - {@link _filter} - An optional {@link ProjectFilter} object containing query parameters provided by route
  * request. Used for querying the database and generating dynamic filenames.
@@ -52,24 +52,24 @@ export async function createLegacyProjectCacheService() {
  * for accessing or creating date specific cache files.
  */
 export class LegacyProjectCacheService extends LegacyAbstractCacheService<IProjectCache> {
-  protected readonly _projectDataService: ProjectDataService;
+  protected readonly _projectDataService: LegacyProjectDataService;
   protected _filter?: ProjectFilter;
   protected _cDate: Date;
   /**
    * @public
    * @constructor
-   * @description Accepts parameters of type {@link ProjectDataService} and {@link JsonFileService}.
+   * @description Accepts parameters of type {@link LegacyProjectDataService} and {@link JsonFileService}.
    * Calls the constructor of the parent class and passes an instance of {@link ProjectsCacheLogger},
    * an instance of {@link JsonFileService}, and the path to the location of all project cache files as specified
    * in environment variables.
    *
-   * @param projectDataService - An instance of the {@link ProjectDataService} class. Used for communicating
+   * @param projectDataService - An instance of the {@link LegacyProjectDataService} class. Used for communicating
    * with the database.
    * @param jsonFileHandler - An instance of the {@link JsonFileService} class. A core component for the default
    * CRUD operations of the cache service.
    */
   public constructor(
-    projectDataService: ProjectDataService,
+    projectDataService: LegacyProjectDataService,
     jsonFileHandler: JsonFileService<IProjectCache>
   ) {
     const logger = ProjectsCacheLogger;

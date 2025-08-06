@@ -7,24 +7,29 @@ import {
   ProjectRepository,
 } from "./repositories";
 
-export async function createProjectDataService() {
+/**
+ * @deprecated Please use `createProjectDataService
+ * @returns
+ */
+export async function createLegacyProjectDataService() {
   const dbContext = await createContext();
   const projectRepoInstance = new ProjectRepository(dbContext);
   const projectFrameworkRepoInstance = new ProjectFrameworkRepository(
     dbContext
   );
-  return new ProjectDataService(
+  return new LegacyProjectDataService(
     projectRepoInstance,
     projectFrameworkRepoInstance
   );
 }
 
 /**
+ * @deprecated Please use `ProjectDataService`
  * Service responsible for retrieving project data from the database via the `ProjectRepository`.
  * Provides utility methods for fetching individual or multiple pages of projects, as well as
  * querying the total count of available projects.
  */
-export class ProjectDataService {
+export class LegacyProjectDataService {
   private readonly _projectRepo: ProjectRepository;
   private readonly _projectFrameworkRepo: ProjectFrameworkRepository;
 
