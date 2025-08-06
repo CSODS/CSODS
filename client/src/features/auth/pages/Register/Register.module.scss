@@ -1,18 +1,94 @@
 @use "~@/assets/sass/variables.scss" as v;
 @use "~@/assets/sass/colors.scss" as *;
 
-input[type="email"] {
-  background-color: transparent;
-  border: none;
-  outline: none;
+.register-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  padding-top: 3.5rem;
+  margin-top: 0.5rem;
+  border-top-left-radius: 3.5rem;
+
+  @media (min-width: 426px) {
+    padding-top: 0;
+    margin-top: 0;
+    border-top-left-radius: 0;
+  }
 }
 
-.register-container {
-  border-top-left-radius: 3.5rem;
-  padding-top: 3.5rem;
+.register-wrapper {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
 
-  @media (min-width: 576px) {
-    border-top-left-radius: 0;
-    padding-top: 0px;
+  @media (min-width: 426px) {
+    flex-direction: row;
+    background-color: green;
+    border: 2px solid white;
+    border-radius: 1rem;
+    overflow: hidden;
+    height: 85%;
+    width: 85%;
+  }
+}
+
+.register-left {
+  display: none;
+
+  @media (min-width: 426px) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+    background-color: white;
+    color: #30282b;
+  }
+}
+
+.register-left-content {
+  width: 100%;
+  font-size: 2rem;
+
+  @media (min-width: 426px) {
+    padding: 0 3rem;
+  }
+
+  @media (min-width: 769px) {
+    font-size: 2.5rem;
+  }
+}
+
+.register-left-logo {
+  max-height: 90px;
+
+  @media (min-width: 769px) {
+    max-height: 120px;   
+  }
+}
+
+.register-right {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  background-color: rgba($color: #13072e, $alpha: 0.9);
+
+  @media (min-width: 426px) {
+    width: 50%;
+  }
+}
+
+.register-right-content {
+  width: 100%;
+
+  @media (min-width: 426px) {
+    width: 90%;
+  }
+  
+  @media (min-width: 1430px) {
+    width: 90%;
   }
 }

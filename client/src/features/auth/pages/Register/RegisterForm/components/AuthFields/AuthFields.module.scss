@@ -7,6 +7,16 @@
   border-color: red !important;
 }
 
+.auth-grid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 1rem;
+
+  @media (min-width: 769px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 .form-group-floating {
   position: relative;
   border-radius: 5rem;
@@ -19,6 +29,12 @@
   background-color: transparent;
   color: white;
   transition: all 0.2s ease;
+  border: none;
+}
+
+.form-control-floating:focus {
+  outline: none;
+  box-shadow: none;
 }
 
 .form-control-floating:focus + label,
@@ -46,3 +62,4 @@ input:-webkit-autofill {
   box-shadow: 0 0 0 1000px transparent inset;
   transition: background-color 5000s ease-in-out 0s;
 }
+

@@ -6,6 +6,16 @@
   border-color: red !important;
 }
 
+.auth-grid {
+  display: grid;
+  grid-template-columns: repeat(0, 1fr);
+  gap: 1rem;
+
+  @media (min-width: 769px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 .form-group-floating {
   position: relative;
   border-radius: 5rem;

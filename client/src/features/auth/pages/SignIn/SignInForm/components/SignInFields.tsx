@@ -42,7 +42,7 @@ export function SignInFields({ signInForm, onType }: SignInFieldsProps) {
         </span>
       </div>
 
-      <div className={`form-group-floating position-relative border border-1 ${groupForm}`}>
+      <div className={`position-relative border border-1 ${groupForm}`}>
         <input
           type="password"
           id="password"

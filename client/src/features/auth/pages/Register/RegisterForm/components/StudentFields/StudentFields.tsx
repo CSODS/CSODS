@@ -14,9 +14,11 @@ export function StudentFields({ registerForm, onType }: RegisterFieldsProps) {
 
   const groupForm = styles["form-group-floating"];
   const controlForm = styles["form-control-floating"];
+  const authGrid = styles["auth-grid"];
 
   return (
     <>
+    <div className={`${authGrid}`}>
       {/* student name */}
       <div
         className={`position-relative border border-1 ${groupForm} 
@@ -31,7 +33,7 @@ export function StudentFields({ registerForm, onType }: RegisterFieldsProps) {
         <input
           type="text"
           id="studentName"
-          className={`color-default-white pe-5 small ${controlForm} ${
+          className={`color-default-white pe-5 fs-responsive ${controlForm} ${
             registerForm.studentName ? styles["not-empty"] : ""
           }`}
           autoComplete="off"
@@ -79,7 +81,7 @@ export function StudentFields({ registerForm, onType }: RegisterFieldsProps) {
         <input
           type="text"
           id="studentNumber"
-          className={`color-default-white pe-5 small ${controlForm} ${
+          className={`color-default-white pe-5 fs-responsive ${controlForm} ${
             registerForm.studentNumber ? styles["not-empty"] : ""
           }`}
           autoComplete="off"
@@ -113,6 +115,7 @@ export function StudentFields({ registerForm, onType }: RegisterFieldsProps) {
       >
         <li>Invalid student number format.</li>
       </ul>
+    </div>
     </>
   );
 }

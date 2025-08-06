@@ -36,10 +36,10 @@ export function RegisterForm() {
 
   return (
     <article className="p-0">
-      <p className="px-3 text-center fs-2 bolder">Sign Up</p>
+      <p className="px-3 pb-2 fs-2 bolder">Sign Up</p>
 
       <form
-        className="m-0 mt-4 p-0 px-3 d-grid row-gap-4"
+        className="d-grid row-gap-4"
         onSubmit={handleSubmit}
       >
         {/* 
@@ -60,7 +60,7 @@ export function RegisterForm() {
         ) : (
           <></>
         )}
-        <div className="m-0 p-0 d-grid row-gap-1">
+        <div className="m-0 p-0 ">
           <ErrorMessage message={errMsg} errRef={errRef} />
           <RegisterBtn />
         </div>
