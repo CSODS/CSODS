@@ -10,27 +10,32 @@ import {
   createProjectDataService,
   ProjectDataService,
 } from "../project-data.service";
-import { ProjectCacheService } from "./project-cache.service";
+import { LegacyProjectCacheService } from "./legacy-project-cache.service";
 
-export async function createProjectCachePageService() {
+/**
+ * @deprecated Will be replaced by `createProjectCachePageService`.
+ * @returns
+ */
+export async function createLegacyProjectCachePageService() {
   const projectDataServiceInstance = await createProjectDataService();
   const jsonFileHandlerInstance =
     createJsonFileService<IProjectCache>("IProjectCache");
 
-  return new ProjectCachePageService(
+  return new LegacyProjectCachePageService(
     projectDataServiceInstance,
     jsonFileHandlerInstance
   );
 }
 
 /**
- * @class ProjectCachePageService
- * @extends ProjectCacheService
+ * @deprecated Will be replaced by `ProjectCachePageService`
+ * @class LegacyProjectCachePageService
+ * @extends LegacyProjectCacheService
  * @description Manages the caching of project page data, including reading from and writing to JSON files,
  * handling cache pages. This class ensures efficient retrieval of project page data by utilizing an
  * in-memory cache and persistent JSON storage.
  */
-export class ProjectCachePageService extends ProjectCacheService {
+export class LegacyProjectCachePageService extends LegacyProjectCacheService {
   /**
    * @public
    * @constructor

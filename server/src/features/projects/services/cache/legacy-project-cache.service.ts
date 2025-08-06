@@ -23,17 +23,22 @@ dotenv.config();
 const PROJECT_CACHE = CACHE.PROJECT_CACHE;
 const AS_JSON = CACHE.EXTENSION.JSON;
 
-export async function createProjectCacheService() {
+/**
+ * @deprecated Will be replaced by `createProjectCacheService`
+ * @returns
+ */
+export async function createLegacyProjectCacheService() {
   const projectDataServiceInstance = await createProjectDataService();
   const jsonFileHandlerInstance =
     createJsonFileService<IProjectCache>("IProjectCache");
-  return new ProjectCacheService(
+  return new LegacyProjectCacheService(
     projectDataServiceInstance,
     jsonFileHandlerInstance
   );
 }
 /**
- * @class ProjectCacheHandler
+ * @deprecated Will be replaced by `ProjectCacheService`
+ * @class LegacyProjectCacheHandler
  * @extends LegacyAbstractCacheService
  * @description Manages the caching of project data, including reading from and writing to JSON files,
  * handling cache pages, and managing backup strategies. This class ensures efficient
@@ -46,7 +51,7 @@ export async function createProjectCacheService() {
  * - {@link _cDate} - A {@link Date} object with the value of the current date. Used for generating filenames
  * for accessing or creating date specific cache files.
  */
-export class ProjectCacheService extends LegacyAbstractCacheService<IProjectCache> {
+export class LegacyProjectCacheService extends LegacyAbstractCacheService<IProjectCache> {
   protected readonly _projectDataService: ProjectDataService;
   protected _filter?: ProjectFilter;
   protected _cDate: Date;

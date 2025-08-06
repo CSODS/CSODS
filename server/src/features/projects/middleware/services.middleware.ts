@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import {
-  createProjectCachePageService,
+  createLegacyProjectCachePageService,
   createTagsCacheHandler,
 } from "../services";
 
@@ -18,6 +18,6 @@ export async function attachProjectCachePageService(
   res: Response,
   next: NextFunction
 ) {
-  req.projectCachePageService = await createProjectCachePageService();
+  req.projectCachePageService = await createLegacyProjectCachePageService();
   next();
 }
