@@ -3,6 +3,7 @@ import { SignInForm } from "./SignInForm";
 import { NavLink } from "react-router-dom";
 import { GoogleSignInButton } from "./SignInForm/components/GoogleSignInButton";
 import { ForgotPassword } from "./SignInForm/components/ForgotPassword";
+import { CreateAccountButton } from "./SignInForm/components/CreateAccountButton";
 import styles from "./SignIn.module.scss";
 
 export function SignIn() {
@@ -38,6 +39,7 @@ export function SignIn() {
               Quisque venenatis iaculis facilisis. 
               Donec tempor eu sem ut tincidunt.
             </article>
+            <CreateAccountButton />
           </div>
         </div>
 
