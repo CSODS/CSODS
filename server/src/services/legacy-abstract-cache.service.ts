@@ -3,6 +3,7 @@ import { ICache } from "@viewmodels";
 import { JsonFileService } from "./json-file.service";
 
 /**
+ * @deprecated Please use new AbstractCacheService. Will be removed before the pr.
  * @abstract
  * @class
  * @description An abstract class to be used for caching services.
@@ -17,7 +18,7 @@ import { JsonFileService } from "./json-file.service";
  * - {@link _cache} - The in-memory reference of the {@link ICache} object loaded from the cache. `null` by
  * default.
  */
-export abstract class AbstractCacheService<TCache extends ICache> {
+export abstract class LegacyAbstractCacheService<TCache extends ICache> {
   protected readonly _logger: winston.Logger;
   protected readonly _jsonFileHandler: JsonFileService<TCache>;
   protected readonly _cachePath: string;
@@ -148,7 +149,7 @@ export abstract class AbstractCacheService<TCache extends ICache> {
    *
    * @remarks
    * If the shape of the `cache` object has fields in need of a reviver other than the default provided fields
-   * in {@link AbstractCacheService.reviver}, reviver must be overriden.
+   * in {@link LegacyAbstractCacheService.reviver}, reviver must be overriden.
    */
   protected async parseCache(filePath?: string): Promise<TCache | null> {
     const cachePath = filePath ?? this._cachePath;

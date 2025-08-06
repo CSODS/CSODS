@@ -1,7 +1,7 @@
 import dotenv from "dotenv";
 import { CACHE } from "@data";
 import {
-  AbstractCacheService,
+  LegacyAbstractCacheService,
   createJsonFileService,
   JsonFileService,
 } from "@services";
@@ -34,11 +34,11 @@ export async function createProjectCacheService() {
 }
 /**
  * @class ProjectCacheHandler
- * @extends AbstractCacheService
+ * @extends LegacyAbstractCacheService
  * @description Manages the caching of project data, including reading from and writing to JSON files,
  * handling cache pages, and managing backup strategies. This class ensures efficient
  * retrieval of project data by utilizing an in-memory cache and persistent JSON storage.
- * In addition to the fields of {@link AbstractCacheService}, contains the following fields:
+ * In addition to the fields of {@link LegacyAbstractCacheService}, contains the following fields:
  * - {@link _projectDataService} - An instance of the {@link ProjectDataService} class. Used for communicating
  * with the database.
  * - {@link _filter} - An optional {@link ProjectFilter} object containing query parameters provided by route
@@ -46,7 +46,7 @@ export async function createProjectCacheService() {
  * - {@link _cDate} - A {@link Date} object with the value of the current date. Used for generating filenames
  * for accessing or creating date specific cache files.
  */
-export class ProjectCacheService extends AbstractCacheService<IProjectCache> {
+export class ProjectCacheService extends LegacyAbstractCacheService<IProjectCache> {
   protected readonly _projectDataService: ProjectDataService;
   protected _filter?: ProjectFilter;
   protected _cDate: Date;
