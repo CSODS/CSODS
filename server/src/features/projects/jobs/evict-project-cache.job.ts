@@ -6,5 +6,5 @@ export async function evictProjectCache() {
 
   JobsLogger.info("[CacheEviction] Evicting stale daily projects cache...");
   const evictedFiles = await projectCacheEvictor.evictStaleCache();
-  JobsLogger.info(`Evicted ${evictedFiles} files.`);
+  JobsLogger.info(`[CacheEviction] Evicted ${evictedFiles} files.`);
 }
