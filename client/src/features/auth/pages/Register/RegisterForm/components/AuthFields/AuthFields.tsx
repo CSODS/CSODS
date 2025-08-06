@@ -73,7 +73,7 @@ export function AuthFields({ registerForm, onType }: RegisterFieldsProps) {
 
         <div
           id="email-note"
-          className={`d-flex d-lg-none mb-0 pb-0 ${bubbleContainer} ${
+          className={`d-flex d-lg-none mb-0 ${bubbleContainer} ${
           emailFocus && registerForm.email && !validEmail
             ? "text-start fs-small"
             : "visually-hidden"
@@ -125,7 +125,7 @@ export function AuthFields({ registerForm, onType }: RegisterFieldsProps) {
 
         <div
           id="user-note"
-          className={`d-flex d-lg-none mb-0 pb-0 ${bubbleContainer} ${
+          className={`d-flex d-lg-none mb-0 ${bubbleContainer} ${
             userFocus && registerForm.username && !validUser
               ? "text-start fs-small"
               : "visually-hidden"
@@ -170,19 +170,17 @@ export function AuthFields({ registerForm, onType }: RegisterFieldsProps) {
           ></i>
         </span>
 
-            <div
-              id="pwd-note"
-              className={`d-flex d-lg-none mb-0 pb-0 ${bubbleContainer} ${
-                pwdFocus && registerForm.password && !validPwd
-                  ? "text-start fs-small"
-                  : "visually-hidden"
-                }`}
-              >
+          <div
+            id="pwd-note"
+            className={`d-flex d-lg-none ${bubbleContainer} ${
+              pwdFocus && registerForm.password && !validPwd
+                ? "text-start fs-small"
+                : "visually-hidden"
+              }`}
+            >
 
-              <span className="ms-2">
-                Password must be 8 – 24 characters and include:
-              </span>
-
+            <div className="ms-2">
+              Password must be 8 – 24 characters and include:
               <ul className="mb-0 pb-0">
                 <li>At least one uppercase letter</li>
                 <li>At least one lowercase letter</li>
@@ -190,6 +188,7 @@ export function AuthFields({ registerForm, onType }: RegisterFieldsProps) {
                 <li>At least one special character<i> (e.g.: ! @ # $ % )</i></li>
               </ul>
             </div>
+          </div>
       </div>
 
       {/* confirm password */}
@@ -221,7 +220,7 @@ export function AuthFields({ registerForm, onType }: RegisterFieldsProps) {
         <span className="position-absolute top-50 end-0 translate-middle-y me-3">
           <i
             className={`${
-              matchFocus && registerForm.passwordMatch && !validMatch
+               registerForm.password && validMatch
                 ? "bi bi-check-all text-success"
                 : registerForm.passwordMatch
                 ? "bi bi-exclamation text-danger"
@@ -231,7 +230,7 @@ export function AuthFields({ registerForm, onType }: RegisterFieldsProps) {
         </span>
         <div
           id="pwd-match-note"
-          className={`d-flex d-lg-none mb-0 pb-0 ${bubbleContainer} ${
+          className={`d-flex d-lg-none ${bubbleContainer} ${
             matchFocus && !validMatch ? "text-start fs-small" : "visually-hidden"
           }`}
         >
@@ -244,14 +243,14 @@ export function AuthFields({ registerForm, onType }: RegisterFieldsProps) {
 
     <div
       id="email-note"
-      className={`d-none d-lg-flex mb-0 pb-0
+      className={`d-none d-lg-flex
       ${
       emailFocus && registerForm.email && !validEmail
         ? "text-start fs-small"
         : "visually-hidden"
       }`}
     >
-    <ul className="mb-0 pb-0">
+    <ul className="mb-0 pb-0 color-light-2">
         <li>Max 254 characters</li>
         <li>No starting dot (.) or consecutive dots (..)</li>
         <li>Lowercase letters, numbers, ', ., +, _, - allowed before @</li>
@@ -261,12 +260,12 @@ export function AuthFields({ registerForm, onType }: RegisterFieldsProps) {
 
     <div
       id="user-note"
-      className={`d-none d-lg-flex mb-0 pb-0 ${
+      className={`d-none d-lg-flex ${
         userFocus && registerForm.username && !validUser
           ? "text-start fs-small"
           : "visually-hidden"
         }`}>
-      <ul className="mb-0 pb-0">
+      <ul className="mb-0 pb-0 color-light-2">
         <li>4-24 characters</li>
         <li>Must start with a letter</li>
         <li>Letters, numbers, hyphens (-), and underscores (_) allowed</li>
@@ -275,7 +274,7 @@ export function AuthFields({ registerForm, onType }: RegisterFieldsProps) {
     
     <div
       id="pwd-note"
-      className={`d-none d-lg-flex mb-0 pb-0
+      className={`d-none d-lg-flex 
         ${
         pwdFocus && registerForm.password && !validPwd
           ? "text-start fs-small"
@@ -283,28 +282,28 @@ export function AuthFields({ registerForm, onType }: RegisterFieldsProps) {
         }`}
       >
 
-      <span className="ms-2">
-        Password must be 8 – 24 characters and include:
-      </span>
+        <div className="ms-2">
+          Password must be 8 – 24 characters and include:
 
-      <ul className="mb-0 pb-0">
-        <li>At least one uppercase letter</li>
-        <li>At least one lowercase letter</li>
-        <li>At least one number</li>
-        <li>At least one special character<i> (e.g.: ! @ # $ % )</i></li>
-      </ul>
+        <ul className="mb-0 pb-0 color-light-2">
+          <li>At least one uppercase letter</li>
+          <li>At least one lowercase letter</li>
+          <li>At least one number</li>
+          <li>At least one special character<i> (e.g.: ! @ # $ % )</i></li>
+        </ul>
+      </div>
     </div>
 
     <div
       id="pwd-match-note"
-      className={`d-none d-lg-flex mb-0 pb-0
+      className={`d-none d-lg-flex 
         ${
         matchFocus && registerForm.passwordMatch && !validMatch 
         ? "text-start fs-small" 
         : "visually-hidden"
       }`}
     >
-      <ul className="mb-0 pb-0">
+      <ul className="mb-0 pb-0 color-light-2">
         <li>Must match the password input field.</li>
       </ul>
     </div>
