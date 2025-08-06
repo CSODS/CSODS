@@ -15,14 +15,27 @@ import {
 dotenv.config();
 
 export function createProjectCacheEvictor(
-  cacheEvictionOptions: IEvictionOptions,
-  pageEvictionOptions: IEvictionOptions
+  cacheEvictionOptions?: IEvictionOptions,
+  pageEvictionOptions?: IEvictionOptions
 ): ProjectCacheEvictor {
+  const defaultCacheEvictionOptions: IEvictionOptions = {
+    Strategy: "ttl",
+    Duration: 1000 * 60 * 60 * 24 * 1,
+  };
+
+  const defaultPageEvictionOptions: IEvictionOptions = {
+    Strategy: "ttl+lfu",
+    Duration: 1000 * 60 * 60 * 3,
+    Granularity: 1000 * 60 * 60,
+    ViewThreshold: 10,
+  };
   const jsonFileHandler = createJsonFileService<IProjectCache>("IProjectCache");
-  const pageEvictorInstance = createProjectPageEvictor(pageEvictionOptions);
+  const pageEvictorInstance = createProjectPageEvictor(
+    pageEvictionOptions ?? defaultPageEvictionOptions
+  );
   const cacheEvictorInstance = new ProjectCacheEvictor(
     jsonFileHandler,
-    cacheEvictionOptions,
+    cacheEvictionOptions ?? defaultCacheEvictionOptions,
     pageEvictorInstance
   );
   return cacheEvictorInstance;
