@@ -42,9 +42,16 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 50%;
     background-color: white;
     color: #30282b;
+  }
+  
+  @media (min-width: 426px) and (max-width: 768px) {
+    width: 40%;
+  }
+
+  @media (min-width: 769px) {
+    width: 50%;
   }
 }
 
@@ -76,8 +83,12 @@
   width: 100%;
   background-color: rgba($color: #13072e, $alpha: 0.9);
 
-  @media (min-width: 426px) {
+  @media (min-width: 769px) {
     width: 50%;
+  }
+
+    @media (min-width: 426px) and (max-width: 768px) {
+    width: 60%;
   }
 }
 
