@@ -1,21 +1,20 @@
 import cron from "node-cron";
 import { authJobs, projectsJobs } from "@/features";
 
-const viewsDecayJobService = projectsJobs.createViewsDecayJobService();
-const evictionJobService = projectsJobs.createEvictionJobService();
+//  every day at the 00:25
+cron.schedule("0 25 0 * * *", authJobs.cleanUpIdleSessions);
 
-cron.schedule("0 0 0 * * *", authJobs.cleanUpIdleSessions);
+//  every day at the 00:30
+cron.schedule("0 30 0 * * *", authJobs.cleanUpExpiredSessions);
 
-cron.schedule("0 5 0 * * *", authJobs.cleanUpExpiredSessions);
+//  every hour at the 5th minute
+cron.schedule("0 5 * * * *", projectsJobs.decayCachePageViews);
 
-// every hour at 0 minutes
-viewsDecayJobService.scheduleViewsDecay();
+// every day at the 00:10
+cron.schedule("0 10 0 * * *", projectsJobs.evictProjectCache);
 
-// every day
-evictionJobService.scheduleProjectCacheEviction();
+// every hour at the 15th minute
+cron.schedule("0 15 * * * *", projectsJobs.evictSearchCache);
 
-// every hour at 3 minutes
-evictionJobService.scheduleSearchCacheEviction();
-
-// every hour at 5 minutes
-evictionJobService.scheduleCachePageEviction();
+// every hour at the 20th minute
+cron.schedule("0 20 * * * *", projectsJobs.evictCachePages);
