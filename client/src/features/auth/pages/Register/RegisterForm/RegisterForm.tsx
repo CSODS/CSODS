@@ -60,7 +60,7 @@ export function RegisterForm() {
         ) : (
           <></>
         )}
-        <div className="m-0 p-0 ">
+        <div className="mt-1 p-0 ">
           <ErrorMessage message={errMsg} errRef={errRef} />
           <RegisterBtn />
         </div>

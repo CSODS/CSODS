@@ -8,7 +8,7 @@
 
 .auth-grid {
   display: grid;
-  grid-template-columns: repeat(0, 1fr);
+  grid-template-columns: repeat(1fr);
   gap: 1rem;
 
   @media (min-width: 769px) {
@@ -24,15 +24,11 @@
 
 .form-control-floating {
   width: 100%;
-  padding: 0.55rem 1rem;
+  padding: 0.85rem 1rem 0.25rem;
   border-radius: 5rem;
   background-color: transparent;
   color: white;
   transition: all 0.2s ease;
-
-  @media (min-width: 426px) {
-    padding: 0.4rem 1rem;
-  }
 }
 
 .form-control-floating:focus + label,
@@ -59,4 +55,32 @@ input:-webkit-autofill {
   -webkit-text-fill-color: white;
   box-shadow: 0 0 0 1000px transparent inset;
   transition: background-color 5000s ease-in-out 0s;
+}
+
+.bubble-container {
+  display: flex;
+  position: absolute;
+  left: 0;
+  top: 100%;
+  background-color: grey;
+  color: white;
+  padding: 0.5rem 1rem;
+  margin-top: 0.25rem;
+  border-radius: 0.5rem;
+  font-size: 0.75rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  width: 100%;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: -0.5rem;
+    right: 1rem;
+    width: 0;
+    height: 0;
+    border-left: 0.5rem solid transparent;
+    border-right: 0.5rem solid transparent;
+    border-bottom: 0.5rem solid grey;
+  }
 }

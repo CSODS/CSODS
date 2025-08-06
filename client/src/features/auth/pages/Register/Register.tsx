@@ -53,8 +53,8 @@ export function Register() {
               <div className="w-100 px-md-4 px-lg-5">
                 <RegisterForm />
           
-                <section className="d-flex d-md-none mt-3 justify-content-center">
-                  <p className="m-0 p-0 color-light-2 small">
+                <section className="d-flex d-md-none mt-2 justify-content-center">
+                  <p className="m-0 p-0 color-light-2 fs-responsive">
                     Already have an account?{" "}
                     <NavLink to={signInLink} className="text-decoration-none">
                       Sign In
