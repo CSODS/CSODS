@@ -1,6 +1,6 @@
 import winston from "winston";
 import { ICache } from "@/viewmodels";
-import { JsonFileService } from "./json-file-service";
+import { JsonFileService } from "../json-file-service";
 import { CACHE } from "@/data";
 
 /**
