@@ -137,12 +137,15 @@ export class JsonFileService<TModel> {
         ? JSON.parse(jsonString, reviver)
         : JSON.parse(jsonString);
 
+      //  ! throw exception if data is null
       this.assertDataNotNull(data);
       FileLogger.info("[parseJsonFile] Success parsing file.");
 
       return data;
     } catch (err) {
       FileLogger.error(`[parseJsonFile] Error parsing file.`, err);
+
+      if (err instanceof JsonError) throw err;
       throw new JsonError({
         name: "JSON_PARSE_ERROR",
         message: "Failed to parse JSON file.",
@@ -198,6 +201,8 @@ export class JsonFileService<TModel> {
       return data!;
     } catch (err) {
       FileLogger.error(`[writeToJsonFile] Error writing file.`, err);
+
+      if (err instanceof JsonError) throw err;
       throw new JsonError({
         name: "JSON_WRITE_ERROR",
         message: "Failed to write JSON file.",
