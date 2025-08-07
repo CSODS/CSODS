@@ -3,7 +3,7 @@ import * as lockfile from "proper-lockfile";
 import path from "path";
 import { OperationOptions } from "retry";
 import { FileLogger } from "@utils";
-import { JsonError } from "./json-file-service.error";
+import { JsonError, ErrorName } from "./json-file-service.error";
 
 export function createJsonFileService<TModel>(modelName: string) {
   return new JsonFileService<TModel>(modelName);
@@ -53,10 +53,8 @@ export class JsonFileService<TModel> {
    * @returns {Promise<string[]>} A promise that resolves to an array of filenames (optionally filtered).
    *
    * @example
-   * // Get all filenames
    * const allFiles = await getDirectoryFilenames('./my-folder');
    *
-   * // Get only .json files
    * const jsonFiles = await getDirectoryFilenames('./my-folder', (name) => name.endsWith('.json'));
    */
   public async getDirectoryFilenames(
@@ -109,6 +107,10 @@ export class JsonFileService<TModel> {
    * @param {string} fileName - The name of the JSON file to be read.
    * @param {Function|null} [reviver] - An optional reviver function for custom JSON parsing.
    * @returns {Promise<TModel>} A promise that resolves to the parsed object or `null` if reading or parsing fails.
+   * @throws {JsonError} Thrown with `name`:
+   * - `"JSON_FILE_NOT_FOUND_ERROR"`
+   * - `"NULL_DATA_ERROR"`
+   * - `"JSON_PARSE_ERROR"`
    */
   public async parseJsonFile(
     filePath: string,
@@ -137,7 +139,7 @@ export class JsonFileService<TModel> {
         ? JSON.parse(jsonString, reviver)
         : JSON.parse(jsonString);
 
-      //  ! throw exception if data is null
+      //  !Throws JsonError: NULL_DATA_ERROR if data is null
       this.assertDataNotNull(data);
       FileLogger.info("[parseJsonFile] Success parsing file.");
 
@@ -167,7 +169,9 @@ export class JsonFileService<TModel> {
    * @param {string} fileName - The name of the JSON file to write.
    * @param {TModel|null} data - The object to serialize and write. Must not be `null`.
    * @returns {Promise<TModel>} A promise that resolves to the written data on success.
-   * @throws {Error} If the data is `null` or the write operation fails.
+   * @throws {JsonError} Thrown with `name`:
+   * - `"NULL_DATA_ERROR"`
+   * - `"JSON_WRITE_ERROR"`
    */
   public async writeToJsonFile(
     filePath: string,
@@ -180,7 +184,7 @@ export class JsonFileService<TModel> {
       FileLogger.info(
         `[writeToJsonFile] Attempting to write into ${fileName} located in ${filePath}...`
       );
-      //  !throw exception if data is null.
+      //  !throw JsonError: NULL_DATA_ERROR exception if data is null
       this.assertDataNotNull(data);
 
       const dataJson = JSON.stringify(data, null, 2);
@@ -270,7 +274,7 @@ export class JsonFileService<TModel> {
    * Used to enforce non-null guarantees before performing operations like serialization.
    *
    * @param {TModel|null} data - The data to check.
-   * @throws {JsonError} `NULL_DATA_ERROR` If the provided data is `null`.
+   * @throws {JsonError} Thrown with `name: "NULL_DATA_ERROR"`.
    */
   public assertDataNotNull(data: TModel | null): asserts data is TModel {
     if (data == null)

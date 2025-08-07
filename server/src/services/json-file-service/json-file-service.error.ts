@@ -1,6 +1,6 @@
 import { ErrorBase } from "@/error";
 
-type ErrorName =
+export type ErrorName =
   | "JSON_FILE_NOT_FOUND_ERROR"
   | "JSON_PARSE_ERROR"
   | "JSON_WRITE_ERROR"
