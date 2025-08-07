@@ -66,14 +66,10 @@ export abstract class AbstractCacheService<TCache extends ICache> {
   }
 
   /**
-   * @async
    * @description Asynchronously loads the cache into memory. The successfully
-   * loaded cache is validated then stored interally in {@link _cache} and
-   * returned.
+   * loaded cache is validated then stored interally in {@link _cache}.
    * @returns A `Promise` that resolves to the loaded cache.
-   * @throws {CacheError} Thrown with `name`:
-   * - `"CACHE_PARSE_ERROR"`
-   * - `"INVALID_CACHE_ERROR"`
+   * @throws {CacheError} `CACHE_PARSE_ERROR` | `INVALID_CACHE_ERROR`
    */
   public async loadCache(): Promise<TCache> {
     this._logger.info("[setCache] Loading cache into memory...");
@@ -100,9 +96,7 @@ export abstract class AbstractCacheService<TCache extends ICache> {
    * @param data The data to be stored into cache.
    * @returns A `Promise` that resolves to the newly created {@link ICache}
    * object.
-   * @throws {CacheError} Thrown with `name:`
-   * - `"INVALID_CACHE_ERROR"` if the data fails validation via {@link isCacheValid}
-   * - `"CACHE_PERSIST_ERROR"`
+   * @throws {CacheError} `INVALID_CACHE_ERROR` | `CACHE_PERSIST_ERROR`
    */
   public async persistCache(data: TCache): Promise<TCache> {
     const { _cachePath, _filename, _logger } = this;
@@ -162,16 +156,13 @@ export abstract class AbstractCacheService<TCache extends ICache> {
   }
 
   /**
-   * @async
-   * @description Asynchronously attempts to parse a JSON cache file. Utilizes
-   * a helper function `reviver` for reviving `Date` type fields.
-   *
+   * @description
+   * Attempts to parse the cache file using the configured `reviver`.
    * @returns A `Promise` that resolves to the parsed `cache` object.
-   * @throws {CacheError} Thrown with `name: "CACHE_PARSE_ERROR"`.
+   * @throws {CacheError} `CACHE_PARSE_ERROR`
    * @remarks
-   * If the shape of the `cache` object has fields in need of a reviver other
-   * than the default provided fields in {@link reviver}, reviver must be
-   * overriden.
+   * Override {@link reviver} in subclasses if custom deserialization
+   * is needed.
    */
   protected async tryParseCache(): Promise<TCache> {
     const { _cachePath, _filename, _logger } = this;
@@ -202,16 +193,8 @@ export abstract class AbstractCacheService<TCache extends ICache> {
   }
 
   /**
-   * @protected
    * @description Revives stringified dates in cache files.
-   *
-   * Converts fields like `createdOn` and `lastAccessed` to `Date` instances.
-   *
    * Override if the cache shape requires custom reviving logic
-   *
-   * @param key - The property name.
-   * @param value - The property value.
-   * @returns - The transformed value.
    */
   protected reviver(key: string, value: any) {
     const isDateKey = key === "createdOn" || key === "lastAccessed";
@@ -220,15 +203,9 @@ export abstract class AbstractCacheService<TCache extends ICache> {
   }
 
   /**
-   * @protected
    * @description Checks if the {@link ICache} object is valid.
-   *
-   * @param cache - The {@link ICache} object to be validated.
-   * @returns `true` if the cache is valid, `false` otherwise.
-   *
    * @remarks
-   * Subclasses may override this method if additional validation logic is
-   * needed.
+   * Override in child classes if custom validation is required.
    */
   protected isCacheValid(cache: TCache | null): boolean {
     return !!cache;
