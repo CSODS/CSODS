@@ -1,6 +1,6 @@
 import { MethodNames } from "@/types";
 
-export type LogParams<T> = {
+export type MethodLogParams<T> = {
   level: "info" | "debug" | "error";
   method: MethodNames<T>;
   message: string;

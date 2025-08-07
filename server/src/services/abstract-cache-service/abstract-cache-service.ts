@@ -3,7 +3,7 @@ import { CACHE } from "@/data";
 import { ICache } from "@/viewmodels";
 import { JsonError, JsonFileService } from "../json-file-service";
 import { CacheError } from "./abstract-cache-service.error";
-import { LogParams } from "./abstract-cache-service.types";
+import { MethodLogParams } from "./abstract-cache-service.types";
 
 /**
  * @abstract
@@ -244,7 +244,7 @@ export abstract class AbstractCacheService<TCache extends ICache> {
     level,
     method,
     message,
-  }: LogParams<AbstractCacheService<TCache>>) {
+  }: MethodLogParams<AbstractCacheService<TCache>>) {
     const logMsg = `[${method}] ${message}`;
     this._logger.log(level, logMsg);
   }
