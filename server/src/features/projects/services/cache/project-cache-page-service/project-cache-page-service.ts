@@ -3,8 +3,14 @@ import {
   IProjectCache,
   IProjectCachePage,
 } from "@/features/projects/types";
-import { createJsonFileService, JsonFileService } from "@/services";
+import {
+  CacheError,
+  createJsonFileService,
+  JsonError,
+  JsonFileService,
+} from "@/services";
 import { ProjectCacheService } from "../project-cache-service";
+import { ProjectCachePageError } from "./project-cache-page-service.error";
 
 export async function createProjectCachePageService() {
   const jsonFileServiceInstance =
@@ -31,116 +37,11 @@ export class ProjectCachePageService extends ProjectCacheService {
     super(jsonFileService);
   }
   /**
-   * @async
-   * @description Retrieves a specific page of project data from the cache.
-   *
-   * If the requested page exists in the in-memory cache, updates both the
-   * top-level and specific cache page’s `viewCount` and `lastAccessed`.
-   *
-   * Throws an error if the cache is not initialized.
-   *
-   * @param pageNumber - The number of the page to retrieve (1-based index).
-   * @returns A `Promise` that resolves to the requested cached page.
-   */
-  public async getCachePage(pageNumber: number): Promise<IProjectCachePage> {
-    const { _logger } = this;
-
-    try {
-      this._jsonFileService.assertDataNotNull(this._cache);
-
-      _logger.info(`[getCachePage] Attempting to retrieve page ${pageNumber}`);
-
-      if (this.isPageOutOfBounds(this._cache.totalPages, pageNumber))
-        //  todo: custom error
-        throw new Error(`Page ${pageNumber} is out of bounds.`);
-
-      if (this.isPageMissingFromCache(this._cache.cachePages, pageNumber))
-        //  todo: custom error
-        throw new Error(`Page ${pageNumber} is not in cache.`);
-
-      _logger.info(
-        `[getCachePage] Success retrieving page ${pageNumber} from cache.`
-      );
-
-      await this.updateViewCount(pageNumber);
-
-      return this._cache.cachePages[pageNumber];
-    } catch (err) {
-      //  todo: better error handling
-      _logger.error("[getCachePage] Failed retrieving cache page: ", err);
-      throw err;
-    }
-  }
-  /**
-   * @description Verifies if the provided `pageNumber` is out of the total page
-   * range.
-   * @param totalPages
-   * @param pageNumber
-   * @returns `true` if the page is out of bounds and `false` otherwise.
-   */
-  public isPageOutOfBounds(totalPages: number, pageNumber: number): boolean {
-    return pageNumber === 0 || pageNumber > totalPages;
-  }
-
-  /**
-   * @private
-   * @async
-   * @description Increments the visit count for a specific page number within
-   * the in-memory cache and persists the updated cache to a JSON file.
-   *
-   * Updates both the top-level and specific cache page’s `viewCount`
-   * and `lastAccessed`.
-   *
-   * It then asynchronously writes the cache back into the file `json` file.
-   *
-   * If any error occurs during the cache update or file writing process, the
-   * original exception is caught and re-thrown as a new `Error` to propagate
-   * the failure.
-   *
-   * @param pageNumber - The page number whose visit count needs to be
-   * incremented.
-   * @returns A Promise that resolves when the page view count has been
-   * successfully updated and persisted.
-   */
-  private async updateViewCount(pageNumber: number): Promise<number> {
-    const { _logger } = this;
-    try {
-      this._jsonFileService.assertDataNotNull(this._cache);
-      const now = new Date();
-
-      this._cache.lastAccessed = now;
-      this._cache.viewCount += 1;
-
-      this._cache.cachePages[pageNumber].lastAccessed = now;
-      this._cache.cachePages[pageNumber].viewCount += 1;
-
-      this._cache = await this.persistCache(this._cache);
-
-      _logger.info(
-        `[updateViewCount] Updated view count of page: ${pageNumber}.`
-      );
-
-      return this._cache.cachePages[pageNumber].viewCount;
-    } catch (err) {
-      _logger.error(`[updateViewCount] Failed updating view count: `, err);
-      throw err;
-    }
-  }
-
-  /**
-   * @async
    * @description Asynchronously stores a new cache page into the projects cache.
-   * Updates the internal date state, increments the view count of the top level
-   * cache, then writes the cache back into the json file. If the write operation
-   * fails, the newly added page is removed from the in-memory cache and the error
-   * is re-thrown.
-   *
-   * Throws an error if the cache is not initialized.
-   *
-   * @param pageNumber The page number of the cache page to be added.
-   * @param cachePage The {@link IProjectCachePage} to be inserted
-   * into the cache.
-   * @return A `Promise` that resolves to the successfully inserted cache page.
+   * Updates the `lastAccessed` and `viewCount` field of the top level cache, then
+   * writes the cache back into the json file.
+   * @throws {JsonError} `NULL_DATA_ERROR`
+   * @throws {CacheError} `INVALID_CACHE_ERROR` | `CACHE_PERSIST_ERROR`
    */
   public async storeCachePage({
     pageNumber,
@@ -156,7 +57,8 @@ export class ProjectCachePageService extends ProjectCacheService {
         `[storeCachePage] Attempting to store page: ${pageNumber} in cache: ${_filename}.`
       );
 
-      this._jsonFileService.assertDataNotNull(this._cache);
+      //  !Throws JsonError: NULL_DATA_ERROR
+      this.assertCacheNotNull(this._cache);
 
       const now = new Date();
 
@@ -164,9 +66,8 @@ export class ProjectCachePageService extends ProjectCacheService {
       this._cache.viewCount += 1;
       this._cache.cachePages[pageNumber] = cachePage;
 
+      //  !Throws CacheError: INVALID_CACHE_ERROR or CACHE_PERSIST_ERROR
       const storedCache = await this.persistCache(this._cache);
-
-      if (!storedCache) throw new Error("Failed writing cache to file.");
 
       _logger.info(
         `[storeCachePage] Success storing page: ${pageNumber} in cache: ${_filename}.`
@@ -182,18 +83,78 @@ export class ProjectCachePageService extends ProjectCacheService {
       }
 
       _logger.error("[storeCachePage] Failed storing new cache page: ", err);
-
-      throw err;
+      throw err; //  * all errors controlled
     }
   }
 
   /**
-   * @description Checks whether a given page number does not exist in the cache.
-   *
-   * @param cachePages - The current cache pages.
-   * @param pageNumber - The page number to verify.
-   * @returns `true` if the page is missing from the cache, otherwise `false`.
+   * @description Retrieves a specific page of project data from the cache.
+   * Then updates the top-level and specific cache page’s `viewCount` and
+   * `lastAccessed`.
+   * @throws {JsonError} `NULL_DATA_ERROR`
+   * @throws {ProjectCachePageError} `PAGE_OUT_OF_BOUNDS_ERROR` | `MISSING_PAGE_ERROR`
+   * @throws {CacheError} `INVALID_CACHE_ERROR` | `CACHE_PERSIST_ERROR`
    */
+  public async getCachePage(pageNumber: number): Promise<IProjectCachePage> {
+    const { _logger } = this;
+
+    try {
+      //  ! may throw JsonError NULL_DATA_ERROR
+      this.assertCacheNotNull(this._cache);
+
+      _logger.info(`[getCachePage] Attempting to retrieve page ${pageNumber}`);
+
+      if (pageNumber === 0 || pageNumber > this._cache.totalPages)
+        throw new ProjectCachePageError({
+          name: "PAGE_OUT_OF_BOUNDS_ERROR",
+          message: `Page ${pageNumber} is out of bounds.`,
+        });
+
+      if (this.isPageMissingFromCache(this._cache.cachePages, pageNumber))
+        throw new ProjectCachePageError({
+          name: "MISSING_PAGE_ERROR",
+          message: `Page ${pageNumber} is not in cache.`,
+        });
+
+      _logger.info(
+        `[getCachePage] Success retrieving page ${pageNumber} from cache.`
+      );
+
+      //  !Throws JsonError: NULL_DATA_ERROR
+      //  !Throws CacheError: INVALID_CACHE_ERROR or CACHE_PERSIST_ERROR
+      await this.updateViewCount(pageNumber);
+
+      return this._cache.cachePages[pageNumber];
+    } catch (err) {
+      _logger.error("[getCachePage] Failed retrieving cache page: ", err);
+      throw err; // * all errors controlled
+    }
+  }
+
+  /**
+   * @description Updates view count and last access time for a cache page.
+   * Persists the cache.
+   * @throws {JsonError} `NULL_DATA_ERROR`
+   * @throws {CacheError} `INVALID_CACHE_ERROR` | `CACHE_PERSIST_ERROR`
+   */
+  private async updateViewCount(pageNumber: number): Promise<number> {
+    //  !Throws JsonError: NULL_DATA_ERROR
+    this.assertCacheNotNull(this._cache);
+    const now = new Date();
+
+    this._cache.lastAccessed = now;
+    this._cache.viewCount += 1;
+
+    this._cache.cachePages[pageNumber].lastAccessed = now;
+    this._cache.cachePages[pageNumber].viewCount += 1;
+
+    //  !Throws CacheError: INVALID_CACHE_ERROR or CACHE_PERSIST_ERROR
+    this._cache = await this.persistCache(this._cache);
+
+    return this._cache.cachePages[pageNumber].viewCount;
+  }
+
+  /** Checks whether a given page number does not exist in the cache. */
   public isPageMissingFromCache(
     cachePages: CachePageRecord,
     pageNumber: number
