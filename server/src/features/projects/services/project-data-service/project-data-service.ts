@@ -232,12 +232,8 @@ export class ProjectDataService {
   }
   /**
    * @description Asychronously attempts to load a backup cache.
-   * Utilizes the {@link tryLoadCache} after setting the cache path and filename
-   * to the backup cache's specifications.
-   * @returns A `Promise` that resolves to the loaded backup cache, or `null`
-   * if the cache path isn't configured, or the cache loading operation fails.
    */
-  private async tryLoadBackupCache() {
+  private async tryLoadBackupCache(): Promise<IProjectCache | null> {
     //  todo: add logging
     try {
       const backupPath = process.env.DEFAULT_CACHE_PATH!;
@@ -267,12 +263,6 @@ export class ProjectDataService {
   /**
    * @description Asynchronously fetches data required for the cache from the
    * database.
-   * @param fetchOptions.filter Optional filtering parameters used to narrow
-   * down the database query.
-   * @param fetchOptions.pageSize Specifies how many projects will be stored
-   * in each page.
-   * @returns A `Promise` that resolves to an object containing the totalPages
-   * of the cache and a `Record` containing the pages of the cache.
    */
   private async fetchCacheData(fetchOptions: {
     filter?: IProjectFilter;
@@ -298,14 +288,7 @@ export class ProjectDataService {
 
   /**
    * @description A utility method that builds a new {@link IProjectCache} object
-   * from the provided arguments.
-   * @param cacheData.totalPages The total pages of the paginated projects,
-   * database included
-   * @param cacheData.currentDate The date the cache is created.
-   * @param cacheData.isBackup Specifies if the project is a backup.
-   * @param cacheData.pageRecord A `Record` object containing each page of the
-   * cache.
-   * @returns A new {@link IProjectCache} instance.
+   * from the provided arguments..
    */
   private buildProjectCache(cacheData: {
     totalPages: number;
