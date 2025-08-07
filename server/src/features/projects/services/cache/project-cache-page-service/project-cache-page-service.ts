@@ -1,6 +1,10 @@
+import {
+  CachePageRecord,
+  IProjectCache,
+  IProjectCachePage,
+} from "@/features/projects/types";
 import { createJsonFileService, JsonFileService } from "@/services";
-import { ProjectCacheService } from "./project-cache-service";
-import { CachePageRecord, IProjectCache, IProjectCachePage } from "../../types";
+import { ProjectCacheService } from "../project-cache-service";
 
 export async function createProjectCachePageService() {
   const jsonFileServiceInstance =
