@@ -95,10 +95,11 @@ export abstract class AbstractCacheService<TCache extends ICache> {
       return cache;
     } catch (err) {
       _logger.error("[setCache] Failed loading cache into memory: ", err);
+
+      if (err instanceof CacheError) throw err;
       throw new CacheError({
         name: "CACHE_LOAD_ERROR",
         message: "Failed loading cache into memory.",
-        cause: err,
       });
     }
   }
@@ -141,6 +142,8 @@ export abstract class AbstractCacheService<TCache extends ICache> {
       return storedCache;
     } catch (err) {
       _logger.error("[storeCache] Failed storing data into cache.", err);
+
+      if (err instanceof CacheError) throw err;
       throw new CacheError({
         name: "CACHE_PERSIST_ERROR",
         message: "Failed storing data into cache.",
