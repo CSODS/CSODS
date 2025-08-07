@@ -81,13 +81,15 @@ export abstract class AbstractCacheService<TCache extends ICache> {
     //  !Throws CacheError: CACHE_PARSE_ERROR on parse operation fail.
     const cache: TCache = await this.tryParseCache();
 
-    if (!this.isCacheValid(cache))
+    if (!this.isCacheValid(cache)) {
+      this._logger.info("[loadCache] Failed loading cache into memory.");
       throw new CacheError({
         name: "INVALID_CACHE_ERROR",
         message: "Invalid cache object.",
       });
+    }
 
-    this._logger.info("[setCache] Success loading cache into memory.");
+    this._logger.info("[loadCache] Success loading cache into memory.");
     this._cache = cache;
     return cache;
   }
@@ -108,7 +110,7 @@ export abstract class AbstractCacheService<TCache extends ICache> {
 
     try {
       _logger.info(
-        `[storeCache] Attempting to store data into cache at ${fullPath}...`
+        `[persistCache] Attempting to store data into cache at ${fullPath}...`
       );
 
       if (!this.isCacheValid(data))
@@ -123,11 +125,11 @@ export abstract class AbstractCacheService<TCache extends ICache> {
         data
       );
 
-      _logger.info("[storeCache] Success storing data into cache.");
+      _logger.info("[persistCache] Success storing data into cache.");
 
       return storedCache;
     } catch (err) {
-      _logger.error("[storeCache] Failed storing data into cache.", err);
+      _logger.error("[persistCache] Failed storing data into cache.", err);
 
       if (err instanceof CacheError) throw err;
       throw new CacheError({
