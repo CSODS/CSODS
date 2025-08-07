@@ -3,6 +3,7 @@ import * as lockfile from "proper-lockfile";
 import path from "path";
 import { OperationOptions } from "retry";
 import { FileLogger } from "@utils";
+import { JsonError } from "./json-file-service.error";
 
 export function createJsonFileService<TModel>(modelName: string) {
   return new JsonFileService<TModel>(modelName);
@@ -116,25 +117,21 @@ export class JsonFileService<TModel> {
   ): Promise<TModel> {
     const fullPath = path.join(filePath, fileName);
     FileLogger.info(
-      `[parseJsonFile] Attempting to parse json file ${fullPath}...`
+      `[parseJsonFile] Attempting to parse JSON file ${fullPath}...`
     );
-
-    //  Throw err if the file does not exist.
-    if (!existsSync(fullPath))
-      throw new Error("File doesn't exist. Unable to parse.");
 
     let release: (() => Promise<void>) | null = null;
 
-    //  Read from json file
     try {
-      //  Attempt to read file.
+      if (!existsSync(fullPath))
+        throw new JsonError({
+          name: "JSON_FILE_NOT_FOUND_ERROR",
+          message: "File doesn't exist. Unable to parse.",
+        });
 
-      //  Lock file.
       FileLogger.info("[parseJsonFile] Locking file...");
       release = await lockfile.lock(fullPath, { retries: this._retryOptions });
 
-      //  Parse Json as a TModel object and return.
-      //  Additionally apply a reviver function if provided.
       const jsonString = await fs.readFile(fullPath, "utf-8");
       const data: TModel = reviver
         ? JSON.parse(jsonString, reviver)
@@ -145,12 +142,14 @@ export class JsonFileService<TModel> {
 
       return data;
     } catch (err) {
-      //  log error and return null.
       FileLogger.error(`[parseJsonFile] Error parsing file.`, err);
-      throw err;
+      throw new JsonError({
+        name: "JSON_PARSE_ERROR",
+        message: "Failed to parse JSON file.",
+        cause: err,
+      });
     } finally {
       if (release) {
-        //  release lock.
         await release();
         FileLogger.info("[parseJsonFile] Lock released.");
       }
@@ -178,12 +177,10 @@ export class JsonFileService<TModel> {
       FileLogger.info(
         `[writeToJsonFile] Attempting to write into ${fileName} located in ${filePath}...`
       );
-      //  throw exception if data is null.
+      //  !throw exception if data is null.
       this.assertDataNotNull(data);
 
-      //  Attempt to write to json file.
       const dataJson = JSON.stringify(data, null, 2);
-      //  Ensure the directory exists. Create it recursively if it doesn't.
       await fs.mkdir(filePath, { recursive: true });
 
       const fullPath = path.join(filePath, fileName);
@@ -195,14 +192,17 @@ export class JsonFileService<TModel> {
         });
       }
 
-      //  attempt to write to file.
       await fs.writeFile(fullPath, dataJson);
       FileLogger.info("[writeToJsonFile] Write complete.");
 
       return data!;
     } catch (err) {
       FileLogger.error(`[writeToJsonFile] Error writing file.`, err);
-      throw err;
+      throw new JsonError({
+        name: "JSON_WRITE_ERROR",
+        message: "Failed to write JSON file.",
+        cause: err,
+      });
     } finally {
       if (release) {
         await release();
@@ -269,9 +269,10 @@ export class JsonFileService<TModel> {
    */
   public assertDataNotNull(data: TModel | null): asserts data is TModel {
     if (data == null)
-      throw new TypeError(
-        `Expected type ${this._modelName}, but received null.`
-      );
+      throw new JsonError({
+        name: "NULL_DATA_ERROR",
+        message: `Expected type ${this._modelName}, but received null.`,
+      });
   }
 
   /**
