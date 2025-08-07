@@ -1,3 +1,4 @@
+export * from "./abstract-cache-service";
 export * from "./legacy-abstract-cache.service";
 export * from "./base-cache.evictor";
 export * from "./json-file.service";
