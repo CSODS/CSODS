@@ -265,7 +265,7 @@ export class JsonFileService<TModel> {
    * Used to enforce non-null guarantees before performing operations like serialization.
    *
    * @param {TModel|null} data - The data to check.
-   * @throws {TypeError} If the provided data is `null`.
+   * @throws {JsonError} `NULL_DATA_ERROR` If the provided data is `null`.
    */
   public assertDataNotNull(data: TModel | null): asserts data is TModel {
     if (data == null)
