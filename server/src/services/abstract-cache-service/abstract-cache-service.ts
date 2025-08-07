@@ -1,8 +1,9 @@
 import winston from "winston";
+import { CACHE } from "@/data";
 import { ICache } from "@/viewmodels";
 import { JsonError, JsonFileService } from "../json-file-service";
-import { CACHE } from "@/data";
 import { CacheError } from "./abstract-cache-service.error";
+import { LogParams } from "./abstract-cache-service.types";
 
 /**
  * @abstract
@@ -229,5 +230,22 @@ export abstract class AbstractCacheService<TCache extends ICache> {
    */
   protected isCacheValid(cache: TCache | null): boolean {
     return !!cache;
+  }
+
+  /**
+   * @virtual
+   * @description Logging helper function. Override for parameter type for
+   * child classes as necessary.
+   * @param level The log level.
+   * @param method The method name. Derived from the keys of the class.
+   * @param message The log message.
+   */
+  protected __log({
+    level,
+    method,
+    message,
+  }: LogParams<AbstractCacheService<TCache>>) {
+    const logMsg = `[${method}] ${message}`;
+    this._logger.log(level, logMsg);
   }
 }
