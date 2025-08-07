@@ -1,6 +1,6 @@
 import winston from "winston";
 import { ICache } from "@/viewmodels";
-import { JsonFileService } from "../json-file-service";
+import { JsonError, JsonFileService } from "../json-file-service";
 import { CACHE } from "@/data";
 import { CacheError } from "./abstract-cache-service.error";
 
@@ -154,7 +154,8 @@ export abstract class AbstractCacheService<TCache extends ICache> {
   /**
    * @description Wrapper method for {@link JsonFileService} `asssertDataNotNull`
    * method.
-   * @param cache
+   * @param cache The cache to check.
+   * @throws {JsonError} `NULL_DATA_ERROR` If the provided data is `null`.
    */
   public assertCacheNotNull(cache: TCache | null): asserts cache is TCache {
     this._jsonFileService.assertDataNotNull(cache);
