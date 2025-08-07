@@ -70,51 +70,36 @@ export abstract class AbstractCacheService<TCache extends ICache> {
    * loaded cache is validated then stored interally in {@link _cache} and
    * returned.
    * @returns A `Promise` that resolves to the loaded cache.
-   * @throws {CacheError} Thrown with `name: "INVALID_CACHE_ERROR"` if cache
-   * validation fails.
-   * @throws {CacheError} Thrown with `name: "CACHE_LOAD_ERROR"` if cache
-   * loading fails.
+   * @throws {CacheError} Thrown with `name`:
+   * - `"CACHE_PARSE_ERROR"`
+   * - `"INVALID_CACHE_ERROR"`
    */
   public async loadCache(): Promise<TCache> {
-    const { _logger } = this;
+    this._logger.info("[setCache] Loading cache into memory...");
 
-    try {
-      _logger.info("[setCache] Loading cache into memory...");
+    //  !Throws CacheError: CACHE_PARSE_ERROR on parse operation fail.
+    const cache: TCache = await this.tryParseCache();
 
-      const cache: TCache = await this.tryParseCache();
-
-      if (!this.isCacheValid(cache))
-        throw new CacheError({
-          name: "INVALID_CACHE_ERROR",
-          message: "Invalid cache object.",
-        });
-
-      _logger.info("[setCache] Success loading cache into memory.");
-
-      this._cache = cache;
-      return cache;
-    } catch (err) {
-      _logger.error("[setCache] Failed loading cache into memory: ", err);
-
-      if (err instanceof CacheError) throw err;
+    if (!this.isCacheValid(cache))
       throw new CacheError({
-        name: "CACHE_LOAD_ERROR",
-        message: "Failed loading cache into memory.",
+        name: "INVALID_CACHE_ERROR",
+        message: "Invalid cache object.",
       });
-    }
+
+    this._logger.info("[setCache] Success loading cache into memory.");
+    this._cache = cache;
+    return cache;
   }
   /**
    * @description Attempts to store data into the cache, validating it with
    * {@link isCacheValid} first, then writing it into the cache.
-   * If the cache is not valid, an `Error` is thrown.
    *
    * @param data The data to be stored into cache.
    * @returns A `Promise` that resolves to the newly created {@link ICache}
    * object.
-   * @throws {CacheError} Thrown with `name: "INVALID_CACHE_ERROR"` if the
-   * data fails validation via {@link isCacheValid}
-   * @throws {CacheError} Thrown with `name: "CACHE_PERSIST_ERROR"` if
-   * persisting operation fails.
+   * @throws {CacheError} Thrown with `name:`
+   * - `"INVALID_CACHE_ERROR"` if the data fails validation via {@link isCacheValid}
+   * - `"CACHE_PERSIST_ERROR"`
    */
   public async persistCache(data: TCache): Promise<TCache> {
     const { _cachePath, _filename, _logger } = this;
@@ -167,7 +152,7 @@ export abstract class AbstractCacheService<TCache extends ICache> {
    * @description Wrapper method for {@link JsonFileService} `asssertDataNotNull`
    * method.
    * @param cache The cache to check.
-   * @throws {JsonError} `NULL_DATA_ERROR` If the provided data is `null`.
+   * @throws {JsonError} Thrown with `name: "NULL_DATA_ERROR"`.
    */
   public assertCacheNotNull(cache: TCache | null): asserts cache is TCache {
     this._jsonFileService.assertDataNotNull(cache);
@@ -179,8 +164,7 @@ export abstract class AbstractCacheService<TCache extends ICache> {
    * a helper function `reviver` for reviving `Date` type fields.
    *
    * @returns A `Promise` that resolves to the parsed `cache` object.
-   * @throws {CacheError} Thrown with `name: "CACHE_PARSE_ERROR"` if JSON parsing
-   * fails.
+   * @throws {CacheError} Thrown with `name: "CACHE_PARSE_ERROR"`.
    * @remarks
    * If the shape of the `cache` object has fields in need of a reviver other
    * than the default provided fields in {@link reviver}, reviver must be
