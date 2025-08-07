@@ -2,6 +2,7 @@ import winston from "winston";
 import { ICache } from "@/viewmodels";
 import { JsonFileService } from "../json-file-service";
 import { CACHE } from "@/data";
+import { CacheError } from "./abstract-cache-service.error";
 
 /**
  * @abstract
@@ -65,7 +66,7 @@ export abstract class AbstractCacheService<TCache extends ICache> {
 
   /**
    * @async
-   * @description Asynchronously loads the cache into memory. The sucessfully
+   * @description Asynchronously loads the cache into memory. The successfully
    * loaded cache is stored interally in {@link _cache} and returned.
    * @returns A `Promise` that resolves to the loaded cache.
    */
@@ -77,7 +78,11 @@ export abstract class AbstractCacheService<TCache extends ICache> {
 
       const cache: TCache = await this.tryParseCache();
 
-      if (!this.isCacheValid(cache)) throw new Error("Invalid cache object.");
+      if (!this.isCacheValid(cache))
+        throw new CacheError({
+          name: "INVALID_CACHE_ERROR",
+          message: "Invalid cache object.",
+        });
 
       _logger.info("[setCache] Success loading cache into memory.");
 
@@ -85,7 +90,11 @@ export abstract class AbstractCacheService<TCache extends ICache> {
       return cache;
     } catch (err) {
       _logger.error("[setCache] Failed loading cache into memory: ", err);
-      throw err;
+      throw new CacheError({
+        name: "CACHE_LOAD_ERROR",
+        message: "Failed loading cache into memory.",
+        cause: err,
+      });
     }
   }
   /**
@@ -99,11 +108,18 @@ export abstract class AbstractCacheService<TCache extends ICache> {
    */
   public async persistCache(data: TCache): Promise<TCache> {
     const { _cachePath, _filename, _logger } = this;
+    const fullPath = _cachePath + _filename;
 
     try {
-      _logger.info("[storeCache] Attempting to store data into cache...");
+      _logger.info(
+        `[storeCache] Attempting to store data into cache at ${fullPath}...`
+      );
 
-      if (!this.isCacheValid(data)) throw new Error("Invalid cache");
+      if (!this.isCacheValid(data))
+        throw new CacheError({
+          name: "INVALID_CACHE_ERROR",
+          message: "Invalid cache",
+        });
 
       const storedCache = await this._jsonFileService.writeToJsonFile(
         _cachePath,
@@ -116,7 +132,11 @@ export abstract class AbstractCacheService<TCache extends ICache> {
       return storedCache;
     } catch (err) {
       _logger.error("[storeCache] Failed storing data into cache.", err);
-      throw err;
+      throw new CacheError({
+        name: "CACHE_PERSIST_ERROR",
+        message: "Failed storing data into cache.",
+        cause: err,
+      });
     }
   }
 
@@ -154,10 +174,11 @@ export abstract class AbstractCacheService<TCache extends ICache> {
    */
   protected async tryParseCache(): Promise<TCache> {
     const { _cachePath, _filename, _logger } = this;
+    const fullPath = _cachePath + _filename;
 
     try {
       _logger.info(
-        `[tryParseCache] Attempting to parse cache at ${_cachePath}${_filename}...`
+        `[tryParseCache] Attempting to parse cache at ${fullPath}...`
       );
 
       const parsedCache = await this._jsonFileService.parseJsonFile(
@@ -166,16 +187,16 @@ export abstract class AbstractCacheService<TCache extends ICache> {
         this.reviver
       );
 
-      _logger.info(
-        `[tryParseCache] Success parsing cache at ${_cachePath}${_filename}...`
-      );
+      _logger.info(`[tryParseCache] Success parsing cache.`);
 
       return parsedCache;
     } catch (err) {
-      _logger.error(
-        `[tryParseCache] Failed parsing cache at ${_cachePath}${_filename}.`
-      );
-      throw err;
+      _logger.error(`[tryParseCache] Failed parsing cache.`, err);
+      throw new CacheError({
+        name: "CACHE_PARSE_ERROR",
+        message: "Failed parsing cache.",
+        cause: err,
+      });
     }
   }
 
