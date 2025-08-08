@@ -1,4 +1,5 @@
 import { CACHE } from "@/data";
+import { EnvError } from "@/error";
 import {
   CachePageRecord,
   IProjectCache,
@@ -9,6 +10,7 @@ import { ProjectCachePageService } from "../cache";
 import { ProjectDbFetchService } from "../project-db-fetch.service";
 import { IProjectFilter, ProjectFilter } from "../repositories";
 import { getCacheFilename } from "./get-cache-filename";
+import { ProjectError } from "./project-data-service.error";
 
 export class ProjectDataService {
   private _projectCachePageService: ProjectCachePageService;
@@ -131,6 +133,7 @@ export class ProjectDataService {
     this._projectCachePageService.setFilename(filename);
     let cache = await this.tryResolveCache({ filter });
 
+    //  !Throws EnvError: CACHE
     if (!cache) cache = await this.tryLoadBackupCache();
 
     return cache;
@@ -180,7 +183,7 @@ export class ProjectDataService {
    */
   public async tryLoadCache(): Promise<IProjectCache | null> {
     try {
-      //  !throws if cache is invalid.
+      //  !throws CacheError: CACHE_PARSE_ERROR | INVALID_CACHE_ERROR.
       return await this._projectCachePageService.loadCache();
     } catch {
       return null;
@@ -208,7 +211,7 @@ export class ProjectDataService {
     try {
       const { currentDate, pageSize, filter } = createOptions;
       //  todo: add logging
-      //  !throws if there are no projects in db.
+      //  !throws ProjectError: FETCH_ERROR
       const { totalPages, pageRecord } = await this.fetchCacheData({
         filter,
         pageSize,
@@ -231,13 +234,19 @@ export class ProjectDataService {
     }
   }
   /**
-   * @description Asychronously attempts to load a backup cache.
+   * @description Asychronously attempts to load and return a backup cache.
+   * @throws {EnvError} Thrown with `name: "CACHE"` if the default cache path
+   * is not configured.
    */
   private async tryLoadBackupCache(): Promise<IProjectCache | null> {
     //  todo: add logging
     try {
       const backupPath = process.env.DEFAULT_CACHE_PATH!;
-      if (!backupPath) throw new Error("Default cache path not configured.");
+      if (!backupPath)
+        throw new EnvError({
+          name: "CACHE",
+          message: "Default cache path not configured.",
+        });
 
       this._projectCachePageService.setCachePath(backupPath);
 
@@ -262,7 +271,12 @@ export class ProjectDataService {
 
   /**
    * @description Asynchronously fetches data required for the cache from the
-   * database.
+   * database with an optional filter and a specified page size..
+   * @returns
+   * - `totalPages` - The total pages of the paginated projects.
+   * - `pageRecord` - A record containing each page of t
+   * @throws {ProjectError} Thrown with `name: "FETCH_ERROR"` if there are no
+   * projects in the database..
    */
   private async fetchCacheData(fetchOptions: {
     filter?: IProjectFilter;
@@ -273,7 +287,11 @@ export class ProjectDataService {
       filter
     );
 
-    if (projectsCount === 0) throw new Error("Project list is empty.");
+    if (projectsCount === 0)
+      throw new ProjectError({
+        name: "FETCH_ERROR",
+        message: "Project list is empty.",
+      });
     const totalPages = Math.ceil(projectsCount / pageSize);
 
     const pageRecord = await this._projectDbFetchService.fetchProjectsPages({
