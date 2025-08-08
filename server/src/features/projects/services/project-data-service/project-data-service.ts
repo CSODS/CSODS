@@ -126,6 +126,8 @@ export class ProjectDataService {
     let filter: ProjectFilter | undefined = new ProjectFilter(filterOptions);
     filter = filter.isEmpty() ? undefined : filter;
 
+    //  todo: maybe move filename generation and setting to resolveProjects to make this a pure public wrapper.
+
     const filename = getCacheFilename(
       this._projectCachePageService.generateCacheFilename,
       {
@@ -190,6 +192,7 @@ export class ProjectDataService {
       const { currentDate, pageSize, filter } = createOptions;
       //  todo: add logging
       //  !throws ProjectError: FETCH_ERROR
+      //  todo: pipeline this with async/await array destructuring for fetchCacheData results
       const { totalPages, pageRecord } = await this.fetchCacheData({
         filter,
         pageSize,
@@ -211,6 +214,7 @@ export class ProjectDataService {
       };
     } catch (err) {
       //  todo: log error
+      //  todo: extract error wrapping into a helper
       return {
         success: false,
         error: normalizeProjectError({
@@ -231,6 +235,7 @@ export class ProjectDataService {
    * @returns A `Promise` that resolves to the loaded or newly created cache,
    * or `null` if both load and creation operations failed.
    * todo: update docs
+   * todo: log each fall back stage.
    */
   private async resolveProjects({
     filter,
@@ -243,6 +248,8 @@ export class ProjectDataService {
 
     const { PAGE_SIZE } = CACHE.PROJECT_CACHE;
     for (let i = 0; i < 3; i++) {
+      //  todo: make retries configurable via a constant in CACHE.PROJECT_CACHE.
+      //  todo: add a short backoff between attempts to prevent hammering the DB if something is wrong.
       const createResult = await this.createCache({
         currentDate: new Date(),
         pageSize: PAGE_SIZE,
