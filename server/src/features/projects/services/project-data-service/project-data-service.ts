@@ -133,7 +133,7 @@ export class ProjectDataService {
       );
 
       this._projectCachePageService.setFilename(filename);
-      const cache = await this.tryResolveCache({ filter });
+      const cache = await this.tryResolveProjects({ filter });
 
       //  todo: add better error control in helper methods
       if (!cache)
@@ -173,12 +173,13 @@ export class ProjectDataService {
    * @returns A `Promise` that resolves to the loaded or newly created cache,
    * or `null` if both load and creation operations failed.
    */
-  public async tryResolveCache({
+  public async tryResolveProjects({
     filter,
   }: {
     filter?: IProjectFilter;
   }): Promise<IProjectCache> {
     //  *returns null on failure
+    //  todo: inline this
     const cache: IProjectCache | null = await this.tryLoadCache();
 
     if (cache) {
