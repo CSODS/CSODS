@@ -17,13 +17,17 @@ export class ProjectError extends ErrorBase<ErrorName> {}
  * @param name The error name. See {@link ErrorName} for possible values.
  * @param message A human readable error message.
  * @param err The err argument in a catch block.
- * @returns A new instance of the {@link ProjectError} class.
+ * @returns An instance of the {@link ProjectError} class.
  */
-export function normalizeProjectError<E extends ErrorName>(
-  name: E,
-  message: string,
-  err: unknown
-): ProjectError {
+export function normalizeProjectError<E extends ErrorName>({
+  name,
+  message,
+  err,
+}: {
+  name: E;
+  message: string;
+  err: unknown;
+}): ProjectError {
   return err instanceof ProjectError
     ? err
     : new ProjectError({
