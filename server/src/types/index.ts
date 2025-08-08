@@ -1,2 +1,2 @@
 export * from "./class-methods.type";
-export * from "./result.type";
+export * from "./result-base.type";

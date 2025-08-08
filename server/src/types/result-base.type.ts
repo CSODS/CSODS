@@ -1,6 +1,6 @@
 import { ErrorBase } from "@/error";
 
-export type Result<TResult, TError extends ErrorBase<string>> =
+export type ResultBase<TResult, TError extends ErrorBase<string>> =
   | {
       success: true;
       result: TResult;
