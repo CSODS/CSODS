@@ -114,6 +114,7 @@ export class ProjectDataService {
    * projects.
    * @returns A `Promise` that resolves to the loaded cache, or `null` if no results
    * were loaded from an active filter, or all loading attempts failed.
+   * todo: update docs
    */
   public async getProjects(
     filterOptions?: IProjectFilter
@@ -132,7 +133,7 @@ export class ProjectDataService {
     );
 
     this._projectCachePageService.setFilename(filename);
-    const resolveResult = await this.tryResolveProjects({ filter });
+    const resolveResult = await this.resolveProjects({ filter });
     return resolveResult;
   }
 
@@ -140,9 +141,9 @@ export class ProjectDataService {
    * @async
    * @description Wrapper for setCache method that returns `null` on failure.
    * @returns
-   * todo: rename to loadFromCache
+   * todo: update docs
    */
-  public async tryLoadCache(): Promise<ProjectResult> {
+  public async loadCache(): Promise<ProjectResult> {
     try {
       //  !throws CacheError: CACHE_PARSE_ERROR | INVALID_CACHE_ERROR.
       const projects = await this._projectCachePageService.loadCache();
@@ -175,9 +176,9 @@ export class ProjectDataService {
    * filtering the contents the database that will be stored in the cache.
    * @returns A `Promise` that resolves to the {@link IProjectCache} or `null`
    * if the cache creation fails.
-   * todo: rename to createNewCache
+   * todo: update docs
    */
-  public async tryCreateCache(createOptions: {
+  public async createCache(createOptions: {
     currentDate: Date;
     pageSize: number;
     filter?: IProjectFilter;
@@ -230,19 +231,20 @@ export class ProjectDataService {
    * @param filter An object containing filter details for the database query.
    * @returns A `Promise` that resolves to the loaded or newly created cache,
    * or `null` if both load and creation operations failed.
+   * todo: update docs
    */
-  private async tryResolveProjects({
+  private async resolveProjects({
     filter,
   }: {
     filter?: IProjectFilter;
   }): Promise<ProjectResult> {
-    const loadResult = await this.tryLoadCache();
+    const loadResult = await this.loadCache();
 
     if (loadResult.success) return loadResult;
 
     const { PAGE_SIZE } = CACHE.PROJECT_CACHE;
     for (let i = 0; i < 3; i++) {
-      const createResult = await this.tryCreateCache({
+      const createResult = await this.createCache({
         currentDate: new Date(),
         pageSize: PAGE_SIZE,
         filter,
@@ -252,8 +254,7 @@ export class ProjectDataService {
     }
 
     //  !Throws EnvError: CACHE | returns null on failure.
-    //  todo: normalize error in method
-    const backupResult = await this.tryLoadBackupCache();
+    const backupResult = await this.loadBackupCache();
 
     if (backupResult.success) return backupResult;
 
@@ -272,9 +273,9 @@ export class ProjectDataService {
   /**
    * @description Asychronously attempts to load and return a backup cache.
    * is not configured.
-   * todo: rename to loadBackupCache
+   * todo: update docs
    */
-  private async tryLoadBackupCache(): Promise<ProjectResult> {
+  private async loadBackupCache(): Promise<ProjectResult> {
     //  todo: add logging
     try {
       const backupPath = process.env.DEFAULT_CACHE_PATH!;
@@ -292,7 +293,7 @@ export class ProjectDataService {
       );
       this._projectCachePageService.setFilename(filename);
 
-      const loadResult = await this.tryLoadCache();
+      const loadResult = await this.loadCache();
 
       if (loadResult.success) return loadResult;
 
