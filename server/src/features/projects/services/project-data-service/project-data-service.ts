@@ -118,63 +118,48 @@ export class ProjectDataService {
   public async getProjects(
     filterOptions?: IProjectFilter
   ): Promise<ProjectResult> {
-    try {
-      //  todo: replace with static class method implementation for better readability
-      let filter: ProjectFilter | undefined = new ProjectFilter(filterOptions);
-      filter = filter.isEmpty() ? undefined : filter;
+    //  todo: replace with static class method implementation for better readability
+    let filter: ProjectFilter | undefined = new ProjectFilter(filterOptions);
+    filter = filter.isEmpty() ? undefined : filter;
 
-      const filename = getCacheFilename(
-        this._projectCachePageService.generateCacheFilename,
-        {
-          isToday: true,
-          filter,
-          isFiltered: !!filter,
-        }
-      );
+    const filename = getCacheFilename(
+      this._projectCachePageService.generateCacheFilename,
+      {
+        isToday: true,
+        filter,
+        isFiltered: !!filter,
+      }
+    );
 
-      this._projectCachePageService.setFilename(filename);
-      const cache = await this.tryResolveProjects({ filter });
-
-      //  todo: add better error control in helper methods
-      if (!cache)
-        throw new ProjectError({
-          name: "RETRIEVE_PROJECTS_ERROR",
-          message: "Some error occured.",
-        });
-
-      return {
-        success: true,
-        result: cache,
-      };
-    } catch (err) {
-      //  todo: should all be controlled errors
-      const projectError: ProjectError = //  * normalize the error object.
-        err instanceof ProjectError
-          ? err
-          : {
-              name: "RETRIEVE_PROJECTS_ERROR",
-              message: "Failed retrieving projects.",
-              cause: err,
-            };
-
-      return {
-        success: false,
-        error: projectError,
-      };
-    }
+    this._projectCachePageService.setFilename(filename);
+    const resolveResult = await this.tryResolveProjects({ filter });
+    return resolveResult;
   }
 
   /**
    * @async
    * @description Wrapper for setCache method that returns `null` on failure.
    * @returns
+   * todo: rename to loadFromCache
    */
-  public async tryLoadCache(): Promise<IProjectCache | null> {
+  public async tryLoadCache(): Promise<ProjectResult> {
     try {
       //  !throws CacheError: CACHE_PARSE_ERROR | INVALID_CACHE_ERROR.
-      return await this._projectCachePageService.loadCache();
-    } catch {
-      return null;
+      const projects = await this._projectCachePageService.loadCache();
+      return {
+        success: true,
+        result: projects,
+      };
+    } catch (err) {
+      //  todo: log error maybe
+      return {
+        success: false,
+        error: {
+          name: "LOAD_FROM_CACHE_ERROR",
+          message: "Error loading projects from cache.",
+          cause: err,
+        },
+      };
     }
   }
 
@@ -190,12 +175,13 @@ export class ProjectDataService {
    * filtering the contents the database that will be stored in the cache.
    * @returns A `Promise` that resolves to the {@link IProjectCache} or `null`
    * if the cache creation fails.
+   * todo: rename to createNewCache
    */
   public async tryCreateCache(createOptions: {
     currentDate: Date;
     pageSize: number;
     filter?: IProjectFilter;
-  }): Promise<IProjectCache | null> {
+  }): Promise<ProjectResult> {
     try {
       const { currentDate, pageSize, filter } = createOptions;
       //  todo: add logging
@@ -215,10 +201,24 @@ export class ProjectDataService {
       const storedCache = await this._projectCachePageService.persistCache(
         newCache
       );
-      return storedCache;
+      return {
+        success: true,
+        result: storedCache,
+      };
     } catch (err) {
       //  todo: log error
-      return null;
+      const error: ProjectError =
+        err instanceof ProjectError
+          ? err
+          : {
+              name: "CREATE_NEW_CACHE_ERROR",
+              message: "Error creating new projects cache.",
+              cause: err,
+            };
+      return {
+        success: false,
+        error,
+      };
     }
   }
 
@@ -235,50 +235,46 @@ export class ProjectDataService {
     filter,
   }: {
     filter?: IProjectFilter;
-  }): Promise<IProjectCache> {
-    //  *returns null on failure
-    //  todo: inline this
-    const cache: IProjectCache | null = await this.tryLoadCache();
+  }): Promise<ProjectResult> {
+    const loadResult = await this.tryLoadCache();
 
-    if (cache) {
-      //  todo: log success
-      return cache;
-    } else {
-      //  todo: log failure
-      for (let i = 0; i < 3; i++) {
-        //  todo: add try catch here and implement error catching in tryCreateCache
-        const { PAGE_SIZE } = CACHE.PROJECT_CACHE;
-        //  *returns null on failure
-        const createdCache: IProjectCache | null = await this.tryCreateCache({
-          currentDate: new Date(),
-          pageSize: PAGE_SIZE,
-          filter,
-        });
+    if (loadResult.success) return loadResult;
 
-        if (createdCache) return createdCache;
-      }
+    const { PAGE_SIZE } = CACHE.PROJECT_CACHE;
+    for (let i = 0; i < 3; i++) {
+      const createResult = await this.tryCreateCache({
+        currentDate: new Date(),
+        pageSize: PAGE_SIZE,
+        filter,
+      });
+
+      if (createResult.success) return createResult;
     }
 
     //  !Throws EnvError: CACHE | returns null on failure.
     //  todo: normalize error in method
-    const backup = await this.tryLoadBackupCache();
+    const backupResult = await this.tryLoadBackupCache();
 
-    //  todo: log failure to parse existing cache and create new cache.
-    if (!backup)
-      throw new ProjectError({
-        name: "RESOLVE_PROJECTS_ERROR",
-        message: "All fallback methods to resolve projects failed.",
-      });
+    if (backupResult.success) return backupResult;
 
-    return backup;
+    //
+    const error = new ProjectError({
+      name: "RESOLVE_PROJECTS_ERROR",
+      message: "All fall back methods for resolving projects failed.",
+    });
+
+    return {
+      success: false,
+      error,
+    };
   }
 
   /**
    * @description Asychronously attempts to load and return a backup cache.
-   * @throws {EnvError} Thrown with `name: "CACHE"` if the default cache path
    * is not configured.
+   * todo: rename to loadBackupCache
    */
-  private async tryLoadBackupCache(): Promise<IProjectCache | null> {
+  private async tryLoadBackupCache(): Promise<ProjectResult> {
     //  todo: add logging
     try {
       const backupPath = process.env.DEFAULT_CACHE_PATH!;
@@ -296,16 +292,25 @@ export class ProjectDataService {
       );
       this._projectCachePageService.setFilename(filename);
 
-      const backupCache = await this.tryLoadCache();
+      const loadResult = await this.tryLoadCache();
 
-      if (!backupCache) {
-        //  todo: log failure to load backup cache.
-      }
+      if (loadResult.success) return loadResult;
 
-      return backupCache;
+      throw loadResult.error; //  ProjectError type
     } catch (err) {
-      //  todo: log config error.
-      return null;
+      //  normalize error
+      const error: ProjectError =
+        err instanceof ProjectError
+          ? err
+          : {
+              name: "LOAD_BACKUP_ERROR",
+              message: "Failed loading backup projects cache.",
+              cause: err,
+            };
+      return {
+        success: false,
+        error,
+      };
     }
   }
 
