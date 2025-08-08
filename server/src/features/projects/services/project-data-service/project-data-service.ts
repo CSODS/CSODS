@@ -220,7 +220,7 @@ export class ProjectDataService {
         pageRecord,
       });
 
-      //  !throws if constructed cache is invalid.
+      //  !throws CacheError: INVALID_CACHE_ERROR | CACHE_PERSIST_ERROR
       const storedCache = await this._projectCachePageService.persistCache(
         newCache
       );
