@@ -10,7 +10,10 @@ import { ProjectCachePageService } from "../cache";
 import { ProjectDbFetchService } from "../project-db-fetch.service";
 import { IProjectFilter, ProjectFilter } from "../repositories";
 import { getCacheFilename } from "./get-cache-filename";
-import { ProjectError } from "./project-data-service.error";
+import {
+  normalizeProjectError,
+  ProjectError,
+} from "./project-data-service.error";
 import { ProjectResult } from "./project-data-service.type";
 
 export class ProjectDataService {
@@ -155,11 +158,11 @@ export class ProjectDataService {
       //  todo: log error maybe
       return {
         success: false,
-        error: {
+        error: new ProjectError({
           name: "LOAD_FROM_CACHE_ERROR",
           message: "Error loading projects from cache.",
           cause: err,
-        },
+        }),
       };
     }
   }
@@ -208,17 +211,13 @@ export class ProjectDataService {
       };
     } catch (err) {
       //  todo: log error
-      const error: ProjectError =
-        err instanceof ProjectError
-          ? err
-          : {
-              name: "CREATE_NEW_CACHE_ERROR",
-              message: "Error creating new projects cache.",
-              cause: err,
-            };
       return {
         success: false,
-        error,
+        error: normalizeProjectError({
+          name: "CREATE_NEW_CACHE_ERROR",
+          message: "Error creating new projects cache.",
+          err,
+        }),
       };
     }
   }
@@ -299,18 +298,13 @@ export class ProjectDataService {
 
       throw loadResult.error; //  ProjectError type
     } catch (err) {
-      //  normalize error
-      const error: ProjectError =
-        err instanceof ProjectError
-          ? err
-          : {
-              name: "LOAD_BACKUP_ERROR",
-              message: "Failed loading backup projects cache.",
-              cause: err,
-            };
       return {
         success: false,
-        error,
+        error: normalizeProjectError({
+          name: "LOAD_BACKUP_ERROR",
+          message: "Failed loading backup projects cache.",
+          err,
+        }),
       };
     }
   }
