@@ -335,7 +335,7 @@ export class ProjectDataService {
 
     if (projectsCount === 0)
       throw new ProjectError({
-        name: "FETCH_ERROR",
+        name: "DB_FETCH_ERROR",
         message: "Project list is empty.",
       });
     const totalPages = Math.ceil(projectsCount / pageSize);
