@@ -133,10 +133,7 @@ export class ProjectDataService {
       );
 
       this._projectCachePageService.setFilename(filename);
-      let cache = await this.tryResolveCache({ filter });
-
-      //  !Throws EnvError: CACHE
-      if (!cache) cache = await this.tryLoadBackupCache();
+      const cache = await this.tryResolveCache({ filter });
 
       //  todo: add better error control in helper methods
       if (!cache)
@@ -180,8 +177,9 @@ export class ProjectDataService {
     filter,
   }: {
     filter?: IProjectFilter;
-  }): Promise<IProjectCache | null> {
-    let cache: IProjectCache | null = await this.tryLoadCache();
+  }): Promise<IProjectCache> {
+    //  *returns null on failure
+    const cache: IProjectCache | null = await this.tryLoadCache();
 
     if (cache) {
       //  todo: log success
@@ -189,7 +187,9 @@ export class ProjectDataService {
     } else {
       //  todo: log failure
       for (let i = 0; i < 3; i++) {
+        //  todo: add try catch here and implement error catching in tryCreateCache
         const { PAGE_SIZE } = CACHE.PROJECT_CACHE;
+        //  *returns null on failure
         const createdCache: IProjectCache | null = await this.tryCreateCache({
           currentDate: new Date(),
           pageSize: PAGE_SIZE,
@@ -200,8 +200,18 @@ export class ProjectDataService {
       }
     }
 
+    //  !Throws EnvError: CACHE | returns null on failure.
+    //  todo: normalize error in method
+    const backup = await this.tryLoadBackupCache();
+
     //  todo: log failure to parse existing cache and create new cache.
-    return null;
+    if (!backup)
+      throw new ProjectError({
+        name: "RESOLVE_PROJECTS_ERROR",
+        message: "All fallback methods to resolve projects failed.",
+      });
+
+    return backup;
   }
 
   /**
