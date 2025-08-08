@@ -11,6 +11,7 @@ import { ProjectDbFetchService } from "../project-db-fetch.service";
 import { IProjectFilter, ProjectFilter } from "../repositories";
 import { getCacheFilename } from "./get-cache-filename";
 import { ProjectError } from "./project-data-service.error";
+import { ProjectResult } from "./project-data-service.type";
 
 export class ProjectDataService {
   private _projectCachePageService: ProjectCachePageService;
@@ -114,29 +115,56 @@ export class ProjectDataService {
    * @returns A `Promise` that resolves to the loaded cache, or `null` if no results
    * were loaded from an active filter, or all loading attempts failed.
    */
-  public async getCache(
+  public async getProjects(
     filterOptions?: IProjectFilter
-  ): Promise<IProjectCache | null> {
-    //  todo: replace with static class method implementation for better readability
-    let filter: ProjectFilter | undefined = new ProjectFilter(filterOptions);
-    filter = filter.isEmpty() ? undefined : filter;
+  ): Promise<ProjectResult> {
+    try {
+      //  todo: replace with static class method implementation for better readability
+      let filter: ProjectFilter | undefined = new ProjectFilter(filterOptions);
+      filter = filter.isEmpty() ? undefined : filter;
 
-    const filename = getCacheFilename(
-      this._projectCachePageService.generateCacheFilename,
-      {
-        isToday: true,
-        filter,
-        isFiltered: !!filter,
-      }
-    );
+      const filename = getCacheFilename(
+        this._projectCachePageService.generateCacheFilename,
+        {
+          isToday: true,
+          filter,
+          isFiltered: !!filter,
+        }
+      );
 
-    this._projectCachePageService.setFilename(filename);
-    let cache = await this.tryResolveCache({ filter });
+      this._projectCachePageService.setFilename(filename);
+      let cache = await this.tryResolveCache({ filter });
 
-    //  !Throws EnvError: CACHE
-    if (!cache) cache = await this.tryLoadBackupCache();
+      //  !Throws EnvError: CACHE
+      if (!cache) cache = await this.tryLoadBackupCache();
 
-    return cache;
+      //  todo: add better error control in helper methods
+      if (!cache)
+        throw new ProjectError({
+          name: "RETRIEVE_PROJECTS_ERROR",
+          message: "Some error occured.",
+        });
+
+      return {
+        success: true,
+        result: cache,
+      };
+    } catch (err) {
+      //  todo: should all be controlled errors
+      const projectError: ProjectError = //  * normalize the error object.
+        err instanceof ProjectError
+          ? err
+          : {
+              name: "RETRIEVE_PROJECTS_ERROR",
+              message: "Failed retrieving projects.",
+              cause: err,
+            };
+
+      return {
+        success: false,
+        error: projectError,
+      };
+    }
   }
 
   /**
