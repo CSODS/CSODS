@@ -166,57 +166,6 @@ export class ProjectDataService {
 
   /**
    * @async
-   * @description Asynchronously attempts to load the cache into memory. If the
-   * operation fails, attempts to create a new cache for up to three times if
-   * needed.
-   * @param filter An object containing filter details for the database query.
-   * @returns A `Promise` that resolves to the loaded or newly created cache,
-   * or `null` if both load and creation operations failed.
-   */
-  public async tryResolveProjects({
-    filter,
-  }: {
-    filter?: IProjectFilter;
-  }): Promise<IProjectCache> {
-    //  *returns null on failure
-    //  todo: inline this
-    const cache: IProjectCache | null = await this.tryLoadCache();
-
-    if (cache) {
-      //  todo: log success
-      return cache;
-    } else {
-      //  todo: log failure
-      for (let i = 0; i < 3; i++) {
-        //  todo: add try catch here and implement error catching in tryCreateCache
-        const { PAGE_SIZE } = CACHE.PROJECT_CACHE;
-        //  *returns null on failure
-        const createdCache: IProjectCache | null = await this.tryCreateCache({
-          currentDate: new Date(),
-          pageSize: PAGE_SIZE,
-          filter,
-        });
-
-        if (createdCache) return createdCache;
-      }
-    }
-
-    //  !Throws EnvError: CACHE | returns null on failure.
-    //  todo: normalize error in method
-    const backup = await this.tryLoadBackupCache();
-
-    //  todo: log failure to parse existing cache and create new cache.
-    if (!backup)
-      throw new ProjectError({
-        name: "RESOLVE_PROJECTS_ERROR",
-        message: "All fallback methods to resolve projects failed.",
-      });
-
-    return backup;
-  }
-
-  /**
-   * @async
    * @description Wrapper for setCache method that returns `null` on failure.
    * @returns
    */
@@ -272,6 +221,58 @@ export class ProjectDataService {
       return null;
     }
   }
+
+  /**
+   * @async
+   * @description Asynchronously attempts to load the cache into memory. If the
+   * operation fails, attempts to create a new cache for up to three times if
+   * needed.
+   * @param filter An object containing filter details for the database query.
+   * @returns A `Promise` that resolves to the loaded or newly created cache,
+   * or `null` if both load and creation operations failed.
+   */
+  private async tryResolveProjects({
+    filter,
+  }: {
+    filter?: IProjectFilter;
+  }): Promise<IProjectCache> {
+    //  *returns null on failure
+    //  todo: inline this
+    const cache: IProjectCache | null = await this.tryLoadCache();
+
+    if (cache) {
+      //  todo: log success
+      return cache;
+    } else {
+      //  todo: log failure
+      for (let i = 0; i < 3; i++) {
+        //  todo: add try catch here and implement error catching in tryCreateCache
+        const { PAGE_SIZE } = CACHE.PROJECT_CACHE;
+        //  *returns null on failure
+        const createdCache: IProjectCache | null = await this.tryCreateCache({
+          currentDate: new Date(),
+          pageSize: PAGE_SIZE,
+          filter,
+        });
+
+        if (createdCache) return createdCache;
+      }
+    }
+
+    //  !Throws EnvError: CACHE | returns null on failure.
+    //  todo: normalize error in method
+    const backup = await this.tryLoadBackupCache();
+
+    //  todo: log failure to parse existing cache and create new cache.
+    if (!backup)
+      throw new ProjectError({
+        name: "RESOLVE_PROJECTS_ERROR",
+        message: "All fallback methods to resolve projects failed.",
+      });
+
+    return backup;
+  }
+
   /**
    * @description Asychronously attempts to load and return a backup cache.
    * @throws {EnvError} Thrown with `name: "CACHE"` if the default cache path
