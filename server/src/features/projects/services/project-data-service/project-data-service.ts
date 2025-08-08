@@ -257,15 +257,12 @@ export class ProjectDataService {
 
     if (backupResult.success) return backupResult;
 
-    //
-    const error = new ProjectError({
-      name: "RESOLVE_PROJECTS_ERROR",
-      message: "All fall back methods for resolving projects failed.",
-    });
-
     return {
       success: false,
-      error,
+      error: new ProjectError({
+        name: "RESOLVE_PROJECTS_ERROR",
+        message: "All fall back methods for resolving projects failed.",
+      }),
     };
   }
 
