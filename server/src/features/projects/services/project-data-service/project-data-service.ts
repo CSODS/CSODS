@@ -17,6 +17,7 @@ import {
   ProjectError,
 } from "./project-data-service.error";
 import { ProjectResult } from "./project-data-service.type";
+import { fail, success } from "@/utils";
 
 export class ProjectDataService {
   private _projectCachePageService: ProjectCachePageService;
@@ -154,20 +155,15 @@ export class ProjectDataService {
     try {
       //  !throws CacheError: CACHE_PARSE_ERROR | INVALID_CACHE_ERROR.
       const projects = await this._projectCachePageService.loadCache();
-      return {
-        success: true,
-        result: projects,
-      };
+      return success(projects);
     } catch (err) {
       //  todo: log error maybe
-      return {
-        success: false,
-        error: new ProjectError({
-          name: "LOAD_FROM_CACHE_ERROR",
-          message: "Error loading projects from cache.",
-          cause: err,
-        }),
-      };
+      const error = new ProjectError({
+        name: "LOAD_FROM_CACHE_ERROR",
+        message: "Error loading projects from cache.",
+        cause: err,
+      });
+      return fail(error);
     }
   }
 
@@ -213,21 +209,15 @@ export class ProjectDataService {
       const storedCache = await this._projectCachePageService.persistCache(
         newCache
       );
-      return {
-        success: true,
-        result: storedCache,
-      };
+      return success(storedCache);
     } catch (err) {
       //  todo: log error
-      //  todo: extract error wrapping into a helper
-      return {
-        success: false,
-        error: normalizeProjectError({
-          name: "CREATE_NEW_CACHE_ERROR",
-          message: "Error creating new projects cache.",
-          err,
-        }),
-      };
+      const error = normalizeProjectError({
+        name: "CREATE_NEW_CACHE_ERROR",
+        message: "Error creating new projects cache.",
+        err,
+      });
+      return fail(error);
     }
   }
 
@@ -269,13 +259,11 @@ export class ProjectDataService {
 
     if (backupResult.success) return backupResult;
 
-    return {
-      success: false,
-      error: new ProjectError({
-        name: "RESOLVE_PROJECTS_ERROR",
-        message: "All fall back methods for resolving projects failed.",
-      }),
-    };
+    const error = new ProjectError({
+      name: "RESOLVE_PROJECTS_ERROR",
+      message: "All fall back methods for resolving projects failed.",
+    });
+    return fail(error);
   }
 
   /**
@@ -307,14 +295,12 @@ export class ProjectDataService {
 
       throw loadResult.error; //  ProjectError type
     } catch (err) {
-      return {
-        success: false,
-        error: normalizeProjectError({
-          name: "LOAD_BACKUP_ERROR",
-          message: "Failed loading backup projects cache.",
-          err,
-        }),
-      };
+      const error = normalizeProjectError({
+        name: "LOAD_BACKUP_ERROR",
+        message: "Failed loading backup projects cache.",
+        err,
+      });
+      return fail(error);
     }
   }
 }
