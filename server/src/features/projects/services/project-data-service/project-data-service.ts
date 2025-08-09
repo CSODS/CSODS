@@ -9,7 +9,7 @@ import {
 import { ProjectCachePageService } from "../cache";
 import { ProjectDbFetchService } from "../project-db-fetch.service";
 import { IProjectFilter, ProjectFilter } from "../repositories";
-import { buildProjectCache } from "./build-project-cache";
+import { buildProjectsData } from "./build-projects-data";
 import { fetchCacheData } from "./fetch-cache-data";
 import { getCacheFilename } from "./get-cache-filename";
 import {
@@ -203,7 +203,7 @@ export class ProjectDataService {
         }
       );
 
-      const newCache = buildProjectCache({
+      const newCache = buildProjectsData({
         totalPages,
         currentDate,
         pageRecord,
