@@ -76,7 +76,11 @@ export class ProjectDataService {
     if (!loadResult.success) return loadResult; //  error loading projects. return fail result.
     const cache = loadResult.result;
 
-    const fetchResult = await this.fetchProjects(pageNumber, filter);
+    const fetchResult = await this.fetchProjects({
+      includeCount: false,
+      pageNumber,
+      filter,
+    });
 
     if (!fetchResult.success) return fetchResult; //  fetch fail, return fail result.
 
@@ -150,7 +154,7 @@ export class ProjectDataService {
 
     //  todo: make retries configurable via a constant in CACHE.PROJECT_CACHE.
     //  todo: add a short backoff between attempts to prevent hammering the DB if something is wrong.
-    const fetchResult = await this.fetchProjects(1, filter);
+    const fetchResult = await this.fetchProjects({ pageNumber: 1, filter });
 
     if (fetchResult.success)
       //  todo: add logging for each retry
@@ -179,11 +183,17 @@ export class ProjectDataService {
   }
 
   /** Wrapper for {@link fetchProjectsData} utility function. */
-  private async fetchProjects(pageNumber: number, filter?: ProjectFilter) {
+  private async fetchProjects(options: {
+    includeCount?: boolean;
+    pageNumber: number;
+    filter?: ProjectFilter;
+  }) {
+    const { includeCount, pageNumber, filter } = options;
     const pageSize = CACHE.PROJECT_CACHE.PAGE_SIZE;
     return await fetchProjectsData(
       this._dbFetchService,
       {
+        includeCount,
         pageStart: pageNumber,
         pageSize,
         isAscending: false,
