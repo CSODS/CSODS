@@ -1,5 +1,5 @@
+import { ProjectFilter } from "../../types";
 import { ProjectDbFetchService } from "../project-db-fetch.service";
-import { IProjectFilter } from "../repositories";
 import { ProjectError } from "./project-data-service.error";
 
 /**
@@ -18,7 +18,7 @@ import { ProjectError } from "./project-data-service.error";
 export async function fetchProjectsData(
   projectDbFetchService: ProjectDbFetchService,
   fetchOptions: {
-    filter?: IProjectFilter;
+    filter?: ProjectFilter;
     pageSize: number;
   }
 ) {

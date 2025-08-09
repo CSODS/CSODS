@@ -2,7 +2,7 @@ import { eq, and, or, like } from "drizzle-orm";
 import { DbContext } from "@/db/csods.js";
 import { Project } from "@models";
 import { Repository } from "@services";
-import { ProjectsTable, ProjectViewModel } from "../../types";
+import { ProjectFilter, ProjectsTable, ProjectViewModel } from "../../types";
 
 export class ProjectRepository extends Repository<ProjectsTable> {
   public constructor(context: DbContext) {
@@ -12,7 +12,7 @@ export class ProjectRepository extends Repository<ProjectsTable> {
    * Retrieves a paginated list of projects from the database, optionally applying filters.
    *
    * Projects are fetched using the specified `pageSize` and `pageNumber`, with support for
-   * filtering based on the fields in the `IProjectFilter` object.
+   * filtering based on the fields in the `ProjectFilter` object.
    *
    * @param pageSize The number of projects to retrieve per page.
    * @param pageNumber The 1-based page number to fetch.
@@ -26,7 +26,7 @@ export class ProjectRepository extends Repository<ProjectsTable> {
    */
   public async getProjects(options?: {
     isAscending?: boolean | undefined;
-    filter?: IProjectFilter | undefined;
+    filter?: ProjectFilter | undefined;
     pageSize?: number | undefined;
     pageNumber?: number | undefined;
   }): Promise<ProjectViewModel[]> {
@@ -60,7 +60,7 @@ export class ProjectRepository extends Repository<ProjectsTable> {
    * const count = await countProjects({ DevTypeId: 1 });
    * // Returns how many projects use development type ID 1
    */
-  public async countProjects(filter?: IProjectFilter): Promise<number> {
+  public async countProjects(filter?: ProjectFilter): Promise<number> {
     const whereClause = this.buildWhereClause(filter);
 
     return await this.GetCount(whereClause);
@@ -85,7 +85,7 @@ export class ProjectRepository extends Repository<ProjectsTable> {
    * const where = buildWhereClause({ DevTypeId: 1, LanguageId: 2 });
    * // Generates: AND(Projects.DevTypeId = 1, (Projects.PrimaryLanguageId = 2 OR Projects.SecondaryLanguageId = 2))
    */
-  public buildWhereClause(filter?: IProjectFilter | undefined) {
+  public buildWhereClause(filter?: ProjectFilter | undefined) {
     const conditions = [];
     if (filter) {
       if (filter.ProjectTitle !== undefined)

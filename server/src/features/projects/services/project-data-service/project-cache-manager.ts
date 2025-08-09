@@ -5,7 +5,6 @@ import {
   createProjectCachePageService,
   ProjectCachePageService,
 } from "../cache";
-import { IProjectFilter } from "../repositories";
 import { buildProjectsData } from "./build-projects-data";
 import {
   normalizeProjectError,

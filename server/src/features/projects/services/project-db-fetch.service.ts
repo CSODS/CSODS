@@ -1,11 +1,7 @@
 import { createContext } from "@/db/csods";
 import { DbLogger } from "@/utils";
-import { IProjectDetails, ProjectViewModel } from "../types";
-import {
-  IProjectFilter,
-  ProjectFrameworkRepository,
-  ProjectRepository,
-} from "./repositories";
+import { IProjectDetails, ProjectFilter, ProjectViewModel } from "../types";
+import { ProjectFrameworkRepository, ProjectRepository } from "./repositories";
 
 export async function createProjectDbFetchService() {
   const projectRepoInstance = new ProjectRepository(await createContext());
@@ -98,7 +94,7 @@ export class ProjectDbFetchService {
     pageSize: number;
     pageEnd?: number;
     isAscending?: boolean;
-    filter?: IProjectFilter;
+    filter?: ProjectFilter;
   }): Promise<Record<number, IProjectDetails[]>> {
     const pageStart = options.pageStart;
     const pageSize = options.pageSize;
@@ -181,7 +177,7 @@ export class ProjectDbFetchService {
    * @param filter - Optional filter to apply (e.g., by language, dev type, etc.).
    * @returns A promise that resolves to the count of matching project records.
    */
-  public async fetchProjectsCount(filter?: IProjectFilter): Promise<number> {
+  public async fetchProjectsCount(filter?: ProjectFilter): Promise<number> {
     return await this._projectRepo.countProjects(filter);
   }
 }
