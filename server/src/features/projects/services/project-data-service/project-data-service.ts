@@ -9,7 +9,7 @@ import {
 } from "../../types";
 import { ProjectCachePageService } from "../cache";
 import { ProjectDbFetchService } from "../project-db-fetch.service";
-import { IProjectFilter, ProjectFilter } from "../repositories";
+import { IProjectFilter, LegacyProjectFilter } from "../repositories";
 import { buildProjectsData } from "./build-projects-data";
 import { fetchProjectsData } from "./fetch-projects-data";
 import { getCacheFilename, getKey } from "./get-cache-filename";
@@ -130,7 +130,9 @@ export class ProjectDataService {
     filterOptions?: IProjectFilter
   ): Promise<ProjectResult> {
     //  todo: replace with static class method implementation for better readability
-    let filter: ProjectFilter | undefined = new ProjectFilter(filterOptions);
+    let filter: LegacyProjectFilter | undefined = new LegacyProjectFilter(
+      filterOptions
+    );
     filter = filter.isEmpty() ? undefined : filter;
 
     //  todo: maybe move filename generation and setting to resolveProjects to make this a pure public wrapper.

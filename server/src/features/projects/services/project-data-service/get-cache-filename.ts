@@ -1,5 +1,5 @@
 import { CACHE } from "@/data";
-import { ProjectFilter } from "../repositories";
+import { LegacyProjectFilter } from "../repositories";
 import { HashService } from "@/utils";
 
 /**
@@ -14,7 +14,7 @@ export function getCacheFilename(
     isHardBackup?: boolean;
     isToday?: boolean;
     date?: Date;
-    filter?: ProjectFilter;
+    filter?: LegacyProjectFilter;
     isFiltered?: boolean;
   }
 ): string {
@@ -22,7 +22,7 @@ export function getCacheFilename(
   const isHardBackup: boolean = options?.isHardBackup ?? false;
   const isToday: boolean = options?.isToday ?? false;
   //  todo: replace with static class method implementations for better readability.
-  const filter: ProjectFilter | undefined = options?.filter;
+  const filter: LegacyProjectFilter | undefined = options?.filter;
   const isFiltered: boolean = options?.isFiltered ?? false;
 
   //  Assemble filename elements.
@@ -55,14 +55,14 @@ export function getKey(options?: {
   isHardBackup?: boolean;
   isToday?: boolean;
   date?: Date;
-  filter?: ProjectFilter;
+  filter?: LegacyProjectFilter;
   isFiltered?: boolean;
 }): string {
   //  Resolve options.
   const isHardBackup: boolean = options?.isHardBackup ?? false;
   const isToday: boolean = options?.isToday ?? false;
   //  todo: replace with static class method implementations for better readability.
-  const filter: ProjectFilter | undefined = options?.filter;
+  const filter: LegacyProjectFilter | undefined = options?.filter;
   const isFiltered: boolean = options?.isFiltered ?? false;
 
   //  Assemble filename elements.

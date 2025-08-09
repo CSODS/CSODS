@@ -16,7 +16,7 @@ import {
   createLegacyProjectDataService,
   LegacyProjectDataService,
 } from "../legacy-project-data.service";
-import { IProjectFilter, ProjectFilter } from "../repositories";
+import { IProjectFilter, LegacyProjectFilter } from "../repositories";
 
 dotenv.config();
 
@@ -46,14 +46,14 @@ export async function createLegacyProjectCacheService() {
  * In addition to the fields of {@link LegacyAbstractCacheService}, contains the following fields:
  * - {@link _projectDataService} - An instance of the {@link LegacyProjectDataService} class. Used for communicating
  * with the database.
- * - {@link _filter} - An optional {@link ProjectFilter} object containing query parameters provided by route
+ * - {@link _filter} - An optional {@link LegacyProjectFilter} object containing query parameters provided by route
  * request. Used for querying the database and generating dynamic filenames.
  * - {@link _cDate} - A {@link Date} object with the value of the current date. Used for generating filenames
  * for accessing or creating date specific cache files.
  */
 export class LegacyProjectCacheService extends LegacyAbstractCacheService<IProjectCache> {
   protected readonly _projectDataService: LegacyProjectDataService;
-  protected _filter?: ProjectFilter;
+  protected _filter?: LegacyProjectFilter;
   protected _cDate: Date;
   /**
    * @public
@@ -94,7 +94,7 @@ export class LegacyProjectCacheService extends LegacyAbstractCacheService<IProje
    * @description Loads the project cache based on the current date and optional filter criteria.
    *
    * This method first updates the internal date state {@link _cDate} and initializes the filter
-   * (if provided) as a {@link ProjectFilter} instance. It then attempts to load the cache from a
+   * (if provided) as a {@link LegacyProjectFilter} instance. It then attempts to load the cache from a
    * JSON file whose name is derived from the current date and filter configuration.
    *
    * If the primary JSON cache is missing, corrupted, or contains no pages, and a filter is
@@ -112,7 +112,7 @@ export class LegacyProjectCacheService extends LegacyAbstractCacheService<IProje
     filterOptions?: IProjectFilter
   ): Promise<IProjectCache | null> {
     this.updateDate();
-    const filter = new ProjectFilter(filterOptions);
+    const filter = new LegacyProjectFilter(filterOptions);
     this._filter = filter.isEmpty() ? undefined : filter;
 
     const isFiltered = filter ? true : false;

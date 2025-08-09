@@ -124,7 +124,7 @@ export class ProjectRepository extends Repository<ProjectsTable> {
  * Implements the `IProjectFilter` interface and provides helper methods
  * for evaluating and representing filters in list form.
  */
-export class ProjectFilter implements IProjectFilter {
+export class LegacyProjectFilter implements IProjectFilter {
   ProjectTitle: string | undefined;
   DevTypeId: number | undefined;
   LanguageId: number | undefined;
@@ -132,6 +132,7 @@ export class ProjectFilter implements IProjectFilter {
   IndustryId: number | undefined;
 
   /**
+   * @deprecated Please use
    * Constructs a `ProjectFilter` instance from an optional `IProjectFilter` object.
    *
    * @param filter Optional object containing filter criteria.
