@@ -22,10 +22,10 @@ export function createProjectCacheManager() {
  * todo: add docs
  */
 export class ProjectCacheManager {
-  private _projectCachePageService: ProjectCachePageService;
+  private _cachePageService: ProjectCachePageService;
 
   public constructor(projectCachePageService: ProjectCachePageService) {
-    this._projectCachePageService = projectCachePageService;
+    this._cachePageService = projectCachePageService;
   }
 
   /**
@@ -74,7 +74,7 @@ export class ProjectCacheManager {
   public async loadCache(): Promise<ProjectResult> {
     try {
       //  !throws CacheError: CACHE_PARSE_ERROR | INVALID_CACHE_ERROR.
-      const projects = await this._projectCachePageService.loadCache();
+      const projects = await this._cachePageService.loadCache();
       return success(projects);
     } catch (err) {
       //  todo: log error maybe
@@ -110,9 +110,7 @@ export class ProjectCacheManager {
       const newCache = buildProjectsData(createParams);
 
       //  !throws CacheError: INVALID_CACHE_ERROR | CACHE_PERSIST_ERROR
-      const storedCache = await this._projectCachePageService.persistCache(
-        newCache
-      );
+      const storedCache = await this._cachePageService.persistCache(newCache);
       return success(storedCache);
     } catch (err) {
       //  todo: log error
@@ -126,11 +124,11 @@ export class ProjectCacheManager {
   }
 
   public setCachePath(newCachePath: string) {
-    return this._projectCachePageService.setCachePath(newCachePath);
+    return this._cachePageService.setCachePath(newCachePath);
   }
 
   public setFilename(key: string) {
-    const filename = this._projectCachePageService.generateCacheFilename(key);
-    return this._projectCachePageService.setFilename(key);
+    const filename = this._cachePageService.generateCacheFilename(key);
+    return this._cachePageService.setFilename(key);
   }
 }
