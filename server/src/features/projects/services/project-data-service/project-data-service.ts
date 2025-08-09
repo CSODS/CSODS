@@ -1,6 +1,6 @@
 import { CACHE } from "@/data";
 import { fail, success } from "@/utils";
-import { IProjectCachePage, ProjectFilter } from "../../types";
+import { IProjectCache, IProjectCachePage, ProjectFilter } from "../../types";
 import { ProjectFilterUtil } from "../../utils";
 import { ProjectCachePageService } from "../cache";
 import { ProjectDbFetchService } from "../project-db-fetch.service";
@@ -67,14 +67,11 @@ export class ProjectDataService {
    * @returns
    */
   public async createNewPage(loadOptions: {
+    cache: IProjectCache;
     pageNumber: number;
     filter?: ProjectFilter;
   }): Promise<ProjectPageResult> {
-    const { pageNumber, filter } = loadOptions;
-    const loadResult = await this.getProjects(filter);
-
-    if (!loadResult.success) return loadResult; //  error loading projects. return fail result.
-    const cache = loadResult.result;
+    const { cache, pageNumber, filter } = loadOptions;
 
     const fetchResult = await this.fetchProjects({
       includeCount: false,
