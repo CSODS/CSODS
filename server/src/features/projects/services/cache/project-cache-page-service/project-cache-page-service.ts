@@ -9,8 +9,8 @@ import {
   JsonError,
   JsonFileService,
 } from "@/services";
+import { ProjectCachePageError } from "@/features/projects/errors";
 import { ProjectCacheService } from "../project-cache-service";
-import { ProjectCachePageError } from "./project-cache-page-service.error";
 
 export function createProjectCachePageService() {
   const jsonFileServiceInstance =
