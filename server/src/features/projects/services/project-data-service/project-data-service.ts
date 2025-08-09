@@ -77,20 +77,18 @@ export class ProjectDataService {
     if (!loadResult.success) return loadResult;
     const cache = loadResult.result;
 
-    //  todo: encapsulate try logic in helper
-    let projects;
-    try {
-      const pageSize = CACHE.PROJECT_CACHE.PAGE_SIZE;
-      const { pageRecord } = await fetchProjectsData(this._dbFetchService, {
-        pageStart: pageNumber,
-        pageSize,
-        filter,
-      });
-      projects = pageRecord[pageNumber];
-    } catch (err) {
-      //  todo: log db error and retry
-      throw err;
-    }
+    const pageSize = CACHE.PROJECT_CACHE.PAGE_SIZE;
+    const fetchResult = await fetchProjectsData(this._dbFetchService, {
+      pageStart: pageNumber,
+      pageSize,
+      filter,
+    });
+
+    if (!fetchResult.success) return fetchResult; //  fetch fail, return fail result.
+
+    const { pageRecord } = fetchResult.result;
+
+    const projects = pageRecord[pageNumber];
 
     const now = new Date();
     const cachePage: IProjectCachePage = {
@@ -155,30 +153,26 @@ export class ProjectDataService {
     if (loadResult.success) return loadResult;
 
     const { PAGE_SIZE } = CACHE.PROJECT_CACHE;
-    for (let i = 0; i < 3; i++) {
-      //  todo: make retries configurable via a constant in CACHE.PROJECT_CACHE.
-      //  todo: add a short backoff between attempts to prevent hammering the DB if something is wrong.
-      let fetchResult;
-      try {
-        //  !Throws ProjectError: DB_FETCH_ERROR
-        fetchResult = await fetchProjectsData(this._dbFetchService, {
-          pageStart: 1,
-          pageSize: PAGE_SIZE,
-          isAscending: false,
-          filter,
+
+    //  todo: make retries configurable via a constant in CACHE.PROJECT_CACHE.
+    //  todo: add a short backoff between attempts to prevent hammering the DB if something is wrong.
+    const fetchResult = await fetchProjectsData(this._dbFetchService, {
+      pageStart: 1,
+      pageSize: PAGE_SIZE,
+      isAscending: false,
+      filter,
+    });
+
+    if (fetchResult.success)
+      //  todo: add logging for each retry
+      for (let i = 0; i < 3; i++) {
+        const createResult = await this._cacheManager.createCache({
+          currentDate: new Date(),
+          ...fetchResult.result,
         });
-      } catch (err) {
-        //  todo: log db error
-        break;
+
+        if (createResult.success) return createResult;
       }
-
-      const createResult = await this._cacheManager.createCache({
-        currentDate: new Date(),
-        ...fetchResult,
-      });
-
-      if (createResult.success) return createResult;
-    }
 
     const backupKey = getProjectDataKey({ isHardBackup: true });
     //  !Throws EnvError: CACHE | returns null on failure.

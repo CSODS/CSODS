@@ -1,9 +1,22 @@
-import { ProjectFilter } from "../../types";
+import { ResultFail, ResultSuccess } from "@/types";
+import { IProjectDetails, ProjectFilter } from "../../types";
 import { ProjectDbFetchService } from "../project-db-fetch.service";
-import { ProjectError } from "./project-data-service.error";
+import {
+  normalizeProjectError,
+  ProjectError,
+} from "./project-data-service.error";
+import { fail, success } from "@/utils";
+
+type ProjectsData = {
+  totalPages: number;
+  pageRecord: Record<number, IProjectDetails[]>;
+};
+
+export type FetchResult =
+  | ResultSuccess<ProjectsData>
+  | ResultFail<ProjectError>;
 
 type FetchOptions = Parameters<ProjectDbFetchService["fetchProjectsPages"]>[0];
-
 /**
  * @description Asynchronously fetches the a paginated record of projects and
  * the total count of projects from the database.
@@ -17,24 +30,37 @@ type FetchOptions = Parameters<ProjectDbFetchService["fetchProjectsPages"]>[0];
  * @throws {ProjectError} Thrown with `name: "DB_FETCH_ERROR"` if there are no
  * projects in the database..
  * todo: update docs
+ * todo: add retry options parameter
+ * todo: log each retry
  */
 export async function fetchProjectsData(
   projectDbFetchService: ProjectDbFetchService,
   fetchOptions: FetchOptions
-) {
-  const { filter, pageSize } = fetchOptions;
+): Promise<FetchResult> {
+  try {
+    const { filter, pageSize } = fetchOptions;
 
-  const projectsCount = await projectDbFetchService.fetchProjectsCount(filter);
-  if (projectsCount === 0)
-    throw new ProjectError({
+    const projectsCount = await projectDbFetchService.fetchProjectsCount(
+      filter
+    );
+    if (projectsCount === 0)
+      throw new ProjectError({
+        name: "DB_FETCH_ERROR",
+        message: "Project list is empty.",
+      });
+
+    const totalPages = Math.ceil(projectsCount / pageSize);
+    const pageRecord = await projectDbFetchService.fetchProjectsPages(
+      fetchOptions
+    );
+
+    return success({ totalPages, pageRecord });
+  } catch (err) {
+    const error = normalizeProjectError({
       name: "DB_FETCH_ERROR",
-      message: "Project list is empty.",
+      message: "Error fetching projects from database.",
+      err,
     });
-
-  const totalPages = Math.ceil(projectsCount / pageSize);
-  const pageRecord = await projectDbFetchService.fetchProjectsPages(
-    fetchOptions
-  );
-
-  return { totalPages, pageRecord };
+    return fail(error);
+  }
 }
