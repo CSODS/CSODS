@@ -1,6 +1,6 @@
 import { CACHE } from "@/data";
 import { fail, success } from "@/utils";
-import { IProjectCache, IProjectCachePage, ProjectFilter } from "../../types";
+import { IProjectCache, ProjectFilter } from "../../types";
 import { ProjectFilterUtil } from "../../utils";
 import { ProjectCachePageService } from "../cache";
 import { ProjectDbFetchService } from "../project-db-fetch.service";
@@ -12,37 +12,38 @@ import { ProjectPageResult, ProjectResult } from "./project-data-service.type";
 
 export class ProjectDataService {
   private _cacheManager: ProjectCacheManager;
-  private _cachePageService: ProjectCachePageService;
   private _dbFetchService: ProjectDbFetchService;
 
   public constructor(
     projectCacheManager: ProjectCacheManager,
-    projectCachePageService: ProjectCachePageService,
     projectDbFetchService: ProjectDbFetchService
   ) {
     this._cacheManager = projectCacheManager;
-    this._cachePageService = projectCachePageService;
     this._dbFetchService = projectDbFetchService;
   }
 
   /**
-   * ! this method must be called after loading the cache into the memory.
    * @param param0
+   * todo: document this
    */
-  public async getProjectByPageAndId({
-    pageNumber,
-    projectId,
-  }: {
+  public async getProjectByPageAndId(options: {
     pageNumber: number;
     projectId: number;
+    rawFilter: ProjectFilter;
   }) {
-    //  get cache page
-    //  get project from cache page.
+    const { pageNumber, projectId, rawFilter } = options;
+    const pageResult = await this.getOrCreatePage(pageNumber, rawFilter);
+
+    if (!pageResult.success) return pageResult; //  fail retrieving page.
+    return pageResult.result.projects.find(
+      (project) => project.project.projectId === projectId
+    );
   }
 
   /**
    * @description
    * @param pageNumber
+   * todo: document this
    */
   public async getOrCreatePage(
     pageNumber: number,
@@ -66,6 +67,7 @@ export class ProjectDataService {
    * the in memory cache.
    * @param loadOptions
    * @returns
+   * todo: update documentation
    */
   public async createNewPage(loadOptions: {
     cache: IProjectCache;
