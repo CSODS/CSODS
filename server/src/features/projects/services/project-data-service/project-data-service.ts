@@ -182,28 +182,16 @@ export class ProjectDataService {
    * todo: update docs
    */
   public async createCache(createOptions: {
+    totalPages: number;
     currentDate: Date;
-    pageSize: number;
-    filter?: IProjectFilter;
+    pageRecord: Record<number, IProjectDetails[]>;
   }): Promise<ProjectResult> {
     try {
-      const { currentDate, pageSize, filter } = createOptions;
       //  todo: add logging
       //  !throws ProjectError: FETCH_ERROR
       //  todo: pipeline this with async/await array destructuring for fetchCacheData results
-      const { totalPages, pageRecord } = await fetchProjectsData(
-        this._projectDbFetchService,
-        {
-          filter,
-          pageSize,
-        }
-      );
 
-      const newCache = buildProjectsData({
-        totalPages,
-        currentDate,
-        pageRecord,
-      });
+      const newCache = buildProjectsData(createOptions);
 
       //  !throws CacheError: INVALID_CACHE_ERROR | CACHE_PERSIST_ERROR
       const storedCache = await this._projectCachePageService.persistCache(
@@ -245,10 +233,21 @@ export class ProjectDataService {
     for (let i = 0; i < 3; i++) {
       //  todo: make retries configurable via a constant in CACHE.PROJECT_CACHE.
       //  todo: add a short backoff between attempts to prevent hammering the DB if something is wrong.
+      let fetchResult;
+      try {
+        //  !Throws ProjectError: DB_FETCH_ERROR
+        fetchResult = await fetchProjectsData(this._projectDbFetchService, {
+          filter,
+          pageSize: PAGE_SIZE,
+        });
+      } catch (err) {
+        //  todo: log db error
+        break;
+      }
+
       const createResult = await this.createCache({
         currentDate: new Date(),
-        pageSize: PAGE_SIZE,
-        filter,
+        ...fetchResult,
       });
 
       if (createResult.success) return createResult;
