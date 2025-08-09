@@ -35,8 +35,6 @@ type RetryOptions = {
  * @throws {ProjectError} Thrown with `name: "DB_FETCH_ERROR"` if there are no
  * projects in the database..
  * todo: update docs
- * todo: add retry jitter
- * todo: exponential delay
  * todo: log each retry
  */
 export async function fetchProjectsData(
@@ -45,12 +43,15 @@ export async function fetchProjectsData(
   retryOptions?: RetryOptions
 ): Promise<FetchResult> {
   const { filter, pageSize } = fetchOptions;
-  const { maxRetries = 1, retryDelayMs = 1500 } = retryOptions ?? {};
+  const { maxRetries = 1, retryDelayMs = 1000 } = retryOptions ?? {};
 
   for (let retry = 0; retry < maxRetries; retry++) {
     try {
       //  add a delay for retries
-      if (retry > 0) await new Promise((r) => setTimeout(r, retryDelayMs));
+      const baseDelay = retryDelayMs;
+      const jitter = Math.random() * 1000; // up to 1s jitter (configure as necessary)
+      const delayMs = baseDelay * 2 ** (retry - 1) + jitter;
+      if (retry > 0) await new Promise((r) => setTimeout(r, delayMs));
 
       const projectsCount = await projectDbFetchService.fetchProjectsCount(
         filter
