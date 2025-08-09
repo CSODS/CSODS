@@ -94,7 +94,7 @@ export class ProjectDataService {
       projects,
     };
 
-    const result = await this._cacheManager.storeCachePage({
+    const result = await this._cacheManager.createAndStorePage({
       pageNumber,
       cachePage,
     });

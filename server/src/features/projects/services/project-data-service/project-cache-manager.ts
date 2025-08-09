@@ -33,7 +33,7 @@ export class ProjectCacheManager {
    * @returns
    * todo: update docs
    */
-  public async storeCachePage(page: {
+  public async createAndStorePage(page: {
     pageNumber: number;
     cachePage: IProjectCachePage;
   }): Promise<ProjectPageResult> {
