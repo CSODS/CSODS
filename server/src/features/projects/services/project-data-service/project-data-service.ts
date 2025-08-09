@@ -1,5 +1,6 @@
 import { CACHE } from "@/data";
 import { EnvError } from "@/error";
+import { fail, success } from "@/utils";
 import {
   CachePageRecord,
   IProjectCache,
@@ -17,7 +18,6 @@ import {
   ProjectError,
 } from "./project-data-service.error";
 import { ProjectResult } from "./project-data-service.type";
-import { fail, success } from "@/utils";
 
 export class ProjectDataService {
   private _projectCachePageService: ProjectCachePageService;
