@@ -68,7 +68,7 @@ export class ProjectRepository extends Repository<ProjectsTable> {
   /**
    * Constructs a dynamic SQL `WHERE` clause based on the provided filter options.
    *
-   * The method builds a list of conditions using the fields in the `IProjectFilter` object.
+   * The method builds a list of conditions using the fields in the `ProjectFilter` object.
    * If no filters are provided or all are `undefined`, the resulting clause will be `undefined`.
    *
    * ### Filters:
@@ -78,7 +78,7 @@ export class ProjectRepository extends Repository<ProjectsTable> {
    * - `DatabaseId`: Matches the project's database technology.
    * - `IndustryId`: Matches the industry to which the project belongs.
    *
-   * @param filter An optional `IProjectFilter` object used to determine which conditions to include.
+   * @param filter An optional `ProjectFilter` object used to determine which conditions to include.
    * @returns A SQL `WHERE` clause composed using `and(...)`, or `undefined` if no conditions are set.
    *
    * @example
@@ -121,7 +121,7 @@ export class ProjectRepository extends Repository<ProjectsTable> {
 
 /**
  * A utility class that encapsulates and manages project filter criteria.
- * Implements the `IProjectFilter` interface and provides helper methods
+ * Implements the `ProjectFilter` interface and provides helper methods
  * for evaluating and representing filters in list form.
  */
 export class LegacyProjectFilter implements IProjectFilter {

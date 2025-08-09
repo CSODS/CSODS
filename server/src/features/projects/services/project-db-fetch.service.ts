@@ -66,7 +66,7 @@ export class ProjectDbFetchService {
    * Defaults to `pageStart`.
    * - `isAscending (boolean, optional): Specifies the sorting order of the
    * data before fetching.
-   * - `filter` (IProjectFilter, optional): A filter to apply to the query
+   * - `filter` (ProjectFilter, optional): A filter to apply to the query
    * (e.g., by language, type, etc.).
    *
    * @returns A promise resolving to a `Record<number, IProjectDetails[]>`,

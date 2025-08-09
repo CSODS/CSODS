@@ -94,7 +94,7 @@ export class ProjectCacheManager {
    * is created.
    * @param createOptions.pageSize Denotes how many projects will be stored in
    * each page of the cache.
-   * @param createOptions.filter An optional {@link IProjectFilter} object for
+   * @param createOptions.filter An optional {@link ProjectFilter} object for
    * filtering the contents the database that will be stored in the cache.
    * @returns A `Promise` that resolves to the {@link IProjectCache} or `null`
    * if the cache creation fails.
