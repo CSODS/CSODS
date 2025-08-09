@@ -14,9 +14,8 @@ import { ProjectError } from "./project-data-service.error";
  * - `pageRecord` - A record containing each page of t
  * @throws {ProjectError} Thrown with `name: "FETCH_ERROR"` if there are no
  * projects in the database..
- * todo: rename to fetchProjectsData
  */
-export async function fetchCacheData(
+export async function fetchProjectsData(
   projectDbFetchService: ProjectDbFetchService,
   fetchOptions: {
     filter?: IProjectFilter;

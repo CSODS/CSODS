@@ -10,7 +10,7 @@ import { ProjectCachePageService } from "../cache";
 import { ProjectDbFetchService } from "../project-db-fetch.service";
 import { IProjectFilter, ProjectFilter } from "../repositories";
 import { buildProjectsData } from "./build-projects-data";
-import { fetchCacheData } from "./fetch-cache-data";
+import { fetchProjectsData } from "./fetch-projects-data";
 import { getCacheFilename } from "./get-cache-filename";
 import {
   normalizeProjectError,
@@ -195,7 +195,7 @@ export class ProjectDataService {
       //  todo: add logging
       //  !throws ProjectError: FETCH_ERROR
       //  todo: pipeline this with async/await array destructuring for fetchCacheData results
-      const { totalPages, pageRecord } = await fetchCacheData(
+      const { totalPages, pageRecord } = await fetchProjectsData(
         this._projectDbFetchService,
         {
           filter,
