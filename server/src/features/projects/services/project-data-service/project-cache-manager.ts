@@ -1,5 +1,9 @@
 import { EnvError } from "@/error";
-import { IProjectCachePage, IProjectDetails } from "@/features/projects/types";
+import {
+  IProjectCache,
+  IProjectCachePage,
+  IProjectDetails,
+} from "@/features/projects/types";
 import { fail, success } from "@/utils";
 import {
   createProjectCachePageService,
@@ -34,13 +38,25 @@ export class ProjectCacheManager {
    * todo: update docs
    */
   public async createAndStorePage(page: {
+    currentDate: Date;
+    cache: IProjectCache; //  used for re-storing cahce.
     pageNumber: number;
-    pageRecord: Record<number, IProjectDetails[]>;
-    cachePage: IProjectCachePage;
+    projects: IProjectDetails[];
   }): Promise<ProjectPageResult> {
+    const { currentDate, cache, pageNumber, projects } = page;
     try {
+      const cachePage: IProjectCachePage = {
+        createdOn: currentDate,
+        lastAccessed: currentDate,
+        viewCount: 1,
+        totalPages: cache.totalPages,
+        projects,
+      };
       //  !Throws JsonError: NULL_DATA ERROR or CacheError: INVALID_CACHE_ERROR | CACHE_PERSIST_ERROR
-      const storedPage = await this._cachePageService.storeCachePage(page);
+      const storedPage = await this._cachePageService.storeCachePage({
+        pageNumber,
+        cachePage,
+      });
       return success(storedPage);
     } catch (err) {
       const error = normalizeProjectError({

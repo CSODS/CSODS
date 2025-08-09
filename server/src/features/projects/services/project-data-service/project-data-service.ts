@@ -82,22 +82,11 @@ export class ProjectDataService {
     if (!fetchResult.success) return fetchResult; //  fetch fail, return fail result.
 
     const { pageRecord } = fetchResult.result;
-
-    const projects = pageRecord[pageNumber];
-
-    const now = new Date();
-    const cachePage: IProjectCachePage = {
-      createdOn: now,
-      lastAccessed: now,
-      viewCount: 1,
-      totalPages: cache.totalPages,
-      projects,
-    };
-
     const result = await this._cacheManager.createAndStorePage({
+      currentDate: new Date(),
+      cache,
       pageNumber,
-      pageRecord,
-      cachePage,
+      projects: pageRecord[pageNumber],
     });
 
     return result;
