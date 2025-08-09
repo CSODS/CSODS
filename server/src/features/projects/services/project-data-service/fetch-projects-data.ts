@@ -7,7 +7,7 @@ import {
 } from "./project-data-service.error";
 import { fail, success } from "@/utils";
 
-type ProjectsData = {
+export type ProjectsData = {
   totalPages: number;
   pageRecord: Record<number, IProjectDetails[]>;
 };
@@ -17,6 +17,11 @@ export type FetchResult =
   | ResultFail<ProjectError>;
 
 type FetchOptions = Parameters<ProjectDbFetchService["fetchProjectsPages"]>[0];
+type RetryOptions = {
+  maxRetries?: number;
+  retryDelayMs?: number;
+};
+
 /**
  * @description Asynchronously fetches the a paginated record of projects and
  * the total count of projects from the database.
@@ -30,37 +35,57 @@ type FetchOptions = Parameters<ProjectDbFetchService["fetchProjectsPages"]>[0];
  * @throws {ProjectError} Thrown with `name: "DB_FETCH_ERROR"` if there are no
  * projects in the database..
  * todo: update docs
- * todo: add retry options parameter
+ * todo: add retry jitter
+ * todo: exponential delay
  * todo: log each retry
  */
 export async function fetchProjectsData(
   projectDbFetchService: ProjectDbFetchService,
-  fetchOptions: FetchOptions
+  fetchOptions: FetchOptions,
+  retryOptions?: RetryOptions
 ): Promise<FetchResult> {
-  try {
-    const { filter, pageSize } = fetchOptions;
+  const { filter, pageSize } = fetchOptions;
+  const { maxRetries, retryDelayMs } = retryOptions ?? {
+    maxRetries: 1,
+    retryDelayMs: 3000,
+  };
 
-    const projectsCount = await projectDbFetchService.fetchProjectsCount(
-      filter
-    );
-    if (projectsCount === 0)
-      throw new ProjectError({
+  for (let retry = 0; retry < (maxRetries ?? 1); retry++) {
+    try {
+      //  add a delay for retries
+      if (retry !== 1) await new Promise((r) => setTimeout(r, retryDelayMs));
+
+      const projectsCount = await projectDbFetchService.fetchProjectsCount(
+        filter
+      );
+      if (projectsCount === 0)
+        throw new ProjectError({
+          name: "EMPTY_PROJECTS_TABLE_ERROR",
+          message: "The projects table is empty.",
+        });
+
+      const totalPages = Math.ceil(projectsCount / pageSize);
+      const pageRecord = await projectDbFetchService.fetchProjectsPages(
+        fetchOptions
+      );
+
+      return success({ totalPages, pageRecord });
+    } catch (err) {
+      //  todo: log errors
+      const error = normalizeProjectError({
         name: "DB_FETCH_ERROR",
-        message: "Project list is empty.",
+        message: "Error fetching projects from database.",
+        err,
       });
 
-    const totalPages = Math.ceil(projectsCount / pageSize);
-    const pageRecord = await projectDbFetchService.fetchProjectsPages(
-      fetchOptions
-    );
-
-    return success({ totalPages, pageRecord });
-  } catch (err) {
-    const error = normalizeProjectError({
-      name: "DB_FETCH_ERROR",
-      message: "Error fetching projects from database.",
-      err,
-    });
-    return fail(error);
+      if (error.name === "EMPTY_PROJECTS_TABLE_ERROR") return fail(error);
+    }
   }
+
+  const error = new ProjectError({
+    name: "EXCEEDED_MAX_FETCH_RETRIES_ERROR",
+    message: "Exceeded retry limit without a successful fetch.",
+  });
+
+  return fail(error);
 }
