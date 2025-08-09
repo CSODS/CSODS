@@ -1,6 +1,8 @@
 import { ErrorBase } from "@/error";
 
 export type ErrorName =
+  | "EXCEEDED_MAX_FETCH_RETRIES_ERROR"
+  | "EMPTY_PROJECTS_TABLE_ERROR"
   | "DB_FETCH_ERROR"
   | "RETRIEVE_PROJECTS_ERROR"
   | "RESOLVE_PROJECTS_ERROR"
