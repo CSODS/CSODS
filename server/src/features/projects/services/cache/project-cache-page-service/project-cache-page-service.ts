@@ -105,13 +105,13 @@ export class ProjectCachePageService extends ProjectCacheService {
       _logger.info(`[getCachePage] Attempting to retrieve page ${pageNumber}`);
 
       if (pageNumber === 0 || pageNumber > cache.totalPages)
-        throw new ProjectCachePageError({
+        throw new ProjectCachePageError.ProjectCachePageError({
           name: "PAGE_OUT_OF_BOUNDS_ERROR",
           message: `Page ${pageNumber} is out of bounds.`,
         });
 
       if (this.isPageMissingFromCache(cache.cachePages, pageNumber))
-        throw new ProjectCachePageError({
+        throw new ProjectCachePageError.ProjectCachePageError({
           name: "MISSING_PAGE_ERROR",
           message: `Page ${pageNumber} is not in cache.`,
         });
