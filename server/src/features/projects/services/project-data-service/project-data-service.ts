@@ -12,7 +12,7 @@ import { ProjectDbFetchService } from "../project-db-fetch.service";
 import { IProjectFilter, ProjectFilter } from "../repositories";
 import { buildProjectsData } from "./build-projects-data";
 import { fetchProjectsData } from "./fetch-projects-data";
-import { getCacheFilename } from "./get-cache-filename";
+import { getCacheFilename, getKey } from "./get-cache-filename";
 import { ProjectCacheManager } from "./project-cache-manager";
 import {
   normalizeProjectError,
@@ -193,8 +193,11 @@ export class ProjectDataService {
       if (createResult.success) return createResult;
     }
 
+    const backupKey = getKey({ isHardBackup: true });
     //  !Throws EnvError: CACHE | returns null on failure.
-    const backupResult = await this.loadBackupCache();
+    const backupResult = await this._cacheManager.loadBackupCache({
+      backupKey,
+    });
 
     if (backupResult.success) return backupResult;
 
@@ -203,43 +206,5 @@ export class ProjectDataService {
       message: "All fall back methods for resolving projects failed.",
     });
     return fail(error);
-  }
-
-  /**
-   * @description Asychronously attempts to load and return a backup cache.
-   * is not configured.
-   * todo: update docs
-   */
-  private async loadBackupCache(): Promise<ProjectResult> {
-    //  todo: add logging
-    try {
-      const backupPath = process.env.DEFAULT_CACHE_PATH!;
-      if (!backupPath)
-        throw new EnvError({
-          name: "CACHE",
-          message: "Default cache path not configured.",
-        });
-
-      this._cachePageService.setCachePath(backupPath);
-
-      const filename = getCacheFilename(
-        this._cachePageService.generateCacheFilename,
-        { isHardBackup: true }
-      );
-      this._cachePageService.setFilename(filename);
-
-      const loadResult = await this.loadCache();
-
-      if (loadResult.success) return loadResult;
-
-      throw loadResult.error; //  ProjectError type
-    } catch (err) {
-      const error = normalizeProjectError({
-        name: "LOAD_BACKUP_ERROR",
-        message: "Failed loading backup projects cache.",
-        err,
-      });
-      return fail(error);
-    }
   }
 }
