@@ -12,7 +12,7 @@ import { ProjectError } from "./project-data-service.error";
  * @returns
  * - `totalPages` - The total pages of the paginated projects.
  * - `pageRecord` - A record containing each page of t
- * @throws {ProjectError} Thrown with `name: "FETCH_ERROR"` if there are no
+ * @throws {ProjectError} Thrown with `name: "DB_FETCH_ERROR"` if there are no
  * projects in the database..
  */
 export async function fetchProjectsData(
