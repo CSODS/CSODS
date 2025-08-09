@@ -1,4 +1,5 @@
 import { ErrorBase } from "@/error";
+import { ProjectCacheError } from "../../errors";
 
 export type ErrorName =
   | "EXCEEDED_MAX_FETCH_RETRIES_ERROR"
@@ -9,7 +10,8 @@ export type ErrorName =
   | "LOAD_FROM_CACHE_ERROR"
   | "LOAD_BACKUP_ERROR"
   | "CREATE_NEW_CACHE_ERROR"
-  | "STORE_CACHE_PAGE_ERROR";
+  | "STORE_CACHE_PAGE_ERROR"
+  | ProjectCacheError.ErrorName;
 
 export class ProjectError extends ErrorBase<ErrorName> {}
 
