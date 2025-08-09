@@ -8,7 +8,7 @@ import { fetchProjectsData } from "./fetch-projects-data";
 import { getProjectDataKey } from "./get-project-data-key";
 import { ProjectCacheManager } from "./project-cache-manager";
 import { ProjectError } from "./project-data-service.error";
-import { ProjectResult } from "./project-data-service.type";
+import { ProjectPageResult, ProjectResult } from "./project-data-service.type";
 
 export class ProjectDataService {
   private _cacheManager: ProjectCacheManager;
@@ -69,11 +69,15 @@ export class ProjectDataService {
   public async createNewPage(loadOptions: {
     pageNumber: number;
     filter?: ProjectFilter;
-  }): Promise<IProjectCachePage> {
+  }): Promise<ProjectPageResult> {
     const { pageNumber, filter } = loadOptions;
+    const loadResult = await this.getProjects(filter);
+
+    //  error loading projects.
+    if (!loadResult.success) return loadResult;
+
     try {
-      const cache = this._cachePageService.getCache();
-      this._cachePageService.assertCacheNotNull(cache);
+      const cache = loadResult.result;
 
       const pageSize = CACHE.PROJECT_CACHE.PAGE_SIZE;
       const projects = (
@@ -98,7 +102,7 @@ export class ProjectDataService {
         cachePage,
       });
 
-      return storedPage;
+      return success(storedPage);
     } catch (err) {
       //  todo: handle errors
       throw err;
