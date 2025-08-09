@@ -9,6 +9,8 @@ import {
 import { ProjectCachePageService } from "../cache";
 import { ProjectDbFetchService } from "../project-db-fetch.service";
 import { IProjectFilter, ProjectFilter } from "../repositories";
+import { buildProjectCache } from "./build-project-cache";
+import { fetchCacheData } from "./fetch-cache-data";
 import { getCacheFilename } from "./get-cache-filename";
 import {
   normalizeProjectError,
@@ -193,12 +195,15 @@ export class ProjectDataService {
       //  todo: add logging
       //  !throws ProjectError: FETCH_ERROR
       //  todo: pipeline this with async/await array destructuring for fetchCacheData results
-      const { totalPages, pageRecord } = await this.fetchCacheData({
-        filter,
-        pageSize,
-      });
+      const { totalPages, pageRecord } = await fetchCacheData(
+        this._projectDbFetchService,
+        {
+          filter,
+          pageSize,
+        }
+      );
 
-      const newCache = this.buildProjectCache({
+      const newCache = buildProjectCache({
         totalPages,
         currentDate,
         pageRecord,
@@ -311,75 +316,5 @@ export class ProjectDataService {
         }),
       };
     }
-  }
-
-  /**
-   * @description Asynchronously fetches data required for the cache from the
-   * database with an optional filter and a specified page size..
-   * @returns
-   * - `totalPages` - The total pages of the paginated projects.
-   * - `pageRecord` - A record containing each page of t
-   * @throws {ProjectError} Thrown with `name: "FETCH_ERROR"` if there are no
-   * projects in the database..
-   */
-  private async fetchCacheData(fetchOptions: {
-    filter?: IProjectFilter;
-    pageSize: number;
-  }) {
-    const { filter, pageSize } = fetchOptions;
-    const projectsCount = await this._projectDbFetchService.fetchProjectsCount(
-      filter
-    );
-
-    if (projectsCount === 0)
-      throw new ProjectError({
-        name: "DB_FETCH_ERROR",
-        message: "Project list is empty.",
-      });
-    const totalPages = Math.ceil(projectsCount / pageSize);
-
-    const pageRecord = await this._projectDbFetchService.fetchProjectsPages({
-      pageStart: 1,
-      pageSize,
-      isAscending: false,
-      filter,
-    });
-
-    return { totalPages, pageRecord };
-  }
-
-  /**
-   * @description A utility method that builds a new {@link IProjectCache} object
-   * from the provided arguments..
-   */
-  private buildProjectCache(cacheData: {
-    totalPages: number;
-    currentDate: Date;
-    isBackup?: boolean;
-    pageRecord: Record<number, IProjectDetails[]>;
-  }): IProjectCache {
-    const { totalPages, currentDate, isBackup, pageRecord } = cacheData;
-
-    let cachePages: CachePageRecord = {};
-    const recordEntries = Object.entries(pageRecord);
-    recordEntries.forEach(([pageNumber, projects]) => {
-      const numericKey = Number(pageNumber);
-      cachePages[numericKey] = {
-        createdOn: currentDate,
-        lastAccessed: currentDate,
-        viewCount: 0,
-        totalPages,
-        projects,
-      };
-    });
-
-    return {
-      totalPages,
-      createdOn: currentDate,
-      lastAccessed: currentDate,
-      viewCount: 1,
-      isBackup: isBackup ?? false,
-      cachePages,
-    };
   }
 }
