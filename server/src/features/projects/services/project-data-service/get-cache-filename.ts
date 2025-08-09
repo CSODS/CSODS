@@ -2,6 +2,12 @@ import { CACHE } from "@/data";
 import { ProjectFilter } from "../repositories";
 import { HashService } from "@/utils";
 
+/**
+ * todo: rename to getKey
+ * @param filenameGenerator
+ * @param options
+ * @returns
+ */
 export function getCacheFilename(
   filenameGenerator: (...nameElements: string[]) => string,
   options?: {
