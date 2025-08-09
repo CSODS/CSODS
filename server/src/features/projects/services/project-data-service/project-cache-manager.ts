@@ -14,15 +14,15 @@ import {
 } from "./project-data-service.error";
 import { ProjectResult } from "./project-data-service.type";
 
-export function createProjectCacheLoader() {
+export function createProjectCacheManager() {
   const cachePageService = createProjectCachePageService();
-  return new ProjectCacheLoader(cachePageService);
+  return new ProjectCacheManager(cachePageService);
 }
 
 /**
  * todo: add docs
  */
-export class ProjectCacheLoader {
+export class ProjectCacheManager {
   private _projectCachePageService: ProjectCachePageService;
 
   public constructor(projectCachePageService: ProjectCachePageService) {
