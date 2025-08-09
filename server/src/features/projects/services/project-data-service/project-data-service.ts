@@ -13,6 +13,7 @@ import { IProjectFilter, ProjectFilter } from "../repositories";
 import { buildProjectsData } from "./build-projects-data";
 import { fetchProjectsData } from "./fetch-projects-data";
 import { getCacheFilename } from "./get-cache-filename";
+import { ProjectCacheManager } from "./project-cache-manager";
 import {
   normalizeProjectError,
   ProjectError,
@@ -20,13 +21,16 @@ import {
 import { ProjectResult } from "./project-data-service.type";
 
 export class ProjectDataService {
+  private _cacheManager: ProjectCacheManager;
   private _cachePageService: ProjectCachePageService;
   private _dbFetchService: ProjectDbFetchService;
 
   public constructor(
+    projectCacheManager: ProjectCacheManager,
     projectCachePageService: ProjectCachePageService,
     projectDbFetchService: ProjectDbFetchService
   ) {
+    this._cacheManager = projectCacheManager;
     this._cachePageService = projectCachePageService;
     this._dbFetchService = projectDbFetchService;
   }
