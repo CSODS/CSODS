@@ -162,8 +162,10 @@ export class ProjectDataService {
       try {
         //  !Throws ProjectError: DB_FETCH_ERROR
         fetchResult = await fetchProjectsData(this._dbFetchService, {
-          filter,
+          pageStart: 1,
           pageSize: PAGE_SIZE,
+          isAscending: false,
+          filter,
         });
       } catch (err) {
         //  todo: log db error
