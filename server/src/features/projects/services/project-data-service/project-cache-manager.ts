@@ -7,7 +7,6 @@ import {
 } from "../cache";
 import { IProjectFilter } from "../repositories";
 import { buildProjectsData } from "./build-projects-data";
-import { getCacheFilename } from "./get-cache-filename";
 import {
   normalizeProjectError,
   ProjectError,
@@ -28,12 +27,42 @@ export class ProjectCacheManager {
   public constructor(projectCachePageService: ProjectCachePageService) {
     this._projectCachePageService = projectCachePageService;
   }
-  public setCachePath(newCachePath: string) {
-    return this._projectCachePageService.setCachePath(newCachePath);
-  }
 
-  public setFilename(newFilename: string) {
-    return this._projectCachePageService.setFilename(newFilename);
+  /**
+   * @description Asychronously attempts to load and return a backup cache.
+   * is not configured.
+   * todo: update docs
+   */
+  public async loadBackupCache(backupOptions: {
+    filename: string;
+  }): Promise<ProjectResult> {
+    //  todo: add logging
+    try {
+      const backupPath = process.env.DEFAULT_CACHE_PATH!;
+      if (!backupPath)
+        throw new EnvError({
+          name: "CACHE",
+          message: "Default cache path not configured.",
+        });
+
+      this.setCachePath(backupPath);
+
+      const { filename } = backupOptions;
+      this.setFilename(filename);
+
+      const loadResult = await this.loadCache();
+
+      if (loadResult.success) return loadResult;
+
+      throw loadResult.error; //  ProjectError type
+    } catch (err) {
+      const error = normalizeProjectError({
+        name: "LOAD_BACKUP_ERROR",
+        message: "Failed loading backup projects cache.",
+        err,
+      });
+      return fail(error);
+    }
   }
 
   /**
@@ -96,41 +125,11 @@ export class ProjectCacheManager {
     }
   }
 
-  /**
-   * @description Asychronously attempts to load and return a backup cache.
-   * is not configured.
-   * todo: update docs
-   */
-  private async loadBackupCache(): Promise<ProjectResult> {
-    //  todo: add logging
-    try {
-      const backupPath = process.env.DEFAULT_CACHE_PATH!;
-      if (!backupPath)
-        throw new EnvError({
-          name: "CACHE",
-          message: "Default cache path not configured.",
-        });
+  public setCachePath(newCachePath: string) {
+    return this._projectCachePageService.setCachePath(newCachePath);
+  }
 
-      this._projectCachePageService.setCachePath(backupPath);
-
-      const filename = getCacheFilename(
-        this._projectCachePageService.generateCacheFilename,
-        { isHardBackup: true }
-      );
-      this._projectCachePageService.setFilename(filename);
-
-      const loadResult = await this.loadCache();
-
-      if (loadResult.success) return loadResult;
-
-      throw loadResult.error; //  ProjectError type
-    } catch (err) {
-      const error = normalizeProjectError({
-        name: "LOAD_BACKUP_ERROR",
-        message: "Failed loading backup projects cache.",
-        err,
-      });
-      return fail(error);
-    }
+  public setFilename(newFilename: string) {
+    return this._projectCachePageService.setFilename(newFilename);
   }
 }
