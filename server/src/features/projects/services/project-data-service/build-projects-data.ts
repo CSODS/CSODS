@@ -3,6 +3,7 @@ import { CachePageRecord, IProjectCache, IProjectDetails } from "../../types";
 /**
  * @description A utility method that builds a new {@link IProjectCache} object
  * from the provided arguments..
+ * todo: update docs
  */
 export function buildProjectsData(params: {
   totalPages: number;
