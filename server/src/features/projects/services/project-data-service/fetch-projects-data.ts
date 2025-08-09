@@ -16,7 +16,10 @@ export type FetchResult =
   | ResultSuccess<ProjectsData>
   | ResultFail<ProjectError>;
 
-type FetchOptions = Parameters<ProjectDbFetchService["fetchProjectsPages"]>[0];
+type FetchOptions = {
+  includeCount?: boolean;
+} & Parameters<ProjectDbFetchService["fetchProjectsPages"]>[0];
+
 type RetryOptions = {
   maxRetries?: number;
   retryDelayMs?: number;
@@ -42,7 +45,7 @@ export async function fetchProjectsData(
   fetchOptions: FetchOptions,
   retryOptions?: RetryOptions
 ): Promise<FetchResult> {
-  const { filter, pageSize } = fetchOptions;
+  const { includeCount, filter, pageSize } = fetchOptions;
   const { maxRetries = 1, retryDelayMs = 1000 } = retryOptions ?? {};
 
   for (let retry = 0; retry < maxRetries; retry++) {
@@ -53,14 +56,16 @@ export async function fetchProjectsData(
       const delayMs = baseDelay * 2 ** (retry - 1) + jitter;
       if (retry > 0) await new Promise((r) => setTimeout(r, delayMs));
 
-      const projectsCount = await projectDbFetchService.fetchProjectsCount(
-        filter
-      );
-      if (projectsCount === 0)
-        throw new ProjectError({
-          name: "EMPTY_PROJECTS_TABLE_ERROR",
-          message: "The projects table is empty.",
-        });
+      let projectsCount = 0;
+
+      if (includeCount) {
+        projectsCount = await projectDbFetchService.fetchProjectsCount(filter);
+        if (projectsCount === 0)
+          throw new ProjectError({
+            name: "EMPTY_PROJECTS_TABLE_ERROR",
+            message: "The projects table is empty.",
+          });
+      }
 
       const totalPages = Math.ceil(projectsCount / pageSize);
       const pageRecord = await projectDbFetchService.fetchProjectsPages(
