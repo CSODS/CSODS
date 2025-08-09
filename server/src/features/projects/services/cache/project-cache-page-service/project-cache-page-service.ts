@@ -65,11 +65,13 @@ export class ProjectCachePageService extends ProjectCacheService {
       const now = new Date();
 
       const newCache: IProjectCache = {
+        //  ! top level deep copy
         ...cache,
+        lastAccessed: now,
+        viewCount: cache.viewCount + 1,
+        //  ! record deep copy
         cachePages: { ...cache.cachePages },
       };
-      newCache.lastAccessed = now;
-      newCache.viewCount += 1;
       newCache.cachePages[pageNumber] = cachePage;
 
       //  !Throws CacheError: INVALID_CACHE_ERROR or CACHE_PERSIST_ERROR
@@ -91,26 +93,24 @@ export class ProjectCachePageService extends ProjectCacheService {
    * @description Retrieves a specific page of project data from the cache.
    * Then updates the top-level and specific cache page’s `viewCount` and
    * `lastAccessed`.
-   * @throws {JsonError} `NULL_DATA_ERROR`
    * @throws {ProjectCachePageError} `PAGE_OUT_OF_BOUNDS_ERROR` | `MISSING_PAGE_ERROR`
    * @throws {CacheError} `INVALID_CACHE_ERROR` | `CACHE_PERSIST_ERROR`
    */
-  public async getCachePage(pageNumber: number): Promise<IProjectCachePage> {
+  public async getCachePage(
+    cache: IProjectCache,
+    pageNumber: number
+  ): Promise<IProjectCachePage> {
     const { _logger } = this;
-
     try {
-      //  ! may throw JsonError NULL_DATA_ERROR
-      this.assertCacheNotNull(this._cache);
-
       _logger.info(`[getCachePage] Attempting to retrieve page ${pageNumber}`);
 
-      if (pageNumber === 0 || pageNumber > this._cache.totalPages)
+      if (pageNumber === 0 || pageNumber > cache.totalPages)
         throw new ProjectCachePageError({
           name: "PAGE_OUT_OF_BOUNDS_ERROR",
           message: `Page ${pageNumber} is out of bounds.`,
         });
 
-      if (this.isPageMissingFromCache(this._cache.cachePages, pageNumber))
+      if (this.isPageMissingFromCache(cache.cachePages, pageNumber))
         throw new ProjectCachePageError({
           name: "MISSING_PAGE_ERROR",
           message: `Page ${pageNumber} is not in cache.`,
@@ -120,11 +120,10 @@ export class ProjectCachePageService extends ProjectCacheService {
         `[getCachePage] Success retrieving page ${pageNumber} from cache.`
       );
 
-      //  !Throws JsonError: NULL_DATA_ERROR
       //  !Throws CacheError: INVALID_CACHE_ERROR or CACHE_PERSIST_ERROR
-      await this.updateViewCount(pageNumber);
+      await this.updateViewCount(cache, pageNumber);
 
-      return this._cache.cachePages[pageNumber];
+      return cache.cachePages[pageNumber];
     } catch (err) {
       _logger.error("[getCachePage] Failed retrieving cache page: ", err);
       throw err; // * all errors controlled
@@ -134,22 +133,32 @@ export class ProjectCachePageService extends ProjectCacheService {
   /**
    * @description Updates view count and last access time for a cache page.
    * Persists the cache.
-   * @throws {JsonError} `NULL_DATA_ERROR`
    * @throws {CacheError} `INVALID_CACHE_ERROR` | `CACHE_PERSIST_ERROR`
    */
-  private async updateViewCount(pageNumber: number): Promise<number> {
-    //  !Throws JsonError: NULL_DATA_ERROR
-    this.assertCacheNotNull(this._cache);
+  private async updateViewCount(
+    cache: IProjectCache,
+    pageNumber: number
+  ): Promise<number> {
     const now = new Date();
-
-    this._cache.lastAccessed = now;
-    this._cache.viewCount += 1;
-
-    this._cache.cachePages[pageNumber].lastAccessed = now;
-    this._cache.cachePages[pageNumber].viewCount += 1;
+    const newCache: IProjectCache = {
+      //  ! top level deep copy
+      ...cache,
+      lastAccessed: now,
+      viewCount: cache.viewCount + 1,
+      //  ! record deep copy
+      cachePages: {
+        ...cache.cachePages,
+        [pageNumber]: {
+          //  ! deep copy the page being modified
+          ...cache.cachePages[pageNumber],
+          lastAccessed: now,
+          viewCount: cache.cachePages[pageNumber].viewCount + 1,
+        },
+      },
+    };
 
     //  !Throws CacheError: INVALID_CACHE_ERROR or CACHE_PERSIST_ERROR
-    this._cache = await this.persistCache(this._cache);
+    this._cache = await this.persistCache(newCache);
 
     return this._cache.cachePages[pageNumber].viewCount;
   }
