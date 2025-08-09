@@ -3,6 +3,7 @@ import * as lockfile from "proper-lockfile";
 import path from "path";
 import { OperationOptions } from "retry";
 import { FileLogger } from "@utils";
+import { JsonError, ErrorName } from "./json-file-service.error";
 
 export function createJsonFileService<TModel>(modelName: string) {
   return new JsonFileService<TModel>(modelName);
@@ -52,10 +53,8 @@ export class JsonFileService<TModel> {
    * @returns {Promise<string[]>} A promise that resolves to an array of filenames (optionally filtered).
    *
    * @example
-   * // Get all filenames
    * const allFiles = await getDirectoryFilenames('./my-folder');
    *
-   * // Get only .json files
    * const jsonFiles = await getDirectoryFilenames('./my-folder', (name) => name.endsWith('.json'));
    */
   public async getDirectoryFilenames(
@@ -66,10 +65,12 @@ export class JsonFileService<TModel> {
       array: string[]
     ) => boolean
   ): Promise<string[]> {
-    FileLogger.info(`[json] Retrieving filenames in directory ${directory}...`);
+    FileLogger.info(
+      `[getDirectoryFilenames] Retrieving filenames in directory ${directory}...`
+    );
     if (!existsSync(directory)) {
       FileLogger.warn(
-        "[json] Directory does not exist. Filename list is empty."
+        "[getDirectoryFilenames] Directory does not exist. Filename list is empty."
       );
       return [] as string[];
     }
@@ -78,12 +79,20 @@ export class JsonFileService<TModel> {
       let filenames = await fs.readdir(directory);
 
       if (filterCondition) {
-        filenames = filenames.filter(filterCondition);
+        filenames = (filenames ?? []).filter(filterCondition);
       }
-      FileLogger.info(`[json] Filenames retrieved: ${filenames}`);
+      FileLogger.info(
+        `[getDirectoryFilenames] Retrieved ${filenames.length} from ${directory}`
+      );
+      FileLogger.debug(
+        `[getDirectoryFilenames] Filenames: ${filenames.join(", ")}`
+      );
       return filenames;
     } catch (err) {
-      FileLogger.error("[json] Error retrieving filenames.", err);
+      FileLogger.error(
+        "[getDirectoryFilenames] Error retrieving filenames.",
+        err
+      );
       return [] as string[];
     }
   }
@@ -97,52 +106,57 @@ export class JsonFileService<TModel> {
    * @param {string} filePath - The directory path containing the JSON file.
    * @param {string} fileName - The name of the JSON file to be read.
    * @param {Function|null} [reviver] - An optional reviver function for custom JSON parsing.
-   * @returns {Promise<TModel|null>} A promise that resolves to the parsed object or `null` if reading or parsing fails.
+   * @returns {Promise<TModel>} A promise that resolves to the parsed object or `null` if reading or parsing fails.
+   * @throws {JsonError} Thrown with `name`:
+   * - `"JSON_FILE_NOT_FOUND_ERROR"`
+   * - `"NULL_DATA_ERROR"`
+   * - `"JSON_PARSE_ERROR"`
    */
   public async parseJsonFile(
     filePath: string,
     fileName: string,
     reviver: Parameters<typeof JSON.parse>[1] | null = null
-  ): Promise<TModel | null> {
+  ): Promise<TModel> {
     const fullPath = path.join(filePath, fileName);
-    FileLogger.info(`[json] Attempting to parse json file ${fullPath}...`);
-
-    //  Return null if the file does not exist.
-    if (!existsSync(fullPath)) {
-      FileLogger.warn(`[json] File does not exist. Unable to parse.`);
-      return null;
-    }
+    FileLogger.info(
+      `[parseJsonFile] Attempting to parse JSON file ${fullPath}...`
+    );
 
     let release: (() => Promise<void>) | null = null;
 
-    //  Read from json file
     try {
-      //  Attempt to read file.
+      if (!existsSync(fullPath))
+        throw new JsonError({
+          name: "JSON_FILE_NOT_FOUND_ERROR",
+          message: "File doesn't exist. Unable to parse.",
+        });
 
-      //  Lock file.
-      FileLogger.info("[json] Locking file...");
+      FileLogger.info("[parseJsonFile] Locking file...");
       release = await lockfile.lock(fullPath, { retries: this._retryOptions });
 
-      //  Parse Json as a TModel object and return.
-      //  Additionally apply a reviver function if provided.
       const jsonString = await fs.readFile(fullPath, "utf-8");
       const data: TModel = reviver
         ? JSON.parse(jsonString, reviver)
         : JSON.parse(jsonString);
 
+      //  !Throws JsonError: NULL_DATA_ERROR if data is null
       this.assertDataNotNull(data);
-      FileLogger.info("[json] Success parsing file.");
+      FileLogger.info("[parseJsonFile] Success parsing file.");
 
       return data;
     } catch (err) {
-      //  log error and return null.
-      FileLogger.error(`[json] Error parsing file.`, err);
-      return null;
+      FileLogger.error(`[parseJsonFile] Error parsing file.`, err);
+
+      if (err instanceof JsonError) throw err;
+      throw new JsonError({
+        name: "JSON_PARSE_ERROR",
+        message: "Failed to parse JSON file.",
+        cause: err,
+      });
     } finally {
       if (release) {
-        //  release lock.
         await release();
-        FileLogger.info("[json] Lock released.");
+        FileLogger.info("[parseJsonFile] Lock released.");
       }
     }
   }
@@ -155,7 +169,9 @@ export class JsonFileService<TModel> {
    * @param {string} fileName - The name of the JSON file to write.
    * @param {TModel|null} data - The object to serialize and write. Must not be `null`.
    * @returns {Promise<TModel>} A promise that resolves to the written data on success.
-   * @throws {Error} If the data is `null` or the write operation fails.
+   * @throws {JsonError} Thrown with `name`:
+   * - `"NULL_DATA_ERROR"`
+   * - `"JSON_WRITE_ERROR"`
    */
   public async writeToJsonFile(
     filePath: string,
@@ -166,37 +182,40 @@ export class JsonFileService<TModel> {
 
     try {
       FileLogger.info(
-        `[json] Attempting to write into ${fileName} located in ${filePath}...`
+        `[writeToJsonFile] Attempting to write into ${fileName} located in ${filePath}...`
       );
-      //  throw exception if data is null.
+      //  !throw JsonError: NULL_DATA_ERROR exception if data is null
       this.assertDataNotNull(data);
 
-      //  Attempt to write to json file.
       const dataJson = JSON.stringify(data, null, 2);
-      //  Ensure the directory exists. Create it recursively if it doesn't.
       await fs.mkdir(filePath, { recursive: true });
 
       const fullPath = path.join(filePath, fileName);
 
       if (existsSync(fullPath)) {
-        FileLogger.info("[json] Locking file...");
+        FileLogger.info("[writeToJsonFile] Locking file...");
         release = await lockfile.lock(fullPath, {
           retries: this._retryOptions,
         });
       }
 
-      //  attempt to write to file.
       await fs.writeFile(fullPath, dataJson);
-      FileLogger.info("[json] Write complete.");
+      FileLogger.info("[writeToJsonFile] Write complete.");
 
       return data!;
     } catch (err) {
-      FileLogger.error(`[json] Error writing file.`, err);
-      throw err;
+      FileLogger.error(`[writeToJsonFile] Error writing file.`, err);
+
+      if (err instanceof JsonError) throw err;
+      throw new JsonError({
+        name: "JSON_WRITE_ERROR",
+        message: "Failed to write JSON file.",
+        cause: err,
+      });
     } finally {
       if (release) {
         await release();
-        FileLogger.info("[json] Lock released.");
+        FileLogger.info("[writeToJsonFile] Lock released.");
       }
     }
   }
@@ -218,28 +237,30 @@ export class JsonFileService<TModel> {
     let release: (() => Promise<void>) | null = null;
     const fullPath = path.join(filePath, fileName);
 
-    FileLogger.info(`[json] Attempting to delete file at ${fullPath}...`);
+    FileLogger.info(
+      `[deleteJsonFile] Attempting to delete file at ${fullPath}...`
+    );
 
     if (!existsSync(fullPath)) {
-      FileLogger.warn(`[json] File at ${fullPath} does not exist.`);
+      FileLogger.warn(`[deleteJsonFile] File at ${fullPath} does not exist.`);
       return true;
     }
 
     try {
-      FileLogger.info("[json] Locking file...");
+      FileLogger.info("[deleteJsonFile] Locking file...");
       release = await lockfile.lock(fullPath, { retries: this._retryOptions });
 
       //  attempt to write to file.
       await fs.unlink(fullPath);
-      FileLogger.info("[json] Delete success.");
+      FileLogger.info("[deleteJsonFile] Delete success.");
       return true;
     } catch (err) {
-      FileLogger.error("[json] Error deleting file.", err);
+      FileLogger.error("[deleteJsonFile] Error deleting file.", err);
       return false;
     } finally {
       if (release) {
         await release();
-        FileLogger.info("[json] Lock released.");
+        FileLogger.info("[deleteJsonFile] Lock released.");
       }
     }
   }
@@ -253,13 +274,14 @@ export class JsonFileService<TModel> {
    * Used to enforce non-null guarantees before performing operations like serialization.
    *
    * @param {TModel|null} data - The data to check.
-   * @throws {TypeError} If the provided data is `null`.
+   * @throws {JsonError} Thrown with `name: "NULL_DATA_ERROR"`.
    */
   public assertDataNotNull(data: TModel | null): asserts data is TModel {
     if (data == null)
-      throw new TypeError(
-        `[json] Expected type ${this._modelName}, but received null.`
-      );
+      throw new JsonError({
+        name: "NULL_DATA_ERROR",
+        message: `Expected type ${this._modelName}, but received null.`,
+      });
   }
 
   /**
@@ -312,14 +334,18 @@ export class JsonFileService<TModel> {
       filenames: string[]
     ) => boolean
   ): Promise<void> {
-    FileLogger.info(`[json] Processing files from diretory ${directory}...`);
+    FileLogger.info(
+      `[processFiles] Processing files from diretory ${directory}...`
+    );
     const filenames = await this.getDirectoryFilenames(
       directory,
       filenameFilter
     );
 
     if (filenames.length === 0) {
-      FileLogger.warn("[json] Filename list is empty. Ending process...");
+      FileLogger.warn(
+        "[processFiles] Filename list is empty. Ending process..."
+      );
       return;
     }
 
@@ -331,7 +357,9 @@ export class JsonFileService<TModel> {
       await callbackFn(file);
     }
 
-    FileLogger.info(`[json] Finished processing ${filenames.length} files.`);
+    FileLogger.info(
+      `[processFiles] Finished processing ${filenames.length} files.`
+    );
   }
   //#endregion
 }
