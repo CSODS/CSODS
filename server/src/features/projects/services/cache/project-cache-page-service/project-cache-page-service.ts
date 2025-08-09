@@ -9,7 +9,7 @@ import {
   JsonError,
   JsonFileService,
 } from "@/services";
-import { ProjectCachePageError } from "@/features/projects/errors";
+import { ProjectCacheError } from "@/features/projects/errors";
 import { ProjectCacheService } from "../project-cache-service";
 
 export function createProjectCachePageService() {
@@ -105,13 +105,13 @@ export class ProjectCachePageService extends ProjectCacheService {
       _logger.info(`[getCachePage] Attempting to retrieve page ${pageNumber}`);
 
       if (pageNumber === 0 || pageNumber > cache.totalPages)
-        throw new ProjectCachePageError.ProjectCachePageError({
+        throw new ProjectCacheError.PageError({
           name: "PAGE_OUT_OF_BOUNDS_ERROR",
           message: `Page ${pageNumber} is out of bounds.`,
         });
 
       if (this.isPageMissingFromCache(cache.cachePages, pageNumber))
-        throw new ProjectCachePageError.ProjectCachePageError({
+        throw new ProjectCacheError.PageError({
           name: "MISSING_PAGE_ERROR",
           message: `Page ${pageNumber} is not in cache.`,
         });

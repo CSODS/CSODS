@@ -1,1 +1,1 @@
-export * as ProjectCachePageError from "./project-cache-page.error";
+export * as ProjectCacheError from "./project-cache-page.error";

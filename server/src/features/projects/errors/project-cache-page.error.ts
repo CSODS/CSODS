@@ -5,4 +5,4 @@ export type ErrorName =
   | "MISSING_PAGE_ERROR"
   | "PAGE_RETRIEVAL_ERROR";
 
-export class ProjectCachePageError extends ErrorBase<ErrorName> {}
+export class PageError extends ErrorBase<ErrorName> {}
