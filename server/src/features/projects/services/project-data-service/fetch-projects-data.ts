@@ -45,12 +45,9 @@ export async function fetchProjectsData(
   retryOptions?: RetryOptions
 ): Promise<FetchResult> {
   const { filter, pageSize } = fetchOptions;
-  const { maxRetries, retryDelayMs } = retryOptions ?? {
-    maxRetries: 1,
-    retryDelayMs: 3000,
-  };
+  const { maxRetries = 1, retryDelayMs = 1500 } = retryOptions ?? {};
 
-  for (let retry = 0; retry < (maxRetries ?? 1); retry++) {
+  for (let retry = 0; retry < maxRetries; retry++) {
     try {
       //  add a delay for retries
       if (retry > 0) await new Promise((r) => setTimeout(r, retryDelayMs));
