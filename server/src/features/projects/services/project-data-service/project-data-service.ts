@@ -20,15 +20,15 @@ import {
 import { ProjectResult } from "./project-data-service.type";
 
 export class ProjectDataService {
-  private _projectCachePageService: ProjectCachePageService;
-  private _projectDbFetchService: ProjectDbFetchService;
+  private _cachePageService: ProjectCachePageService;
+  private _dbFetchService: ProjectDbFetchService;
 
   public constructor(
     projectCachePageService: ProjectCachePageService,
     projectDbFetchService: ProjectDbFetchService
   ) {
-    this._projectCachePageService = projectCachePageService;
-    this._projectDbFetchService = projectDbFetchService;
+    this._cachePageService = projectCachePageService;
+    this._dbFetchService = projectDbFetchService;
   }
 
   /**
@@ -53,9 +53,9 @@ export class ProjectDataService {
    */
   public async getOrCreatePage(pageNumber: number) {
     try {
-      const cache = this._projectCachePageService.getCache();
+      const cache = this._cachePageService.getCache();
       //  ! throws TypeError if cache is null.
-      this._projectCachePageService.assertCacheNotNull(cache);
+      this._cachePageService.assertCacheNotNull(cache);
 
       //  ? get page from cache
       //  ? if out of bounds, return null
@@ -78,12 +78,12 @@ export class ProjectDataService {
   }): Promise<IProjectCachePage> {
     const { pageNumber, filter } = loadOptions;
     try {
-      const cache = this._projectCachePageService.getCache();
-      this._projectCachePageService.assertCacheNotNull(cache);
+      const cache = this._cachePageService.getCache();
+      this._cachePageService.assertCacheNotNull(cache);
 
       const pageSize = CACHE.PROJECT_CACHE.PAGE_SIZE;
       const projects = (
-        await this._projectDbFetchService.fetchProjectsPages({
+        await this._dbFetchService.fetchProjectsPages({
           pageStart: pageNumber,
           pageSize,
           filter,
@@ -99,7 +99,7 @@ export class ProjectDataService {
         projects,
       };
 
-      const storedPage = await this._projectCachePageService.storeCachePage({
+      const storedPage = await this._cachePageService.storeCachePage({
         pageNumber,
         cachePage,
       });
@@ -132,7 +132,7 @@ export class ProjectDataService {
     //  todo: maybe move filename generation and setting to resolveProjects to make this a pure public wrapper.
 
     const filename = getCacheFilename(
-      this._projectCachePageService.generateCacheFilename,
+      this._cachePageService.generateCacheFilename,
       {
         isToday: true,
         filter,
@@ -140,7 +140,7 @@ export class ProjectDataService {
       }
     );
 
-    this._projectCachePageService.setFilename(filename);
+    this._cachePageService.setFilename(filename);
     const resolveResult = await this.resolveProjects({ filter });
     return resolveResult;
   }
@@ -154,7 +154,7 @@ export class ProjectDataService {
   public async loadCache(): Promise<ProjectResult> {
     try {
       //  !throws CacheError: CACHE_PARSE_ERROR | INVALID_CACHE_ERROR.
-      const projects = await this._projectCachePageService.loadCache();
+      const projects = await this._cachePageService.loadCache();
       return success(projects);
     } catch (err) {
       //  todo: log error maybe
@@ -194,9 +194,7 @@ export class ProjectDataService {
       const newCache = buildProjectsData(createOptions);
 
       //  !throws CacheError: INVALID_CACHE_ERROR | CACHE_PERSIST_ERROR
-      const storedCache = await this._projectCachePageService.persistCache(
-        newCache
-      );
+      const storedCache = await this._cachePageService.persistCache(newCache);
       return success(storedCache);
     } catch (err) {
       //  todo: log error
@@ -236,7 +234,7 @@ export class ProjectDataService {
       let fetchResult;
       try {
         //  !Throws ProjectError: DB_FETCH_ERROR
-        fetchResult = await fetchProjectsData(this._projectDbFetchService, {
+        fetchResult = await fetchProjectsData(this._dbFetchService, {
           filter,
           pageSize: PAGE_SIZE,
         });
@@ -280,13 +278,13 @@ export class ProjectDataService {
           message: "Default cache path not configured.",
         });
 
-      this._projectCachePageService.setCachePath(backupPath);
+      this._cachePageService.setCachePath(backupPath);
 
       const filename = getCacheFilename(
-        this._projectCachePageService.generateCacheFilename,
+        this._cachePageService.generateCacheFilename,
         { isHardBackup: true }
       );
-      this._projectCachePageService.setFilename(filename);
+      this._cachePageService.setFilename(filename);
 
       const loadResult = await this.loadCache();
 
