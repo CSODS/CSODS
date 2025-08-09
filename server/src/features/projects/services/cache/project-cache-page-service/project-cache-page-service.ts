@@ -12,7 +12,7 @@ import {
 import { ProjectCacheService } from "../project-cache-service";
 import { ProjectCachePageError } from "./project-cache-page-service.error";
 
-export async function createProjectCachePageService() {
+export function createProjectCachePageService() {
   const jsonFileServiceInstance =
     createJsonFileService<IProjectCache>("IProjectCache");
   return new ProjectCachePageService(jsonFileServiceInstance);
