@@ -2,7 +2,6 @@ import { CACHE } from "@/data";
 import { fail, success } from "@/utils";
 import { IProjectCache, ProjectFilter } from "../../types";
 import { ProjectFilterUtil } from "../../utils";
-import { ProjectCachePageService } from "../cache";
 import { ProjectDbFetchService } from "../project-db-fetch.service";
 import { fetchProjectsData } from "./fetch-projects-data";
 import { getProjectDataKey } from "./get-project-data-key";
