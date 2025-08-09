@@ -1,6 +1,7 @@
 import { CACHE } from "@/data";
 import { fail, success } from "@/utils";
 import { IProjectCachePage, ProjectFilter } from "../../types";
+import { ProjectFilterUtil } from "../../utils";
 import { ProjectCachePageService } from "../cache";
 import { ProjectDbFetchService } from "../project-db-fetch.service";
 import { fetchProjectsData } from "./fetch-projects-data";
@@ -8,7 +9,6 @@ import { getProjectDataKey } from "./get-project-data-key";
 import { ProjectCacheManager } from "./project-cache-manager";
 import { ProjectError } from "./project-data-service.error";
 import { ProjectResult } from "./project-data-service.type";
-import { ProjectFilterUtil } from "../../utils";
 
 export class ProjectDataService {
   private _cacheManager: ProjectCacheManager;
