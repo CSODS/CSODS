@@ -129,7 +129,8 @@ export class ProjectCacheManager {
     return this._projectCachePageService.setCachePath(newCachePath);
   }
 
-  public setFilename(newFilename: string) {
-    return this._projectCachePageService.setFilename(newFilename);
+  public setFilename(key: string) {
+    const filename = this._projectCachePageService.generateCacheFilename(key);
+    return this._projectCachePageService.setFilename(key);
   }
 }

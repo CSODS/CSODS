@@ -151,68 +151,6 @@ export class ProjectDataService {
 
   /**
    * @async
-   * @description Wrapper for setCache method that returns `null` on failure.
-   * @returns
-   * todo: update docs
-   */
-  public async loadCache(): Promise<ProjectResult> {
-    try {
-      //  !throws CacheError: CACHE_PARSE_ERROR | INVALID_CACHE_ERROR.
-      const projects = await this._cachePageService.loadCache();
-      return success(projects);
-    } catch (err) {
-      //  todo: log error maybe
-      const error = new ProjectError({
-        name: "LOAD_FROM_CACHE_ERROR",
-        message: "Error loading projects from cache.",
-        cause: err,
-      });
-      return fail(error);
-    }
-  }
-
-  /**
-   * @description Asynchronously attempts to create a new cache by fetching data
-   * from the database, building a new cache, then persisting it to the cache
-   * storage with {@link ProjectCachePageService}.
-   * @param createOptions.currentDate The current date to denote when the cache
-   * is created.
-   * @param createOptions.pageSize Denotes how many projects will be stored in
-   * each page of the cache.
-   * @param createOptions.filter An optional {@link IProjectFilter} object for
-   * filtering the contents the database that will be stored in the cache.
-   * @returns A `Promise` that resolves to the {@link IProjectCache} or `null`
-   * if the cache creation fails.
-   * todo: update docs
-   */
-  public async createCache(createOptions: {
-    totalPages: number;
-    currentDate: Date;
-    pageRecord: Record<number, IProjectDetails[]>;
-  }): Promise<ProjectResult> {
-    try {
-      //  todo: add logging
-      //  !throws ProjectError: FETCH_ERROR
-      //  todo: pipeline this with async/await array destructuring for fetchCacheData results
-
-      const newCache = buildProjectsData(createOptions);
-
-      //  !throws CacheError: INVALID_CACHE_ERROR | CACHE_PERSIST_ERROR
-      const storedCache = await this._cachePageService.persistCache(newCache);
-      return success(storedCache);
-    } catch (err) {
-      //  todo: log error
-      const error = normalizeProjectError({
-        name: "CREATE_NEW_CACHE_ERROR",
-        message: "Error creating new projects cache.",
-        err,
-      });
-      return fail(error);
-    }
-  }
-
-  /**
-   * @async
    * @description Asynchronously attempts to load the cache into memory. If the
    * operation fails, attempts to create a new cache for up to three times if
    * needed.
@@ -227,7 +165,7 @@ export class ProjectDataService {
   }: {
     filter?: IProjectFilter;
   }): Promise<ProjectResult> {
-    const loadResult = await this.loadCache();
+    const loadResult = await this._cacheManager.loadCache();
 
     if (loadResult.success) return loadResult;
 
@@ -247,7 +185,7 @@ export class ProjectDataService {
         break;
       }
 
-      const createResult = await this.createCache({
+      const createResult = await this._cacheManager.createCache({
         currentDate: new Date(),
         ...fetchResult,
       });
