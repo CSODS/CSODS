@@ -32,10 +32,35 @@ export class ProjectCacheManager {
   }
 
   /**
+   * @description wrapper for `getCachePage` method that returns a `ProjectResult` type.
+   * @param cache
+   * @param pageNumber
+   * @returns
+   */
+  public async getPage(
+    cache: IProjectCache,
+    pageNumber: number
+  ): Promise<ProjectPageResult> {
+    try {
+      //  !Throws ProjectCachePageError: PAGE_OUT_OF_BOUNDS_ERROR | MISSING_PAGE_ERROR
+      //  !Throws CacheError: INVALID_CACHE_ERROR | CACHE_PERSIST_ERROR
+      const page = await this._cachePageService.getCachePage(cache, pageNumber);
+      return success(page);
+    } catch (err) {
+      const error = normalizeProjectError({
+        name: "PAGE_RETRIEVAL_ERROR",
+        message: "Failed retrieving page from cache.",
+        err,
+      });
+      return fail(error);
+    }
+  }
+  /**
    * @description Asynchronously stores a new page to the cache.
    * @param page
    * @returns
    * todo: update docs
+   * todo: set filename when creating
    */
   public async createAndStorePage(page: {
     currentDate: Date;
