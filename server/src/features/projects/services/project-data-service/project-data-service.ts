@@ -80,13 +80,12 @@ export class ProjectDataService {
       const cache = loadResult.result;
 
       const pageSize = CACHE.PROJECT_CACHE.PAGE_SIZE;
-      const projects = (
-        await this._dbFetchService.fetchProjectsPages({
-          pageStart: pageNumber,
-          pageSize,
-          filter,
-        })
-      )[pageNumber];
+      const { pageRecord } = await fetchProjectsData(this._dbFetchService, {
+        pageStart: pageNumber,
+        pageSize,
+        filter,
+      });
+      const projects = pageRecord[pageNumber];
 
       const now = new Date();
       const cachePage: IProjectCachePage = {
