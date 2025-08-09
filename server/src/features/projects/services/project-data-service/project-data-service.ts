@@ -75,37 +75,38 @@ export class ProjectDataService {
 
     //  error loading projects.
     if (!loadResult.success) return loadResult;
+    const cache = loadResult.result;
 
+    //  todo: encapsulate try logic in helper
+    let projects;
     try {
-      const cache = loadResult.result;
-
       const pageSize = CACHE.PROJECT_CACHE.PAGE_SIZE;
       const { pageRecord } = await fetchProjectsData(this._dbFetchService, {
         pageStart: pageNumber,
         pageSize,
         filter,
       });
-      const projects = pageRecord[pageNumber];
-
-      const now = new Date();
-      const cachePage: IProjectCachePage = {
-        createdOn: now,
-        lastAccessed: now,
-        viewCount: 1,
-        totalPages: cache.totalPages,
-        projects,
-      };
-
-      const storedPage = await this._cachePageService.storeCachePage({
-        pageNumber,
-        cachePage,
-      });
-
-      return success(storedPage);
+      projects = pageRecord[pageNumber];
     } catch (err) {
-      //  todo: handle errors
+      //  todo: log db error and retry
       throw err;
     }
+
+    const now = new Date();
+    const cachePage: IProjectCachePage = {
+      createdOn: now,
+      lastAccessed: now,
+      viewCount: 1,
+      totalPages: cache.totalPages,
+      projects,
+    };
+
+    const result = await this._cacheManager.storeCachePage({
+      pageNumber,
+      cachePage,
+    });
+
+    return result;
   }
   /**
    * @async
