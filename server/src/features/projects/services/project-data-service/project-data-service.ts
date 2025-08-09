@@ -66,7 +66,7 @@ export class ProjectDataService {
    * @param loadOptions
    * @returns
    */
-  public async loadNewCachePage(loadOptions: {
+  public async createNewPage(loadOptions: {
     pageNumber: number;
     filter?: ProjectFilter;
   }): Promise<IProjectCachePage> {
