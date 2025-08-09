@@ -1,5 +1,5 @@
 import { EnvError } from "@/error";
-import { IProjectDetails } from "@/features/projects/types";
+import { IProjectCachePage, IProjectDetails } from "@/features/projects/types";
 import { fail, success } from "@/utils";
 import {
   createProjectCachePageService,
@@ -10,7 +10,7 @@ import {
   normalizeProjectError,
   ProjectError,
 } from "./project-data-service.error";
-import { ProjectResult } from "./project-data-service.type";
+import { ProjectPageResult, ProjectResult } from "./project-data-service.type";
 
 export function createProjectCacheManager() {
   const cachePageService = createProjectCachePageService();
@@ -25,6 +25,30 @@ export class ProjectCacheManager {
 
   public constructor(projectCachePageService: ProjectCachePageService) {
     this._cachePageService = projectCachePageService;
+  }
+
+  /**
+   * @description Asynchronously stores a new page to the cache.
+   * @param page
+   * @returns
+   * todo: update docs
+   */
+  public async storeCachePage(page: {
+    pageNumber: number;
+    cachePage: IProjectCachePage;
+  }): Promise<ProjectPageResult> {
+    try {
+      //  !Throws JsonError: NULL_DATA ERROR or CacheError: INVALID_CACHE_ERROR | CACHE_PERSIST_ERROR
+      const storedPage = await this._cachePageService.storeCachePage(page);
+      return success(storedPage);
+    } catch (err) {
+      const error = normalizeProjectError({
+        name: "STORE_CACHE_PAGE_ERROR",
+        message: `Error storing new cache page with page number: ${page.pageNumber}`,
+        err,
+      });
+      return fail(error);
+    }
   }
 
   /**
