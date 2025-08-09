@@ -34,7 +34,7 @@ export class ProjectCacheManager {
    * todo: update docs
    */
   public async loadBackupCache(backupOptions: {
-    filename: string;
+    backupKey: string;
   }): Promise<ProjectResult> {
     //  todo: add logging
     try {
@@ -47,8 +47,8 @@ export class ProjectCacheManager {
 
       this.setCachePath(backupPath);
 
-      const { filename } = backupOptions;
-      this.setFilename(filename);
+      const { backupKey } = backupOptions;
+      this.setFilename(backupKey);
 
       const loadResult = await this.loadCache();
 
