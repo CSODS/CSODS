@@ -44,9 +44,11 @@ export class ProjectCachePageService extends ProjectCacheService {
    * @throws {CacheError} `INVALID_CACHE_ERROR` | `CACHE_PERSIST_ERROR`
    */
   public async storeCachePage({
+    cache,
     pageNumber,
     cachePage,
   }: {
+    cache: IProjectCache;
     pageNumber: number;
     cachePage: IProjectCachePage;
   }): Promise<IProjectCachePage> {
@@ -58,16 +60,21 @@ export class ProjectCachePageService extends ProjectCacheService {
       );
 
       //  !Throws JsonError: NULL_DATA_ERROR
-      this.assertCacheNotNull(this._cache);
+      this.assertCacheNotNull(cache);
 
       const now = new Date();
 
-      this._cache.lastAccessed = now;
-      this._cache.viewCount += 1;
-      this._cache.cachePages[pageNumber] = cachePage;
+      const newCache: IProjectCache = {
+        ...cache,
+        cachePages: { ...cache.cachePages },
+      };
+      newCache.lastAccessed = now;
+      newCache.viewCount += 1;
+      newCache.cachePages[pageNumber] = cachePage;
 
       //  !Throws CacheError: INVALID_CACHE_ERROR or CACHE_PERSIST_ERROR
-      const storedCache = await this.persistCache(this._cache);
+      const storedCache = await this.persistCache(newCache);
+      this._cache = newCache;
 
       _logger.info(
         `[storeCachePage] Success storing page: ${pageNumber} in cache: ${_filename}.`
@@ -75,13 +82,6 @@ export class ProjectCachePageService extends ProjectCacheService {
 
       return storedCache.cachePages[pageNumber];
     } catch (err) {
-      if (
-        this._cache !== null &&
-        !this.isPageMissingFromCache(this._cache.cachePages, pageNumber)
-      ) {
-        delete this._cache.cachePages[pageNumber];
-      }
-
       _logger.error("[storeCachePage] Failed storing new cache page: ", err);
       throw err; //  * all errors controlled
     }

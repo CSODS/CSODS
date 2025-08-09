@@ -54,6 +54,7 @@ export class ProjectCacheManager {
       };
       //  !Throws JsonError: NULL_DATA ERROR or CacheError: INVALID_CACHE_ERROR | CACHE_PERSIST_ERROR
       const storedPage = await this._cachePageService.storeCachePage({
+        cache,
         pageNumber,
         cachePage,
       });
