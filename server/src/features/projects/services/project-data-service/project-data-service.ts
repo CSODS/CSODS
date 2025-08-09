@@ -73,8 +73,7 @@ export class ProjectDataService {
     const { pageNumber, filter } = loadOptions;
     const loadResult = await this.getProjects(filter);
 
-    //  error loading projects.
-    if (!loadResult.success) return loadResult;
+    if (!loadResult.success) return loadResult; //  error loading projects. return fail result.
     const cache = loadResult.result;
 
     const fetchResult = await this.fetchProjects(pageNumber, filter);
@@ -182,11 +181,15 @@ export class ProjectDataService {
   /** Wrapper for {@link fetchProjectsData} utility function. */
   private async fetchProjects(pageNumber: number, filter?: ProjectFilter) {
     const pageSize = CACHE.PROJECT_CACHE.PAGE_SIZE;
-    return await fetchProjectsData(this._dbFetchService, {
-      pageStart: pageNumber,
-      pageSize,
-      isAscending: false,
-      filter,
-    });
+    return await fetchProjectsData(
+      this._dbFetchService,
+      {
+        pageStart: pageNumber,
+        pageSize,
+        isAscending: false,
+        filter,
+      },
+      { maxRetries: 3, retryDelayMs: 1000 }
+    );
   }
 }
