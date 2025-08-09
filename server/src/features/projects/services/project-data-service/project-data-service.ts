@@ -1,24 +1,14 @@
 import { CACHE } from "@/data";
-import { EnvError } from "@/error";
 import { fail, success } from "@/utils";
-import {
-  CachePageRecord,
-  IProjectCache,
-  IProjectCachePage,
-  IProjectDetails,
-} from "../../types";
+import { IProjectCachePage, ProjectFilter } from "../../types";
 import { ProjectCachePageService } from "../cache";
 import { ProjectDbFetchService } from "../project-db-fetch.service";
-import { IProjectFilter, LegacyProjectFilter } from "../repositories";
-import { buildProjectsData } from "./build-projects-data";
 import { fetchProjectsData } from "./fetch-projects-data";
-import { getCacheFilename, getKey } from "./get-cache-filename";
+import { getProjectDataKey } from "./get-project-data-key";
 import { ProjectCacheManager } from "./project-cache-manager";
-import {
-  normalizeProjectError,
-  ProjectError,
-} from "./project-data-service.error";
+import { ProjectError } from "./project-data-service.error";
 import { ProjectResult } from "./project-data-service.type";
+import { ProjectFilterUtil } from "../../utils";
 
 export class ProjectDataService {
   private _cacheManager: ProjectCacheManager;
@@ -78,7 +68,7 @@ export class ProjectDataService {
    */
   public async loadNewCachePage(loadOptions: {
     pageNumber: number;
-    filter?: IProjectFilter;
+    filter?: ProjectFilter;
   }): Promise<IProjectCachePage> {
     const { pageNumber, filter } = loadOptions;
     try {
@@ -117,36 +107,18 @@ export class ProjectDataService {
   /**
    * @async
    * @description Asynchronously retrieves data from a resolved cache whose key is
-   * generated from an {@link IProjectFilter} object. If both cache loading and
+   * generated from an {@link ProjectFilter} object. If both cache loading and
    * creation fails, attempts to load data from a backup. The final value is
    * then returned.
-   * @param filterOptions Optional filtering parameters used to narrow down cached
+   * @param rawFilter Optional filtering parameters used to narrow down cached
    * projects.
    * @returns A `Promise` that resolves to the loaded cache, or `null` if no results
    * were loaded from an active filter, or all loading attempts failed.
    * todo: update docs
    */
-  public async getProjects(
-    filterOptions?: IProjectFilter
-  ): Promise<ProjectResult> {
-    //  todo: replace with static class method implementation for better readability
-    let filter: LegacyProjectFilter | undefined = new LegacyProjectFilter(
-      filterOptions
-    );
-    filter = filter.isEmpty() ? undefined : filter;
+  public async getProjects(rawFilter?: ProjectFilter): Promise<ProjectResult> {
+    const filter = ProjectFilterUtil.normalizeFilter(rawFilter);
 
-    //  todo: maybe move filename generation and setting to resolveProjects to make this a pure public wrapper.
-
-    const filename = getCacheFilename(
-      this._cachePageService.generateCacheFilename,
-      {
-        isToday: true,
-        filter,
-        isFiltered: !!filter,
-      }
-    );
-
-    this._cachePageService.setFilename(filename);
     const resolveResult = await this.resolveProjects({ filter });
     return resolveResult;
   }
@@ -165,8 +137,15 @@ export class ProjectDataService {
   private async resolveProjects({
     filter,
   }: {
-    filter?: IProjectFilter;
+    filter?: ProjectFilter;
   }): Promise<ProjectResult> {
+    const dataKey = getProjectDataKey({
+      isToday: true,
+      filter,
+      isFiltered: !!filter,
+    });
+
+    this._cacheManager.setFilename(dataKey);
     const loadResult = await this._cacheManager.loadCache();
 
     if (loadResult.success) return loadResult;
@@ -195,7 +174,7 @@ export class ProjectDataService {
       if (createResult.success) return createResult;
     }
 
-    const backupKey = getKey({ isHardBackup: true });
+    const backupKey = getProjectDataKey({ isHardBackup: true });
     //  !Throws EnvError: CACHE | returns null on failure.
     const backupResult = await this._cacheManager.loadBackupCache({
       backupKey,
