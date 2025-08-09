@@ -41,23 +41,24 @@ export class ProjectDataService {
   }
 
   /**
-   * ! this method must be called after loading the cache into the memory.
    * @description
    * @param pageNumber
    */
-  public async getOrCreatePage(pageNumber: number) {
-    try {
-      const cache = this._cachePageService.getCache();
-      //  ! throws TypeError if cache is null.
-      this._cachePageService.assertCacheNotNull(cache);
+  public async getOrCreatePage(
+    pageNumber: number,
+    rawFilter: ProjectFilter
+  ): Promise<ProjectPageResult> {
+    const resultRecord = await this.getProjects(rawFilter);
 
-      //  ? get page from cache
-      //  ? if out of bounds, return null
-      //  ? if missing page and cache is backup, return null
-      //  ? if missing page and cache isn't backup, load new page into cache.
-      //  ? update view count
-      //  ? return cache page.
-    } catch (err) {}
+    if (!resultRecord.success) return resultRecord; // failed loading projects. return result fail object.
+
+    const cache = resultRecord.result;
+    const pageResult = await this._cacheManager.getPage(cache, pageNumber);
+
+    if (!pageResult.success && pageResult.error.name === "MISSING_PAGE_ERROR")
+      return await this.createNewPage({ cache, pageNumber, filter: rawFilter });
+
+    return pageResult;
   }
 
   /**
@@ -134,15 +135,9 @@ export class ProjectDataService {
 
     this._cacheManager.setFilename(dataKey);
     const loadResult = await this._cacheManager.loadCache();
+    if (loadResult.success) return loadResult; //  success loading cache.
 
-    if (loadResult.success) return loadResult;
-
-    const { PAGE_SIZE } = CACHE.PROJECT_CACHE;
-
-    //  todo: make retries configurable via a constant in CACHE.PROJECT_CACHE.
-    //  todo: add a short backoff between attempts to prevent hammering the DB if something is wrong.
     const fetchResult = await this.fetchProjects({ pageNumber: 1, filter });
-
     if (fetchResult.success)
       //  todo: add logging for each retry
       for (let i = 0; i < 3; i++) {
@@ -151,7 +146,7 @@ export class ProjectDataService {
           ...fetchResult.result,
         });
 
-        if (createResult.success) return createResult;
+        if (createResult.success) return createResult; //  success creating cache.
       }
 
     const backupKey = getProjectDataKey({ isHardBackup: true });
@@ -160,7 +155,7 @@ export class ProjectDataService {
       backupKey,
     });
 
-    if (backupResult.success) return backupResult;
+    if (backupResult.success) return backupResult; //  success loading backup.
 
     const error = new ProjectError({
       name: "RESOLVE_PROJECTS_ERROR",
