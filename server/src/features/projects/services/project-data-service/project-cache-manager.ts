@@ -35,6 +35,7 @@ export class ProjectCacheManager {
    */
   public async createAndStorePage(page: {
     pageNumber: number;
+    pageRecord: Record<number, IProjectDetails[]>;
     cachePage: IProjectCachePage;
   }): Promise<ProjectPageResult> {
     try {
