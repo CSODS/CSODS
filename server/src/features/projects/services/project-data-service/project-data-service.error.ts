@@ -12,7 +12,9 @@ export class ProjectError extends ErrorBase<ErrorName> {}
 
 /**
  * @description Normalizes err objects in catch blocks specifically for
- * `ProjectDataService`.
+ * `ProjectDataService`. If the `err` param provider is already an instance
+ * of the {@link ProjectError}, returns it directly. If not, wraps it in a new
+ * instance of the {@link ProjectError}.
  * !DO NOT USE THIS FOR ANY OTHER CLASS.
  * @param name The error name. See {@link ErrorName} for possible values.
  * @param message A human readable error message.
