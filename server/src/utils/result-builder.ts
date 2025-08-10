@@ -1,15 +1,19 @@
 import { ErrorBase } from "@/error";
-import { ResultBase, ResultFail, ResultSuccess } from "@/types";
+import { ResultFail, ResultSuccess } from "@/types";
 
 /**
  * @description Returns a success result object with the given payload.
  * @param result The successful result data.
  * @returns An object with shape `{ success: true, result: TResult }`.
  */
-export function success<TResult>(result: TResult): ResultSuccess<TResult> {
+export function success<TResult, TSource extends string = string>(
+  result: TResult,
+  source?: TSource
+): ResultSuccess<TResult, TSource> {
   return {
     success: true,
     result,
+    source,
   };
 }
 
