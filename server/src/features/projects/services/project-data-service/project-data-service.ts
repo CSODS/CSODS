@@ -48,7 +48,8 @@ export class ProjectDataService {
     pageNumber: number,
     rawFilter: ProjectFilter
   ): Promise<ProjectPageResult> {
-    const resultRecord = await this.getProjects(rawFilter);
+    const filter = ProjectFilterUtil.normalizeFilter(rawFilter); //  normalize filter early
+    const resultRecord = await this.getProjects(filter);
 
     if (!resultRecord.success) return resultRecord; // failed loading projects. return result fail object.
 
@@ -56,7 +57,7 @@ export class ProjectDataService {
     const pageResult = await this._cacheManager.getPage(cache, pageNumber);
 
     if (!pageResult.success && pageResult.error.name === "MISSING_PAGE_ERROR")
-      return await this.createNewPage({ cache, pageNumber, filter: rawFilter });
+      return await this.createNewPage({ cache, pageNumber, filter });
 
     return pageResult;
   }
