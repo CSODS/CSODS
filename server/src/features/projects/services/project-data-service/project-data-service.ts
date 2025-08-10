@@ -2,32 +2,26 @@ import { CACHE } from "@/data";
 import { fail } from "@/utils";
 import { IProjectCache, ProjectFilter } from "../../types";
 import { ProjectFilterUtil } from "../../utils";
-import {
-  createProjectDbFetchService,
-  ProjectDbFetchService,
-} from "../project-db-fetch.service";
+import * as FetchService from "../project-db-fetch.service";
 import { fetchProjectsData } from "./fetch-projects-data";
 import { getProjectDataKey } from "./get-project-data-key";
-import {
-  createProjectCacheManager,
-  ProjectCacheManager,
-} from "./project-cache-manager";
+import * as CacheManager from "./project-cache-manager";
 import { ProjectError } from "./project-data-service.error";
 import { ProjectPageResult, ProjectResult } from "./project-data-service.type";
 
 export async function createProjectDataService() {
-  const cacheManager = createProjectCacheManager();
-  const dbFetchService = await createProjectDbFetchService();
+  const cacheManager = CacheManager.createProjectCacheManager();
+  const dbFetchService = await FetchService.createProjectDbFetchService();
   return new ProjectDataService(cacheManager, dbFetchService);
 }
 
 export class ProjectDataService {
-  private _cacheManager: ProjectCacheManager;
-  private _dbFetchService: ProjectDbFetchService;
+  private _cacheManager: CacheManager.ProjectCacheManager;
+  private _dbFetchService: FetchService.ProjectDbFetchService;
 
   public constructor(
-    projectCacheManager: ProjectCacheManager,
-    projectDbFetchService: ProjectDbFetchService
+    projectCacheManager: CacheManager.ProjectCacheManager,
+    projectDbFetchService: FetchService.ProjectDbFetchService
   ) {
     this._cacheManager = projectCacheManager;
     this._dbFetchService = projectDbFetchService;
