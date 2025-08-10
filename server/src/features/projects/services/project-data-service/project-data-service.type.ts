@@ -6,6 +6,6 @@ export type Source = "DATABASE" | "JSON_CACHE";
 export type ProjectResult =
   | ResultSuccess<IProjectCache, Source>
   | ResultFail<ProjectError>;
-export type ProjecgtPageResult =
+export type ProjectPageResult =
   | ResultSuccess<IProjectCachePage, Source>
   | ResultFail<ProjectError>;
