@@ -45,7 +45,7 @@ export class ProjectCacheManager {
       //  !Throws ProjectCachePageError: PAGE_OUT_OF_BOUNDS_ERROR | MISSING_PAGE_ERROR
       //  !Throws CacheError: INVALID_CACHE_ERROR | CACHE_PERSIST_ERROR
       const page = await this._cachePageService.getCachePage(cache, pageNumber);
-      return success(page);
+      return success(page, "JSON_CACHE");
     } catch (err) {
       const error = normalizeProjectError({
         name: "PAGE_RETRIEVAL_ERROR",
@@ -118,7 +118,7 @@ export class ProjectCacheManager {
 
       const loadResult = await this.loadCache();
 
-      if (loadResult.success) return loadResult;
+      if (loadResult.success) return { ...loadResult, source: "BACKUP_CACHE" };
 
       throw loadResult.error; //  ProjectError type
     } catch (err) {
@@ -141,7 +141,7 @@ export class ProjectCacheManager {
     try {
       //  !throws CacheError: CACHE_PARSE_ERROR | INVALID_CACHE_ERROR.
       const projects = await this._cachePageService.loadCache();
-      return success(projects);
+      return success(projects, "JSON_CACHE");
     } catch (err) {
       //  todo: log error maybe
       const error = new ProjectError({
