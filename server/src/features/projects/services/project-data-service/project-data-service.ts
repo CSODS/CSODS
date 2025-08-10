@@ -1,5 +1,5 @@
 import { CACHE } from "@/data";
-import { fail } from "@/utils";
+import { fail, success } from "@/utils";
 import { IProjectCache, ProjectFilter } from "../../types";
 import { ProjectFilterUtil } from "../../utils";
 import * as FetchService from "../project-db-fetch.service";
@@ -40,9 +40,19 @@ export class ProjectDataService {
     const pageResult = await this.getOrCreatePage(pageNumber, rawFilter);
 
     if (!pageResult.success) return pageResult; //  fail retrieving page.
-    return pageResult.result.projects.find(
+    const project = pageResult.result.projects.find(
       (project) => project.project.projectId === projectId
     );
+
+    return project
+      ? success(project, pageResult.source)
+      : fail(
+          new ProjectError({
+            name: "MISSING_PROJECT_IN_PAGE_ERROR",
+            message:
+              "Project with specified id could not be found in the projects page.",
+          })
+        );
   }
 
   /**
