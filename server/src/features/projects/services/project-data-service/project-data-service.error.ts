@@ -27,6 +27,7 @@ export class ProjectError extends ErrorBase<ErrorName> {}
  * @param message A human readable error message.
  * @param err The err argument in a catch block.
  * @returns An instance of the {@link ProjectError} class.
+ * todo: update docs
  */
 export function normalizeProjectError<E extends ErrorName>({
   name,
@@ -37,6 +38,12 @@ export function normalizeProjectError<E extends ErrorName>({
   message: string;
   err: unknown;
 }): ProjectError {
+  const isPageError = err instanceof ProjectCacheError.PageError;
+  const isMissingPage = isPageError && err.name === "MISSING_PAGE_ERROR";
+
+  //  todo: improve stack trace preservation here.
+  if (isMissingPage) return new ProjectError({ ...err, cause: err.stack });
+
   return err instanceof ProjectError
     ? err
     : new ProjectError({
