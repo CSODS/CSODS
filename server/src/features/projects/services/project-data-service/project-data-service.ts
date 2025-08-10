@@ -2,12 +2,24 @@ import { CACHE } from "@/data";
 import { fail } from "@/utils";
 import { IProjectCache, ProjectFilter } from "../../types";
 import { ProjectFilterUtil } from "../../utils";
-import { ProjectDbFetchService } from "../project-db-fetch.service";
+import {
+  createProjectDbFetchService,
+  ProjectDbFetchService,
+} from "../project-db-fetch.service";
 import { fetchProjectsData } from "./fetch-projects-data";
 import { getProjectDataKey } from "./get-project-data-key";
-import { ProjectCacheManager } from "./project-cache-manager";
+import {
+  createProjectCacheManager,
+  ProjectCacheManager,
+} from "./project-cache-manager";
 import { ProjectError } from "./project-data-service.error";
 import { ProjectPageResult, ProjectResult } from "./project-data-service.type";
+
+export async function createProjectDataService() {
+  const cacheManager = createProjectCacheManager();
+  const dbFetchService = await createProjectDbFetchService();
+  return new ProjectDataService(cacheManager, dbFetchService);
+}
 
 export class ProjectDataService {
   private _cacheManager: ProjectCacheManager;
