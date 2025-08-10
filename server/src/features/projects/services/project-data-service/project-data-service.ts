@@ -55,9 +55,17 @@ export class ProjectDataService {
 
     const cache = resultRecord.result;
     const pageResult = await this._cacheManager.getPage(cache, pageNumber);
+    if (!pageResult.success && pageResult.error.name === "MISSING_PAGE_ERROR") {
+      if (resultRecord.source === "BACKUP_CACHE") {
+        const error = new ProjectError({
+          name: "BACKUP_CACHE_READONLY_MODIFICATION_ERROR",
+          message: "Back up cache is readonly and cannot be modified.",
+        });
+        return fail(error);
+      }
 
-    if (!pageResult.success && pageResult.error.name === "MISSING_PAGE_ERROR")
       return await this.createNewPage({ cache, pageNumber, filter });
+    }
 
     return pageResult;
   }
