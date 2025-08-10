@@ -121,9 +121,9 @@ export class ProjectCachePageService extends ProjectCacheService {
       );
 
       //  !Throws CacheError: INVALID_CACHE_ERROR or CACHE_PERSIST_ERROR
-      await this.updateViewCount(cache, pageNumber);
+      const updatedCache = await this.updateViewCount(cache, pageNumber);
 
-      return cache.cachePages[pageNumber];
+      return updatedCache.cachePages[pageNumber];
     } catch (err) {
       _logger.error("[getCachePage] Failed retrieving cache page: ", err);
       throw err; // * all errors controlled
@@ -138,7 +138,7 @@ export class ProjectCachePageService extends ProjectCacheService {
   private async updateViewCount(
     cache: IProjectCache,
     pageNumber: number
-  ): Promise<number> {
+  ): Promise<IProjectCache> {
     const now = new Date();
     const newCache: IProjectCache = {
       //  ! top level deep copy
@@ -160,7 +160,7 @@ export class ProjectCachePageService extends ProjectCacheService {
     //  !Throws CacheError: INVALID_CACHE_ERROR or CACHE_PERSIST_ERROR
     this._cache = await this.persistCache(newCache);
 
-    return this._cache.cachePages[pageNumber].viewCount;
+    return this._cache;
   }
 
   /** Checks whether a given page number does not exist in the cache. */
