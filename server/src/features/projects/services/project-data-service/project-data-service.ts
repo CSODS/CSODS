@@ -163,7 +163,11 @@ export class ProjectDataService {
     const loadResult = await this._cacheManager.loadCache();
     if (loadResult.success) return loadResult; //  success loading cache.
 
-    const fetchResult = await this.fetchProjects({ pageNumber: 1, filter });
+    const fetchResult = await this.fetchProjects({
+      includeCount: true,
+      pageNumber: 1,
+      filter,
+    });
     if (fetchResult.success)
       //  todo: add logging for each retry
       for (let i = 0; i < 3; i++) {
