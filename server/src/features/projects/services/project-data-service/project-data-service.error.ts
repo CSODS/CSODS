@@ -12,6 +12,7 @@ export type ErrorName =
   | "CREATE_NEW_CACHE_ERROR"
   | "STORE_CACHE_PAGE_ERROR"
   | "BACKUP_CACHE_READONLY_MODIFICATION_ERROR"
+  | "MISSING_PROJECT_IN_PAGE_ERROR"
   | ProjectCacheError.ErrorName;
 
 export class ProjectError extends ErrorBase<ErrorName> {}
