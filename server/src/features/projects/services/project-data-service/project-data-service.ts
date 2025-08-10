@@ -1,5 +1,5 @@
 import { CACHE } from "@/data";
-import { fail, success } from "@/utils";
+import { fail } from "@/utils";
 import { IProjectCache, ProjectFilter } from "../../types";
 import { ProjectFilterUtil } from "../../utils";
 import { ProjectDbFetchService } from "../project-db-fetch.service";
@@ -91,7 +91,7 @@ export class ProjectDataService {
       projects: pageRecord[pageNumber],
     });
 
-    return result;
+    return result.success ? { ...result, source: "DATABASE" } : result;
   }
   /**
    * @async
@@ -147,7 +147,8 @@ export class ProjectDataService {
           ...fetchResult.result,
         });
 
-        if (createResult.success) return createResult; //  success creating cache.
+        if (createResult.success)
+          return { ...createResult, source: "DATABASE" }; //  success creating cache from database.
       }
 
     const backupKey = getProjectDataKey({ isHardBackup: true });
