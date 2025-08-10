@@ -4,6 +4,12 @@ import {
   createTagsCacheHandler,
 } from "../services";
 
+/**
+ * @deprecated please use ProjectDataService
+ * @param req
+ * @param res
+ * @param next
+ */
 export function attachTagsCacheHandler(
   req: Request,
   res: Response,
@@ -13,6 +19,12 @@ export function attachTagsCacheHandler(
   next();
 }
 
+/**
+ * @deprecated please use ProjectDataService
+ * @param req
+ * @param res
+ * @param next
+ */
 export async function attachProjectCachePageService(
   req: Request,
   res: Response,
