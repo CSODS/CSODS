@@ -1,4 +1,4 @@
-export const ROOT = "/projects/v2";
+export const ROOT = "/projects-v2";
 
 export const ROUTES = {
   BY_PAGE: "/:page_number",
