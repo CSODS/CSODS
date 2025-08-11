@@ -18,7 +18,7 @@ export class DevTypeRepository extends Repository<DevTypeTable> {
    * @returns A `Promise` that resolves to the list of rows or `null`
    * if the read operation fails.
    */
-  public async getAll(): Promise<DevTypeViewModel[] | null> {
+  public async getAll(): Promise<DevTypeViewModel[]> {
     const devTypes = await this.GetRows({ column: DevType.devTypeId });
     return devTypes;
   }

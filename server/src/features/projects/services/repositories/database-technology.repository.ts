@@ -21,7 +21,7 @@ export class DatabaseTechnologyRepository extends Repository<DatabaseTechnologyT
    * @returns A `Promise` that resolves to the list of rows or
    * `null` if the read operation fails.
    */
-  public async getAll(): Promise<DatabaseTechnologyViewModel[] | null> {
+  public async getAll(): Promise<DatabaseTechnologyViewModel[]> {
     const databaseTechnologies = await this.GetRows({
       column: DatabaseTechnology.databaseId,
     });

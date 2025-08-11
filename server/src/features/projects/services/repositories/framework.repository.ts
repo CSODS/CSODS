@@ -18,7 +18,7 @@ export class FrameworkRepository extends Repository<FrameworkTable> {
    * @returns A `Promise` that resolves to the list of rows or
    * `null` if the read operation fails.
    */
-  public async getAll(): Promise<FrameworkViewModel[] | null> {
+  public async getAll(): Promise<FrameworkViewModel[]> {
     const frameworks = await this.GetRows({ column: Framework.frameworkId });
     return frameworks;
   }

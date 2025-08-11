@@ -21,7 +21,7 @@ export class ApplicationIndustryRepository extends Repository<ApplicationIndustr
    * @returns A `Promise` that resolves to the list of rows or
    * `null` if the read operation fails.
    */
-  public async getAll(): Promise<ApplicationIndustryViewModel[] | null> {
+  public async getAll(): Promise<ApplicationIndustryViewModel[]> {
     const applicationIndustries = await this.GetRows({
       column: ApplicationIndustry.industryId,
     });
