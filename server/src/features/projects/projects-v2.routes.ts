@@ -40,3 +40,12 @@ projectsRouterV2.get(
 );
 
 //  todo: add project tags route
+projectsRouterV2.get(
+  ROUTES.ALL_TAGS,
+  validateRoles(
+    Guest.roleName,
+    Student.roleName,
+    Moderator.roleName,
+    Administrator.roleName
+  )
+);
