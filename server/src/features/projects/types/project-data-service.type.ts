@@ -1,6 +1,6 @@
 import { ResultFail, ResultSuccess } from "@/types";
-import { ProjectError } from "../../errors";
-import { IProjectCache, IProjectCachePage } from "../../types";
+import { ProjectError } from "../errors";
+import { IProjectCache, IProjectCachePage } from ".";
 
 export type Source = "DATABASE" | "JSON_CACHE" | "BACKUP_CACHE";
 export type ProjectResult =

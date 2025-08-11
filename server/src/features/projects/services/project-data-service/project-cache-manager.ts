@@ -3,6 +3,8 @@ import {
   IProjectCache,
   IProjectCachePage,
   IProjectDetails,
+  ProjectResult,
+  ProjectPageResult,
 } from "@/features/projects/types";
 import { fail, success } from "@/utils";
 import {
@@ -11,7 +13,6 @@ import {
 } from "../cache";
 import { ProjectError } from "../../errors";
 import { buildProjectsData } from "./build-projects-data";
-import { ProjectPageResult, ProjectResult } from "./project-data-service.type";
 
 export function createProjectCacheManager() {
   const cachePageService = createProjectCachePageService();
