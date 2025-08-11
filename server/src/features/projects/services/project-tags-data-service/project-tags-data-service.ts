@@ -1,17 +1,23 @@
 import { fail } from "@/utils";
 import { ProjectTagError } from "../../errors";
 import { ProjectTagsResult } from "../../types";
-import { ProjectTagsDbFetcher } from "../project-tags-db-fetcher.service";
+import * as CacheManager from "./project-tags-cache-manager";
+import * as DbFetcher from "../project-tags-db-fetcher.service";
 import { fetchProjectTagsData } from "./fetch-project-tags-data";
-import { ProjectTagsCacheManager } from "./project-tags-cache-manager";
+
+export async function createProjectTagsDataService() {
+  const cacheManager = CacheManager.createProjectsTagCacheManager();
+  const dbFetcher = await DbFetcher.createProjectTagsDbFetcher();
+  return new ProjectTagsDataService(cacheManager, dbFetcher);
+}
 
 export class ProjectTagsDataService {
-  private readonly _cacheManager: ProjectTagsCacheManager;
-  private readonly _dbFetcher: ProjectTagsDbFetcher;
+  private readonly _cacheManager: CacheManager.ProjectTagsCacheManager;
+  private readonly _dbFetcher: DbFetcher.ProjectTagsDbFetcher;
 
   public constructor(
-    projectTagsCacheManager: ProjectTagsCacheManager,
-    projectTagsDbFetcher: ProjectTagsDbFetcher
+    projectTagsCacheManager: CacheManager.ProjectTagsCacheManager,
+    projectTagsDbFetcher: DbFetcher.ProjectTagsDbFetcher
   ) {
     this._cacheManager = projectTagsCacheManager;
     this._dbFetcher = projectTagsDbFetcher;
