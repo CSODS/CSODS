@@ -4,13 +4,13 @@ import { ProjectTagError } from "../../errors";
 import { IProjectTagsCache, ProjectTagsResult } from "../../types";
 import * as ViewModels from "../../types/project-viewmodels.type";
 
-export function createProjectTagCacheManager() {
+export function createProjectsTagCacheManager() {
   const cacheService = createProjectTagCacheService();
-  return new ProjectTagCacheManager(cacheService);
+  return new ProjectTagsCacheManager(cacheService);
 }
 
 //  todo: add docs
-export class ProjectTagCacheManager {
+export class ProjectTagsCacheManager {
   private readonly _cacheService: ProjectTagCacheService;
 
   public constructor(projectTagCacheService: ProjectTagCacheService) {

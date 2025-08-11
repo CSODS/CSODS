@@ -1,9 +1,9 @@
-import { ProjectTagCacheManager } from "./project-tag-cache-manager";
+import { ProjectTagsCacheManager } from "./project-tags-cache-manager";
 
 export class ProjectTagsDataService {
-  private readonly _cacheManager: ProjectTagCacheManager;
+  private readonly _cacheManager: ProjectTagsCacheManager;
 
-  public constructor(projectTagCacheManager: ProjectTagCacheManager) {
+  public constructor(projectTagCacheManager: ProjectTagsCacheManager) {
     this._cacheManager = projectTagCacheManager;
   }
 
