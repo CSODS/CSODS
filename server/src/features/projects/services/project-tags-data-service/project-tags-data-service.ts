@@ -29,7 +29,7 @@ export class ProjectTagsDataService {
   }
 
   //  todo: add docs
-  public async resolveProjectTags(): Promise<ProjectTagsResult> {
+  private async resolveProjectTags(): Promise<ProjectTagsResult> {
     const loadResult = await this._cacheManager.loadCache();
     if (loadResult.success) return loadResult;
 
