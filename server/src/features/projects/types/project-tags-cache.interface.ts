@@ -1,5 +1,5 @@
 import { ICache } from "@/viewmodels";
-import * as tableTypes from "./projects-viewmodels.type";
+import * as tableTypes from "./project-viewmodels.type";
 
 /**
  * Represents a structured cache of all project-related tags used for categorization and filtering.
