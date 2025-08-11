@@ -47,5 +47,6 @@ projectsRouterV2.get(
     Student.roleName,
     Moderator.roleName,
     Administrator.roleName
-  )
+  ),
+  controllers.getProjectTags
 );
