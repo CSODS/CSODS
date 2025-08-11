@@ -6,7 +6,7 @@ import * as FetchService from "../project-db-fetch.service";
 import { fetchProjectsData } from "./fetch-projects-data";
 import { getProjectDataKey } from "./get-project-data-key";
 import * as CacheManager from "./project-cache-manager";
-import { ProjectError } from "./project-data-service.error";
+import { ProjectError } from "./project-error";
 import { ProjectPageResult, ProjectResult } from "./project-data-service.type";
 
 export async function createProjectDataService() {

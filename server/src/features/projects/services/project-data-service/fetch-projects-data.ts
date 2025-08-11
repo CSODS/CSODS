@@ -1,10 +1,7 @@
 import { ResultFail, ResultSuccess } from "@/types";
 import { IProjectDetails, ProjectFilter } from "../../types";
 import { ProjectDbFetchService } from "../project-db-fetch.service";
-import {
-  normalizeProjectError,
-  ProjectError,
-} from "./project-data-service.error";
+import { normalizeProjectError, ProjectError } from "./project-error";
 import { fail, success } from "@/utils";
 
 export type ProjectsData = {

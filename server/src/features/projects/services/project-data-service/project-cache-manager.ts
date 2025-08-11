@@ -10,10 +10,7 @@ import {
   ProjectCachePageService,
 } from "../cache";
 import { buildProjectsData } from "./build-projects-data";
-import {
-  normalizeProjectError,
-  ProjectError,
-} from "./project-data-service.error";
+import { normalizeProjectError, ProjectError } from "./project-error";
 import { ProjectPageResult, ProjectResult } from "./project-data-service.type";
 
 export function createProjectCacheManager() {
