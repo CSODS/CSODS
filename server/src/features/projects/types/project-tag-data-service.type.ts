@@ -1,8 +1,8 @@
 import { ResultFail, ResultSuccess } from "@/types";
 import { ProjectTagError } from "../errors";
 import { DataSource } from "./data-source.type";
-import { IProjectCache } from "./projects-cache.interface";
+import { IProjectTagsCache } from "./project-tags-cache.interface";
 
 export type TagResult =
-  | ResultSuccess<IProjectCache, DataSource>
+  | ResultSuccess<IProjectTagsCache, DataSource>
   | ResultFail<ProjectTagError.ProjectTagError>;
