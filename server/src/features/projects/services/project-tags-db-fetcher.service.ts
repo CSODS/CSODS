@@ -1,4 +1,25 @@
+import { createContext } from "@/db/csods";
 import * as Repositories from "./repositories";
+
+export async function createProjectTagsDbFetcher() {
+  const dbContext = await createContext();
+  const applicationIndustryRepo =
+    new Repositories.ApplicationIndustryRepository(dbContext);
+  const databaseTechnologyRepo = new Repositories.DatabaseTechnologyRepository(
+    dbContext
+  );
+  const devTypeRepo = new Repositories.DevTypeRepository(dbContext);
+  const frameworkRepo = new Repositories.FrameworkRepository(dbContext);
+  const programmingLanguageRepo =
+    new Repositories.ProgrammingLanguageRepository(dbContext);
+  return new ProjectTagsDbFetcher({
+    applicationIndustryRepo,
+    databaseTechnologyRepo,
+    devTypeRepo,
+    frameworkRepo,
+    programmingLanguageRepo,
+  });
+}
 
 //  todo: document this
 export class ProjectTagsDbFetcher {
