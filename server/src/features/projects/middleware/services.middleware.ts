@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import {
   createLegacyProjectCachePageService,
-  createTagsCacheHandler,
+  createLegacyTagsCacheHandler,
 } from "../services";
 
 /**
@@ -15,7 +15,7 @@ export function attachTagsCacheHandler(
   res: Response,
   next: NextFunction
 ) {
-  req.tagsCacheHandler = createTagsCacheHandler();
+  req.tagsCacheHandler = createLegacyTagsCacheHandler();
   next();
 }
 

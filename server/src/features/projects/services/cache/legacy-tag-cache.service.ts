@@ -8,13 +8,16 @@ dotenv.config();
 const TAGS_CACHE = CACHE.TAGS_CACHE;
 const AS_JSON = CACHE.EXTENSION.JSON;
 
-export function createTagsCacheHandler() {
+export function createLegacyTagsCacheHandler() {
   const jsonFileHandlerInstance =
     createJsonFileService<IProjectTagsCache>("IProjectTags");
-  return new TagsCacheHandler(jsonFileHandlerInstance);
+  return new LegacyTagsCacheHandler(jsonFileHandlerInstance);
 }
 
-export class TagsCacheHandler {
+/**
+ * @deprecated Please use TagsCacheService
+ */
+export class LegacyTagsCacheHandler {
   private readonly _jsonFileHandler: JsonFileService<IProjectTagsCache>;
   private readonly _filepath: string;
   private readonly _filename: string;
