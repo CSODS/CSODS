@@ -9,8 +9,8 @@ import {
   createProjectCachePageService,
   ProjectCachePageService,
 } from "../cache";
+import { ProjectError } from "../../errors";
 import { buildProjectsData } from "./build-projects-data";
-import { normalizeProjectError, ProjectError } from "./project-error";
 import { ProjectPageResult, ProjectResult } from "./project-data-service.type";
 
 export function createProjectCacheManager() {
@@ -44,7 +44,7 @@ export class ProjectCacheManager {
       const page = await this._cachePageService.getCachePage(cache, pageNumber);
       return success(page, "JSON_CACHE");
     } catch (err) {
-      const error = normalizeProjectError({
+      const error = ProjectError.normalizeProjectError({
         name: "PAGE_RETRIEVAL_ERROR",
         message: "Failed retrieving page from cache.",
         err,
@@ -82,7 +82,7 @@ export class ProjectCacheManager {
       });
       return success(storedPage);
     } catch (err) {
-      const error = normalizeProjectError({
+      const error = ProjectError.normalizeProjectError({
         name: "STORE_CACHE_PAGE_ERROR",
         message: `Error storing new cache page with page number: ${page.pageNumber}`,
         err,
@@ -119,7 +119,7 @@ export class ProjectCacheManager {
 
       throw loadResult.error; //  ProjectError type
     } catch (err) {
-      const error = normalizeProjectError({
+      const error = ProjectError.normalizeProjectError({
         name: "LOAD_BACKUP_ERROR",
         message: "Failed loading backup projects cache.",
         err,
@@ -141,7 +141,7 @@ export class ProjectCacheManager {
       return success(projects, "JSON_CACHE");
     } catch (err) {
       //  todo: log error maybe
-      const error = new ProjectError({
+      const error = new ProjectError.ProjectError({
         name: "LOAD_FROM_CACHE_ERROR",
         message: "Error loading projects from cache.",
         cause: err,
@@ -177,7 +177,7 @@ export class ProjectCacheManager {
       return success(storedCache);
     } catch (err) {
       //  todo: log error
-      const error = normalizeProjectError({
+      const error = ProjectError.normalizeProjectError({
         name: "CREATE_NEW_CACHE_ERROR",
         message: "Error creating new projects cache.",
         err,

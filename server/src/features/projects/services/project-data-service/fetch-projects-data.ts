@@ -1,8 +1,8 @@
 import { ResultFail, ResultSuccess } from "@/types";
-import { IProjectDetails, ProjectFilter } from "../../types";
-import { ProjectDbFetchService } from "../project-db-fetch.service";
-import { normalizeProjectError, ProjectError } from "./project-error";
 import { fail, success } from "@/utils";
+import { ProjectError } from "../../errors";
+import { IProjectDetails } from "../../types";
+import { ProjectDbFetchService } from "../project-db-fetch.service";
 
 export type ProjectsData = {
   totalPages: number;
@@ -11,7 +11,7 @@ export type ProjectsData = {
 
 export type FetchResult =
   | ResultSuccess<ProjectsData>
-  | ResultFail<ProjectError>;
+  | ResultFail<ProjectError.ProjectError>;
 
 type FetchOptions = {
   includeCount?: boolean;
@@ -58,7 +58,7 @@ export async function fetchProjectsData(
       if (includeCount) {
         projectsCount = await projectDbFetchService.fetchProjectsCount(filter);
         if (projectsCount === 0)
-          throw new ProjectError({
+          throw new ProjectError.ProjectError({
             name: "EMPTY_PROJECTS_TABLE_ERROR",
             message: "The projects table is empty.",
           });
@@ -72,7 +72,7 @@ export async function fetchProjectsData(
       return success({ totalPages, pageRecord });
     } catch (err) {
       //  todo: log errors
-      const error = normalizeProjectError({
+      const error = ProjectError.normalizeProjectError({
         name: "DB_FETCH_ERROR",
         message: "Error fetching projects from database.",
         err,
@@ -82,7 +82,7 @@ export async function fetchProjectsData(
     }
   }
 
-  const error = new ProjectError({
+  const error = new ProjectError.ProjectError({
     name: "EXCEEDED_MAX_FETCH_RETRIES_ERROR",
     message: "Exceeded retry limit without a successful fetch.",
   });

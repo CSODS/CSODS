@@ -1,5 +1,5 @@
 import { ErrorBase } from "@/error";
-import { ProjectCacheError } from "../../errors";
+import { ProjectCacheError } from ".";
 
 export type ErrorName =
   | "EXCEEDED_MAX_FETCH_RETRIES_ERROR"
