@@ -4,10 +4,12 @@ import { validateRoles } from "@/middleware";
 import { API } from "./constants";
 import { attachProjectDataService } from "./middleware";
 import * as controllers from "./controllers";
+import { attachProjectTagsDataService } from "./middleware/project-tags-data-service.middleware";
 
 export const projectsRouterV2 = Router();
 
 projectsRouterV2.use(attachProjectDataService);
+projectsRouterV2.use(attachProjectTagsDataService);
 //  todo: add limiters for routes
 const { ROUTES } = API;
 const { Guest, Student, Moderator, Administrator } = AUTH.ROLES_MAP;
