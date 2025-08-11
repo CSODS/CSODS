@@ -23,11 +23,13 @@ export async function getProject(req: Request, res: Response) {
     rawFilter,
   });
 
-  if (projectResult.success) return res.json(projectResult);
+  if (projectResult.success) {
+    res.json(projectResult);
+    return;
+  }
 
   const { name: errorName } = projectResult.error;
-
-  return res
+  res
     .status(StatusCode.fromError({ errorName, statusCodeMap }))
     .json(projectResult);
 }

@@ -19,10 +19,13 @@ export async function getProjectsPage(req: Request, res: Response) {
   const pageNumber = Number(req.params.page_number);
   const pageResult = await dataService.getOrCreatePage(pageNumber, rawFilter);
 
-  if (pageResult.success) return res.json(pageResult);
+  if (pageResult.success) {
+    res.json(pageResult);
+    return;
+  }
 
   const { name: errorName } = pageResult.error;
-  return res
+  res
     .status(StatusCode.fromError({ errorName, statusCodeMap }))
     .json(pageResult);
 }

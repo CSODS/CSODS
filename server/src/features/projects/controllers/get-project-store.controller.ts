@@ -9,10 +9,11 @@ export async function getProjectStore(req: Request, res: Response) {
 
   const result = await dataService.getProjects(rawFilter);
 
-  if (result.success) return res.json(result);
+  if (result.success) {
+    res.json(result);
+    return;
+  }
 
   const { name: errorName } = result.error;
-  return res
-    .status(StatusCode.fromError({ errorName, statusCodeMap }))
-    .json(result);
+  res.status(StatusCode.fromError({ errorName, statusCodeMap })).json(result);
 }
