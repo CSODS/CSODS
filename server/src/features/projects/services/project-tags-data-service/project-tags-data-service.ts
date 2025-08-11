@@ -17,6 +17,12 @@ export class ProjectTagsDataService {
     this._dbFetcher = projectTagsDbFetcher;
   }
 
+  //  todo: add docs
+  public async getProjectTags() {
+    return await this.resolveProjectTags();
+  }
+
+  //  todo: add docs
   public async resolveProjectTags(): Promise<ProjectTagsResult> {
     const loadResult = await this._cacheManager.loadCache();
     if (loadResult.success) return loadResult;
