@@ -27,6 +27,9 @@ async function tagsLoader() {
     frameworks: [],
     databaseTechnologies: [],
     applicationIndustries: [],
+    createdOn: new Date(),
+    lastAccessed: new Date(),
+    viewCount: 0,
   };
 
   const context = await createContext();
