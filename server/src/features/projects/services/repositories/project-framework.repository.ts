@@ -11,7 +11,7 @@ export class ProjectFrameworkRepository extends Repository<Tables.ProjectFramewo
 
   public async FindManyByProjectId(
     projectId: number
-  ): Promise<ViewModels.ProjectFrameworkViewModel[]> {
+  ): Promise<ViewModels.ProjectFramework[]> {
     return await this._dbContext.query.ProjectFramework.findMany({
       where: eq(ProjectFramework.projectId, projectId),
     });

@@ -109,7 +109,7 @@ export class LegacyProjectDataService {
 
     for (let pageNumber = pageStart; pageNumber <= pageEnd; pageNumber++) {
       DbLogger.info(`[Projects] Fetching page ${pageNumber}...`);
-      const projectArr: ViewModels.ProjectViewModel[] =
+      const projectArr: ViewModels.Project[] =
         await this._projectRepo.getProjects({
           isAscending: isAscending,
           filter: filter,
@@ -149,7 +149,7 @@ export class LegacyProjectDataService {
    * // details: [{ Project: ..., ProjectFrameworks: [...] }, ...]
    */
   private async constructProjectDetails(
-    projectArr: ViewModels.ProjectViewModel[]
+    projectArr: ViewModels.Project[]
   ): Promise<IProjectDetails[]> {
     return await Promise.all(
       projectArr.map(async (project) => ({

@@ -14,21 +14,21 @@ export interface IProjectTagsCache extends StoreBase {
   /**
    * A list of all available development types (e.g., Web, Mobile, Desktop).
    */
-  devTypes: tableTypes.DevTypeViewModel[];
+  devTypes: tableTypes.DevType[];
   /**
    * A list of programming languages used across projects (e.g., JavaScript, Python).
    */
-  programmingLanguages: tableTypes.ProgrammingLanguageViewModel[];
+  programmingLanguages: tableTypes.ProgrammingLanguage[];
   /**
    * A list of frameworks that can be associated with projects (e.g., React, Django).
    */
-  frameworks: tableTypes.FrameworkViewModel[];
+  frameworks: tableTypes.Framework[];
   /**
    * A list of database technologies (e.g., MySQL, MongoDB).
    */
-  databaseTechnologies: tableTypes.DatabaseTechnologyViewModel[];
+  databaseTechnologies: tableTypes.DatabaseTechnology[];
   /**
    * A list of industries or sectors for project applications (e.g., Education, Healthcare).
    */
-  applicationIndustries: tableTypes.ApplicationIndustryViewModel[];
+  applicationIndustries: tableTypes.ApplicationIndustry[];
 }

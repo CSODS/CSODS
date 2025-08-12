@@ -56,11 +56,11 @@ export interface IProjectDetails {
   /**
    * The main project entity containing metadata such as title, description, associated tags, etc.
    */
-  project: tableTypes.ProjectViewModel;
+  project: tableTypes.Project;
 
   /**
    * A list of frameworks associated with the project.
    * Each entry links a framework to the project through a many-to-many relationship.
    */
-  projectFrameworks: tableTypes.ProjectFrameworkViewModel[];
+  projectFrameworks: tableTypes.ProjectFramework[];
 }

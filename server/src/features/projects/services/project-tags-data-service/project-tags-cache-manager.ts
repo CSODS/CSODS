@@ -23,11 +23,11 @@ export class ProjectTagsCacheManager {
     databaseTechnologies,
     applicationIndustries,
   }: {
-    devTypes: ViewModels.DevTypeViewModel[];
-    programmingLanguages: ViewModels.ProgrammingLanguageViewModel[];
-    frameworks: ViewModels.FrameworkViewModel[];
-    databaseTechnologies: ViewModels.DatabaseTechnologyViewModel[];
-    applicationIndustries: ViewModels.ApplicationIndustryViewModel[];
+    devTypes: ViewModels.DevType[];
+    programmingLanguages: ViewModels.ProgrammingLanguage[];
+    frameworks: ViewModels.Framework[];
+    databaseTechnologies: ViewModels.DatabaseTechnology[];
+    applicationIndustries: ViewModels.ApplicationIndustry[];
   }): Promise<ProjectTagsResult> {
     const data: ProjectTags.Store = {
       devTypes,

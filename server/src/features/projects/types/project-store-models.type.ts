@@ -52,11 +52,11 @@ export namespace ProjectStoreModels {
     /**
      * The main project entity containing metadata such as title, description, associated tags, etc.
      */
-    project: ViewModels.ProjectViewModel;
+    project: ViewModels.Project;
     /**
      * A list of frameworks associated with the project.
      * Each entry links a framework to the project through a many-to-many relationship.
      */
-    projectFrameworks: ViewModels.ProjectFrameworkViewModel[];
+    projectFrameworks: ViewModels.ProjectFramework[];
   };
 }

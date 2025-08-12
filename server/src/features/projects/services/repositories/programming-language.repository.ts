@@ -18,7 +18,7 @@ export class ProgrammingLanguageRepository extends Repository<Tables.Programming
    * @returns A `Promise` that resolves to the list of rows or
    * `null` if the read operation fails.
    */
-  public async getAll(): Promise<ViewModels.ProgrammingLanguageViewModel[]> {
+  public async getAll(): Promise<ViewModels.ProgrammingLanguage[]> {
     const programmingLanguages = await this.GetRows({
       column: ProgrammingLanguage.languageId,
     });

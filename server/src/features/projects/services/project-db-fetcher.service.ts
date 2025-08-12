@@ -115,7 +115,7 @@ export class ProjectDbFetcher {
 
     for (let pageNumber = pageStart; pageNumber <= pageEnd; pageNumber++) {
       DbLogger.info(`[fetchProjectsPages] Fetching page ${pageNumber}...`);
-      const projectArr: ViewModels.ProjectViewModel[] =
+      const projectArr: ViewModels.Project[] =
         await this._projectRepo.getProjects({
           isAscending: isAscending,
           filter: filter,
@@ -158,7 +158,7 @@ export class ProjectDbFetcher {
    * details: [{ Project: ..., ProjectFrameworks: [...] }, ...]
    */
   private async constructProjectDetails(
-    projectArr: ViewModels.ProjectViewModel[]
+    projectArr: ViewModels.Project[]
   ): Promise<ProjectStoreModels.ProjectDetails[]> {
     return await Promise.all(
       projectArr.map(async (project) => ({

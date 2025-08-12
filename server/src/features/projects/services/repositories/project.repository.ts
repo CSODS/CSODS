@@ -29,7 +29,7 @@ export class ProjectRepository extends Repository<Tables.ProjectsTable> {
     filter?: ProjectFilter | undefined;
     pageSize?: number | undefined;
     pageNumber?: number | undefined;
-  }): Promise<ViewModels.ProjectViewModel[]> {
+  }): Promise<ViewModels.Project[]> {
     const isAscending = options?.isAscending ?? true;
     const filter = options?.filter;
     const pageSize = options?.pageSize ?? 100;

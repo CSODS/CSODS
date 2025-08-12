@@ -14,22 +14,22 @@ export namespace ProjectTags {
     /**
      * A list of all available development types (e.g., Web, Mobile, Desktop).
      */
-    devTypes: ViewModels.DevTypeViewModel[];
+    devTypes: ViewModels.DevType[];
     /**
      * A list of programming languages used across projects (e.g., JavaScript, Python).
      */
-    programmingLanguages: ViewModels.ProgrammingLanguageViewModel[];
+    programmingLanguages: ViewModels.ProgrammingLanguage[];
     /**
      * A list of frameworks that can be associated with projects (e.g., React, Django).
      */
-    frameworks: ViewModels.FrameworkViewModel[];
+    frameworks: ViewModels.Framework[];
     /**
      * A list of database technologies (e.g., MySQL, MongoDB).
      */
-    databaseTechnologies: ViewModels.DatabaseTechnologyViewModel[];
+    databaseTechnologies: ViewModels.DatabaseTechnology[];
     /**
      * A list of industries or sectors for project applications (e.g., Education, Healthcare).
      */
-    applicationIndustries: ViewModels.ApplicationIndustryViewModel[];
+    applicationIndustries: ViewModels.ApplicationIndustry[];
   } & StoreBase;
 }
