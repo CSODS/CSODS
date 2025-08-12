@@ -1,7 +1,7 @@
 import winston from "winston";
 import { CACHE } from "@/data";
-import { ICache } from "@/viewmodels";
-import { JsonError, JsonFileService } from "../json-file-service";
+import { StoreBase } from "@/viewmodels";
+import { JsonFileService } from "../json-file-service";
 import { CacheError } from "./abstract-cache-service.error";
 import { MethodLogParams } from "./abstract-cache-service.types";
 
@@ -16,15 +16,15 @@ import { MethodLogParams } from "./abstract-cache-service.types";
  * class. A core component for the default CRUD operations of the cache service.
  * - {@link _cachePath} - The path to the cache folder.
  * - {@link _filename} - The filename of the cache. `cache.json` by default.
- * - {@link _cache} - The in-memory reference of the {@link ICache} object
+ * - {@link _cache} - The in-memory reference of the {@link StoreBase} object
  * loaded from the cache. `null` by default.
  */
-export abstract class AbstractCacheService<TCache extends ICache> {
+export abstract class AbstractCacheService<TStore extends StoreBase> {
   protected readonly _logger: winston.Logger;
-  protected readonly _jsonFileService: JsonFileService<TCache>;
+  protected readonly _jsonFileService: JsonFileService<TStore>;
   protected _cachePath: string;
   protected _filename: string = "cache.json";
-  protected _cache: TCache | null = null;
+  protected _cache: TStore | null = null;
 
   /**
    * @constructor
@@ -37,7 +37,7 @@ export abstract class AbstractCacheService<TCache extends ICache> {
    */
   public constructor(
     logger: winston.Logger,
-    jsonFileService: JsonFileService<TCache>,
+    jsonFileService: JsonFileService<TStore>,
     cachePath: string
   ) {
     this._logger = logger;
@@ -45,7 +45,7 @@ export abstract class AbstractCacheService<TCache extends ICache> {
     this._cachePath = cachePath;
   }
 
-  public getCache(): TCache | null {
+  public getCache(): TStore | null {
     return this._cache;
   }
 
@@ -71,11 +71,11 @@ export abstract class AbstractCacheService<TCache extends ICache> {
    * @returns A `Promise` that resolves to the loaded cache.
    * @throws {CacheError} `CACHE_PARSE_ERROR` | `INVALID_CACHE_ERROR`
    */
-  public async loadCache(): Promise<TCache> {
+  public async loadCache(): Promise<TStore> {
     this._logger.info("[setCache] Loading cache into memory...");
 
     //  !Throws CacheError: CACHE_PARSE_ERROR on parse operation fail.
-    const cache: TCache = await this.tryParseCache();
+    const cache: TStore = await this.tryParseCache();
 
     if (!this.isCacheValid(cache)) {
       this._logger.info("[loadCache] Failed loading cache into memory.");
@@ -94,11 +94,11 @@ export abstract class AbstractCacheService<TCache extends ICache> {
    * {@link isCacheValid} first, then writing it into the cache.
    *
    * @param data The data to be stored into cache.
-   * @returns A `Promise` that resolves to the newly created {@link ICache}
+   * @returns A `Promise` that resolves to the newly created {@link StoreBase}
    * object.
    * @throws {CacheError} `INVALID_CACHE_ERROR` | `CACHE_PERSIST_ERROR`
    */
-  public async persistCache(data: TCache): Promise<TCache> {
+  public async persistCache(data: TStore): Promise<TStore> {
     const { _cachePath, _filename, _logger } = this;
     const fullPath = _cachePath + _filename;
 
@@ -151,7 +151,7 @@ export abstract class AbstractCacheService<TCache extends ICache> {
    * @param cache The cache to check.
    * @throws {JsonError} Thrown with `name: "NULL_DATA_ERROR"`.
    */
-  public assertCacheNotNull(cache: TCache | null): asserts cache is TCache {
+  public assertCacheNotNull(cache: TStore | null): asserts cache is TStore {
     this._jsonFileService.assertDataNotNull(cache);
   }
 
@@ -164,7 +164,7 @@ export abstract class AbstractCacheService<TCache extends ICache> {
    * Override {@link reviver} in subclasses if custom deserialization
    * is needed.
    */
-  protected async tryParseCache(): Promise<TCache> {
+  protected async tryParseCache(): Promise<TStore> {
     const { _cachePath, _filename, _logger } = this;
     const fullPath = _cachePath + _filename;
 
@@ -203,11 +203,11 @@ export abstract class AbstractCacheService<TCache extends ICache> {
   }
 
   /**
-   * @description Checks if the {@link ICache} object is valid.
+   * @description Checks if the {@link StoreBase} object is valid.
    * @remarks
    * Override in child classes if custom validation is required.
    */
-  protected isCacheValid(cache: TCache | null): boolean {
+  protected isCacheValid(cache: TStore | null): boolean {
     return !!cache;
   }
 
@@ -223,7 +223,7 @@ export abstract class AbstractCacheService<TCache extends ICache> {
     level,
     method,
     message,
-  }: MethodLogParams<AbstractCacheService<TCache>>) {
+  }: MethodLogParams<AbstractCacheService<TStore>>) {
     const logMsg = `[${method}] ${message}`;
     this._logger.log(level, logMsg);
   }

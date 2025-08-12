@@ -1,4 +1,4 @@
-import { ICache } from "@/viewmodels";
+import { StoreBase } from "@/viewmodels";
 import * as tableTypes from "./project-viewmodels.type";
 
 /**
@@ -9,7 +9,7 @@ import * as tableTypes from "./project-viewmodels.type";
  * and application industries. It allows for efficient access and reuse of tag metadata,
  * especially when rendering filters or forms in the UI.
  */
-export interface IProjectTagsCache extends ICache {
+export interface IProjectTagsCache extends StoreBase {
   /**
    * A list of all available development types (e.g., Web, Mobile, Desktop).
    */

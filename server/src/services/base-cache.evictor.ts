@@ -1,7 +1,7 @@
 import { JsonFileService, IFile } from "@services";
-import { ICache } from "@viewmodels";
+import { StoreBase } from "@viewmodels";
 
-export class BaseCacheEvictor<TCache extends ICache> {
+export class BaseCacheEvictor<TCache extends StoreBase> {
   protected readonly _jsonFileHandler: JsonFileService<TCache>;
   protected _defaultEvictionOptions: IEvictionOptions;
 

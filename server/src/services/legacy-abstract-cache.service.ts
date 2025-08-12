@@ -1,5 +1,5 @@
 import winston from "winston";
-import { ICache } from "@viewmodels";
+import { StoreBase } from "@viewmodels";
 import { JsonFileService } from "./json-file-service";
 
 /**
@@ -15,10 +15,10 @@ import { JsonFileService } from "./json-file-service";
  * CRUD operations of the cache service.
  * - {@link _cachePath} - The path to the cache folder.
  * - {@link _filename} - The filename of the cache. `cache.json` by default.
- * - {@link _cache} - The in-memory reference of the {@link ICache} object loaded from the cache. `null` by
+ * - {@link _cache} - The in-memory reference of the {@link StoreBase} object loaded from the cache. `null` by
  * default.
  */
-export abstract class LegacyAbstractCacheService<TCache extends ICache> {
+export abstract class LegacyAbstractCacheService<TCache extends StoreBase> {
   protected readonly _logger: winston.Logger;
   protected readonly _jsonFileHandler: JsonFileService<TCache>;
   protected readonly _cachePath: string;
@@ -54,8 +54,8 @@ export abstract class LegacyAbstractCacheService<TCache extends ICache> {
   /**
    * @public
    * @method getLastAccessed
-   * @description Accessor for the {@link ICache.lastAccessed} field of {@link _cache}.
-   * @returns The value of the {@link ICache.lastAccessed} field. `null` if {@link _cache} is `null`.
+   * @description Accessor for the {@link StoreBase.lastAccessed} field of {@link _cache}.
+   * @returns The value of the {@link StoreBase.lastAccessed} field. `null` if {@link _cache} is `null`.
    */
   public getLastAccessed(): Date | null {
     return this._cache?.lastAccessed ?? null;
@@ -173,7 +173,7 @@ export abstract class LegacyAbstractCacheService<TCache extends ICache> {
    *
    * Revives certain fields.
    *
-   * By default, converts fields {@link ICache.createdOn}, and {@link ICache.lastAccessed} fields back
+   * By default, converts fields {@link StoreBase.createdOn}, and {@link StoreBase.lastAccessed} fields back
    * into `Date` type.
    *
    * @param key - The property name.
@@ -199,7 +199,7 @@ export abstract class LegacyAbstractCacheService<TCache extends ICache> {
    * If the constructed cache is not valid, an `Error` is thrown, and `null` is returned.
    *
    * @param filePath An optional parameter that overrides the default {@link _cachePath} when specified.
-   * @returns A promise that rsolvse to the newly created {@link ICache} object, or `null` if the cache construction
+   * @returns A promise that rsolvse to the newly created {@link StoreBase} object, or `null` if the cache construction
    * or the write operation fails.
    *
    * @remarks
@@ -250,9 +250,9 @@ export abstract class LegacyAbstractCacheService<TCache extends ICache> {
   /**
    * @protected
    * @method isCacheValid
-   * @description Checks if the {@link ICache} object is valid.
+   * @description Checks if the {@link StoreBase} object is valid.
    *
-   * @param cache - The {@link ICache} object to be validated.
+   * @param cache - The {@link StoreBase} object to be validated.
    * @returns `true` if the cache is valid, `false` otherwise.
    *
    * @remarks
@@ -265,10 +265,10 @@ export abstract class LegacyAbstractCacheService<TCache extends ICache> {
   /**
    * @abstract
    * @method constructCache
-   * @description An abstract method that on definition will generate the {@link ICache} object to be used
+   * @description An abstract method that on definition will generate the {@link StoreBase} object to be used
    * when writing to a `json` file with {@link tryCreateCache}.
    *
-   * @returns The generated {@link ICache} object.
+   * @returns The generated {@link StoreBase} object.
    */
   protected abstract constructCache(): Promise<TCache>;
 }

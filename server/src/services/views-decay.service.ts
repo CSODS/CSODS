@@ -1,7 +1,7 @@
-import { ICache } from "@viewmodels";
+import { StoreBase } from "@viewmodels";
 import { JsonFileService } from "@services";
 
-type decayFunc<TCache extends ICache> = (
+type decayFunc<TCache extends StoreBase> = (
   cache: TCache,
   now: Date
 ) => TCache | Promise<TCache>;
@@ -12,7 +12,7 @@ type decayFunc<TCache extends ICache> = (
  * @description
  * A service for decaying the view counts on cached files.
  */
-export class ViewsDecayService<TCache extends ICache> {
+export class ViewsDecayService<TCache extends StoreBase> {
   /**
    * The directory path where cache JSON files are stored.
    * This is used as the root location for reading and writing cache data during decay processing.

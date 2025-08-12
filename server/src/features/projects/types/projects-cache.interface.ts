@@ -1,4 +1,4 @@
-import { ICache } from "@/viewmodels";
+import { StoreBase } from "@/viewmodels";
 import * as tableTypes from "./project-viewmodels.type";
 
 /**
@@ -7,7 +7,7 @@ import * as tableTypes from "./project-viewmodels.type";
  * This interface represents the structure used to cache paginated project data,
  * enabling efficient retrieval and display in a paginated view.
  */
-export interface IProjectCache extends ICache {
+export interface IProjectCache extends StoreBase {
   /**
    * The total number of available pages of projects.
    */
@@ -29,7 +29,7 @@ export type CachePageRecord = Record<number, IProjectCachePage>;
 /**
  * Represents a cached page of projects within the ProjectCache.
  */
-export interface IProjectCachePage extends ICache {
+export interface IProjectCachePage extends StoreBase {
   /**
    * The total number of available pages of projects.
    */
