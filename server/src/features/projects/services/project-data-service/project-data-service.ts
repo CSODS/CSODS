@@ -2,7 +2,7 @@ import { CACHE } from "@/data";
 import { fail, success } from "@/utils";
 import { Project } from "../../errors";
 import type {
-  Projects,
+  ProjectStoreModels,
   ProjectFilter,
   ProjectPageResult,
   ProjectResult,
@@ -98,7 +98,7 @@ export class ProjectDataService {
    * todo: update documentation
    */
   public async createNewPage(loadOptions: {
-    cache: Projects.Store;
+    cache: ProjectStoreModels.Store;
     pageNumber: number;
     filter?: ProjectFilter;
   }): Promise<ProjectPageResult> {

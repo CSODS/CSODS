@@ -1,12 +1,12 @@
 import { ResultFail, ResultSuccess } from "@/types";
 import { fail, success } from "@/utils";
 import { Project } from "../../errors";
-import type { Projects } from "../../types";
+import type { ProjectStoreModels } from "../../types";
 import { ProjectDbFetcher } from "../project-db-fetcher.service";
 
 export type ProjectsData = {
   totalPages: number;
-  pageRecord: Record<number, Projects.ProjectDetails[]>;
+  pageRecord: Record<number, ProjectStoreModels.ProjectDetails[]>;
 };
 
 export type FetchResult =

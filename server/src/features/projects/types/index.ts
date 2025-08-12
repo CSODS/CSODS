@@ -6,4 +6,4 @@ export * as Tables from "./project-tables.type";
 export * from "./project-tag-data-service.type";
 export * from "./project-tags-store.type";
 export * as ViewModels from "./project-viewmodels.type";
-export * from "./projects-store.type";
+export * from "./project-store-models.type";

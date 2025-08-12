@@ -1,6 +1,6 @@
 import { Env } from "@/error";
 import type {
-  Projects,
+  ProjectStoreModels,
   ProjectResult,
   ProjectPageResult,
 } from "@/features/projects/types";
@@ -34,7 +34,7 @@ export class ProjectCacheManager {
    * @returns
    */
   public async getPage(
-    cache: Projects.Store,
+    cache: ProjectStoreModels.Store,
     pageNumber: number
   ): Promise<ProjectPageResult> {
     try {
@@ -60,13 +60,13 @@ export class ProjectCacheManager {
    */
   public async createAndStorePage(page: {
     currentDate: Date;
-    cache: Projects.Store; //  used for re-storing cahce.
+    cache: ProjectStoreModels.Store; //  used for re-storing cahce.
     pageNumber: number;
-    projects: Projects.ProjectDetails[];
+    projects: ProjectStoreModels.ProjectDetails[];
   }): Promise<ProjectPageResult> {
     const { currentDate, cache, pageNumber, projects } = page;
     try {
-      const cachePage: Projects.Page = {
+      const cachePage: ProjectStoreModels.Page = {
         createdOn: currentDate,
         lastAccessed: currentDate,
         viewCount: 1,
@@ -166,7 +166,7 @@ export class ProjectCacheManager {
   public async createCache(createParams: {
     totalPages: number;
     currentDate: Date;
-    pageRecord: Record<number, Projects.ProjectDetails[]>;
+    pageRecord: Record<number, ProjectStoreModels.ProjectDetails[]>;
   }): Promise<ProjectResult> {
     try {
       const newCache = buildProjectsData(createParams);

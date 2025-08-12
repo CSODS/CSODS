@@ -4,11 +4,11 @@ import {
   JsonFileService,
 } from "@/services";
 import { ProjectsCacheLogger } from "@/utils";
-import type { Projects } from "../../types";
+import type { ProjectStoreModels } from "../../types";
 
 export async function createProjectCacheService() {
   const jsonFileServiceInstance =
-    createJsonFileService<Projects.Store>("Projects.Store");
+    createJsonFileService<ProjectStoreModels.Store>("Projects.Store");
   return new ProjectCacheService(jsonFileServiceInstance);
 }
 /**
@@ -19,8 +19,10 @@ export async function createProjectCacheService() {
  * This class ensures efficient retrieval of project data by utilizing an
  * in-memory cache and persistent JSON storage.
  */
-export class ProjectCacheService extends AbstractCacheService<Projects.Store> {
-  public constructor(jsonFileService: JsonFileService<Projects.Store>) {
+export class ProjectCacheService extends AbstractCacheService<ProjectStoreModels.Store> {
+  public constructor(
+    jsonFileService: JsonFileService<ProjectStoreModels.Store>
+  ) {
     const logger = ProjectsCacheLogger;
     const cachePath = process.env.PROJECT_CACHE_PATH!;
     super(logger, jsonFileService, cachePath);
@@ -40,7 +42,9 @@ export class ProjectCacheService extends AbstractCacheService<Projects.Store> {
    * @param cache - The project cache to check.
    * @returns `true` if the cache is not `null` and has pages, otherwise `false`.
    */
-  protected override isCacheValid(cache: Projects.Store | null): boolean {
+  protected override isCacheValid(
+    cache: ProjectStoreModels.Store | null
+  ): boolean {
     return cache !== null && Object.keys(cache.pages).length > 0;
   }
 }

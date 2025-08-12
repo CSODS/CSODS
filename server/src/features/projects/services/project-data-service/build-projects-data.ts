@@ -1,7 +1,7 @@
-import type { Projects } from "../../types";
+import type { ProjectStoreModels } from "../../types";
 
 /**
- * @description A utility method that builds a new {@link Projects.ProjectStore} object
+ * @description A utility method that builds a new {@link ProjectStoreModels.ProjectStore} object
  * from the provided arguments..
  * todo: update docs
  */
@@ -9,11 +9,11 @@ export function buildProjectsData(params: {
   totalPages: number;
   currentDate: Date;
   isBackup?: boolean;
-  pageRecord: Record<number, Projects.ProjectDetails[]>;
-}): Projects.Store {
+  pageRecord: Record<number, ProjectStoreModels.ProjectDetails[]>;
+}): ProjectStoreModels.Store {
   const { totalPages, currentDate, isBackup, pageRecord } = params;
 
-  let pages: Projects.PageRecord = {};
+  let pages: ProjectStoreModels.PageRecord = {};
   const recordEntries = Object.entries(pageRecord);
   recordEntries.forEach(([pageNumber, projects]) => {
     const numericKey = Number(pageNumber);

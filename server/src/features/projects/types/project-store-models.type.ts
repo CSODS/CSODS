@@ -1,7 +1,7 @@
 import { StoreBase } from "@/viewmodels";
 import type { ViewModels } from ".";
 
-export namespace Projects {
+export namespace ProjectStoreModels {
   /**
    * A View Model for the Project Store.
    *

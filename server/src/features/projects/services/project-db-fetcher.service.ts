@@ -1,6 +1,6 @@
 import { createContext } from "@/db/csods";
 import { DbLogger } from "@/utils";
-import type { Projects, ProjectFilter, ViewModels } from "../types";
+import type { ProjectStoreModels, ProjectFilter, ViewModels } from "../types";
 import { ProjectFrameworkRepository, ProjectRepository } from "./repositories";
 
 export async function createProjectDbFetcher() {
@@ -95,7 +95,7 @@ export class ProjectDbFetcher {
     pageEnd?: number;
     isAscending?: boolean;
     filter?: ProjectFilter;
-  }): Promise<Record<number, Projects.ProjectDetails[]>> {
+  }): Promise<Record<number, ProjectStoreModels.ProjectDetails[]>> {
     const pageStart = options.pageStart;
     const pageSize = options.pageSize;
     const pageEnd = options.pageEnd ?? options.pageStart;
@@ -110,7 +110,8 @@ export class ProjectDbFetcher {
     DbLogger.info(
       `[fetchProjectsPages] Fetching pages ${pageStart} to ${pageEnd} with size ${pageSize} from database.`
     );
-    let projectDetails: Record<number, Projects.ProjectDetails[]> = {};
+    let projectDetails: Record<number, ProjectStoreModels.ProjectDetails[]> =
+      {};
 
     for (let pageNumber = pageStart; pageNumber <= pageEnd; pageNumber++) {
       DbLogger.info(`[fetchProjectsPages] Fetching page ${pageNumber}...`);
@@ -158,7 +159,7 @@ export class ProjectDbFetcher {
    */
   private async constructProjectDetails(
     projectArr: ViewModels.ProjectViewModel[]
-  ): Promise<Projects.ProjectDetails[]> {
+  ): Promise<ProjectStoreModels.ProjectDetails[]> {
     return await Promise.all(
       projectArr.map(async (project) => ({
         project, // The core project data.
