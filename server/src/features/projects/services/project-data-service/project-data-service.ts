@@ -1,6 +1,6 @@
 import { CACHE } from "@/data";
 import { fail, success } from "@/utils";
-import { ProjectError } from "../../errors";
+import { Project } from "../../errors";
 import type {
   Projects,
   ProjectFilter,
@@ -51,7 +51,7 @@ export class ProjectDataService {
     return project
       ? success(project, pageResult.source)
       : fail(
-          new ProjectError.ProjectError({
+          new Project.ErrorClass({
             name: "MISSING_PROJECT_IN_PAGE_ERROR",
             message:
               "Project with specified id could not be found in the projects page.",
@@ -77,7 +77,7 @@ export class ProjectDataService {
     const pageResult = await this._cacheManager.getPage(cache, pageNumber);
     if (!pageResult.success && pageResult.error.name === "MISSING_PAGE_ERROR") {
       if (resultRecord.source === "BACKUP_CACHE") {
-        const error = new ProjectError.ProjectError({
+        const error = new Project.ErrorClass({
           name: "BACKUP_CACHE_READONLY_MODIFICATION_ERROR",
           message: "Back up cache is readonly and cannot be modified.",
         });
@@ -192,7 +192,7 @@ export class ProjectDataService {
 
     if (backupResult.success) return backupResult; //  success loading backup.
 
-    const error = new ProjectError.ProjectError({
+    const error = new Project.ErrorClass({
       name: "RESOLVE_PROJECTS_ERROR",
       message: "All fall back methods for resolving projects failed.",
     });
