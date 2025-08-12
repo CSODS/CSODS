@@ -1,6 +1,6 @@
 import { createContext } from "@/db/csods";
 import { DbLogger } from "@/utils";
-import type { IProjectDetails, ProjectFilter, ViewModels } from "../types";
+import type { Projects, ProjectFilter, ViewModels } from "../types";
 import { ProjectFrameworkRepository, ProjectRepository } from "./repositories";
 
 export async function createProjectDbFetchService() {
@@ -95,7 +95,7 @@ export class ProjectDbFetchService {
     pageEnd?: number;
     isAscending?: boolean;
     filter?: ProjectFilter;
-  }): Promise<Record<number, IProjectDetails[]>> {
+  }): Promise<Record<number, Projects.ProjectDetails[]>> {
     const pageStart = options.pageStart;
     const pageSize = options.pageSize;
     const pageEnd = options.pageEnd ?? options.pageStart;
@@ -110,7 +110,7 @@ export class ProjectDbFetchService {
     DbLogger.info(
       `[fetchProjectsPages] Fetching pages ${pageStart} to ${pageEnd} with size ${pageSize} from database.`
     );
-    let projectDetails: Record<number, IProjectDetails[]> = {};
+    let projectDetails: Record<number, Projects.ProjectDetails[]> = {};
 
     for (let pageNumber = pageStart; pageNumber <= pageEnd; pageNumber++) {
       DbLogger.info(`[fetchProjectsPages] Fetching page ${pageNumber}...`);
@@ -158,7 +158,7 @@ export class ProjectDbFetchService {
    */
   private async constructProjectDetails(
     projectArr: ViewModels.ProjectViewModel[]
-  ): Promise<IProjectDetails[]> {
+  ): Promise<Projects.ProjectDetails[]> {
     return await Promise.all(
       projectArr.map(async (project) => ({
         project, // The core project data.

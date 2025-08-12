@@ -1,8 +1,6 @@
 import { EnvError } from "@/error";
 import {
-  IProjectCache,
-  IProjectCachePage,
-  IProjectDetails,
+  Projects,
   ProjectResult,
   ProjectPageResult,
 } from "@/features/projects/types";
@@ -36,7 +34,7 @@ export class ProjectCacheManager {
    * @returns
    */
   public async getPage(
-    cache: IProjectCache,
+    cache: Projects.Store,
     pageNumber: number
   ): Promise<ProjectPageResult> {
     try {
@@ -62,13 +60,13 @@ export class ProjectCacheManager {
    */
   public async createAndStorePage(page: {
     currentDate: Date;
-    cache: IProjectCache; //  used for re-storing cahce.
+    cache: Projects.Store; //  used for re-storing cahce.
     pageNumber: number;
-    projects: IProjectDetails[];
+    projects: Projects.ProjectDetails[];
   }): Promise<ProjectPageResult> {
     const { currentDate, cache, pageNumber, projects } = page;
     try {
-      const cachePage: IProjectCachePage = {
+      const cachePage: Projects.Page = {
         createdOn: currentDate,
         lastAccessed: currentDate,
         viewCount: 1,
@@ -168,7 +166,7 @@ export class ProjectCacheManager {
   public async createCache(createParams: {
     totalPages: number;
     currentDate: Date;
-    pageRecord: Record<number, IProjectDetails[]>;
+    pageRecord: Record<number, Projects.ProjectDetails[]>;
   }): Promise<ProjectResult> {
     try {
       const newCache = buildProjectsData(createParams);

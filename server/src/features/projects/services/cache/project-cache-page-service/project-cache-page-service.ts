@@ -1,20 +1,11 @@
-import {
-  CachePageRecord,
-  IProjectCache,
-  IProjectCachePage,
-} from "@/features/projects/types";
-import {
-  CacheError,
-  createJsonFileService,
-  JsonError,
-  JsonFileService,
-} from "@/services";
 import { ProjectCacheError } from "@/features/projects/errors";
+import { Projects } from "@/features/projects/types";
+import { createJsonFileService, JsonFileService } from "@/services";
 import { ProjectCacheService } from "../project-cache-service";
 
 export function createProjectCachePageService() {
   const jsonFileServiceInstance =
-    createJsonFileService<IProjectCache>("IProjectCache");
+    createJsonFileService<Projects.Store>("Projects.Store");
   return new ProjectCachePageService(jsonFileServiceInstance);
 }
 
@@ -33,7 +24,7 @@ export class ProjectCachePageService extends ProjectCacheService {
    * Calls the parent class constructor with the {@link JsonFileService}
    * instance.
    */
-  public constructor(jsonFileService: JsonFileService<IProjectCache>) {
+  public constructor(jsonFileService: JsonFileService<Projects.Store>) {
     super(jsonFileService);
   }
   /**
@@ -48,10 +39,10 @@ export class ProjectCachePageService extends ProjectCacheService {
     pageNumber,
     cachePage,
   }: {
-    cache: IProjectCache;
+    cache: Projects.Store;
     pageNumber: number;
-    cachePage: IProjectCachePage;
-  }): Promise<IProjectCachePage> {
+    cachePage: Projects.Page;
+  }): Promise<Projects.Page> {
     const { _logger, _filename } = this;
 
     try {
@@ -64,15 +55,15 @@ export class ProjectCachePageService extends ProjectCacheService {
 
       const now = new Date();
 
-      const newCache: IProjectCache = {
+      const newCache: Projects.Store = {
         //  ! top level deep copy
         ...cache,
         lastAccessed: now,
         viewCount: cache.viewCount + 1,
         //  ! record deep copy
-        cachePages: { ...cache.cachePages },
+        pages: { ...cache.pages },
       };
-      newCache.cachePages[pageNumber] = cachePage;
+      newCache.pages[pageNumber] = cachePage;
 
       //  !Throws CacheError: INVALID_CACHE_ERROR or CACHE_PERSIST_ERROR
       const storedCache = await this.persistCache(newCache);
@@ -82,7 +73,7 @@ export class ProjectCachePageService extends ProjectCacheService {
         `[storeCachePage] Success storing page: ${pageNumber} in cache: ${_filename}.`
       );
 
-      return storedCache.cachePages[pageNumber];
+      return storedCache.pages[pageNumber];
     } catch (err) {
       _logger.error("[storeCachePage] Failed storing new cache page: ", err);
       throw err; //  * all errors controlled
@@ -97,9 +88,9 @@ export class ProjectCachePageService extends ProjectCacheService {
    * @throws {CacheError} `INVALID_CACHE_ERROR` | `CACHE_PERSIST_ERROR`
    */
   public async getCachePage(
-    cache: IProjectCache,
+    cache: Projects.Store,
     pageNumber: number
-  ): Promise<IProjectCachePage> {
+  ): Promise<Projects.Page> {
     const { _logger } = this;
     try {
       _logger.info(`[getCachePage] Attempting to retrieve page ${pageNumber}`);
@@ -110,7 +101,7 @@ export class ProjectCachePageService extends ProjectCacheService {
           message: `Page ${pageNumber} is out of bounds.`,
         });
 
-      if (this.isPageMissingFromCache(cache.cachePages, pageNumber))
+      if (this.isPageMissingFromCache(cache.pages, pageNumber))
         throw new ProjectCacheError.PageError({
           name: "MISSING_PAGE_ERROR",
           message: `Page ${pageNumber} is not in cache.`,
@@ -123,7 +114,7 @@ export class ProjectCachePageService extends ProjectCacheService {
       //  !Throws CacheError: INVALID_CACHE_ERROR or CACHE_PERSIST_ERROR
       const updatedCache = await this.updateViewCount(cache, pageNumber);
 
-      return updatedCache.cachePages[pageNumber];
+      return updatedCache.pages[pageNumber];
     } catch (err) {
       _logger.error("[getCachePage] Failed retrieving cache page: ", err);
       throw err; // * all errors controlled
@@ -136,23 +127,23 @@ export class ProjectCachePageService extends ProjectCacheService {
    * @throws {CacheError} `INVALID_CACHE_ERROR` | `CACHE_PERSIST_ERROR`
    */
   private async updateViewCount(
-    cache: IProjectCache,
+    cache: Projects.Store,
     pageNumber: number
-  ): Promise<IProjectCache> {
+  ): Promise<Projects.Store> {
     const now = new Date();
-    const newCache: IProjectCache = {
+    const newCache: Projects.Store = {
       //  ! top level deep copy
       ...cache,
       lastAccessed: now,
       viewCount: cache.viewCount + 1,
       //  ! record deep copy
-      cachePages: {
-        ...cache.cachePages,
+      pages: {
+        ...cache.pages,
         [pageNumber]: {
           //  ! deep copy the page being modified
-          ...cache.cachePages[pageNumber],
+          ...cache.pages[pageNumber],
           lastAccessed: now,
-          viewCount: cache.cachePages[pageNumber].viewCount + 1,
+          viewCount: cache.pages[pageNumber].viewCount + 1,
         },
       },
     };
@@ -165,7 +156,7 @@ export class ProjectCachePageService extends ProjectCacheService {
 
   /** Checks whether a given page number does not exist in the cache. */
   public isPageMissingFromCache(
-    cachePages: CachePageRecord,
+    cachePages: Projects.PageRecord,
     pageNumber: number
   ): boolean {
     return !Object.keys(cachePages).includes(pageNumber.toString());
