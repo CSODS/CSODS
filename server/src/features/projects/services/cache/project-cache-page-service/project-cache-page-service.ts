@@ -1,5 +1,5 @@
 import { ProjectCacheError } from "@/features/projects/errors";
-import { Projects } from "@/features/projects/types";
+import type { Projects } from "@/features/projects/types";
 import { createJsonFileService, JsonFileService } from "@/services";
 import { ProjectCacheService } from "../project-cache-service";
 

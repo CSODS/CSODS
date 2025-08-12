@@ -1,6 +1,6 @@
 import { fail } from "@/utils";
 import { ProjectTagError } from "../../errors";
-import { ProjectTagsResult } from "../../types";
+import type { ProjectTagsResult } from "../../types";
 import * as CacheManager from "./project-tags-cache-manager";
 import * as DbFetcher from "../project-tags-db-fetcher.service";
 import { fetchProjectTagsData } from "./fetch-project-tags-data";

@@ -1,5 +1,5 @@
 import { Request } from "express";
-import { ProjectFilter } from "../types";
+import type { ProjectFilter } from "../types";
 
 /**
  * Extracts and parses query parameters from the request object to construct an `IProjectFilter`.

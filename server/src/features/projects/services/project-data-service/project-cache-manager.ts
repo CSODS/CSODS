@@ -1,5 +1,5 @@
 import { EnvError } from "@/error";
-import {
+import type {
   Projects,
   ProjectResult,
   ProjectPageResult,

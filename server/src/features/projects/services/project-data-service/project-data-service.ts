@@ -1,7 +1,7 @@
 import { CACHE } from "@/data";
 import { fail, success } from "@/utils";
 import { ProjectError } from "../../errors";
-import {
+import type {
   Projects,
   ProjectFilter,
   ProjectPageResult,

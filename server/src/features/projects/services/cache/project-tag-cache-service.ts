@@ -4,7 +4,7 @@ import {
   JsonFileService,
 } from "@/services";
 import { ProjectsCacheLogger } from "@/utils";
-import { ProjectTags } from "../../types";
+import type { ProjectTags } from "../../types";
 
 export function createProjectTagCacheService() {
   const jsonFileService =
