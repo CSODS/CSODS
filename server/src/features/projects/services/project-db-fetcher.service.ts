@@ -3,13 +3,13 @@ import { DbLogger } from "@/utils";
 import type { Projects, ProjectFilter, ViewModels } from "../types";
 import { ProjectFrameworkRepository, ProjectRepository } from "./repositories";
 
-export async function createProjectDbFetchService() {
+export async function createProjectDbFetcher() {
   const projectRepoInstance = new ProjectRepository(await createContext());
   const projectFrameworkRepoInstance = new ProjectFrameworkRepository(
     await createContext()
   );
 
-  return new ProjectDbFetchService(
+  return new ProjectDbFetcher(
     projectRepoInstance,
     projectFrameworkRepoInstance
   );
@@ -21,7 +21,7 @@ export async function createProjectDbFetchService() {
  * multiple pages of projects, as well as querying the total count of available
  * projects.
  */
-export class ProjectDbFetchService {
+export class ProjectDbFetcher {
   private readonly _projectRepo: ProjectRepository;
   private readonly _projectFrameworkRepo: ProjectFrameworkRepository;
 

@@ -8,24 +8,24 @@ import type {
   ProjectResult,
 } from "../../types";
 import { ProjectFilterUtil } from "../../utils";
-import * as FetchService from "../project-db-fetch.service";
+import * as FetchService from "../project-db-fetcher.service";
 import { fetchProjectsData } from "./fetch-projects-data";
 import { getProjectDataKey } from "./get-project-data-key";
 import * as CacheManager from "./project-cache-manager";
 
 export async function createProjectDataService() {
   const cacheManager = CacheManager.createProjectCacheManager();
-  const dbFetchService = await FetchService.createProjectDbFetchService();
+  const dbFetchService = await FetchService.createProjectDbFetcher();
   return new ProjectDataService(cacheManager, dbFetchService);
 }
 
 export class ProjectDataService {
   private _cacheManager: CacheManager.ProjectCacheManager;
-  private _dbFetchService: FetchService.ProjectDbFetchService;
+  private _dbFetchService: FetchService.ProjectDbFetcher;
 
   public constructor(
     projectCacheManager: CacheManager.ProjectCacheManager,
-    projectDbFetchService: FetchService.ProjectDbFetchService
+    projectDbFetchService: FetchService.ProjectDbFetcher
   ) {
     this._cacheManager = projectCacheManager;
     this._dbFetchService = projectDbFetchService;

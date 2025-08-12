@@ -2,7 +2,7 @@ import { ResultFail, ResultSuccess } from "@/types";
 import { fail, success } from "@/utils";
 import { Project } from "../../errors";
 import type { Projects } from "../../types";
-import { ProjectDbFetchService } from "../project-db-fetch.service";
+import { ProjectDbFetcher } from "../project-db-fetcher.service";
 
 export type ProjectsData = {
   totalPages: number;
@@ -15,7 +15,7 @@ export type FetchResult =
 
 type FetchOptions = {
   includeCount?: boolean;
-} & Parameters<ProjectDbFetchService["fetchProjectsPages"]>[0];
+} & Parameters<ProjectDbFetcher["fetchProjectsPages"]>[0];
 
 type RetryOptions = {
   maxRetries?: number;
@@ -38,7 +38,7 @@ type RetryOptions = {
  * todo: log each retry
  */
 export async function fetchProjectsData(
-  projectDbFetchService: ProjectDbFetchService,
+  projectDbFetchService: ProjectDbFetcher,
   fetchOptions: FetchOptions,
   retryOptions?: RetryOptions
 ): Promise<FetchResult> {
