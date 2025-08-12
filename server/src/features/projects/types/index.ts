@@ -5,4 +5,4 @@ export * from "./project-tag-data-service.type";
 export * from "./legacy-project-tags-cache.interface";
 export * as ViewModels from "./project-viewmodels.type";
 export * from "./legacy-projects-cache.interface";
-export * from "./projects-store.type";
+export * as ProjectsStore from "./projects-store.type";
