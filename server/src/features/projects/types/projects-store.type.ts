@@ -57,6 +57,6 @@ export namespace Projects {
      * A list of frameworks associated with the project.
      * Each entry links a framework to the project through a many-to-many relationship.
      */
-    projectFrameworks: ViewModels.ProjectFrameworkViewModel;
+    projectFrameworks: ViewModels.ProjectFrameworkViewModel[];
   };
 }
