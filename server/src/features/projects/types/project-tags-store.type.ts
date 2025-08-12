@@ -1,34 +1,33 @@
 import { StoreBase } from "@/viewmodels";
-import * as tableTypes from "./project-viewmodels.type";
+import { ViewModels } from ".";
 
 /**
- * @deprecated Pleas use `ProjectTagsStore`
- * Represents a structured cache of all project-related tags used for categorization and filtering.
+ * Represents a structured store of all project-related tags used for categorization and filtering.
  *
  * This interface is typically used to store or serve tag data that can be applied to projects,
  * such as development types, programming languages, frameworks, database technologies,
  * and application industries. It allows for efficient access and reuse of tag metadata,
  * especially when rendering filters or forms in the UI.
  */
-export interface IProjectTagsCache extends StoreBase {
+export type ProjectTagsStore = {
   /**
    * A list of all available development types (e.g., Web, Mobile, Desktop).
    */
-  devTypes: tableTypes.DevTypeViewModel[];
+  devTypes: ViewModels.DevTypeViewModel[];
   /**
    * A list of programming languages used across projects (e.g., JavaScript, Python).
    */
-  programmingLanguages: tableTypes.ProgrammingLanguageViewModel[];
+  programmingLanguages: ViewModels.ProgrammingLanguageViewModel[];
   /**
    * A list of frameworks that can be associated with projects (e.g., React, Django).
    */
-  frameworks: tableTypes.FrameworkViewModel[];
+  frameworks: ViewModels.FrameworkViewModel[];
   /**
    * A list of database technologies (e.g., MySQL, MongoDB).
    */
-  databaseTechnologies: tableTypes.DatabaseTechnologyViewModel[];
+  databaseTechnologies: ViewModels.DatabaseTechnologyViewModel[];
   /**
    * A list of industries or sectors for project applications (e.g., Education, Healthcare).
    */
-  applicationIndustries: tableTypes.ApplicationIndustryViewModel[];
-}
+  applicationIndustries: ViewModels.ApplicationIndustryViewModel[];
+} & StoreBase;
