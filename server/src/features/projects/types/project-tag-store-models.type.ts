@@ -1,7 +1,7 @@
 import { StoreBase } from "@/viewmodels";
 import { ViewModels } from ".";
 
-export namespace ProjectTags {
+export namespace ProjectTagStoreModels {
   /**
    * Represents a structured store of all project-related tags used for categorization and filtering.
    *
