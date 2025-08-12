@@ -1,5 +1,5 @@
 import { fail, success } from "@/utils";
-import { ProjectTagError } from "../../errors";
+import { ProjectTag } from "../../errors";
 import { ProjectTagsDbFetcher } from "../project-tags-db-fetcher.service";
 
 //  todo: add docs
@@ -20,7 +20,7 @@ export async function fetchProjectTagsData(dbFetcher: ProjectTagsDbFetcher) {
       programmingLanguages,
     });
   } catch (err) {
-    const error = new ProjectTagError.ProjectTagError({
+    const error = new ProjectTag.ProjectTagError({
       name: "DB_FETCH_ERROR",
       message: "Error fetching tag data from database.",
       cause: err,

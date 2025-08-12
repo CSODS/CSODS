@@ -1,6 +1,6 @@
 import { fail, success } from "@/utils";
 import { createProjectTagCacheService, ProjectTagCacheService } from "../cache";
-import { ProjectTagError } from "../../errors";
+import { ProjectTag } from "../../errors";
 import type { ProjectTags, ProjectTagsResult, ViewModels } from "../../types";
 
 export function createProjectsTagCacheManager() {
@@ -44,7 +44,7 @@ export class ProjectTagsCacheManager {
       const storedCache = await this._cacheService.persistCache(data);
       return success(storedCache);
     } catch (err) {
-      const error = new ProjectTagError.ProjectTagError({
+      const error = new ProjectTag.ProjectTagError({
         name: "CREATE_NEW_CACHE_ERROR",
         message: "Error creating project tags cache.",
         cause: err,
@@ -59,7 +59,7 @@ export class ProjectTagsCacheManager {
       const tags = await this._cacheService.loadCache();
       return success(tags, "JSON_CACHE");
     } catch (err) {
-      const error = new ProjectTagError.ProjectTagError({
+      const error = new ProjectTag.ProjectTagError({
         name: "LOAD_FROM_CACHE_ERROR",
         message: "Error loading tags from cache.",
         cause: err,

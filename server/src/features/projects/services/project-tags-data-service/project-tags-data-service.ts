@@ -1,5 +1,5 @@
 import { fail } from "@/utils";
-import { ProjectTagError } from "../../errors";
+import { ProjectTag } from "../../errors";
 import type { ProjectTagsResult } from "../../types";
 import * as CacheManager from "./project-tags-cache-manager";
 import * as DbFetcher from "../project-tags-db-fetcher.service";
@@ -44,7 +44,7 @@ export class ProjectTagsDataService {
       if (createResult.success) return { ...createResult, source: "DATABASE" };
     }
 
-    const error = new ProjectTagError.ProjectTagError({
+    const error = new ProjectTag.ProjectTagError({
       name: "RESOLVE_TAGS_ERROR",
       message: "Failed all attempts to crate tags cache.",
     });
