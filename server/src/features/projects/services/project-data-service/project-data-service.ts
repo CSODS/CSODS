@@ -185,7 +185,7 @@ export class ProjectDataService {
       }
 
     const backupKey = getProjectDataKey({ isHardBackup: true });
-    //  !Throws EnvError: CACHE | returns null on failure.
+    //  !Throws Env.ErrorClass: CACHE | returns null on failure.
     const backupResult = await this._cacheManager.loadBackupCache({
       backupKey,
     });

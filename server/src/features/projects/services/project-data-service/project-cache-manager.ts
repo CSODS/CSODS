@@ -1,4 +1,4 @@
-import { EnvError } from "@/error";
+import { Env } from "@/error";
 import type {
   Projects,
   ProjectResult,
@@ -102,7 +102,7 @@ export class ProjectCacheManager {
     try {
       const backupPath = process.env.DEFAULT_CACHE_PATH!;
       if (!backupPath)
-        throw new EnvError({
+        throw new Env.ErrorClass({
           name: "CACHE",
           message: "Default cache path not configured.",
         });
