@@ -38,7 +38,7 @@ export class ProjectCacheManager {
     pageNumber: number
   ): Promise<ProjectPageResult> {
     try {
-      //  !Throws ProjectCachePageError: PAGE_OUT_OF_BOUNDS_ERROR | MISSING_PAGE_ERROR
+      //  !Throws ProjectPage.ErrorClass: PAGE_OUT_OF_BOUNDS_ERROR | MISSING_PAGE_ERROR
       //  !Throws CacheError: INVALID_CACHE_ERROR | CACHE_PERSIST_ERROR
       const page = await this._cachePageService.getCachePage(cache, pageNumber);
       return success(page, "JSON_CACHE");

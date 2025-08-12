@@ -1,5 +1,5 @@
 import { Cache, Db, ErrorBase } from "@/error";
-import { ProjectCacheError } from ".";
+import { ProjectPage } from "./project-page.error";
 import { isAnyError, isError } from "@/utils";
 
 export type ErrorName =
@@ -7,7 +7,7 @@ export type ErrorName =
   | "RESOLVE_PROJECTS_ERROR"
   | "STORE_CACHE_PAGE_ERROR"
   | "MISSING_PROJECT_IN_PAGE_ERROR"
-  | ProjectCacheError.ErrorName
+  | ProjectPage.ErrorName
   | Cache.ErrorName
   | Db.ErrorName;
 
@@ -36,13 +36,11 @@ export function normalizeProjectError<E extends ErrorName>({
 }): ProjectError {
   if (isError(ProjectError, err)) return err;
 
-  if (
-    isAnyError(
-      [Cache.ErrorClass, Db.ErrorClass, ProjectCacheError.PageError],
-      err
-    )
-  )
-    return new ProjectError({ ...err });
+  const isInherited = isAnyError(
+    [Cache.ErrorClass, Db.ErrorClass, ProjectPage.ErrorClass],
+    err
+  );
+  if (isInherited) return new ProjectError({ ...err });
 
   return new ProjectError({ name, message, cause: err });
 }

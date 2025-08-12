@@ -1,4 +1,4 @@
-import { ProjectCacheError } from "@/features/projects/errors";
+import { ProjectPage } from "@/features/projects/errors";
 import type { Projects } from "@/features/projects/types";
 import { createJsonFileService, JsonFileService } from "@/services";
 import { ProjectCacheService } from "../project-cache-service";
@@ -84,7 +84,7 @@ export class ProjectCachePageService extends ProjectCacheService {
    * @description Retrieves a specific page of project data from the cache.
    * Then updates the top-level and specific cache page’s `viewCount` and
    * `lastAccessed`.
-   * @throws {ProjectCachePageError} `PAGE_OUT_OF_BOUNDS_ERROR` | `MISSING_PAGE_ERROR`
+   * @throws {ProjectPage.ErrorClass} `PAGE_OUT_OF_BOUNDS_ERROR` | `MISSING_PAGE_ERROR`
    * @throws {CacheError} `INVALID_CACHE_ERROR` | `CACHE_PERSIST_ERROR`
    */
   public async getCachePage(
@@ -96,13 +96,13 @@ export class ProjectCachePageService extends ProjectCacheService {
       _logger.info(`[getCachePage] Attempting to retrieve page ${pageNumber}`);
 
       if (pageNumber === 0 || pageNumber > cache.totalPages)
-        throw new ProjectCacheError.PageError({
+        throw new ProjectPage.ErrorClass({
           name: "PAGE_OUT_OF_BOUNDS_ERROR",
           message: `Page ${pageNumber} is out of bounds.`,
         });
 
       if (this.isPageMissingFromCache(cache.pages, pageNumber))
-        throw new ProjectCacheError.PageError({
+        throw new ProjectPage.ErrorClass({
           name: "MISSING_PAGE_ERROR",
           message: `Page ${pageNumber} is not in cache.`,
         });
