@@ -1,18 +1,14 @@
 import { Exhaustive } from "@/types";
 import { Project } from "../errors";
+import { StatusCodeMap } from "@/data";
 
 //  todo: add docs
 export const ProjectErrorStatusCodeMap: Exhaustive<Project.ErrorName> = {
-  EXCEEDED_MAX_FETCH_RETRIES_ERROR: 500,
-  EMPTY_TABLE_ERROR: 500,
-  DB_FETCH_ERROR: 500,
+  ...StatusCodeMap.CacheError,
+  ...StatusCodeMap.DbError,
   RETRIEVE_PROJECTS_ERROR: 500,
   RESOLVE_PROJECTS_ERROR: 500,
-  LOAD_FROM_CACHE_ERROR: 500,
-  LOAD_BACKUP_ERROR: 500,
-  CREATE_NEW_CACHE_ERROR: 500,
   STORE_CACHE_PAGE_ERROR: 500,
-  BACKUP_CACHE_READONLY_MODIFICATION_ERROR: 500,
   MISSING_PROJECT_IN_PAGE_ERROR: 404,
   //  Inherited PageError types
   PAGE_OUT_OF_BOUNDS_ERROR: 404,
