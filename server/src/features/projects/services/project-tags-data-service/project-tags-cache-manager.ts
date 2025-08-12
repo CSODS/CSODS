@@ -1,7 +1,7 @@
 import { fail, success } from "@/utils";
 import { createProjectTagCacheService, ProjectTagCacheService } from "../cache";
 import { ProjectTagError } from "../../errors";
-import { IProjectTagsCache, ProjectTagsResult } from "../../types";
+import { ProjectTags, ProjectTagsResult } from "../../types";
 import { ViewModels } from "../../types";
 
 export function createProjectsTagCacheManager() {
@@ -30,7 +30,7 @@ export class ProjectTagsCacheManager {
     databaseTechnologies: ViewModels.DatabaseTechnologyViewModel[];
     applicationIndustries: ViewModels.ApplicationIndustryViewModel[];
   }): Promise<ProjectTagsResult> {
-    const data: IProjectTagsCache = {
+    const data: ProjectTags.Store = {
       devTypes,
       programmingLanguages,
       frameworks,
