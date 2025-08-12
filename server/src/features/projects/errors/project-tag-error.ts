@@ -1,18 +1,9 @@
-import { ErrorBase } from "@/error";
+import { Cache, Db, ErrorBase } from "@/error";
+import { isAnyError } from "@/utils";
 
 export type ErrorName =
-  // db error
-  | "EXCEEDED_MAX_FETCH_RETRIES_ERROR"
-  | "EMPTY_TABLE_ERROR"
-  | "DB_FETCH_ERROR"
   // cache specific error
-  | "RETRIEVE_TAGS_ERROR"
-  | "RESOLVE_TAGS_ERROR"
-  // general cache error
-  | "LOAD_FROM_CACHE_ERROR"
-  | "LOAD_BACKUP_ERROR"
-  | "CREATE_NEW_CACHE_ERROR"
-  | "BACKUP_CACHE_READONLY_MODIFICATION_ERROR";
+  "RETRIEVE_TAGS_ERROR" | "RESOLVE_TAGS_ERROR" | Cache.ErrorName | Db.ErrorName;
 
 export class ProjectTagError extends ErrorBase<ErrorName> {}
 
@@ -25,11 +16,10 @@ export function normalizeProjectTagError<E extends ErrorName>({
   message: string;
   err: unknown;
 }): ProjectTagError {
-  return err instanceof ProjectTagError
-    ? err
-    : new ProjectTagError({
-        name,
-        message,
-        cause: err,
-      });
+  if (err instanceof ProjectTagError) return err;
+
+  if (isAnyError([Cache.ErrorClass, Db.ErrorClass], err))
+    return new ProjectTagError({ ...err });
+
+  return new ProjectTagError({ name, message, cause: err });
 }
