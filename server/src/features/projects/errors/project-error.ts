@@ -26,7 +26,7 @@ export namespace Project {
    * @returns An instance of the {@link ErrorClass} class.
    * todo: update docs
    */
-  export function normalizeProjectError<E extends ErrorName>({
+  export function normalizeError<E extends ErrorName>({
     name,
     message,
     err,

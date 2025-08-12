@@ -11,7 +11,7 @@ export namespace ProjectTag {
 
   export class ErrorClass extends ErrorBase<ErrorName> {}
 
-  export function normalizeProjectTagError<E extends ErrorName>({
+  export function normalizeError<E extends ErrorName>({
     name,
     message,
     err,

@@ -72,7 +72,7 @@ export async function fetchProjectsData(
       return success({ totalPages, pageRecord });
     } catch (err) {
       //  todo: log errors
-      const error = Project.normalizeProjectError({
+      const error = Project.normalizeError({
         name: "DB_FETCH_ERROR",
         message: "Error fetching projects from database.",
         err,
