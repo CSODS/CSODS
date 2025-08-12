@@ -1,5 +1,5 @@
 import { Cache, Db, ErrorBase } from "@/error";
-import { isAnyError } from "@/utils";
+import { isAnyError, isError } from "@/utils";
 
 export type ErrorName =
   // cache specific error
@@ -16,7 +16,7 @@ export function normalizeProjectTagError<E extends ErrorName>({
   message: string;
   err: unknown;
 }): ProjectTagError {
-  if (err instanceof ProjectTagError) return err;
+  if (isError(ProjectTagError, err)) return err;
 
   if (isAnyError([Cache.ErrorClass, Db.ErrorClass], err))
     return new ProjectTagError({ ...err });

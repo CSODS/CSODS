@@ -1,6 +1,6 @@
 import { Cache, Db, ErrorBase } from "@/error";
 import { ProjectCacheError } from ".";
-import { isAnyError } from "@/utils";
+import { isAnyError, isError } from "@/utils";
 
 export type ErrorName =
   | "RETRIEVE_PROJECTS_ERROR"
@@ -34,7 +34,7 @@ export function normalizeProjectError<E extends ErrorName>({
   message: string;
   err: unknown;
 }): ProjectError {
-  if (err instanceof ProjectError) return err;
+  if (isError(ProjectError, err)) return err;
 
   if (
     isAnyError(
