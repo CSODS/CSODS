@@ -2,9 +2,9 @@ import { eq, and, or, like } from "drizzle-orm";
 import { DbContext } from "@/db/csods.js";
 import { Project } from "@models";
 import { Repository } from "@services";
-import { ProjectFilter, ProjectsTable, ProjectViewModel } from "../../types";
+import type { ProjectFilter, Tables, ViewModels } from "../../types";
 
-export class ProjectRepository extends Repository<ProjectsTable> {
+export class ProjectRepository extends Repository<Tables.ProjectsTable> {
   public constructor(context: DbContext) {
     super(context, Project);
   }
@@ -29,7 +29,7 @@ export class ProjectRepository extends Repository<ProjectsTable> {
     filter?: ProjectFilter | undefined;
     pageSize?: number | undefined;
     pageNumber?: number | undefined;
-  }): Promise<ProjectViewModel[]> {
+  }): Promise<ViewModels.ProjectViewModel[]> {
     const isAscending = options?.isAscending ?? true;
     const filter = options?.filter;
     const pageSize = options?.pageSize ?? 100;

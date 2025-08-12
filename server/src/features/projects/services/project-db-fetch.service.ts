@@ -1,6 +1,6 @@
 import { createContext } from "@/db/csods";
 import { DbLogger } from "@/utils";
-import { IProjectDetails, ProjectFilter, ProjectViewModel } from "../types";
+import type { IProjectDetails, ProjectFilter, ViewModels } from "../types";
 import { ProjectFrameworkRepository, ProjectRepository } from "./repositories";
 
 export async function createProjectDbFetchService() {
@@ -114,7 +114,7 @@ export class ProjectDbFetchService {
 
     for (let pageNumber = pageStart; pageNumber <= pageEnd; pageNumber++) {
       DbLogger.info(`[fetchProjectsPages] Fetching page ${pageNumber}...`);
-      const projectArr: ProjectViewModel[] =
+      const projectArr: ViewModels.ProjectViewModel[] =
         await this._projectRepo.getProjects({
           isAscending: isAscending,
           filter: filter,
@@ -157,7 +157,7 @@ export class ProjectDbFetchService {
    * details: [{ Project: ..., ProjectFrameworks: [...] }, ...]
    */
   private async constructProjectDetails(
-    projectArr: ProjectViewModel[]
+    projectArr: ViewModels.ProjectViewModel[]
   ): Promise<IProjectDetails[]> {
     return await Promise.all(
       projectArr.map(async (project) => ({

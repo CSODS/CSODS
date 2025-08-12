@@ -1,12 +1,9 @@
 import { DbContext } from "@/db/csods";
 import { DatabaseTechnology } from "@/models";
 import { Repository } from "@/services";
-import {
-  DatabaseTechnologyTable,
-  DatabaseTechnologyViewModel,
-} from "../../types";
+import type { Tables, ViewModels } from "../../types";
 
-export class DatabaseTechnologyRepository extends Repository<DatabaseTechnologyTable> {
+export class DatabaseTechnologyRepository extends Repository<Tables.DatabaseTechnologyTable> {
   public constructor(dbContext: DbContext) {
     super(dbContext, DatabaseTechnology);
   }
@@ -21,7 +18,7 @@ export class DatabaseTechnologyRepository extends Repository<DatabaseTechnologyT
    * @returns A `Promise` that resolves to the list of rows or
    * `null` if the read operation fails.
    */
-  public async getAll(): Promise<DatabaseTechnologyViewModel[]> {
+  public async getAll(): Promise<ViewModels.DatabaseTechnologyViewModel[]> {
     const databaseTechnologies = await this.GetRows({
       column: DatabaseTechnology.databaseId,
     });

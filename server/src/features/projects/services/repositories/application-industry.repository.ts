@@ -1,12 +1,9 @@
 import { DbContext } from "@/db/csods";
 import { ApplicationIndustry } from "@/models";
 import { Repository } from "@/services";
-import {
-  ApplicationIndustryTable,
-  ApplicationIndustryViewModel,
-} from "../../types";
+import type { ViewModels, Tables } from "../../types";
 
-export class ApplicationIndustryRepository extends Repository<ApplicationIndustryTable> {
+export class ApplicationIndustryRepository extends Repository<Tables.ApplicationIndustryTable> {
   public constructor(dbContext: DbContext) {
     super(dbContext, ApplicationIndustry);
   }
@@ -21,7 +18,7 @@ export class ApplicationIndustryRepository extends Repository<ApplicationIndustr
    * @returns A `Promise` that resolves to the list of rows or
    * `null` if the read operation fails.
    */
-  public async getAll(): Promise<ApplicationIndustryViewModel[]> {
+  public async getAll(): Promise<ViewModels.ApplicationIndustryViewModel[]> {
     const applicationIndustries = await this.GetRows({
       column: ApplicationIndustry.industryId,
     });

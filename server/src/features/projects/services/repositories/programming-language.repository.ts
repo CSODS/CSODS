@@ -1,12 +1,9 @@
 import { DbContext } from "@/db/csods";
 import { ProgrammingLanguage } from "@/models";
 import { Repository } from "@/services";
-import {
-  ProgrammingLanguageTable,
-  ProgrammingLanguageViewModel,
-} from "../../types";
+import type { Tables, ViewModels } from "../../types";
 
-export class ProgrammingLanguageRepository extends Repository<ProgrammingLanguageTable> {
+export class ProgrammingLanguageRepository extends Repository<Tables.ProgrammingLanguageTable> {
   public constructor(dbContext: DbContext) {
     super(dbContext, ProgrammingLanguage);
   }
@@ -21,7 +18,7 @@ export class ProgrammingLanguageRepository extends Repository<ProgrammingLanguag
    * @returns A `Promise` that resolves to the list of rows or
    * `null` if the read operation fails.
    */
-  public async getAll(): Promise<ProgrammingLanguageViewModel[]> {
+  public async getAll(): Promise<ViewModels.ProgrammingLanguageViewModel[]> {
     const programmingLanguages = await this.GetRows({
       column: ProgrammingLanguage.languageId,
     });

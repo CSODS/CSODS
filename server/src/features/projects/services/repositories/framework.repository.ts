@@ -1,9 +1,9 @@
 import { DbContext } from "@/db/csods";
 import { Framework } from "@/models";
 import { Repository } from "@/services";
-import { FrameworkTable, FrameworkViewModel } from "../../types";
+import type { Tables, ViewModels } from "../../types";
 
-export class FrameworkRepository extends Repository<FrameworkTable> {
+export class FrameworkRepository extends Repository<Tables.FrameworkTable> {
   public constructor(dbContext: DbContext) {
     super(dbContext, Framework);
   }
@@ -18,7 +18,7 @@ export class FrameworkRepository extends Repository<FrameworkTable> {
    * @returns A `Promise` that resolves to the list of rows or
    * `null` if the read operation fails.
    */
-  public async getAll(): Promise<FrameworkViewModel[]> {
+  public async getAll(): Promise<ViewModels.FrameworkViewModel[]> {
     const frameworks = await this.GetRows({ column: Framework.frameworkId });
     return frameworks;
   }
