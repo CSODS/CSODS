@@ -4,7 +4,7 @@ import { ProjectError } from "../errors";
 //  todo: add docs
 export const ProjectErrorStatusCodeMap: Exhaustive<ProjectError.ErrorName> = {
   EXCEEDED_MAX_FETCH_RETRIES_ERROR: 500,
-  EMPTY_PROJECTS_TABLE_ERROR: 500,
+  EMPTY_TABLE_ERROR: 500,
   DB_FETCH_ERROR: 500,
   RETRIEVE_PROJECTS_ERROR: 500,
   RESOLVE_PROJECTS_ERROR: 500,

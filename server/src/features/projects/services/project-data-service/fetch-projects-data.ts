@@ -59,7 +59,7 @@ export async function fetchProjectsData(
         projectsCount = await projectDbFetchService.fetchProjectsCount(filter);
         if (projectsCount === 0)
           throw new ProjectError.ProjectError({
-            name: "EMPTY_PROJECTS_TABLE_ERROR",
+            name: "EMPTY_TABLE_ERROR",
             message: "The projects table is empty.",
           });
       }
@@ -78,7 +78,7 @@ export async function fetchProjectsData(
         err,
       });
 
-      if (error.name === "EMPTY_PROJECTS_TABLE_ERROR") return fail(error);
+      if (error.name === "EMPTY_TABLE_ERROR") return fail(error);
     }
   }
 
