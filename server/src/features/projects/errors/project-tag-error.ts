@@ -9,7 +9,7 @@ export namespace ProjectTag {
     | Cache.ErrorName
     | Db.ErrorName;
 
-  export class ProjectTagError extends ErrorBase<ErrorName> {}
+  export class ErrorClass extends ErrorBase<ErrorName> {}
 
   export function normalizeProjectTagError<E extends ErrorName>({
     name,
@@ -19,12 +19,12 @@ export namespace ProjectTag {
     name: E;
     message: string;
     err: unknown;
-  }): ProjectTagError {
-    if (isError(ProjectTagError, err)) return err;
+  }): ErrorClass {
+    if (isError(ErrorClass, err)) return err;
 
     if (isAnyError([Cache.ErrorClass, Db.ErrorClass], err))
-      return new ProjectTagError({ ...err });
+      return new ErrorClass({ ...err });
 
-    return new ProjectTagError({ name, message, cause: err });
+    return new ErrorClass({ name, message, cause: err });
   }
 }

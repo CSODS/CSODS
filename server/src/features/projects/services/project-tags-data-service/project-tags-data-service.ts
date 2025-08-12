@@ -44,7 +44,7 @@ export class ProjectTagsDataService {
       if (createResult.success) return { ...createResult, source: "DATABASE" };
     }
 
-    const error = new ProjectTag.ProjectTagError({
+    const error = new ProjectTag.ErrorClass({
       name: "RESOLVE_TAGS_ERROR",
       message: "Failed all attempts to crate tags cache.",
     });

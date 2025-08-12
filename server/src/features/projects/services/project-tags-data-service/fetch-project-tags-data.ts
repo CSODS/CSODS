@@ -20,7 +20,7 @@ export async function fetchProjectTagsData(dbFetcher: ProjectTagsDbFetcher) {
       programmingLanguages,
     });
   } catch (err) {
-    const error = new ProjectTag.ProjectTagError({
+    const error = new ProjectTag.ErrorClass({
       name: "DB_FETCH_ERROR",
       message: "Error fetching tag data from database.",
       cause: err,

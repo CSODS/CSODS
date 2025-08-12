@@ -5,4 +5,4 @@ import { ProjectTags } from "./project-tags-store.type";
 
 export type ProjectTagsResult =
   | ResultSuccess<ProjectTags.Store, DataSource>
-  | ResultFail<ProjectTag.ProjectTagError>;
+  | ResultFail<ProjectTag.ErrorClass>;
