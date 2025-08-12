@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { StatusCode } from "@/utils";
-import { ProjectTagsErrorStatusCodeMap as statusCodeMap } from "../constants";
+import { StatusCodeMap } from "../constants";
 
 //  todo: add docs
 export async function getProjectTags(req: Request, res: Response) {
@@ -11,6 +11,7 @@ export async function getProjectTags(req: Request, res: Response) {
     return;
   }
 
+  const statusCodeMap = StatusCodeMap.ProjectTagsError;
   const { name: errorName } = tagResult.error;
   res
     .status(StatusCode.fromError({ errorName, statusCodeMap }))

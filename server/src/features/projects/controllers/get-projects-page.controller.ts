@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { StatusCode } from "@/utils";
-import { ProjectErrorStatusCodeMap as statusCodeMap } from "../constants";
+import { StatusCodeMap } from "../constants";
 import type { ProjectPageResult } from "../types";
 import { assembleFilter } from "../utils";
 
@@ -24,6 +24,7 @@ export async function getProjectsPage(req: Request, res: Response) {
     return;
   }
 
+  const statusCodeMap = StatusCodeMap.ProjectError;
   const { name: errorName } = pageResult.error;
   res
     .status(StatusCode.fromError({ errorName, statusCodeMap }))
