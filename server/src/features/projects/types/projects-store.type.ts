@@ -1,14 +1,13 @@
 import { StoreBase } from "@/viewmodels";
-import * as tableTypes from "./project-viewmodels.type";
+import type { ViewModels } from ".";
 
 /**
- * @deprecated Please use `ProjectStore`
- * A View Model for the Project Cache.
+ * A View Model for the Project Store.
  *
- * This interface represents the structure used to cache paginated project data,
+ * This interface represents the structure used to store paginated project data,
  * enabling efficient retrieval and display in a paginated view.
  */
-export interface IProjectCache extends StoreBase {
+export type ProjectsStore = {
   /**
    * The total number of available pages of projects.
    */
@@ -18,23 +17,19 @@ export interface IProjectCache extends StoreBase {
    */
   isBackup: boolean;
   /**
-   * A mapping of page numbers to CachePage objects.
-   * Each key is a page number, and the corresponding value is a CachePage instance
-   * representing cached data for that page.
+   * A mapping of page numbers to ProjectPage objects.
+   * Each key is a page number, and the corresponding value is a ProjectPage instance
+   * representing stored data for that page.
    */
-  cachePages: CachePageRecord;
-}
+  pages: PageRecord;
+} & StoreBase;
+
+export type PageRecord = Record<number, ProjectsPage>;
 
 /**
- * @deprecated Please use `PageRecord`
+ * Represents a stored page of projects within the ProjectStore.
  */
-export type CachePageRecord = Record<number, IProjectCachePage>;
-
-/**
- * @deprecated Please use `ProjectPage`
- * Represents a cached page of projects within the ProjectCache.
- */
-export interface IProjectCachePage extends StoreBase {
+export type ProjectsPage = {
   /**
    * The total number of available pages of projects.
    */
@@ -42,25 +37,24 @@ export interface IProjectCachePage extends StoreBase {
   /**
    * The project list associated with this page.
    */
-  projects: IProjectDetails[];
-}
+  projects: ProjectDetails[];
+} & StoreBase;
+
 /**
- * @deprecated `Please use ProjectDetails`
  * Represents the fully detailed view of a project, including its core project data and
  * all associated frameworks.
  *
  * This interface is typically used in contexts where a project needs to be displayed
  * along with its related framework technologies.
  */
-export interface IProjectDetails {
+export type ProjectDetails = {
   /**
    * The main project entity containing metadata such as title, description, associated tags, etc.
    */
-  project: tableTypes.ProjectViewModel;
-
+  project: ViewModels.ProjectViewModel;
   /**
    * A list of frameworks associated with the project.
    * Each entry links a framework to the project through a many-to-many relationship.
    */
-  projectFrameworks: tableTypes.ProjectFrameworkViewModel[];
-}
+  projectFrameworks: ViewModels.ProjectFrameworkViewModel;
+};
