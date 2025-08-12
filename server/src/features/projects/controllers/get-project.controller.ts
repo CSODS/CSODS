@@ -1,7 +1,6 @@
 import { Request, Response } from "express";
 import { StatusCode } from "@/utils";
 import { ProjectErrorStatusCodeMap as statusCodeMap } from "../constants";
-import type { IProjectDetails } from "../types";
 import { assembleFilter } from "../utils";
 
 /**
