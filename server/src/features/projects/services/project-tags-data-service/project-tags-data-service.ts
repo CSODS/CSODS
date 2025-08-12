@@ -1,9 +1,9 @@
 import { fail } from "@/utils";
 import { ProjectTag } from "../../errors";
 import type { ProjectTagsResult } from "../../types";
-import * as CacheManager from "./project-tags-cache-manager";
 import * as DbFetcher from "../project-tags-db-fetcher.service";
 import { fetchProjectTagsData } from "./fetch-project-tags-data";
+import * as CacheManager from "./project-tags-cache-manager";
 
 export async function createProjectTagsDataService() {
   const cacheManager = CacheManager.createProjectsTagCacheManager();

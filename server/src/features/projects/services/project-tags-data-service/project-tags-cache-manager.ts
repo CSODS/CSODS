@@ -1,7 +1,7 @@
 import { fail, success } from "@/utils";
-import { createProjectTagCacheService, ProjectTagCacheService } from "../cache";
 import { ProjectTag } from "../../errors";
 import type { ProjectTags, ProjectTagsResult, ViewModels } from "../../types";
+import { createProjectTagCacheService, ProjectTagCacheService } from "../cache";
 
 export function createProjectsTagCacheManager() {
   const cacheService = createProjectTagCacheService();
