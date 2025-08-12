@@ -1,19 +1,15 @@
-import { ErrorBase } from "@/error";
+import { Cache, Db, ErrorBase } from "@/error";
 import { ProjectCacheError } from ".";
+import { isAnyError } from "@/utils";
 
 export type ErrorName =
-  | "EXCEEDED_MAX_FETCH_RETRIES_ERROR"
-  | "EMPTY_TABLE_ERROR"
-  | "DB_FETCH_ERROR"
   | "RETRIEVE_PROJECTS_ERROR"
   | "RESOLVE_PROJECTS_ERROR"
-  | "LOAD_FROM_CACHE_ERROR"
-  | "LOAD_BACKUP_ERROR"
-  | "CREATE_NEW_CACHE_ERROR"
   | "STORE_CACHE_PAGE_ERROR"
-  | "BACKUP_CACHE_READONLY_MODIFICATION_ERROR"
   | "MISSING_PROJECT_IN_PAGE_ERROR"
-  | ProjectCacheError.ErrorName;
+  | ProjectCacheError.ErrorName
+  | Cache.ErrorName
+  | Db.ErrorName;
 
 export class ProjectError extends ErrorBase<ErrorName> {}
 
@@ -38,17 +34,15 @@ export function normalizeProjectError<E extends ErrorName>({
   message: string;
   err: unknown;
 }): ProjectError {
-  const isPageError = err instanceof ProjectCacheError.PageError;
-  const isMissingPage = isPageError && err.name === "MISSING_PAGE_ERROR";
+  if (err instanceof ProjectError) return err;
 
-  //  todo: improve stack trace preservation here.
-  if (isMissingPage) return new ProjectError({ ...err, cause: err.stack });
+  if (
+    isAnyError(
+      [Cache.ErrorClass, Db.ErrorClass, ProjectCacheError.PageError],
+      err
+    )
+  )
+    return new ProjectError({ ...err });
 
-  return err instanceof ProjectError
-    ? err
-    : new ProjectError({
-        name,
-        message,
-        cause: err,
-      });
+  return new ProjectError({ name, message, cause: err });
 }
