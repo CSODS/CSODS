@@ -1,8 +1,8 @@
 import { Exhaustive } from "@/types";
-import { ProjectError } from "../errors";
+import { Project } from "../errors";
 
 //  todo: add docs
-export const ProjectErrorStatusCodeMap: Exhaustive<ProjectError.ErrorName> = {
+export const ProjectErrorStatusCodeMap: Exhaustive<Project.ErrorName> = {
   EXCEEDED_MAX_FETCH_RETRIES_ERROR: 500,
   EMPTY_TABLE_ERROR: 500,
   DB_FETCH_ERROR: 500,
