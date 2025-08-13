@@ -3,7 +3,7 @@ import * as lockfile from "proper-lockfile";
 import path from "path";
 import { OperationOptions } from "retry";
 import { FileLogger } from "@utils";
-import { JsonService } from "./json-file-service.error";
+import { JsonIO } from "./json-file-service.error";
 
 export function createJsonFileService<TModel>(modelName: string) {
   return new JsonFileService<TModel>(modelName);
@@ -126,8 +126,8 @@ export class JsonFileService<TModel> {
 
     try {
       if (!existsSync(fullPath))
-        throw new JsonService.ErrorClass({
-          name: "JSON_FILE_NOT_FOUND_ERROR",
+        throw new JsonIO.ErrorClass({
+          name: "JSON_IO_FILE_NOT_FOUND_ERROR",
           message: "File doesn't exist. Unable to parse.",
         });
 
@@ -147,9 +147,9 @@ export class JsonFileService<TModel> {
     } catch (err) {
       FileLogger.error(`[parseJsonFile] Error parsing file.`, err);
 
-      if (err instanceof JsonService.ErrorClass) throw err;
-      throw new JsonService.ErrorClass({
-        name: "JSON_PARSE_ERROR",
+      if (err instanceof JsonIO.ErrorClass) throw err;
+      throw new JsonIO.ErrorClass({
+        name: "JSON_IO_PARSE_ERROR",
         message: "Failed to parse JSON file.",
         cause: err,
       });
@@ -206,9 +206,9 @@ export class JsonFileService<TModel> {
     } catch (err) {
       FileLogger.error(`[writeToJsonFile] Error writing file.`, err);
 
-      if (err instanceof JsonService.ErrorClass) throw err;
-      throw new JsonService.ErrorClass({
-        name: "JSON_WRITE_ERROR",
+      if (err instanceof JsonIO.ErrorClass) throw err;
+      throw new JsonIO.ErrorClass({
+        name: "JSON_IO_WRITE_ERROR",
         message: "Failed to write JSON file.",
         cause: err,
       });
@@ -278,8 +278,8 @@ export class JsonFileService<TModel> {
    */
   public assertDataNotNull(data: TModel | null): asserts data is TModel {
     if (data == null)
-      throw new JsonService.ErrorClass({
-        name: "NULL_DATA_ERROR",
+      throw new JsonIO.ErrorClass({
+        name: "JSON_IO_NULL_DATA_ERROR",
         message: `Expected type ${this._modelName}, but received null.`,
       });
   }
