@@ -1,8 +1,8 @@
 import winston from "winston";
 import { CACHE } from "@/data";
+import { CacheIO } from "@/error";
 import { StoreBase } from "@/viewmodels";
-import { JsonFileService } from "../json-file-service";
-import { CacheIO } from "./abstract-cache-service.error";
+import { JsonFileService } from "./json-file-service";
 
 import type { MethodLogParams } from "@/types";
 
@@ -81,7 +81,7 @@ export abstract class AbstractCacheService<TStore extends StoreBase> {
     if (!this.isCacheValid(cache)) {
       this._logger.info("[loadCache] Failed loading cache into memory.");
       throw new CacheIO.ErrorClass({
-        name: "INVALID_CACHE_ERROR",
+        name: "CACHE_IO_INVALID_CACHE_ERROR",
         message: "Invalid cache object.",
       });
     }
@@ -110,7 +110,7 @@ export abstract class AbstractCacheService<TStore extends StoreBase> {
 
       if (!this.isCacheValid(data))
         throw new CacheIO.ErrorClass({
-          name: "INVALID_CACHE_ERROR",
+          name: "CACHE_IO_INVALID_CACHE_ERROR",
           message: "Invalid cache",
         });
 
