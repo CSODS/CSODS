@@ -117,7 +117,7 @@ export class ProjectCacheManager {
       throw loadResult.error; //  ProjectError type
     } catch (err) {
       const error = Project.normalizeError({
-        name: "LOAD_BACKUP_ERROR",
+        name: "CACHE_MANAGER_LOAD_BACKUP_ERROR",
         message: "Failed loading backup projects cache.",
         err,
       });
@@ -139,7 +139,7 @@ export class ProjectCacheManager {
     } catch (err) {
       //  todo: log error maybe
       const error = new Project.ErrorClass({
-        name: "LOAD_FROM_CACHE_ERROR",
+        name: "CACHE_MANAGER_LOAD_PRIMARY_ERROR",
         message: "Error loading projects from cache.",
         cause: err,
       });
@@ -175,7 +175,7 @@ export class ProjectCacheManager {
     } catch (err) {
       //  todo: log error
       const error = Project.normalizeError({
-        name: "CREATE_NEW_CACHE_ERROR",
+        name: "CACHE_MANAGER_CREATE_NEW_ERROR",
         message: "Error creating new projects cache.",
         err,
       });

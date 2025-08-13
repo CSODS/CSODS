@@ -48,7 +48,7 @@ export class ProjectTagsCacheManager {
       return success(storedCache);
     } catch (err) {
       const error = new ProjectTag.ErrorClass({
-        name: "CREATE_NEW_CACHE_ERROR",
+        name: "CACHE_MANAGER_CREATE_NEW_ERROR",
         message: "Error creating project tags cache.",
         cause: err,
       });
@@ -63,7 +63,7 @@ export class ProjectTagsCacheManager {
       return success(tags, "JSON_CACHE");
     } catch (err) {
       const error = new ProjectTag.ErrorClass({
-        name: "LOAD_FROM_CACHE_ERROR",
+        name: "CACHE_MANAGER_LOAD_PRIMARY_ERROR",
         message: "Error loading tags from cache.",
         cause: err,
       });

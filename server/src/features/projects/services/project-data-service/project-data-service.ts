@@ -76,7 +76,7 @@ export class ProjectDataService {
     if (!pageResult.success && pageResult.error.name === "MISSING_PAGE_ERROR") {
       if (resultRecord.source === "BACKUP_CACHE") {
         const error = new Project.ErrorClass({
-          name: "BACKUP_CACHE_READONLY_MODIFICATION_ERROR",
+          name: "CACHE_MANAGER_BACKUP_READONLY_MODIFICATION_ERROR",
           message: "Back up cache is readonly and cannot be modified.",
         });
         return fail(error);
