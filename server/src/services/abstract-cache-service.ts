@@ -228,4 +228,29 @@ export abstract class AbstractCacheService<TStore extends StoreBase> {
     const logMsg = `[${method}] ${message}`;
     this._logger.log(level, logMsg);
   }
+
+  protected __info({
+    method,
+    message,
+  }: MethodLogParams<AbstractCacheService<TStore>>) {
+    const logMsg = `[${method}] ${message}`;
+    this._logger.info(logMsg);
+  }
+
+  protected __debug({
+    method,
+    message,
+  }: MethodLogParams<AbstractCacheService<TStore>>) {
+    const logMsg = `[${method}] ${message}`;
+    this._logger.debug(logMsg);
+  }
+
+  protected __error({
+    method,
+    message,
+    err,
+  }: MethodLogParams<AbstractCacheService<TStore>>) {
+    const logMsg = `[${method}] ${message}`;
+    this._logger.error(logMsg, err);
+  }
 }
