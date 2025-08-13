@@ -1,7 +1,7 @@
 import dotenv from "dotenv";
 import {
-  JsonFileService,
-  createJsonFileService,
+  JsonService,
+  createJsonService,
   IFile,
   IEvictionOptions,
   BaseCacheEvictor,
@@ -29,7 +29,7 @@ export function createProjectCacheEvictor(
     Granularity: 1000 * 60 * 60,
     ViewThreshold: 10,
   };
-  const jsonFileHandler = createJsonFileService<IProjectCache>("IProjectCache");
+  const jsonFileHandler = createJsonService<IProjectCache>("IProjectCache");
   const pageEvictorInstance = createProjectPageEvictor(
     pageEvictionOptions ?? defaultPageEvictionOptions
   );
@@ -46,7 +46,7 @@ export class ProjectCacheEvictor extends BaseCacheEvictor<IProjectCache> {
   private readonly _cacheDirectory = process.env.PROJECT_CACHE_PATH!;
 
   public constructor(
-    jsonFileHandler: JsonFileService<IProjectCache>,
+    jsonFileHandler: JsonService<IProjectCache>,
     evictionOptions: IEvictionOptions,
     projectPageEvictor: ProjectPageEvictor
   ) {

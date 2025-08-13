@@ -1,12 +1,12 @@
-import { JsonFileService, IFile } from "@services";
+import { JsonService, IFile } from "@services";
 import { StoreBase } from "@viewmodels";
 
-export class BaseCacheEvictor<TCache extends StoreBase> {
-  protected readonly _jsonFileHandler: JsonFileService<TCache>;
+export class BaseCacheEvictor<TStore extends StoreBase> {
+  protected readonly _jsonFileHandler: JsonService<TStore>;
   protected _defaultEvictionOptions: IEvictionOptions;
 
   public constructor(
-    jsonFileHandler: JsonFileService<TCache>,
+    jsonFileHandler: JsonService<TStore>,
     defaultEvictionOptions: IEvictionOptions
   ) {
     this._jsonFileHandler = jsonFileHandler;
@@ -54,10 +54,10 @@ export class BaseCacheEvictor<TCache extends StoreBase> {
    * JsonFileHandler.
    *
    * @param {IFile} file - The file's path and directory.
-   * @returns {Promise<TCache | null>} - A promise that resolves to the data inside the file if
+   * @returns {Promise<TStore | null>} - A promise that resolves to the data inside the file if
    * successfully read, null otherwise.
    */
-  protected async readFile(file: IFile): Promise<TCache | null> {
+  protected async readFile(file: IFile): Promise<TStore | null> {
     const filepath = file.Filepath;
     const filename = file.Filename;
 
@@ -77,7 +77,7 @@ export class BaseCacheEvictor<TCache extends StoreBase> {
    * @param {any} value - The property value.
    * @returns {any} The transformed value.
    */
-  protected reviver(key: string, value: any) {
+  protected reviver(key: string, value: any): any {
     const isDateKey = key === "CreatedOn" || key === "LastAccessed";
     if (isDateKey && typeof value === "string") {
       return new Date(value);
@@ -91,14 +91,14 @@ export class BaseCacheEvictor<TCache extends StoreBase> {
    * @description Verifies if the data is up for eviction with an optional evictionOptions parameter.
    * If the evictionOptions is not specified, the default evictionOptions provided will be used.
    *
-   * @param {TCache} data - The data subject to eviction.
+   * @param {TStore} data - The data subject to eviction.
    * @param {IEvictionOptions} evictionOptions - The eviction options to be used for determining if data is up for eviction.
    *
    * @returns - True if data is up for eviction, false if not or if an unknown eviction strategy is
    * used in the evictionOptions.
    */
   public async isEvict(
-    data: TCache,
+    data: TStore,
     evictionOptions?: IEvictionOptions
   ): Promise<boolean> {
     evictionOptions = this.normalizeEvictionOptions(evictionOptions);
@@ -146,12 +146,12 @@ export class BaseCacheEvictor<TCache extends StoreBase> {
    * the specified TTL duration. If either the timestamp is invalid or the eviction options
    * are malformed, the method defaults to evicting the entry as a fail-safe.
    *
-   * @param {TCache} data - The cache entry to check. It is assumed that `data` has a `LastAccessed` property which is a Date object.
+   * @param {TStore} data - The cache entry to check. It is assumed that `data` has a `LastAccessed` property which is a Date object.
    * @param {IEvictionOptions} evictionOptions - The eviction options, specifically expecting `Duration` to be defined for this strategy.
    * @returns {boolean} `true` if the cache entry has expired based on its last access time and the configured duration, `false` otherwise.
    */
   protected verifyEvictByTtl(
-    data: TCache,
+    data: TStore,
     evictionOptions: IEvictionOptions
   ): boolean {
     const { lastAccessed: LastAccessed } = data;
@@ -179,13 +179,13 @@ export class BaseCacheEvictor<TCache extends StoreBase> {
    * If the view count is missing or the eviction options are malformed, the entry will be evicted by default
    * as a safety measure.
    *
-   * @param {TCache} data - The cache entry to evaluate. Must include a numeric `ViewCount` property.
+   * @param {TStore} data - The cache entry to evaluate. Must include a numeric `ViewCount` property.
    * @param {IEvictionOptions} evictionOptions - The LFU eviction options. Must include a numeric `ViewThreshold`.
    *
    * @returns {boolean} `true` if the entry should be evicted based on view count or due to invalid inputs, `false` otherwise.
    */
   protected verifyEvictByLfu(
-    data: TCache,
+    data: TStore,
     evictionOptions: IEvictionOptions
   ): boolean {
     const { viewCount: ViewCount } = data;

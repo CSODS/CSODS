@@ -1,7 +1,7 @@
 import {
   AbstractCacheService,
-  createJsonFileService,
-  JsonFileService,
+  createJsonService,
+  JsonService,
 } from "@/services";
 import { ProjectsCacheLogger } from "@/utils";
 
@@ -9,7 +9,7 @@ import type { ProjectStoreModels } from "../../types/store";
 
 export async function createProjectCacheService() {
   const jsonFileServiceInstance =
-    createJsonFileService<ProjectStoreModels.Store>("Projects.Store");
+    createJsonService<ProjectStoreModels.Store>("Projects.Store");
   return new ProjectCacheService(jsonFileServiceInstance);
 }
 /**
@@ -21,9 +21,7 @@ export async function createProjectCacheService() {
  * in-memory cache and persistent JSON storage.
  */
 export class ProjectCacheService extends AbstractCacheService<ProjectStoreModels.Store> {
-  public constructor(
-    jsonFileService: JsonFileService<ProjectStoreModels.Store>
-  ) {
+  public constructor(jsonFileService: JsonService<ProjectStoreModels.Store>) {
     const logger = ProjectsCacheLogger;
     const cachePath = process.env.PROJECT_CACHE_PATH!;
     super(logger, jsonFileService, cachePath);

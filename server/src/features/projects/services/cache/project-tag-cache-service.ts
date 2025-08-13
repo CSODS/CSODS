@@ -1,14 +1,14 @@
 import {
   AbstractCacheService,
-  createJsonFileService,
-  JsonFileService,
+  createJsonService,
+  JsonService,
 } from "@/services";
 import { ProjectsCacheLogger } from "@/utils";
 
 import type { ProjectTagStoreModels } from "../../types/store";
 
 export function createProjectTagCacheService() {
-  const jsonFileService = createJsonFileService<ProjectTagStoreModels.Store>(
+  const jsonFileService = createJsonService<ProjectTagStoreModels.Store>(
     "ProjectTagStoreModels.Store"
   );
   return new ProjectTagCacheService(jsonFileService);
@@ -21,7 +21,7 @@ export class ProjectTagCacheService extends AbstractCacheService<ProjectTagStore
   protected override _filename: string = "TAG_CACHE";
 
   public constructor(
-    jsonFileService: JsonFileService<ProjectTagStoreModels.Store>
+    jsonFileService: JsonService<ProjectTagStoreModels.Store>
   ) {
     const logger = ProjectsCacheLogger;
     const cachePath = process.env.TAGS_CACHE_PATH!;

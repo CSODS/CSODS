@@ -5,8 +5,8 @@ import { OperationOptions } from "retry";
 import { JsonIO } from "@/error";
 import { FileLogger } from "@utils";
 
-export function createJsonFileService<TModel>(modelName: string) {
-  return new JsonFileService<TModel>(modelName);
+export function createJsonService<TModel>(modelName: string) {
+  return new JsonService<TModel>(modelName);
 }
 
 /**
@@ -18,7 +18,7 @@ export function createJsonFileService<TModel>(modelName: string) {
  *
  * @template TModel The type of the model object to be serialized/deserialized.a
  */
-export class JsonFileService<TModel> {
+export class JsonService<TModel> {
   private readonly _modelName: string;
   private readonly _retryOptions: OperationOptions = {
     retries: 10,
