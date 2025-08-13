@@ -26,7 +26,7 @@ export abstract class AbstractCacheService<TStore extends StoreBase> {
    * @deprecated Please use new _log field
    */
   protected readonly _logger: winston.Logger;
-  protected readonly _log: MethodLoggers<this>;
+  protected readonly _log: MethodLoggers<AbstractCacheService<TStore>>;
   protected readonly _jsonFileService: JsonService<TStore>;
   protected _cachePath: string;
   protected _filename: string = "cache.json";
@@ -47,7 +47,7 @@ export abstract class AbstractCacheService<TStore extends StoreBase> {
     cachePath: string
   ) {
     this._logger = logger;
-    this._log = getMethodLoggers<this>(logger);
+    this._log = getMethodLoggers<AbstractCacheService<TStore>>(logger);
     this._jsonFileService = jsonFileService;
     this._cachePath = cachePath;
   }
