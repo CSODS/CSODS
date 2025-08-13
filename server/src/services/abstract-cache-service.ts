@@ -61,13 +61,13 @@ export abstract class AbstractCacheService<TStore extends StoreBase> {
   }
 
   public setCachePath(newCachePath: string): string {
-    this._logger.debug(`[setCachePath] Setting cache path to: ${newCachePath}`);
+    this._log.debug("setCachePath", `Setting cache path to: ${newCachePath}`);
     this._cachePath = newCachePath;
     return this._cachePath;
   }
 
   public setFilename(newFilename: string): string {
-    this._logger.debug(`[setFilename] Setting filename to: ${newFilename}`);
+    this._log.debug("setFilename", `Setting filename to: ${newFilename}`);
     this._filename = newFilename;
     return this._filename;
   }

@@ -16,15 +16,6 @@ export type ErrorCallback<T> = (
 ) => void;
 
 /**
- * @deprecated Use {@link MethodLoggers}
- */
-export type MethodLogger<T> = (
-  method: MethodNames<T>,
-  message: string,
-  err?: unknown
-) => void;
-
-/**
  * @description Creates a set of logger utility functions for a class's methods
  * using a provided `logger`.
  * @param {winston.Logger} logger The logger object.
@@ -61,12 +52,9 @@ export function getMethodLoggers<T>(logger: winston.Logger): MethodLoggers<T> {
 
   const error = (method: MethodNames<T>, message: string, err?: unknown) => {
     const logMsg = `[${String(method)}] ${message}`;
-    if (err) logger.error(message, { error: err });
-    else logger.error(message);
-    if (err) logger.error(message, { error: err });
+    if (err) logger.error(logMsg, { error: err });
     else logger.error(message);
   };
 
-  return { info, debug, error };
   return { info, debug, error };
 }
