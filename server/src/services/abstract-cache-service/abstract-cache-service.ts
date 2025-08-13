@@ -2,7 +2,7 @@ import winston from "winston";
 import { CACHE } from "@/data";
 import { StoreBase } from "@/viewmodels";
 import { JsonFileService } from "../json-file-service";
-import { CacheError } from "./abstract-cache-service.error";
+import { CacheIO } from "./abstract-cache-service.error";
 
 import type { MethodLogParams } from "@/types";
 
@@ -80,7 +80,7 @@ export abstract class AbstractCacheService<TStore extends StoreBase> {
 
     if (!this.isCacheValid(cache)) {
       this._logger.info("[loadCache] Failed loading cache into memory.");
-      throw new CacheError({
+      throw new CacheIO.ErrorClass({
         name: "INVALID_CACHE_ERROR",
         message: "Invalid cache object.",
       });
@@ -109,7 +109,7 @@ export abstract class AbstractCacheService<TStore extends StoreBase> {
       );
 
       if (!this.isCacheValid(data))
-        throw new CacheError({
+        throw new CacheIO.ErrorClass({
           name: "INVALID_CACHE_ERROR",
           message: "Invalid cache",
         });
@@ -126,8 +126,8 @@ export abstract class AbstractCacheService<TStore extends StoreBase> {
     } catch (err) {
       _logger.error("[persistCache] Failed storing data into cache.", err);
 
-      if (err instanceof CacheError) throw err;
-      throw new CacheError({
+      if (err instanceof CacheIO.ErrorClass) throw err;
+      throw new CacheIO.ErrorClass({
         name: "CACHE_PERSIST_ERROR",
         message: "Failed storing data into cache.",
         cause: err,
@@ -185,7 +185,7 @@ export abstract class AbstractCacheService<TStore extends StoreBase> {
       return parsedCache;
     } catch (err) {
       _logger.error(`[tryParseCache] Failed parsing cache.`, err);
-      throw new CacheError({
+      throw new CacheIO.ErrorClass({
         name: "CACHE_PARSE_ERROR",
         message: "Failed parsing cache.",
         cause: err,
