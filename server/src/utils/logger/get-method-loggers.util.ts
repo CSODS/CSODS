@@ -63,7 +63,10 @@ export function getMethodLoggers<T>(logger: winston.Logger): MethodLoggers<T> {
     const logMsg = `[${String(method)}] ${message}`;
     if (err) logger.error(message, { error: err });
     else logger.error(message);
+    if (err) logger.error(message, { error: err });
+    else logger.error(message);
   };
 
+  return { info, debug, error };
   return { info, debug, error };
 }
