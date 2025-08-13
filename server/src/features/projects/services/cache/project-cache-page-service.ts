@@ -1,7 +1,8 @@
-import { ProjectPage } from "@/features/projects/errors";
-import type { ProjectStoreModels } from "@/features/projects/types";
 import { createJsonFileService, JsonFileService } from "@/services";
-import { ProjectCacheService } from "../project-cache-service";
+import { ProjectPage } from "../../errors";
+import { ProjectCacheService } from "./project-cache-service";
+
+import type { ProjectStoreModels } from "../../types/store";
 
 export function createProjectCachePageService() {
   const jsonFileServiceInstance =

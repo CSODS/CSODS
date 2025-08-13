@@ -1,8 +1,9 @@
 import { ResultFail, ResultSuccess } from "@/types";
 import { fail, success } from "@/utils";
 import { Project } from "../../errors";
-import type { ProjectStoreModels } from "../../types";
 import { ProjectDbFetcher } from "../project-db-fetcher.service";
+
+import type { ProjectStoreModels } from "../../types/store";
 
 export type ProjectsData = {
   totalPages: number;

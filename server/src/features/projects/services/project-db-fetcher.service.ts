@@ -1,7 +1,9 @@
 import { createContext } from "@/db/csods";
 import { DbLogger } from "@/utils";
-import type { ProjectStoreModels, ProjectFilter, ViewModels } from "../types";
 import { ProjectFrameworkRepository, ProjectRepository } from "./repositories";
+
+import type { ProjectStoreModels } from "../types/store";
+import type { ProjectFilter, ViewModels } from "../types";
 
 export async function createProjectDbFetcher() {
   const projectRepoInstance = new ProjectRepository(await createContext());

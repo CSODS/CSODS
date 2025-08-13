@@ -4,7 +4,8 @@ import {
   JsonFileService,
 } from "@/services";
 import { ProjectsCacheLogger } from "@/utils";
-import type { ProjectStoreModels } from "../../types";
+
+import type { ProjectStoreModels } from "../../types/store";
 
 export async function createProjectCacheService() {
   const jsonFileServiceInstance =

@@ -1,8 +1,9 @@
 import { Request, Response } from "express";
 import { StatusCode } from "@/utils";
 import { StatusCodeMap } from "../constants";
-import type { ProjectPageResult } from "../types";
 import { assembleFilter } from "../utils";
+
+import type { ProjectPageResult } from "../types/result";
 
 /**
  * todo: update docs

@@ -1,7 +1,8 @@
 import { CACHE } from "@/data";
 import { HashService } from "@/utils";
-import type { ProjectFilter } from "../../types";
 import { ProjectFilterUtil } from "../../utils";
+
+import type { ProjectFilter } from "../../types";
 
 /**
  * @param filenameGenerator

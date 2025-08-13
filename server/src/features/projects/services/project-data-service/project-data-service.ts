@@ -1,17 +1,15 @@
 import { CACHE } from "@/data";
 import { fail, success } from "@/utils";
 import { Project } from "../../errors";
-import type {
-  ProjectStoreModels,
-  ProjectFilter,
-  ProjectPageResult,
-  ProjectResult,
-} from "../../types";
 import { ProjectFilterUtil } from "../../utils";
 import * as FetchService from "../project-db-fetcher.service";
 import { fetchProjectsData } from "./fetch-projects-data";
 import { getProjectDataKey } from "./get-project-data-key";
 import * as CacheManager from "./project-cache-manager";
+
+import type { ProjectResult, ProjectPageResult } from "../../types/result";
+import type { ProjectStoreModels } from "../../types/store";
+import type { ProjectFilter } from "../../types";
 
 export async function createProjectDataService() {
   const cacheManager = CacheManager.createProjectCacheManager();

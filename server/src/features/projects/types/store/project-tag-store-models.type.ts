@@ -1,5 +1,5 @@
 import { StoreBase } from "@/viewmodels";
-import { ViewModels } from ".";
+import type { ViewModels } from "..";
 
 export namespace ProjectTagStoreModels {
   /**

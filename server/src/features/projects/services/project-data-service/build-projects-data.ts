@@ -1,4 +1,4 @@
-import type { ProjectStoreModels } from "../../types";
+import type { ProjectStoreModels } from "../../types/store";
 
 /**
  * @description A utility method that builds a new {@link ProjectStoreModels.ProjectStore} object

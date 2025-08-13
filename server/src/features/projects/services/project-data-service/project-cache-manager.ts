@@ -1,9 +1,4 @@
 import { Env } from "@/error";
-import type {
-  ProjectStoreModels,
-  ProjectResult,
-  ProjectPageResult,
-} from "@/features/projects/types";
 import { fail, success } from "@/utils";
 import {
   createProjectCachePageService,
@@ -11,6 +6,9 @@ import {
 } from "../cache";
 import { Project } from "../../errors";
 import { buildProjectsData } from "./build-projects-data";
+
+import type { ProjectResult, ProjectPageResult } from "../../types/result";
+import type { ProjectStoreModels } from "../../types/store";
 
 export function createProjectCacheManager() {
   const cachePageService = createProjectCachePageService();
