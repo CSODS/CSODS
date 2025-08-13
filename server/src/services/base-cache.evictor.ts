@@ -1,6 +1,8 @@
 import { JsonService, IFile } from "@services";
 import { StoreBase } from "@viewmodels";
 
+import type { JsonIO } from "@/error";
+
 export class BaseCacheEvictor<TStore extends StoreBase> {
   protected readonly _jsonFileHandler: JsonService<TStore>;
   protected _defaultEvictionOptions: IEvictionOptions;
@@ -23,8 +25,8 @@ export class BaseCacheEvictor<TStore extends StoreBase> {
    * @param {IFile} file - The file's path and directory.
    * @returns {boolean} - Returns true if the file is successfully deleted, false otherwise.
    */
-  public async forceEvict(file: IFile): Promise<boolean> {
-    return await this.deleteFile(file);
+  public async forceEvict(file: IFile): Promise<void> {
+    await this.deleteFile(file);
   }
   //#region tryEvict logic
   /**
@@ -35,18 +37,17 @@ export class BaseCacheEvictor<TStore extends StoreBase> {
    *
    * @param {IFile} file - The file's path and directory.
    * @param {IEvictionOptions} evictionOptions - see IEvictionOptions for details.
-   * @returns {boolean} True if the file is sucessfully evicted, false if not or if the data is null.
+   * @throws {JsonIO.ErrorClass} Thrown with `name: "JSON_IO_DELETE_ERROR"`
    */
   public async tryEvict(
     file: IFile,
     evictionOptions?: IEvictionOptions
-  ): Promise<boolean> {
+  ): Promise<void> {
     const data = await this.readFile(file);
 
     if (data && (await this.isEvict(data, evictionOptions))) {
-      return await this.deleteFile(file);
+      await this.deleteFile(file);
     }
-    return false;
   }
   /**
    * @protected
@@ -207,12 +208,12 @@ export class BaseCacheEvictor<TStore extends StoreBase> {
    * @description Helper function for deleting a file and improved readabiltiy.
    *
    * @param {IFile} file - The file's path and name used for identifying the file to be deleted.
-   * @returns {boolean} True if the file is successfully deleted, false if not.
+   * @throws {JsonIO.ErrorClass} Thrown with `name: "JSON_IO_DELETE_ERROR"`
    */
-  protected async deleteFile(file: IFile): Promise<boolean> {
+  protected async deleteFile(file: IFile): Promise<void> {
     const filepath = file.Filepath;
     const filename = file.Filename;
-    return await this._jsonFileHandler.deleteJsonFile(filepath, filename);
+    await this._jsonFileHandler.deleteJsonFile(filepath, filename);
   }
 }
 /**
