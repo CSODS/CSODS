@@ -128,7 +128,7 @@ export abstract class AbstractCacheService<TStore extends StoreBase> {
 
       if (err instanceof CacheIO.ErrorClass) throw err;
       throw new CacheIO.ErrorClass({
-        name: "CACHE_PERSIST_ERROR",
+        name: "CACHE_IO_PERSIST_ERROR",
         message: "Failed storing data into cache.",
         cause: err,
       });
@@ -186,7 +186,7 @@ export abstract class AbstractCacheService<TStore extends StoreBase> {
     } catch (err) {
       _logger.error(`[tryParseCache] Failed parsing cache.`, err);
       throw new CacheIO.ErrorClass({
-        name: "CACHE_PARSE_ERROR",
+        name: "CACHE_IO_PARSE_ERROR",
         message: "Failed parsing cache.",
         cause: err,
       });
