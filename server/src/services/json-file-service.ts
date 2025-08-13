@@ -228,12 +228,12 @@ export class JsonService<TModel> {
    *
    * @param filePath - The directory path where the JSON file is stored.
    * @param fileName - THe name of the JSON file to delete.
-   * @returns - True if the file is deleted, false otherwise.
+   * @throws {JsonIO.ErrorClass} with `name: 'JSON_IO_DELETE_ERROR'`
    */
   public async deleteJsonFile(
     filePath: string,
     fileName: string
-  ): Promise<boolean> {
+  ): Promise<void> {
     let release: (() => Promise<void>) | null = null;
     const fullPath = path.join(filePath, fileName);
 
@@ -243,7 +243,7 @@ export class JsonService<TModel> {
 
     if (!existsSync(fullPath)) {
       FileLogger.warn(`[deleteJsonFile] File at ${fullPath} does not exist.`);
-      return true;
+      return;
     }
 
     try {
@@ -253,10 +253,14 @@ export class JsonService<TModel> {
       //  attempt to write to file.
       await fs.unlink(fullPath);
       FileLogger.info("[deleteJsonFile] Delete success.");
-      return true;
+      return;
     } catch (err) {
       FileLogger.error("[deleteJsonFile] Error deleting file.", err);
-      return false;
+      throw new JsonIO.ErrorClass({
+        name: "JSON_IO_DELETE_ERROR",
+        message: `Error deleting file at ${fullPath}`,
+        cause: err,
+      });
     } finally {
       if (release) {
         await release();

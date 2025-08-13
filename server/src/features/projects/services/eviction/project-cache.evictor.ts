@@ -84,11 +84,11 @@ export class ProjectCacheEvictor extends BaseCacheEvictor<IProjectCache> {
     await this._jsonFileHandler.processFiles(
       this._cacheDirectory,
       async (file) => {
-        const isEvicted = await this.tryEvict(file, evictionOptions);
+        try {
+          const isEvicted = await this.tryEvict(file, evictionOptions);
 
-        if (isEvicted) {
           evictionCount++;
-        }
+        } catch {}
       },
       filterFunc
     );
