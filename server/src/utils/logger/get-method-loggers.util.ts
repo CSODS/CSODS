@@ -7,7 +7,7 @@ export type MethodLogger<T> = (
   err?: unknown
 ) => void;
 
-export function methodLogger<T>(
+export function getMethodLoggers<T>(
   logger: winston.Logger,
   level: "info" | "debug" | "error"
 ): MethodLogger<T> {
