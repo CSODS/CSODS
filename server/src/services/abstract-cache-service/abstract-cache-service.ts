@@ -3,7 +3,8 @@ import { CACHE } from "@/data";
 import { StoreBase } from "@/viewmodels";
 import { JsonFileService } from "../json-file-service";
 import { CacheError } from "./abstract-cache-service.error";
-import { MethodLogParams } from "./abstract-cache-service.types";
+
+import type { MethodLogParams } from "@/types";
 
 /**
  * @abstract

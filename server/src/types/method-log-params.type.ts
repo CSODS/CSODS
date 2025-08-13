@@ -1,4 +1,4 @@
-import { MethodNames } from "@/types";
+import { MethodNames } from "./class-methods.type";
 
 export type MethodLogParams<T> = {
   level: "info" | "debug" | "error";
