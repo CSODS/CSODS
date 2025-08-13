@@ -17,7 +17,8 @@ export type ErrorCallback<T> = (
 
 /**
  * @description Creates a set of logger utility functions for a class's methods
- * using a provided `logger`.
+ * using a provided `logger`. Enables autocomplete for class methods when
+ * invoking the callbacks.
  * @param {winston.Logger} logger The logger object.
  * @param level Deprecated parameter. No longer needed as the function will be
  * returning an anonymous object containing logger utilities with different
@@ -36,7 +37,7 @@ export type ErrorCallback<T> = (
  * ```
  * To use:
  * ```
- * this.log.info('myMethod', 'myMessage');
+ * this.log.info('myMethod', 'myMessage');Gg
  * ```
  */
 export function getMethodLoggers<T>(logger: winston.Logger): MethodLoggers<T> {
