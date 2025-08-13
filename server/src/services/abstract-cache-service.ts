@@ -5,7 +5,7 @@ import { StoreBase } from "@/viewmodels";
 import { JsonService } from "./json-file-service";
 
 import type { MethodLogParams } from "@/types";
-import { getMethodLoggers, MethodLogger } from "@/utils";
+import { getMethodLoggers, MethodLoggers } from "@/utils";
 
 /**
  * @abstract
@@ -22,11 +22,12 @@ import { getMethodLoggers, MethodLogger } from "@/utils";
  * loaded from the cache. `null` by default.
  */
 export abstract class AbstractCacheService<TStore extends StoreBase> {
+  /**
+   * @deprecated Please use new _log field
+   */
   protected readonly _logger: winston.Logger;
+  protected readonly _log: MethodLoggers<this>;
   protected readonly _jsonFileService: JsonService<TStore>;
-  protected readonly _info: MethodLogger<AbstractCacheService<TStore>>;
-  protected readonly _debug: MethodLogger<AbstractCacheService<TStore>>;
-  protected readonly _error: MethodLogger<AbstractCacheService<TStore>>;
   protected _cachePath: string;
   protected _filename: string = "cache.json";
   protected _cache: TStore | null = null;
@@ -46,15 +47,7 @@ export abstract class AbstractCacheService<TStore extends StoreBase> {
     cachePath: string
   ) {
     this._logger = logger;
-    this._info = getMethodLoggers<AbstractCacheService<TStore>>(logger, "info");
-    this._debug = getMethodLoggers<AbstractCacheService<TStore>>(
-      logger,
-      "debug"
-    );
-    this._error = getMethodLoggers<AbstractCacheService<TStore>>(
-      logger,
-      "error"
-    );
+    this._log = getMethodLoggers<this>(logger);
     this._jsonFileService = jsonFileService;
     this._cachePath = cachePath;
   }
