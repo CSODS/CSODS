@@ -1,4 +1,4 @@
-import { Cache, Db, ErrorBase } from "@/error";
+import { CacheManager, Db, ErrorBase } from "@/error";
 import { isAnyError, isError } from "@/utils";
 
 export namespace ProjectTag {
@@ -6,7 +6,7 @@ export namespace ProjectTag {
     // cache specific error
     | "RETRIEVE_TAGS_ERROR"
     | "RESOLVE_TAGS_ERROR"
-    | Cache.ErrorName
+    | CacheManager.ErrorName
     | Db.ErrorName;
 
   export class ErrorClass extends ErrorBase<ErrorName> {}
@@ -22,7 +22,7 @@ export namespace ProjectTag {
   }): ErrorClass {
     if (isError(ErrorClass, err)) return err;
 
-    if (isAnyError([Cache.ErrorClass, Db.ErrorClass], err))
+    if (isAnyError([CacheManager.ErrorClass, Db.ErrorClass], err))
       return new ErrorClass({ ...err });
 
     return new ErrorClass({ name, message, cause: err });

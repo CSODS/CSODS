@@ -11,7 +11,7 @@ export namespace StatusCodeMap {
   } as const;
 
   export const ProjectError: Exhaustive<Project.ErrorName> = {
-    ...BaseMap.CacheError,
+    ...BaseMap.CacheManagerError,
     ...BaseMap.DbError,
     ...ProjectPageError,
     RETRIEVE_PROJECTS_ERROR: 500,
@@ -21,7 +21,7 @@ export namespace StatusCodeMap {
   } as const;
 
   export const ProjectTagsError: Exhaustive<ProjectTag.ErrorName> = {
-    ...BaseMap.CacheError,
+    ...BaseMap.CacheManagerError,
     ...BaseMap.DbError,
     RETRIEVE_TAGS_ERROR: 500,
     RESOLVE_TAGS_ERROR: 500,

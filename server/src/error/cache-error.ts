@@ -1,6 +1,6 @@
 import { ErrorBase } from "./error-base";
 
-export namespace Cache {
+export namespace CacheManager {
   export type ErrorName =
     | "LOAD_FROM_CACHE_ERROR"
     | "LOAD_BACKUP_ERROR"
