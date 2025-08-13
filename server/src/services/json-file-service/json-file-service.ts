@@ -2,8 +2,8 @@ import { existsSync, promises as fs } from "fs";
 import * as lockfile from "proper-lockfile";
 import path from "path";
 import { OperationOptions } from "retry";
+import { JsonIO } from "@/error";
 import { FileLogger } from "@utils";
-import { JsonIO } from "./json-file-service.error";
 
 export function createJsonFileService<TModel>(modelName: string) {
   return new JsonFileService<TModel>(modelName);
@@ -16,7 +16,7 @@ export function createJsonFileService<TModel>(modelName: string) {
  * It includes built-in checks for file existence and null values, as well as optional support
  * for a custom JSON reviver function during parsing.
  *
- * @template TModel The type of the model object to be serialized/deserialized.
+ * @template TModel The type of the model object to be serialized/deserialized.a
  */
 export class JsonFileService<TModel> {
   private readonly _modelName: string;

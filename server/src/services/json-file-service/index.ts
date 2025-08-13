@@ -1,2 +1,2 @@
-export * from "./json-file-service.error";
+export * from "../../error/json-io.error";
 export * from "./json-file-service";
