@@ -1,6 +1,6 @@
 import {
-  createJsonFileService,
-  JsonFileService,
+  createJsonService,
+  JsonService,
   IEvictionOptions,
   BaseCacheEvictor,
 } from "@services";
@@ -10,14 +10,14 @@ export function createProjectPageEvictor(
   evictionOptions: IEvictionOptions
 ): ProjectPageEvictor {
   const jsonFileHandler =
-    createJsonFileService<IProjectCachePage>("IProjectCachePage");
+    createJsonService<IProjectCachePage>("IProjectCachePage");
   const evictor = new ProjectPageEvictor(jsonFileHandler, evictionOptions);
   return evictor;
 }
 
 export class ProjectPageEvictor extends BaseCacheEvictor<IProjectCachePage> {
   public constructor(
-    jsonFileHandler: JsonFileService<IProjectCachePage>,
+    jsonFileHandler: JsonService<IProjectCachePage>,
     evictionOptions: IEvictionOptions
   ) {
     super(jsonFileHandler, evictionOptions);

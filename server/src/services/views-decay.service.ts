@@ -1,10 +1,10 @@
 import { StoreBase } from "@viewmodels";
-import { JsonFileService } from "@services";
+import { JsonService } from "@services";
 
-type decayFunc<TCache extends StoreBase> = (
-  cache: TCache,
+type decayFunc<TStore extends StoreBase> = (
+  cache: TStore,
   now: Date
-) => TCache | Promise<TCache>;
+) => TStore | Promise<TStore>;
 
 /**
  * @class ViewDecayService
@@ -12,7 +12,7 @@ type decayFunc<TCache extends StoreBase> = (
  * @description
  * A service for decaying the view counts on cached files.
  */
-export class ViewsDecayService<TCache extends StoreBase> {
+export class ViewsDecayService<TStore extends StoreBase> {
   /**
    * The directory path where cache JSON files are stored.
    * This is used as the root location for reading and writing cache data during decay processing.
@@ -27,7 +27,7 @@ export class ViewsDecayService<TCache extends StoreBase> {
   /**
    * Responsible for reading and writing cache files of type `TCache` within the configured cache directory.
    */
-  private readonly _jsonFileHandler: JsonFileService<TCache>;
+  private readonly _jsonFileHandler: JsonService<TStore>;
   /**
    * @constructor
    *
@@ -49,7 +49,7 @@ export class ViewsDecayService<TCache extends StoreBase> {
     //  set a default decay rate of 0.5 if the provided value is not valid.
     this._decayRate = isDecayRateValid ? decayRate : 0.5;
 
-    this._jsonFileHandler = new JsonFileService<TCache>(modelName);
+    this._jsonFileHandler = new JsonService<TStore>(modelName);
   }
 
   /**
@@ -65,7 +65,7 @@ export class ViewsDecayService<TCache extends StoreBase> {
    * @param {decayFunc} decayFunc - a function that takes the cache object and a date representing the current time.
    * It decays the view count when executed. If not provided, it defaults to usign {@link defaultDecayFunc}.
    */
-  public async decayAllCache(decayFunc?: decayFunc<TCache>) {
+  public async decayAllCache(decayFunc?: decayFunc<TStore>) {
     decayFunc = decayFunc ?? this.defaultDecayFunc;
 
     const now = new Date();
@@ -104,7 +104,7 @@ export class ViewsDecayService<TCache extends StoreBase> {
    * @param now - The current time used to calculate the decay.
    * @returns The updated cache object with the decayed view count.
    */
-  protected defaultDecayFunc(cache: TCache, now: Date) {
+  protected defaultDecayFunc(cache: TStore, now: Date) {
     const viewCount = cache.viewCount;
     const lastAccessed = cache.lastAccessed;
 

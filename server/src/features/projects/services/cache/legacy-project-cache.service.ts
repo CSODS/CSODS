@@ -2,8 +2,8 @@ import dotenv from "dotenv";
 import { CACHE } from "@data";
 import {
   LegacyAbstractCacheService,
-  createJsonFileService,
-  JsonFileService,
+  createJsonService,
+  JsonService,
 } from "@services";
 import { HashService, ProjectsCacheLogger } from "@utils";
 import {
@@ -30,7 +30,7 @@ const AS_JSON = CACHE.EXTENSION.JSON;
 export async function createLegacyProjectCacheService() {
   const projectDataServiceInstance = await createLegacyProjectDataService();
   const jsonFileHandlerInstance =
-    createJsonFileService<IProjectCache>("IProjectCache");
+    createJsonService<IProjectCache>("IProjectCache");
   return new LegacyProjectCacheService(
     projectDataServiceInstance,
     jsonFileHandlerInstance
@@ -58,19 +58,19 @@ export class LegacyProjectCacheService extends LegacyAbstractCacheService<IProje
   /**
    * @public
    * @constructor
-   * @description Accepts parameters of type {@link LegacyProjectDataService} and {@link JsonFileService}.
+   * @description Accepts parameters of type {@link LegacyProjectDataService} and {@link JsonService}.
    * Calls the constructor of the parent class and passes an instance of {@link ProjectsCacheLogger},
-   * an instance of {@link JsonFileService}, and the path to the location of all project cache files as specified
+   * an instance of {@link JsonService}, and the path to the location of all project cache files as specified
    * in environment variables.
    *
    * @param projectDataService - An instance of the {@link LegacyProjectDataService} class. Used for communicating
    * with the database.
-   * @param jsonFileHandler - An instance of the {@link JsonFileService} class. A core component for the default
+   * @param jsonFileHandler - An instance of the {@link JsonService} class. A core component for the default
    * CRUD operations of the cache service.
    */
   public constructor(
     projectDataService: LegacyProjectDataService,
-    jsonFileHandler: JsonFileService<IProjectCache>
+    jsonFileHandler: JsonService<IProjectCache>
   ) {
     const logger = ProjectsCacheLogger;
     const cachePath = process.env.PROJECT_CACHE_PATH!;

@@ -1,12 +1,13 @@
-import { createJsonFileService, JsonFileService } from "@/services";
+import { createJsonService, JsonService } from "@/services";
 import { ProjectPage } from "../../errors";
 import { ProjectCacheService } from "./project-cache-service";
 
 import type { ProjectStoreModels } from "../../types/store";
 
 export function createProjectCachePageService() {
-  const jsonFileServiceInstance =
-    createJsonFileService<ProjectStoreModels.Store>("ProjectStoreModels.Store");
+  const jsonFileServiceInstance = createJsonService<ProjectStoreModels.Store>(
+    "ProjectStoreModels.Store"
+  );
   return new ProjectCachePageService(jsonFileServiceInstance);
 }
 
@@ -22,12 +23,10 @@ export class ProjectCachePageService extends ProjectCacheService {
   /**
    * @constructor
    * @description
-   * Calls the parent class constructor with the {@link JsonFileService}
+   * Calls the parent class constructor with the {@link JsonService}
    * instance.
    */
-  public constructor(
-    jsonFileService: JsonFileService<ProjectStoreModels.Store>
-  ) {
+  public constructor(jsonFileService: JsonService<ProjectStoreModels.Store>) {
     super(jsonFileService);
   }
   /**

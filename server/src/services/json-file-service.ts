@@ -5,8 +5,8 @@ import { OperationOptions } from "retry";
 import { JsonIO } from "@/error";
 import { FileLogger } from "@utils";
 
-export function createJsonFileService<TModel>(modelName: string) {
-  return new JsonFileService<TModel>(modelName);
+export function createJsonService<TModel>(modelName: string) {
+  return new JsonService<TModel>(modelName);
 }
 
 /**
@@ -18,7 +18,7 @@ export function createJsonFileService<TModel>(modelName: string) {
  *
  * @template TModel The type of the model object to be serialized/deserialized.a
  */
-export class JsonFileService<TModel> {
+export class JsonService<TModel> {
   private readonly _modelName: string;
   private readonly _retryOptions: OperationOptions = {
     retries: 10,
@@ -107,7 +107,7 @@ export class JsonFileService<TModel> {
    * @param {string} fileName - The name of the JSON file to be read.
    * @param {Function|null} [reviver] - An optional reviver function for custom JSON parsing.
    * @returns {Promise<TModel>} A promise that resolves to the parsed object or `null` if reading or parsing fails.
-   * @throws {JsonError} Thrown with `name`:
+   * @throws {JsonIO.ErrorClass} Thrown with `name`:
    * - `"JSON_FILE_NOT_FOUND_ERROR"`
    * - `"NULL_DATA_ERROR"`
    * - `"JSON_PARSE_ERROR"`
@@ -169,7 +169,7 @@ export class JsonFileService<TModel> {
    * @param {string} fileName - The name of the JSON file to write.
    * @param {TModel|null} data - The object to serialize and write. Must not be `null`.
    * @returns {Promise<TModel>} A promise that resolves to the written data on success.
-   * @throws {JsonError} Thrown with `name`:
+   * @throws {JsonIO.ErrorClass} Thrown with `name`:
    * - `"NULL_DATA_ERROR"`
    * - `"JSON_WRITE_ERROR"`
    */

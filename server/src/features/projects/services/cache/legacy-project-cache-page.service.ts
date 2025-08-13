@@ -1,5 +1,5 @@
 import { CACHE } from "@data";
-import { createJsonFileService, JsonFileService } from "@services";
+import { createJsonService, JsonService } from "@services";
 import {
   CachePageRecord,
   IProjectCache,
@@ -19,7 +19,7 @@ import { LegacyProjectCacheService } from "./legacy-project-cache.service";
 export async function createLegacyProjectCachePageService() {
   const projectDataServiceInstance = await createLegacyProjectDataService();
   const jsonFileHandlerInstance =
-    createJsonFileService<IProjectCache>("IProjectCache");
+    createJsonService<IProjectCache>("IProjectCache");
 
   return new LegacyProjectCachePageService(
     projectDataServiceInstance,
@@ -39,16 +39,16 @@ export class LegacyProjectCachePageService extends LegacyProjectCacheService {
   /**
    * @public
    * @constructor
-   * @description Accepts parameters of type {@link LegacyProjectDataService} and {@link JsonFileService}.
+   * @description Accepts parameters of type {@link LegacyProjectDataService} and {@link JsonService}.
    * Calls the constructor of the parent class and passes an instance of the two.
    * @param projectDataService - An instance of the {@link LegacyProjectDataService} class. Used for communicating
    * with the database.
-   * @param jsonFileHandler - An instance of the {@link JsonFileService} class. A core component for the default
+   * @param jsonFileHandler - An instance of the {@link JsonService} class. A core component for the default
    * CRUD operations of the cache service.
    */
   public constructor(
     projectDataService: LegacyProjectDataService,
-    jsonFileHandler: JsonFileService<IProjectCache>
+    jsonFileHandler: JsonService<IProjectCache>
   ) {
     super(projectDataService, jsonFileHandler);
   }

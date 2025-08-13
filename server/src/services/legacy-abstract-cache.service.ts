@@ -1,6 +1,6 @@
 import winston from "winston";
 import { StoreBase } from "@viewmodels";
-import { JsonFileService } from "./json-file-service";
+import { JsonService } from "./json-file-service";
 
 /**
  * @deprecated Please use new AbstractCacheService. Will be removed before the pr.
@@ -11,7 +11,7 @@ import { JsonFileService } from "./json-file-service";
  * {@link constructCache} method that **must** be implemented for default cache creation logic.
  * Contains the following fields:
  * - {@link _logger} - An instance of {@link winston.Logger}. Used for logging.
- * - {@link _jsonFileHandler} - An instance of the {@link JsonFileService} class. A core component for the default
+ * - {@link _jsonFileHandler} - An instance of the {@link JsonService} class. A core component for the default
  * CRUD operations of the cache service.
  * - {@link _cachePath} - The path to the cache folder.
  * - {@link _filename} - The filename of the cache. `cache.json` by default.
@@ -20,22 +20,22 @@ import { JsonFileService } from "./json-file-service";
  */
 export abstract class LegacyAbstractCacheService<TCache extends StoreBase> {
   protected readonly _logger: winston.Logger;
-  protected readonly _jsonFileHandler: JsonFileService<TCache>;
+  protected readonly _jsonFileHandler: JsonService<TCache>;
   protected readonly _cachePath: string;
   protected _filename: string = "cache.json";
   protected _cache: TCache | null = null;
   /**
    * @public
    * @constructor
-   * @description The constructor. Accepts parameters of type {@link JsonFileService} and {@link string}.
+   * @description The constructor. Accepts parameters of type {@link JsonService} and {@link string}.
    * @param logger - An instance of {@link winston.Logger}. Used for logging.
-   * @param jsonFileHandler - An instance of the {@link JsonFileService} class. A core component for the default
+   * @param jsonFileHandler - An instance of the {@link JsonService} class. A core component for the default
    * CRUD operations of the cache service.
    * @param cachePath - The path to the cache folder.
    */
   public constructor(
     logger: winston.Logger,
-    jsonFileHandler: JsonFileService<TCache>,
+    jsonFileHandler: JsonService<TCache>,
     cachePath: string
   ) {
     this._logger = logger;
@@ -169,7 +169,7 @@ export abstract class LegacyAbstractCacheService<TCache extends StoreBase> {
    * @protected
    * @method reviver
    * @description A helper function to be used in {@link parseCache} as a parameter for calling
-   * {@link JsonFileService.parseJsonFile}.
+   * {@link JsonService.parseJsonFile}.
    *
    * Revives certain fields.
    *

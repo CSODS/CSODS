@@ -2,7 +2,7 @@ import winston from "winston";
 import { CACHE } from "@/data";
 import { CacheIO } from "@/error";
 import { StoreBase } from "@/viewmodels";
-import { JsonFileService } from "./json-file-service";
+import { JsonService } from "./json-file-service";
 
 import type { MethodLogParams } from "@/types";
 
@@ -13,7 +13,7 @@ import type { MethodLogParams } from "@/types";
  * Provides CRUD methods for with default behaviors for `json` cache handling.
  * Contains the following fields:
  * - {@link _logger} - An instance of {@link winston.Logger}. Used for logging.
- * - {@link _jsonFileService} - An instance of the {@link JsonFileService}
+ * - {@link _jsonFileService} - An instance of the {@link JsonService}
  * class. A core component for the default CRUD operations of the cache service.
  * - {@link _cachePath} - The path to the cache folder.
  * - {@link _filename} - The filename of the cache. `cache.json` by default.
@@ -22,7 +22,7 @@ import type { MethodLogParams } from "@/types";
  */
 export abstract class AbstractCacheService<TStore extends StoreBase> {
   protected readonly _logger: winston.Logger;
-  protected readonly _jsonFileService: JsonFileService<TStore>;
+  protected readonly _jsonFileService: JsonService<TStore>;
   protected _cachePath: string;
   protected _filename: string = "cache.json";
   protected _cache: TStore | null = null;
@@ -30,15 +30,15 @@ export abstract class AbstractCacheService<TStore extends StoreBase> {
   /**
    * @constructor
    * @description The constructor. Accepts parameters of type
-   * {@link winston.Logger}, {@link JsonFileService}, and {@link string}.
+   * {@link winston.Logger}, {@link JsonService}, and {@link string}.
    * @param logger - An instance of {@link winston.Logger}. Used for logging.
-   * @param jsonFileService - An instance of the {@link JsonFileService} class.
+   * @param jsonFileService - An instance of the {@link JsonService} class.
    * A core component for the default CRUD operations of the cache service.
    * @param cachePath - The path to the cache folder.
    */
   public constructor(
     logger: winston.Logger,
-    jsonFileService: JsonFileService<TStore>,
+    jsonFileService: JsonService<TStore>,
     cachePath: string
   ) {
     this._logger = logger;
@@ -136,7 +136,7 @@ export abstract class AbstractCacheService<TStore extends StoreBase> {
   }
 
   /**
-   * @description Wrapper method for {@link JsonFileService}'s
+   * @description Wrapper method for {@link JsonService}'s
    * `generateFilename` method.
    * @param nameElements
    * @returns
@@ -147,7 +147,7 @@ export abstract class AbstractCacheService<TStore extends StoreBase> {
   }
 
   /**
-   * @description Wrapper method for {@link JsonFileService} `asssertDataNotNull`
+   * @description Wrapper method for {@link JsonService} `asssertDataNotNull`
    * method.
    * @param cache The cache to check.
    * @throws {JsonError} Thrown with `name: "NULL_DATA_ERROR"`.
