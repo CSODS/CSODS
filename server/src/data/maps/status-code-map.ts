@@ -1,4 +1,4 @@
-import { CacheManager, Db } from "@/error";
+import { CacheManager, DbAccess } from "@/error";
 import { Exhaustive } from "@/types";
 
 export namespace StatusCodeMap {
@@ -9,9 +9,9 @@ export namespace StatusCodeMap {
     CACHE_MANAGER_LOAD_PRIMARY_ERROR: 500,
   } as const;
 
-  export const DbError: Exhaustive<Db.ErrorName> = {
-    EXCEEDED_MAX_FETCH_RETRIES_ERROR: 500,
-    EMPTY_TABLE_ERROR: 500,
-    DB_FETCH_ERROR: 500,
+  export const DbError: Exhaustive<DbAccess.ErrorName> = {
+    DB_ACCESS_EXCEEDED_MAX_FETCH_RETRIES_ERROR: 500,
+    DB_ACCESS_EMPTY_TABLE_ERROR: 500,
+    DB_ACCESS_QUERY_ERROR: 500,
   } as const;
 }

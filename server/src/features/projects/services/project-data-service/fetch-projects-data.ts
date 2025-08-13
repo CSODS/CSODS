@@ -60,7 +60,7 @@ export async function fetchProjectsData(
         projectsCount = await projectDbFetchService.fetchProjectsCount(filter);
         if (projectsCount === 0)
           throw new Project.ErrorClass({
-            name: "EMPTY_TABLE_ERROR",
+            name: "DB_ACCESS_EMPTY_TABLE_ERROR",
             message: "The projects table is empty.",
           });
       }
@@ -74,17 +74,17 @@ export async function fetchProjectsData(
     } catch (err) {
       //  todo: log errors
       const error = Project.normalizeError({
-        name: "DB_FETCH_ERROR",
+        name: "DB_ACCESS_QUERY_ERROR",
         message: "Error fetching projects from database.",
         err,
       });
 
-      if (error.name === "EMPTY_TABLE_ERROR") return fail(error);
+      if (error.name === "DB_ACCESS_EMPTY_TABLE_ERROR") return fail(error);
     }
   }
 
   const error = new Project.ErrorClass({
-    name: "EXCEEDED_MAX_FETCH_RETRIES_ERROR",
+    name: "DB_ACCESS_EXCEEDED_MAX_FETCH_RETRIES_ERROR",
     message: "Exceeded retry limit without a successful fetch.",
   });
 

@@ -21,7 +21,7 @@ export async function fetchProjectTagsData(dbFetcher: ProjectTagsDbFetcher) {
     });
   } catch (err) {
     const error = new ProjectTag.ErrorClass({
-      name: "DB_FETCH_ERROR",
+      name: "DB_ACCESS_QUERY_ERROR",
       message: "Error fetching tag data from database.",
       cause: err,
     });

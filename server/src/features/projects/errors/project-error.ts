@@ -1,4 +1,4 @@
-import { CacheManager, Db, ErrorBase } from "@/error";
+import { CacheManager, DbAccess, ErrorBase } from "@/error";
 import { isAnyError, isError } from "@/utils";
 import { ProjectPage } from "./project-page.error";
 
@@ -10,7 +10,7 @@ export namespace Project {
     | "MISSING_PROJECT_IN_PAGE_ERROR"
     | ProjectPage.ErrorName
     | CacheManager.ErrorName
-    | Db.ErrorName;
+    | DbAccess.ErrorName;
 
   export class ErrorClass extends ErrorBase<ErrorName> {}
 
@@ -38,7 +38,7 @@ export namespace Project {
     if (isError(ErrorClass, err)) return err;
 
     const isInherited = isAnyError(
-      [CacheManager.ErrorClass, Db.ErrorClass, ProjectPage.ErrorClass],
+      [CacheManager.ErrorClass, DbAccess.ErrorClass, ProjectPage.ErrorClass],
       err
     );
     if (isInherited) return new ErrorClass({ ...err });
