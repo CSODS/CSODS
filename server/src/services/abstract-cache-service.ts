@@ -5,6 +5,7 @@ import { StoreBase } from "@/viewmodels";
 import { JsonService } from "./json-file-service";
 
 import type { MethodLogParams } from "@/types";
+import { methodLogger, MethodLogger } from "@/utils";
 
 /**
  * @abstract
@@ -23,6 +24,9 @@ import type { MethodLogParams } from "@/types";
 export abstract class AbstractCacheService<TStore extends StoreBase> {
   protected readonly _logger: winston.Logger;
   protected readonly _jsonFileService: JsonService<TStore>;
+  protected readonly _info: MethodLogger<AbstractCacheService<TStore>>;
+  protected readonly _debug: MethodLogger<AbstractCacheService<TStore>>;
+  protected readonly _error: MethodLogger<AbstractCacheService<TStore>>;
   protected _cachePath: string;
   protected _filename: string = "cache.json";
   protected _cache: TStore | null = null;
@@ -42,6 +46,9 @@ export abstract class AbstractCacheService<TStore extends StoreBase> {
     cachePath: string
   ) {
     this._logger = logger;
+    this._info = methodLogger<AbstractCacheService<TStore>>(logger, "info");
+    this._debug = methodLogger<AbstractCacheService<TStore>>(logger, "debug");
+    this._error = methodLogger<AbstractCacheService<TStore>>(logger, "error");
     this._jsonFileService = jsonFileService;
     this._cachePath = cachePath;
   }
