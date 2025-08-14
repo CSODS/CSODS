@@ -79,20 +79,20 @@ export abstract class AbstractCacheService<TStore extends StoreBase> {
    * @throws {CacheError} `CACHE_PARSE_ERROR` | `INVALID_CACHE_ERROR`
    */
   public async loadCache(): Promise<TStore> {
-    this._logger.info("[setCache] Loading cache into memory...");
+    this._log.info("loadCache", "Loading cache into memory...");
 
     //  !Throws CacheError: CACHE_PARSE_ERROR on parse operation fail.
     const cache: TStore = await this.tryParseCache();
 
     if (!this.isCacheValid(cache)) {
-      this._logger.info("[loadCache] Failed loading cache into memory.");
+      this._log.info("loadCache", "Failed loading cache into memory.");
       throw new CacheIO.ErrorClass({
         name: "CACHE_IO_INVALID_CACHE_ERROR",
         message: "Invalid cache object.",
       });
     }
 
-    this._logger.info("[loadCache] Success loading cache into memory.");
+    this._log.info("loadCache", "Success loading cache into memory.");
     this._cache = cache;
     return cache;
   }
@@ -106,14 +106,15 @@ export abstract class AbstractCacheService<TStore extends StoreBase> {
    * @throws {CacheError} `INVALID_CACHE_ERROR` | `CACHE_PERSIST_ERROR`
    */
   public async persistCache(data: TStore): Promise<TStore> {
-    const { _cachePath, _filename, _logger } = this;
+    const { _cachePath, _filename, _log } = this;
     const fullPath = _cachePath + _filename;
 
-    try {
-      _logger.info(
-        `[persistCache] Attempting to store data into cache at ${fullPath}...`
-      );
+    _log.info(
+      "persistCache",
+      `Attempting to store data into cache at ${fullPath}...`
+    );
 
+    try {
       if (!this.isCacheValid(data))
         throw new CacheIO.ErrorClass({
           name: "CACHE_IO_INVALID_CACHE_ERROR",
@@ -126,11 +127,11 @@ export abstract class AbstractCacheService<TStore extends StoreBase> {
         data
       );
 
-      _logger.info("[persistCache] Success storing data into cache.");
+      _log.info("persistCache", "Success storing data into cache.");
 
       return storedCache;
     } catch (err) {
-      _logger.error("[persistCache] Failed storing data into cache.", err);
+      _log.error("persistCache", "Failed storing data into cache.", err);
 
       if (err instanceof CacheIO.ErrorClass) throw err;
       throw new CacheIO.ErrorClass({
@@ -172,30 +173,28 @@ export abstract class AbstractCacheService<TStore extends StoreBase> {
    * is needed.
    */
   protected async tryParseCache(): Promise<TStore> {
-    const { _cachePath, _filename, _logger } = this;
+    const { _cachePath, _filename, _log } = this;
     const fullPath = _cachePath + _filename;
+    const logInfo = (message: string) => _log.info("tryParseCache", message);
 
+    logInfo(`Attempting to parse cache at ${fullPath}...`);
     try {
-      _logger.info(
-        `[tryParseCache] Attempting to parse cache at ${fullPath}...`
-      );
-
       const parsedCache = await this._jsonFileService.parseJsonFile(
         _cachePath,
         _filename,
         this.reviver
       );
 
-      _logger.info(`[tryParseCache] Success parsing cache.`);
-
+      logInfo(`Attempting to parse cache at ${fullPath}...`);
       return parsedCache;
     } catch (err) {
-      _logger.error(`[tryParseCache] Failed parsing cache.`, err);
-      throw new CacheIO.ErrorClass({
+      const error = new CacheIO.ErrorClass({
         name: "CACHE_IO_PARSE_ERROR",
         message: "Failed parsing cache.",
         cause: err,
       });
+      _log.error("tryParseCache", "Failed parsing cache.", error);
+      throw error;
     }
   }
 
