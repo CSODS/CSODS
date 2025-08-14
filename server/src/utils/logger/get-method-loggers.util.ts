@@ -37,7 +37,9 @@ export type ErrorCallback<T> = (
  * ```
  * To use:
  * ```
- * this.log.info('myMethod', 'myMessage');Gg
+ * this.log.info('myMethod', 'myMessage');
+ * this.log.debug('myMethod', 'myMessage');
+ * this.log.error('myMethod', 'myMessage', err);
  * ```
  */
 export function getMethodLoggers<T>(logger: winston.Logger): MethodLoggers<T> {
