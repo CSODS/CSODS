@@ -15,7 +15,7 @@ import { JsonService } from "./json-file-service";
  * - {@link _jsonFileService} - An instance of the {@link JsonService}
  * class. A core component for the default CRUD operations of the cache service.
  * - {@link _cachePath} - The path to the cache folder.
- * - {@link _filename} - The filename of the cache. `cache.json` by default.
+ * - {@link _filename} - The filename of the cache. `"cache.json"` by default.
  * - {@link _cache} - The in-memory reference of the {@link StoreBase} object
  * loaded from the cache. `null` by default.
  */
@@ -27,6 +27,9 @@ export abstract class AbstractCacheService<
    * @deprecated Please use new _log field
    */
   protected readonly _logger: winston.Logger;
+  /**
+   * @see getMethodLoggers for detailed description.
+   */
   protected readonly _log: MethodLoggers<TSelf>;
   protected readonly _jsonFileService: JsonService<TStore>;
   protected _cachePath: string;
