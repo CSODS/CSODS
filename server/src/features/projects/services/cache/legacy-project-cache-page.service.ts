@@ -1,5 +1,5 @@
 import { CACHE } from "@data";
-import { createJsonFileService, JsonFileService } from "@services";
+import { createJsonService, JsonService } from "@services";
 import {
   CachePageRecord,
   IProjectCache,
@@ -7,43 +7,48 @@ import {
   IProjectDetails,
 } from "../../types";
 import {
-  createProjectDataService,
-  ProjectDataService,
-} from "../project-data.service";
-import { ProjectCacheService } from "./project-cache.service";
+  createLegacyProjectDataService,
+  LegacyProjectDataService,
+} from "../legacy-project-data.service";
+import { LegacyProjectCacheService } from "./legacy-project-cache.service";
 
-export async function createProjectCachePageService() {
-  const projectDataServiceInstance = await createProjectDataService();
+/**
+ * @deprecated Will be replaced by `createProjectCachePageService`.
+ * @returns
+ */
+export async function createLegacyProjectCachePageService() {
+  const projectDataServiceInstance = await createLegacyProjectDataService();
   const jsonFileHandlerInstance =
-    createJsonFileService<IProjectCache>("IProjectCache");
+    createJsonService<IProjectCache>("IProjectCache");
 
-  return new ProjectCachePageService(
+  return new LegacyProjectCachePageService(
     projectDataServiceInstance,
     jsonFileHandlerInstance
   );
 }
 
 /**
- * @class ProjectCachePageService
- * @extends ProjectCacheService
+ * @deprecated Will be replaced by `ProjectCachePageService`
+ * @class LegacyProjectCachePageService
+ * @extends LegacyProjectCacheService
  * @description Manages the caching of project page data, including reading from and writing to JSON files,
  * handling cache pages. This class ensures efficient retrieval of project page data by utilizing an
  * in-memory cache and persistent JSON storage.
  */
-export class ProjectCachePageService extends ProjectCacheService {
+export class LegacyProjectCachePageService extends LegacyProjectCacheService {
   /**
    * @public
    * @constructor
-   * @description Accepts parameters of type {@link ProjectDataService} and {@link JsonFileService}.
+   * @description Accepts parameters of type {@link LegacyProjectDataService} and {@link JsonService}.
    * Calls the constructor of the parent class and passes an instance of the two.
-   * @param projectDataService - An instance of the {@link ProjectDataService} class. Used for communicating
+   * @param projectDataService - An instance of the {@link LegacyProjectDataService} class. Used for communicating
    * with the database.
-   * @param jsonFileHandler - An instance of the {@link JsonFileService} class. A core component for the default
+   * @param jsonFileHandler - An instance of the {@link JsonService} class. A core component for the default
    * CRUD operations of the cache service.
    */
   public constructor(
-    projectDataService: ProjectDataService,
-    jsonFileHandler: JsonFileService<IProjectCache>
+    projectDataService: LegacyProjectDataService,
+    jsonFileHandler: JsonService<IProjectCache>
   ) {
     super(projectDataService, jsonFileHandler);
   }
@@ -85,7 +90,7 @@ export class ProjectCachePageService extends ProjectCacheService {
    * @description Retrieves a specific page of project data from the cache.
    *
    * If the requested page exists in the in-memory cache, it returns it directly.
-   * If the page is not present, it fetches the page from the database via the {@link ProjectDataService},
+   * If the page is not present, it fetches the page from the database via the {@link LegacyProjectDataService},
    * adds it to the in-memory cache, updates the cache file on disk, and then returns the new page.
    *
    * This method ensures that your cache remains up to date and self-expanding as new pages are accessed.

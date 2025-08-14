@@ -1,30 +1,35 @@
 import { createContext } from "@/db/csods";
 import { DbLogger } from "@/utils";
-import { IProjectDetails, ProjectViewModel } from "../types";
+import type { IProjectDetails, ViewModels } from "../types";
 import {
   IProjectFilter,
   ProjectFrameworkRepository,
   ProjectRepository,
 } from "./repositories";
 
-export async function createProjectDataService() {
+/**
+ * @deprecated Please use `createProjectDataService
+ * @returns
+ */
+export async function createLegacyProjectDataService() {
   const dbContext = await createContext();
   const projectRepoInstance = new ProjectRepository(dbContext);
   const projectFrameworkRepoInstance = new ProjectFrameworkRepository(
     dbContext
   );
-  return new ProjectDataService(
+  return new LegacyProjectDataService(
     projectRepoInstance,
     projectFrameworkRepoInstance
   );
 }
 
 /**
+ * @deprecated Please use `ProjectDataService`
  * Service responsible for retrieving project data from the database via the `ProjectRepository`.
  * Provides utility methods for fetching individual or multiple pages of projects, as well as
  * querying the total count of available projects.
  */
-export class ProjectDataService {
+export class LegacyProjectDataService {
   private readonly _projectRepo: ProjectRepository;
   private readonly _projectFrameworkRepo: ProjectFrameworkRepository;
 
@@ -104,7 +109,7 @@ export class ProjectDataService {
 
     for (let pageNumber = pageStart; pageNumber <= pageEnd; pageNumber++) {
       DbLogger.info(`[Projects] Fetching page ${pageNumber}...`);
-      const projectArr: ProjectViewModel[] =
+      const projectArr: ViewModels.Project[] =
         await this._projectRepo.getProjects({
           isAscending: isAscending,
           filter: filter,
@@ -144,7 +149,7 @@ export class ProjectDataService {
    * // details: [{ Project: ..., ProjectFrameworks: [...] }, ...]
    */
   private async constructProjectDetails(
-    projectArr: ProjectViewModel[]
+    projectArr: ViewModels.Project[]
   ): Promise<IProjectDetails[]> {
     return await Promise.all(
       projectArr.map(async (project) => ({

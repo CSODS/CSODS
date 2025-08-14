@@ -1,8 +1,9 @@
 import winston from "winston";
-import { ICache } from "@viewmodels";
-import { JsonFileService } from "./json-file.service";
+import { StoreBase } from "@viewmodels";
+import { JsonService } from "./json-file-service";
 
 /**
+ * @deprecated Please use new AbstractCacheService. Will be removed before the pr.
  * @abstract
  * @class
  * @description An abstract class to be used for caching services.
@@ -10,31 +11,31 @@ import { JsonFileService } from "./json-file.service";
  * {@link constructCache} method that **must** be implemented for default cache creation logic.
  * Contains the following fields:
  * - {@link _logger} - An instance of {@link winston.Logger}. Used for logging.
- * - {@link _jsonFileHandler} - An instance of the {@link JsonFileService} class. A core component for the default
+ * - {@link _jsonFileHandler} - An instance of the {@link JsonService} class. A core component for the default
  * CRUD operations of the cache service.
  * - {@link _cachePath} - The path to the cache folder.
  * - {@link _filename} - The filename of the cache. `cache.json` by default.
- * - {@link _cache} - The in-memory reference of the {@link ICache} object loaded from the cache. `null` by
+ * - {@link _cache} - The in-memory reference of the {@link StoreBase} object loaded from the cache. `null` by
  * default.
  */
-export abstract class AbstractCacheService<TCache extends ICache> {
+export abstract class LegacyAbstractCacheService<TCache extends StoreBase> {
   protected readonly _logger: winston.Logger;
-  protected readonly _jsonFileHandler: JsonFileService<TCache>;
+  protected readonly _jsonFileHandler: JsonService<TCache>;
   protected readonly _cachePath: string;
   protected _filename: string = "cache.json";
   protected _cache: TCache | null = null;
   /**
    * @public
    * @constructor
-   * @description The constructor. Accepts parameters of type {@link JsonFileService} and {@link string}.
+   * @description The constructor. Accepts parameters of type {@link JsonService} and {@link string}.
    * @param logger - An instance of {@link winston.Logger}. Used for logging.
-   * @param jsonFileHandler - An instance of the {@link JsonFileService} class. A core component for the default
+   * @param jsonFileHandler - An instance of the {@link JsonService} class. A core component for the default
    * CRUD operations of the cache service.
    * @param cachePath - The path to the cache folder.
    */
   public constructor(
     logger: winston.Logger,
-    jsonFileHandler: JsonFileService<TCache>,
+    jsonFileHandler: JsonService<TCache>,
     cachePath: string
   ) {
     this._logger = logger;
@@ -53,8 +54,8 @@ export abstract class AbstractCacheService<TCache extends ICache> {
   /**
    * @public
    * @method getLastAccessed
-   * @description Accessor for the {@link ICache.lastAccessed} field of {@link _cache}.
-   * @returns The value of the {@link ICache.lastAccessed} field. `null` if {@link _cache} is `null`.
+   * @description Accessor for the {@link StoreBase.lastAccessed} field of {@link _cache}.
+   * @returns The value of the {@link StoreBase.lastAccessed} field. `null` if {@link _cache} is `null`.
    */
   public getLastAccessed(): Date | null {
     return this._cache?.lastAccessed ?? null;
@@ -148,7 +149,7 @@ export abstract class AbstractCacheService<TCache extends ICache> {
    *
    * @remarks
    * If the shape of the `cache` object has fields in need of a reviver other than the default provided fields
-   * in {@link AbstractCacheService.reviver}, reviver must be overriden.
+   * in {@link LegacyAbstractCacheService.reviver}, reviver must be overriden.
    */
   protected async parseCache(filePath?: string): Promise<TCache | null> {
     const cachePath = filePath ?? this._cachePath;
@@ -168,11 +169,11 @@ export abstract class AbstractCacheService<TCache extends ICache> {
    * @protected
    * @method reviver
    * @description A helper function to be used in {@link parseCache} as a parameter for calling
-   * {@link JsonFileService.parseJsonFile}.
+   * {@link JsonService.parseJsonFile}.
    *
    * Revives certain fields.
    *
-   * By default, converts fields {@link ICache.createdOn}, and {@link ICache.lastAccessed} fields back
+   * By default, converts fields {@link StoreBase.createdOn}, and {@link StoreBase.lastAccessed} fields back
    * into `Date` type.
    *
    * @param key - The property name.
@@ -198,7 +199,7 @@ export abstract class AbstractCacheService<TCache extends ICache> {
    * If the constructed cache is not valid, an `Error` is thrown, and `null` is returned.
    *
    * @param filePath An optional parameter that overrides the default {@link _cachePath} when specified.
-   * @returns A promise that rsolvse to the newly created {@link ICache} object, or `null` if the cache construction
+   * @returns A promise that rsolvse to the newly created {@link StoreBase} object, or `null` if the cache construction
    * or the write operation fails.
    *
    * @remarks
@@ -249,9 +250,9 @@ export abstract class AbstractCacheService<TCache extends ICache> {
   /**
    * @protected
    * @method isCacheValid
-   * @description Checks if the {@link ICache} object is valid.
+   * @description Checks if the {@link StoreBase} object is valid.
    *
-   * @param cache - The {@link ICache} object to be validated.
+   * @param cache - The {@link StoreBase} object to be validated.
    * @returns `true` if the cache is valid, `false` otherwise.
    *
    * @remarks
@@ -264,10 +265,10 @@ export abstract class AbstractCacheService<TCache extends ICache> {
   /**
    * @abstract
    * @method constructCache
-   * @description An abstract method that on definition will generate the {@link ICache} object to be used
+   * @description An abstract method that on definition will generate the {@link StoreBase} object to be used
    * when writing to a `json` file with {@link tryCreateCache}.
    *
-   * @returns The generated {@link ICache} object.
+   * @returns The generated {@link StoreBase} object.
    */
   protected abstract constructCache(): Promise<TCache>;
 }

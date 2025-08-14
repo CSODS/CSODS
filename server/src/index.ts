@@ -7,8 +7,10 @@ import express from "express";
 import { API, CORS } from "@data";
 import { authRoutes, authMiddlewares } from "@feature-auth";
 import {
+  ProjectsApiV2,
   projectsMiddlewares,
   projectsRouter,
+  projectsRouterV2,
   projectTagsRouter,
 } from "@feature-projects";
 import "./schedulers/cron-schedulers";
@@ -51,6 +53,14 @@ app.use(
   projectsRouteLimiter,
   validateJWT,
   projectTagsRouter
+);
+
+//  v2 projects
+app.use(
+  ProjectsApiV2.ROOT,
+  projectsRouteLimiter,
+  validateJWT,
+  projectsRouterV2
 );
 
 app.listen(3001, "0.0.0.0", async () => {

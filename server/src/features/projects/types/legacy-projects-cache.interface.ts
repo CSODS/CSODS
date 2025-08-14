@@ -1,13 +1,14 @@
-import { ICache } from "@/viewmodels";
-import * as tableTypes from "./projects-viewmodels.type";
+import { StoreBase } from "@/viewmodels";
+import * as tableTypes from "./project-viewmodels.type";
 
 /**
+ * @deprecated Please use `ProjectStore`
  * A View Model for the Project Cache.
  *
  * This interface represents the structure used to cache paginated project data,
  * enabling efficient retrieval and display in a paginated view.
  */
-export interface IProjectCache extends ICache {
+export interface IProjectCache extends StoreBase {
   /**
    * The total number of available pages of projects.
    */
@@ -24,12 +25,16 @@ export interface IProjectCache extends ICache {
   cachePages: CachePageRecord;
 }
 
+/**
+ * @deprecated Please use `PageRecord`
+ */
 export type CachePageRecord = Record<number, IProjectCachePage>;
 
 /**
+ * @deprecated Please use `ProjectPage`
  * Represents a cached page of projects within the ProjectCache.
  */
-export interface IProjectCachePage extends ICache {
+export interface IProjectCachePage extends StoreBase {
   /**
    * The total number of available pages of projects.
    */
@@ -40,6 +45,7 @@ export interface IProjectCachePage extends ICache {
   projects: IProjectDetails[];
 }
 /**
+ * @deprecated `Please use ProjectDetails`
  * Represents the fully detailed view of a project, including its core project data and
  * all associated frameworks.
  *
@@ -50,11 +56,11 @@ export interface IProjectDetails {
   /**
    * The main project entity containing metadata such as title, description, associated tags, etc.
    */
-  project: tableTypes.ProjectViewModel;
+  project: tableTypes.Project;
 
   /**
    * A list of frameworks associated with the project.
    * Each entry links a framework to the project through a many-to-many relationship.
    */
-  projectFrameworks: tableTypes.ProjectFrameworkViewModel[];
+  projectFrameworks: tableTypes.ProjectFramework[];
 }

@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 
+//  todo: replace allowedRoles with RoleDetails
 export function validateRoles(...allowedRoles: string[]) {
   return (req: Request, res: Response, next: NextFunction) => {
     const { requestLogContext: requestLogger } = req;
