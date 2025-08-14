@@ -8,8 +8,9 @@ import { ProjectsCacheLogger } from "@/utils";
 import type { ProjectStoreModels } from "../../types/store";
 
 export async function createProjectCacheService() {
-  const jsonFileServiceInstance =
-    createJsonService<ProjectStoreModels.Store>("Projects.Store");
+  const jsonFileServiceInstance = createJsonService<ProjectStoreModels.Store>(
+    "ProjectStoreModels.Store"
+  );
   return new ProjectCacheService(jsonFileServiceInstance);
 }
 /**
