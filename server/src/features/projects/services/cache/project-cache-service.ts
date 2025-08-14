@@ -20,7 +20,10 @@ export async function createProjectCacheService() {
  * This class ensures efficient retrieval of project data by utilizing an
  * in-memory cache and persistent JSON storage.
  */
-export class ProjectCacheService extends AbstractCacheService<ProjectStoreModels.Store> {
+export class ProjectCacheService extends AbstractCacheService<
+  ProjectStoreModels.Store,
+  ProjectCacheService
+> {
   public constructor(jsonFileService: JsonService<ProjectStoreModels.Store>) {
     const logger = ProjectsCacheLogger;
     const cachePath = process.env.PROJECT_CACHE_PATH!;
