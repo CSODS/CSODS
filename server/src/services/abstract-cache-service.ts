@@ -56,13 +56,18 @@ export abstract class AbstractCacheService<
     this._cachePath = cachePath;
   }
 
-  public getCache(): TStore | null {
+  public get cache(): TStore {
+    this.assertCacheNotNull(this._cache); //  ! throws JsonError
     return this._cache;
   }
 
-  public getLastAccessed(): Date | null {
-    return this._cache?.lastAccessed ?? null;
+  public get lastAccessed(): Date {
+    this.assertCacheNotNull(this._cache); //  ! throws JsonError
+    return this._cache.lastAccessed;
   }
+
+  //  todo: finish this
+  public set cachePath(newCachePath: string) {}
 
   public setCachePath(newCachePath: string): string {
     this._log.debug("setCachePath", `Setting cache path to: ${newCachePath}`);
