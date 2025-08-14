@@ -1,11 +1,9 @@
 import winston from "winston";
 import { CACHE } from "@/data";
 import { CacheIO } from "@/error";
+import { getMethodLoggers, MethodLoggers } from "@/utils";
 import { StoreBase } from "@/viewmodels";
 import { JsonService } from "./json-file-service";
-
-import type { MethodLogParams } from "@/types";
-import { getMethodLoggers, MethodLoggers } from "@/utils";
 
 /**
  * @abstract
