@@ -7,16 +7,15 @@ export type MethodLoggers<T> = {
   error: ErrorCallback<T>;
 };
 
-export type LogCallback<T> = (
-  method: MethodNames<T> | string,
-  message: string
-) => void;
+export type LogCallback<T> = {
+  (method: MethodNames<T>, message: string): void;
+  (method: string, message: string): void;
+};
 
-export type ErrorCallback<T> = (
-  method: MethodNames<T> | string,
-  message: string,
-  err?: unknown
-) => void;
+export type ErrorCallback<T> = {
+  (method: MethodNames<T>, message: string, err?: unknown): void;
+  (method: string, message: string, err?: unknown): void;
+};
 
 /**
  * @description Creates a set of logger utility functions for a class's methods
