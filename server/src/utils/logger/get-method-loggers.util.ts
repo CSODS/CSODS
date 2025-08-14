@@ -41,17 +41,21 @@ export type ErrorCallback<T> = (
  * ```
  */
 export function getMethodLoggers<T>(logger: winston.Logger): MethodLoggers<T> {
-  const info = (method: MethodNames<T>, message: string) => {
+  const info = (method: MethodNames<T> | string, message: string) => {
     const logMsg = `[${String(method)}] ${message}`;
     logger.info(logMsg);
   };
 
-  const debug = (method: MethodNames<T>, message: string) => {
+  const debug = (method: MethodNames<T> | string, message: string) => {
     const logMsg = `[${String(method)}] ${message}`;
     logger.debug(logMsg);
   };
 
-  const error = (method: MethodNames<T>, message: string, err?: unknown) => {
+  const error = (
+    method: MethodNames<T> | string,
+    message: string,
+    err?: unknown
+  ) => {
     const logMsg = `[${String(method)}] ${message}`;
     if (err) logger.error(logMsg, { error: err });
     else logger.error(message);
