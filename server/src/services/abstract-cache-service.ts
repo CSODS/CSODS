@@ -19,12 +19,15 @@ import { JsonService } from "./json-file-service";
  * - {@link _cache} - The in-memory reference of the {@link StoreBase} object
  * loaded from the cache. `null` by default.
  */
-export abstract class AbstractCacheService<TStore extends StoreBase> {
+export abstract class AbstractCacheService<
+  TStore extends StoreBase,
+  TSelf extends AbstractCacheService<TStore, TSelf>
+> {
   /**
    * @deprecated Please use new _log field
    */
   protected readonly _logger: winston.Logger;
-  protected readonly _log: MethodLoggers<AbstractCacheService<TStore>>;
+  protected readonly _log: MethodLoggers<TSelf>;
   protected readonly _jsonFileService: JsonService<TStore>;
   protected _cachePath: string;
   protected _filename: string = "cache.json";
@@ -45,7 +48,7 @@ export abstract class AbstractCacheService<TStore extends StoreBase> {
     cachePath: string
   ) {
     this._logger = logger;
-    this._log = getMethodLoggers<AbstractCacheService<TStore>>(logger);
+    this._log = getMethodLoggers<TSelf>(logger);
     this._jsonFileService = jsonFileService;
     this._cachePath = cachePath;
   }
