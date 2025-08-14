@@ -216,46 +216,4 @@ export abstract class AbstractCacheService<TStore extends StoreBase> {
   protected isCacheValid(cache: TStore | null): boolean {
     return !!cache;
   }
-
-  /**
-   * @virtual
-   * @description Logging helper function. Override for parameter type for
-   * child classes as necessary.
-   * @param level The log level.
-   * @param method The method name. Derived from the keys of the class.
-   * @param message The log message.
-   */
-  protected __log({
-    level,
-    method,
-    message,
-  }: MethodLogParams<AbstractCacheService<TStore>>) {
-    const logMsg = `[${method}] ${message}`;
-    this._logger.log(level, logMsg);
-  }
-
-  protected __info({
-    method,
-    message,
-  }: MethodLogParams<AbstractCacheService<TStore>>) {
-    const logMsg = `[${method}] ${message}`;
-    this._logger.info(logMsg);
-  }
-
-  protected __debug({
-    method,
-    message,
-  }: MethodLogParams<AbstractCacheService<TStore>>) {
-    const logMsg = `[${method}] ${message}`;
-    this._logger.debug(logMsg);
-  }
-
-  protected __error({
-    method,
-    message,
-    err,
-  }: MethodLogParams<AbstractCacheService<TStore>>) {
-    const logMsg = `[${method}] ${message}`;
-    this._logger.error(logMsg, err);
-  }
 }
