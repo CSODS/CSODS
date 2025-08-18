@@ -1,8 +1,8 @@
 import { JobsLogger } from "@/utils";
-import { createLegacyProjectCacheEvictor } from "../services";
+import { createProjectCacheEvictor } from "../services/eviction";
 
 export async function evictCachePages() {
-  const projectCacheEvictor = createLegacyProjectCacheEvictor();
+  const projectCacheEvictor = createProjectCacheEvictor();
 
   JobsLogger.info("[CacheEviction] Evicting stale pages from project caches.");
   const evictedPages = await projectCacheEvictor.evictPagesFromCaches();

@@ -1,8 +1,8 @@
 import { JobsLogger } from "@/utils";
-import { createLegacyProjectCacheEvictor } from "../services";
+import { createProjectCacheEvictor } from "../services/eviction";
 
 export async function evictProjectCache() {
-  const projectCacheEvictor = createLegacyProjectCacheEvictor();
+  const projectCacheEvictor = createProjectCacheEvictor();
 
   JobsLogger.info("[CacheEviction] Evicting stale daily projects cache...");
   const evictedFiles = await projectCacheEvictor.evictStaleCache();
