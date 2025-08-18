@@ -1,15 +1,15 @@
 import mock from "mock-fs";
 import {
-  createJsonFileService,
-  JsonFileService,
-} from "../src/services/json-file.service";
+  createJsonService,
+  JsonService,
+} from "../src/services/json-file-service";
 import { describe, beforeEach, afterEach, it, expect } from "vitest";
 import path from "path";
-import { IProjectCache } from "../src/viewmodels/cache.interface";
+import { IProjectCache } from "../src/viewmodels/store-base.type";
 import { promises as fs } from "fs";
 
 describe("fileHandler", async () => {
-  const _jsonFileHandler = await createJsonFileService<IProjectCache>(
+  const _jsonFileHandler = await createJsonService<IProjectCache>(
     "IProjectCache"
   );
 

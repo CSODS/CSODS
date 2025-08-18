@@ -2,9 +2,9 @@ import { eq, and, or, like } from "drizzle-orm";
 import { DbContext } from "@/db/csods.js";
 import { Project } from "@models";
 import { Repository } from "@services";
-import { ProjectsTable, ProjectViewModel } from "../../types";
+import type { ProjectFilter, Tables, ViewModels } from "../../types";
 
-export class ProjectRepository extends Repository<ProjectsTable> {
+export class ProjectRepository extends Repository<Tables.ProjectsTable> {
   public constructor(context: DbContext) {
     super(context, Project);
   }
@@ -12,7 +12,7 @@ export class ProjectRepository extends Repository<ProjectsTable> {
    * Retrieves a paginated list of projects from the database, optionally applying filters.
    *
    * Projects are fetched using the specified `pageSize` and `pageNumber`, with support for
-   * filtering based on the fields in the `IProjectFilter` object.
+   * filtering based on the fields in the `ProjectFilter` object.
    *
    * @param pageSize The number of projects to retrieve per page.
    * @param pageNumber The 1-based page number to fetch.
@@ -26,10 +26,10 @@ export class ProjectRepository extends Repository<ProjectsTable> {
    */
   public async getProjects(options?: {
     isAscending?: boolean | undefined;
-    filter?: IProjectFilter | undefined;
+    filter?: ProjectFilter | undefined;
     pageSize?: number | undefined;
     pageNumber?: number | undefined;
-  }): Promise<ProjectViewModel[]> {
+  }): Promise<ViewModels.Project[]> {
     const isAscending = options?.isAscending ?? true;
     const filter = options?.filter;
     const pageSize = options?.pageSize ?? 100;
@@ -60,7 +60,7 @@ export class ProjectRepository extends Repository<ProjectsTable> {
    * const count = await countProjects({ DevTypeId: 1 });
    * // Returns how many projects use development type ID 1
    */
-  public async countProjects(filter?: IProjectFilter): Promise<number> {
+  public async countProjects(filter?: ProjectFilter): Promise<number> {
     const whereClause = this.buildWhereClause(filter);
 
     return await this.GetCount(whereClause);
@@ -68,7 +68,7 @@ export class ProjectRepository extends Repository<ProjectsTable> {
   /**
    * Constructs a dynamic SQL `WHERE` clause based on the provided filter options.
    *
-   * The method builds a list of conditions using the fields in the `IProjectFilter` object.
+   * The method builds a list of conditions using the fields in the `ProjectFilter` object.
    * If no filters are provided or all are `undefined`, the resulting clause will be `undefined`.
    *
    * ### Filters:
@@ -78,14 +78,14 @@ export class ProjectRepository extends Repository<ProjectsTable> {
    * - `DatabaseId`: Matches the project's database technology.
    * - `IndustryId`: Matches the industry to which the project belongs.
    *
-   * @param filter An optional `IProjectFilter` object used to determine which conditions to include.
+   * @param filter An optional `ProjectFilter` object used to determine which conditions to include.
    * @returns A SQL `WHERE` clause composed using `and(...)`, or `undefined` if no conditions are set.
    *
    * @example
    * const where = buildWhereClause({ DevTypeId: 1, LanguageId: 2 });
    * // Generates: AND(Projects.DevTypeId = 1, (Projects.PrimaryLanguageId = 2 OR Projects.SecondaryLanguageId = 2))
    */
-  public buildWhereClause(filter?: IProjectFilter | undefined) {
+  public buildWhereClause(filter?: ProjectFilter | undefined) {
     const conditions = [];
     if (filter) {
       if (filter.ProjectTitle !== undefined)
@@ -121,10 +121,10 @@ export class ProjectRepository extends Repository<ProjectsTable> {
 
 /**
  * A utility class that encapsulates and manages project filter criteria.
- * Implements the `IProjectFilter` interface and provides helper methods
+ * Implements the `ProjectFilter` interface and provides helper methods
  * for evaluating and representing filters in list form.
  */
-export class ProjectFilter implements IProjectFilter {
+export class LegacyProjectFilter implements IProjectFilter {
   ProjectTitle: string | undefined;
   DevTypeId: number | undefined;
   LanguageId: number | undefined;
@@ -132,6 +132,7 @@ export class ProjectFilter implements IProjectFilter {
   IndustryId: number | undefined;
 
   /**
+   * @deprecated Please use
    * Constructs a `ProjectFilter` instance from an optional `IProjectFilter` object.
    *
    * @param filter Optional object containing filter criteria.
