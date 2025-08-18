@@ -3,7 +3,7 @@ import {
   createJsonService,
   IFile,
   IEvictionOptions,
-  BaseCacheEvictor,
+  BaseStoreEvictor,
 } from "@services";
 import {
   createProjectPageEvictor,
@@ -41,7 +41,7 @@ export function createProjectStoreEvictor(
   return cacheEvictorInstance;
 }
 
-export class ProjectStoreEvictor extends BaseCacheEvictor<ProjectStoreModels.Store> {
+export class ProjectStoreEvictor extends BaseStoreEvictor<ProjectStoreModels.Store> {
   private readonly _projectPageEvictor: ProjectPageEvictor;
   private readonly _jsonDirectory = process.env.PROJECT_CACHE_PATH!;
 
@@ -81,7 +81,7 @@ export class ProjectStoreEvictor extends BaseCacheEvictor<ProjectStoreModels.Sto
 
     let evictionCount = 0;
 
-    await this._jsonFileHandler.processFiles(
+    await this._jsonService.processFiles(
       this._jsonDirectory,
       async (file) => {
         try {
@@ -112,16 +112,13 @@ export class ProjectStoreEvictor extends BaseCacheEvictor<ProjectStoreModels.Sto
   ): Promise<number> {
     let totalEvictedPages = 0;
 
-    await this._jsonFileHandler.processFiles(
-      this._jsonDirectory,
-      async (file) => {
-        const evictedPages = await this.evictStaleStorePages(
-          file,
-          evictionOptions
-        );
-        totalEvictedPages += evictedPages;
-      }
-    );
+    await this._jsonService.processFiles(this._jsonDirectory, async (file) => {
+      const evictedPages = await this.evictStaleStorePages(
+        file,
+        evictionOptions
+      );
+      totalEvictedPages += evictedPages;
+    });
     return totalEvictedPages;
   }
   /**
@@ -144,7 +141,7 @@ export class ProjectStoreEvictor extends BaseCacheEvictor<ProjectStoreModels.Sto
   ): Promise<number> {
     let evictedPages = 0;
 
-    const data = await this.readFile(file);
+    const data = await this.parseStore(file);
 
     const pageRecord: ProjectStoreModels.PageRecord = data?.pages ?? {};
 
@@ -170,7 +167,7 @@ export class ProjectStoreEvictor extends BaseCacheEvictor<ProjectStoreModels.Sto
     }
 
     try {
-      await this._jsonFileHandler.writeToJsonFile(
+      await this._jsonService.writeToJsonFile(
         file.Filepath,
         file.Filename,
         data

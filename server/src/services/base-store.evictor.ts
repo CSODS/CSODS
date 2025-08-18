@@ -3,22 +3,22 @@ import { StoreBase } from "@viewmodels";
 
 import type { JsonIO } from "@/error";
 
-export class BaseCacheEvictor<TStore extends StoreBase> {
-  protected readonly _jsonFileHandler: JsonService<TStore>;
+export class BaseStoreEvictor<TStore extends StoreBase> {
+  protected readonly _jsonService: JsonService<TStore>;
   protected _defaultEvictionOptions: IEvictionOptions;
 
   public constructor(
-    jsonFileHandler: JsonService<TStore>,
+    jsonService: JsonService<TStore>,
     defaultEvictionOptions: IEvictionOptions
   ) {
-    this._jsonFileHandler = jsonFileHandler;
+    this._jsonService = jsonService;
     this._defaultEvictionOptions = this.normalizeEvictionOptions(
       defaultEvictionOptions
     );
   }
   /**
    * @public
-   * @description Forcefully evicts a cache from memory.
+   * @description Forcefully evicts a store from memory.
    * Possible use for cron jobs or custom eviction criteria more complex than what the eviction options
    * can handle.
    *
@@ -26,13 +26,13 @@ export class BaseCacheEvictor<TStore extends StoreBase> {
    * @returns {boolean} - Returns true if the file is successfully deleted, false otherwise.
    */
   public async forceEvict(file: IFile): Promise<void> {
-    await this.deleteFile(file);
+    await this.deleteStore(file);
   }
   //#region tryEvict logic
   /**
    * @public
-   * @description Attempts to read then evict a cache with an optional evictionOptions parameter.
-   * If the cache exists and is not null, check if it's current state satisfies the eviction
+   * @description Attempts to read then evict a store with an optional evictionOptions parameter.
+   * If the store exists and is not null, check if it's current state satisfies the eviction
    * conditions. If it does, delete the file.
    *
    * @param {IFile} file - The file's path and directory.
@@ -43,10 +43,10 @@ export class BaseCacheEvictor<TStore extends StoreBase> {
     file: IFile,
     evictionOptions?: IEvictionOptions
   ): Promise<void> {
-    const data = await this.readFile(file);
+    const data = await this.parseStore(file);
 
     if (data && (await this.isEvict(data, evictionOptions))) {
-      await this.deleteFile(file);
+      await this.deleteStore(file);
     }
   }
   /**
@@ -58,11 +58,11 @@ export class BaseCacheEvictor<TStore extends StoreBase> {
    * @returns {Promise<TStore | null>} - A promise that resolves to the data inside the file if
    * successfully read, null otherwise.
    */
-  protected async readFile(file: IFile): Promise<TStore | null> {
+  protected async parseStore(file: IFile): Promise<TStore | null> {
     const filepath = file.Filepath;
     const filename = file.Filename;
 
-    const data = await this._jsonFileHandler.parseJsonFile(
+    const data = await this._jsonService.parseJsonFile(
       filepath,
       filename,
       this.reviver
@@ -141,15 +141,15 @@ export class BaseCacheEvictor<TStore extends StoreBase> {
   /**
    * @protected
    * @description
-   * Determines whether a cache entry should be evicted based on the Time-to-Live (TTL) strategy.
+   * Determines whether a store entry should be evicted based on the Time-to-Live (TTL) strategy.
    *
    * This method checks if the time elapsed since the entry's `LastAccessed` timestamp exceeds
    * the specified TTL duration. If either the timestamp is invalid or the eviction options
    * are malformed, the method defaults to evicting the entry as a fail-safe.
    *
-   * @param {TStore} data - The cache entry to check. It is assumed that `data` has a `LastAccessed` property which is a Date object.
+   * @param {TStore} data - The store entry to check. It is assumed that `data` has a `LastAccessed` property which is a Date object.
    * @param {IEvictionOptions} evictionOptions - The eviction options, specifically expecting `Duration` to be defined for this strategy.
-   * @returns {boolean} `true` if the cache entry has expired based on its last access time and the configured duration, `false` otherwise.
+   * @returns {boolean} `true` if the store entry has expired based on its last access time and the configured duration, `false` otherwise.
    */
   protected verifyEvictByTtl(
     data: TStore,
@@ -163,7 +163,7 @@ export class BaseCacheEvictor<TStore extends StoreBase> {
       !(LastAccessed instanceof Date) ||
       typeof Duration !== "number"
     ) {
-      //  Fail-safe for invalid date in the cache or malformed eviction options.
+      //  Fail-safe for invalid date in the store or malformed eviction options.
       return true;
     }
 
@@ -174,13 +174,13 @@ export class BaseCacheEvictor<TStore extends StoreBase> {
   /**
    * @protected
    * @description
-   * Determines whether a cache entry should be evicted based on the Least Frequently Used (LFU) strategy.
+   * Determines whether a store entry should be evicted based on the Least Frequently Used (LFU) strategy.
    *
    * This method checks if the entry's view count is less than or equal to the configured `ViewThreshold`.
    * If the view count is missing or the eviction options are malformed, the entry will be evicted by default
    * as a safety measure.
    *
-   * @param {TStore} data - The cache entry to evaluate. Must include a numeric `ViewCount` property.
+   * @param {TStore} data - The store entry to evaluate. Must include a numeric `ViewCount` property.
    * @param {IEvictionOptions} evictionOptions - The LFU eviction options. Must include a numeric `ViewThreshold`.
    *
    * @returns {boolean} `true` if the entry should be evicted based on view count or due to invalid inputs, `false` otherwise.
@@ -193,7 +193,7 @@ export class BaseCacheEvictor<TStore extends StoreBase> {
     const { ViewThreshold } = evictionOptions;
 
     if (typeof ViewCount !== "number" || typeof ViewThreshold !== "number") {
-      //  Fail-safe for invalid view count in the cache or malformed eviction options.
+      //  Fail-safe for invalid view count in the store or malformed eviction options.
       return true;
     }
     const isLfu = ViewCount <= ViewThreshold;
@@ -210,15 +210,15 @@ export class BaseCacheEvictor<TStore extends StoreBase> {
    * @param {IFile} file - The file's path and name used for identifying the file to be deleted.
    * @throws {JsonIO.ErrorClass} Thrown with `name: "JSON_IO_DELETE_ERROR"`
    */
-  protected async deleteFile(file: IFile): Promise<void> {
+  protected async deleteStore(file: IFile): Promise<void> {
     const filepath = file.Filepath;
     const filename = file.Filename;
-    await this._jsonFileHandler.deleteJsonFile(filepath, filename);
+    await this._jsonService.deleteJsonFile(filepath, filename);
   }
 }
 /**
  * @interface IEvictionOptions
- * @description Defines options for cache eviction strategies.
+ * @description Defines options for store eviction strategies.
  *
  * Fields:
  * - `Strategy` (required): Determines the eviction strategy to use.
@@ -257,7 +257,7 @@ export interface IEvictionOptions {
   Granularity?: number;
   /**
    * Used for lfu.
-   * Specifies the threshold of the minimum possible viewcount of which the cache will be evicted
+   * Specifies the threshold of the minimum possible viewcount of which the store will be evicted
    * if it goes below it.
    */
   ViewThreshold?: number;

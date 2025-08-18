@@ -4,7 +4,7 @@ import {
   createJsonService,
   IFile,
   IEvictionOptions,
-  BaseCacheEvictor,
+  BaseStoreEvictor,
 } from "@services";
 import { CachePageRecord, IProjectCache } from "../../types";
 import {
@@ -41,7 +41,7 @@ export function createLegacyProjectCacheEvictor(
   return cacheEvictorInstance;
 }
 
-export class LegacyProjectCacheEvictor extends BaseCacheEvictor<IProjectCache> {
+export class LegacyProjectCacheEvictor extends BaseStoreEvictor<IProjectCache> {
   private readonly _projectPageEvictor: LegacyProjectPageEvictor;
   private readonly _cacheDirectory = process.env.PROJECT_CACHE_PATH!;
 
@@ -81,7 +81,7 @@ export class LegacyProjectCacheEvictor extends BaseCacheEvictor<IProjectCache> {
 
     let evictionCount = 0;
 
-    await this._jsonFileHandler.processFiles(
+    await this._jsonService.processFiles(
       this._cacheDirectory,
       async (file) => {
         try {
@@ -112,16 +112,13 @@ export class LegacyProjectCacheEvictor extends BaseCacheEvictor<IProjectCache> {
   ): Promise<number> {
     let totalEvictedPages = 0;
 
-    await this._jsonFileHandler.processFiles(
-      this._cacheDirectory,
-      async (file) => {
-        const evictedPages = await this.evictStaleCachePages(
-          file,
-          evictionOptions
-        );
-        totalEvictedPages += evictedPages;
-      }
-    );
+    await this._jsonService.processFiles(this._cacheDirectory, async (file) => {
+      const evictedPages = await this.evictStaleCachePages(
+        file,
+        evictionOptions
+      );
+      totalEvictedPages += evictedPages;
+    });
     return totalEvictedPages;
   }
   /**
@@ -144,7 +141,7 @@ export class LegacyProjectCacheEvictor extends BaseCacheEvictor<IProjectCache> {
   ): Promise<number> {
     let evictedPages = 0;
 
-    const data = await this.readFile(file);
+    const data = await this.parseStore(file);
 
     const cachePageRecord: CachePageRecord = data?.cachePages ?? {};
 
@@ -170,7 +167,7 @@ export class LegacyProjectCacheEvictor extends BaseCacheEvictor<IProjectCache> {
     }
 
     try {
-      await this._jsonFileHandler.writeToJsonFile(
+      await this._jsonService.writeToJsonFile(
         file.Filepath,
         file.Filename,
         data

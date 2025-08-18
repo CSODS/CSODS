@@ -1,8 +1,8 @@
 import { createJsonService, JsonService } from "@/services/json-file-service";
 import {
-  BaseCacheEvictor,
+  BaseStoreEvictor,
   IEvictionOptions,
-} from "@/services/base-cache.evictor";
+} from "@/services/base-store.evictor";
 
 import type { ProjectStoreModels } from "../../types/store";
 
@@ -16,7 +16,7 @@ export function createProjectPageEvictor(
   return evictor;
 }
 
-export class ProjectPageEvictor extends BaseCacheEvictor<ProjectStoreModels.Page> {
+export class ProjectPageEvictor extends BaseStoreEvictor<ProjectStoreModels.Page> {
   public constructor(
     jsonService: JsonService<ProjectStoreModels.Page>,
     evictionOptions: IEvictionOptions

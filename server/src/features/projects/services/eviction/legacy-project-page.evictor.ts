@@ -2,7 +2,7 @@ import {
   createJsonService,
   JsonService,
   IEvictionOptions,
-  BaseCacheEvictor,
+  BaseStoreEvictor,
 } from "@services";
 import { IProjectCachePage } from "../../types";
 
@@ -18,7 +18,7 @@ export function createLegacyProjectPageEvictor(
   return evictor;
 }
 
-export class LegacyProjectPageEvictor extends BaseCacheEvictor<IProjectCachePage> {
+export class LegacyProjectPageEvictor extends BaseStoreEvictor<IProjectCachePage> {
   public constructor(
     jsonFileHandler: JsonService<IProjectCachePage>,
     evictionOptions: IEvictionOptions
