@@ -30,6 +30,14 @@ export namespace StatusCodeMap {
      * Thrown when the request for a page in the `Store` fails.
      */
     PAGE_RETRIEVAL_ERROR: 500,
+    /**
+     * Thrown when storing a page in the projects `Store` fails.
+     */
+    STORE_PAGE_ERROR: 500,
+    /**
+     * Thrown when the requested project is missing in the specified page.
+     */
+    MISSING_PROJECT_IN_PAGE_ERROR: 404,
   } as const;
   /**
    * @description A map for Status Codes that correspond to a specific `Project` Error
@@ -49,16 +57,6 @@ export namespace StatusCodeMap {
      * (parsing, creating, backups) fail.
      */
     RESOLVE_PROJECTS_ERROR: 500,
-    /**
-     * todo: move this to `ProjectPage` status code map.
-     * Thrown when storing a page in the projects `Store` fails.
-     */
-    STORE_CACHE_PAGE_ERROR: 500,
-    /**
-     * todo: move this to `ProjectPage` status code map.
-     * Thrown when the requested project is missing in the specified page.
-     */
-    MISSING_PROJECT_IN_PAGE_ERROR: 404,
   } as const;
   /**
    * @description A map for Status Codes that correspond to a specific `ProjectTags`

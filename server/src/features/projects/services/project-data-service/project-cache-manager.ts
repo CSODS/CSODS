@@ -77,7 +77,7 @@ export class ProjectCacheManager {
       return success(storedPage);
     } catch (err) {
       const error = Project.normalizeError({
-        name: "STORE_CACHE_PAGE_ERROR",
+        name: "STORE_PAGE_ERROR",
         message: `Error storing new cache page with page number: ${page.pageNumber}`,
         err,
       });

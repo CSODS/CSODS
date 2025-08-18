@@ -6,8 +6,6 @@ export namespace Project {
   export type ErrorName =
     | "RETRIEVE_PROJECTS_ERROR"
     | "RESOLVE_PROJECTS_ERROR"
-    | "STORE_CACHE_PAGE_ERROR"
-    | "MISSING_PROJECT_IN_PAGE_ERROR"
     | ProjectPage.ErrorName
     | CacheManager.ErrorName
     | DbAccess.ErrorName;
