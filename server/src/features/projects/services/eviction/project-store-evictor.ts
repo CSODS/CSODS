@@ -33,12 +33,12 @@ export function createProjectStoreEvictor(
   const pageEvictorInstance = createProjectPageEvictor(
     pageEvictionOptions ?? defaultPageEvictionOptions
   );
-  const cacheEvictorInstance = new ProjectStoreEvictor(
+  const storeEvictorInstance = new ProjectStoreEvictor(
     jsonService,
     storeEvictionOptions ?? defaultStoreEvictionOptions,
     pageEvictorInstance
   );
-  return cacheEvictorInstance;
+  return storeEvictorInstance;
 }
 
 export class ProjectStoreEvictor extends BaseStoreEvictor<ProjectStoreModels.Store> {
@@ -58,7 +58,7 @@ export class ProjectStoreEvictor extends BaseStoreEvictor<ProjectStoreModels.Sto
    * @public
    *
    * @description
-   * Scans the project cache directory and attempts to evict cache files
+   * Scans the project store directory and attempts to evict store files
    * that meet the given eviction criteria.
    * If `excludeNoFilter` is set to true, excludes files whose names contain `'nofilter'`.
    *
@@ -66,7 +66,7 @@ export class ProjectStoreEvictor extends BaseStoreEvictor<ProjectStoreModels.Sto
    * @param {{ excludeNoFilter?: boolean }} [IEvictionFilter] - Optional filter settings.
    * @param {boolean} [IEvictionFilter.excludeNoFilter=false] - If `true`, excludes files whose names contain `'nofilter'`.
    *
-   * @returns {Promise<number>} - A promise that resolves to the number of cache files evicted.
+   * @returns {Promise<number>} - A promise that resolves to the number of store files evicted.
    */
   public async evictStaleStore(
     evictionOptions?: IEvictionOptions,
@@ -100,12 +100,12 @@ export class ProjectStoreEvictor extends BaseStoreEvictor<ProjectStoreModels.Sto
    * @public
    *
    * @description
-   * Scans the project cache directory and evicts individual stale cache pages
-   * within each cache file based on the given eviction options.
+   * Scans the project store directory and evicts individual stale store pages
+   * within each store file based on the given eviction options.
    *
    * @param {IEvictionOptions} [evictionOptions] - Optional eviction strategy options.
    *
-   * @returns {Promise<number>} - A promise that resolves to the total number of cache pages evicted.
+   * @returns {Promise<number>} - A promise that resolves to the total number of store pages evicted.
    */
   public async evictPagesFromStores(
     evictionOptions?: IEvictionOptions
@@ -125,15 +125,15 @@ export class ProjectStoreEvictor extends BaseStoreEvictor<ProjectStoreModels.Sto
    * @private
    *
    * @description
-   * Evicts stale pages from the projects cache.
+   * Evicts stale pages from the projects store.
    *
-   * Parses an `IProjectsCache` file first. If it has pages, iterates through all pages and
+   * Parses an `ProjectStoreModels.Store` file first. If it has pages, iterates through all pages and
    * tries each for eviction.
    *
    * @param {IFile} file - The file to parse and evict pages from.
    * @param {IEvictionOptions} [evictionOptions] - Optional eviction strategy options (e.g., TTL, LFU).
    *
-   * @returns {Promise<number>} - A promise that resolves to the number of cache pages evicted from the file.
+   * @returns {Promise<number>} - A promise that resolves to the number of store pages evicted from the file.
    */
   private async evictStaleStorePages(
     file: IFile,
@@ -181,11 +181,11 @@ export class ProjectStoreEvictor extends BaseStoreEvictor<ProjectStoreModels.Sto
 /**
  * @interface IEvictionFilter
  * @description
- * Defines filters for project cache eviction.
+ * Defines filters for project store eviction.
  */
 interface IEvictionFilter {
   /**
-   * Set to true if 'nofilter' cache should be excluded from eviction.
+   * Set to true if 'nofilter' store should be excluded from eviction.
    */
   excludeNoFilter?: boolean;
 }
