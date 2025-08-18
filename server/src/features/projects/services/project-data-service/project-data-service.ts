@@ -12,7 +12,7 @@ import type { ProjectStoreModels } from "../../types/store";
 import type { ProjectFilter } from "../../types";
 
 export async function createProjectDataService() {
-  const cacheManager = CacheManager.createProjectCacheManager();
+  const cacheManager = await CacheManager.createProjectCacheManager();
   const dbFetchService = await FetchService.createProjectDbFetcher();
   return new ProjectDataService(cacheManager, dbFetchService);
 }

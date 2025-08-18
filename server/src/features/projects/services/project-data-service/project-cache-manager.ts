@@ -1,28 +1,25 @@
 import { Env } from "@/error";
 import { fail, success } from "@/utils";
-import {
-  createProjectCachePageService,
-  ProjectCachePageService,
-} from "../cache";
+import { createProjectCacheService, ProjectCacheService } from "../cache";
 import { Project } from "../../errors";
 import { buildProjectsData } from "./build-projects-data";
 
 import type { ProjectResult, ProjectPageResult } from "../../types/result";
 import type { ProjectStoreModels } from "../../types/store";
 
-export function createProjectCacheManager() {
-  const cachePageService = createProjectCachePageService();
-  return new ProjectCacheManager(cachePageService);
+export async function createProjectCacheManager() {
+  const cacheService = await createProjectCacheService();
+  return new ProjectCacheManager(cacheService);
 }
 
 /**
  * todo: add docs
  */
 export class ProjectCacheManager {
-  private _cachePageService: ProjectCachePageService;
+  private _cachesService: ProjectCacheService;
 
-  public constructor(projectCachePageService: ProjectCachePageService) {
-    this._cachePageService = projectCachePageService;
+  public constructor(projectCachePageService: ProjectCacheService) {
+    this._cachesService = projectCachePageService;
   }
 
   /**
@@ -38,7 +35,7 @@ export class ProjectCacheManager {
     try {
       //  !Throws ProjectPage.ErrorClass: PAGE_OUT_OF_BOUNDS_ERROR | MISSING_PAGE_ERROR
       //  !Throws CacheError: INVALID_CACHE_ERROR | CACHE_PERSIST_ERROR
-      const page = await this._cachePageService.getCachePage(cache, pageNumber);
+      const page = await this._cachesService.getCachePage(cache, pageNumber);
       return success(page, "JSON_CACHE");
     } catch (err) {
       const error = Project.normalizeError({
@@ -72,7 +69,7 @@ export class ProjectCacheManager {
         projects,
       };
       //  !Throws JsonError: NULL_DATA ERROR or CacheError: INVALID_CACHE_ERROR | CACHE_PERSIST_ERROR
-      const storedPage = await this._cachePageService.storeCachePage({
+      const storedPage = await this._cachesService.storeCachePage({
         cache,
         pageNumber,
         cachePage,
@@ -134,7 +131,7 @@ export class ProjectCacheManager {
   public async loadCache(): Promise<ProjectResult> {
     try {
       //  !throws CacheError: CACHE_PARSE_ERROR | INVALID_CACHE_ERROR.
-      const projects = await this._cachePageService.loadCache();
+      const projects = await this._cachesService.loadCache();
       return success(projects, "JSON_CACHE");
     } catch (err) {
       //  todo: log error maybe
@@ -170,7 +167,7 @@ export class ProjectCacheManager {
       const newCache = buildProjectsData(createParams);
 
       //  !throws CacheError: INVALID_CACHE_ERROR | CACHE_PERSIST_ERROR
-      const storedCache = await this._cachePageService.persistCache(newCache);
+      const storedCache = await this._cachesService.persistCache(newCache);
       return success(storedCache);
     } catch (err) {
       //  todo: log error
@@ -184,11 +181,11 @@ export class ProjectCacheManager {
   }
 
   public setCachePath(newCachePath: string) {
-    return this._cachePageService.setCachePath(newCachePath);
+    return this._cachesService.setCachePath(newCachePath);
   }
 
   public setFilename(key: string) {
-    const filename = this._cachePageService.generateCacheFilename(key);
-    return this._cachePageService.setFilename(filename);
+    const filename = this._cachesService.generateCacheFilename(key);
+    return this._cachesService.setFilename(filename);
   }
 }
