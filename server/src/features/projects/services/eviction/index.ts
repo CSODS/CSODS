@@ -1,2 +1,2 @@
-export * from "./project-cache.evictor";
-export * from "./project-page.evictor";
+export * from "./legacy-project-cache.evictor";
+export * from "./legacy-project-page.evictor";

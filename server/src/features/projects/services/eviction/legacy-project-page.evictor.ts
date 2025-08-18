@@ -6,16 +6,19 @@ import {
 } from "@services";
 import { IProjectCachePage } from "../../types";
 
-export function createProjectPageEvictor(
+export function createLegacyProjectPageEvictor(
   evictionOptions: IEvictionOptions
-): ProjectPageEvictor {
+): LegacyProjectPageEvictor {
   const jsonFileHandler =
     createJsonService<IProjectCachePage>("IProjectCachePage");
-  const evictor = new ProjectPageEvictor(jsonFileHandler, evictionOptions);
+  const evictor = new LegacyProjectPageEvictor(
+    jsonFileHandler,
+    evictionOptions
+  );
   return evictor;
 }
 
-export class ProjectPageEvictor extends BaseCacheEvictor<IProjectCachePage> {
+export class LegacyProjectPageEvictor extends BaseCacheEvictor<IProjectCachePage> {
   public constructor(
     jsonFileHandler: JsonService<IProjectCachePage>,
     evictionOptions: IEvictionOptions

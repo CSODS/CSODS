@@ -8,16 +8,16 @@ import {
 } from "@services";
 import { CachePageRecord, IProjectCache } from "../../types";
 import {
-  createProjectPageEvictor,
-  ProjectPageEvictor,
-} from "./project-page.evictor";
+  createLegacyProjectPageEvictor,
+  LegacyProjectPageEvictor,
+} from "./legacy-project-page.evictor";
 
 dotenv.config();
 
-export function createProjectCacheEvictor(
+export function createLegacyProjectCacheEvictor(
   cacheEvictionOptions?: IEvictionOptions,
   pageEvictionOptions?: IEvictionOptions
-): ProjectCacheEvictor {
+): LegacyProjectCacheEvictor {
   const defaultCacheEvictionOptions: IEvictionOptions = {
     Strategy: "ttl",
     Duration: 1000 * 60 * 60 * 24 * 1,
@@ -30,10 +30,10 @@ export function createProjectCacheEvictor(
     ViewThreshold: 10,
   };
   const jsonFileHandler = createJsonService<IProjectCache>("IProjectCache");
-  const pageEvictorInstance = createProjectPageEvictor(
+  const pageEvictorInstance = createLegacyProjectPageEvictor(
     pageEvictionOptions ?? defaultPageEvictionOptions
   );
-  const cacheEvictorInstance = new ProjectCacheEvictor(
+  const cacheEvictorInstance = new LegacyProjectCacheEvictor(
     jsonFileHandler,
     cacheEvictionOptions ?? defaultCacheEvictionOptions,
     pageEvictorInstance
@@ -41,14 +41,14 @@ export function createProjectCacheEvictor(
   return cacheEvictorInstance;
 }
 
-export class ProjectCacheEvictor extends BaseCacheEvictor<IProjectCache> {
-  private readonly _projectPageEvictor: ProjectPageEvictor;
+export class LegacyProjectCacheEvictor extends BaseCacheEvictor<IProjectCache> {
+  private readonly _projectPageEvictor: LegacyProjectPageEvictor;
   private readonly _cacheDirectory = process.env.PROJECT_CACHE_PATH!;
 
   public constructor(
     jsonFileHandler: JsonService<IProjectCache>,
     evictionOptions: IEvictionOptions,
-    projectPageEvictor: ProjectPageEvictor
+    projectPageEvictor: LegacyProjectPageEvictor
   ) {
     super(jsonFileHandler, evictionOptions);
     this._projectPageEvictor = projectPageEvictor;

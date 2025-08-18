@@ -1,9 +1,9 @@
 import { IEvictionOptions } from "@/services";
 import { JobsLogger } from "@/utils";
-import { createProjectCacheEvictor } from "../services";
+import { createLegacyProjectCacheEvictor } from "../services";
 
 export async function evictSearchCache() {
-  const projectCacheEvictor = createProjectCacheEvictor();
+  const projectCacheEvictor = createLegacyProjectCacheEvictor();
   const evictionOptions: IEvictionOptions = {
     Strategy: "ttl+lfu",
     Duration: 1000 * 60 * 60, // 1 hour
