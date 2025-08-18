@@ -45,11 +45,12 @@ export class ProjectCachePageService extends ProjectCacheService {
     pageNumber: number;
     cachePage: ProjectStoreModels.Page;
   }): Promise<ProjectStoreModels.Page> {
-    const { _logger, _filename } = this;
+    const { _log, _filename } = this;
 
     try {
-      _logger.info(
-        `[storeCachePage] Attempting to store page: ${pageNumber} in cache: ${_filename}.`
+      _log.info(
+        "storeCachePage",
+        `Attempting to store page: ${pageNumber} in cache: ${_filename}`
       );
 
       //  !Throws JsonError: NULL_DATA_ERROR
@@ -71,13 +72,14 @@ export class ProjectCachePageService extends ProjectCacheService {
       const storedCache = await this.persistCache(newCache);
       this._cache = newCache;
 
-      _logger.info(
-        `[storeCachePage] Success storing page: ${pageNumber} in cache: ${_filename}.`
+      _log.info(
+        "storeCachePage",
+        `Success storing page: ${pageNumber} in cache: ${_filename}.`
       );
 
       return storedCache.pages[pageNumber];
     } catch (err) {
-      _logger.error("[storeCachePage] Failed storing new cache page: ", err);
+      _log.error("storeCachePage", "Failed storing new cache page: ", err);
       throw err; //  * all errors controlled
     }
   }
@@ -93,9 +95,9 @@ export class ProjectCachePageService extends ProjectCacheService {
     cache: ProjectStoreModels.Store,
     pageNumber: number
   ): Promise<ProjectStoreModels.Page> {
-    const { _logger } = this;
+    const { _log } = this;
     try {
-      _logger.info(`[getCachePage] Attempting to retrieve page ${pageNumber}`);
+      _log.info("getCachePage", `Attempting to retrieve page ${pageNumber}...`);
 
       if (pageNumber === 0 || pageNumber > cache.totalPages)
         throw new ProjectPage.ErrorClass({
@@ -109,16 +111,16 @@ export class ProjectCachePageService extends ProjectCacheService {
           message: `Page ${pageNumber} is not in cache.`,
         });
 
-      _logger.info(
-        `[getCachePage] Success retrieving page ${pageNumber} from cache.`
+      _log.info(
+        "getCachePage",
+        `Success retrieving page ${pageNumber} from cache.`
       );
-
       //  !Throws CacheError: INVALID_CACHE_ERROR or CACHE_PERSIST_ERROR
       const updatedCache = await this.updateViewCount(cache, pageNumber);
 
       return updatedCache.pages[pageNumber];
     } catch (err) {
-      _logger.error("[getCachePage] Failed retrieving cache page: ", err);
+      _log.error("getCachePage", "Failed retrieving cache page: ", err);
       throw err; // * all errors controlled
     }
   }
