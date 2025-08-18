@@ -66,8 +66,10 @@ export abstract class AbstractCacheService<
     return this._cache.lastAccessed;
   }
 
-  //  todo: finish this
-  public set cachePath(newCachePath: string) {}
+  public set cachePath(newCachePath: string) {
+    this._log.debug("cachePath", `Setting cache path to: ${newCachePath}.`);
+    this._cachePath = newCachePath;
+  }
 
   public setCachePath(newCachePath: string): string {
     this._log.debug("setCachePath", `Setting cache path to: ${newCachePath}`);
