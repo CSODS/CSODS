@@ -12,11 +12,11 @@ import {
 
 import type { ProjectStoreModels } from "../../types/store";
 
-export function createProjectCacheEvictor(
-  cacheEvictionOptions?: IEvictionOptions,
+export function createProjectStoreEvictor(
+  storeEvictionOptions?: IEvictionOptions,
   pageEvictionOptions?: IEvictionOptions
 ): ProjectStoreEvictor {
-  const defaultCacheEvictionOptions: IEvictionOptions = {
+  const defaultStoreEvictionOptions: IEvictionOptions = {
     Strategy: "ttl",
     Duration: 1000 * 60 * 60 * 24 * 1,
   };
@@ -27,15 +27,15 @@ export function createProjectCacheEvictor(
     Granularity: 1000 * 60 * 60,
     ViewThreshold: 10,
   };
-  const jsonFileHandler = createJsonService<ProjectStoreModels.Store>(
+  const jsonService = createJsonService<ProjectStoreModels.Store>(
     "ProjectStoreModels.Store"
   );
   const pageEvictorInstance = createProjectPageEvictor(
     pageEvictionOptions ?? defaultPageEvictionOptions
   );
   const cacheEvictorInstance = new ProjectStoreEvictor(
-    jsonFileHandler,
-    cacheEvictionOptions ?? defaultCacheEvictionOptions,
+    jsonService,
+    storeEvictionOptions ?? defaultStoreEvictionOptions,
     pageEvictorInstance
   );
   return cacheEvictorInstance;
@@ -43,14 +43,14 @@ export function createProjectCacheEvictor(
 
 export class ProjectStoreEvictor extends BaseCacheEvictor<ProjectStoreModels.Store> {
   private readonly _projectPageEvictor: ProjectPageEvictor;
-  private readonly _cacheDirectory = process.env.PROJECT_CACHE_PATH!;
+  private readonly _jsonDirectory = process.env.PROJECT_CACHE_PATH!;
 
   public constructor(
-    jsonFileHandler: JsonService<ProjectStoreModels.Store>,
+    jsonService: JsonService<ProjectStoreModels.Store>,
     evictionOptions: IEvictionOptions,
     projectPageEvictor: ProjectPageEvictor
   ) {
-    super(jsonFileHandler, evictionOptions);
+    super(jsonService, evictionOptions);
     this._projectPageEvictor = projectPageEvictor;
   }
 
@@ -68,7 +68,7 @@ export class ProjectStoreEvictor extends BaseCacheEvictor<ProjectStoreModels.Sto
    *
    * @returns {Promise<number>} - A promise that resolves to the number of cache files evicted.
    */
-  public async evictStaleCache(
+  public async evictStaleStore(
     evictionOptions?: IEvictionOptions,
     { excludeNoFilter = false }: IEvictionFilter = {}
   ): Promise<number> {
@@ -82,7 +82,7 @@ export class ProjectStoreEvictor extends BaseCacheEvictor<ProjectStoreModels.Sto
     let evictionCount = 0;
 
     await this._jsonFileHandler.processFiles(
-      this._cacheDirectory,
+      this._jsonDirectory,
       async (file) => {
         try {
           const isEvicted = await this.tryEvict(file, evictionOptions);
@@ -107,15 +107,15 @@ export class ProjectStoreEvictor extends BaseCacheEvictor<ProjectStoreModels.Sto
    *
    * @returns {Promise<number>} - A promise that resolves to the total number of cache pages evicted.
    */
-  public async evictPagesFromCaches(
+  public async evictPagesFromStores(
     evictionOptions?: IEvictionOptions
   ): Promise<number> {
     let totalEvictedPages = 0;
 
     await this._jsonFileHandler.processFiles(
-      this._cacheDirectory,
+      this._jsonDirectory,
       async (file) => {
-        const evictedPages = await this.evictStaleCachePages(
+        const evictedPages = await this.evictStaleStorePages(
           file,
           evictionOptions
         );
@@ -138,7 +138,7 @@ export class ProjectStoreEvictor extends BaseCacheEvictor<ProjectStoreModels.Sto
    *
    * @returns {Promise<number>} - A promise that resolves to the number of cache pages evicted from the file.
    */
-  private async evictStaleCachePages(
+  private async evictStaleStorePages(
     file: IFile,
     evictionOptions?: IEvictionOptions
   ): Promise<number> {

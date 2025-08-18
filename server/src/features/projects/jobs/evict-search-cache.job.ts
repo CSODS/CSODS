@@ -1,9 +1,9 @@
 import { IEvictionOptions } from "@/services";
 import { JobsLogger } from "@/utils";
-import { createProjectCacheEvictor } from "../services";
+import { createProjectStoreEvictor } from "../services";
 
 export async function evictSearchCache() {
-  const projectCacheEvictor = createProjectCacheEvictor();
+  const projectCacheEvictor = createProjectStoreEvictor();
   const evictionOptions: IEvictionOptions = {
     Strategy: "ttl+lfu",
     Duration: 1000 * 60 * 60, // 1 hour
@@ -11,7 +11,7 @@ export async function evictSearchCache() {
   };
 
   JobsLogger.info("[CacheEviction] Evicting stale projects search cache.");
-  const evictedFiles = await projectCacheEvictor.evictStaleCache(
+  const evictedFiles = await projectCacheEvictor.evictStaleStore(
     evictionOptions,
     { excludeNoFilter: true }
   );

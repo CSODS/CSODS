@@ -1,10 +1,10 @@
 import { JobsLogger } from "@/utils";
-import { createProjectCacheEvictor } from "../services/eviction";
+import { createProjectStoreEvictor } from "../services/eviction";
 
 export async function evictCachePages() {
-  const projectCacheEvictor = createProjectCacheEvictor();
+  const projectCacheEvictor = createProjectStoreEvictor();
 
   JobsLogger.info("[CacheEviction] Evicting stale pages from project caches.");
-  const evictedPages = await projectCacheEvictor.evictPagesFromCaches();
+  const evictedPages = await projectCacheEvictor.evictPagesFromStores();
   JobsLogger.info(`[CacheEviction] Evicted ${evictedPages} pages.`);
 }
